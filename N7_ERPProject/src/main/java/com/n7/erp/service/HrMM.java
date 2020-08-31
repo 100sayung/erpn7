@@ -24,6 +24,7 @@ public class HrMM {
 	ModelAndView mav = new ModelAndView();
 	/*
 	 * DB설정 뒤 DB관련 주석풀기
+	 * DB�꽕�젙 �뮘 DB愿��젴 二쇱꽍��湲�
 	 * 
 	 * @Autowired private IHrDao hDao;
 	 */
@@ -107,30 +108,30 @@ public class HrMM {
 	}
 
 	public void registCertification(HttpServletRequest request, String id) {
-		String hc_code = hDao.getHcCodeFromID(id);
-		Integer cnt = hDao.selectCertification(hc_code);
-		for (int i = 0; i < request.getParameterValues("hct_agency").length; i++) {
-			Certification ctf = new Certification();
-			ctf.setHct_code(hc_code);
-			ctf.setHct_agency(request.getParameterValues("hct_agency")[i]);
-			ctf.setHct_date(request.getParameterValues("hct_date")[i]);
-			ctf.setHct_name(request.getParameterValues("hct_name")[i]);
-			if (i < cnt) {
-				ctf.setHct_num(request.getParameterValues("hct_num")[i]);
-				hDao.updateCertification(ctf);
-			}else {
-				hDao.registCertification(ctf);
-			}
-		}
-		System.out.println("Certification �엯�젰�셿猷�");
+//		String hc_code = hDao.getHcCodeFromID(id);
+//		Integer cnt = hDao.selectCertification(hc_code);
+//		for (int i = 0; i < request.getParameterValues("hct_agency").length; i++) {
+//			Certification ctf = new Certification();
+//			ctf.setHct_code(hc_code);
+//			ctf.setHct_agency(request.getParameterValues("hct_agency")[i]);
+//			ctf.setHct_date(request.getParameterValues("hct_date")[i]);
+//			ctf.setHct_name(request.getParameterValues("hct_name")[i]);
+//			if (i < cnt) {
+//				ctf.setHct_num(request.getParameterValues("hct_num")[i]);
+//				hDao.updateCertification(ctf);
+//			}else {
+//				hDao.registCertification(ctf);
+//			}
+//		}
+		System.out.println("Certification 占쎌뿯占쎌젾占쎌끏�뙴占�");
 	}
 
 	public void registHRCard(HR_Card hrCard, String id, String cCode) {
 		System.out.println(id);
-		hrCard.setHc_id(id);
-		hrCard.setHc_cname(hDao.getCName(cCode));
-		hrCard.setHc_cname("회사이름..두개?");
-//		if (hDao.selectHRCard(id)) {
+//		hrCard.setHc_id(id);
+//		hrCard.setHc_cname(hDao.getCName(cCode));
+//		hrCard.setHc_cname("�쉶�궗�씠由�..�몢媛�?");
+////		if (hDao.selectHRCard(id)) {
 //			System.out.println("");
 //			hDao.updateHRCard(hrCard);
 //		} else {
