@@ -20,11 +20,7 @@ import com.n7.erp.userClass.FileManager;
 public class MemberMM {
 
 	ModelAndView mav = new ModelAndView();
-	/*
-	 * DB이후
-	 * 
-	 * @Autowired private IMemberDao mDao;
-	 */
+	@Autowired private IMemberDao mDao;
 	
 	String view = "";
 
@@ -64,11 +60,11 @@ public class MemberMM {
 		System.out.println(file);
 		mb.setM_photo(file);
 
-//		if (mDao.join(mb)) {
-//			mav.addObject("msg", 1);
-//		} else {
-//			mav.addObject("msg", 0);
-//		}
+		if (mDao.join(mb)) {
+			mav.addObject("msg", 1);
+		} else {
+			mav.addObject("msg", 0);
+		}
 		mav.setViewName("/home/home");
 		return mav;
 	}

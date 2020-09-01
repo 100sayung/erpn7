@@ -11,7 +11,7 @@
 		<property name="driverClassName"
 			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
 		<property name="jdbcUrl"
-			value="jdbc:log4jdbc:oracle:thin:@121.65.47.46:4000:XE" />
+			value="jdbc:log4jdbc:oracle:thin:@121.65.47.76:3100:XE" />
 		<property name="username" value="n7_dev" />
 		<property name="password" value="1111" />
 	</bean>

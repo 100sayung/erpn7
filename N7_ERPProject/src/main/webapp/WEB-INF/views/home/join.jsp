@@ -93,7 +93,7 @@ button {
 						required name="m_name" id="name" />
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="회사 코드를 입력해주세요"
+					<input type="text" class="form-control" placeholder="회사 코드를 입력해주세요 / 없으면 공백 "
 						required name="m_ccode" />
 				</div>
 				<div class="form-group">
@@ -113,8 +113,8 @@ button {
 						placeholder="핸드폰 번호를 입력해주세요" required name="m_phonenum"/>
 				</div>
 				<div class="form-group">
-					<input type="radio" name="m_gender" required id="pwd" value="남"/>
-						남 &nbsp; <input type="radio" name="m_gender" value="여"/> 여 
+					<input type="email" class="form-control"
+						placeholder = "이메일을 입력해주세요" required name="m_email"/>
 				</div>
 				<div class="form-group">
 					<input type="file" class="form-control-file border"
