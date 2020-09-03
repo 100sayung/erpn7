@@ -94,7 +94,7 @@ button {
 				</div>
 				<div class="form-group">
 					<input type="text" class="form-control" placeholder="회사 코드를 입력해주세요 / 없으면 공백 "
-						required name="m_ccode" />
+						name="m_ccode" />
 				</div>
 				<div class="form-group">
 					<input type="text" class="form-control"

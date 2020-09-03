@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.util.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +23,7 @@
 	font-size: 20px;
 	font-weight: bolder;
 	float: left;
-	border-right:1px solid #E6E6E6;
+	border-right: 1px solid #E6E6E6;
 }
 
 #side_menu #menuList {
@@ -50,6 +51,10 @@ ul {
 </style>
 </head>
 <body>
+
+<%
+    request.setCharacterEncoding("UTF-8");
+%>
 	<div id="header">
 		<div id="logo">
 			<h1>
@@ -94,32 +99,76 @@ ul {
 			</li>
 		</ul>
 	</div>
-	<div id="description"> ${hrCard} </div>
-	<script>
-		$("#showMenu1").hover(function() {
-			$("#smallMenu1").attr("style", "display:inline-block");
-		}, function() {
-			$("#smallMenu1").attr("style", "display:none");
-		})
-		$("#showMenu2").hover(function() {
-			$("#smallMenu2").attr("style", "display:inline-block");
-		}, function() {
-			$("#smallMenu2").attr("style", "display:none");
-		})
-		$("#showMenu3").hover(function() {
-			$("#smallMenu3").attr("style", "display:inline-block");
-		}, function() {
-			$("#smallMenu3").attr("style", "display:none");
-		})
-		
-		
-		function modifyDetail(id){
-			window.open('/erp/hr/hrModifyDetail?id='+id, '사원 인사카드 등록', 'width=700, height=800')
-		}
-		window.onbeforeunload = function(){
-			window.reload();
-		}
-		
-	</script>
+	<div id="description">
+
+	<h1 align="center">부서 등록 페이지</h1>
+	<form action="/erp/hr/deptregistinsert" name="deptregistinsert" method="post" accept-charset="utf-8">
+		<button>등록</button>
+		<table id="depttable">
+			<tr>
+				<td>부서 :</td>
+				<td><input type="text" name="HDP_position" id="position"></td>
+				<td>직책 :</td>
+				<td><input type="text" name="HDP_dept" id="dept"></td>
+			</tr>
+		</table>
+	</form>
+	<button type="button" id="deptbutton">+부서등록추가</button>
+	</div>
+</body>
+<script>
+$("#showMenu1").hover(function() {
+	$("#smallMenu1").attr("style", "display:inline-block");
+}, function() {
+	$("#smallMenu1").attr("style", "display:none");
+})
+$("#showMenu2").hover(function() {
+	$("#smallMenu2").attr("style", "display:inline-block");
+}, function() {
+	$("#smallMenu2").attr("style", "display:none");
+})
+$("#showMenu3").hover(function() {
+	$("#smallMenu3").attr("style", "display:inline-block");
+}, function() {
+	$("#smallMenu3").attr("style", "display:none");
+})
+
+	$("#deptbutton")
+			.click(
+					function() {
+						$("#depttable")
+								.append(
+										"<tr>"
+												+ "<td>부서 : </td>"
+												+ "<td><input type'text' name='HDP_position' id='position'></td>"
+												+ "<td>직책 : </td>"
+												+ "<td><input type'text' name='HDP_dept' id='dept'></td>"
+												+ "</tr>");
+					});
+
+	$("#showMenu1").hover(function() {
+		$("#smallMenu1").attr("style", "display:inline-block");
+	}, function() {
+		$("#smallMenu1").attr("style", "display:none");
+	})
+	$("#showMenu2").hover(function() {
+		$("#smallMenu2").attr("style", "display:inline-block");
+	}, function() {
+		$("#smallMenu2").attr("style", "display:none");
+	})
+	$("#showMenu3").hover(function() {
+		$("#smallMenu3").attr("style", "display:inline-block");
+	}, function() {
+		$("#smallMenu3").attr("style", "display:none");
+	})
+
+	function modifyDetail(id) {
+		window.open('/erp/hr/hrModifyDetail?id=' + id, '사원 인사카드 등록',
+				'width=700, height=800')
+	}
+	window.onbeforeunload = function() {
+		window.reload();
+	}
+</script>
 </body>
 </html>

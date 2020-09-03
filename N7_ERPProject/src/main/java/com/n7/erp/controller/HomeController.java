@@ -22,11 +22,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.n7.erp.bean.Member;
 import com.n7.erp.bean.hr.Academic;
 import com.n7.erp.bean.hr.Career;
 import com.n7.erp.bean.hr.Certification;
 import com.n7.erp.bean.hr.HR_Card;
-import com.n7.erp.bean.hr.Member;
 import com.n7.erp.service.HrMM;
 import com.n7.erp.service.MemberMM;
 
@@ -92,5 +92,12 @@ public class HomeController {
 	public String main() {
 		return "/hr/hrMain";
 	}
-	
+	@GetMapping(value="/myinfo/myinfo")
+	public String myinfoMain() {
+		return "/myInfo/myInfo";
+	}
+	@GetMapping(value="/hr/hr")
+	public String hrMain() {
+		return "/hr/hrMain";
+	}
 }

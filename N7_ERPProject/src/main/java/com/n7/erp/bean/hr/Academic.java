@@ -6,14 +6,14 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 @Accessors(chain = true)
-@Alias("")
+@Alias("academic")
 @Data
 public class Academic {
 	String code;
-	String hac_code;
+	String hac_hrcode;
 	String hac_num;
 	String hac_school;
 	String hac_major;
 	String hac_year;
-
+	String hac_ccode;
 }

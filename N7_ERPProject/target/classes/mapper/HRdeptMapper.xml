@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--회원관련 sql -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.n7.erp.dao.HRIDeptDao">
+<!-- 
+	<update id="deptpayupdate" parameterType="HashMap">
+		UPDATE HR_DEPT SET HDP_PAY=#{pay1} WHERE HDP_NUM=#{dept1}
+	</update> -->
+	<select id="payselect" parameterType="hashMap" resultType="String">
+		SELECT HDP_PAY FROM HR_DEPT WHERE HDP_NUM=#{HDP_num} AND HDP_CCODE = #{cCode}
+	</select>
+	<select id="findDeduction" resultType="String" parameterType="hashMap">
+		SELECT HDD_AMOUNT FROM HR_DEDUCTION WHERE HDD_NAME=#{deduct} AND HDD_CCODE = #{cCode}
+	</select>
+
+</mapper>

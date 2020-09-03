@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
 
-import com.n7.erp.bean.hr.Member;
+import com.n7.erp.bean.Member;
 
 public interface IMemberDao {
 	boolean access(Member mb);

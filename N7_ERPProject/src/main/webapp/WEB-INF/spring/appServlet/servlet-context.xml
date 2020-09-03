@@ -30,12 +30,10 @@
 	<!-- root-context.xml 설정가능 -->
 	
 	
-<!--  DB설정되면 풀기  -->
-<!-- 	<beans:bean id="txManager"
+<beans:bean id="txManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<beans:property name="dataSource" ref="dataSource" />	
 	</beans:bean>
- -->	<!-- @Transactional어노테이션 사용하기 위해,servlet-context.xml에 반드시 설정해야 함....???? -->
  
  
  
@@ -43,14 +41,9 @@
 	
 	
 	
-	<!-- 일단 오류라서 잠궈둠 -->
-	
-	<!-- 인터셉터를 이용해서 로그인 여부 판단 -->
-	<!-- <interceptors>
+<interceptors>
 		<interceptor>
-			mapping의 모든 요청은 Controller에 도착하기 전에 가로챈다
 			<mapping path="/*" />
-			exclude-mapping은 요청을 가로채지 않는다.\
 			<exclude-mapping path="/"/>
 			<exclude-mapping path="/introducecompany"/>
 			<exclude-mapping path="/join"/>
@@ -60,5 +53,5 @@
 			<exclude-mapping path="/erpboard"/>
 			<beans:bean class="com.n7.erp.userClass.SessionInterceptor"/>
 		</interceptor>	
-	</interceptors> -->
+	</interceptors> 
 </beans:beans>

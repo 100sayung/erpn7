@@ -1,4 +1,4 @@
-package com.n7.erp.bean.hr;
+package com.n7.erp.bean;
 
 import org.apache.ibatis.type.Alias;
 
@@ -14,8 +14,9 @@ public class Member {
 	String m_address;
 	String m_phonenum;
 	String m_photo;
-	String m_gender;
 	String m_birth;
 	String m_name;
 	String m_ccode;
+	String m_email;
+	String m_grade;
 }

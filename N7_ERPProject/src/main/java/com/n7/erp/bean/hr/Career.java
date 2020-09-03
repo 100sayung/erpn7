@@ -12,13 +12,13 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class Career {
-	String hca_num;
-	String hca_cname;
-	String hca_period;
-	String hca_periodend; //끝난 날
-	String hca_content;
-	String hca_position;
-	String hca_code;
-	
+	String hcr_num;
+	String hcr_name;
+	String hcr_startperiod;
+	String hcr_endperiod; //끝난 날
+	String hcr_content;
+	String hcr_position;
+	String hcr_hrcode;
+	String hcr_ccode;
 	private List<Career> caList;
 }

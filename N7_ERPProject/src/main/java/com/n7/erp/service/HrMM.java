@@ -5,16 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.n7.erp.bean.Member;
 import com.n7.erp.bean.hr.Academic;
 import com.n7.erp.bean.hr.Career;
 import com.n7.erp.bean.hr.Certification;
 import com.n7.erp.bean.hr.HR_Card;
-import com.n7.erp.bean.hr.Member;
 import com.n7.erp.dao.IHrDao;
 import com.n7.erp.dao.IMemberDao;
 
@@ -22,131 +23,174 @@ import com.n7.erp.dao.IMemberDao;
 public class HrMM {
 
 	ModelAndView mav = new ModelAndView();
-	/*
-	 * DB설정 뒤 DB관련 주석풀기
-	 * DB�꽕�젙 �뮘 DB愿��젴 二쇱꽍��湲�
-	 * 
-	 * @Autowired private IHrDao hDao;
-	 */
+	
+	@Autowired private IHrDao hDao;
+	@Autowired private IMemberDao mDao;
+
 	String view = "";
 
 	public HR_Card getHrCardInfo(String id) {
-		HR_Card hrCard = null; //hDao.getHrCard(id);
+		HR_Card hrCard = hDao.getHrCardDetail(id);
 		return hrCard;
 	}
 
-	public List<Certification> getCertificationInfo(String id, String type) {
-//		String hc_code = hDao.getHcCodeFromID(id);
-//		HashMap<String, String> hMap = new HashMap<String, String>();
-//		hMap.put("code", hc_code);
-//		hMap.put("type", type);
-//		hMap.put("column", "hct");
-		List<Certification> ctfList = null; //hDao.getCertificationInfo(hMap);
+	public List<Certification> getCertificationInfo(String id, String type, String cCode) {
+		String hc_hrcode = hDao.getHcCodeFromID(id);
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("code", hc_hrcode);
+		hMap.put("type", type);
+		hMap.put("cCode", cCode);
+		hMap.put("column", "hct");
+		List<Certification> ctfList = hDao.getCertificationInfo(hMap);
 		return ctfList;
 	}
 
-	public List<Career> getCareerInfo(String id, String type) {
-//		String hc_code = hDao.getHcCodeFromID(id);
-//		HashMap<String, String> hMap = new HashMap<String, String>();
-//		hMap.put("code", hc_code);
-//		hMap.put("type", type);
-//		hMap.put("column", "hca");
-		List<Career> crList = null; //hDao.getCareerInfo(hMap);
+	public List<Career> getCareerInfo(String id, String type, String cCode) {
+		String hc_hrcode = hDao.getHcCodeFromID(id);
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("code", hc_hrcode);
+		hMap.put("type", type);
+		hMap.put("cCode", cCode);
+		hMap.put("column", "hcr");
+		List<Career> crList = hDao.getCareerInfo(hMap);
 		return crList;
 	}
 
-	public List<Academic> getAcademicInfo(String id, String type) {
-//		String hc_code = hDao.getHcCodeFromID(id);
-//		HashMap<String, String> hMap = new HashMap<String, String>();
-//		System.out.println(hc_code);
-//		hMap.put("code", hc_code);
-//		hMap.put("type", type);
-//		hMap.put("column", "hac");
-		List<Academic> acList = null;//hDao.getAcademicInfo(hMap);
+	public List<Academic> getAcademicInfo(String id, String type, String cCode) {
+		String hc_hrcode = hDao.getHcCodeFromID(id);
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		System.out.println(hc_hrcode);
+		hMap.put("code", hc_hrcode);
+		hMap.put("type", type);
+		hMap.put("cCode", cCode);
+		hMap.put("column", "hac");
+		List<Academic> acList = hDao.getAcademicInfo(hMap);
 		return acList;
 	}
 
 	public void registAcademic(HttpServletRequest request, String id) {
-//		String hc_code = hDao.getHcCodeFromID(id);
-//		Integer cnt = hDao.selectAcademic(hc_code);
-//		for (int i = 0; i < request.getParameterValues("hac_school").length; i++) {
-//			Academic ac = new Academic();
-//			ac.setHac_code(hc_code);
-//			ac.setHac_school(request.getParameterValues("hac_school")[i]);
-//			ac.setHac_major(request.getParameterValues("hac_major")[i]);
-//			ac.setHac_year(request.getParameterValues("hac_year")[i]);
-//			if (i < cnt) {
-//				ac.setHac_num(request.getParameterValues("hac_num")[i]);
-//				hDao.updateAcademic(ac);
-//				System.out.println("update : " + i);
-//			}else {
-//				hDao.registAcademic(ac);
-//			}
-//		}
+		HashMap<String, String> acMap = new HashMap<String, String>();
+		String hc_hrcode = hDao.getHcCodeFromID(id);
+		String cCode = request.getSession().getAttribute("cCode").toString();
+		acMap.put("hrcode", hc_hrcode);
+		acMap.put("cCode", cCode);
+		Integer cnt = hDao.selectAcademic(acMap);
+		for (int i = 0; i < request.getParameterValues("hac_school").length; i++) {
+			Academic ac = new Academic();
+			ac.setHac_ccode(cCode);
+			ac.setHac_hrcode(hc_hrcode);
+			ac.setHac_school(request.getParameterValues("hac_school")[i]);
+			ac.setHac_major(request.getParameterValues("hac_major")[i]);
+			ac.setHac_year(request.getParameterValues("hac_year")[i]);
+			if (i < cnt) {
+				ac.setHac_num(request.getParameterValues("hac_num")[i]);
+				hDao.updateAcademic(ac);
+				System.out.println("update : " + i);
+			}else {
+				hDao.registAcademic(ac);
+			}
+		}
 		System.out.println("Academic");
 	}
 
 	public void registCareer(HttpServletRequest request, String id) {
-//		String hc_code = hDao.getHcCodeFromID(id);
-//		Integer cnt = hDao.selectCareer(hc_code);
-//		for (int i = 0; i < request.getParameterValues("hca_cname").length; i++) {
-//			Career cr = new Career();
-//			cr.setHca_cname(request.getParameterValues("hca_cname")[i]);
-//			cr.setHca_content(request.getParameterValues("hca_content")[i]);
-//			cr.setHca_period(request.getParameterValues("hca_period")[i]);
-//			cr.setHca_periodend(request.getParameterValues("hca_periodend")[i]);
-//			cr.setHca_position(request.getParameterValues("hca_position")[i]);
-//			cr.setHca_code(hc_code);
-//			if (i < cnt) {
-//				cr.setHca_num(request.getParameterValues("hca_num")[i]);
-//				hDao.updateCareer(cr);
-//			}else {
-//				hDao.registCareer(cr);
-//			}
-//		}
+		HashMap<String, String> crMap = new HashMap<String, String>();
+		String hc_hrcode = hDao.getHcCodeFromID(id);
+		String cCode = request.getSession().getAttribute("cCode").toString();
+		crMap.put("hrcode", hc_hrcode);
+		crMap.put("cCode", cCode);
+		Integer cnt = hDao.selectCareer(crMap);
+		for (int i = 0; i < request.getParameterValues("hcr_cname").length; i++) {
+			Career cr = new Career();
+			cr.setHcr_ccode(cCode);
+			cr.setHcr_name(request.getParameterValues("hcr_cname")[i]);
+			cr.setHcr_content(request.getParameterValues("hcr_content")[i]);
+			cr.setHcr_startperiod(request.getParameterValues("hcr_startperiod")[i]);
+			cr.setHcr_endperiod(request.getParameterValues("hcr_endperiod")[i]);
+			cr.setHcr_position(request.getParameterValues("hcr_position")[i]);
+			cr.setHcr_hrcode(hc_hrcode);
+			if (i < cnt) {
+				cr.setHcr_num(request.getParameterValues("hra_num")[i]);
+				hDao.updateCareer(cr);
+			}else {
+				hDao.registCareer(cr);
+			}
+		}
 		System.out.println("Career");
 	}
 
 	public void registCertification(HttpServletRequest request, String id) {
-//		String hc_code = hDao.getHcCodeFromID(id);
-//		Integer cnt = hDao.selectCertification(hc_code);
-//		for (int i = 0; i < request.getParameterValues("hct_agency").length; i++) {
-//			Certification ctf = new Certification();
-//			ctf.setHct_code(hc_code);
-//			ctf.setHct_agency(request.getParameterValues("hct_agency")[i]);
-//			ctf.setHct_date(request.getParameterValues("hct_date")[i]);
-//			ctf.setHct_name(request.getParameterValues("hct_name")[i]);
-//			if (i < cnt) {
-//				ctf.setHct_num(request.getParameterValues("hct_num")[i]);
-//				hDao.updateCertification(ctf);
-//			}else {
-//				hDao.registCertification(ctf);
-//			}
-//		}
-		System.out.println("Certification 占쎌뿯占쎌젾占쎌끏�뙴占�");
+		HashMap<String, String> ctfMap = new HashMap<String, String>();
+		String cCode = request.getSession().getAttribute("cCode").toString();
+		String hc_hrcode = hDao.getHcCodeFromID(id);
+		ctfMap.put("hrcode", hc_hrcode);
+		ctfMap.put("cCode", cCode);
+		Integer cnt = hDao.selectCertification(ctfMap);
+		for (int i = 0; i < request.getParameterValues("hct_agency").length; i++) {
+			Certification ctf = new Certification();
+			ctf.setHct_ccode(cCode);
+			ctf.setHct_hrcode(hc_hrcode);
+			ctf.setHct_agency(request.getParameterValues("hct_agency")[i]);
+			ctf.setHct_date(request.getParameterValues("hct_date")[i]);
+			ctf.setHct_name(request.getParameterValues("hct_name")[i]);
+			if (i < cnt) {
+				ctf.setHct_num(request.getParameterValues("hct_num")[i]);
+				hDao.updateCertification(ctf);
+			}else {
+				hDao.registCertification(ctf);
+			}
+		}
 	}
 
 	public void registHRCard(HR_Card hrCard, String id, String cCode) {
 		System.out.println(id);
-//		hrCard.setHc_id(id);
-//		hrCard.setHc_cname(hDao.getCName(cCode));
-//		hrCard.setHc_cname("�쉶�궗�씠由�..�몢媛�?");
-////		if (hDao.selectHRCard(id)) {
-//			System.out.println("");
-//			hDao.updateHRCard(hrCard);
-//		} else {
-//			hDao.registHRCard(hrCard);
-//		}
+		hrCard.setHc_id(id);
+		hrCard.setHc_ccode(cCode);
+		System.out.println(hrCard.getHc_joindate());
+		hrCard.setHc_hrcode(hrCard.getHc_joindate().toString().replace("-", ""));
+		if (hDao.selectHRCard(id)) {
+			hDao.updateHRCard(hrCard);
+		} else {
+			hDao.registHRCard(hrCard);
+		}
 	}
 
 	public boolean haveHRCodeFromId(String m_id) {
-//		boolean flag = hDao.haveHRCodeFromId(m_id);
-		return true;//flag;
+		boolean flag = hDao.haveHRCodeFromId(m_id);
+		return flag;
 	}
 
 	public Member getMemberInfo(String m_id) {
-//		Member mb = hDao.getMemberInfo(m_id);
-		return null; //mb;
+		Member mb = hDao.getMemberInfo(m_id);
+		return mb;
+	}
+
+	public ModelAndView hrCard(HttpSession session) {
+		String m_id = session.getAttribute("id").toString();
+		String m_ccode = session.getAttribute("cCode").toString();
+
+		System.out.println(m_ccode);
+
+		ArrayList<Member> hrCardList = new ArrayList<>();
+		hrCardList = mDao.getHRCard(m_ccode);
+
+		mav.addObject("hrCard", makeHRCardList(hrCardList));
+		mav.setViewName("/hr/hrCard");
+		return mav;
+	}
+	private String makeHRCardList(ArrayList<Member> hList) {
+		StringBuilder str = new StringBuilder();
+		str.append("<table id='table1'>");
+		str.append("<tr><td></td><td>�</td><td></td><td></td><td></td></tr>");
+		for (int i = 0; i < hList.size(); i++) {
+			str.append("<tr><td><img src='/erp/upload/" + hList.get(i).getM_photo() + "'></td>");
+			str.append("<td>" + hList.get(i).getM_name() + "</td>");
+			str.append("<td>" + hList.get(i).getM_birth() + "</td>");
+			str.append("<td>" + hList.get(i).getM_email() + "</td><td>");
+			str.append("<input type='button' value='' onclick='modifyDetail(\""+hList.get(i).getM_id()+"\")'></td></tr>");
+		}
+		str.append("</table>");
+		return str.toString();
 	}
 
 }

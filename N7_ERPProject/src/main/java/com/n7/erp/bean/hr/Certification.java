@@ -13,12 +13,12 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class Certification {
-	String hct_code;
+	String hct_hrcode;
 	String hct_name;
 	String hct_agency;
 	//@DateTimeFormat(pattern = "yyyy-MM-dd")
 	String hct_date;
 	String hct_num;
-	
+	String hct_ccode;
 	private List<Certification> ctList;
 }

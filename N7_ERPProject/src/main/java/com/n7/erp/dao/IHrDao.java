@@ -7,24 +7,24 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.n7.erp.bean.Member;
 import com.n7.erp.bean.hr.Academic;
 import com.n7.erp.bean.hr.Career;
 import com.n7.erp.bean.hr.Certification;
 import com.n7.erp.bean.hr.HR_Card;
-import com.n7.erp.bean.hr.Member;
 
 public interface IHrDao {
 	@Select("SELECT * FROM HR_CARD WHERE HC_ID = #{m_id}")
-	HR_Card getHrCard(String id);
+	HR_Card getHrCardDetail(String id);
 	
-	@Select("SELECT HC_CODE FROM HR_CARD WHERE HC_ID = #{m_id}")
+	@Select("SELECT HC_HRCODE FROM HR_CARD WHERE HC_ID = #{m_id}")
 	String getHcCodeFromID(String id);
 	
-	@Select("SELECT * FROM HR_${type} WHERE ${column}_CODE = #{code}")
+	@Select("SELECT * FROM HR_${type} WHERE ${column}_HRCODE = #{code} AND ${column}_CCODE = #{cCode}")
 	List<Certification> getCertificationInfo(HashMap<String, String> hMap);
-	@Select("SELECT * FROM HR_${type} WHERE ${column}_CODE = #{code}")
+	@Select("SELECT * FROM HR_${type} WHERE ${column}_HRCODE = #{code} AND ${column}_CCODE = #{cCode}")
 	List<Academic> getAcademicInfo(HashMap<String, String> hMap);
-	@Select("SELECT * FROM HR_${type} WHERE ${column}_CODE = #{code}")
+	@Select("SELECT * FROM HR_${type} WHERE ${column}_HRCODE = #{code} AND ${column}_CCODE = #{cCode}")
 	List<Career> getCareerInfo(HashMap<String, String> hMap);
 
 
@@ -34,16 +34,16 @@ public interface IHrDao {
 	String getCName(String cCode);
 
 	
-	@Select("SELECT COUNT(*) FROM HR_ACADEMIC WHERE Hac_CODE = #{hc_code}")
-	Integer selectAcademic(String hc_code);
+	@Select("SELECT COUNT(*) FROM HR_ACADEMIC WHERE Hac_HRCODE = #{hrcode} AND HAC_CCODE = #{cCode}")
+	Integer selectAcademic(HashMap<String, String> acMap);
 	@Select("SELECT COUNT(*) FROM HR_CARD WHERE HC_ID = #{hc_id}")
 	boolean selectHRCard(String hc_id);
-	@Select("SELECT COUNT(*) FROM HR_CAREER WHERE Hca_CODE = #{hc_code}")
-	Integer selectCareer(String hc_code);
-	@Select("SELECT COUNT(*) FROM HR_CERTIFICATION WHERE Hct_CODE = #{hc_code}")
-	Integer selectCertification(String hc_code);
+	@Select("SELECT COUNT(*) FROM HR_CAREER WHERE Hcr_HRCODE = #{hrcode} AND HCR_CCODE = #{cCode}")
+	Integer selectCareer(HashMap<String, String> crMap);
+	@Select("SELECT COUNT(*) FROM HR_CERTIFICATION WHERE Hct_HRCODE = #{hct_hrcode} AND HCT_CCODE = #{hct_ccode}")
+	Integer selectCertification(HashMap<String, String> ctfMap);
 
-	@Insert("INSERT INTO HR_CARD VALUES(#{hc_id}, #{hc_joindate}||HC_CODE_SEQ.NEXTVAL, #{hc_joindate}, #{hc_cname}, #{hc_dept}, #{hc_position}, DEFAULT, DEFAULT, DEFAULT)")
+	@Insert("INSERT INTO HR_CARD VALUES(#{hc_hrcode}||HR_CARD_SEQ.NEXTVAL, #{hc_ccode}, #{hc_id}, #{hc_dept}, #{hc_position}, #{hc_joindate}, DEFAULT, DEFAULT, DEFAULT)")
 	void registHRCard(HR_Card hrCard);
 	void registAcademic(Academic ac);
 	void registCareer(Career cr);

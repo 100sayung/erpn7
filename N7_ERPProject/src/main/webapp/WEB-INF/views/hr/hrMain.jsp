@@ -58,8 +58,8 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="#" accesskey="4" title="">내 정보</a></li>
-				<li class="current_page_item"><a href="#" accesskey="2"
+				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내 정보</a></li>
+				<li class="current_page_item"><a href="/erp/hr/hr" accesskey="2"
 					title="">인사 관리</a></li>
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
@@ -72,7 +72,7 @@ ul {
 		<ul id="menuList">
 			<li id="showMenu1">인사 관리
 				<ul id="smallMenu1" style="display: none;">
-					<li><a href="">부서등록</a></li>
+					<li><a href="/erp/hr/deptregistpage">부서등록</a></li>
 					<li><a href="/erp/hr/movehrcardpage">인사카드</a></li>
 				</ul>
 			</li>
@@ -87,9 +87,8 @@ ul {
 			</li>
 			<li id="showMenu3">급여 관리
 				<ul id="smallMenu3" style="display: none;">
-					<li><a href="">부서/직급별 급여</a></li>
-					<li><a href="">급여 조회</a></li>
-					<li><a href="">공제사항 관리</a></li>
+					<li><a href="/erp/hr/deptpay">부서/직급별 급여</a></li>
+					<li><a href="/erp/hr/deduct">공제사항 관리</a></li>
 					<li><a href="">급여 관리</a></li>
 				</ul>
 			</li>

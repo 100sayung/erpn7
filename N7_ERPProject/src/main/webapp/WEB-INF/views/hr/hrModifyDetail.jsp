@@ -37,7 +37,7 @@ span{
 <div id="menu"></div>
 </table>
 
-<form id="form" method="post" onsubmit="return checkValue();">
+<form id="form" method="post">
 <div id="hrDetailInfo">
 
 
@@ -115,15 +115,6 @@ function replaceAll(str, searchStr, replaceStr) {
     return str.split(searchStr).join(replaceStr);
  }
  
-function checkValue(){
-	for(let i = 0 ; i<$("input").length ; i++){
-		if($("input")[i].value==""){
-			alert("값을 모두 입력해주세요.");	
-			return false;
-		}
-	}
-	return true;
-}
 function checkDateValue(val1, val2){
 	let date1 = Number(replaceAll(val1.value, "-", ""));
 	let date2 = Number(replaceAll(val2.value, "-", ""));
@@ -150,11 +141,11 @@ function addRecord(){
 		str += "<td><input type='date' name='hct_date' class='detailInfo'></td>"
 			str += "<td><input type='button' value='삭제' onclick='javascript:thisRowDel(this);'></td></tr>";
 	}else if($current =='Career'){
-		str += "<tr><td><input type='text' name='hca_cname' class='detailInfo'></td>";
-		str += "<td><input type='date' name='hca_period' id='chk"+(num*2)+"' class='detailInfo checkDate'><br>";
-		str += "<input type='date' name='hca_periodend' id='chk"+((num*2)+1)+"' class='detailInfo checkDate' onchange='checkDateValue(chk"+(num*2)+", chk"+((num*2)+1)+")'></td>"
-		str += "<td><input type='text' name='hca_position' class='detailInfo'></td>";
-		str += "<td><textarea rows='3' cols='20' name='hca_content' class='detailInfo'></textarea></td>"
+		str += "<tr><td><input type='text' name='hcr_cname' class='detailInfo'></td>";
+		str += "<td><input type='date' name='hcr_startperiod' id='chk"+(num*2)+"' class='detailInfo checkDate'><br>";
+		str += "<input type='date' name='hcr_endperiod' id='chk"+((num*2)+1)+"' class='detailInfo checkDate' onchange='checkDateValue(chk"+(num*2)+", chk"+((num*2)+1)+")'></td>"
+		str += "<td><input type='text' name='hcr_position' class='detailInfo'></td>";
+		str += "<td><textarea rows='3' cols='20' name='hcr_content' class='detailInfo'></textarea></td>"
 		str += "<td><input type='button' value='삭제' onclick='javascript:thisRowDel(this);'></td></tr>";
 		num++;
 	}
@@ -271,26 +262,18 @@ function CareerInfo(){
 			str += "<table border='1px solid black'><tr>";
 			str += "<td>회사/프로젝트명</td><td>기간</td><td>직책</td><td>내용</td></tr>";
 			for(let i=0; i<data.length ; i++){
-			str += "<tr><td><input type='text' name='hca_cname' class='detailInfo' value='"+data[i].hca_cname+"' readonly ></td>"
-			str += "<td><input type='date' name='hca_period' id='chk"+(i*2)+"'class='detailInfo checkDate' value='"+data[i].hca_period+"' readonly ><br>"
-			str += "<input type='date' name='hca_periodend' id='chk"+((i*2)+1)+"' class='detailInfo checkDate' value='"+data[i].hca_periodend+"' readonly onchange='checkDateValue(chk"+(i*2)+", chk"+((i*2)+1)+")'> </td>"
-			str += "<td><input type='text' name='hca_position' class='detailInfo' value='"+data[i].hca_position+"' readonly ></td>";
-			str += "<td><textarea rows='3' cols='20' name='hca_content' class='detailInfo' value='"+data[i].hca_content+"'></textarea>";
-			str += "<input type='hidden' name='hca_num' value='"+data[i].hca_num+"'></td></tr>'";
+			str += "<tr><td><input type='text' name='hcr_cname' class='detailInfo' value='"+data[i].hcr_cname+"' readonly ></td>"
+			str += "<td><input type='date' name='hcr_startperiod' id='chk"+(i*2)+"'class='detailInfo checkDate' value='"+data[i].hcr_startperiod+"' readonly ><br>"
+			str += "<input type='date' name='hcr_endperiod' id='chk"+((i*2)+1)+"' class='detailInfo checkDate' value='"+data[i].hcr_endperiod+"' readonly onchange='checkDateValue(chk"+(i*2)+", chk"+((i*2)+1)+")'> </td>"
+			str += "<td><input type='text' name='hcr_position' class='detailInfo' value='"+data[i].hcr_position+"' readonly ></td>";
+			str += "<td><textarea rows='3' cols='20' name='hcr_content' class='detailInfo' value='"+data[i].hcr_content+"'></textarea>";
+			str += "<input type='hidden' name='hcr_num' value='"+data[i].hcr_num+"'></td></tr>'";
 			}
 			str+="</table>";
 			$("#hrDetailInfo").html(str);
 			num=data.length;
 		},error : function(err){
-			/* let str ="";
-			str += "<table border='1px solid black'><tr>";
-			str += "<td>회사/프로젝트명</td><td>기간</td><td>직책</td><td>내용</td></tr>";
-			str += "<tr><td><input type='text' name='hca_cname' class='detailInfo'></td>"
-			str += "<td><input type='date' name='hca_period' class='detailInfo'></td>"
-			str += "<td><input type='date' name='hca_periodend' class='detailInfo'></td>"
-			str += "<td><input type='text' name='hca_position' class='detailInfo'></td>";
-			str += "<td><textarea rows='3' cols='20' name='hca_content' class='detailInfo'></textarea></td></tr></table>";
-			$("#hrDetailInfo").html(str); */
+			console.log(err);
 		} 
 	}); 
 }
@@ -298,59 +281,91 @@ function InCompanyInfo(){
 	$("#form").attr("action", formURL + "/newhrcard/" +id);
 	$("#current").val("HRCard");
 	$.ajax({
-		url:"/erp/rest/hr/hrcard",
-		data:{m_id:id},
+		url :"/erp/rest/hr/deptlist",
 		dataType:"json",
-		method:"get",
-		success : function(data){
-			console.log(data);
-			var married ="";
-			var status ="";
-			var work="";
-			if(data.hc_status==1){
-				status="근무";
-			}else if(data.hc_status==0){
-				status="퇴근"
-			}else{
-				status="휴가";
-			}
-			if(data.hc_work==1){
-				work="재직";
-			}else if(data.hc_work==2){
-				work="휴직";
-			}else{
-				work="퇴사";
-			}
-			let str ="";
-			str += "<table border='1px solid black'><tr>";
-			str += "<td>사원코드</td><td>부서</td><td>직책</td></tr>";
-			str += "<tr><td><input type='text' name='hc_code' value='"+data.hc_code+"' readonly></td>"
-			str += "<td><input type='text' name='hc_dept' value='"+data.hc_dept+"' class='detailInfo' readonly></td>"
-			str += "<td><input type='text' name='hc_position' value='"+data.hc_position+"' class='detailInfo' readonly></td></tr>";
-			str += "<td colspan='3'>입사일</td></tr>";
-			str += "<td colspan='3'><input type='date' name='hc_joindate' value='"+data.hc_joindate+"' class='detailInfo' readonly></td>"
-			str += "<tr><td>현재 상태</td><td>재/휴직 상태</td><td>사용한 월차</td></tr>";
-			str += "<td><input type='text' value='"+status+"' readonly></td>"
-			str += "<td><input type='text' value='"+work+"'readonly></td>"
-			str += "<td><input type='text' value='"+data.hc_numholi+"' readonly></td></tr></table>";
-			$("#hrDetailInfo").html(str);
+		method :"get",
+		success : function(deptList){
+			$.ajax({
+				url:"/erp/rest/hr/hrcard",
+				data:{m_id:id},
+				dataType:"json",
+				method:"get",
+				success : function(data){
+					console.log(deptList);
+					console.log(data);
+					var married ="";
+					var status ="";
+					var work="";
+					if(data.hc_status==1){
+						status="근무";
+					}else if(data.hc_status==0){
+						status="퇴근"
+					}else{
+						status="휴가";
+					}
+					if(data.hc_work==1){
+						work="재직";
+					}else if(data.hc_work==2){
+						work="휴직";
+					}else{
+						work="퇴사";
+					}
+					let str ="";
+					str += "<table border='1px solid black'><tr>";
+					str += "<td>사원코드</td><td>부서</td><td>직책</td></tr>";
+					str += "<tr><td><input type='text' name='hc_code' value='"+data.hc_hrcode+"' readonly></td>"
+					str += "<td><select name='hc_dept' class='detailInfo'>"
+						for(let i = 0 ; i<deptList.deptList.length ; i++){
+							if(data.hc_dept===deptList.deptList[i]){
+								str += "<option value='"+deptList.deptList[i]+"' selected='selected'>"+deptList.deptList[i]+"</option>";
+							}else{
+							str += "<option value='"+deptList.deptList[i]+"'>"+deptList.deptList[i]+"</option>";
+							}
+						}
+						str += "</select></td><td><select name='hc_position' class='detailInfo'>";
+						for(let i = 0 ; i<deptList.positionList.length ; i++){
+							if(data.hc_position===deptList.positionList[i]){
+								str += "<option value='"+deptList.positionList[i]+"' selected='selected'>"+deptList.positionList[i]+"</option>";
+							}else{
+							str += "<option value='"+deptList.positionList[i]+"'>"+deptList.positionList[i]+"</option>";
+							}
+						}
+						str += "</select></td></tr><td colspan='3'>입사일</td></tr>";
+					str += "<td colspan='3'><input type='date' name='hc_joindate' value='"+data.hc_joindate+"' class='detailInfo' readonly></td>"
+					str += "<tr><td>현재 상태</td><td>재/휴직 상태</td><td>사용한 월차</td></tr>";
+					str += "<td><input type='text' value='"+status+"' readonly></td>"
+					str += "<td><input type='text' value='"+work+"'readonly></td>"
+					str += "<td><input type='text' value='"+data.hc_numholi+"' readonly></td></tr></table>";
+					console.log(data.hc_joindate);
+					$("#hrDetailInfo").html(str);
+				},error : function(err){
+					console.log(deptList);
+					console.log(err);
+					let str ="";
+					str += "<table border='1px solid black'><tr>";
+					str += "<td>사원코드</td><td>부서</td><td>직책</td></tr>";
+					str += "<tr><td><input type='text' name='hc_code' placeholder='---' readonly></td>"
+					str += "<td><select name='hc_dept' class='detailInfo'>"
+					for(let i = 0 ; i<deptList.deptList.length ; i++){
+						str += "<option value='"+deptList.deptList[i]+"'>"+deptList.deptList[i]+"</option>";
+					}
+					str += "</select></td><td><select name='hc_position' class='detailInfo'>";
+					for(let i = 0 ; i<deptList.positionList.length ; i++){
+						str += "<option value='"+deptList.positionList[i]+"'>"+deptList.positionList[i]+"</option>";
+					}
+					str += "</select></td></tr><td colspan='3'>입사일</td></tr>";
+					str += "<td colspan='3'><input type='date' name='hc_joindate' class='detailInfo'></td></tr>"
+					str += "<tr><td>현재 상태</td><td>재/휴직 상태</td><td>사용한 월차</td></tr>";
+					str += "<td><input type='text' placeholder='---' readonly></td>"
+					str += "<td><input type='text' placeholder='---' readonly></td>"
+					str += "<td><input type='text' placeholder='---' readonly></td></tr></table>";
+					$("#hrDetailInfo").html(str);
+				} 
+			}); 
 		},error : function(err){
 			console.log(err);
-			let str ="";
-			str += "<table border='1px solid black'><tr>";
-			str += "<td>사원코드</td><td>부서</td><td>직책</td></tr>";
-			str += "<tr><td><input type='text' name='hc_code' placeholder='---' readonly></td>"
-			str += "<td><input type='text' name='hc_dept' class='detailInfo'></td>"
-			str += "<td><input type='text' name='hc_position' class='detailInfo'></td></tr>";
-			str += "<td colspan='3'>입사일</td></tr>";
-			str += "<td colspan='3'><input type='date' name='hc_joindate' class='detailInfo'></td></tr>"
-			str += "<tr><td>현재 상태</td><td>재/휴직 상태</td><td>사용한 월차</td></tr>";
-			str += "<td><input type='text' placeholder='---' readonly></td>"
-			str += "<td><input type='text' placeholder='---' readonly></td>"
-			str += "<td><input type='text' placeholder='---' readonly></td></tr></table>";
-			$("#hrDetailInfo").html(str);
-		} 
-	}); 
+		}
+	});
 }
 </script>
 </body>
