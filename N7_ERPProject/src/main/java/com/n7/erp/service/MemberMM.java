@@ -34,7 +34,6 @@ public class MemberMM {
 			view = "/home/login";
 			mav.addObject("warn", "Warning");
 		}
-		view="/home/login";
 		System.out.println(view);
 		mav.setViewName(view);
 		return mav;

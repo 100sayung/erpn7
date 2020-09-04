@@ -72,4 +72,14 @@ public class HRRestController {
 	}
 	
 	
+	
+	
+	//근태관리
+	
+	//출결등록
+	@PostMapping(value = "/hr/attendance") 
+	public String logAttendance(HttpSession session, @RequestBody String status) {
+		String result = hm.logAttendance(session.getAttribute("cCode").toString(), session.getAttribute("id").toString(), status);
+		return result;
+	}
 }

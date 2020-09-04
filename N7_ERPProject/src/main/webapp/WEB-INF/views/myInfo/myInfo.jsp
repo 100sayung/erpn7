@@ -81,6 +81,9 @@ ul {
 	</div>
 	<div id="description"> 내정보보기 </div>
 	<script>
+		$.ajax({
+			
+		});
 		
 	</script>
 </body>

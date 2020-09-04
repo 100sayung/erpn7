@@ -193,4 +193,27 @@ public class HrMM {
 		return str.toString();
 	}
 
+	
+	
+	
+	public String logAttendance(String cCode, String id, String status) {
+		String hrCode = hDao.getHrCodeFromID(id);
+		System.out.println("status는 ? " + status.substring(7));
+		HashMap<String, String> logAtMap = new HashMap<String, String>();
+		logAtMap.put("hrCode", hrCode);
+		logAtMap.put("cCode", cCode);
+		String type;
+		
+		if(status.substring(7).equals("in")) {
+			type = "1";
+		}else {
+			type = "0";
+		}
+		logAtMap.put("type", "1");
+		System.out.println("type은? " + logAtMap.get("type"));
+		hDao.logAttendance(logAtMap);
+		hDao.logStatusToHrCard(logAtMap);
+		return type;
+	}
+
 }

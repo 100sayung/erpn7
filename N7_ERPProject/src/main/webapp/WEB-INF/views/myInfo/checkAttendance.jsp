@@ -62,7 +62,7 @@ ul {
 		<div id="menu">
 			<ul>
 				<li class="current_page_item"><a href="/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
-				<li><a href="/hr/hrMain" accesskey="2"
+				<li><a href="/hr/hr" accesskey="2"
 					title="">인사 관리</a></li>
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
@@ -85,6 +85,7 @@ ul {
 	<div id="description">
 	
 	<h1 align="center">오늘 날짜 현재 시각</h1>
+	<div id="currentStatus"></div>
 	<br>
 	<span id="in" class="attendance"> 출근 등록 </span>
 	<span id="out" class="attendance"> 퇴근 등록 </span>
@@ -93,9 +94,50 @@ ul {
 
 
 <script>
+	var status = "";
+	var load = function(){
+		$.ajax({
+			url:"/erp/rest/hr/currentattendance",
+			dataType:"json",
+			method:"get",
+			success : function(status){
+				console.log(status);
+				if(data == 1){
+					status = "근무중";
+				}else{
+					status = "퇴근중";
+				}
+				$("#currentStatus").html(status);
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+	};
+	load();
 	$(".attendance").click(function(){
-		console.log(this);
+		console.log(this.id);
+		$.ajax({
+			url:"/erp/rest/hr/attendance",
+			data:{status : this.id},
+			dataType:"json",
+			method:"post",
+			success: function(data){
+				console.log(data);
+				if(data == 1){
+					alert("출근 등록 되었습니다.");
+					status = "근무중";
+				}else{
+					alert("퇴근 등록 되었습니다.");
+					status = "퇴근중";
+				}
+				$("#currentStatus").html(status);
+			}, error : function(err){
+				console.log(err);
+			}
+		});
 	});
+	
+	
 </script>
 </body>
 </html>

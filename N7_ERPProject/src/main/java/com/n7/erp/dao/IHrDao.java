@@ -18,7 +18,7 @@ public interface IHrDao {
 	HR_Card getHrCardDetail(String id);
 	
 	@Select("SELECT HC_HRCODE FROM HR_CARD WHERE HC_ID = #{m_id}")
-	String getHcCodeFromID(String id);
+	String getHrCodeFromID(String id);
 	
 	@Select("SELECT * FROM HR_${type} WHERE ${column}_HRCODE = #{code} AND ${column}_CCODE = #{cCode}")
 	List<Certification> getCertificationInfo(HashMap<String, String> hMap);
@@ -59,5 +59,10 @@ public interface IHrDao {
 
 	@Select("SELECT * FROM MEMBER WHERE M_ID = #{m_id}")
 	Member getMemberInfo(String m_id);
+
+	@Insert("INSERT INTO HR_ATTENDANCE VALUES(#{cCode}, #{hrCode}, DEFAULT, #{type})")
+	boolean logAttendance(HashMap<String, String> logAtMap);
+	@Insert("UPDATE HR_CARD SET HC_STATUS = #{type} WHERE HC_CCODE = #{cCode} AND HC_HRCODE = #{hrCode}")
+	void logStatusToHrCard(HashMap<String, String> logAtMap);
 	
 }
