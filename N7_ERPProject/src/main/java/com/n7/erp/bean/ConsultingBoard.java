@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Alias("board")
 @Data
-public class ConsultingBoard {
+public class ConsultingBoard { //상담게시판
 	private String CB_NUM;	
 	private String CB_ID;
 	private String CB_PW;

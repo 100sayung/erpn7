@@ -11,11 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.n7.erp.bean.ApprovalDocu;
 import com.n7.erp.bean.Member;
+import com.n7.erp.bean.entity.NameHrCode;
 import com.n7.erp.bean.hr.Academic;
+import com.n7.erp.bean.hr.ApplyHoliday;
 import com.n7.erp.bean.hr.Career;
 import com.n7.erp.bean.hr.Certification;
 import com.n7.erp.bean.hr.HR_Card;
+import com.n7.erp.dao.HRIDeptDao;
+import com.n7.erp.dao.IBaiscDao;
 import com.n7.erp.dao.IHrDao;
 import com.n7.erp.dao.IMemberDao;
 
@@ -26,6 +32,8 @@ public class HrMM {
 	
 	@Autowired private IHrDao hDao;
 	@Autowired private IMemberDao mDao;
+	@Autowired private HRIDeptDao dDao;
+	@Autowired private IBaiscDao bDao;
 
 	String view = "";
 
@@ -35,7 +43,7 @@ public class HrMM {
 	}
 
 	public List<Certification> getCertificationInfo(String id, String type, String cCode) {
-		String hc_hrcode = hDao.getHcCodeFromID(id);
+		String hc_hrcode = hDao.getHrCodeFromID(id);
 		HashMap<String, String> hMap = new HashMap<String, String>();
 		hMap.put("code", hc_hrcode);
 		hMap.put("type", type);
@@ -46,7 +54,7 @@ public class HrMM {
 	}
 
 	public List<Career> getCareerInfo(String id, String type, String cCode) {
-		String hc_hrcode = hDao.getHcCodeFromID(id);
+		String hc_hrcode = hDao.getHrCodeFromID(id);
 		HashMap<String, String> hMap = new HashMap<String, String>();
 		hMap.put("code", hc_hrcode);
 		hMap.put("type", type);
@@ -57,7 +65,7 @@ public class HrMM {
 	}
 
 	public List<Academic> getAcademicInfo(String id, String type, String cCode) {
-		String hc_hrcode = hDao.getHcCodeFromID(id);
+		String hc_hrcode = hDao.getHrCodeFromID(id);
 		HashMap<String, String> hMap = new HashMap<String, String>();
 		System.out.println(hc_hrcode);
 		hMap.put("code", hc_hrcode);
@@ -70,7 +78,7 @@ public class HrMM {
 
 	public void registAcademic(HttpServletRequest request, String id) {
 		HashMap<String, String> acMap = new HashMap<String, String>();
-		String hc_hrcode = hDao.getHcCodeFromID(id);
+		String hc_hrcode = hDao.getHrCodeFromID(id);
 		String cCode = request.getSession().getAttribute("cCode").toString();
 		acMap.put("hrcode", hc_hrcode);
 		acMap.put("cCode", cCode);
@@ -95,7 +103,7 @@ public class HrMM {
 
 	public void registCareer(HttpServletRequest request, String id) {
 		HashMap<String, String> crMap = new HashMap<String, String>();
-		String hc_hrcode = hDao.getHcCodeFromID(id);
+		String hc_hrcode = hDao.getHrCodeFromID(id);
 		String cCode = request.getSession().getAttribute("cCode").toString();
 		crMap.put("hrcode", hc_hrcode);
 		crMap.put("cCode", cCode);
@@ -122,7 +130,7 @@ public class HrMM {
 	public void registCertification(HttpServletRequest request, String id) {
 		HashMap<String, String> ctfMap = new HashMap<String, String>();
 		String cCode = request.getSession().getAttribute("cCode").toString();
-		String hc_hrcode = hDao.getHcCodeFromID(id);
+		String hc_hrcode = hDao.getHrCodeFromID(id);
 		ctfMap.put("hrcode", hc_hrcode);
 		ctfMap.put("cCode", cCode);
 		Integer cnt = hDao.selectCertification(ctfMap);
@@ -216,4 +224,39 @@ public class HrMM {
 		return type;
 	}
 
+
+	public ModelAndView applyHoliday(ApplyHoliday apholi, HttpSession session) {
+		String id = session.getAttribute("id").toString();
+		String cCode = session.getAttribute("cCode").toString();
+		String hrCode = hDao.getHrCodeFromID(id);
+		
+		//결재문서양식부터 등록
+		ApprovalDocu docu = new ApprovalDocu();
+		docu.setAp_ccode(cCode).setAp_docuname(apholi.getHap_docuname()).setAp_docunum("H");
+		docu.setAp_fromapprover(hrCode).setAp_toapprover(apholi.getHap_toapprover());
+		
+		apholi.setHap_ccode(cCode).setHap_hrcode(hrCode);
+		apholi.setHap_fromapprover(hrCode).setHap_docunum("H");
+		
+		if(bDao.registHolidayApprovalDocu(docu)) {
+			hDao.registHoliday(apholi);
+		}
+		mav.setViewName("/myInfo/myHoliday");
+		return mav;
+	}
+
+	public String getMyLeaderUsingGrade(HttpSession session, String string) {
+
+		String id = session.getAttribute("id").toString();
+		String cCode = session.getAttribute("cCode").toString();
+		String myDept = hDao.getHrCardDetail(id).getHc_dept();
+		
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("authority", string);
+		hMap.put("cCode", cCode);
+		hMap.put("myDept", myDept);
+		ArrayList<NameHrCode> nlist = dDao.getMyLeaderUsingGradeDept(hMap);
+		String result = new Gson().toJson(nlist);
+		return result;
+	}
 }

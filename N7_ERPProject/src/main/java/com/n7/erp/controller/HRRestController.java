@@ -31,32 +31,38 @@ public class HRRestController {
 	@Autowired
 	private HrMM hm;
 	@Autowired private HRDepartmentMM deptmm;
-	
+	//자격증 리스트 출력
 	@GetMapping(value="/hr/certification")
 	public List<Certification> getCTFInfo(String m_id, HttpServletRequest request) {
 		List<Certification> ctfList = hm.getCertificationInfo(m_id, request.getServletPath().substring(9), request.getSession().getAttribute("cCode").toString());
 		return ctfList;
 	}
+	//인사카드 정보 출력
 	@GetMapping(value="/hr/hrcard")
 	public HR_Card getHRCInfo(String m_id, HttpServletRequest request) {
 		HR_Card hrCard = hm.getHrCardInfo(m_id);
 		return hrCard;
 	}
+	//학력 리스트 출력
 	@GetMapping(value="/hr/academic")
 	public List<Academic> getACInfo(String m_id, HttpServletRequest request) {
 		List<Academic> acList = hm.getAcademicInfo(m_id, request.getServletPath().substring(9), request.getSession().getAttribute("cCode").toString());
 		return acList;
 	}
+	//이력 리스트 출력
 	@GetMapping(value="/hr/career")
 	public List<Career> getCRInfo(String m_id, HttpServletRequest request) {
 		List<Career> crList = hm.getCareerInfo(m_id, request.getServletPath().substring(9), request.getSession().getAttribute("cCode").toString());
 		return crList;
 	}
+	
+	//id로부터 hrCard가 존재하는지 안하는지 체크함!!!
 	@GetMapping(value="/hr/hrcodefromid")
 	public boolean haveHRCodeFromID(String m_id) {
 		boolean flag = hm.haveHRCodeFromId(m_id);
 		return flag;
 	}
+	//id로부터 member정보 가져옴!
 	@GetMapping(value="/hr/memberfromid")
 	public Member getMemberInfo(String m_id) {
 		System.out.println(m_id);
@@ -64,6 +70,7 @@ public class HRRestController {
 		return mb;
 	}
 	
+	//
 	@GetMapping(value = "/hr/deptlist")
 	public String getDeptList(HttpSession session) {
 		Department dept = new Department();
@@ -71,7 +78,12 @@ public class HRRestController {
 		return result;
 	}
 	
-	
+	//휴가신청
+	@GetMapping(value = "/hr/myleaderlist")
+	public String getMyLeaderUsingGrade(HttpSession session){
+		String leaderList = hm.getMyLeaderUsingGrade(session, "1");
+		return leaderList;
+	}
 	
 	
 	//근태관리

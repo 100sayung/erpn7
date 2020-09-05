@@ -76,15 +76,15 @@ ul {
 			<li><a href="/erp/myinfo/checkattendance">출/퇴근 등록</a></li>
 			<li><a href="/erp/myinfo/myinfo">내 정보 보기</li>
 			<li><a href="#">급여명세서 보기</li>
-			<li><a href="#">내 출결 보기</li>
-			<li><a href="#">내 휴가 보기</li>
-			<li><a href="#">휴가신청</a></li>
-			<li><a href="#">나의결재함</a></li>
+			<li><a href="/erp/myinfo/myattendance">내 출결 보기</li>
+			<li><a href="/erp/myinfo/myholiday">내 휴가 보기</li>
+			<li><a href="/erp/myinfo/applyholiday">휴가신청</a></li>
+			<li><a href="/erp/myinfo/mydocument">나의 결재함</a></li>
 		</ul>
 	</div>
 	<div id="description">
 	
-	<h1 align="center">오늘 날짜 현재 시각</h1>
+	<h1 align="center">오늘 날짜 현재 시각 출력해야함. 현재 등록버튼누르면 오늘날짜가 입력되는데 현재시각이 들어가도록 바꿔야함</h1>
 	<div id="currentStatus"></div>
 	<br>
 	<span id="in" class="attendance"> 출근 등록 </span>

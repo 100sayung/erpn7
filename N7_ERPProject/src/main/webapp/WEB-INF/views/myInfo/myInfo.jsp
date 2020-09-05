@@ -47,6 +47,9 @@ a {
 ul {
 	list-style: none;
 }
+.attendance{
+	border: 1px solid black;
+}
 </style>
 </head>
 <body>
@@ -59,7 +62,7 @@ ul {
 		<div id="menu">
 			<ul>
 				<li class="current_page_item"><a href="/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
-				<li><a href="/hr/hrMain" accesskey="2"
+				<li><a href="/hr/hr" accesskey="2"
 					title="">인사 관리</a></li>
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
@@ -73,16 +76,23 @@ ul {
 			<li><a href="/erp/myinfo/checkattendance">출/퇴근 등록</a></li>
 			<li><a href="/erp/myinfo/myinfo">내 정보 보기</li>
 			<li><a href="#">급여명세서 보기</li>
-			<li><a href="#">내 출결 보기</li>
-			<li><a href="#">내 휴가 보기</li>
-			<li><a href="#">휴가신청</a></li>
-			<li><a href="#">나의결재함</a></li>
+			<li><a href="/erp/myinfo/myattendance">내 출결 보기</li>
+			<li><a href="/erp/myinfo/myholiday">내 휴가 보기</li>
+			<li><a href="/erp/myinfo/applyholiday">휴가신청</a></li>
+			<li><a href="/erp/myinfo/mydocument">나의 결재함</a></li>
 		</ul>
 	</div>
 	<div id="description"> 내정보보기 </div>
 	<script>
 		$.ajax({
-			
+			url:"/erp/rest/myinfo/myinfo",
+			dataType:"json",
+			method:"get",
+			success : function(data){
+				console.log(data);
+			}, error : function(err){
+				console.log(err);
+			}
 		});
 		
 	</script>

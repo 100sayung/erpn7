@@ -22,10 +22,27 @@ public class MyInfoController {
 	
 	@Autowired
 	private MemberMM mm;
-	
-	@GetMapping(value="myinfo/checkattendance")
+	//이동관련
+	@GetMapping(value="/myinfo/checkattendance")
 	public String moveCheckAttendance() {
 		return "myInfo/checkAttendance";
 	}
+	@GetMapping(value="/myinfo/applyholiday")
+	public String moveApplyHoliday() {
+		return "myInfo/applyHoliday";
+	}
+	@GetMapping(value="/myinfo/myattendance")
+	public String moveMyAttendance() {
+		return "myInfo/myAttendance";
+	}
+	@GetMapping(value="/myinfo/myholiday")
+	public String moveMyHoliday() {
+		return "myInfo/myHoliday";
+	}
+	@GetMapping(value="/myinfo/myinfo")
+	public String moveMyinfo() {
+		return "myInfo/myInfo";
+	}
 	
+	//여기까지 이동관련
 }

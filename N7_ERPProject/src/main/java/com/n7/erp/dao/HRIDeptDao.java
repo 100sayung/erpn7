@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.n7.erp.bean.ConsultingBoard;
+import com.n7.erp.bean.entity.NameHrCode;
 import com.n7.erp.bean.hr.Deduct;
 import com.n7.erp.bean.hr.Department;
 
@@ -55,7 +56,7 @@ public interface HRIDeptDao {
 	@Select("SELECT * FROM HR_DEPT WHERE HDP_POSITION=#{disposition} AND HDP_CCODE = #{cCode}")
 	ArrayList<Department> findDisposition(HashMap<String, String> fdpMap);
 
-	@Select("SEL")
-	ArrayList<Department> getDeptList(String cCode);
+
+	ArrayList<NameHrCode> getMyLeaderUsingGradeDept(HashMap<String, String> hMap);
 	
 }

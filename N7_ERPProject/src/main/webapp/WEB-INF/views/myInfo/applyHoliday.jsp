@@ -82,8 +82,43 @@ ul {
 			<li><a href="/erp/myinfo/mydocument">나의 결재함</a></li>
 		</ul>
 	</div>
-	<div id="description">
-		내 출결조회
+	<div id="description"> 휴가신청폼<br>
+	
+	<form action="/erp/hr/applyholiday" method="post">
+	<input type="text" name="hap_docuname" placeholder="문서 제목을 입력해주세요 글자제한 20자" required="required">
+	<input type="text" name="hap_type" placeholder="휴가 종류를 입력해주세요 글자제한 20자" required="required">
+	<br>
+	<input type="date" name="hap_startday" required="required">
+	<span id="myleader"></span>
+	<input type="date" name="hap_endday" required="required">
+	<br>
+	<textarea rows="10" cols="10" name="hap_reason"></textarea>
+	<input type="submit" value="제출">
+	</form>
+	
+	
+	
 	</div>
+	<script>
+	$(document).ready(function() {
+		$.ajax({
+			url : "/erp/rest/hr/myleaderlist",
+			dataType : "json",
+			method : "get",
+			success : function(data){
+				console.log(data);
+				var str = "<td><select name='hap_toapprover'>";
+				for(let i = 0 ; i<data.length ; i++){
+					str += "<option value='"+data[i].hr_hrcode+"' selected='selected'>"+data[i].m_name+"("+data[i].hc_position+")</option>";
+					}
+				str += "</select>"
+				$("#myleader").html(str);
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+	});
+	
+	</script>
 </body>
 </html>

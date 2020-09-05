@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.n7.erp.bean.hr.ApplyHoliday;
 import com.n7.erp.bean.hr.Department;
 import com.n7.erp.bean.hr.HR_Card;
 import com.n7.erp.service.HRDepartmentMM;
@@ -36,27 +37,31 @@ public class HRHomeController {
 	@Autowired private HrMM hm;
 	@Autowired private MemberMM mm;
 	
+	//인사카드 세부정보 페이지로 이동 
 	@GetMapping(value="/hr/hrModifyDetail")
 	public ModelAndView moveModifyDetail(@RequestParam String id) {
 		mav.setViewName("/hr/hrModifyDetail");
 		return mav;
 	}
-	
+	//새로운 학력 정보 등록
 	@PostMapping(value="/hr/newacademic/{id}")
 	public String registAcademic(HttpServletRequest request, @PathVariable("id") String id) throws Exception{
 		hm.registAcademic(request, id);
 		return "redirect:/hr/hrModifyDetail?id="+id;
 	}
+	//새로운 이력 정보 등록
 	@PostMapping(value="/hr/newcareer/{id}")
 	public String registCareer(HttpServletRequest request, @PathVariable("id") String id) throws Exception{
 		hm.registCareer(request, id);
 		return "redirect:/hr/hrModifyDetail?id="+id;
 	}
+	//새로운 자격증 정보 등록
 	@PostMapping(value="/hr/newcertification/{id}")
 	public String registCertification(HttpServletRequest request, @PathVariable("id") String id) throws Exception{
 		hm.registCertification(request, id);
 		return "redirect:/hr/hrModifyDetail?id="+id;
 	}
+	//새로운 인사카드 등록
 	@PostMapping(value="/hr/newhrcard/{id}")
 	public String registHRCard(HR_Card hrCard, @PathVariable("id") String id, HttpSession session) {
 		hm.registHRCard(hrCard, id, session.getAttribute("cCode").toString());
@@ -145,4 +150,13 @@ public class HRHomeController {
 		System.out.println("넘어온 값=" + duction);
 		return duction;
 	}
+	
+	
+	//휴가신청
+	@PostMapping(value="/hr/applyholiday")
+	public ModelAndView applyHoliday(ApplyHoliday apholi, HttpSession session) {
+		mav = hm.applyHoliday(apholi, session);
+		return mav;
+	}
+	
 }

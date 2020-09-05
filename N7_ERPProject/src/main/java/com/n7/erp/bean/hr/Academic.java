@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Alias("academic")
 @Data
-public class Academic {
+public class Academic { //학력
 	String code;
 	String hac_hrcode;
 	String hac_num;

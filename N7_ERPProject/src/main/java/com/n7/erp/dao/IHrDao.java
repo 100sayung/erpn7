@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.n7.erp.bean.Member;
 import com.n7.erp.bean.hr.Academic;
+import com.n7.erp.bean.hr.ApplyHoliday;
 import com.n7.erp.bean.hr.Career;
 import com.n7.erp.bean.hr.Certification;
 import com.n7.erp.bean.hr.HR_Card;
@@ -64,5 +65,9 @@ public interface IHrDao {
 	boolean logAttendance(HashMap<String, String> logAtMap);
 	@Insert("UPDATE HR_CARD SET HC_STATUS = #{type} WHERE HC_CCODE = #{cCode} AND HC_HRCODE = #{hrCode}")
 	void logStatusToHrCard(HashMap<String, String> logAtMap);
+
+	@Insert("INSERT INTO HR_APPLYHOLIDAY VALUES(${hap_docunum}||HR_APPLYHOLIDAY_SEQ.currval, #{hap_ccode}, #{hap_hrcode}, #{hap_docuname},"
+			+ "#{hap_fromapprover}, #{hap_toapprover}, DEFAULT, #{hap_type}, #{hap_reason}, #{hap_startday}, #{hap_endday}, DEFAULT")
+	void registHoliday(ApplyHoliday apholi);
 	
 }

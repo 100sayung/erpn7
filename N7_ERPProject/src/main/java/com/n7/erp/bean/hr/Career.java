@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 @Alias("career")
 @Data
 @Accessors(chain = true)
-public class Career {
+public class Career { //이력
 	String hcr_num;
 	String hcr_name;
 	String hcr_startperiod;

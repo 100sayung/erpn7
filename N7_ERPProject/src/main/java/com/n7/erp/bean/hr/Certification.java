@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 @Alias("certification")
 @Data
 @Accessors(chain = true)
-public class Certification {
+public class Certification { //자격증
 	String hct_hrcode;
 	String hct_name;
 	String hct_agency;

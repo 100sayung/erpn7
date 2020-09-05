@@ -30,7 +30,7 @@ import com.n7.erp.bean.hr.HR_Card;
 import com.n7.erp.service.HrMM;
 import com.n7.erp.service.MemberMM;
 
-
+//전부 이동관련
 @Controller
 public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);	
