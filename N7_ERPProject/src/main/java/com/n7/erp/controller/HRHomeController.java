@@ -75,6 +75,11 @@ public class HRHomeController {
 		return mav;
 	}
 	
+	//사원출결조회 페이지로 이동
+	@GetMapping(value = "/erp/hr/attendance")
+	public String moveAttendance() {
+		return "/hr/attendance";
+	}
 	
 	
 	

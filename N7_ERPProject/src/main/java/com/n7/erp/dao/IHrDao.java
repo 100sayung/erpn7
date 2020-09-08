@@ -1,5 +1,6 @@
 package com.n7.erp.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import com.n7.erp.bean.Member;
 import com.n7.erp.bean.hr.Academic;
 import com.n7.erp.bean.hr.ApplyHoliday;
+import com.n7.erp.bean.hr.Attendance;
 import com.n7.erp.bean.hr.Career;
 import com.n7.erp.bean.hr.Certification;
 import com.n7.erp.bean.hr.HR_Card;
@@ -61,7 +63,7 @@ public interface IHrDao {
 	@Select("SELECT * FROM MEMBER WHERE M_ID = #{m_id}")
 	Member getMemberInfo(String m_id);
 
-	@Insert("INSERT INTO HR_ATTENDANCE VALUES(#{cCode}, #{hrCode}, DEFAULT, #{type})")
+	@Insert("INSERT INTO HR_ATTENDANCE VALUES(#{cCode}, #{hrCode}, #{time}, #{type})")
 	boolean logAttendance(HashMap<String, String> logAtMap);
 	@Insert("UPDATE HR_CARD SET HC_STATUS = #{type} WHERE HC_CCODE = #{cCode} AND HC_HRCODE = #{hrCode}")
 	void logStatusToHrCard(HashMap<String, String> logAtMap);
@@ -69,5 +71,14 @@ public interface IHrDao {
 	@Insert("INSERT INTO HR_APPLYHOLIDAY VALUES(${hap_docunum}||HR_APPLYHOLIDAY_SEQ.currval, #{hap_ccode}, #{hap_hrcode}, #{hap_docuname},"
 			+ "#{hap_fromapprover}, #{hap_toapprover}, DEFAULT, #{hap_type}, #{hap_reason}, #{hap_startday}, #{hap_endday}, DEFAULT")
 	void registHoliday(ApplyHoliday apholi);
+
+	@Select("SELECT * FROM HR_ATTENDANCE WHERE HA_HRCODE = #{hrCode} AND HA_CCODE = #{cCode} AND HA_TIME LIKE #{dateStandard} ORDER BY HA_TIME")
+	ArrayList<Attendance> getMyAttendance(HashMap<String, String> hMap);
+	@Select("SELECT * FROM HR_ATTENDANCE WHERE HA_CCODE = #{cCode} AND HA_TIME LIKE #{dateStandard} ORDER BY HA_TIME")
+	ArrayList<Attendance> getEmployeeAttendance(HashMap<String, String> hMap);
+
+	@Select("SELECT * FROM HR_APPLYHOLIDAY WHERE HAP_CCODE = #{cCode}, HAP_HRCODE = #{hrCode}")
+	ArrayList<ApplyHoliday> getMyHoliday(HashMap<String, String> hMap);
+
 	
 }

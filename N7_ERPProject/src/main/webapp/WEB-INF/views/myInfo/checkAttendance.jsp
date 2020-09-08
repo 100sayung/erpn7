@@ -52,7 +52,7 @@ ul {
 }
 </style>
 </head>
-<body>
+<body onload="build();">
 	<div id="header">
 		<div id="logo">
 			<h1>
@@ -61,8 +61,8 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li class="current_page_item"><a href="/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
-				<li><a href="/hr/hr" accesskey="2"
+				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
+				<li><a href="/erp/hr/hr" accesskey="2"
 					title="">인사 관리</a></li>
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
@@ -85,11 +85,30 @@ ul {
 	<div id="description">
 	
 	<h1 align="center">오늘 날짜 현재 시각 출력해야함. 현재 등록버튼누르면 오늘날짜가 입력되는데 현재시각이 들어가도록 바꿔야함</h1>
+	<h1 id="clock"></h1>
 	<div id="currentStatus"></div>
 	<br>
 	<span id="in" class="attendance"> 출근 등록 </span>
 	<span id="out" class="attendance"> 퇴근 등록 </span>
 	</div>
+	
+	
+    <table align="center" id="calendar">
+        <tr>
+            <td><font size=1%; color="#B3B6B3"><label onclick="beforem()" id="before" ></label></font></td>
+            <td colspan="5" align="center" id="yearmonth"></td>
+            <td><font size=1%; color="#B3B6B3"><label onclick="nextm()" id="next"></label></font></td>
+        </tr>
+        <tr>
+            <td align="center"> <font color="#FF9090">일</font></td>
+            <td align="center"> 월 </td>
+            <td align="center"> 화 </td>
+            <td align="center"> 수 </td>
+            <td align="center"> 목 </td>
+            <td align="center"> 금 </td>
+            <td align="center"><font color=#7ED5E4>토</font></td>
+        </tr>
+    </table>
 	
 
 
@@ -102,7 +121,7 @@ ul {
 			method:"get",
 			success : function(status){
 				console.log(status);
-				if(data == 1){
+				if(status == 1){
 					status = "근무중";
 				}else{
 					status = "퇴근중";
@@ -112,13 +131,17 @@ ul {
 				console.log(err);
 			}
 		});
+		
+		
 	};
 	load();
 	$(".attendance").click(function(){
 		console.log(this.id);
+		let curtime = new Date();
+	
 		$.ajax({
 			url:"/erp/rest/hr/attendance",
-			data:{status : this.id},
+			data:{status : this.id, time : curtime.toString()},
 			dataType:"json",
 			method:"post",
 			success: function(data){
@@ -134,10 +157,121 @@ ul {
 			}, error : function(err){
 				console.log(err);
 			}
-		});
+		}); 
 	});
 	
+
+	var clockTarget = document.getElementById("clock");
+
+
+	function clock() {
+	    var date = new Date();
+	    // date Object를 받아오고 
+	    var month = date.getMonth();
+	    // 달을 받아옵니다 
+	    var clockDate = date.getDate();
+	    // 몇일인지 받아옵니다 
+	    var day = date.getDay();
+	    // 요일을 받아옵니다. 
+	    var week = ['일', '월', '화', '수', '목', '금', '토'];
+	    // 요일은 숫자형태로 리턴되기때문에 미리 배열을 만듭니다. 
+	    var hours = date.getHours();
+	    // 시간을 받아오고 
+	    var minutes = date.getMinutes();
+	    // 분도 받아옵니다.
+	    var seconds = date.getSeconds();
+	    let time = (month+1)+"월 "+clockDate + "일 " + week[day] + "요일 " + hours + "시 " + minutes + "분 " + seconds + "초";
+	    $("#clock").text(time);
+	}
+
+
+	//시계 진행되게 계속 실행시켜주는거
+	function init() {
+	clock();
+	setInterval(clock, 1000);
+	}
+
+	init();
 	
+
+	
+	//이 아래로 달력
+	    var today = new Date(); // 오늘 날짜
+	    var date = new Date();
+	 
+	    function beforem() //이전 달을 today에 값을 저장
+	    { 
+	        today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+	        build(); //만들기
+	    }
+	    
+	    function nextm()  //다음 달을 today에 저장
+	    {
+	        today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+	        build();
+	    }
+	    
+	    function build()
+	    {
+	        var nMonth = new Date(today.getFullYear(), today.getMonth(), 1); //현재달의 첫째 날
+	        var lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); //현재 달의 마지막 날
+	        var tbcal = document.getElementById("calendar"); // 테이블 달력을 만들 테이블
+	        var yearmonth = document.getElementById("yearmonth"); //  년도와 월 출력할곳
+	        yearmonth.innerHTML = today.getFullYear() + "년 "+ (today.getMonth() + 1) + "월"; //년도와 월 출력
+	        
+	        if(today.getMonth()+1==12) //  눌렀을 때 월이 넘어가는 곳
+	        {
+	            before.innerHTML=(today.getMonth())+"월";
+	            next.innerHTML="1월";
+	        }
+	        else if(today.getMonth()+1==1) //  1월 일 때
+	        {
+	        before.innerHTML="12월";
+	        next.innerHTML=(today.getMonth()+2)+"월";
+	        }
+	        else //   12월 일 때
+	        {
+	            before.innerHTML=(today.getMonth())+"월";
+	            next.innerHTML=(today.getMonth()+2)+"월";
+	        }
+	        
+	       
+	        // 남은 테이블 줄 삭제
+	        while (tbcal.rows.length > 2) 
+	        {
+	            tbcal.deleteRow(tbcal.rows.length - 1);
+	        }
+	        var row = null;
+	        row = tbcal.insertRow();
+	        var cnt = 0;
+	 
+	        // 1일 시작칸 찾기
+	        for (i = 0; i < nMonth.getDay(); i++) 
+	        {
+	            cell = row.insertCell();
+	            cnt = cnt + 1;
+	        }
+	 
+	        // 달력 출력
+	        for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
+	        { 
+	            cell = row.insertCell();
+	            cell.innerHTML = i;
+	            cnt = cnt + 1;
+	            if (cnt % 7 == 1) {//일요일 계산
+	                cell.innerHTML = "<font color=#FF9090>" + i//일요일에 색
+	            }
+	            if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
+	                cell.innerHTML = "<font color=#7ED5E4>" + i//토요일에 색
+	                row = calendar.insertRow();// 줄 추가
+	            }
+	            if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) 
+	            {
+	                cell.bgColor = "#BCF1B1"; //오늘날짜배경색
+	            }
+	        }
+	 
+	    }
 </script>
 </body>
 </html>

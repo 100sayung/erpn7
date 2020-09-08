@@ -61,8 +61,8 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li class="current_page_item"><a href="/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
-				<li><a href="/hr/hr" accesskey="2"
+				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
+				<li><a href="/erp/hr/hr" accesskey="2"
 					title="">인사 관리</a></li>
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>

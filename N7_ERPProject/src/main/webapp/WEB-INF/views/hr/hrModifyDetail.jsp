@@ -52,8 +52,6 @@ span{
 <input type='submit' value='등록하기' disabled="disabled" id='registBtn'>
 </form>
 
-<
-
 
 <script>
 var num;

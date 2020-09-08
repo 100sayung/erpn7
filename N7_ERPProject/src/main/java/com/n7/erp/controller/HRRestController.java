@@ -1,5 +1,6 @@
 package com.n7.erp.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.annotation.MultipartConfig;
@@ -90,8 +91,22 @@ public class HRRestController {
 	
 	//출결등록
 	@PostMapping(value = "/hr/attendance") 
-	public String logAttendance(HttpSession session, @RequestBody String status) {
-		String result = hm.logAttendance(session.getAttribute("cCode").toString(), session.getAttribute("id").toString(), status);
+	public String logAttendance(HttpSession session, String status, String time) {
+		String result = hm.logAttendance(session.getAttribute("cCode").toString(), session.getAttribute("id").toString(), status,time);
 		return result;
+	}
+	//현재상태확인
+	@GetMapping(value="/hr/currentattendance")
+	public String getCurAttendance(HttpSession session) {
+		String result = hm.getCurAttendance(session.getAttribute("id").toString());
+		return result;
+	}
+	
+	//사원출결조회
+
+	@GetMapping(value="/hr/employeeattendance")
+	public String getMyAttendance(HttpSession session, String day, String yearmonth) {
+		String result = hm.getEmployeeAttendance(session, day, yearmonth);
+		return result; 
 	}
 }

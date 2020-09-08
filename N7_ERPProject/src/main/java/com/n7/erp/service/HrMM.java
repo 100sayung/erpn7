@@ -1,6 +1,7 @@
 package com.n7.erp.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import com.n7.erp.bean.Member;
 import com.n7.erp.bean.entity.NameHrCode;
 import com.n7.erp.bean.hr.Academic;
 import com.n7.erp.bean.hr.ApplyHoliday;
+import com.n7.erp.bean.hr.Attendance;
 import com.n7.erp.bean.hr.Career;
 import com.n7.erp.bean.hr.Certification;
 import com.n7.erp.bean.hr.HR_Card;
@@ -29,11 +31,15 @@ import com.n7.erp.dao.IMemberDao;
 public class HrMM {
 
 	ModelAndView mav = new ModelAndView();
-	
-	@Autowired private IHrDao hDao;
-	@Autowired private IMemberDao mDao;
-	@Autowired private HRIDeptDao dDao;
-	@Autowired private IBaiscDao bDao;
+
+	@Autowired
+	private IHrDao hDao;
+	@Autowired
+	private IMemberDao mDao;
+	@Autowired
+	private HRIDeptDao dDao;
+	@Autowired
+	private IBaiscDao bDao;
 
 	String view = "";
 
@@ -94,7 +100,7 @@ public class HrMM {
 				ac.setHac_num(request.getParameterValues("hac_num")[i]);
 				hDao.updateAcademic(ac);
 				System.out.println("update : " + i);
-			}else {
+			} else {
 				hDao.registAcademic(ac);
 			}
 		}
@@ -120,7 +126,7 @@ public class HrMM {
 			if (i < cnt) {
 				cr.setHcr_num(request.getParameterValues("hra_num")[i]);
 				hDao.updateCareer(cr);
-			}else {
+			} else {
 				hDao.registCareer(cr);
 			}
 		}
@@ -144,7 +150,7 @@ public class HrMM {
 			if (i < cnt) {
 				ctf.setHct_num(request.getParameterValues("hct_num")[i]);
 				hDao.updateCertification(ctf);
-			}else {
+			} else {
 				hDao.registCertification(ctf);
 			}
 		}
@@ -186,6 +192,7 @@ public class HrMM {
 		mav.setViewName("/hr/hrCard");
 		return mav;
 	}
+
 	private String makeHRCardList(ArrayList<Member> hList) {
 		StringBuilder str = new StringBuilder();
 		str.append("<table id='table1'>");
@@ -195,50 +202,48 @@ public class HrMM {
 			str.append("<td>" + hList.get(i).getM_name() + "</td>");
 			str.append("<td>" + hList.get(i).getM_birth() + "</td>");
 			str.append("<td>" + hList.get(i).getM_email() + "</td><td>");
-			str.append("<input type='button' value='' onclick='modifyDetail(\""+hList.get(i).getM_id()+"\")'></td></tr>");
+			str.append("<input type='button' value='' onclick='modifyDetail(\"" + hList.get(i).getM_id()
+					+ "\")'></td></tr>");
 		}
 		str.append("</table>");
 		return str.toString();
 	}
 
-	
-	
-	
-	public String logAttendance(String cCode, String id, String status) {
+	public String logAttendance(String cCode, String id, String status, String time) {
 		String hrCode = hDao.getHrCodeFromID(id);
-		System.out.println("status는 ? " + status.substring(7));
+		System.out.println(time);
+		System.out.println(status);
 		HashMap<String, String> logAtMap = new HashMap<String, String>();
 		logAtMap.put("hrCode", hrCode);
 		logAtMap.put("cCode", cCode);
+		logAtMap.put("time", time);
 		String type;
-		
-		if(status.substring(7).equals("in")) {
+		if (status.equals("in")) {
 			type = "1";
-		}else {
+		} else {
 			type = "0";
 		}
-		logAtMap.put("type", "1");
+		logAtMap.put("type", type);
 		System.out.println("type은? " + logAtMap.get("type"));
 		hDao.logAttendance(logAtMap);
 		hDao.logStatusToHrCard(logAtMap);
 		return type;
 	}
 
-
 	public ModelAndView applyHoliday(ApplyHoliday apholi, HttpSession session) {
 		String id = session.getAttribute("id").toString();
 		String cCode = session.getAttribute("cCode").toString();
 		String hrCode = hDao.getHrCodeFromID(id);
-		
-		//결재문서양식부터 등록
+
+		// 결재문서양식부터 등록
 		ApprovalDocu docu = new ApprovalDocu();
 		docu.setAp_ccode(cCode).setAp_docuname(apholi.getHap_docuname()).setAp_docunum("H");
 		docu.setAp_fromapprover(hrCode).setAp_toapprover(apholi.getHap_toapprover());
-		
+
 		apholi.setHap_ccode(cCode).setHap_hrcode(hrCode);
 		apholi.setHap_fromapprover(hrCode).setHap_docunum("H");
-		
-		if(bDao.registHolidayApprovalDocu(docu)) {
+
+		if (bDao.registHolidayApprovalDocu(docu)) {
 			hDao.registHoliday(apholi);
 		}
 		mav.setViewName("/myInfo/myHoliday");
@@ -250,7 +255,7 @@ public class HrMM {
 		String id = session.getAttribute("id").toString();
 		String cCode = session.getAttribute("cCode").toString();
 		String myDept = hDao.getHrCardDetail(id).getHc_dept();
-		
+
 		HashMap<String, String> hMap = new HashMap<String, String>();
 		hMap.put("authority", string);
 		hMap.put("cCode", cCode);
@@ -258,5 +263,127 @@ public class HrMM {
 		ArrayList<NameHrCode> nlist = dDao.getMyLeaderUsingGradeDept(hMap);
 		String result = new Gson().toJson(nlist);
 		return result;
+	}
+
+	public String getMyAttendance(HttpSession session, String day, String yearmonth) {
+		Attendance at = new Attendance();
+
+		String id = session.getAttribute("id").toString();
+		String cCode = session.getAttribute("cCode").toString();
+		String hrCode = hDao.getHrCodeFromID(id);
+
+		// 검색을 위해서 양식 만들기
+		int dayInt = Integer.parseInt(day);
+		if (dayInt < 10) {
+			day = "0" + day;
+		}
+		String month = "";
+		if (yearmonth.substring(6).equals("1월")) {
+			month = "Jan";
+		} else if (yearmonth.substring(6).equals("2월")) {
+			month = "Feb";
+		} else if (yearmonth.substring(6).equals("3월")) {
+			month = "Mar";
+		} else if (yearmonth.substring(6).equals("4월")) {
+			month = "Apr";
+		} else if (yearmonth.substring(6).equals("5월")) {
+			month = "May";
+		} else if (yearmonth.substring(6).equals("6월")) {
+			month = "Jun";
+		} else if (yearmonth.substring(6).equals("7월")) {
+			month = "Jul";
+		} else if (yearmonth.substring(6).equals("8월")) {
+			month = "Aug";
+		} else if (yearmonth.substring(6).equals("9월")) {
+			month = "Sep";
+		} else if (yearmonth.substring(6).equals("10월")) {
+			month = "Oct";
+		} else if (yearmonth.substring(6).equals("11월")) {
+			month = "Nov";
+		} else if (yearmonth.substring(6).equals("12월")) {
+			month = "Dec";
+		}
+		String dateStandard = "%" + month + " " + day + " " + yearmonth.substring(0, 4) + "%";
+		System.out.println(dateStandard);
+
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("hrCode", hrCode);
+		hMap.put("cCode", cCode);
+		hMap.put("dateStandard", dateStandard);
+
+		ArrayList<Attendance> atList = hDao.getMyAttendance(hMap);
+		String result = new Gson().toJson(atList);
+		return result;
+	}
+
+	public String getMyHoliday(HttpSession session) {
+		String id = session.getAttribute("id").toString();
+		String cCode = session.getAttribute("cCode").toString();
+		String hrCode = hDao.getHrCodeFromID(id);
+
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("hrCode", hrCode);
+		hMap.put("cCode", cCode);
+
+		ArrayList<ApplyHoliday> ahList = hDao.getMyHoliday(hMap);
+		String result = new Gson().toJson(ahList);
+		return result;
+	}
+
+	public String getCurAttendance(String id) {
+		String curAttendance = hDao.getHrCardDetail(id).getHc_status();
+
+		return curAttendance;
+
+	}
+
+	public String getEmployeeAttendance(HttpSession session, String day, String yearmonth) {
+		Attendance at = new Attendance();
+
+		String id = session.getAttribute("id").toString();
+		String cCode = session.getAttribute("cCode").toString();
+		String hrCode = hDao.getHrCodeFromID(id);
+
+		// 검색을 위해서 양식 만들기
+		int dayInt = Integer.parseInt(day);
+		if (dayInt < 10) {
+			day = "0" + day;
+		}
+		String month = "";
+		if (yearmonth.substring(6).equals("1월")) {
+			month = "Jan";
+		} else if (yearmonth.substring(6).equals("2월")) {
+			month = "Feb";
+		} else if (yearmonth.substring(6).equals("3월")) {
+			month = "Mar";
+		} else if (yearmonth.substring(6).equals("4월")) {
+			month = "Apr";
+		} else if (yearmonth.substring(6).equals("5월")) {
+			month = "May";
+		} else if (yearmonth.substring(6).equals("6월")) {
+			month = "Jun";
+		} else if (yearmonth.substring(6).equals("7월")) {
+			month = "Jul";
+		} else if (yearmonth.substring(6).equals("8월")) {
+			month = "Aug";
+		} else if (yearmonth.substring(6).equals("9월")) {
+			month = "Sep";
+		} else if (yearmonth.substring(6).equals("10월")) {
+			month = "Oct";
+		} else if (yearmonth.substring(6).equals("11월")) {
+			month = "Nov";
+		} else if (yearmonth.substring(6).equals("12월")) {
+			month = "Dec";
+		}
+		String dateStandard = "%" + month + " " + day + " " + yearmonth.substring(0, 4) + "%";
+		System.out.println(dateStandard);
+
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("cCode", cCode);
+		hMap.put("dateStandard", dateStandard);
+
+		ArrayList<Attendance> atList = hDao.getEmployeeAttendance(hMap);
+		String result = new Gson().toJson(atList);
+		return null;
 	}
 }

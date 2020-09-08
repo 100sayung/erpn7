@@ -58,7 +58,7 @@ ul {
 }
 </style>
 </head>
-<body onload="build();">
+<body>
 	<div id="header">
 		<div id="logo">
 			<h1>
@@ -67,8 +67,8 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
-				<li><a href="/erp/hr/hr" accesskey="2"
+				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내 정보</a></li>
+				<li class="current_page_item"><a href="/erp/hr/hr" accesskey="2"
 					title="">인사 관리</a></li>
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
@@ -79,13 +79,28 @@ ul {
 	</div>
 	<div id="side_menu">
 		<ul id="menuList">
-			<li><a href="/erp/myinfo/checkattendance">출/퇴근 등록</a></li>
-			<li><a href="/erp/myinfo/myinfo">내 정보 보기</li>
-			<li><a href="#">급여명세서 보기</li>
-			<li><a href="/erp/myinfo/myattendance">내 출결 보기</li>
-			<li><a href="/erp/myinfo/myholiday">내 휴가 보기</li>
-			<li><a href="/erp/myinfo/applyholiday">휴가신청</a></li>
-			<li><a href="/erp/myinfo/mydocument">나의 결재함</a></li>
+			<li id="showMenu1">인사 관리
+				<ul id="smallMenu1" style="display: none;">
+					<li><a href="/erp/hr/deptregistpage">부서등록</a></li>
+					<li><a href="/erp/hr/movehrcardpage">인사카드</a></li>
+				</ul>
+			</li>
+
+			<li id="showMenu2">근태 관리
+				<ul id="smallMenu2" style="display: none;">
+					<li><a href="">휴가 접수</a></li>
+					<li><a href="">사원 출결 관리</a></li>
+					<li><a href="">근무 조회</a></li>
+					<li><a href="">휴/퇴직 관리</a></li>
+				</ul>
+			</li>
+			<li id="showMenu3">급여 관리
+				<ul id="smallMenu3" style="display: none;">
+					<li><a href="/erp/hr/deptpay">부서/직급별 급여</a></li>
+					<li><a href="/erp/hr/deduct">공제사항 관리</a></li>
+					<li><a href="">급여 관리</a></li>
+				</ul>
+			</li>
 		</ul>
 	</div>
 	<div id="description">
@@ -111,7 +126,7 @@ ul {
 	<script>
 	function checkMyAt(i){
 		$.ajax({
-			url : "/erp/rest/myinfo/myattendance",
+			url : "/erp/rest/hr/employeeattendance",
 			method:"get",
 			dataType:"json",
 			data:{day : i, yearmonth : $("#yearmonth").html()},
