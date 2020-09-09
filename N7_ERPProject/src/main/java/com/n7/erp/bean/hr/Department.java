@@ -14,4 +14,5 @@ public class Department {
 	private int HDP_pay;
 	private String HDP_num;
 	private String hdp_ccode;
+	private String hdp_auth;
 }
