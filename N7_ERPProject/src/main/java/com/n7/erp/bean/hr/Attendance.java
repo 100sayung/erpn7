@@ -13,4 +13,7 @@ public class Attendance {
 	String ha_hrcode;
 	String ha_time;
 	String ha_type;
+	
+	//출력을 위해서
+	String m_name;
 }

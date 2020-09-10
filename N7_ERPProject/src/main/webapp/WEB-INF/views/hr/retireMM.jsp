@@ -94,13 +94,37 @@ ul {
 			</li>
 		</ul>
 	</div>
-	<div id="description"> 본 화면  
+	<div id="description">
 	
-	<br> 임시페이지 
-	<a href="/erp/management/deptauth"> dept 권한 설정 </a>
+	
+	
 	
 	</div>
 	<script>
+	//검색 조건들 생성
+	
+	
+	
+	
+	
+	
+	//검색 조건 끝
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		$("#showMenu1").hover(function() {
 			$("#smallMenu1").attr("style", "display:inline-block");
 		}, function() {

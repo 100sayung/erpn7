@@ -74,7 +74,7 @@ public interface IHrDao {
 
 	@Select("SELECT * FROM HR_ATTENDANCE WHERE HA_HRCODE = #{hrCode} AND HA_CCODE = #{cCode} AND HA_TIME LIKE #{dateStandard} ORDER BY HA_TIME")
 	ArrayList<Attendance> getMyAttendance(HashMap<String, String> hMap);
-	@Select("SELECT * FROM HR_ATTENDANCE WHERE HA_CCODE = #{cCode} AND HA_TIME LIKE #{dateStandard} ORDER BY HA_TIME")
+	
 	ArrayList<Attendance> getEmployeeAttendance(HashMap<String, String> hMap);
 
 	@Select("SELECT * FROM HR_APPLYHOLIDAY WHERE HAP_CCODE = #{cCode}, HAP_HRCODE = #{hrCode}")

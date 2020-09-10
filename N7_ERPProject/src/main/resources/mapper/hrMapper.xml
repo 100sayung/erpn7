@@ -63,4 +63,20 @@
 		(HR_CERTIFICATION_SEQ.nextval, #{hct_ccode}, #{hct_hrcode}, #{hct_name}, #{hct_agency}, #{hct_date}) 
 </insert>
 
+
+<select id="getEmployeeAttendance" parameterType="hashMap" resultType="Attendance">
+	SELECT
+		HR_ATTENDANCE.HA_TIME, HR_ATTENDANCE.HA_TYPE, MEMBER.M_NAME
+	FROM HR_ATTENDANCE
+		INNER JOIN HR_CARD ON 
+			HR_ATTENDANCE.HA_HRCODE = HR_CARD.HC_HRCODE AND
+			HR_ATTENDANCE.HA_CCODE = HR_CARD.HC_CCODE
+		INNER JOIN MEMBER ON
+			HR_CARD.HC_ID = MEMBER.M_ID
+	WHERE
+		HR_ATTENDANCE.HA_CCODE = #{cCode} AND
+		HR_ATTENDANCE.HA_TIME LIKE #{dateStandard}
+	ORDER BY HA_TIME
+</select>
+
 </mapper>

@@ -338,11 +338,9 @@ public class HrMM {
 	}
 
 	public String getEmployeeAttendance(HttpSession session, String day, String yearmonth) {
-		Attendance at = new Attendance();
 
 		String id = session.getAttribute("id").toString();
 		String cCode = session.getAttribute("cCode").toString();
-		String hrCode = hDao.getHrCodeFromID(id);
 
 		// 검색을 위해서 양식 만들기
 		int dayInt = Integer.parseInt(day);
@@ -384,6 +382,6 @@ public class HrMM {
 
 		ArrayList<Attendance> atList = hDao.getEmployeeAttendance(hMap);
 		String result = new Gson().toJson(atList);
-		return null;
+		return result;
 	}
 }

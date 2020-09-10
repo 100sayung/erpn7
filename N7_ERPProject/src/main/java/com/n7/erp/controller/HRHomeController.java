@@ -24,6 +24,7 @@ import com.n7.erp.service.HRDepartmentMM;
 import com.n7.erp.service.HrMM;
 import com.n7.erp.service.MemberMM;
 
+import lombok.Getter;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -76,13 +77,20 @@ public class HRHomeController {
 	}
 	
 	//사원출결조회 페이지로 이동
-	@GetMapping(value = "/erp/hr/attendance")
+	@GetMapping(value = "/hr/attendance")
 	public String moveAttendance() {
 		return "/hr/attendance";
 	}
-	
-	
-	
+	//근무조회 페이지로 이동
+	@GetMapping(value = "/hr/employeestatus")
+	public String moveEmployeeStatus() {
+		return "/hr/employeestatus";
+	}
+	//휴/퇴직 관리 페이지로 이동
+	@GetMapping(value="/hr/retiremm")
+	public String moveRetireMM() {
+		return "/hr/retiremm";
+	}
 	
 	
 	@RequestMapping(value = "/hr/deptregistpage", method = RequestMethod.GET)

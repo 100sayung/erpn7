@@ -58,7 +58,7 @@ ul {
 }
 </style>
 </head>
-<body>
+<body onload="build();">
 	<div id="header">
 		<div id="logo">
 			<h1>
@@ -140,9 +140,9 @@ ul {
 					}else{
 						type = "퇴근"
 					}
-					str += "<tr><td>" + data[i].ha_time + "</td><td>" + type + "</td></tr>";
+					str += "<tr><td>"+data[i].m_name+"</td><td>" + data[i].ha_time + "</td><td>" + type + "</td></tr>";
 				}
-				str += "</table>"
+				str += "</table>";
 				$("#at").html(str);
 			}, error : function(err){
 				console.log(err);
@@ -150,6 +150,22 @@ ul {
 		});
 	}
 
+	$("#showMenu1").hover(function() {
+		$("#smallMenu1").attr("style", "display:inline-block");
+	}, function() {
+		$("#smallMenu1").attr("style", "display:none");
+	})
+	$("#showMenu2").hover(function() {
+		$("#smallMenu2").attr("style", "display:inline-block");
+	}, function() {
+		$("#smallMenu2").attr("style", "display:none");
+	})
+	$("#showMenu3").hover(function() {
+		$("#smallMenu3").attr("style", "display:inline-block");
+	}, function() {
+		$("#smallMenu3").attr("style", "display:none");
+	})
+	
 	
 //이 아래로 달력
     var today = new Date(); // 오늘 날짜
