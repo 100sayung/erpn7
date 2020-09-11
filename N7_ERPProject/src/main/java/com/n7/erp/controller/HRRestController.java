@@ -78,7 +78,12 @@ public class HRRestController {
 		String result = deptmm.getDeptList(session.getAttribute("cCode").toString());
 		return result;
 	}
-	
+	//부서 등급 검색
+	@GetMapping(value = "/hr/deptauthlist")
+	public String getDeptAuthList(HttpSession session) {
+		String result = deptmm.getDeptAuthList(session.getAttribute("cCode").toString());
+		return result;
+	}
 	//휴가신청
 	@GetMapping(value = "/hr/myleaderlist")
 	public String getMyLeaderUsingGrade(HttpSession session){
@@ -108,5 +113,12 @@ public class HRRestController {
 	public String getMyAttendance(HttpSession session, String day, String yearmonth) {
 		String result = hm.getEmployeeAttendance(session, day, yearmonth);
 		return result; 
+	}
+	
+	//사원 휴/퇴직 상태 조회
+	@GetMapping(value="/hr/checkretired")
+	public String getCheckRetired(HttpSession session, String status) {
+		String result = hm.getCheckRetired(session.getAttribute("cCode").toString(), status);
+		return result;
 	}
 }

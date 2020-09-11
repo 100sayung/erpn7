@@ -58,5 +58,11 @@ public interface HRIDeptDao {
 
 
 	ArrayList<NameHrCode> getMyLeaderUsingGradeDept(HashMap<String, String> hMap);
+
+	@Select("SELECT * FROM HR_DEPT WHERE HDP_CCODE = #{cCode}")
+	ArrayList<Department> getDeptAuthlist(String cCode);
+
+	@Update("UPDATE HR_DEPT SET HDP_AUTH = #{hdp_auth} WHERE HDP_CCODE = #{hdp_ccode} AND HDP_POSITION = #{hdp_position} AND HDP_DEPT = #{hdp_dept}")
+	void updateDeptAuth(Department dept);
 	
 }

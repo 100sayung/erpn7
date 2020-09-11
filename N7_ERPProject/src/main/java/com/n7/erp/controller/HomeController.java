@@ -22,11 +22,13 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.n7.erp.bean.ConsultingBoard;
 import com.n7.erp.bean.Member;
 import com.n7.erp.bean.hr.Academic;
 import com.n7.erp.bean.hr.Career;
 import com.n7.erp.bean.hr.Certification;
 import com.n7.erp.bean.hr.HR_Card;
+import com.n7.erp.service.ConsultingBoardMM;
 import com.n7.erp.service.HrMM;
 import com.n7.erp.service.MemberMM;
 
@@ -39,6 +41,8 @@ public class HomeController {
 	
 	@Autowired
 	private MemberMM mm;
+	@Autowired
+	private ConsultingBoardMM cbm;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
@@ -90,7 +94,7 @@ public class HomeController {
 	
 	@GetMapping(value="/main")
 	public String main() {
-		return "/hr/hrMain";
+		return "/myInfo/myInfo";
 	}
 	@GetMapping(value="/myinfo/myinfo")
 	public String myinfoMain() {
@@ -100,4 +104,39 @@ public class HomeController {
 	public String hrMain() {
 		return "/hr/hrMain";
 	}
+	
+	//게시글 페이지로 이동
+	   @RequestMapping(value = "/writeFrm", method = RequestMethod.GET)
+	   public String write() {
+	      logger.info("게시글 창으로 이동");
+	      return "writeFrm";
+	   }
+	   
+	   //게시글 작성
+	   @RequestMapping(value = "/writeBoard", method = RequestMethod.POST)
+	   public ModelAndView writeBoard(ConsultingBoard board) {
+	      mav=cbm.writeBoard(board);
+	      return mav;
+	   }
+	   //게시글 수정
+	   @RequestMapping(value = "/boardmodify", method = RequestMethod.POST)
+	   public ModelAndView boardmodify(ConsultingBoard board) {
+	      mav=cbm.boardmodify(board);
+	      return mav;
+	   }
+	   
+	   //게시글 수정페이지로 이동
+	   @RequestMapping(value = "/boardmodifyajax", method = RequestMethod.POST)
+	   public @ResponseBody String boardmodifyajax(Integer num) {
+	      System.out.println("수정페이지 번호 값="+num);
+	      String result=cbm.boardmodifyajax(num);
+	      return result;
+	   }
+	   //게시글 삭제
+	   @RequestMapping(value = "/writelistdelete", method = RequestMethod.POST)
+	   public ModelAndView writelistdelete(Integer num) {
+	      System.out.println("번호 값="+num);
+	      mav=cbm.writelistdelete(num);
+	      return mav;
+	   }
 }

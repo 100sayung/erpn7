@@ -1,12 +1,16 @@
 package com.n7.erp.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.n7.erp.bean.hr.Department;
 import com.n7.erp.service.HRDepartmentMM;
 import com.n7.erp.service.HrMM;
 import com.n7.erp.service.MemberMM;
@@ -23,4 +27,14 @@ public class ManagementController {
 	public String moveDeptAuth() {
 		return "/management/deptauth";
 	}
+	
+	@PostMapping(value="/management/updateDeptAuth")
+	public String updateDeptAuth(HttpSession session, Department dept) {
+		System.out.println(dept.getList());
+		dm.updateDeptAuth(session.getAttribute("cCode").toString(), dept.getList());
+		
+		return "/management/deptauth";
+	}
+	
+
 }

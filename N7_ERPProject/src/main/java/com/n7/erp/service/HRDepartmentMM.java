@@ -211,4 +211,15 @@ public class HRDepartmentMM {
 		System.out.println(result);
 		return result;
 	}
+	public String getDeptAuthList(String cCode) {
+		ArrayList<Department> deptlist = Ddao.getDeptAuthlist(cCode); //사실 이게 전체긁어오는거임
+		String result = new Gson().toJson(deptlist);
+		return result;
+	}
+	public void updateDeptAuth(String cCode, List<Department> list) {
+		for(int i = 0 ; i <list.size() ; i++) {
+			list.get(i).setHdp_ccode(cCode);
+			Ddao.updateDeptAuth(list.get(i));
+		}
+	}
 }

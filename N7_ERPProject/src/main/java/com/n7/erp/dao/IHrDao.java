@@ -77,8 +77,11 @@ public interface IHrDao {
 	
 	ArrayList<Attendance> getEmployeeAttendance(HashMap<String, String> hMap);
 
-	@Select("SELECT * FROM HR_APPLYHOLIDAY WHERE HAP_CCODE = #{cCode}, HAP_HRCODE = #{hrCode}")
+	@Select("SELECT * FROM HR_APPLYHOLIDAY WHERE HAP_CCODE = #{cCode} AND HAP_HRCODE = #{hrCode}")
 	ArrayList<ApplyHoliday> getMyHoliday(HashMap<String, String> hMap);
+
+	@Select("SELECT * FROM HR_CARD WHERE HC_CCODE = #{cCode} AND HC_WORK = #{status}")
+	ArrayList<HR_Card> getCheckRetired(String cCode, String status);
 
 	
 }

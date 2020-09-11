@@ -96,6 +96,21 @@ ul {
 	</div>
 	<div id="description"> 본 화면 </div>
 	<script>
+	
+	$.ajax({
+		url:"/erp/rest/hr/employeestatus",
+		dataType:"json",
+		method:"get",
+		success : function(data){
+			console.log(data);
+		}, error : function(err){
+			console.log(err);
+		}
+	});
+	
+	
+	
+	
 		$("#showMenu1").hover(function() {
 			$("#smallMenu1").attr("style", "display:inline-block");
 		}, function() {

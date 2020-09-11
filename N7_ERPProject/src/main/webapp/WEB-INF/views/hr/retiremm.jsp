@@ -22,7 +22,7 @@
 	font-size: 20px;
 	font-weight: bolder;
 	float: left;
-	border-right:1px solid #E6E6E6;
+	border-right: 1px solid #E6E6E6;
 }
 
 #side_menu #menuList {
@@ -58,9 +58,10 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내 정보</a></li>
-				<li class="current_page_item"><a href="/erp/hr/hr" accesskey="2"
-					title="">인사 관리</a></li>
+				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내
+						정보</a></li>
+				<li class="current_page_item"><a href="/erp/hr/hr"
+					accesskey="2" title="">인사 관리</a></li>
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
 				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
@@ -95,25 +96,65 @@ ul {
 		</ul>
 	</div>
 	<div id="description">
-	
-	
-	
-	
+
+		<a href="javascript:CheckRetired(1)"> 재직중(1) </a> <a
+			href="javascript:CheckRetired(2)"> 휴직중(2) </a> <a
+			href="javascript:CheckRetired(3)"> 퇴사(3) </a> <br>
+		<div id="container">
+			<input type="hidden" value="" id="status">
+		</div>
+
 	</div>
 	<script>
 	//검색 조건들 생성
 	
 	
 	
-	
-	
-	
 	//검색 조건 끝
 	
+	function CheckRetired(status){
+		$.ajax({
+			url:"/erp/rest/hr/checkretired",
+			dataType:"json",
+			method:"get",
+			data : {status : status}
+			success : function(data){
+				let str = "<table>";
+				for(let i = 0 ; i<data.length ; i++){
+				str += "<tr><td><input type='text' name ='hc_dept' value = '" + data[i].hc_dept + "' readonly></td>";
+				str += "<td><input type='text' name='hc_position' value = '" + data[i].hc_position + "' readonly></td>";
+				str+="<td><select name='hc_work'>";
+				if(status == 1){
+					str+="<option value = '1' selected = 'selected'> 1 </option>";
+					str+="<option value = '2'> 2 </option>";
+					str+="<option value = '3'> 3 </option>";
+				}else if(status == 2){
+					str+="<option value = '1'> 1 </option>";
+					str+="<option value = '2' selected = 'selected'> 2 </option>";
+					str+="<option value = '3'> 3 </option>";
+				}else if(status == 3){
+					str+="<option value = '1'> 1 </option>";
+					str+="<option value = '2'> 2 </option>";
+					str+="<option value = '3' selected = 'selected'> 3 </option>";
+				}
+				str += "</select></td><td><input type='button' value='등록' onclick='javascript:thisRowDel(this);'></td></tr>";
+				}
+				str+="</table>"
+				$("#container").html(str);
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+		$("#status").val(status);
+	}
 	
-	
-	
-	
+
+		function thisRowDel(row){
+			console.log(row);
+			let tr = row.parentNode.parentNode;
+			tr.parentNode.removeChild(tr);
+		}
+	//업데이트시
 	
 	
 	

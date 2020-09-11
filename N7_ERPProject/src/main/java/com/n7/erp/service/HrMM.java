@@ -384,4 +384,10 @@ public class HrMM {
 		String result = new Gson().toJson(atList);
 		return result;
 	}
+
+	public String getCheckRetired(String cCode, String status) {
+		ArrayList<HR_Card> hList = hDao.getCheckRetired(cCode, status);
+		String result = new Gson().toJson(hList);
+		return result;
+	}
 }
