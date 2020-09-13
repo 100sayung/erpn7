@@ -87,7 +87,7 @@ public class HRRestController {
 	//휴가신청
 	@GetMapping(value = "/hr/myleaderlist")
 	public String getMyLeaderUsingGrade(HttpSession session){
-		String leaderList = hm.getMyLeaderUsingGrade(session, "1");
+		String leaderList = hm.getMyLeaderUsingGrade(session, "2");
 		return leaderList;
 	}
 	
@@ -119,6 +119,12 @@ public class HRRestController {
 	@GetMapping(value="/hr/checkretired")
 	public String getCheckRetired(HttpSession session, String status) {
 		String result = hm.getCheckRetired(session.getAttribute("cCode").toString(), status);
+		return result;
+	}
+	
+	@GetMapping(value="/hr/detailholiday")
+	public String getDetailHoliday(HttpSession session, String docunum) {
+		String result = hm.getDetailHoliday(session.getAttribute("cCode").toString(), docunum);
 		return result;
 	}
 }

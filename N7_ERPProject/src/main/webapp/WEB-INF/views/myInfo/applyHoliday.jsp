@@ -109,7 +109,7 @@ ul {
 				console.log(data);
 				var str = "<td><select name='hap_toapprover'>";
 				for(let i = 0 ; i<data.length ; i++){
-					str += "<option value='"+data[i].hr_hrcode+"' selected='selected'>"+data[i].m_name+"("+data[i].hc_position+")</option>";
+					str += "<option value='"+data[i].hc_hrcode+"' selected='selected'>"+data[i].m_name+"("+data[i].hc_position+")</option>";
 					}
 				str += "</select>"
 				$("#myleader").html(str);
