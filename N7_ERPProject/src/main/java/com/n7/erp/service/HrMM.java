@@ -262,6 +262,7 @@ public class HrMM {
 		hMap.put("myDept", myDept);
 		ArrayList<NameHrCode> nlist = dDao.getMyLeaderUsingGradeDept(hMap);
 		String result = new Gson().toJson(nlist);
+		System.out.println(result);
 		return result;
 	}
 
@@ -430,7 +431,6 @@ public class HrMM {
 		return result;
 	}
 <<<<<<< Updated upstream
-=======
 
 	public String getDetailHoliday(String cCode, String docunum) {
 		HashMap<String, String> hMap = new HashMap<String, String>();

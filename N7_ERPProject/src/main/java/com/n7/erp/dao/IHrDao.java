@@ -19,10 +19,10 @@ import com.n7.erp.bean.hr.HR_Card;
 public interface IHrDao {
 	@Select("SELECT * FROM HR_CARD WHERE HC_ID = #{m_id}")
 	HR_Card getHrCardDetail(String id);
-	
+
 	@Select("SELECT HC_HRCODE FROM HR_CARD WHERE HC_ID = #{m_id}")
 	String getHrCodeFromID(String id);
-	
+
 	@Select("SELECT * FROM HR_${type} WHERE ${column}_HRCODE = #{code} AND ${column}_CCODE = #{cCode}")
 	List<Certification> getCertificationInfo(HashMap<String, String> hMap);
 	@Select("SELECT * FROM HR_${type} WHERE ${column}_HRCODE = #{code} AND ${column}_CCODE = #{cCode}")
@@ -36,7 +36,7 @@ public interface IHrDao {
 	@Select("SELECT C_NAME FROM COMPANY WHERE C_CODE = #{cCode}")
 	String getCName(String cCode);
 
-	
+
 	@Select("SELECT COUNT(*) FROM HR_ACADEMIC WHERE Hac_HRCODE = #{hrcode} AND HAC_CCODE = #{cCode}")
 	Integer selectAcademic(HashMap<String, String> acMap);
 	@Select("SELECT COUNT(*) FROM HR_CARD WHERE HC_ID = #{hc_id}")
@@ -51,7 +51,7 @@ public interface IHrDao {
 	void registAcademic(Academic ac);
 	void registCareer(Career cr);
 	void registCertification(Certification ctf);
-	
+
 	void updateAcademic(Academic ac);
 	void updateCareer(Career cr);
 	void updateCertification(Certification ctf);
@@ -68,13 +68,14 @@ public interface IHrDao {
 	@Insert("UPDATE HR_CARD SET HC_STATUS = #{type} WHERE HC_CCODE = #{cCode} AND HC_HRCODE = #{hrCode}")
 	void logStatusToHrCard(HashMap<String, String> logAtMap);
 
-	@Insert("INSERT INTO HR_APPLYHOLIDAY VALUES(${hap_docunum}||HR_APPLYHOLIDAY_SEQ.currval, #{hap_ccode}, #{hap_hrcode}, #{hap_docuname},"
-			+ "#{hap_fromapprover}, #{hap_toapprover}, DEFAULT, #{hap_type}, #{hap_reason}, #{hap_startday}, #{hap_endday}, DEFAULT")
+	@Insert("INSERT INTO HR_APPLYHOLIDAY VALUES(#{hap_docunum}||HR_APPLYHOLIDAY_SEQ.currval, #{hap_ccode}, #{hap_hrcode}, #{hap_docuname},"
+			+ "#{hap_fromapprover}, #{hap_toapprover}, DEFAULT, #{hap_type}, #{hap_reason}, #{hap_startday}, #{hap_endday}, DEFAULT)")
 	void registHoliday(ApplyHoliday apholi);
-
+	@Select("SELECT * FROM HR_APPLYHOLIDAY WHERE HAP_DOCUNUM = #{docunum} AND HAP_CCODE = #{cCode}")
+	ApplyHoliday getDetailHoliday(HashMap<String, String> hMap);
 	@Select("SELECT * FROM HR_ATTENDANCE WHERE HA_HRCODE = #{hrCode} AND HA_CCODE = #{cCode} AND HA_TIME LIKE #{dateStandard} ORDER BY HA_TIME")
 	ArrayList<Attendance> getMyAttendance(HashMap<String, String> hMap);
-	
+
 	ArrayList<Attendance> getEmployeeAttendance(HashMap<String, String> hMap);
 
 	@Select("SELECT * FROM HR_APPLYHOLIDAY WHERE HAP_CCODE = #{cCode} AND HAP_HRCODE = #{hrCode}")
@@ -82,14 +83,9 @@ public interface IHrDao {
 
 	@Select("SELECT * FROM HR_CARD WHERE HC_CCODE = #{cCode} AND HC_WORK = #{status}")
 	ArrayList<HR_Card> getCheckRetired(String cCode, String status);
-
-<<<<<<< Updated upstream
-=======
 	@Select("SELECT COUNT(*) FROM HR_CARD WHERE HC_ID=#{m_id}")
 	boolean haveHrCode(String m_id);
 	@Select("SELECT * FROM HR_ATTENDANCE WHERE HA_HRCODE = #{hrCode} AND HA_CCODE = #{cCode} AND HA_TIME LIKE #{date} ORDER BY HA_TIME")
 	ArrayList<Attendance> getAllMyAttendance(HashMap<String, String> hMap);
-	
->>>>>>> Stashed changes
-	
+
 }

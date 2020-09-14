@@ -82,9 +82,12 @@ ul {
 			<li><a href="/erp/myinfo/mydocument">나의 결재함</a></li>
 		</ul>
 	</div>
-	<div id="description"> 내 휴가 보기</div>
+	<div id="description"> 내 휴가 보기
+	<div id = "container"></div>
+	<div id = "detail"></div>
+	</div>
 	<script>
-	
+
 	$(document).ready(function() {
 		$.ajax({
 			url : "/erp/rest/myinfo/myholiday",
@@ -92,11 +95,13 @@ ul {
 			method : "get",
 			success : function(data){
 				console.log(data);
-<<<<<<< Updated upstream
-=======
 				let str = "";
 				for(let i = 0 ; i < data.length ; i++){
 					str += "<a href='javascript:detail(\""+data[i].hap_docunum+"\")'>";
+
+				let str = "";
+				for(let i = 0 ; i < data.length ; i++){
+					str += "<a href='javascript:detail(\""+data[i].hap_docunum+"\")'>"
 					str += data[i].hap_docuname + " ";
 					str += data[i].hap_startday + " 부터 " + data[i].hap_endday + " 까지 ";
 					str += data[i].hap_type + " 휴가 / 신청일시 : " + data[i].hap_applydate;
@@ -111,17 +116,14 @@ ul {
 					str += "</a><br>"
 				}
 				$("#container").html(str);
->>>>>>> Stashed changes
 			}, error : function(err){
 				console.log(err);
 			}
 		});
 	});
-<<<<<<< Updated upstream
-=======
 	function detail(docunum){
 		console.log(docunum);
-		
+
 		$.ajax({
 			url:"/erp/rest/hr/detailholiday",
 			data:{docunum : docunum},
@@ -129,7 +131,7 @@ ul {
 			method:"get",
 			success : function(data){
 				console.log(data);
-				let str = "";
+				let str = ""
 				str += data.hap_docuname + "<br>";
 				str += data.hap_startday + "부터 " +data.hap_endday + "까지 <br>";
 				str += data.hap_status + "(0:대기 1:승인 2:반려)<br>";
@@ -141,9 +143,8 @@ ul {
 				console.log(err);
 			}
 		});
-		
+
 	}
->>>>>>> Stashed changes
 	</script>
 </body>
 </html>
