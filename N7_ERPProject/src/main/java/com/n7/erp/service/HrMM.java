@@ -315,6 +315,45 @@ public class HrMM {
 		String result = new Gson().toJson(atList);
 		return result;
 	}
+	public String getAllMyAttendance(HttpSession session, String yearmonth) {
+		String cCode = session.getAttribute("cCode").toString();
+		String hrCode = session.getAttribute("hrCode").toString();
+		String month = "";
+		if (yearmonth.substring(6).equals("1월")) {
+			month = "Jan";
+		} else if (yearmonth.substring(6).equals("2월")) {
+			month = "Feb";
+		} else if (yearmonth.substring(6).equals("3월")) {
+			month = "Mar";
+		} else if (yearmonth.substring(6).equals("4월")) {
+			month = "Apr";
+		} else if (yearmonth.substring(6).equals("5월")) {
+			month = "May";
+		} else if (yearmonth.substring(6).equals("6월")) {
+			month = "Jun";
+		} else if (yearmonth.substring(6).equals("7월")) {
+			month = "Jul";
+		} else if (yearmonth.substring(6).equals("8월")) {
+			month = "Aug";
+		} else if (yearmonth.substring(6).equals("9월")) {
+			month = "Sep";
+		} else if (yearmonth.substring(6).equals("10월")) {
+			month = "Oct";
+		} else if (yearmonth.substring(6).equals("11월")) {
+			month = "Nov";
+		} else if (yearmonth.substring(6).equals("12월")) {
+			month = "Dec";
+		}
+		String date = "%" + month + "%" + yearmonth.substring(0, 4) + "%";
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("hrCode", hrCode);
+		hMap.put("cCode", cCode);
+		hMap.put("date", date);
+
+		ArrayList<Attendance> atList = hDao.getAllMyAttendance(hMap);
+		String result = new Gson().toJson(atList);
+		return result;
+	}
 
 	public String getMyHoliday(HttpSession session) {
 		String id = session.getAttribute("id").toString();
@@ -390,4 +429,16 @@ public class HrMM {
 		String result = new Gson().toJson(hList);
 		return result;
 	}
+<<<<<<< Updated upstream
+=======
+
+	public String getDetailHoliday(String cCode, String docunum) {
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("docunum", docunum);
+		hMap.put("cCode", cCode);
+		String result = new Gson().toJson(hDao.getDetailHoliday(hMap));
+		return result;
+	}
+
+>>>>>>> Stashed changes
 }

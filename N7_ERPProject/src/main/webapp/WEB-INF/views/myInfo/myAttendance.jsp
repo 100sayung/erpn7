@@ -197,20 +197,46 @@ ul {
         for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
         { 
             cell = row.insertCell();
-            cell.innerHTML = "<a href='javascript:checkMyAt("+i+")'>"+i+"</a>" ;
+            cell.innerHTML = "<span id="+i+"><a href='javascript:checkMyAt("+i+")'>"+i+"</a></span>" ;
             cnt = cnt + 1;
             if (cnt % 7 == 1) {//일요일 계산
-                cell.innerHTML = "<a href='javascript:checkMyAt("+i+")'><font color=#FF9090>"+i+"</font></a>";//일요일에 색
+                cell.innerHTML = "<span id="+i+"><a href='javascript:checkMyAt("+i+")'><font color=#FF9090>"+i+"</font></a></span>";//일요일에 색
             }
             if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
-                cell.innerHTML = "<a href='javascript:checkMyAt("+i+")'><font color=#7ED5E4>"+i+"</font></a>";//토요일에 색
+                cell.innerHTML = "<span id="+i+"><a href='javascript:checkMyAt("+i+")'><font color=#7ED5E4>"+i+"</font></a></span>";//토요일에 색
                 row = calendar.insertRow();// 줄 추가
             }
             if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) 
             {
                 cell.bgColor = "#BCF1B1"; //오늘날짜배경색
             }
-        }
+        }$.ajax({
+    		url:"/erp/rest/myinfo/allmyattendance",
+    		data:{yearmonth:$("#yearmonth").html()},
+    		dataType:"json",
+    		method:"get",
+    		success: function(data){
+    			console.log(data);
+    			for(let i = 0 ; i<data.length ; i++){
+    				console.log(data[i]);
+    				let str = "";
+    				str += data[i].ha_time + "<br>";
+    				if(data[i].ha_type=="1"){
+						str+= "출근"
+					}else{
+						str+= "퇴근"
+					}
+    				let date = data[i].ha_time.substring(8,10);
+    				if(date<10){
+    					date = date.substring(1);
+    				}
+    				console.log(date);
+					$("#"+date).append(str);
+    			}
+    		}, error : function(err){
+    			console.log(err);
+    		}
+    	});
     }
     
 	</script>

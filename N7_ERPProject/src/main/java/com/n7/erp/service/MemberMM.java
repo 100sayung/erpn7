@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.n7.erp.bean.Member;
+import com.n7.erp.dao.IHrDao;
 import com.n7.erp.dao.IMemberDao;
 import com.n7.erp.userClass.FileManager;
 
@@ -21,7 +22,7 @@ public class MemberMM {
 
 	ModelAndView mav = new ModelAndView();
 	@Autowired private IMemberDao mDao;
-	
+	@Autowired private IHrDao hDao;
 	String view = "";
 
 	public ModelAndView access(Member mb, HttpSession session) {
@@ -30,6 +31,10 @@ public class MemberMM {
 			view = "/home/home";
 			session.setAttribute("id", mb.getM_id());
 			session.setAttribute("cCode", mDao.bringCCode(mb));
+			if(hDao.haveHrCode(mb.getM_id())) {
+				session.setAttribute("hrCode", hDao.getHrCodeFromID(mb.getM_id()));
+				System.out.println(hDao.getHrCodeFromID(mb.getM_id()));
+			}
 		} else {
 			view = "/home/login";
 			mav.addObject("warn", "Warning");

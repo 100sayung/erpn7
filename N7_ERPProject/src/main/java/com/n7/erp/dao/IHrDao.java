@@ -83,5 +83,13 @@ public interface IHrDao {
 	@Select("SELECT * FROM HR_CARD WHERE HC_CCODE = #{cCode} AND HC_WORK = #{status}")
 	ArrayList<HR_Card> getCheckRetired(String cCode, String status);
 
+<<<<<<< Updated upstream
+=======
+	@Select("SELECT COUNT(*) FROM HR_CARD WHERE HC_ID=#{m_id}")
+	boolean haveHrCode(String m_id);
+	@Select("SELECT * FROM HR_ATTENDANCE WHERE HA_HRCODE = #{hrCode} AND HA_CCODE = #{cCode} AND HA_TIME LIKE #{date} ORDER BY HA_TIME")
+	ArrayList<Attendance> getAllMyAttendance(HashMap<String, String> hMap);
+	
+>>>>>>> Stashed changes
 	
 }

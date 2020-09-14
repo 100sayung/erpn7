@@ -41,6 +41,13 @@ public class MyInfoRestController {
 		String result = hm.getMyAttendance(session, day, yearmonth);
 		return result; 
 	}
+	//내 출결 확인(달력 출력용)
+	@GetMapping(value="/myinfo/allmyattendance")
+	public String getAllMyAttendance(HttpSession session, String yearmonth) {
+		String result = hm.getAllMyAttendance(session, yearmonth);
+		return result;
+	}
+	
 	//myHoliday에 내가 신청한 휴가 출력
 	@GetMapping(value="/myinfo/myholiday")
 	public String getMyHoliday(HttpSession session) {
