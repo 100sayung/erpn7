@@ -108,18 +108,36 @@ public class HRRestController {
 	}
 	
 	//사원출결조회
-
 	@GetMapping(value="/hr/employeeattendance")
 	public String getMyAttendance(HttpSession session, String day, String yearmonth) {
 		String result = hm.getEmployeeAttendance(session, day, yearmonth);
 		return result; 
 	}
 	
+	//근무조회
+	@GetMapping(value="/hr/employeestatus")
+	public String getEmployeeStatus(HttpSession session) {
+		String result = hm.getEmployeeStatus(session);
+		return result;
+	}
+	//사원 휴가 조회
+	@GetMapping(value="/hr/employeeholiday")
+	public String getEmployeeHoliday(HttpSession session) {
+		String result = hm.getEmployeeHoliday(session);
+		return result;
+	}
+	
+	
+	
 	//사원 휴/퇴직 상태 조회
 	@GetMapping(value="/hr/checkretired")
 	public String getCheckRetired(HttpSession session, String status) {
 		String result = hm.getCheckRetired(session.getAttribute("cCode").toString(), status);
 		return result;
+	}
+	@PostMapping(value="/hr/updateretired")
+	public void updateRetired(HttpSession session, String hrCode, String work) {
+		hm.updateRetired(session.getAttribute("cCode").toString(), hrCode, work);
 	}
 	
 	@GetMapping(value="/hr/detailholiday")

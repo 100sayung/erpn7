@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.n7.erp.bean.Member;
+import com.n7.erp.bean.entity.NameHoliday;
 import com.n7.erp.bean.hr.Academic;
 import com.n7.erp.bean.hr.ApplyHoliday;
 import com.n7.erp.bean.hr.Attendance;
@@ -81,11 +82,22 @@ public interface IHrDao {
 	@Select("SELECT * FROM HR_APPLYHOLIDAY WHERE HAP_CCODE = #{cCode} AND HAP_HRCODE = #{hrCode}")
 	ArrayList<ApplyHoliday> getMyHoliday(HashMap<String, String> hMap);
 
-	@Select("SELECT * FROM HR_CARD WHERE HC_CCODE = #{cCode} AND HC_WORK = #{status}")
-	ArrayList<HR_Card> getCheckRetired(String cCode, String status);
+	@Select("SELECT HR_CARD.HC_DEPT, HR_CARD.HC_POSITION, HR_CARD.HC_HRCODE, HR_CARD.HC_WORK, MEMBER.M_NAME "
+			+ "FROM HR_CARD INNER JOIN MEMBER ON HR_CARD.HC_ID = MEMBER.M_ID WHERE HC_CCODE = #{cCode} AND HC_WORK = #{status}")
+	ArrayList<HR_Card> getCheckRetired(HashMap<String, String> hMap);
 	@Select("SELECT COUNT(*) FROM HR_CARD WHERE HC_ID=#{m_id}")
 	boolean haveHrCode(String m_id);
 	@Select("SELECT * FROM HR_ATTENDANCE WHERE HA_HRCODE = #{hrCode} AND HA_CCODE = #{cCode} AND HA_TIME LIKE #{date} ORDER BY HA_TIME")
 	ArrayList<Attendance> getAllMyAttendance(HashMap<String, String> hMap);
+
+	@Update("UPDATE HR_CARD SET HC_WORK = #{hc_work} WHERE HC_CCODE = #{hc_code} AND HC_HRCODE = #{hc_hrcode}")
+	void updateRetired(HR_Card hrCard);
+
+	@Select("SELECT HR_CARD.HC_DEPT, HR_CARD.HC_POSITION, HR_CARD.HC_STATUS, MEMBER.M_NAME "
+			+ "FROM HR_CARD INNER JOIN MEMBER ON HR_CARD.HC_ID = MEMBER.M_ID WHERE HC_CCODE = #{cCode} ORDER BY HC_WORK")
+	ArrayList<HR_Card> getEmployeeStatus(String cCode);
+
+	ArrayList<NameHoliday> getEmployeeHoliday(String cCode);
+
 
 }

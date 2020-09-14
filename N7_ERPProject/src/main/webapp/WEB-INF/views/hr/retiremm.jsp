@@ -58,10 +58,9 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내
-						정보</a></li>
-				<li class="current_page_item"><a href="/erp/hr/hr"
-					accesskey="2" title="">인사 관리</a></li>
+				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내 정보</a></li>
+				<li class="current_page_item"><a href="/erp/hr/hr" accesskey="2"
+					title="">인사 관리</a></li>
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
 				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
@@ -80,7 +79,7 @@ ul {
 
 			<li id="showMenu2">근태 관리
 				<ul id="smallMenu2" style="display: none;">
-					<li><a href="/erp/hr/applyholiday">휴가 접수</a></li>
+					<li><a href="/erp/hr/receiptholiday">휴가 접수</a></li>
 					<li><a href="/erp/hr/attendance">사원 출결 관리</a></li>
 					<li><a href="/erp/hr/employeestatus">근무 조회</a></li>
 					<li><a href="/erp/hr/retiremm">휴/퇴직 관리</a></li>
@@ -95,11 +94,12 @@ ul {
 			</li>
 		</ul>
 	</div>
-	<div id="description">
 
-		<a href="javascript:CheckRetired(1)"> 재직중(1) </a> <a
-			href="javascript:CheckRetired(2)"> 휴직중(2) </a> <a
-			href="javascript:CheckRetired(3)"> 퇴사(3) </a> <br>
+	<div id="description">
+	<br> 재직중일때 검색 기능 추가해야함 !! 정말 그럴거냐고 물어봐야함 !!<br>
+		<a href="javascript:CheckRetired(0)"> 재직중(0) </a> <a
+			href="javascript:CheckRetired(1)"> 휴직중(1) </a> <a
+			href="javascript:CheckRetired(2)"> 퇴사(2) </a> <br>
 		<div id="container">
 			<input type="hidden" value="" id="status">
 		</div>
@@ -121,24 +121,27 @@ ul {
 			
 			success : function(data){
 				let str = "<table>";
+				console.log(data);
 				for(let i = 0 ; i<data.length ; i++){
-				str += "<tr><td><input type='text' name ='hc_dept' value = '" + data[i].hc_dept + "' readonly></td>";
-				str += "<td><input type='text' name='hc_position' value = '" + data[i].hc_position + "' readonly></td>";
-				str+="<td><select name='hc_work'>";
-				if(status == 1){
-					str+="<option value = '1' selected = 'selected'> 1 </option>";
-					str+="<option value = '2'> 2 </option>";
-					str+="<option value = '3'> 3 </option>";
-				}else if(status == 2){
-					str+="<option value = '1'> 1 </option>";
-					str+="<option value = '2' selected = 'selected'> 2 </option>";
-					str+="<option value = '3'> 3 </option>";
-				}else if(status == 3){
-					str+="<option value = '1'> 1 </option>";
-					str+="<option value = '2'> 2 </option>";
-					str+="<option value = '3' selected = 'selected'> 3 </option>";
-				}
-				str += "</select></td><td><input type='button' value='등록' onclick='javascript:thisRowDel(this);'></td></tr>";
+					str += "<tr>"
+					str += "<td>" +data[i].m_name +"<input type='hidden' name='hc_hrcode' value= '"+data[i].hc_hrcode+"'></td>";
+					str += "<td><input type='text' name ='hc_dept' value = '" + data[i].hc_dept + "' readonly></td>";
+					str += "<td><input type='text' name='hc_position' value = '" + data[i].hc_position + "' readonly></td>";
+					str+="<td><select name='hc_work'>";
+					if(status == 1){
+						str+="<option value = '1' selected = 'selected'> 휴직 </option>";
+						str+="<option value = '2'> 퇴사 </option>";
+						str+="<option value = '0'> 재직 </option>";
+					}else if(status == 2){
+						str+="<option value = '1'> 휴직 </option>";
+						str+="<option value = '2' selected = 'selected'> 퇴사 </option>";
+						str+="<option value = '0'> 재직 </option>";
+					}else if(status == 0){
+						str+="<option value = '1'> 휴직 </option>";
+						str+="<option value = '2'> 퇴사 </option>";
+						str+="<option value = '0' selected = 'selected'> 재직 </option>";
+					}
+					str += "</select></td><td><input type='button' value='등록' onclick='javascript:thisRowDel(this);'></td></tr>";
 				}
 				str+="</table>"
 				$("#container").html(str);
@@ -153,6 +156,19 @@ ul {
 		function thisRowDel(row){
 			console.log(row);
 			let tr = row.parentNode.parentNode;
+			console.log(tr.firstChild.firstChild.value);
+			console.log(tr.lastChild.previousSibling.firstChild.value);	
+			$.ajax({
+				url:"/erp/rest/hr/updateretired",
+				data : {hrCode : tr.firstChild.firstChild.value, work : tr.lastChild.previousSibling.firstChild.value},
+				dataType:"json",
+				method:"post",
+				success : function(data){
+					console.log(data);
+				},error : function(err){
+					console.log(err)
+				}
+			});
 			tr.parentNode.removeChild(tr);
 		}
 	//업데이트시

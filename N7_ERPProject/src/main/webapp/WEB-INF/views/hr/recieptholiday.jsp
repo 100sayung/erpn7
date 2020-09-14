@@ -94,38 +94,31 @@ ul {
 			</li>
 		</ul>
 	</div>
-
-	<div id="description"> 검색 기능 만들어야함 <br> 그리고 표 형식으로 정리 <br>
-	<div id ="container">
+	<div id="description"> 사원들 휴가 등록된거 보는 화면임~!
 	
+	<br>
+	<div id = "container">
 	</div>
 	
-	 </div>
+	</div>
 	<script>
-
+	
 	$(document).ready(function() {
 		$.ajax({
-			url:"/erp/rest/hr/employeestatus",
+			url:"/erp/rest/hr/employeeholiday",
 			dataType:"json",
 			method:"get",
-			success : function(data){
+			success:function(data){
 				console.log(data);
-				let str = "";
-				for(let i = 0 ; i<data.length ; i++){
-					str += data[i].hc_dept + " . " + data[i].hc_position + " 의 " +data[i].m_name + " 은(는) 현재 ";
-					if(data[i].hc_status == 1){
-						str += "출근";
-					}else{
-						str += "퇴근";
-					}
-					str += " 상태입니다. <br>";
-				}
-				$("container").html(str);
-			}, error : function(err){
+			},error : function(err){
 				console.log(err);
 			}
 		});
-	});
+	})
+	
+	
+	
+	
 	
 	
 	
@@ -134,17 +127,17 @@ ul {
 			$("#smallMenu1").attr("style", "display:inline-block");
 		}, function() {
 			$("#smallMenu1").attr("style", "display:none");
-		})
+		});
 		$("#showMenu2").hover(function() {
 			$("#smallMenu2").attr("style", "display:inline-block");
 		}, function() {
 			$("#smallMenu2").attr("style", "display:none");
-		})
+		});
 		$("#showMenu3").hover(function() {
 			$("#smallMenu3").attr("style", "display:inline-block");
 		}, function() {
 			$("#smallMenu3").attr("style", "display:none");
-		})
+		});
 		
 	</script>
 </body>

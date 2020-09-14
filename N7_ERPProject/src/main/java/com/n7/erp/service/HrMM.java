@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.omg.CosNaming.NameHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.n7.erp.bean.ApprovalDocu;
 import com.n7.erp.bean.Member;
+import com.n7.erp.bean.entity.NameHoliday;
 import com.n7.erp.bean.entity.NameHrCode;
 import com.n7.erp.bean.hr.Academic;
 import com.n7.erp.bean.hr.ApplyHoliday;
@@ -426,11 +428,15 @@ public class HrMM {
 	}
 
 	public String getCheckRetired(String cCode, String status) {
-		ArrayList<HR_Card> hList = hDao.getCheckRetired(cCode, status);
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("cCode", cCode);
+		hMap.put("status", status);
+		ArrayList<HR_Card> hList = hDao.getCheckRetired(hMap);
+		System.out.println(hList);
 		String result = new Gson().toJson(hList);
+		System.out.println("테스트중" + result);
 		return result;
 	}
-<<<<<<< Updated upstream
 
 	public String getDetailHoliday(String cCode, String docunum) {
 		HashMap<String, String> hMap = new HashMap<String, String>();
@@ -440,5 +446,28 @@ public class HrMM {
 		return result;
 	}
 
->>>>>>> Stashed changes
+	public void updateRetired(String cCode, String hrCode, String work) {
+		HR_Card hrCard = new HR_Card();
+		hrCard.setHc_ccode(cCode);
+		hrCard.setHc_hrcode(hrCode);
+		hrCard.setHc_work(work);
+		hDao.updateRetired(hrCard);
+	}
+
+	public String getEmployeeStatus(HttpSession session) {
+		String cCode = session.getAttribute("cCode").toString();
+		ArrayList<HR_Card> hlist = hDao.getEmployeeStatus(cCode);
+		String result = new Gson().toJson(hlist);
+		return result;
+	}
+
+
+	public String getEmployeeHoliday(HttpSession session) {
+		String cCode = session.getAttribute("cCode").toString();
+		
+		ArrayList<NameHoliday> holiList = hDao.getEmployeeHoliday(cCode);
+		String result = new Gson().toJson(holiList);
+		return result;
+	}
+
 }

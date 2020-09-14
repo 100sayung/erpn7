@@ -97,10 +97,6 @@ ul {
 				console.log(data);
 				let str = "";
 				for(let i = 0 ; i < data.length ; i++){
-					str += "<a href='javascript:detail(\""+data[i].hap_docunum+"\")'>";
-
-				let str = "";
-				for(let i = 0 ; i < data.length ; i++){
 					str += "<a href='javascript:detail(\""+data[i].hap_docunum+"\")'>"
 					str += data[i].hap_docuname + " ";
 					str += data[i].hap_startday + " 부터 " + data[i].hap_endday + " 까지 ";
