@@ -67,7 +67,7 @@ ul {
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
 				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="#">회계 관리</a></li>
+				<li><a href="/erp/Account/acerp">회계 관리</a></li>
 			</ul>
 		</div>
 	</div>
@@ -156,7 +156,7 @@ ul {
 		function replaceAll(str, searchStr, replaceStr) {
 		    return str.split(searchStr).join(replaceStr);
 		 }
-		 
+
 		function checkDateValue(val1, val2){
 			let date1 = Number(replaceAll(val1.value, "-", ""));
 			let date2 = Number(replaceAll(val2.value, "-", ""));
@@ -165,7 +165,7 @@ ul {
 				val2.value = "";
 			}
 		}
-		 
+
 		function addRecord(){
 			let str ="";
 			let cntAc = 0;
@@ -249,8 +249,8 @@ ul {
 					str += "<td><input type='date' name='hac_year' class='detailInfo'></td></tr>";
 					str += "</table>";
 					$("#hrDetailInfo").html(str); */
-				} 
-			}); 
+				}
+			});
 		}
 
 		function CertificationInfo(){
@@ -285,8 +285,8 @@ ul {
 					str += "<td><input type='date' name='hct_date' class='detailInfo' required pattern='\d{4}-\d{2}-\d{2}'></td></tr>";
 					str += "</table>";
 					$("#hrDetailInfo").html(str); */
-				} 
-			}); 
+				}
+			});
 		}
 		function CareerInfo(){
 			$("#form").attr("action", formURL + "/newcareer");
@@ -313,8 +313,8 @@ ul {
 					num=data.length;
 				},error : function(err){
 					console.log(err);
-				} 
-			}); 
+				}
+			});
 		}
 		function InCompanyInfo(){
 			$("#form").attr("action", formURL + "/newhrcard");
@@ -371,8 +371,8 @@ ul {
 							str += "<td><input type='text' placeholder='---' readonly></td>"
 							str += "<td><input type='text' placeholder='---' readonly></td></tr></table>";
 							$("#hrDetailInfo").html(str);
-						} 
-					}); 
+						}
+					});
 		}
 	</script>
 </body>

@@ -83,7 +83,7 @@ ul {
 		</ul>
 	</div>
 	<div id="description"> 휴가신청폼<br>
-	
+
 	<form action="/erp/hr/applyholiday" method="post">
 	<input type="text" name="hap_docuname" placeholder="문서 제목을 입력해주세요 글자제한 20자" required="required">
 	<input type="text" name="hap_type" placeholder="휴가 종류를 입력해주세요 글자제한 20자" required="required">
@@ -95,9 +95,9 @@ ul {
 	<textarea rows="10" cols="10" name="hap_reason"></textarea>
 	<input type="submit" value="제출">
 	</form>
-	
-	
-	
+
+
+
 	</div>
 	<script>
 	$(document).ready(function() {
@@ -122,7 +122,7 @@ ul {
 	function replaceAll(str, searchStr, replaceStr) {
 	    return str.split(searchStr).join(replaceStr);
 	 }
-	 
+
 	function checkDateValue(val1, val2){
 		let date1 = Number(replaceAll(val1.value, "-", ""));
 		let date2 = Number(replaceAll(val2.value, "-", ""));

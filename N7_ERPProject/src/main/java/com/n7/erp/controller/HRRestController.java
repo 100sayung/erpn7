@@ -56,7 +56,7 @@ public class HRRestController {
 		List<Career> crList = hm.getCareerInfo(m_id, request.getServletPath().substring(9), request.getSession().getAttribute("cCode").toString());
 		return crList;
 	}
-	
+
 	//id로부터 hrCard가 존재하는지 안하는지 체크함!!!
 	@GetMapping(value="/hr/hrcodefromid")
 	public boolean haveHRCodeFromID(String m_id) {
@@ -70,7 +70,7 @@ public class HRRestController {
 		Member mb = hm.getMemberInfo(m_id);
 		return mb;
 	}
-	
+
 	//
 	@GetMapping(value = "/hr/deptlist")
 	public String getDeptList(HttpSession session) {
@@ -90,12 +90,12 @@ public class HRRestController {
 		String leaderList = hm.getMyLeaderUsingGrade(session, "2");
 		return leaderList;
 	}
-	
-	
+
+
 	//근태관리
-	
+
 	//출결등록
-	@PostMapping(value = "/hr/attendance") 
+	@PostMapping(value = "/hr/attendance")
 	public String logAttendance(HttpSession session, String status, String time) {
 		String result = hm.logAttendance(session.getAttribute("cCode").toString(), session.getAttribute("id").toString(), status,time);
 		return result;
@@ -106,14 +106,14 @@ public class HRRestController {
 		String result = hm.getCurAttendance(session.getAttribute("id").toString());
 		return result;
 	}
-	
+
 	//사원출결조회
 	@GetMapping(value="/hr/employeeattendance")
 	public String getMyAttendance(HttpSession session, String day, String yearmonth) {
 		String result = hm.getEmployeeAttendance(session, day, yearmonth);
-		return result; 
+		return result;
 	}
-	
+
 	//근무조회
 	@GetMapping(value="/hr/employeestatus")
 	public String getEmployeeStatus(HttpSession session) {
@@ -126,8 +126,8 @@ public class HRRestController {
 		String result = hm.getEmployeeHoliday(session, yearmonth);
 		return result;
 	}
-	
-	
+
+
 	//사원 휴/퇴직 상태 조회
 	@GetMapping(value="/hr/checkretired")
 	public String getCheckRetired(HttpSession session, String status) {
@@ -138,7 +138,7 @@ public class HRRestController {
 	public void updateRetired(HttpSession session, String hrCode, String work) {
 		hm.updateRetired(session.getAttribute("cCode").toString(), hrCode, work);
 	}
-	
+
 	@GetMapping(value="/hr/detailholiday")
 	public String getDetailHoliday(HttpSession session, String docunum) {
 		String result = hm.getDetailHoliday(session.getAttribute("cCode").toString(), docunum);

@@ -32,13 +32,13 @@ public class ManagementController {
 	public String moveDeptAuth() {
 		return "/management/deptauth";
 	}
-	
+
 	@PostMapping(value="/management/updateDeptAuth")
 	public String updateDeptAuth(HttpServletRequest request) {
 		dm.updateDeptAuth(request.getSession().getAttribute("cCode").toString(), request);
 
 		return "/management/deptauth";
 	}
-	
+
 
 }

@@ -94,7 +94,6 @@ ul {
 			</li>
 		</ul>
 	</div>
-
 	<div id="description"> ${hrCard} </div>
 	<script>
 		$("#showMenu1").hover(function() {
@@ -112,15 +111,15 @@ ul {
 		}, function() {
 			$("#smallMenu3").attr("style", "display:none");
 		})
-		
-		
+
+
 		function modifyDetail(id){
 			window.open('/erp/hr/hrModifyDetail?id='+id, '사원 인사카드 등록', 'width=700, height=800')
 		}
 		window.onbeforeunload = function(){
 			window.reload();
 		}
-		
+
 	</script>
 </body>
 </html>

@@ -22,24 +22,24 @@ import com.n7.erp.service.MyInfoMM;
 @RestController // @ResponseBody 생략가능
 @RequestMapping(value = "/rest")
 public class MyInfoRestController {
-	
+
 	@Autowired private MyInfoMM imm;
 	@Autowired private HrMM hm;
 	@Autowired private HRDepartmentMM deptmm;
-	
+
 	//myInfo에 내 정보 출력
 	@GetMapping(value="/myinfo/myinfo")
 	public String getMyInfo(HttpSession session) {
-		
+
 		String json =  imm.getMyInfo(session);
 		return json;
 	}
-	
+
 	//내 출결 확인
 	@GetMapping(value="/myinfo/myattendance")
 	public String getMyAttendance(HttpSession session, String day, String yearmonth) {
 		String result = hm.getMyAttendance(session, day, yearmonth);
-		return result; 
+		return result;
 	}
 	//내 출결 확인(달력 출력용)
 	@GetMapping(value="/myinfo/allmyattendance")
@@ -47,16 +47,16 @@ public class MyInfoRestController {
 		String result = hm.getAllMyAttendance(session, yearmonth);
 		return result;
 	}
-	
+
 	//myHoliday에 내가 신청한 휴가 출력
 	@GetMapping(value="/myinfo/myholiday")
 	public String getMyHoliday(HttpSession session) {
-		
+
 		String json = hm.getMyHoliday(session);
 		return json;
 	}
-	
-	
+
+
 	//내정보출력 메소드 -->
 	@GetMapping(value="/myinfo/hrexistfromid")
 	public boolean haveHRCodeFromID(HttpSession session) {
@@ -64,7 +64,7 @@ public class MyInfoRestController {
 		boolean flag = hm.haveHRCodeFromId(m_id);
 		return flag;
 	}
-	
+
 	@GetMapping(value="/myinfo/certification")
 	public List<Certification> getCTFInfo(HttpServletRequest request) {
 		String m_id = request.getSession().getAttribute("id").toString();
@@ -99,5 +99,5 @@ public class MyInfoRestController {
 		String result = deptmm.getDeptList(session.getAttribute("cCode").toString());
 		return result;
 	}
-	
+
 }

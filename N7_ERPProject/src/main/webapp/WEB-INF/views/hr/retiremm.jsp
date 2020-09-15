@@ -58,9 +58,10 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내 정보</a></li>
-				<li class="current_page_item"><a href="/erp/hr/hr" accesskey="2"
-					title="">인사 관리</a></li>
+				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내
+						정보</a></li>
+				<li class="current_page_item"><a href="/erp/hr/hr"
+					accesskey="2" title="">인사 관리</a></li>
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
 				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
@@ -107,18 +108,18 @@ ul {
 	</div>
 	<script>
 	//검색 조건들 생성
-	
-	
-	
+
+
+
 	//검색 조건 끝
-	
+
 	function CheckRetired(status){
 		$.ajax({
 			url:"/erp/rest/hr/checkretired",
 			dataType:"json",
 			method:"get",
 			data : {status : status},
-			
+
 			success : function(data){
 				let str = "<table>";
 				console.log(data);
@@ -151,13 +152,13 @@ ul {
 		});
 		$("#status").val(status);
 	}
-	
+
 
 		function thisRowDel(row){
 			console.log(row);
 			let tr = row.parentNode.parentNode;
 			console.log(tr.firstChild.firstChild.value);
-			console.log(tr.lastChild.previousSibling.firstChild.value);	
+			console.log(tr.lastChild.previousSibling.firstChild.value);
 			$.ajax({
 				url:"/erp/rest/hr/updateretired",
 				data : {hrCode : tr.firstChild.firstChild.value, work : tr.lastChild.previousSibling.firstChild.value},
@@ -172,17 +173,17 @@ ul {
 			tr.parentNode.removeChild(tr);
 		}
 	//업데이트시
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
 		$("#showMenu1").hover(function() {
 			$("#smallMenu1").attr("style", "display:inline-block");
 		}, function() {
@@ -198,7 +199,7 @@ ul {
 		}, function() {
 			$("#smallMenu3").attr("style", "display:none");
 		})
-		
+
 	</script>
 </body>
 </html>

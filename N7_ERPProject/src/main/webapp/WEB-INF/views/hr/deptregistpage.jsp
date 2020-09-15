@@ -99,7 +99,6 @@ ul {
 			</li>
 		</ul>
 	</div>
-
 	<div id="description">
 
 	<h1 align="center">부서 등록 페이지</h1>

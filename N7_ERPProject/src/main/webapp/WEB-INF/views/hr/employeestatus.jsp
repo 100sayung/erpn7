@@ -97,9 +97,9 @@ ul {
 
 	<div id="description"> 검색 기능 만들어야함 <br> 그리고 표 형식으로 정리 <br>
 	<div id ="container">
-	
+
 	</div>
-	
+
 	 </div>
 	<script>
 
@@ -126,10 +126,10 @@ ul {
 			}
 		});
 	});
-	
-	
-	
-	
+
+
+
+
 		$("#showMenu1").hover(function() {
 			$("#smallMenu1").attr("style", "display:inline-block");
 		}, function() {
@@ -145,7 +145,7 @@ ul {
 		}, function() {
 			$("#smallMenu3").attr("style", "display:none");
 		})
-		
+
 	</script>
 </body>
 </html>

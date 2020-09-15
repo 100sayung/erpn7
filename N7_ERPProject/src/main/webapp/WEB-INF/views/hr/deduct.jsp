@@ -68,7 +68,7 @@ ul {
 			</ul>
 		</div>
 	</div>
-	<div id="side_menu">
+	<div id = "side_menu">
 		<ul id="menuList">
 			<li id="showMenu1">인사 관리
 				<ul id="smallMenu1" style="display: none;">
@@ -134,9 +134,9 @@ $("#showMenu3").hover(function() {
 		}
 		$("#deductiontable").html(str);
 	});
-	
-	
-	
+
+
+
 	function modifydeduction(deduct){
 		console.log($("#123"+deduct));
 		var denum = $("#deduct_"+deduct).val();

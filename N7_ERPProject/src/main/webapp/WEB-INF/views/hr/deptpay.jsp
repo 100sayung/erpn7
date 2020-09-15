@@ -94,7 +94,6 @@ ul {
 			</li>
 		</ul>
 	</div>
-
 	<div id="description">
 <form action="">
 	<table>
@@ -138,7 +137,7 @@ $("#showMenu3").hover(function() {
 	$("#smallMenu3").attr("style", "display:none");
 })
 
-	
+
 	//현재 부서와 직급 갯수 대로 반복 출력
 	$(function() {
 		var dept = ${dept};
@@ -154,7 +153,7 @@ $("#showMenu3").hover(function() {
 			console.log(dept[i].HDP_num);
 		}
 	});
-	
+
 	//부서 직급 페이지 에서 급여 수정
 	function dify(dept) {
 		var paymodify = $("#modifypay_"+dept).val();
@@ -176,8 +175,8 @@ $("#showMenu3").hover(function() {
 			}
 		});
 	}
-	
-	
+
+
 	//부서 직급 페이지 해당 부서,직급 삭제
 	function erase(deptnum) {
 		console.log(deptnum);
@@ -207,7 +206,7 @@ $("#showMenu3").hover(function() {
 			}
 		});
 	}
-	
+
 
 	//부서 직책 검색전 <select>문 목록
 	$(function(){
@@ -225,10 +224,10 @@ $("#showMenu3").hover(function() {
 			$("#disdept").append("<option name=''>"+distinctdept[i].HDP_dept+"</option>");
 		}
 	});
-	
+
 	//부서 직책 검색기능
 	function distinct(){
-		
+
 		var disdept=$("#disdept").val();
 		var disposition=$("#disposition").val();
 		console.log(disdept);
@@ -255,7 +254,7 @@ $("#showMenu3").hover(function() {
 			error:function(err){
 				console.log(err);
 			}
-			
+
 		});
 	}
 </script>

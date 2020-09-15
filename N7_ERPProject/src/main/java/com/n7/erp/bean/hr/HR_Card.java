@@ -18,8 +18,8 @@ public class HR_Card {
 	private String hc_status;
 	private String hc_numholi;
 	private String hc_ccode;
-	
-	
+
+
 	//가져올때 이름을 많이 가져와서 추가했음!
 	private String m_name;
 }
