@@ -4,7 +4,7 @@
 --테이블 관련
 -->>홈페이지 테이블
 
---상담게시판
+--상담게시판88888
 CREATE TABLE CONSULTING_BOARD(
   CB_NUM NUMBER(5,0) NOT NULL,
   CB_TYPE NCHAR(1) NOT NULL,
