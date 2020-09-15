@@ -262,6 +262,7 @@ public class HrMM {
 		hMap.put("myDept", myDept);
 		ArrayList<NameHrCode> nlist = dDao.getMyLeaderUsingGradeDept(hMap);
 		String result = new Gson().toJson(nlist);
+		System.out.println(result);
 		return result;
 	}
 
@@ -388,6 +389,14 @@ public class HrMM {
 	public String getCheckRetired(String cCode, String status) {
 		ArrayList<HR_Card> hList = hDao.getCheckRetired(cCode, status);
 		String result = new Gson().toJson(hList);
+		return result;
+	}
+
+	public String getDetailHoliday(String cCode, String docunum) {
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("docunum", docunum);
+		hMap.put("cCode", cCode);
+		String result = new Gson().toJson(hDao.getDetailHoliday(hMap));
 		return result;
 	}
 }

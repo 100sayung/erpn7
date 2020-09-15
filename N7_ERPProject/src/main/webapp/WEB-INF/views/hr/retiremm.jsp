@@ -117,7 +117,8 @@ ul {
 			url:"/erp/rest/hr/checkretired",
 			dataType:"json",
 			method:"get",
-			data : {status : status}
+			data : {status : status},
+			
 			success : function(data){
 				let str = "<table>";
 				for(let i = 0 ; i<data.length ; i++){

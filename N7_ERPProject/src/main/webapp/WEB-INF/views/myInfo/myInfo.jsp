@@ -349,7 +349,7 @@ ul {
 							str += "<td><input type='text' name='hc_dept' value='"+data.hc_dept+"' readonly></td>";
 							str += "<td><input type='text' name='hc_position' value='"+data.hc_position+"' readonly></td>";
 							str += "</tr><td colspan='3'>입사일</td></tr>";
-							str += "<td colspan='3'><input type='date' name='hc_joindate' value='"+data.hc_joindate+"' class='detailInfo' readonly></td>"
+							str += "<td colspan='3'><input type='date' name='hc_joindate' value='"+data.hc_joindate+"'readonly></td>"
 							str += "<tr><td>현재 상태</td><td>재/휴직 상태</td><td>사용한 월차</td></tr>";
 							str += "<td><input type='text' value='"+status+"' readonly></td>"
 							str += "<td><input type='text' value='"+work+"'readonly></td>"

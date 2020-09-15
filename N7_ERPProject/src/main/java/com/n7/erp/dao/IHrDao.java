@@ -68,10 +68,11 @@ public interface IHrDao {
 	@Insert("UPDATE HR_CARD SET HC_STATUS = #{type} WHERE HC_CCODE = #{cCode} AND HC_HRCODE = #{hrCode}")
 	void logStatusToHrCard(HashMap<String, String> logAtMap);
 
-	@Insert("INSERT INTO HR_APPLYHOLIDAY VALUES(${hap_docunum}||HR_APPLYHOLIDAY_SEQ.currval, #{hap_ccode}, #{hap_hrcode}, #{hap_docuname},"
-			+ "#{hap_fromapprover}, #{hap_toapprover}, DEFAULT, #{hap_type}, #{hap_reason}, #{hap_startday}, #{hap_endday}, DEFAULT")
+	@Insert("INSERT INTO HR_APPLYHOLIDAY VALUES(#{hap_docunum}||HR_APPLYHOLIDAY_SEQ.currval, #{hap_ccode}, #{hap_hrcode}, #{hap_docuname},"
+			+ "#{hap_fromapprover}, #{hap_toapprover}, DEFAULT, #{hap_type}, #{hap_reason}, #{hap_startday}, #{hap_endday}, DEFAULT)")
 	void registHoliday(ApplyHoliday apholi);
-
+	@Select("SELECT * FROM HR_APPLYHOLIDAY WHERE HAP_DOCUNUM = #{docunum} AND HAP_CCODE = #{cCode}")
+	ApplyHoliday getDetailHoliday(HashMap<String, String> hMap);
 	@Select("SELECT * FROM HR_ATTENDANCE WHERE HA_HRCODE = #{hrCode} AND HA_CCODE = #{cCode} AND HA_TIME LIKE #{dateStandard} ORDER BY HA_TIME")
 	ArrayList<Attendance> getMyAttendance(HashMap<String, String> hMap);
 	
@@ -82,6 +83,6 @@ public interface IHrDao {
 
 	@Select("SELECT * FROM HR_CARD WHERE HC_CCODE = #{cCode} AND HC_WORK = #{status}")
 	ArrayList<HR_Card> getCheckRetired(String cCode, String status);
-
+	
 	
 }
