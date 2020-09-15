@@ -1,4 +1,4 @@
---N7 TEAM PROJECT155
+--N7 TEAM PROJECT
 --ERP DB
 
 --테이블 관련
