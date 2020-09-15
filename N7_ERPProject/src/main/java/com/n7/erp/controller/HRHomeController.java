@@ -172,4 +172,9 @@ public class HRHomeController {
 		return mav;
 	}
 	
+	@GetMapping(value="/hr/receiptholiday")
+	public String moveReceiptHoliady() {
+		return "/hr/receiptholiday";
+	}
+	
 }

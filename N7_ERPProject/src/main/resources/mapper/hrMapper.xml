@@ -25,7 +25,7 @@
 </update>
 
 <insert parameterType="Academic" id="registAcademic">
-	INSERT INTO HR_ACADEMIC
+	INSERT INTO HR_ACADEMIC (HAC_NUM, HAC_CCODE, HAC_HRCODe, HAC_SCHOOL, HAC_MAJOR, HAC_YEAR)
 	VALUES
 		(HR_ACADEMIC_SEQ.nextval, #{hac_ccode}, #{hac_hrcode}, #{hac_school}, #{hac_major}, #{hac_year}) 
 </insert>
@@ -89,8 +89,9 @@
 		INNER JOIN MEMBER ON
 			HR_CARD.HC_ID = MEMBER.M_ID
 	WHERE
-		HR_APPLYHOLIDAY.HAP_CCODE = #{cCode}
-	ORDER BY HAP_STARTDAY;
+		HR_APPLYHOLIDAY.HAP_CCODE = #{cCode} AND
+		(HR_APPLYHOLIDAY.HAP_STARTDAY LIKE #{date} OR HR_APPLYHOLIDAY.HAP_ENDDAY LIKE #{date})
+	ORDER BY HAP_STARTDAY
 </select>
 
 

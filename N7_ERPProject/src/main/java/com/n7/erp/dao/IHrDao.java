@@ -97,7 +97,7 @@ public interface IHrDao {
 			+ "FROM HR_CARD INNER JOIN MEMBER ON HR_CARD.HC_ID = MEMBER.M_ID WHERE HC_CCODE = #{cCode} ORDER BY HC_WORK")
 	ArrayList<HR_Card> getEmployeeStatus(String cCode);
 
-	ArrayList<NameHoliday> getEmployeeHoliday(String cCode);
+	ArrayList<NameHoliday> getEmployeeHoliday(HashMap<String, String> hMap);
 
 
 }

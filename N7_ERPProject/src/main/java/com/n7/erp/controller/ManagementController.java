@@ -36,7 +36,7 @@ public class ManagementController {
 	@PostMapping(value="/management/updateDeptAuth")
 	public String updateDeptAuth(HttpServletRequest request) {
 		dm.updateDeptAuth(request.getSession().getAttribute("cCode").toString(), request);
-		
+
 		return "/management/deptauth";
 	}
 	

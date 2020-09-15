@@ -88,9 +88,9 @@ ul {
 	<input type="text" name="hap_docuname" placeholder="문서 제목을 입력해주세요 글자제한 20자" required="required">
 	<input type="text" name="hap_type" placeholder="휴가 종류를 입력해주세요 글자제한 20자" required="required">
 	<br>
-	<input type="date" name="hap_startday" required="required">
+	<input type="date" name="hap_startday" required="required" id="start">
 	<span id="myleader"></span>
-	<input type="date" name="hap_endday" required="required">
+	<input type="date" name="hap_endday" required="required" onchange='checkDateValue(start, end);' id="end">
 	<br>
 	<textarea rows="10" cols="10" name="hap_reason"></textarea>
 	<input type="submit" value="제출">
@@ -118,7 +118,20 @@ ul {
 			}
 		});
 	});
-	
+
+	function replaceAll(str, searchStr, replaceStr) {
+	    return str.split(searchStr).join(replaceStr);
+	 }
+	 
+	function checkDateValue(val1, val2){
+		let date1 = Number(replaceAll(val1.value, "-", ""));
+		let date2 = Number(replaceAll(val2.value, "-", ""));
+		if(date1>date2){
+			alert("종료일은 시작일보다 이전일 수 없습니다.");
+			val2.value = "";
+		}
+	}
+
 	</script>
 </body>
 </html>

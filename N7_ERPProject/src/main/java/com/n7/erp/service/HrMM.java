@@ -321,32 +321,7 @@ public class HrMM {
 	public String getAllMyAttendance(HttpSession session, String yearmonth) {
 		String cCode = session.getAttribute("cCode").toString();
 		String hrCode = session.getAttribute("hrCode").toString();
-		String month = "";
-		if (yearmonth.substring(6).equals("1월")) {
-			month = "Jan";
-		} else if (yearmonth.substring(6).equals("2월")) {
-			month = "Feb";
-		} else if (yearmonth.substring(6).equals("3월")) {
-			month = "Mar";
-		} else if (yearmonth.substring(6).equals("4월")) {
-			month = "Apr";
-		} else if (yearmonth.substring(6).equals("5월")) {
-			month = "May";
-		} else if (yearmonth.substring(6).equals("6월")) {
-			month = "Jun";
-		} else if (yearmonth.substring(6).equals("7월")) {
-			month = "Jul";
-		} else if (yearmonth.substring(6).equals("8월")) {
-			month = "Aug";
-		} else if (yearmonth.substring(6).equals("9월")) {
-			month = "Sep";
-		} else if (yearmonth.substring(6).equals("10월")) {
-			month = "Oct";
-		} else if (yearmonth.substring(6).equals("11월")) {
-			month = "Nov";
-		} else if (yearmonth.substring(6).equals("12월")) {
-			month = "Dec";
-		}
+		String month = monthConvert(yearmonth.substring(6));
 		String date = "%" + month + "%" + yearmonth.substring(0, 4) + "%";
 		HashMap<String, String> hMap = new HashMap<String, String>();
 		hMap.put("hrCode", hrCode);
@@ -389,32 +364,7 @@ public class HrMM {
 		if (dayInt < 10) {
 			day = "0" + day;
 		}
-		String month = "";
-		if (yearmonth.substring(6).equals("1월")) {
-			month = "Jan";
-		} else if (yearmonth.substring(6).equals("2월")) {
-			month = "Feb";
-		} else if (yearmonth.substring(6).equals("3월")) {
-			month = "Mar";
-		} else if (yearmonth.substring(6).equals("4월")) {
-			month = "Apr";
-		} else if (yearmonth.substring(6).equals("5월")) {
-			month = "May";
-		} else if (yearmonth.substring(6).equals("6월")) {
-			month = "Jun";
-		} else if (yearmonth.substring(6).equals("7월")) {
-			month = "Jul";
-		} else if (yearmonth.substring(6).equals("8월")) {
-			month = "Aug";
-		} else if (yearmonth.substring(6).equals("9월")) {
-			month = "Sep";
-		} else if (yearmonth.substring(6).equals("10월")) {
-			month = "Oct";
-		} else if (yearmonth.substring(6).equals("11월")) {
-			month = "Nov";
-		} else if (yearmonth.substring(6).equals("12월")) {
-			month = "Dec";
-		}
+		String month = monthConvert(yearmonth.substring(6));
 		String dateStandard = "%" + month + " " + day + " " + yearmonth.substring(0, 4) + "%";
 		System.out.println(dateStandard);
 
@@ -462,12 +412,53 @@ public class HrMM {
 	}
 
 
-	public String getEmployeeHoliday(HttpSession session) {
+	public String getEmployeeHoliday(HttpSession session, String yearmonth) {
 		String cCode = session.getAttribute("cCode").toString();
-		
-		ArrayList<NameHoliday> holiList = hDao.getEmployeeHoliday(cCode);
+		System.out.println(yearmonth);
+		String month = yearmonth.substring(6);
+		month = month.substring(0, month.length()-1);
+		if(Integer.parseInt(month) < 10) {
+			month = "0" + month;
+		}
+		String date = yearmonth.substring(0, 4) + "-" + month + "%";
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("cCode", cCode);
+		hMap.put("date", date);
+		ArrayList<NameHoliday> holiList = hDao.getEmployeeHoliday(hMap);
+		System.out.println(holiList);
 		String result = new Gson().toJson(holiList);
 		return result;
 	}
-
+	
+	
+	private String monthConvert(String number) {
+		String month = "";
+		if (number.equals("1월")) {
+			month = "Jan";
+		} else if (number.equals("2월")) {
+			month = "Feb";
+		} else if (number.equals("3월")) {
+			month = "Mar";
+		} else if (number.equals("4월")) {
+			month = "Apr";
+		} else if (number.equals("5월")) {
+			month = "May";
+		} else if (number.equals("6월")) {
+			month = "Jun";
+		} else if (number.equals("7월")) {
+			month = "Jul";
+		} else if (number.equals("8월")) {
+			month = "Aug";
+		} else if (number.equals("9월")) {
+			month = "Sep";
+		} else if (number.equals("10월")) {
+			month = "Oct";
+		} else if (number.equals("11월")) {
+			month = "Nov";
+		} else if (number.equals("12월")) {
+			month = "Dec";
+		}
+		return month;
+	}
+	
 }

@@ -122,11 +122,10 @@ public class HRRestController {
 	}
 	//사원 휴가 조회
 	@GetMapping(value="/hr/employeeholiday")
-	public String getEmployeeHoliday(HttpSession session) {
-		String result = hm.getEmployeeHoliday(session);
+	public String getEmployeeHoliday(HttpSession session, String yearmonth) {
+		String result = hm.getEmployeeHoliday(session, yearmonth);
 		return result;
 	}
-	
 	
 	
 	//사원 휴/퇴직 상태 조회
