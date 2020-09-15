@@ -17,7 +17,7 @@ import com.n7.erp.bean.hr.Department;
 
 public interface HRIDeptDao {
 	
-	@Insert("INSERT INTO HR_DEPT VALUES(#{HDP_position},#{HDP_dept},#{hdp_ccode}, 0, HR_DEPT_SEQ.nextval, DEFAULT)")
+	@Insert("INSERT INTO HR_DEPT VALUES(#{HDP_position},#{HDP_dept},#{hdp_ccode}, 0, HR_DEPT_SEQ.nextval)")
 	boolean deptregistinsert(Department dept);
 
 	@Select("SELECT * FROM HR_DEPT WHERE HDP_CCODE = #{cCode}")
@@ -62,7 +62,7 @@ public interface HRIDeptDao {
 	@Select("SELECT * FROM HR_DEPT WHERE HDP_CCODE = #{cCode}")
 	ArrayList<Department> getDeptAuthlist(String cCode);
 
-	@Update("UPDATE HR_DEPT SET HDP_AUTH = #{hdp_auth} WHERE HDP_CCODE = #{hdp_ccode} AND HDP_NUM = #{HDP_num}")
+	@Update("UPDATE HR_DEPT SET HDP_AUTH = #{hdp_auth} WHERE HDP_CCODE = #{hdp_ccode} AND HDP_POSITION = #{hdp_position} AND HDP_DEPT = #{hdp_dept}")
 	void updateDeptAuth(Department dept);
 	
 }

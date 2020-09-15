@@ -82,10 +82,7 @@ ul {
 			<li><a href="/erp/myinfo/mydocument">나의 결재함</a></li>
 		</ul>
 	</div>
-	<div id="description"> 내 휴가 보기
-	<div id = "container"></div>
-	<div id = "detail"></div>
-	</div>
+	<div id="description"> 내 휴가 보기</div>
 	<script>
 	
 	$(document).ready(function() {
@@ -95,52 +92,11 @@ ul {
 			method : "get",
 			success : function(data){
 				console.log(data);
-				let str = "";
-				for(let i = 0 ; i < data.length ; i++){
-					str += "<a href='javascript:detail(\""+data[i].hap_docunum+"\")'>"
-					str += data[i].hap_docuname + " ";
-					str += data[i].hap_startday + " 부터 " + data[i].hap_endday + " 까지 ";
-					str += data[i].hap_type + " 휴가 / 신청일시 : " + data[i].hap_applydate;
-					str += " / 현재상태 : ";
-					if(data[i].hap_status == 0 ){
-						str += "대기중";
-					}else if(data[i].hap_status == 1 ){
-						str += "승인";
-					}else{
-						str += "반려됨";
-					}
-					str += "</a><br>"
-				}
-				$("#container").html(str);
 			}, error : function(err){
 				console.log(err);
 			}
 		});
 	});
-	function detail(docunum){
-		console.log(docunum);
-		
-		$.ajax({
-			url:"/erp/rest/hr/detailholiday",
-			data:{docunum : docunum},
-			dataType:"json",
-			method:"get",
-			success : function(data){
-				console.log(data);
-				let str = ""
-				str += data.hap_docuname + "<br>";
-				str += data.hap_startday + "부터 " +data.hap_endday + "까지 <br>";
-				str += data.hap_status + "(0:대기 1:승인 2:반려)<br>";
-				str += data.hap_reason + "<br>";
-				str += data.hap_toapprover + "에게 " + data.hap_fromapprover + " 보냄<br>";
-				str += data.hap_applydate + "(신청일) " + data.hap_type + "(타입)";
-				$("#detail").html(str);
-			}, error : function(err){
-				console.log(err);
-			}
-		});
-		
-	}
 	</script>
 </body>
 </html>

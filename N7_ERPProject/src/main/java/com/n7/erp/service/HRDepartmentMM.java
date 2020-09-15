@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.n7.erp.bean.ConsultingBoard;
-import com.n7.erp.bean.hr.Academic;
 import com.n7.erp.bean.hr.Deduct;
 import com.n7.erp.bean.hr.Department;
 import com.n7.erp.dao.HRIDeptDao;
@@ -219,16 +216,10 @@ public class HRDepartmentMM {
 		String result = new Gson().toJson(deptlist);
 		return result;
 	}
-	public void updateDeptAuth(String cCode, HttpServletRequest request) {
-		for(int i = 0 ; i <request.getParameterValues("HDP_dept").length ; i++) {
-			Department dept = new Department();
-			dept.setHdp_auth(request.getParameterValues("hdp_auth")[i]);
-			dept.setHdp_ccode(cCode);
-			dept.setHDP_num(request.getParameterValues("HDP_num")[i]);
-			System.out.println(dept);
-			Ddao.updateDeptAuth(dept);
-			System.out.println(i);
-			
+	public void updateDeptAuth(String cCode, List<Department> list) {
+		for(int i = 0 ; i <list.size() ; i++) {
+			list.get(i).setHdp_ccode(cCode);
+			Ddao.updateDeptAuth(list.get(i));
 		}
 	}
 }
