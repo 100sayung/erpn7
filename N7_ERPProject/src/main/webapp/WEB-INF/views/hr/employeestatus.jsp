@@ -79,7 +79,7 @@ ul {
 
 			<li id="showMenu2">근태 관리
 				<ul id="smallMenu2" style="display: none;">
-					<li><a href="/erp/hr/applyholiday">휴가 접수</a></li>
+					<li><a href="/erp/hr/receiptholiday">휴가 접수</a></li>
 					<li><a href="/erp/hr/attendance">사원 출결 관리</a></li>
 					<li><a href="/erp/hr/employeestatus">근무 조회</a></li>
 					<li><a href="/erp/hr/retiremm">휴/퇴직 관리</a></li>
@@ -94,23 +94,42 @@ ul {
 			</li>
 		</ul>
 	</div>
-	<div id="description"> 본 화면 </div>
+
+	<div id="description"> 검색 기능 만들어야함 <br> 그리고 표 형식으로 정리 <br>
+	<div id ="container">
+
+	</div>
+
+	 </div>
 	<script>
-	
-	$.ajax({
-		url:"/erp/rest/hr/employeestatus",
-		dataType:"json",
-		method:"get",
-		success : function(data){
-			console.log(data);
-		}, error : function(err){
-			console.log(err);
-		}
+
+	$(document).ready(function() {
+		$.ajax({
+			url:"/erp/rest/hr/employeestatus",
+			dataType:"json",
+			method:"get",
+			success : function(data){
+				console.log(data);
+				let str = "";
+				for(let i = 0 ; i<data.length ; i++){
+					str += data[i].hc_dept + " . " + data[i].hc_position + " 의 " +data[i].m_name + " 은(는) 현재 ";
+					if(data[i].hc_status == 1){
+						str += "출근";
+					}else{
+						str += "퇴근";
+					}
+					str += " 상태입니다. <br>";
+				}
+				$("container").html(str);
+			}, error : function(err){
+				console.log(err);
+			}
+		});
 	});
-	
-	
-	
-	
+
+
+
+
 		$("#showMenu1").hover(function() {
 			$("#smallMenu1").attr("style", "display:inline-block");
 		}, function() {
@@ -126,7 +145,7 @@ ul {
 		}, function() {
 			$("#smallMenu3").attr("style", "display:none");
 		})
-		
+
 	</script>
 </body>
 </html>

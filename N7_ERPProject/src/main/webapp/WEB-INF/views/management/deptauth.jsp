@@ -18,6 +18,8 @@
 한번에 확인누를거 or 아니면 등급별로 출력해서 등급바꿀떄마다 거기서 사라지게 만들기
 
 
+<h1> !!! 공사중 !!!</h1>
+
 <form action = "/erp/management/updateDeptAuth" method="post">
 <div id = "container" >
 
@@ -25,7 +27,7 @@
 <button>변경완료</button>
 </form>
 
-이거 왜 세번째부터 입력이안되냐 새로해야함 
+이거 왜 세번째부터 입력이안되냐 새로해야함
 
 <script>
 

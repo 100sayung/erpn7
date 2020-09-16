@@ -7,7 +7,7 @@ Design by TEMPLATED
 http://templated.co
 Released for free under the Creative Commons Attribution License
 
-Name       : UpRight 
+Name       : UpRight
 Description: A two-column, fixed-width design with dark color scheme.
 Version    : 1.0
 Released   : 20130526
@@ -24,10 +24,17 @@ Released   : 20130526
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous" />
+		<link href="img/favicon.png" rel="icon" />
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon" />
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="lib/icomoon/icomoon.css" rel="stylesheet" />
+  <script type="text/javascript"
+	src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=1a9e4h5a1u&callback=initMap"></script>
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
 	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-	crossorigin="anonymous">
+	crossorigin="anonymous" />
 	<!--[if IE 6]>
 <link href="default_ie6.css" rel="stylesheet" type="text/css" />
 <![endif]-->
@@ -57,9 +64,11 @@ Released   : 20130526
 }
 
 #desc {
+margin-left: 200px;
 	font-size: 20px;
 	font-weight: bolder;
 }
+
 </style>
 </head>
 
@@ -72,7 +81,7 @@ Released   : 20130526
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="/erp/introducecompany" accesskey="2" title="">회사
+				<li><a href="#" id="introduce" accesskey="2" title="">회사
 						소개</a></li>
 				<li><a href="/erp/erpboard" accesskey="3" title="">신청 게시판</a></li>
 				<li><a href="/erp/erpapply" accesskey="4" title="">ERP 신청</a></li>
@@ -110,7 +119,20 @@ Released   : 20130526
 	</div>
 	<div id="desc" style="float: left;"></div>
 	<script>
-		
+	$("#introduce").click(function(){
+		$.ajax({
+			url:'introducecompany',
+			type:"get",
+			success:function(data){
+				$("#description").hide();
+				$("#desc").html(data);
+			},
+			error:function(error){
+				console.log(error);
+			}
+		});
+
+	});
 		var msg=location.search.substring(5, 6);
 		console.log(msg)
 		if(!msg){

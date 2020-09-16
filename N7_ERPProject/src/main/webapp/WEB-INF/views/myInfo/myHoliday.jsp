@@ -87,7 +87,7 @@ ul {
 	<div id = "detail"></div>
 	</div>
 	<script>
-	
+
 	$(document).ready(function() {
 		$.ajax({
 			url : "/erp/rest/myinfo/myholiday",
@@ -119,7 +119,7 @@ ul {
 	});
 	function detail(docunum){
 		console.log(docunum);
-		
+
 		$.ajax({
 			url:"/erp/rest/hr/detailholiday",
 			data:{docunum : docunum},
@@ -139,7 +139,7 @@ ul {
 				console.log(err);
 			}
 		});
-		
+
 	}
 	</script>
 </body>

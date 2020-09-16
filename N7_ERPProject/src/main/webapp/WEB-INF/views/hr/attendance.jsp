@@ -73,7 +73,7 @@ ul {
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
 				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="#">회계 관리</a></li>
+				<li><a href="Account/acerp">회계 관리</a></li>
 			</ul>
 		</div>
 	</div>
@@ -88,10 +88,10 @@ ul {
 
 			<li id="showMenu2">근태 관리
 				<ul id="smallMenu2" style="display: none;">
-					<li><a href="">휴가 접수</a></li>
-					<li><a href="">사원 출결 관리</a></li>
-					<li><a href="">근무 조회</a></li>
-					<li><a href="">휴/퇴직 관리</a></li>
+					<li><a href="/erp/hr/receiptholiday">휴가 접수</a></li>
+					<li><a href="/erp/hr/attendance">사원 출결 관리</a></li>
+					<li><a href="/erp/hr/employeestatus">근무 조회</a></li>
+					<li><a href="/erp/hr/retiremm">휴/퇴직 관리</a></li>
 				</ul>
 			</li>
 			<li id="showMenu3">급여 관리
@@ -122,7 +122,7 @@ ul {
     </table>
     <div id="at"></div>
 	</div>
-	
+
 	<script>
 	function checkMyAt(i){
 		$.ajax({
@@ -165,24 +165,24 @@ ul {
 	}, function() {
 		$("#smallMenu3").attr("style", "display:none");
 	})
-	
-	
+
+
 //이 아래로 달력
     var today = new Date(); // 오늘 날짜
     var date = new Date();
- 
+
     function beforem() //이전 달을 today에 값을 저장
-    { 
+    {
         today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
         build(); //만들기
     }
-    
+
     function nextm()  //다음 달을 today에 저장
     {
         today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
         build();
     }
-    
+
     function build()
     {
         var nMonth = new Date(today.getFullYear(), today.getMonth(), 1); //현재달의 첫째 날
@@ -190,7 +190,7 @@ ul {
         var tbcal = document.getElementById("calendar"); // 테이블 달력을 만들 테이블
         var yearmonth = document.getElementById("yearmonth"); //  년도와 월 출력할곳
         yearmonth.innerHTML = today.getFullYear() + "년 "+ (today.getMonth() + 1) + "월"; //년도와 월 출력
-        
+
         if(today.getMonth()+1==12) //  눌렀을 때 월이 넘어가는 곳
         {
             before.innerHTML=(today.getMonth())+"월";
@@ -206,27 +206,27 @@ ul {
             before.innerHTML=(today.getMonth())+"월";
             next.innerHTML=(today.getMonth()+2)+"월";
         }
-        
-       
+
+
         // 남은 테이블 줄 삭제
-        while (tbcal.rows.length > 2) 
+        while (tbcal.rows.length > 2)
         {
             tbcal.deleteRow(tbcal.rows.length - 1);
         }
         var row = null;
         row = tbcal.insertRow();
         var cnt = 0;
- 
+
         // 1일 시작칸 찾기
-        for (i = 0; i < nMonth.getDay(); i++) 
+        for (i = 0; i < nMonth.getDay(); i++)
         {
             cell = row.insertCell();
             cnt = cnt + 1;
         }
- 
+
         // 달력 출력
         for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
-        { 
+        {
             cell = row.insertCell();
             cell.innerHTML = "<a href='javascript:checkMyAt("+i+")'>"+i+"</a>" ;
             cnt = cnt + 1;
@@ -237,13 +237,13 @@ ul {
                 cell.innerHTML = "<a href='javascript:checkMyAt("+i+")'><font color=#7ED5E4>"+i+"</font></a>";//토요일에 색
                 row = calendar.insertRow();// 줄 추가
             }
-            if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) 
+            if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate())
             {
                 cell.bgColor = "#BCF1B1"; //오늘날짜배경색
             }
         }
     }
-    
+
 	</script>
 </body>
 </html>
