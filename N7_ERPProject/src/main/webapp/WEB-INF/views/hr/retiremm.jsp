@@ -119,7 +119,6 @@ ul {
 			dataType:"json",
 			method:"get",
 			data : {status : status},
-
 			success : function(data){
 				let str = "<table>";
 				console.log(data);
