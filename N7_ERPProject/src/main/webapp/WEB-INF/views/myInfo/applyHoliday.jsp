@@ -122,6 +122,7 @@ ul {
 	function replaceAll(str, searchStr, replaceStr) {
 	    return str.split(searchStr).join(replaceStr);
 	 }
+	
 
 	function checkDateValue(val1, val2){
 		let date1 = Number(replaceAll(val1.value, "-", ""));

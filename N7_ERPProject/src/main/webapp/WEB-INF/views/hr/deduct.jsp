@@ -106,6 +106,7 @@ ul {
 </table> 본 화면 </div>
 </body>
 <script>
+
 $("#showMenu1").hover(function() {
 	$("#smallMenu1").attr("style", "display:inline-block");
 }, function() {

@@ -95,5 +95,23 @@
 </select>
 
 
+<select id="getNoHrCard" parameterType="String" resultType="member">
+	SELECT
+		MEMBER.M_ID, MEMBER.M_NAME, MEMBER.M_BIRTH, MEMBER.M_EMAIL, MEMBER.M_PHOTO
+	FROM MEMBER
+		LEFT OUTER JOIN HR_CARD ON
+			M_ID = HC_ID
+	WHERE
+		M_CCODE = #{cCode} AND HR_CARD.HC_HRCODE IS NULL
+</select>
 
+<select id="checkMemberHrCardCnt" parameterType="String" resultType="boolean">
+	SELECT
+		COUNT(*)
+	FROM MEMBER
+		LEFT OUTER JOIN HR_CARD ON
+			M_ID = HC_ID
+	WHERE
+		M_CCODE = #{cCode} AND HR_CARD.HC_HRCODE IS NULL
+</select>
 </mapper>

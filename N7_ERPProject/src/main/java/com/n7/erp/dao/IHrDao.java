@@ -90,7 +90,7 @@ public interface IHrDao {
 	@Select("SELECT * FROM HR_ATTENDANCE WHERE HA_HRCODE = #{hrCode} AND HA_CCODE = #{cCode} AND HA_TIME LIKE #{date} ORDER BY HA_TIME")
 	ArrayList<Attendance> getAllMyAttendance(HashMap<String, String> hMap);
 
-	@Update("UPDATE HR_CARD SET HC_WORK = #{hc_work} WHERE HC_CCODE = #{hc_code} AND HC_HRCODE = #{hc_hrcode}")
+	@Update("UPDATE HR_CARD SET HC_WORK = #{hc_work} WHERE HC_CCODE = #{hc_ccode} AND HC_HRCODE = #{hc_hrcode}")
 	void updateRetired(HR_Card hrCard);
 
 	@Select("SELECT HR_CARD.HC_DEPT, HR_CARD.HC_POSITION, HR_CARD.HC_STATUS, MEMBER.M_NAME "
@@ -98,6 +98,10 @@ public interface IHrDao {
 	ArrayList<HR_Card> getEmployeeStatus(String cCode);
 
 	ArrayList<NameHoliday> getEmployeeHoliday(HashMap<String, String> hMap);
+
+	
+	boolean checkMemberHrCardCnt(String cCode);
+	ArrayList<Member> getNoHrCard(String cCode);
 
 
 }

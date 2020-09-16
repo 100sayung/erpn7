@@ -81,6 +81,7 @@ margin-left: 200px;
 		</div>
 		<div id="menu">
 			<ul>
+				<li><a href="/erp/adminpage"  title="">ADMIN관리</a></li>
 				<li><a href="#" id="introduce" accesskey="2" title="">회사
 						소개</a></li>
 				<li><a href="/erp/erpboard" accesskey="3" title="">신청 게시판</a></li>

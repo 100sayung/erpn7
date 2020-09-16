@@ -85,6 +85,7 @@ ul {
 <div id="description">
 
 <h1>인사카드 세부정보 / 수정</h1>
+<br><br><h1>인사카드없을때 내정보 보기 이외엔 활동할 수 없게 막아야함!!!!!!!!!!!!!!!!!</h1>
 <div id="member"></div>
 
 <br><br><br>

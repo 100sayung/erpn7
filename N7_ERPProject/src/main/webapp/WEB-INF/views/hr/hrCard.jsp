@@ -94,8 +94,50 @@ ul {
 			</li>
 		</ul>
 	</div>
-	<div id="description"> ${hrCard} </div>
+	<div id="description"> ${msg }<br><br>
+	<div id="noHaveHrCard"></div>
+	<input type="text" id="nameSearch"> <- 이름으로 검색
+	
+	<div id="container">
+	</div>
+	
+	${hrCard} 
+	
+	
+	</div>
 	<script>
+  	  $(function(){
+  	      var responseMessage = "<c:out value="${msg}" />";
+  	      if (responseMessage != ""){
+            alert(responseMessage)
+            let str = "";
+            str += "<a href='javascript:NoHaveHrCard()'>미 등록 인원 보기</a>";
+            $("#noHaveHrCard").html(str);
+   	     }
+ 	  });
+
+  	  function NoHaveHrCard(){
+  		  $.ajax({
+  			 url:"/erp/rest/hr/nohrcard",
+  			 dataType:"text",
+  			 method:"get",
+  			 success : function(data){
+  				 console.log(data);
+  				 $("#container").html(data);
+  			 }, error : function(err){
+  				 console.log(err.responseText);
+  			 }
+  		  });
+  	  }
+  	  
+  	  
+  	  
+  	  
+  	  
+  	  
+  	  
+  	  
+	
 		$("#showMenu1").hover(function() {
 			$("#smallMenu1").attr("style", "display:inline-block");
 		}, function() {
@@ -119,6 +161,7 @@ ul {
 		window.onbeforeunload = function(){
 			window.reload();
 		}
+		
 
 	</script>
 </body>

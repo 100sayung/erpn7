@@ -78,18 +78,21 @@ public class HRHomeController {
 
 	//사원출결조회 페이지로 이동
 	@GetMapping(value = "/hr/attendance")
-	public String moveAttendance() {
-		return "/hr/attendance";
+	public ModelAndView moveAttendance(HttpSession session) {
+		mav = hm.checkMemberHrCard(session, "/hr/attendance");
+		return mav;
 	}
 	//근무조회 페이지로 이동
 	@GetMapping(value = "/hr/employeestatus")
-	public String moveEmployeeStatus() {
-		return "/hr/employeestatus";
+	public ModelAndView moveEmployeeStatus(HttpSession session) {
+		mav = hm.checkMemberHrCard(session, "/hr/employeestatus");
+		return mav;
 	}
 	//휴/퇴직 관리 페이지로 이동
 	@GetMapping(value="/hr/retiremm")
-	public String moveRetireMM() {
-		return "/hr/retiremm";
+	public ModelAndView moveRetireMM(HttpSession session) {
+		mav = hm.checkMemberHrCard(session, "/hr/retiremm");
+		return mav;
 	}
 
 

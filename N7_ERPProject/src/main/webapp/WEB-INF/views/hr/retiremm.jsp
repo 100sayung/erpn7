@@ -98,9 +98,10 @@ ul {
 
 	<div id="description">
 	<br> 재직중일때 검색 기능 추가해야함 !! 정말 그럴거냐고 물어봐야함 !!<br>
-		<a href="javascript:CheckRetired(0)"> 재직중(0) </a> <a
-			href="javascript:CheckRetired(1)"> 휴직중(1) </a> <a
-			href="javascript:CheckRetired(2)"> 퇴사(2) </a> <br>
+	<br><h1>인사카드 등록이 한개라도 안되어있을땐 인사카드부터 하게해야함. 전부 예외처리해서 인사카드로 이동시켜야함.</h1>
+		<a href="javascript:CheckRetired(0)"> 재직중(0) </a> 
+		<a href="javascript:CheckRetired(1)"> 휴직중(1) </a> 
+		<a href="javascript:CheckRetired(2)"> 퇴사(2) </a> <br>
 		<div id="container">
 			<input type="hidden" value="" id="status">
 		</div>
@@ -125,7 +126,7 @@ ul {
 				console.log(data);
 				for(let i = 0 ; i<data.length ; i++){
 					str += "<tr>"
-					str += "<td>" +data[i].m_name +"<input type='hidden' name='hc_hrcode' value= '"+data[i].hc_hrcode+"'></td>";
+					str += "<td><input type='hidden' name='hc_hrcode' value= '"+data[i].hc_hrcode+"'>"+data[i].m_name +"</td>";
 					str += "<td><input type='text' name ='hc_dept' value = '" + data[i].hc_dept + "' readonly></td>";
 					str += "<td><input type='text' name='hc_position' value = '" + data[i].hc_position + "' readonly></td>";
 					str+="<td><select name='hc_work'>";

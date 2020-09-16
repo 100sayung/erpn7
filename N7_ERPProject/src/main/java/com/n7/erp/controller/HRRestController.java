@@ -70,6 +70,13 @@ public class HRRestController {
 		Member mb = hm.getMemberInfo(m_id);
 		return mb;
 	}
+	
+	//인사카드 없는 사람들 정보 출력
+	@GetMapping(value="/hr/nohrcard")
+	public String getNoHrCard(HttpSession session) {
+		String result = hm.getNoHrCard(session);
+		return result;
+	}
 
 	//
 	@GetMapping(value = "/hr/deptlist")

@@ -182,23 +182,28 @@ public class HrMM {
 	}
 
 	public ModelAndView hrCard(HttpSession session) {
-		String m_id = session.getAttribute("id").toString();
 		String m_ccode = session.getAttribute("cCode").toString();
 
 		System.out.println(m_ccode);
 
 		ArrayList<Member> hrCardList = new ArrayList<>();
 		hrCardList = mDao.getHRCard(m_ccode);
-
+		
 		mav.addObject("hrCard", makeHRCardList(hrCardList));
 		mav.setViewName("/hr/hrCard");
+		
+		if(!checkMemberHrCardCnt(m_ccode)) {
+			mav.addObject("msg", "인사카드/사원코드를 전부 다 부여해주세요");
+			
+		}
+		
 		return mav;
 	}
 
 	private String makeHRCardList(ArrayList<Member> hList) {
 		StringBuilder str = new StringBuilder();
 		str.append("<table id='table1'>");
-		str.append("<tr><td></td><td>�</td><td></td><td></td><td></td></tr>");
+		str.append("<tr><td></td><td></td><td></td><td></td><td></td></tr>");
 		for (int i = 0; i < hList.size(); i++) {
 			str.append("<tr><td><img src='/erp/upload/" + hList.get(i).getM_photo() + "'></td>");
 			str.append("<td>" + hList.get(i).getM_name() + "</td>");
@@ -460,5 +465,35 @@ public class HrMM {
 		}
 		return month;
 	}
+
+	public ModelAndView checkMemberHrCard(HttpSession session, String address) {
+		String cCode = session.getAttribute("cCode").toString();
+		if(checkMemberHrCardCnt(cCode)) {
+			mav.setViewName(address);
+		}else {
+			mav.setViewName("redirect:/hr/movehrcardpage");
+		}
+		return mav;
+	}
+	
+	private boolean checkMemberHrCardCnt(String cCode) {
+		if(hDao.checkMemberHrCardCnt(cCode)) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+
+	public String getNoHrCard(HttpSession session) {
+		String cCode = session.getAttribute("cCode").toString();
+		
+		
+		ArrayList<Member> hrCardList = new ArrayList<>();
+		hrCardList = hDao.getNoHrCard(cCode);
+		
+		String list = makeHRCardList(hrCardList);
+		return list;
+	}
+	
 
 }
