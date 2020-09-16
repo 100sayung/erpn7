@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.n7.erp.bean.ConsultingBoard;
-import com.n7.erp.bean.hr.Academic;
 import com.n7.erp.bean.hr.Deduct;
 import com.n7.erp.bean.hr.Department;
 import com.n7.erp.dao.HRIDeptDao;

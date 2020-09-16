@@ -66,7 +66,7 @@ ul {
 					title="">인사 관리</a></li>
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
+				<li><a href="/erp/stock/setcategory" accesskey="6" title="">자재 관리</a></li>
 				<li><a href="/erp/Account/acerp">회계 관리</a></li>
 			</ul>
 		</div>
@@ -350,7 +350,7 @@ ul {
 							str += "<td><input type='text' name='hc_dept' value='"+data.hc_dept+"' readonly></td>";
 							str += "<td><input type='text' name='hc_position' value='"+data.hc_position+"' readonly></td>";
 							str += "</tr><td colspan='3'>입사일</td></tr>";
-							str += "<td colspan='3'><input type='date' name='hc_joindate' value='"+data.hc_joindate+"'readonly></td>"
+							str += "<td colspan='3'><input type='date' name='hc_joindate' value='"+data.hc_joindate+"' class='detailInfo' readonly></td>"
 							str += "<tr><td>현재 상태</td><td>재/휴직 상태</td><td>사용한 월차</td></tr>";
 							str += "<td><input type='text' value='"+status+"' readonly></td>"
 							str += "<td><input type='text' value='"+work+"'readonly></td>"

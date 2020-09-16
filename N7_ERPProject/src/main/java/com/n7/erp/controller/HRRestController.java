@@ -94,7 +94,7 @@ public class HRRestController {
 	//휴가신청
 	@GetMapping(value = "/hr/myleaderlist")
 	public String getMyLeaderUsingGrade(HttpSession session){
-		String leaderList = hm.getMyLeaderUsingGrade(session, "2");
+		String leaderList = hm.getMyLeaderUsingGrade(session, "1");
 		return leaderList;
 	}
 
