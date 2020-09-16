@@ -6,8 +6,8 @@ import org.apache.ibatis.type.Alias;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-@Alias("Line")
 @Data
+@Alias("Line")
 @Accessors(chain=true)
 public class approvalLine {
 	private String m_name;

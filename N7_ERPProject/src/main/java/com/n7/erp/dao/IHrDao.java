@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.google.gson.JsonElement;
 import com.n7.erp.bean.Member;
 import com.n7.erp.bean.entity.NameHoliday;
 import com.n7.erp.bean.hr.Academic;
@@ -101,6 +102,9 @@ public interface IHrDao {
 	
 	boolean checkMemberHrCardCnt(String cCode);
 	ArrayList<Member> getNoHrCard(String cCode);
+
+	@Select("SELECT * FROM HR_APPLYHOLIDAY WHERE HAP_DOCUNUM = #{docunum} AND HAP_CCODE = #{cCode}")
+	ApplyHoliday getDetailHoliday(HashMap<String, String> hMap);
 
 
 }

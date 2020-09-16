@@ -5,8 +5,8 @@ import org.apache.ibatis.type.Alias;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-@Alias("ap")
 @Data
+@Alias("ap")
 @Accessors(chain=true)
 public class Approvaldocu {
 	private String ap_docunum;
