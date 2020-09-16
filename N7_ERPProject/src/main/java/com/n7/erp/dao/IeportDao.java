@@ -16,7 +16,7 @@ public interface IeportDao {
 	@Select("SELECT * FROM P JOIN IT ON P.P_ITCODE = IT.IT_CODE WHERE P.P_SITUATION = 0 ORDER BY P.P_ACCOUNT AND P.P_")//수정
 	List<Purchase> importCheckList(String cCode);
 
-	@Insert("INSERT INTO IE VALUES(IE_SEQ.NEXTVAL,#{ie_cpcode},DEFAULT,#{ie_hrcode},#{ie_pnum},#{ie_code},#{ie_etc},0,#{ie_clcode},#{ie_ocode})")
+	@Insert("INSERT INTO IE VALUES(S_IEPORT_SEQ.NEXTVAL,#{ie_cpcode},DEFAULT,#{ie_hrcode},#{ie_pnum},#{ie_code},#{ie_etc},0,#{ie_clcode},#{ie_ocode})")
 	boolean insertImport(IePort iePort);
 
 	@Select("SELECT * FROM IE WHERE IE_CPCODE = #{cCode}")
