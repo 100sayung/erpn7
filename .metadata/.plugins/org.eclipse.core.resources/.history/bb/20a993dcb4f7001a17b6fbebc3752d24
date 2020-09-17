@@ -1,0 +1,5 @@
+package com.n7.erp.controller;
+
+public class HomeRestController {
+
+}
