@@ -7,7 +7,7 @@
 <title>Purchase Details</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
-html,body{
+#aaa{
 text-align: center;
 }
 input{
@@ -20,6 +20,7 @@ border: 1px solid silver;
 </style>
 </head>
 <body>
+	<div id="aaa">
 		 <div style="width: auto; background-color: white; padding: 1%;">
          	<button id="stock">재고현황</button>
          	<button id="Pinfo">구매조회</button>
@@ -95,7 +96,7 @@ border: 1px solid silver;
             	<button type="reset">다시작성</button>
          	</div>
          </form>
-
+	</div>
 	  <script type="text/javascript">
 	  
 	 $(document).ready(function(){
