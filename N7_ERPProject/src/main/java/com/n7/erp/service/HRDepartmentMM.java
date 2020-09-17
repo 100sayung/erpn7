@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.n7.erp.bean.ConsultingBoard;
-import com.n7.erp.bean.hr.Academic;
 import com.n7.erp.bean.hr.Deduct;
 import com.n7.erp.bean.hr.Department;
 import com.n7.erp.dao.HRIDeptDao;
@@ -28,14 +27,14 @@ public class HRDepartmentMM {
 	private HRIDeptDao Ddao;
 
 	ModelAndView mav = new ModelAndView();
-	//부서 등록 
+	//부서 등록
 	public ModelAndView deptregistinsert(Department dept, String cCode) {
 		String view = null;
 		System.out.println(dept.getHDP_dept());
 		dept.setHdp_ccode(cCode);
 		if (Ddao.deptregistinsert(dept)) {
 			view = "hr/deptregistpage";
-			
+
 		} else {
 			mav.addObject("deptfalse", "부서 등록에 실패하였습니다.");
 			view = "hr/deptregistpage";
@@ -117,11 +116,11 @@ public class HRDepartmentMM {
 		}
 		return json;
 	}
-	
+
 	public ModelAndView searchpay(String cCode) {
 		ArrayList<Department> deList=Ddao.searchpay(cCode);
-		
-		
+
+
 		return mav;
 	}
 	//공제사항 관리 페이지 이동 and 공제 목록 출력
@@ -135,10 +134,10 @@ public class HRDepartmentMM {
 			System.out.println(json);
 			mav.addObject("deduct", json);
 		}
-		mav.setViewName(view);				
+		mav.setViewName(view);
 		return mav;
 	}
-	//공제 금액 수정 
+	//공제 금액 수정
 	public String modifyDeduction(String deduct, Integer denum, String cCode) {
 		HashMap<String, String> duMap=new HashMap<String, String>();
 		duMap.put("deduct", deduct);
@@ -166,7 +165,7 @@ public class HRDepartmentMM {
 		fdpMap.put("disdept", disdept);
 		fdpMap.put("disposition", disposition);
 		fdpMap.put("cCode", cCode);
-		
+
 		if(disdept!=""&&disposition=="") {
 			System.out.println("두번쨰에선오나");
 			deptList=Ddao.findDisdept(fdpMap);
@@ -194,7 +193,7 @@ public class HRDepartmentMM {
 		return null;
 	}
 	public String getDeptList(String cCode) {
-		
+
 		ArrayList<Department> distinctdept=Ddao.distinctdept(cCode);
 		ArrayList<Department> distinctposition=Ddao.distinctposition(cCode);
 		System.out.println(distinctdept);
@@ -228,7 +227,7 @@ public class HRDepartmentMM {
 			System.out.println(dept);
 			Ddao.updateDeptAuth(dept);
 			System.out.println(i);
-			
+
 		}
 	}
 }

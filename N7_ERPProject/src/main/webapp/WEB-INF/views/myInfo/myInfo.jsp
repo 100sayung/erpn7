@@ -66,8 +66,8 @@ ul {
 					title="">인사 관리</a></li>
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="#">회계 관리</a></li>
+				<li><a href="/erp/stock/setcategory" accesskey="6" title="">자재 관리</a></li>
+				<li><a href="/erp/Account/acerp">회계 관리</a></li>
 			</ul>
 		</div>
 	</div>
@@ -85,6 +85,7 @@ ul {
 <div id="description">
 
 <h1>인사카드 세부정보 / 수정</h1>
+<br><br><h1>인사카드없을때 내정보 보기 이외엔 활동할 수 없게 막아야함!!!!!!!!!!!!!!!!!</h1>
 <div id="member"></div>
 
 <br><br><br>
@@ -156,7 +157,7 @@ ul {
 		function replaceAll(str, searchStr, replaceStr) {
 		    return str.split(searchStr).join(replaceStr);
 		 }
-		 
+
 		function checkDateValue(val1, val2){
 			let date1 = Number(replaceAll(val1.value, "-", ""));
 			let date2 = Number(replaceAll(val2.value, "-", ""));
@@ -165,7 +166,7 @@ ul {
 				val2.value = "";
 			}
 		}
-		 
+
 		function addRecord(){
 			let str ="";
 			let cntAc = 0;
@@ -249,8 +250,8 @@ ul {
 					str += "<td><input type='date' name='hac_year' class='detailInfo'></td></tr>";
 					str += "</table>";
 					$("#hrDetailInfo").html(str); */
-				} 
-			}); 
+				}
+			});
 		}
 
 		function CertificationInfo(){
@@ -285,8 +286,8 @@ ul {
 					str += "<td><input type='date' name='hct_date' class='detailInfo' required pattern='\d{4}-\d{2}-\d{2}'></td></tr>";
 					str += "</table>";
 					$("#hrDetailInfo").html(str); */
-				} 
-			}); 
+				}
+			});
 		}
 		function CareerInfo(){
 			$("#form").attr("action", formURL + "/newcareer");
@@ -313,8 +314,8 @@ ul {
 					num=data.length;
 				},error : function(err){
 					console.log(err);
-				} 
-			}); 
+				}
+			});
 		}
 		function InCompanyInfo(){
 			$("#form").attr("action", formURL + "/newhrcard");
@@ -349,7 +350,7 @@ ul {
 							str += "<td><input type='text' name='hc_dept' value='"+data.hc_dept+"' readonly></td>";
 							str += "<td><input type='text' name='hc_position' value='"+data.hc_position+"' readonly></td>";
 							str += "</tr><td colspan='3'>입사일</td></tr>";
-							str += "<td colspan='3'><input type='date' name='hc_joindate' value='"+data.hc_joindate+"'readonly></td>"
+							str += "<td colspan='3'><input type='date' name='hc_joindate' value='"+data.hc_joindate+"' class='detailInfo' readonly></td>"
 							str += "<tr><td>현재 상태</td><td>재/휴직 상태</td><td>사용한 월차</td></tr>";
 							str += "<td><input type='text' value='"+status+"' readonly></td>"
 							str += "<td><input type='text' value='"+work+"'readonly></td>"
@@ -371,8 +372,8 @@ ul {
 							str += "<td><input type='text' placeholder='---' readonly></td>"
 							str += "<td><input type='text' placeholder='---' readonly></td></tr></table>";
 							$("#hrDetailInfo").html(str);
-						} 
-					}); 
+						}
+					});
 		}
 	</script>
 </body>

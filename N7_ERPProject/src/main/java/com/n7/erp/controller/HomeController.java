@@ -74,6 +74,18 @@ public class HomeController {
 		logger.info("");
 		return "/home/erpapply";
 	}
+	@GetMapping(value="/adminpage")
+	public String moveAdminPage() {
+		return "/home/adminpage";
+	}
+	@GetMapping(value="/companymanager")
+	public String moveCompanyManager() {
+		return "/home/companymanager";
+	}
+	@GetMapping(value="/membermanager")
+	public String moveMemberManager() {
+		return "/home/membermanager";
+	}
 	
 	
 	@PostMapping(value="/access")

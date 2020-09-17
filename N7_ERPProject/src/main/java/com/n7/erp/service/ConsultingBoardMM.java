@@ -1,4 +1,3 @@
-
 package com.n7.erp.service;
 
 
@@ -36,7 +35,7 @@ public class ConsultingBoardMM {
 		Integer pageNum=bList.size();
 		System.out.println("전체 글 갯수"+pageNum);
 		pageNum=(pageNum==null)?1:pageNum;
-		
+
 		if(pageNum<=0) {
 			System.out.println("잘못된 페이지 번호");
 		}
@@ -86,7 +85,7 @@ public class ConsultingBoardMM {
 			System.out.println("json타입으로 변경"+json);
 			return json;
 		}
-		
+
 		return null;
 	}
 	//게시글 수정

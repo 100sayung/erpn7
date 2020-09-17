@@ -18,4 +18,6 @@ public class Department {
 	private String hdp_ccode;
 	private String hdp_auth;
 	
+	//배열로 받으려고
+	private List<Department> list;
 }

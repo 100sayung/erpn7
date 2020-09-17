@@ -16,7 +16,7 @@ import com.n7.erp.bean.hr.Department;
 
 
 public interface HRIDeptDao {
-	
+
 	@Insert("INSERT INTO HR_DEPT VALUES(#{HDP_position},#{HDP_dept},#{hdp_ccode}, 0, HR_DEPT_SEQ.nextval, DEFAULT)")
 	boolean deptregistinsert(Department dept);
 
@@ -25,20 +25,20 @@ public interface HRIDeptDao {
 
 	@Update("UPDATE HR_DEPT SET HDP_PAY=#{pay} WHERE HDP_NUM=#{dept} AND HDP_CCODE = #{cCode}")
 	boolean deptpayupdate(HashMap<String, String> hMap);
-	
+
 	String payselect(HashMap<String, String> hMap);
-	
+
 	@Delete("DELETE FROM HR_DEPT WHERE HDP_NUM=#{deptnum} AND HDP_CCODE = #{cCode}")
 	boolean deptdelete(HashMap<String, String> delMap);
-	
+
 	@Select("SELECT * FROM HR_DEPT WHERE HDP_CCODE = #{cCode}")
 	ArrayList<Department> deptafterselect(String cCode);
 
 	ArrayList<Department> searchpay(String cCode);
-	
+
 	@Select("SELECT * FROM HR_DEDUCTION WHERE HDD_CCODE = #{cCode}")
 	ArrayList<Deduct> moveDeduct(String cCode);
-	
+
 	@Update("UPDATE HR_DEDUCTION SET HDD_AMOUNT=#{denum} WHERE HDD_NAME=#{deduct} AND HDD_CCODE = #{cCode}")
 	boolean modifyDeduction(HashMap<String, String> duMap);
 
@@ -48,7 +48,7 @@ public interface HRIDeptDao {
 	ArrayList<Department> distinctposition(String cCode);
 	@Select("SELECT DISTINCT HDP_DEPT FROM HR_DEPT WHERE HDP_CCODE = #{cCode}")
 	ArrayList<Department> distinctdept(String cCode);
-	
+
 	@Select("SELECT * FROM HR_DEPT WHERE HDP_DEPT=#{disdept} AND HDP_POSITION=#{disposition} AND HDP_CCODE = #{cCode}")
 	ArrayList<Department> findDeptPosition(HashMap<String, String> fdpMap);
 	@Select("SELECT * FROM HR_DEPT WHERE HDP_DEPT=#{disdept} AND HDP_CCODE = #{cCode}")
@@ -62,7 +62,7 @@ public interface HRIDeptDao {
 	@Select("SELECT * FROM HR_DEPT WHERE HDP_CCODE = #{cCode}")
 	ArrayList<Department> getDeptAuthlist(String cCode);
 
-	@Update("UPDATE HR_DEPT SET HDP_AUTH = #{hdp_auth} WHERE HDP_CCODE = #{hdp_ccode} AND HDP_NUM = #{HDP_num}")
+	@Update("UPDATE HR_DEPT SET HDP_AUTH = #{hdp_auth} WHERE HDP_CCODE = #{hdp_ccode} AND HDP_POSITION = #{hdp_position} AND HDP_DEPT = #{hdp_dept}")
 	void updateDeptAuth(Department dept);
-	
+
 }
