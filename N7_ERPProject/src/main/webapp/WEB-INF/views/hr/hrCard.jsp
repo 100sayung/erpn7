@@ -97,15 +97,34 @@ ul {
 	<div id="description"> ${msg }<br><br>
 	<div id="noHaveHrCard"></div>
 	<input type="text" id="nameSearch"> <- 이름으로 검색
+	<button onclick="searchFromName()">검색</button>
 	
 	<div id="container">
+	${hrCard} 
 	</div>
 	
-	${hrCard} 
 	
 	
 	</div>
 	<script>
+	
+	function searchFromName(){
+		$name = $("#nameSearch").val();
+		console.log($name);
+		$.ajax({
+			url:"/erp/rest/hr/searchfromname",
+			data:{name:$name},
+			dataType:"text",
+			method:"get",
+			success : function(data){
+				console.log(data);
+				$("#container").html(data);
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+	}
+	
   	  $(function(){
   	      var responseMessage = "<c:out value="${msg}" />";
   	      if (responseMessage != ""){

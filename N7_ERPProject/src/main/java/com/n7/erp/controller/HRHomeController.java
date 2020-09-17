@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.n7.erp.bean.hr.ApplyHoliday;
 import com.n7.erp.bean.hr.Department;
 import com.n7.erp.bean.hr.HR_Card;
+import com.n7.erp.service.AccountMM;
 import com.n7.erp.service.HRDepartmentMM;
 import com.n7.erp.service.HrMM;
 import com.n7.erp.service.MemberMM;
@@ -37,6 +38,7 @@ public class HRHomeController {
 	@Autowired private HRDepartmentMM dm;
 	@Autowired private HrMM hm;
 	@Autowired private MemberMM mm;
+	@Autowired private AccountMM am;
 
 	//인사카드 세부정보 페이지로 이동
 	@GetMapping(value="/hr/hrModifyDetail")
@@ -178,6 +180,12 @@ public class HRHomeController {
 	@GetMapping(value="/hr/receiptholiday")
 	public String moveReceiptHoliady() {
 		return "/hr/receiptholiday";
+	}
+	
+	@GetMapping(value="/hr/holidayap")
+	public ModelAndView holidayAp() {
+		mav=am.approvalLine();
+		return mav;
 	}
 
 }

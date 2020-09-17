@@ -98,13 +98,18 @@ public interface IHrDao {
 	ArrayList<HR_Card> getEmployeeStatus(String cCode);
 
 	ArrayList<NameHoliday> getEmployeeHoliday(HashMap<String, String> hMap);
+	ArrayList<NameHoliday> getMyHolidayView(HashMap<String, String> hMap);
 
 	
 	boolean checkMemberHrCardCnt(String cCode);
 	ArrayList<Member> getNoHrCard(String cCode);
+	@Select("SELECT * FROM MEMBER WHERE M_CCODE = #{cCode}")
+	ArrayList<Member> getSearchFromName(String cCode);
 
 	@Select("SELECT * FROM HR_APPLYHOLIDAY WHERE HAP_DOCUNUM = #{docunum} AND HAP_CCODE = #{cCode}")
 	ApplyHoliday getDetailHoliday(HashMap<String, String> hMap);
+
+
 
 
 }

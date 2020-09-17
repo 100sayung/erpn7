@@ -56,6 +56,14 @@ ul {
 .attendance{
 	border: 1px solid black;
 }
+
+table{
+	width : 1400px;
+	height: 900px;
+}
+td{
+	width:200px;
+}
 </style>
 </head>
 <body onload="build();">
@@ -91,9 +99,9 @@ ul {
 	<div id="description">
     <table align="center" id="calendar">
         <tr>
-            <td><font size=1%; color="#B3B6B3"><label onclick="beforem()" id="before" ></label></font></td>
-            <td colspan="5" align="center" id="yearmonth"></td>
-            <td><font size=1%; color="#B3B6B3"><label onclick="nextm()" id="next"></label></font></td>
+            <td><font color="#B3B6B3"><label onclick="beforem()" id="before" ></label></font></td>
+            <td colspan="5" align="center" id="yearmonth"><font size="20px"></font></td>
+            <td><font color="#B3B6B3"><label onclick="nextm()" id="next"></label></font></td>
         </tr>
         <tr>
             <td align="center"> <font color="#FF9090">일</font></td>
@@ -218,13 +226,16 @@ ul {
     		success: function(data){
     			console.log(data);
     			for(let i = 0 ; i<data.length ; i++){
-    				console.log(data[i]);
     				let str = "";
-    				str += data[i].ha_time + "<br>";
+       				let time = data[i].ha_time.substr(16, 8);
     				if(data[i].ha_type=="1"){
-						str+= "출근"
+    					str += "<font style='color:blue'>"
+        				str += "<br>" + time;
+						str+= " 출근</font>"
 					}else{
-						str+= "퇴근"
+						str += "<font style='color:red'>"
+	    				str += "<br>" + time;
+						str+= " 퇴근</font>"
 					}
     				let date = data[i].ha_time.substring(8,10);
     				if(date<10){

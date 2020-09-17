@@ -41,18 +41,19 @@ a {
 #description {
 	float: left;
 	height: 100%;
-	width: 800px;
 }
 
-table, td, th {
-	border: 1px solid black;
+table{
+	text-align: center;
+}
+table, th, td{
+	border-bottom : 1px solid balck;
+	border-top : 1px solid black;
 	border-collapse: collapse;
 }
-
-td {
-	width: 30px
+#calendar td{
+	width:30px;
 }
-
 ul {
 	list-style: none;
 }
@@ -107,14 +108,16 @@ ul {
 	<div id="description">
 		사원들 휴가 등록된거 보는 화면임~!
 
-		<table align="center" id="calendar">
+		<table align="center">
 			<tr>
-				<td><font size=1%; color="#B3B6B3"><label
+				<td style="width : 100px;"><font color="#B3B6B3"><label
 						onclick="beforem()" id="before"></label></font></td>
-				<td colspan="5" align="center" id="yearmonth"></td>
-				<td><font size=1%; color="#B3B6B3"><label
+				<td style="width : 150px; font-size: 15px;" align="center" id="yearmonth" style="font-size: 15px;"></td>
+				<td style="width : 100px;"><font color="#B3B6B3"><label
 						onclick="nextm()" id="next"></label></font></td>
 			</tr>
+		</table>
+		<table align="center" id="calendar">
 		</table>
 
 		<br>
@@ -256,6 +259,7 @@ ul {
 								cell.innerHTML = "";
 							}
 						}
+						designThis(cell);
 						row = calendar.insertRow();
 					}
 					str = data[0].hap_type;
@@ -264,7 +268,14 @@ ul {
 					console.log(err);
 				}
 			});
+			
 		}
+
+		function designThis(cell){
+			console.log(cell);
+			cell.style.width = "100px";
+		}
+
 
 		$("#showMenu1").hover(function() {
 			$("#smallMenu1").attr("style", "display:inline-block");

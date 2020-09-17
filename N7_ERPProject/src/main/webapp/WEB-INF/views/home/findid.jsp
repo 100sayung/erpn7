@@ -81,7 +81,7 @@ button {
 			</div>
 			<span class="warnMsg">${warn }</span>
 			<button>로그인</button><br>
-			<a style="color:black;" href = "/erp/findid">아이디 찾기 </a>
+			<a href = "/erp/findid">아이디 찾기 </a><span> | </span><a href="/erp/findpassword">비밀번호 찾기</a>
 		</div>
 	</form>
 	<script>

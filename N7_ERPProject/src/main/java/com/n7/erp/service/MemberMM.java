@@ -111,4 +111,12 @@ public class MemberMM {
 
 	}
 
+	public ModelAndView moveMyInfo(HttpSession session) {
+		if(!hDao.haveHrCode(session.getAttribute("id").toString())) {
+			mav.addObject("msg", "우선 인사카드 등록을 요청해주세요.");
+		}
+		mav.setViewName("myInfo/myInfo");
+		return mav;
+	}
+
 }

@@ -30,20 +30,24 @@ public class MyInfoController {
 	private HrMM hm;
 	//이동관련
 	@GetMapping(value="/myinfo/checkattendance")
-	public String moveCheckAttendance() {
-		return "myInfo/checkAttendance";
+	public ModelAndView moveCheckAttendance(HttpSession session) {
+		mav = hm.checkMyHrCard(session, "myInfo/checkAttendance");
+		return mav;
 	}
 	@GetMapping(value="/myinfo/applyholiday")
-	public String moveApplyHoliday() {
-		return "myInfo/applyHoliday";
+	public ModelAndView moveApplyHoliday(HttpSession session) {
+		mav = hm.checkMyHrCard(session, "/myInfo/applyHoliday");
+		return mav;
 	}
 	@GetMapping(value="/myinfo/myattendance")
-	public String moveMyAttendance() {
-		return "myInfo/myAttendance";
+	public ModelAndView moveMyAttendance(HttpSession session) {
+		mav = hm.checkMyHrCard(session, "/myInfo/myAttendance");
+		return mav;
 	}
 	@GetMapping(value="/myinfo/myholiday")
-	public String moveMyHoliday() {
-		return "myInfo/myHoliday";
+	public ModelAndView moveMyHoliday(HttpSession session) {
+		mav = hm.checkMyHrCard(session, "myInfo/myHoliday");
+		return mav;
 	}
 	
 	//여기까지 이동관련

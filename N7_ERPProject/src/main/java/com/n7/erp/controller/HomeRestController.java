@@ -32,11 +32,13 @@ public class HomeRestController {
 		List<Member> mlist = new Gson().fromJson(jsonStr, new TypeToken<List<Member>>() {}.getType());
 		System.out.println(mlist);
 		String result = mm.updateChangeGrade(mlist);
+		
 		return result;
 	}
 	
 	@PostMapping(value="/home/forcewithdrawal")
 	public String forceWithDrawal(String jsonStr) { //강퇴기능
+		System.out.println(jsonStr);
 		List<String> slist = new Gson().fromJson(jsonStr, new TypeToken<List<String>>() {}.getType());
 		System.out.println(slist);
 		mm.forceWithDrawal(slist);

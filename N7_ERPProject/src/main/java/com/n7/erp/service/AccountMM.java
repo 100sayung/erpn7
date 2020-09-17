@@ -275,7 +275,6 @@ public class AccountMM {
 				mav.addObject("aList",new Gson().toJson(aList));
 				view="Account/approvalLine";
 			}else {
-				
 			    mav.addObject("msg","주소록에 정보가 없습니다");
 				view="Account/acApproval";
 			}

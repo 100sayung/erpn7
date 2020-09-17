@@ -86,6 +86,14 @@ public class HomeController {
 	public String moveMemberManager() {
 		return "/home/membermanager";
 	}
+	@GetMapping(value="/findid")
+	public String findId() {
+		return "/home/findid";
+	}
+	@GetMapping(value="/findpassword")
+	public String findPassword() {
+		return "/home/findpassword";
+	}
 	
 	
 	@PostMapping(value="/access")
@@ -109,8 +117,9 @@ public class HomeController {
 		return "/myInfo/myInfo";
 	}
 	@GetMapping(value="/myinfo/myinfo")
-	public String myinfoMain() {
-		return "/myInfo/myInfo";
+	public ModelAndView myinfoMain(HttpSession session) {
+		mav = mm.moveMyInfo(session);
+		return mav;
 	}
 	@GetMapping(value="/hr/hr")
 	public String hrMain() {

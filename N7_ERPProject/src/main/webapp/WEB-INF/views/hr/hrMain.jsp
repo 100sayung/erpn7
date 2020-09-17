@@ -63,7 +63,7 @@ ul {
 					title="">인사 관리</a></li>
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
+				<li><a href="/erp/stock/setcategory" accesskey="6" title="">자재 관리</a></li>
 				<li><a href="/erp/Account/acerp">회계 관리</a></li>
 			</ul>
 		</div>
