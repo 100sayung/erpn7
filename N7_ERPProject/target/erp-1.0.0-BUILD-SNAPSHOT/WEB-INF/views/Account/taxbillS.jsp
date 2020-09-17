@@ -46,40 +46,40 @@ font-size: 20px;
 				<tr>
 					<th rowspan="4">공급자</th>
 					<th>사업자번호</th>
-					<td colspan="3"><input type="text" value="${mc.mc_num}"
+					<td colspan="3"><input type="text" value="${mc.c_comnum}"
 						readonly></td>
 					<th rowspan="4">공급받는자</th>
 					<th>사업자번호</th>
-					<td colspan="3"><input type="text" value="${ac.c_comnum}"
+					<td colspan="3"><input type="text" value="${ac.cl_comnum}"
 						readonly></td>
 				</tr>
 				<tr>
 					<th>상호(법인명)</th>
-					<td><input type="text" value="${mc.mc_name}" readonly></td>
+					<td><input type="text" value="${mc.c_name}" readonly></td>
 					<th>성명(대표자)</th>
-					<td><input type="text" value="${mc.mc_ceo}" readonly></td>
+					<td><input type="text" value="${mc.c_ceo}" readonly></td>
 					<th>상호(법인명)</th>
-					<td><input type="text" value="${ac.c_name}" readonly></td>
+					<td><input type="text" value="${ac.cl_name}" readonly></td>
 					<th>성명(대표자)</th>
-					<td><input type="text" value="${ac.c_ceo}" readonly></td>
+					<td><input type="text" value="${ac.cl_ceo}" readonly></td>
 				</tr>
 				<tr>
 					<th>사업장주소</th>
-					<td colspan="3"><input type="text" value="${mc.mc_addr}"
+					<td colspan="3"><input type="text" value="${mc.c_addr}"
 						readonly></td>
 					<th>사업장주소</th>
-					<td colspan="3"><input type="text" value="${ac.c_addr}"
+					<td colspan="3"><input type="text" value="${ac.cl_addr}"
 						readonly></td>
 				</tr>
 				<tr>
 					<th>업태</th>
-					<td><input type="text" value="${mc.mc_kind}" readonly></td>
+					<td><input type="text" value="${mc.c_kind}" readonly></td>
 					<th>종목</th>
-					<td><input type="text" value="${mc.mc_kind2}" readonly></td>
+					<td><input type="text" value="${mc.c_kind2}" readonly></td>
 					<th>업태</th>
-					<td><input type="text" value="${ac.c_kind}" readonly></td>
+					<td><input type="text" value="${ac.cl_kind}" readonly></td>
 					<th>종목</th>
-					<td><input type="text" value="${ac.c_kind2}" readonly></td>
+					<td><input type="text" value="${ac.cl_kind2}" readonly></td>
 				</tr>
 				<tr>
 					<th colspan="2">작성날자</th>

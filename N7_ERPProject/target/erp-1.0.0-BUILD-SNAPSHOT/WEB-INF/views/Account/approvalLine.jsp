@@ -140,6 +140,8 @@ height:10px;
 	<a  href="javascript:sendChildValue()"><button>결제라인 등록</button></a>
 </body>
 <script>
+var count1=0;
+
 function sendChildValue(){
 	
 	if(count1==0){
@@ -147,16 +149,13 @@ function sendChildValue(){
 	} else{
 		
 	var code1 = new Array();
-	var code2 = new Array();
+	//var code2 = new Array();
 	for(var i =0; i<count1; i++){
 		code1.push($(".addname1"+i).val());
 	}
-	for(var i =0; i<count2; i++){
-		code2.push($(".addname2"+i).val());
-	}
 	
 	$.ajax({
-		 url:"/erp/rest/Account/approLinecom?code1="+code1+"&code2="+code2,
+		 url:"/erp/rest/Account/approLinecom?code1="+code1,
 		 type:'post',
 		 datatype:'json',
 		 success:function(data){
@@ -180,6 +179,7 @@ function sendChildValue(){
 
 
 $("#deleteCheck1").click(function() {
+	var cnt = $("input[name='checknum']:checked").length;
 	for (var i = 0; i < $(".check1").length; i++) {
 		if ($(".check1")[i].checked == true) {
 			$(".check1")[i].parentElement.parentElement.remove();
@@ -189,7 +189,7 @@ $("#deleteCheck1").click(function() {
 		}
 	}
 });
-$("#deleteCheck2").click(function() {
+/* $("#deleteCheck2").click(function() {
 	for (var i = 0; i < $(".check2").length; i++) {
 		if ($(".check2")[i].checked == true) {
 			$(".check2")[i].parentElement.parentElement.remove();
@@ -199,12 +199,12 @@ $("#deleteCheck2").click(function() {
 		}
 	}
 });
-
+ */
 	var list = ${aList};
 	console.log(list);
 	var str = "";
 	for (var i = 0; i < list.length; i++) {
-		str += "<tr><td><input name='checknum' type='checkbox' value="+list[i].m_code+"></td><td>"
+		str += "<tr><td><input name='checknum' type='checkbox' value="+list[i].hc_hrcode+"></td><td>"
 				+ list[i].m_name + "(" + list[i].m_email + ")" + "</td></tr>";
 	}
 
@@ -223,10 +223,10 @@ $("#deleteCheck2").click(function() {
 								console.log(data);
 								
 								for ( var i in data.aList) {
-									str += "<tr><td><input name='checknum' type='checkbox' value='"+data.aList[i].m_code+"'></td>";
+									str += "<tr><td><input name='checknum' type='checkbox' value='"+data.aList[i].hc_hrcode+"'></td>";
 									str += "<td>"+ data.aList[i].m_name+ "</td>";
-									str += "<td>"+ data.aList[i].m_colume+ "</td>";
-									str += "<td>"+ data.aList[i].m_grade+ "</td>";
+									str += "<td>"+ data.aList[i].hc_dept+ "</td>";
+									str += "<td>"+ data.aList[i].hc_position+ "</td>";
 									str += "<td>"+ data.aList[i].m_email+ "</td></tr>";
 									}
 										$("#nameInfo").html(str);
@@ -237,9 +237,12 @@ $("#deleteCheck2").click(function() {
 								});
 					});
 	
-	    var count1=0;
+	   
 	$("#addapproval1").click(function(){
-		var name =[];
+		if(count1==3){
+			alert("3명이상  선택 할 수 없습니다.");
+		}else{
+			
 		var cnt = $("input[name='checknum']:checked").length;
 		var arr = new Array();
 		
@@ -249,8 +252,9 @@ $("#deleteCheck2").click(function() {
 		$("input[name='checknum']:checked").each(function() {
 			
 			arr.push($(this).attr('value'));
-               var code = $(this).attr('value');
-		       
+               //var code = $(this).attr('value');
+			   
+		});
 			   $.ajax({
 					url : '/erp/rest/Account/addApproval',
 					type : 'post',
@@ -260,31 +264,24 @@ $("#deleteCheck2").click(function() {
 					success : function(data) {
 						console.log(data);
 						var str="";
-		                    console.log(code);
+		                    //console.log(code);
 						
 							for(var i in data.aList){
 								str+="<tr><td><input class='check1' type='checkbox'></td>";
-								str+="<td><input class='addname1"+i+"' type='text' value='"+data.aList[i].m_code+"' hidden='true'>"+data.aList[i].m_name+"</td>";
-								str+="<td>"+data.aList[i].m_grade+"</td>";
-								str+="<td>"+data.aList[i].m_colume+"</td></tr>";
+								str+="<td><input class='addname1"+i+"' type='text' value='"+data.aList[i].hc_hrcode+"' hidden='true'>"+data.aList[i].m_name+"</td>";
+								str+="<td>"+data.aList[i].hc_position+"</td>";
+								str+="<td>"+data.aList[i].hc_dept+"</td></tr>";
 										
 									}
 							$("#addAp1").append(str);
 							
-							for(var k=0; k<=count1; k++){
+							/* for(var k=0; k<=count1; k++){
 								name[k]=$(".addname1"+k).val();
 									
-								}
-							if(cnt==1){
-								count1=1;
-							}else if(cnt==2){
-								count1=2;
-							}else if(cnt==3){
-								count1=3;
-							}
-							
-							console.log(name);
-							console.log(count1);
+								} */
+						count1+=Number(cnt);
+							//console.log(name);
+							//console.log(count1);
 					     $("#cnt1").html(count1);
 				},
 					error:function(error){
@@ -292,11 +289,12 @@ $("#deleteCheck2").click(function() {
 					}	
 		
 		});
-			   
-		});
+		
 	};		
+		}
+		//var name =[];
 	});
-	    var count2=0;
+	 /*    var count2=0;
 	$("#addapproval2").click(function(){
 		var name =[];
 		var cnt = $("input[name='checknum']:checked").length;
@@ -321,22 +319,22 @@ $("#deleteCheck2").click(function() {
 		                    console.log(code);
 						
 						
-							/* for(var j=0; j<=count; j++){
+							for(var j=0; j<=count; j++){
 								if(code==$(".addname"+j).val()&&count!=0){
 									alert("이미추가되었습니다");
 									
-									}else{ */
+									}else{ 
 							for(var i in data.aList){
 								str+="<tr><td><input class='check2' type='checkbox'></td>";
-								str+="<td><input class='addname2"+count2+"' type='text' value='"+data.aList[i].m_code+"' hidden='true'>"+data.aList[i].m_name+"</td>";
-								str+="<td>"+data.aList[i].m_grade+"</td>";
-								str+="<td>"+data.aList[i].m_colume+"</td></tr>";
+								str+="<td><input class='addname2"+count2+"' type='text' value='"+data.aList[i].hc_hrcode+"' hidden='true'>"+data.aList[i].m_name+"</td>";
+								str+="<td>"+data.aList[i].hc_position+"</td>";
+								str+="<td>"+data.aList[i].hc_dept+"</td></tr>";
 							$("#addAp2").append(str);
 										
 									}
-								/* } */
+								 } 
 							
-							/* } */
+							 }
 							for(var k=0; k<=count2; k++){
 								name[k]=$(".addname2"+k).val();
 									
@@ -356,7 +354,7 @@ $("#deleteCheck2").click(function() {
 		});
 	};		
 	});
-	   
+	    */
 	
 		
      

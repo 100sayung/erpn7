@@ -62,11 +62,11 @@ text-align: center;
          
             <tr>
                <th>일자</th>
-               <th><input id="time" type="text" name="ad_date"></th>
+               <th><input id="time" type="text" name="rs_date"></th>
             </tr>
             <tr>
                <th>제목</th>
-               <th><textarea rows="1" cols="190" name="ad_title"></textarea></th>
+               <th><textarea rows="1" cols="190" name="rs_title"></textarea></th>
             </tr>
             <tr>
                <th>결재자</th>
@@ -85,22 +85,22 @@ text-align: center;
                            </tr>
                            <tr>
                            <th>전표번호</th>
-                           <th colspan="2"><input type="text" name="ad_num" value="${approval.s_num}"></th>
+                           <th colspan="2"><input type="text" name="rs_num" value="${approval.s_num}"></th>
                               <th>유형</th>
-                              <th><input type="text" name="ad_kind" value="${approval.s_kind}"></th>
+                              <th><input type="text" name="rs_kind" value="${approval.s_kind}"></th>
                               <th colspan="2">거래처</th>
-                              <th colspan="3"><input type="text" name="ad_company" value="${approval.s_company}"></th>
+                              <th colspan="3"><input type="text" name="rs_company" value="${approval.s_company}"></th>
                            </tr>
                            <tr>
                            <th>사업자번호</th>
-                           <th colspan="2"><input type="text" name="ad_comnum" value="${approval.s_comnum}"></th>
+                           <th colspan="2"><input type="text" name="rs_comnum" value="${approval.s_comnum}"></th>
                               <th>매출일자</th>
-                              <th><input type="text" name="ad_sdate" value="${approval.s_date}"></th>
+                              <th><input type="text" name="rs_sdate" value="${approval.s_date}"></th>
                               <th>담당자</th>
                               <th>부서명</th>
-                              <th><input type="text" name="ad_dept" value="회계팀"></th>
+                              <th><input type="text" name="rs_dept" value="회계팀"></th>
                               <th>성명</th>
-                              <th><input type="text" name="ad_employee" value="${approval.s_employee}"></th>
+                              <th><input type="text" name="rs_employee" value="${approval.s_employee}"></th>
                            </tr>
                            </c:forEach>
                            <tr>
@@ -118,7 +118,7 @@ text-align: center;
                         <tr><th colspan="3">총합계(원)</th><th id="total" colspan="7"></th></tr>
                            <tr>
                               <th>기타</th>
-                              <th colspan="10"><textarea rows="5" cols="163" name="ad_reason"></textarea></th>
+                              <th colspan="10"><textarea rows="5" cols="163" name="rs_reason"></textarea></th>
                            </tr>
                         </table>
                      </div>
@@ -154,13 +154,13 @@ var saleList = ${sList2};
 var total=0;
 var str="";
 for(var i in saleList){
-	str+="<tr><td colspan='2'><input type='text' name='ad_pkind' value="+saleList[i].s_pkind+"></td>";
-	str+="<td><input type='text' name='ad_cnt' value="+saleList[i].s_cnt+"></td>";
-	str+="<td><input type='text' name='ad_price' value="+saleList[i].s_price+"></td>";
-	str+="<td colspan='2'><input type='text' name='ad_price2' value="+saleList[i].s_price2+"></td>";
-	str+="<td colspan='2'><input type='text' name='ad_tax' value="+saleList[i].s_tax+"></td>";
-	str+="<td><input type='text' name='ad_total' value="+saleList[i].s_total+"></td>";
-	str+="<td><input type='text' name='ad_memo' value="+saleList[i].s_memo+"></td></tr>";
+	str+="<tr><td colspan='2'><input type='text' name='rs_pkind' value="+saleList[i].s_pkind+"></td>";
+	str+="<td><input type='text' name='rs_cnt' value="+saleList[i].s_cnt+"></td>";
+	str+="<td><input type='text' name='rs_price' value="+saleList[i].s_price+"></td>";
+	str+="<td colspan='2'><input type='text' name='rs_price2' value="+saleList[i].s_price2+"></td>";
+	str+="<td colspan='2'><input type='text' name='rs_tax' value="+saleList[i].s_tax+"></td>";
+	str+="<td><input type='text' name='rs_total' value="+saleList[i].s_total+"></td>";
+	str+="<td><input type='text' name='rs_memo' value="+saleList[i].s_memo+"></td></tr>";
 	total+=Number(saleList[i].s_total);
 }
 $("#tbody").html(str);
@@ -177,9 +177,9 @@ $("#time").val(time.toLocaleDateString()+time.toLocaleTimeString());
 		if (data.tList1 != "") {
 		var str = "";
 			for ( var i in data.tList1) {
-		        str +="<input type='text' name='ad_apcode"+i+"' value='"+data.tList1[i].m_code+"' hidden='true'>";
-				str +=data.tList1[i].m_grade+"/";
-				str +="<input style='width:50px;' type='text' name='ad_apname"+i+"' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
+		        str +="<input type='text' name='rs_apcode"+i+"' value='"+data.tList1[i].hc_hrcode+"' hidden='true'>";
+				str +=data.tList1[i].hc_position+"/";
+				str +="<input style='width:50px;' type='text' name='rs_apname"+i+"' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
 			}
 			console.log(str)
 			$("#line").html(str);
