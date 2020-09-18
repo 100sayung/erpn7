@@ -1,5 +1,6 @@
 package com.n7.erp.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -28,13 +29,10 @@ public class ManagementController {
 		return "/management/deptauth";
 	}
 	
-	@PostMapping(value="/management/updateDeptAuth")
-	public String updateDeptAuth(HttpSession session, Department dept) {
-		System.out.println(dept.getList());
-		dm.updateDeptAuth(session.getAttribute("cCode").toString(), dept.getList());
-		
-		return "/management/deptauth";
-	}
-	
-
+	   @PostMapping(value="/management/updateDeptAuth")
+	   public String updateDeptAuth(HttpServletRequest request) {
+	      dm.updateDeptAuth(request.getSession().getAttribute("cCode").toString(), request);
+	      
+	      return "/management/deptauth";
+	   }
 }
