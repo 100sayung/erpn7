@@ -84,6 +84,9 @@
 	<select id="addApproval" parameterType="String" resultType="Line">
 	SELECT * FROM MLIST  WHERE HC_HRCODE=#{code}
 	</select>
+	<select id="getMyInfo" parameterType="String" resultType="Line">
+	SELECT * FROM MLIST  WHERE HC_HRCODE=#{code}
+	</select>
 	
 	<select id="approLinecom1" parameterType="String" resultType="Line">
 	SELECT * FROM MLIST  WHERE HC_HRCODE=#{code01}
@@ -95,7 +98,7 @@
 	SELECT * FROM AC_SALESTATEMENTLIST WHERE S_PKIND=#{pkind}
 	</select>
 	
-	<select id="comparecode" parameterType="String" resultType="ap">
+	<select id="comparecode" parameterType="String" resultType="approvaldocu">
 	SELECT * FROM APPROVALDOCU WHERE AP_DOCUNUM=#{code}
 	</select>
 	

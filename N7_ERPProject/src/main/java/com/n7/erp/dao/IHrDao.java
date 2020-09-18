@@ -83,5 +83,8 @@ public interface IHrDao {
 	@Select("SELECT * FROM HR_CARD WHERE HC_CCODE = #{cCode} AND HC_WORK = #{status}")
 	ArrayList<HR_Card> getCheckRetired(String cCode, String status);
 
+	@Select("SELECT COUNT(*) FROM HR_CARD WHERE HC_ID=#{m_id}")
+   boolean haveHrCode(String m_id);
+
 	
 }

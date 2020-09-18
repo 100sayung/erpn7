@@ -17,10 +17,10 @@
 	href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
 	rel='stylesheet' type='text/css'>
 
-<script src="lib/jquery/jquery.min.js"></script>
-<script src="lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="lib/php-mail-form/validate.js"></script>
-<script src="lib/easing/easing.min.js"></script>
+<script src="/erp/lib/jquery/jquery.min.js"></script>
+<script src="/erp/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="/erp/lib/php-mail-form/validate.js"></script>
+<script src="/erp/lib/easing/easing.min.js"></script>
 
 <!-- Template Main Javascript File -->
 <script src="resources/js/main.js"></script>
@@ -64,6 +64,19 @@ width:300px;
 height: 400px;
 
 }
+header{
+padding-left: 300px;
+}
+
+#logo2{
+width:50%;
+position: absolute; 
+left:25%;
+top: 47%
+}
+.clearfix{
+height: 700px;
+}
 </style>
 </head>
 <body data-spy="scroll" data-offset="58" data-target="#navbar-main">
@@ -77,7 +90,7 @@ height: 400px;
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon icon-shield" style="font-size:30px; color:#3498db;"></span>
           </button>
-          <a class="navbar-brand hidden-xs hidden-sm smoothscroll" href="#home"><span class="icon icon-shield" style="font-size:18px; color:#3498db;"></span></a>
+          <a class="navbar-brand hidden-xs hidden-sm smoothscroll" href="#home"></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -95,7 +108,6 @@ height: 400px;
   <div id="home"></div>
   <div id="headerwrap" name="home">
     <header class="clearfix">
-      <h1><span class="icon icon-shield"></span></h1>
       <h1>인사말
 				</h1>
 				<span> <br>최첨단 기술과 최고의 전문 인력으로 고객에게 최상의 결과물을 제공하는 IT기업,
@@ -105,6 +117,7 @@ height: 400px;
 				구축하여 고객에게 안전한 업무 환경을 제공하고 있으며, 기업 관리 시스템 구축으로 보다 효율적으로 사업을 <br>
 				진행할 수 있도록 도와드리고 있습니다.<br>
                               그 외에도 홈페이지 구축, 그룹웨어 등 기업에서 필요로 하는 많은 기술을 제공할 수 있는 기업이 되었습니다.</span>
+                              <br><img src="/erp/img/logo.png" id="logo2">
     </header>
   </div>
 

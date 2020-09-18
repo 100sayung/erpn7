@@ -92,26 +92,14 @@ margin-left: 200px;
 				</c:when>
 				<c:when test="${id!=null and id eq 'manager'}">
 				<li><form action="logout" method="post"><button>LOGOUT</button></form></li>
-				<li class="current_page_item"><a href="#" onClick='window.open("/erp/home/managermode", "ERP START", "width=1200, height=900, toolbar=no, menubar=no, resizable=yes"); return false;'>ERP관리하기</a></li>
+				<li class="current_page_item"><a href="#" onClick='window.open("/erp/managermode/managermode", "ERP START", "width=1200, height=900, toolbar=no, menubar=no, resizable=yes"); return false;'>ERP관리하기</a></li>
 				</c:when>
 				<c:when test="${id!=null and id ne 'manager'}">
 				<li><form action="logout" method="post"><button>LOGOUT</button></form></li>
 				<li class="current_page_item"><a href="#" onClick='window.open("/erp/main", "ERP START", "width=1200, height=900, toolbar=no, menubar=no, resizable=yes"); return false;'>ERP시작</a></li>
 				</c:when>
 				</c:choose>
-				<%-- <c:if test="${id==null}">
-				<li><a href="/erp/login" accesskey="5" title="">LOGIN</a></li>
-				<li><a href="/erp/join" accesskey="6" title="">JOIN</a></li>
-				</c:if>
 				
-				<c:if test="${id!=null and id eq manager}">
-             	<li><form action="logout" method="post"><button>LOGOUT</button></form></li>
-				<li class="current_page_item"><a href="#" onClick='window.open("/erp/home/managermode", "ERP START", "width=1200, height=900, toolbar=no, menubar=no, resizable=yes"); return false;'>ERP관리하기</a></li>
-				</c:if>
-				<c:if test="${id!=null and id ne manager}">
-             	<li><form action="logout" method="post"><button>LOGOUT</button></form></li>
-				<li class="current_page_item"><a href="#" onClick='window.open("/erp/main", "ERP START", "width=1200, height=900, toolbar=no, menubar=no, resizable=yes"); return false;'>ERP시작</a></li>
-				</c:if> --%>
 			</ul>
 		</div>
 	</div>
@@ -136,13 +124,14 @@ margin-left: 200px;
 		</div>
 		</center>
 	</div>
-	<div id="desc" style="float: left;"></div>
+	<div id="desc"></div>
 	<script>
 	$("#introduce").click(function(){
 		$.ajax({
 			url:'introducecompany',
 			type:"get",
 			success:function(data){
+				
 				$("#description").hide();
 				$("#desc").html(data);
 			},
