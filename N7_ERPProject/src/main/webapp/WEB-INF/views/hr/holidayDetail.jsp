@@ -10,7 +10,7 @@
 
 <div id="holidayDetail">
 </div>
-${apholi.hap_docunum }
+${apholi.hap_ docunum }
 
 <script>
 
