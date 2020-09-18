@@ -560,4 +560,14 @@ public class HrMM {
 		}
 		return null;
 	}
+
+	public ModelAndView getHolidayDetail(String docunum, HttpSession session) {
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("cCode", session.getAttribute("cCode").toString());
+		hMap.put("docunum", docunum);
+		ApplyHoliday apholi = hDao.getDetailHoliday(hMap);
+		mav.addObject("apholi", apholi);
+		mav.setViewName("/hr/holidayDetail");
+		return mav;
+	}
 }

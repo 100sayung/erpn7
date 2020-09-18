@@ -242,10 +242,16 @@ table, th, td{
 									cell.innerHTML = data[k].m_name;
 									cell.style.width="90px;";
 									cell.className="last"
+										cell = row.insertCell();
+									cell.innerHTML = "<input type='button' value='상세정보' id='"+data[k].hap_docunum+"' onclick='showDetail(\""+data[k].hap_docunum+"\")'>"
+									cell.clssName="last"
 								}
 							} else if (j == cnt) {
 								cell.innerHTML = data[k].m_name;
 								cell.style.width="90px;";
+								cell.clssName="last"
+								cell = row.insertCell();
+								cell.innerHTML = "<input type='button' value='상세정보' id='"+data[k].hap_docunum+"' onclick='showDetail(\""+data[k].hap_docunum+"\")'>"
 								cell.clssName="last"
 							} else {
 								cell.innerHTML = "";
@@ -265,6 +271,12 @@ table, th, td{
 		function designThis(cell){
 			console.log(cell);
 			cell.style.width = "100px";
+		}
+		
+		function showDetail(docunum){
+			console.log(docunum);
+			window.open('/erp/hr/holidaydetail?docunum=' + docunum, '휴가상세정보', 'width=1400, heigth=700');
+
 		}
 
 		$("#showMenu1").hover(function() {

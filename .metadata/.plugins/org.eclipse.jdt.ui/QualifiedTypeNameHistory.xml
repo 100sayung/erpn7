@@ -3,7 +3,6 @@
 <fullyQualifiedTypeName name="com.n7.erp.dao.IHrDao"/>
 <fullyQualifiedTypeName name="oracle.jdbc.proxy.annotation.Post"/>
 <fullyQualifiedTypeName name="com.n7.erp.bean.hr.HR_Card"/>
-<fullyQualifiedTypeName name="com.n7.erp.bean.hr.ApplyHoliday"/>
 <fullyQualifiedTypeName name="lombok.Data"/>
 <fullyQualifiedTypeName name="com.n7.erp.bean.entity.NameHrCode"/>
 <fullyQualifiedTypeName name="org.omg.CosNaming.NameHolder"/>
@@ -13,7 +12,6 @@
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="com.n7.erp.service.MemberMM"/>
 <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Select"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="com.google.gson.reflect.TypeToken"/>
@@ -23,9 +21,11 @@
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="org.springframework.web.servlet.ModelAndView"/>
-<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
-<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 <fullyQualifiedTypeName name="com.google.gson.Gson"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
 <fullyQualifiedTypeName name="com.n7.erp.bean.ac.A_company"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+<fullyQualifiedTypeName name="com.n7.erp.bean.hr.ApplyHoliday"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
 </qualifiedTypeNameHistroy>

@@ -73,6 +73,7 @@ margin-left: 200px;
 </head>
 
 <body>
+사원코드 : ${hrCode }
 	<div id="header" class="container">
 		<div id="logo">
 			<h1>

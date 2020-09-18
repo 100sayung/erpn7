@@ -8,5 +8,13 @@
 </head>
 <body>
 
+<div id="holidayDetail">
+</div>
+${apholi.hap_docunum }
+
+<script>
+
+
+</script>
 </body>
-</html>
+</html> 
