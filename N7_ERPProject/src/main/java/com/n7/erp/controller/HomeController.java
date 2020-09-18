@@ -49,6 +49,16 @@ public class HomeController {
 		logger.info("");
 		return "/home/home";
 	}
+	@RequestMapping(value = "/managermode/managermode", method = RequestMethod.GET)
+	public String managermode() {
+
+		return "/managermode/managermode";
+	}
+	@RequestMapping(value = "/managermode/Company", method = RequestMethod.GET)
+	public String Company() {
+		
+		return "/managermode/Company";
+	}
 	@RequestMapping(value = "/introducecompany", method = RequestMethod.GET)
 	public String introduceCompany() {
 		logger.info("");

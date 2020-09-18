@@ -223,6 +223,7 @@ $("input[name='checknum']:checked").each(function() {
                 }
 			});
 });
+
 function saleInsertInfo(){
        var obj = $("#saleInfo").serialize();
        $.ajax({
@@ -244,42 +245,67 @@ function saleInsertInfo(){
 };
 
 
-
-
-
-
 $("#approval").click(function(){
 	var check = '';
 	$("input[name='checknum']:checked").each(function() {
 						check = $(this).attr('value');
-						if(check!=""){
-							
-						window.open('/erp/Account/acApproval?check='+check,'acApproval','width=1400,height=700');
-						}else{
+	      });
+						if(check==""){
 							alert("체크한 항목이 없습니다");
+						}else{
+							$.ajax({
+								url:'/erp/rest/Account/comparecode?code='+check,
+								type:'post',
+								datatype:'json',
+								success:function(data){
+									console.log(data);
+									if(data.sList.length==1){
+										alert("이미 결재요청된 데이터 입니다.");
+									}else{
+										window.open('/erp/Account/acApproval?check='+check,'acApproval','width=1400,height=700');
+									}
+								},
+								error:function(error){
+									console.log(error);
+								}
+							});
 						}
-						
-	});
+	
 });
 
- 
+$("#addList").click(function() {
+					var str = '';
+					for (var i = 0; i < $("#qty").val(); i++) {
+						str += "<tr><td><input type='checkbox' class='check'></td>"
+						str += "<td><input class='data' type='text' name='s_pkind'/></td>"
+						str += "<td><input class='data' type='text' name='s_cnt'/></td>"
+						str += "<td><input class='data' type='text' name='s_price'/></td>"
+						str += "<td><input class='data' type='text' name='s_price2'/></td>"
+						str += "<td><input class='data' type='text' name='s_tax'/></td>"
+						str += "<td><input class='data' type='text' name='s_total' /></td>"
+						str += "<td><input class='data' name='s_memo' /></td></tr>"
+					}
+					$("#tBody").append(str);
+					$("#qty").val(1);
+				});
 
-function saleinsert(){
-	$("#comInfo").attr("display","inline-block");	
-	$("#plusorminus").attr("display","inline-block");
+
+ function saleinsert(){
+	//$("#comInfo").attr("display","inline-block");	
+	//$("#plusorminus").attr("display","inline-block");
 	$("#testTable").html("");
 	var str='';
-	str += "<tr><td>체크</td><td>품목</td><td>수량</td><td>단가(원)</td><td>공급가액(원)</td><td>부가세액(원)</td><td>합계(원)</td><td>적요</td></tr>"
-	str += "<tr><td><input type='checkbox' class='check'></td>"
+	str += "<thead><tr><td>체크</td><td>품목</td><td>수량</td><td>단가(원)</td><td>공급가액(원)</td><td>부가세액(원)</td><td>합계(원)</td><td>적요</td></tr></thead>"
+	str += "<tbody id='tBody'><tr><td><input type='checkbox' class='check'></td>"
 		str += "<td><input class='data' type='text' name='s_pkind'/></td>"
 		str += "<td><input class='data' type='text' name='s_cnt'/></td>"
 		str += "<td><input class='data' type='text' name='s_price'/></td>"
 		str += "<td><input class='data' type='text' name='s_price2'/></td>"
 		str += "<td><input class='data' type='text' name='s_tax'/></td>"
 		str += "<td><input class='data' type='text' name='s_total' /></td>"
-		str += "<td><input class='data' name='s_memo' /></td></tr>"
+		str += "<td><input class='data' name='s_memo' /></td></tr></tbody>"
 	
-	$("#testTable").append(str);
+	$("#testTable").html(str);
 }
 
 	$("#taxbill").click(function() {
@@ -388,24 +414,6 @@ function saleinsert(){
 
 					});
 
-	$("#addList")
-			.click(
-					function() {
-						var str = '';
-						for (var i = 0; i < $("#qty").val(); i++) {
-							str += "<tr><td><input type='checkbox' class='check'></td>"
-							str += "<td><input class='data' type='text' name='s_pkind'/></td>"
-							str += "<td><input class='data' type='text' name='s_cnt'/></td>"
-							str += "<td><input class='data' type='text' name='s_price'/></td>"
-							str += "<td><input class='data' type='text' name='s_price2'/></td>"
-							str += "<td><input class='data' type='text' name='s_tax'/></td>"
-							str += "<td><input class='data' type='text' name='s_total' /></td>"
-							str += "<td><input class='data' name='s_memo' /></td></tr>"
-						}
-						$("#tBody").append(str);
-						$("#qty").val(1);
-					});
-
 	$("#deleteCheck").click(function() {
 		for (var i = 0; i < $(".check").length; i++) {
 			if ($(".check")[i].checked == true) {
@@ -426,8 +434,7 @@ function saleinsert(){
 							alert("선택된 내용이 없습니다");
 						} else {
 
-							$
-									.ajax({
+							$.ajax({
 										url : '/erp/rest/Account/deleteSale',
 										type : 'post',
 										traditional : true,

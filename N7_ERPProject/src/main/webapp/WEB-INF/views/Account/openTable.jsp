@@ -85,8 +85,8 @@ float: left;
 			<option value="employee">입력자</option>
 		</select>
 		<button id="search2" type="button">검색</button>
-		매출<input onclick="getList('S')" type='radio' name="sale" value='S'>
-		매입<input onclick="getList('P')" type='radio' name="sale" value='P'>
+		매출<input onclick="getList('AS')" type='radio' name="sale" value='AS'>
+		매입<input onclick="getList('AP')" type='radio' name="sale" value='AP'>
 	
 		<!-- <form action="rest/saleinsert" method="post"> -->
 		<form id="saleInfo">

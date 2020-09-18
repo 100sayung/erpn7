@@ -35,10 +35,10 @@ style>body, td, th, select, textarea {
 <body>
 	<div id="mainhead" class="main">
 		<br>
-		<form id="code">
-					<input type="text" name="c_code">
+		<!-- <form id="code"> -->
+					<input type="text" id="code">
 					<button type="button" id="codesearch">코드검색</button>
-	                    </form>
+	                    <!-- </form> -->
 	                    <button type="button" id="Alllist">전체리스트</button>
 				        
 	                    <button type="button" id="delete">삭제</button>
@@ -56,40 +56,40 @@ style>body, td, th, select, textarea {
 				<tbody>
 					<tr>
 						<th class="th1">거래처코드</th>
-						<td class="th2"><input type="text" name="c_code"
+						<td class="th2"><input type="text" name="cl_code"
 							class="noline00"
 							style="width: 45px; background: #FFFFFF;"></td>
 						<th class="th3">거래처명</th>
-						<td class="th4"><input type="text" name="c_name"
+						<td class="th4"><input type="text" name="cl_name"
 							class="noline00"
 							style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"></td>
 					</tr>
 					<tr>
 						<th class="th1">사업자번호</th>
 						<td class="th2"><input type="text" autocomplete="off"
-							name="c_comnum" class="nolineEx"></td>
+							name="cl_comnum" class="nolineEx"></td>
 						<th class="th3">대표자명</th>
-						<td class="th4"><input type="text" name="c_ceo"
+						<td class="th4"><input type="text" name="cl_ceo"
 							class="noline00"
 							style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"></td>
 					</tr>
 					<tr>
 						<th class="th1">담당자명</th>
-						<td class="th2"><input type="text" name="c_employee"
+						<td class="th2"><input type="text" name="cl_employee"
 							class="noline00"
 							style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"></td>
 						<th class="th3">전화번호</th>
-						<td class="th4"><input type="text" name="c_phone"
+						<td class="th4"><input type="text" name="cl_phone"
 							class="noline00"
 							style="width: 145px; background: #FFFFFF;"></td>
 					</tr>
 					<tr>
 						<th class="th1">핸드폰번호</th>
-						<td class="th2"><input type="text" name="c_phone2"
+						<td class="th2"><input type="text" name="cl_phone2"
 							class="noline00"
 							style="width: 145px; background: #FFFFFF;"></td>
 						<th class="th3">팩스번호</th>
-						<td class="th4"><input type="text" name="c_fax"
+						<td class="th4"><input type="text" name="cl_fax"
 							class="noline00"
 							style="width: 145px; background: #FFFFFF;" value=""></td>
 					</tr>
@@ -97,13 +97,13 @@ style>body, td, th, select, textarea {
 
 						<th class="th3">email</th>
 						<td class="th4"><input type="text" autocomplete="off"
-							name="c_email" class="noline00"
+							name="cl_email" class="noline00"
 							style="ime-mode: inactive; width: 145px; background: #FFFFFF;"
 							value=""></td>
 					</tr>
 					<tr>
 						<th class="th1">우편번호</th>
-						<td class="th2"><input type="text" name="c_addrnum"
+						<td class="th2"><input type="text" name="cl_addrnum"
 							class="noline00"
 							style="width: 80px; background: #FFFFFF;"></td>
 
@@ -112,43 +112,43 @@ style>body, td, th, select, textarea {
 
 					<tr>
 						<th class="th1">주소</th>
-						<td colspan="3"><input type="text" name="c_addr"
+						<td colspan="3"><input type="text" name="cl_addr"
 							class="noline00"
 							style="width: 380px; background: #FFFFFF; -ms-ime-mode: active;"><br>
 						</td>
 					</tr>
 					<tr>
 						<th class="th1">업태</th>
-						<td class="th2"><input type="text" name="c_kind"
+						<td class="th2"><input type="text" name="cl_kind"
 							class="noline00"
 							style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"></td>
 						<th class="th3">종목</th>
-						<td class="th4"><input type="text" name="c_kind2"
+						<td class="th4"><input type="text" name="cl_kind2"
 							class="noline00"
 							style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"></td>
 					</tr>
 					<tr>
 						<th class="th1">거래은행</th>
-						<td class="th2"><input type="text" name="c_bank"
+						<td class="th2"><input type="text" name="cl_bank"
 							class="noline00"
 							style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"></td>
 						<th class="th3">예금주</th>
-						<td class="th4"><input type="text" name="c_bankholder"
+						<td class="th4"><input type="text" name="cl_bankholder"
 							class="noline00"
 							style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"></td>
 					</tr>
 					<tr>
 						<th class="th1">계좌번호</th>
-						<td><input type="text" name="c_banknum"
+						<td><input type="text" name="cl_banknum"
 							class="noline00" style="width: 145px; background: #FFFFFF;"></td>
 						<th>종사업장번호</th>
-						<td><input type="text" name="c_comnum2"
+						<td><input type="text" name="cl_comnum2"
 							class="noline00" style="width: 145px; background: #FFFFFF;"></td>
 					</tr>
 					<tr>
 						<th class="th1">유형</th>
 						<td class="th2" style="padding-left: 10px;"><select
-							name="c_kind3" class="select1"
+							name="cl_kind3" class="select1"
 							style="width: 60px;">
 								<option value="">--</option>
 								<option value="매출">매출</option>
@@ -159,7 +159,7 @@ style>body, td, th, select, textarea {
 
 					<tr>
 						<th class="th1">메모</th>
-						<td colspan="3"><textarea name="c_memo"
+						<td colspan="3"><textarea name="cl_memo"
 								style="width: 380px; height: 75px; background: #FFFFFF; -ms-ime-mode: active;"></textarea></td>
 					</tr>
 				</tbody>
@@ -184,13 +184,13 @@ style>body, td, th, select, textarea {
 				List+="<tr><th><input name='Allcheck' type='checkbox'></th><th>코드</th><th>거래처명</th><th>사업자(주민)번호</th><th>대표자명</th><th>업태</th><th>유형</th></tr>";
 				for ( var i in data.aList) {
 					List+="<tr>";
-					List+="<td><input type='checkbox' name='reportChkBxRow' value="+data.aList[i].c_code+"></td>";
-					List+="<td>" + data.aList[i].c_code + "</td>";
-					List+="<td>" + data.aList[i].c_name + "</td>";
-					List+="<td>" + data.aList[i].c_comnum + "</td>";
-				    List+="<td>" + data.aList[i].c_ceo + "</td>";
-					List+="<td>" + data.aList[i].c_kind + "</td>";
-					List+="<td>" + data.aList[i].c_kind3 + "</td>";
+					List+="<td><input type='checkbox' name='reportChkBxRow' value="+data.aList[i].cl_code+"></td>";
+					List+="<td>" + data.aList[i].cl_code + "</td>";
+					List+="<td>" + data.aList[i].cl_name + "</td>";
+					List+="<td>" + data.aList[i].cl_comnum + "</td>";
+				    List+="<td>" + data.aList[i].cl_ceo + "</td>";
+					List+="<td>" + data.aList[i].cl_kind + "</td>";
+					List+="<td>" + data.aList[i].cl_kind3 + "</td>";
 					List+="</tr>";
 				}
                  $("#Tbody").html(List);
@@ -204,14 +204,12 @@ style>body, td, th, select, textarea {
 	});
 
 	$("#codesearch").click(function() {
-		var obj = $("#code").serialize();
-		var json = JSON.stringify(obj);
-		console.log(json);
+		var code = $("#code").val();
+		console.log(code);
 						$.ajax({
 									url : '/erp/rest/Account/searchcode',
 									type : 'post',
-									contentType : 'application/json; charset=UTF-8',
-									data : json,
+									data : {code:code},
 									dataType : 'json',
 									success : function(data) {
 									
@@ -220,13 +218,13 @@ style>body, td, th, select, textarea {
 										List+="<tr><th><input type='checkbox'></th><th>코드</th><th>거래처명</th><th>사업자(주민)번호</th><th>대표자명</th><th>업태</th><th>유형</th></tr>";
 										for ( var i in data.aList) {
 											List+="<tr>";
-											List+="<td><input type='checkbox' name='reportChkBxRow' value="+data.aList[i].c_code+"></td>";
-											List+="<td>" + data.aList[i].c_code + "</td>";
-											List+="<td>" + data.aList[i].c_name + "</td>";
-											List+="<td>" + data.aList[i].c_comnum + "</td>";
-										    List+="<td>" + data.aList[i].c_ceo + "</td>";
-											List+="<td>" + data.aList[i].c_kind + "</td>";
-											List+="<td>" + data.aList[i].c_kind3 + "</td>";
+											List+="<td><input type='checkbox' name='reportChkBxRow' value="+data.aList[i].cl_code+"></td>";
+											List+="<td>" + data.aList[i].cl_code + "</td>";
+											List+="<td>" + data.aList[i].cl_name + "</td>";
+											List+="<td>" + data.aList[i].cl_comnum + "</td>";
+										    List+="<td>" + data.aList[i].cl_ceo + "</td>";
+											List+="<td>" + data.aList[i].cl_kind + "</td>";
+											List+="<td>" + data.aList[i].cl_kind3 + "</td>";
 											List+="</tr>";
 										}
 						                 $("#Tbody").html(List);
@@ -253,13 +251,13 @@ style>body, td, th, select, textarea {
 										List+="<tr><th><input type='checkbox'></th><th>코드</th><th>거래처명</th><th>사업자(주민)번호</th><th>대표자명</th><th>업태</th><th>유형</th></tr>";
 										for ( var i in data.aList) {
 											List+="<tr>";
-											List+="<td><input  type='checkbox' name='reportChkBxRow' value="+data.aList[i].c_code+"></td>";
-											List+="<td>" + data.aList[i].c_code + "</td>";
-											List+="<td>" + data.aList[i].c_name + "</td>";
-											List+="<td>" + data.aList[i].c_comnum + "</td>";
-										    List+="<td>" + data.aList[i].c_ceo + "</td>";
-											List+="<td>" + data.aList[i].c_kind + "</td>";
-											List+="<td>" + data.aList[i].c_kind3 + "</td>";
+											List+="<td><input  type='checkbox' name='reportChkBxRow' value="+data.aList[i].cl_code+"></td>";
+											List+="<td>" + data.aList[i].cl_code + "</td>";
+											List+="<td>" + data.aList[i].cl_name + "</td>";
+											List+="<td>" + data.aList[i].cl_comnum + "</td>";
+										    List+="<td>" + data.aList[i].cl_ceo + "</td>";
+											List+="<td>" + data.aList[i].cl_kind + "</td>";
+											List+="<td>" + data.aList[i].cl_kind3 + "</td>";
 											List+="</tr>";
 										}
 						                 $("#Tbody").html(List);
@@ -295,13 +293,13 @@ style>body, td, th, select, textarea {
 						List+="<tr><th><input type='checkbox'></th><th>코드</th><th>거래처명</th><th>사업자(주민)번호</th><th>대표자명</th><th>업태</th><th>유형</th></tr>";
 						for ( var i in data.aList) {
 							List+="<tr>";
-							List+="<td><input  type='checkbox' name='reportChkBxRow' value="+data.aList[i].c_code+"></td>";
-							List+="<td>" + data.aList[i].c_code + "</td>";
-							List+="<td>" + data.aList[i].c_name + "</td>";
-							List+="<td>" + data.aList[i].c_comnum + "</td>";
-						    List+="<td>" + data.aList[i].c_ceo + "</td>";
-							List+="<td>" + data.aList[i].c_kind + "</td>";
-							List+="<td>" + data.aList[i].c_kind3 + "</td>";
+							List+="<td><input  type='checkbox' name='reportChkBxRow' value="+data.aList[i].cl_code+"></td>";
+							List+="<td>" + data.aList[i].cl_code + "</td>";
+							List+="<td>" + data.aList[i].cl_name + "</td>";
+							List+="<td>" + data.aList[i].cl_comnum + "</td>";
+						    List+="<td>" + data.aList[i].cl_ceo + "</td>";
+							List+="<td>" + data.aList[i].cl_kind + "</td>";
+							List+="<td>" + data.aList[i].cl_kind3 + "</td>";
 							List+="</tr>";
 						}
 		                 $("#Tbody").html(List);
