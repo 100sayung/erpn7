@@ -132,6 +132,23 @@ text-align: center;
 </body>
 <script>
 
+
+ $(document).ready(function(){
+	$.ajax({
+		url:'/erp/rest/Account/getMyInfo',
+		type:'get',
+		datatype:'json',
+		success:function(data){
+			console.log(data);
+		},
+		error:function(error){
+			console.log(error);
+		}
+	});
+	 
+ });
+ 
+
 $("#commit").click(function(){
 	var data = $("#formdata").serialize();
 	$.ajax({
@@ -182,7 +199,7 @@ $("#time").val(time.toLocaleDateString()+time.toLocaleTimeString());
 				str +="<input style='width:50px;' type='text' name='rs_apname"+i+"' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
 			}
 			console.log(str)
-			$("#line").html(str);
+			$("#line").append(str);
 		};
 		/* if (data.tList2 != "") {
 			for ( var i in data.tList2) {

@@ -15,7 +15,7 @@ import com.n7.erp.dao.AccountDao;
 import com.google.gson.Gson;
 import com.n7.erp.bean.ac.A_company;
 import com.n7.erp.bean.ac.ApprovalDocument;
-import com.n7.erp.bean.ac.Approvaldocu;
+import com.n7.erp.bean.ApprovalDocu;
 import com.n7.erp.bean.ac.SaleInfo;
 import com.n7.erp.bean.ac.myCompany;
 import com.n7.erp.bean.ac.approvalLine;
@@ -445,11 +445,26 @@ public class AccountMM {
 		return sMap;
 	}
 
-	public Map<String, List<Approvaldocu>> comparecode(String code) {
-		Map<String, List<Approvaldocu>> sMap=null;
-		List<Approvaldocu> sList=null;
+	public Map<String, List<ApprovalDocu>> comparecode(String code) {
+		Map<String, List<ApprovalDocu>> sMap=null;
+		List<ApprovalDocu> sList=null;
 
 		sList=aDao.comparecode(code);
+		System.out.println(sList);
+		if(sList!=null) {
+			sMap=new HashMap<>();
+			sMap.put("sList", sList);
+		}else {
+			sMap=null;
+		}
+		return sMap;
+	}
+
+	public Map<String, List<approvalLine>> getMyInfo(HttpSession session) {
+		Map<String, List<approvalLine>> sMap=null;
+		List<approvalLine> sList=null;
+		String code = session.getAttribute("hrCode").toString();
+		sList=aDao.getMyInfo(code);
 		System.out.println(sList);
 		if(sList!=null) {
 			sMap=new HashMap<>();

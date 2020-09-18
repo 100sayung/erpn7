@@ -5,11 +5,11 @@
 <mapper namespace="com.n7.erp.dao.AccountDao">
 <insert id="saleinsert" parameterType="saleInfo">
 	INSERT INTO AC_SALESTATEMENT
-	VALUES(#{s_num}||LPAD(AC_REALSALESTATEMENT_SEQ.NEXTVAL,4,0),#{s_ccode},#{s_kind},#{s_comnum},DEFAULT,#{s_employee},#{s_clcode},#{s_company})
+	VALUES(#{s_num}||LPAD(AC_REALSALESTATEMENT_SEQ.NEXTVAL,6,0),#{s_ccode},#{s_kind},#{s_comnum},DEFAULT,#{s_employee},#{s_clcode},#{s_company})
 	</insert>
 <insert id="saleinsert2" parameterType="String">
 	INSERT INTO AC_SALESTATEMENTLIST
-	VALUES(#{s_num}||LPAD(AC_REALSALESTATEMENT_SEQ.CURRVAL,4,0),#{s_ccode},#{s_cnt},#{s_pkind},#{s_tax},#{s_price},#{s_price2},
+	VALUES(#{s_num}||LPAD(AC_REALSALESTATEMENT_SEQ.CURRVAL,6,0),#{s_ccode},#{s_cnt},#{s_pkind},#{s_tax},#{s_price},#{s_price2},
 	#{s_memo},#{s_total})
 	</insert>
 
@@ -81,6 +81,9 @@
 	SELECT * FROM MLIST  WHERE M_NAME=#{name}
 	</select>
 
+	<select id="addApproval" parameterType="String" resultType="Line">
+	SELECT * FROM MLIST  WHERE HC_HRCODE=#{code}
+	</select>
 	<select id="addApproval" parameterType="String" resultType="Line">
 	SELECT * FROM MLIST  WHERE HC_HRCODE=#{code}
 	</select>

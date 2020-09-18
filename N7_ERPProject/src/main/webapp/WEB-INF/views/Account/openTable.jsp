@@ -67,7 +67,7 @@ float: left;
 		style="width: auto; background-color: white-space; color: white; padding: 1%;">
 		<span style="padding-left: 5px"><a href="#" onclick="saleinsert()"><button>매출/매입등록</button></a></span>
 		<span style="padding-left: 5px"><a href="#"
-			onclick="window.open('comPany','comlist','width=1400,height=700')"><button>거래처등록</button></a></span>
+			onclick="window.open('comPany','comlist','width=1350,height=500')"><button>거래처등록</button></a></span>
 		<span style="padding-left: 5px"><button id="getList">매출/매입조회</button></span>
 		<span style="padding-left: 5px"><button id="taxbill">세금계산서인쇄</button></span>
 		<span style="padding-left: 5px"><button id="saledetails">거래명세표인쇄</button></span>
@@ -186,7 +186,7 @@ $("#search2").click(function(){
 			var str = '';
 			str += "<tr id='colume'><td>체크</td><td>전표번호</td><td>유형</td><td>거래처명</td><td>사업자번호</td><td>입력날짜</td><td>입력자</td></tr>"
 			for ( var i in data.sList) {
-				str += "<tr><td><input name='checknum' type='checkbox' class='check' value='"+data.sList[i].s_num+"'></td>";
+				str += "<tr><td><input name='checknum' type='radio' class='check' value='"+data.sList[i].s_num+"'></td>";
 				str += "<td><input class='data2' type='text' name='s_num' value="+data.sList[i].s_num+"></td>";
 				str += "<td><input class='data2' type='text' name='s_kind' value="+data.sList[i].s_kind+"></td>";
 				str += "<td><input class='data2' type='text' name='s_company' value="+data.sList[i].s_company+"></td>";
@@ -276,7 +276,7 @@ $("#approval").click(function(){
 $("#addList").click(function() {
 					var str = '';
 					for (var i = 0; i < $("#qty").val(); i++) {
-						str += "<tr><td><input type='checkbox' class='check'></td>"
+						str += "<tr><td><input type='radio' class='check'></td>"
 						str += "<td><input class='data' type='text' name='s_pkind'/></td>"
 						str += "<td><input class='data' type='text' name='s_cnt'/></td>"
 						str += "<td><input class='data' type='text' name='s_price'/></td>"
@@ -362,7 +362,7 @@ $("#addList").click(function() {
 						var str = '';
 						str += "<tr id='colume'><td>체크</td><td>전표번호</td><td>유형</td><td>거래처명</td><td>사업자번호</td><td>입력날짜</td><td>입력자</td></tr>"
 						for ( var i in data.sList) {
-							str += "<tr><td><input name='checknum' type='checkbox' class='check' value='"+data.sList[i].s_num+"'></td>";
+							str += "<tr><td><input name='checknum' type='radio' class='check' value='"+data.sList[i].s_num+"'></td>";
 							str += "<td><input class='data2' type='text' name='s_num' value="+data.sList[i].s_num+"></td>";
 							str += "<td><input class='data2' type='text' name='s_kind' value="+data.sList[i].s_kind+"></td>";
 							str += "<td><input class='data2' type='text' name='s_company' value="+data.sList[i].s_company+"></td>";
@@ -389,7 +389,7 @@ $("#addList").click(function() {
 										var str = '';
 										str += "<tr id='colume'><td>체크</td><td>전표번호</td><td>유형</td><td>거래처명</td><td>사업자번호</td><td>입력날짜</td><td>입력자</td></tr>"
 										for ( var i in data.sList1) {
-											str += "<tr><td><input name='checknum' type='checkbox' class='check' value='"+data.sList1[i].s_num+"' readonly></td>"
+											str += "<tr><td><input name='checknum' type='radio' class='check' value='"+data.sList1[i].s_num+"' readonly></td>"
 											str += "<td><input class='data2' type='text' name='s_num' value="+data.sList1[i].s_num+" readonly></td>"
 											str += "<td><input class='data2' type='text' name='s_kind' value="+data.sList1[i].s_kind+" readonly></td>"
 											//str += "<td><input class='data2' type='text' name='s_pkind' value="+data.sList[i].s_pkind+"></td>"
@@ -444,7 +444,7 @@ $("#addList").click(function() {
 											var str = '';
 											str += "<tr id='colume'><td>체크</td><td>전표번호</td><td>유형</td><td>거래처명</td><td>사업자번호</td><td>입력날짜</td><td>입력자</td></tr>"
 											for ( var i in data.sList) {
-												str += "<tr><td><input name='checknum' type='checkbox' class='check' value='"+data.sList[i].s_num+"'></td>";
+												str += "<tr><td><input name='checknum' type='radio' class='check' value='"+data.sList[i].s_num+"'></td>";
 												str += "<td><input class='data2' type='text' name='s_num' value="+data.sList[i].s_num+"></td>";
 												str += "<td><input class='data2' type='text' name='s_kind' value="+data.sList[i].s_kind+"></td>";
 												str += "<td><input class='data2' type='text' name='s_company' value="+data.sList[i].s_company+"></td>";
