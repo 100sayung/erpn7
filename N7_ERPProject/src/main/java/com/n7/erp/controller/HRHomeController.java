@@ -37,8 +37,8 @@ public class HRHomeController {
 	@Autowired private HRDepartmentMM dm;
 	@Autowired private HrMM hm;
 	@Autowired private MemberMM mm;
-	
-	//인사카드 세부정보 페이지로 이동 
+
+	//인사카드 세부정보 페이지로 이동
 	@GetMapping(value="/hr/hrModifyDetail")
 	public ModelAndView moveModifyDetail(@RequestParam String id) {
 		mav.setViewName("/hr/hrModifyDetail");
@@ -68,31 +68,34 @@ public class HRHomeController {
 		hm.registHRCard(hrCard, id, session.getAttribute("cCode").toString());
 		return "redirect:/hr/hrModifyDetail?id="+id;
 	}
-	
+
 	//인사카드 페이지로 이동
 	@GetMapping(value="/hr/movehrcardpage")
 	public ModelAndView moveHrCard(HttpSession session) {
 		mav = hm.hrCard(session);
 		return mav;
 	}
-	
+
 	//사원출결조회 페이지로 이동
 	@GetMapping(value = "/hr/attendance")
-	public String moveAttendance() {
-		return "/hr/attendance";
+	public ModelAndView moveAttendance(HttpSession session) {
+		mav = hm.checkMemberHrCard(session, "/hr/attendance");
+		return mav;
 	}
 	//근무조회 페이지로 이동
 	@GetMapping(value = "/hr/employeestatus")
-	public String moveEmployeeStatus() {
-		return "/hr/employeestatus";
+	public ModelAndView moveEmployeeStatus(HttpSession session) {
+		mav = hm.checkMemberHrCard(session, "/hr/employeestatus");
+		return mav;
 	}
 	//휴/퇴직 관리 페이지로 이동
 	@GetMapping(value="/hr/retiremm")
-	public String moveRetireMM() {
-		return "/hr/retiremm";
+	public ModelAndView moveRetireMM(HttpSession session) {
+		mav = hm.checkMemberHrCard(session, "/hr/retiremm");
+		return mav;
 	}
-	
-	
+
+
 	@RequestMapping(value = "/hr/deptregistpage", method = RequestMethod.GET)
 	public String deptregistpage() {
 		logger.info("부서 등록페이지 이동");
@@ -163,13 +166,18 @@ public class HRHomeController {
 		System.out.println("넘어온 값=" + duction);
 		return duction;
 	}
-	
-	
+
+
 	//휴가신청
 	@PostMapping(value="/hr/applyholiday")
 	public ModelAndView applyHoliday(ApplyHoliday apholi, HttpSession session) {
 		mav = hm.applyHoliday(apholi, session);
 		return mav;
 	}
-	
+
+	@GetMapping(value="/hr/receiptholiday")
+	public String moveReceiptHoliady() {
+		return "/hr/receiptholiday";
+	}
+
 }

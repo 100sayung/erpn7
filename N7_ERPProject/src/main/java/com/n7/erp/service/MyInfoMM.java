@@ -16,28 +16,32 @@ import com.n7.erp.dao.IMemberDao;
 @Service
 public class MyInfoMM {
 
-	@Autowired IMemberDao mDao;
-	@Autowired IHrDao hDao;
-	
+	@Autowired
+	IMemberDao mDao;
+	@Autowired
+	IHrDao hDao;
+
 	public String getMyInfo(HttpSession session) {
 		String id = session.getAttribute("id").toString();
-		
+
 		Member mb = mDao.getMemberDetail(id);
-		HR_Card hrCard = hDao.getHrCardDetail(id);
 		HashMap<String, String> infoMap = new HashMap<String, String>();
 		infoMap.put("name", mb.getM_name());
-		infoMap.put("birth",mb.getM_birth());
-		infoMap.put("email",mb.getM_email());
-		infoMap.put("phonenum",mb.getM_phonenum());
-		infoMap.put("photo",mb.getM_photo());
-		infoMap.put("address",mb.getM_address());
-		infoMap.put("cCode",hrCard.getHc_ccode());
-		infoMap.put("dept",hrCard.getHc_dept());
-		infoMap.put("position",hrCard.getHc_position());
-		infoMap.put("joindate",hrCard.getHc_joindate());
-		infoMap.put("status",hrCard.getHc_status());
-		infoMap.put("work",hrCard.getHc_work());
-		
+		infoMap.put("birth", mb.getM_birth());
+		infoMap.put("email", mb.getM_email());
+		infoMap.put("phonenum", mb.getM_phonenum());
+		infoMap.put("photo", mb.getM_photo());
+		infoMap.put("address", mb.getM_address());
+
+		if (hDao.haveHRCodeFromId(id)) {
+			HR_Card hrCard = hDao.getHrCardDetail(id);
+			infoMap.put("cCode", hrCard.getHc_ccode());
+			infoMap.put("dept", hrCard.getHc_dept());
+			infoMap.put("position", hrCard.getHc_position());
+			infoMap.put("joindate", hrCard.getHc_joindate());
+			infoMap.put("status", hrCard.getHc_status());
+			infoMap.put("work", hrCard.getHc_work());
+		}
 		String result = new Gson().toJson(infoMap);
 		return result;
 	}

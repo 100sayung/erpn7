@@ -64,7 +64,7 @@ ul {
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
 				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="#">회계 관리</a></li>
+				<li><a href="/erp/Account/acerp">회계 관리</a></li>
 			</ul>
 		</div>
 	</div>
@@ -79,7 +79,7 @@ ul {
 
 			<li id="showMenu2">근태 관리
 				<ul id="smallMenu2" style="display: none;">
-					<li><a href="/erp/hr/applyholiday">휴가 접수</a></li>
+					<li><a href="/erp/hr/receiptholiday">휴가 접수</a></li>
 					<li><a href="/erp/hr/attendance">사원 출결 관리</a></li>
 					<li><a href="/erp/hr/employeestatus">근무 조회</a></li>
 					<li><a href="/erp/hr/retiremm">휴/퇴직 관리</a></li>
@@ -94,11 +94,11 @@ ul {
 			</li>
 		</ul>
 	</div>
-	<div id="description"> 본 화면  
-	
-	<br> 임시페이지 
+	<div id="description"> 본 화면
+
+	<br> 임시페이지
 	<a href="/erp/management/deptauth"> dept 권한 설정 </a>
-	
+
 	</div>
 	<script>
 		$("#showMenu1").hover(function() {
@@ -116,7 +116,7 @@ ul {
 		}, function() {
 			$("#smallMenu3").attr("style", "display:none");
 		})
-		
+
 	</script>
 </body>
 </html>

@@ -84,7 +84,7 @@ ul {
 	</div>
 	<div id="description"> 내 휴가 보기</div>
 	<script>
-	
+
 	$(document).ready(function() {
 		$.ajax({
 			url : "/erp/rest/myinfo/myholiday",
@@ -97,6 +97,30 @@ ul {
 			}
 		});
 	});
+	function detail(docunum){
+		console.log(docunum);
+
+		$.ajax({
+			url:"/erp/rest/hr/detailholiday",
+			data:{docunum : docunum},
+			dataType:"json",
+			method:"get",
+			success : function(data){
+				console.log(data);
+				let str = ""
+				str += data.hap_docuname + "<br>";
+				str += data.hap_startday + "부터 " +data.hap_endday + "까지 <br>";
+				str += data.hap_status + "(0:대기 1:승인 2:반려)<br>";
+				str += data.hap_reason + "<br>";
+				str += data.hap_toapprover + "에게 " + data.hap_fromapprover + " 보냄<br>";
+				str += data.hap_applydate + "(신청일) " + data.hap_type + "(타입)";
+				$("#detail").html(str);
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+
+	}
 	</script>
 </body>
 </html>
