@@ -22,12 +22,7 @@ import com.n7.erp.bean.hr.Department;
 import com.n7.erp.bean.hr.HR_Card;
 import com.n7.erp.service.HRDepartmentMM;
 import com.n7.erp.service.HrMM;
-import com.n7.erp.service.MemberMM;
 
-import lombok.Getter;
-import lombok.extern.log4j.Log4j;
-
-@Log4j
 @Controller
 public class HRHomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -36,7 +31,6 @@ public class HRHomeController {
 
 	@Autowired private HRDepartmentMM dm;
 	@Autowired private HrMM hm;
-	@Autowired private MemberMM mm;
 
 	//인사카드 세부정보 페이지로 이동
 	@GetMapping(value="/hr/hrModifyDetail")
