@@ -43,12 +43,12 @@ public class PurchaseController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "Purchase/approvalLine", method = RequestMethod.GET)
-	   public ModelAndView approvalLine() {
-	      mav=pm.approvalLine();
-	      return mav;
-	}
-	
+//	@RequestMapping(value = "Purchase/approvalLine", method = RequestMethod.GET)
+//	   public ModelAndView approvalLine() {
+//	      mav=pm.approvalLine();
+//	      return mav;
+//	}
+//	
 	@RequestMapping(value = "Purchase/returnregistration", method = RequestMethod.GET)
 	public String returnregistration() {
 		return "Purchase/returnregistration";

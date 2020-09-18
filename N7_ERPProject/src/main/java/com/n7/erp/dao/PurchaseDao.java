@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import com.n7.erp.bean.IePort;
 import com.n7.erp.bean.Purchase;
-import com.n7.erp.bean.approvalLine;
 import com.n7.erp.bean.ps.PurchaseApproval;
 import com.n7.erp.bean.ps.Purchasebean;
 import com.n7.erp.bean.ps.Return;
@@ -40,16 +39,16 @@ public interface PurchaseDao {
 	Purchasebean pBring(String check);
 
 	List<Purchasebean> pProgram(String check);
-
-	com.n7.erp.bean.approvalLine approLinecom1(String code01);
-
-	com.n7.erp.bean.approvalLine approLinecom2(String code02);
-
-	List<approvalLine> approvalLine();
-
-	List<approvalLine> searchName(String name);
-
-	List<approvalLine> addApproval(String name);
+//
+//	com.n7.erp.bean.approvalLine approLinecom1(String code01);
+//
+//	com.n7.erp.bean.approvalLine approLinecom2(String code02);
+//
+//	List<approvalLine> approvalLine();
+//
+//	List<approvalLine> searchName(String name);
+//
+//	List<approvalLine> addApproval(String name);
 
 	boolean Approval(PurchaseApproval pa);
 

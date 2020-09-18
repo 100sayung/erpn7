@@ -1,4 +1,4 @@
-spackage com.n7.erp.controller;
+package com.n7.erp.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -53,37 +53,37 @@ public class PurchaseRestController {
 		Map<String, List<Purchasebean>> pMap= pm.pfdelete(check_list);
 		return pMap;
 	}
-	
-	@PostMapping(value = "/Purchase/addApproval",produces="application/json;charset=utf-8" )
-	public Map<String, List<approvalLine>> addApprovale(String CNT, String ARR) {
-	     int cnt = Integer.parseInt(CNT);
-	     String [] strArray = ARR.split(",");
-	     Map<String, List<approvalLine>> aMap=pm.addApproval(cnt,strArray);
-	     return aMap;
-	}
-	
-	@PostMapping(value = "/Purchase/approLinecom",produces="application/json;charset=utf-8")
-	public Map<String, List<approvalLine>> approLinecom(String code1, String code2) {
-	     String [] code01 = code1.split(",");
-	     String [] code02 = code2.split(",");
-	      
-	     System.out.println(code01[0]);
-	     System.out.println(code02[0]);
-	     Map<String, List<approvalLine>> aMap=pm.approLinecom(code01, code02);
-	     return aMap;
-	}
-	
-	@PostMapping(value = "/Purchase/searchName",produces="application/json;charset=utf-8" )
-	public Map<String, List<approvalLine>> searchName(String name) {
-	     Map<String, List<approvalLine>> aMap=pm.searchName(name);
-	     return aMap;
-	}
-	
-	@PostMapping(value = "/Purchase/pprogramwrite")
-	public ModelAndView pprogramwrite(HttpServletRequest request, PurchaseApproval pa) {
-		mav= pm.pprogramwrite(request, pa);
-		return mav;
-	}
+//	
+//	@PostMapping(value = "/Purchase/addApproval",produces="application/json;charset=utf-8" )
+//	public Map<String, List<approvalLine>> addApprovale(String CNT, String ARR) {
+//	     int cnt = Integer.parseInt(CNT);
+//	     String [] strArray = ARR.split(",");
+//	     Map<String, List<approvalLine>> aMap=pm.addApproval(cnt,strArray);
+//	     return aMap;
+//	}
+//	
+//	@PostMapping(value = "/Purchase/approLinecom",produces="application/json;charset=utf-8")
+//	public Map<String, List<approvalLine>> approLinecom(String code1, String code2) {
+//	     String [] code01 = code1.split(",");
+//	     String [] code02 = code2.split(",");
+//	      
+//	     System.out.println(code01[0]);
+//	     System.out.println(code02[0]);
+//	     Map<String, List<approvalLine>> aMap=pm.approLinecom(code01, code02);
+//	     return aMap;
+//	}
+//	
+//	@PostMapping(value = "/Purchase/searchName",produces="application/json;charset=utf-8" )
+//	public Map<String, List<approvalLine>> searchName(String name) {
+//	     Map<String, List<approvalLine>> aMap=pm.searchName(name);
+//	     return aMap;
+//	}
+//	
+//	@PostMapping(value = "/Purchase/pprogramwrite")
+//	public ModelAndView pprogramwrite(HttpServletRequest request, PurchaseApproval pa) {
+//		mav= pm.pprogramwrite(request, pa);
+//		return mav;
+//	}
 	
 	@PostMapping(value = "/Purchase/rRegistration")
 	public ModelAndView rRegistration(Return rt) {

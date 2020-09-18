@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.n7.erp.bean.ps.PurchaseApproval;
 import com.n7.erp.bean.ps.Purchasebean;
 import com.n7.erp.bean.ps.Return;
 import com.n7.erp.dao.PurchaseDao;
@@ -136,91 +137,91 @@ public class PurchaseMM {
 		mav.setViewName(view);
 		return mav;
 	}
-	
-	public Map<String, List<approvalLine>> searchName(String name) {
-	      Map<String, List<approvalLine>> aMap=null;
-	      List<approvalLine> aList=null;
-	      if(name!=null) {
-	         aList = pDao.searchName(name);
-	         aMap=new HashMap<>();
-	         aMap.put("aList", aList);
-	      }else {
-	         aMap=null;
-	      }
-	      return aMap;
-	   }
-
-	   public Map<String, List<approvalLine>> addApproval(int cnt, String[] strArray) {
-	      Map<String, List<approvalLine>> aMap=null;
-	      List<approvalLine> aList=null;
-	      System.out.println(cnt);
-	      boolean result=false;
-	      String code="";
-	      for(int i=0; i<cnt; i++) {
-	         approvalLine al = new approvalLine();
-	         code=strArray[i];
-	          aList=pDao.addApproval(code);
-	      }
-	      System.out.println(aList);
-	      if(aList!=null) {
-	         aMap=new HashMap<>();
-	         aMap.put("aList", aList);
-	      }else {
-	         aMap=null;
-	      }
-	      return aMap;
-	   }
-
-	   public Map<String, List<approvalLine>> approLinecom(String[] code01, String[] code02) {
-	      Map<String, List<approvalLine>> aMap=null;
-	      System.out.println(code01[0]);
-	      System.out.println(code02[0]);
-	      
-	      if(code01.length!=0) {
-	            List<approvalLine> tList1 = new ArrayList<>();
-	            List<approvalLine> tList2= new ArrayList<>();
-	            
-	            for(int i=0; i<code01.length; i++) {
-	               approvalLine al = new approvalLine();
-	               al=pDao.approLinecom1(code01[i]); 
-	               tList1.add(al);
-	            }
-	            for(int i=0; i<code02.length; i++) {
-	               approvalLine al = new approvalLine();
-	               al=pDao.approLinecom2(code02[i]); 
-	               tList2.add(al);
-	            }
-	            aMap=new HashMap<>();
-	            System.out.println(tList1);
-	            aMap.put("tList1",tList1);
-	            aMap.put("tList2",tList2);
-	         }else {
-	            
-	            aMap=null;;
-	         }
-	      
-	      return aMap;
-	   
-	   }
-	   
-	   public ModelAndView approvalLine() {
-		   	ModelAndView mav = new ModelAndView();
-		      String view=null;
-		      mav= new ModelAndView();
-		      List<approvalLine> aList = null;
-		      aList=pDao.approvalLine(); 
-		      if(aList.size()!=0) {
-		            mav.addObject("aList",new Gson().toJson(aList));
-		            view="approvalLine";
-		         }else {
-		            
-		             mav.addObject("msg","주소록에 정보가 없습니다");
-		            view="pprogramwrite";
-		         }
-		      
-		      mav.setViewName(view);
-		      return mav;
-		   }
+//	
+//	public Map<String, List<approvalLine>> searchName(String name) {
+//	      Map<String, List<approvalLine>> aMap=null;
+//	      List<approvalLine> aList=null;
+//	      if(name!=null) {
+//	         aList = pDao.searchName(name);
+//	         aMap=new HashMap<>();
+//	         aMap.put("aList", aList);
+//	      }else {
+//	         aMap=null;
+//	      }
+//	      return aMap;
+//	   }
+//
+//	   public Map<String, List<approvalLine>> addApproval(int cnt, String[] strArray) {
+//	      Map<String, List<approvalLine>> aMap=null;
+//	      List<approvalLine> aList=null;
+//	      System.out.println(cnt);
+//	      boolean result=false;
+//	      String code="";
+//	      for(int i=0; i<cnt; i++) {
+//	         approvalLine al = new approvalLine();
+//	         code=strArray[i];
+//	          aList=pDao.addApproval(code);
+//	      }
+//	      System.out.println(aList);
+//	      if(aList!=null) {
+//	         aMap=new HashMap<>();
+//	         aMap.put("aList", aList);
+//	      }else {
+//	         aMap=null;
+//	      }
+//	      return aMap;
+//	   }
+//
+//	   public Map<String, List<approvalLine>> approLinecom(String[] code01, String[] code02) {
+//	      Map<String, List<approvalLine>> aMap=null;
+//	      System.out.println(code01[0]);
+//	      System.out.println(code02[0]);
+//	      
+//	      if(code01.length!=0) {
+//	            List<approvalLine> tList1 = new ArrayList<>();
+//	            List<approvalLine> tList2= new ArrayList<>();
+//	            
+//	            for(int i=0; i<code01.length; i++) {
+//	               approvalLine al = new approvalLine();
+//	               al=pDao.approLinecom1(code01[i]); 
+//	               tList1.add(al);
+//	            }
+//	            for(int i=0; i<code02.length; i++) {
+//	               approvalLine al = new approvalLine();
+//	               al=pDao.approLinecom2(code02[i]); 
+//	               tList2.add(al);
+//	            }
+//	            aMap=new HashMap<>();
+//	            System.out.println(tList1);
+//	            aMap.put("tList1",tList1);
+//	            aMap.put("tList2",tList2);
+//	         }else {
+//	            
+//	            aMap=null;;
+//	         }
+//	      
+//	      return aMap;
+//	   
+//	   }
+//	   
+//	   public ModelAndView approvalLine() {
+//		   	ModelAndView mav = new ModelAndView();
+//		      String view=null;
+//		      mav= new ModelAndView();
+//		      List<approvalLine> aList = null;
+//		      aList=pDao.approvalLine(); 
+//		      if(aList.size()!=0) {
+//		            mav.addObject("aList",new Gson().toJson(aList));
+//		            view="approvalLine";
+//		         }else {
+//		            
+//		             mav.addObject("msg","주소록에 정보가 없습니다");
+//		            view="pprogramwrite";
+//		         }
+//		      
+//		      mav.setViewName(view);
+//		      return mav;
+//		   }
 
 	public ModelAndView pprogramwrite(HttpServletRequest request, PurchaseApproval pa) {
 		ModelAndView mav = new ModelAndView();
