@@ -2,15 +2,13 @@ package com.n7.erp.bean.ps;
 
 import org.apache.ibatis.type.Alias;
 
-import com.n7.erp.bean.Purchase;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 @Data
-@Alias("Purchasebean")
+@Alias("purchase")
 @Accessors(chain = true)
-public class Purchasebean {
+public class Purchase {
 	private String p_documentcode; 
 	private String p_productnum;
 	private String p_ccode; 
@@ -22,4 +20,6 @@ public class Purchasebean {
 	private int p_unlit; 
 	private int p_amount; 
 	private int p_budget; 
+	
+	
 }

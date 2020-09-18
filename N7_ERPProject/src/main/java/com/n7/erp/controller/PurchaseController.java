@@ -10,13 +10,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.n7.erp.service.PurchaseMM;
 
+
 @Controller
 public class PurchaseController {
 	private static final Logger logger = LoggerFactory.getLogger(PurchaseController.class);
-
 	@Autowired
 	PurchaseMM pm;
-	
+
 	ModelAndView mav;
 
 	@RequestMapping(value = "Purchase/erpmain", method = RequestMethod.GET)
@@ -43,11 +43,6 @@ public class PurchaseController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "Purchase/approvalLine", method = RequestMethod.GET)
-	   public ModelAndView approvalLine() {
-	      mav=pm.approvalLine();
-	      return mav;
-	}
 	
 	@RequestMapping(value = "Purchase/returnregistration", method = RequestMethod.GET)
 	public String returnregistration() {

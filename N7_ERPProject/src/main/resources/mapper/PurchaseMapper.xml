@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.n7.erp.dao.PurchaseDao">
 	<insert id="pregistration" parameterType="Purchase">
-		INSERT INTO O_PURCHASELIST VALUES(#{p_documentcode}||LPAD(P_SEQ.CURRVAL,4,0), DEFAULT, #{p_itcode}, #{p_name}, #{p_unlit}, #{p_amount}, #{p_budget})
+		INSERT INTO O_PURCHASELIST VALUES(#{p_documentcode}||LPAD(P_SEQ.CURRVAL,4,0), #{p_ccode}, #{p_itcode}, #{p_name}, #{p_unlit}, #{p_amount}, #{p_budget})
 	</insert>
 	
 	<insert id="pcommom" parameterType="Purchase">
-		INSERT INTO O_PURCHASECOMMOM VALUES(#{p_documentcode}||LPAD(P_SEQ.NEXTVAL,4,0), DEFAULT, #{p_productnum}, #{p_day}, #{p_clcode}, #{p_writer})
-	</insert>
-	
-	<insert id="order" parameterType="Purchase">
-		
+		INSERT INTO O_PURCHASECOMMOM VALUES(#{p_documentcode}||LPAD(P_SEQ.NEXTVAL,4,0), #{p_ccode}, #{p_productnum}, #{p_day}, #{p_clcode}, #{p_writer})
 	</insert>
 	
 	<select id="pFrerence" resultType="Purchase">
@@ -80,19 +75,19 @@
    </select>
    
 	<insert id="Approval" parameterType="Approval" >
-		INSERT INTO APPROVALDOCU VALUES(#{p_docunum}, DEFAULT, #{p_docuname}, #{p_approver0}, #{p_approver1}, DEFAULT, 1)
+		INSERT INTO APPROVALDOCU VALUES(#{p_docunum}, #{p_ccode}, #{p_docuname}, #{p_approver0}, #{p_approver1}, DEFAULT, 1)
 	</insert>
 	
 	<insert id="pApproval1" parameterType="Approval">
-		INSERT INTO O_PURCHASEPROGRAMCOMMOM VALUES(#{p_docunum}, DEFAULT,#{p_docuname}, #{p_clcode}, DEFAULT, #{p_productnum}, #{p_day}, #{p_ect,jdbcType=VARCHAR}, #{p_approver0}, #{p_approver1}, #{p_approver2})
+		INSERT INTO O_PURCHASEPROGRAMCOMMOM VALUES(#{p_docunum}, #{p_ccode}, #{p_docuname}, #{p_clcode}, DEFAULT, #{p_productnum}, #{p_day}, #{p_ect,jdbcType=VARCHAR}, #{p_approver0}, #{p_approver1}, #{p_approver2})
 	</insert>
 	
 	<insert id="pApproval2" parameterType="Approval">
-		INSERT INTO O_PURCHASEPROGRAM VALUES(#{p_docunum}, DEFAULT, #{p_name}, #{p_itcode}, #{p_unlit}, #{p_amount}, #{p_budget})
+		INSERT INTO O_PURCHASEPROGRAM VALUES(#{p_docunum}, #{p_ccode}, #{p_name}, #{p_itcode}, #{p_unlit}, #{p_amount}, #{p_budget})
 	</insert>
 	
 	<insert id="rRegistration" parameterType="Return">
-		INSERT INTO O_RETURN VALUES(#{r_documentcode}||LPAD(R_SEQ.NEXTVAL,4,0), DEFAULT, #{r_ieseqnum}, #{r_itcode}, #{r_clcode}, DEFAULT, #{r_amount}, #{r_unlit}, #{r_budget}, #{r_name}, #{r_reason}, 3)
+		INSERT INTO O_RETURN VALUES(#{r_documentcode}||LPAD(R_SEQ.NEXTVAL,4,0), #{r_ccode}, #{r_ieseqnum}, #{r_itcode}, #{r_clcode}, DEFAULT, #{r_amount}, #{r_unlit}, #{r_budget}, #{r_name}, #{r_reason}, 3)
 	</insert>
 	
 	<select id="rInfo" resultType="Return">
@@ -120,5 +115,4 @@
 			</if>
 		</where>
 	</select>
-	
 </mapper>

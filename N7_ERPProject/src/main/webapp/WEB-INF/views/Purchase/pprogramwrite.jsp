@@ -10,6 +10,9 @@
 html,body{
 text-align: center;
 }
+#pprogramwrite{
+margin-top: 50px;
+}
 #table, tr, th, td{
 border: 1px solid silver;
 text-align: center;

@@ -1,6 +1,5 @@
 package com.n7.erp.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,16 +11,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.n7.erp.bean.ps.Purchasebean;
+import com.n7.erp.bean.ps.Purchase;
+import com.n7.erp.bean.ps.PurchaseApproval;
 import com.n7.erp.bean.ps.Return;
 import com.n7.erp.dao.PurchaseDao;
 
 @Component
 public class PurchaseMM {
+	
 	@Autowired
-	private PurchaseDao pDao;
+	PurchaseDao pDao;
 
-	public ModelAndView pregistration(HttpServletRequest request, Purchasebean ps) {
+	public ModelAndView pregistration(HttpServletRequest request, Purchase ps) {
 		ModelAndView mav = new ModelAndView();
 		boolean a = false;
 		boolean b = false;
@@ -41,19 +42,19 @@ public class PurchaseMM {
 			b= pDao.pregistration(ps); 
 		}
 		if(a&&b) {
-			view = "/pregistrationfrm";
+			view = "/erp/Purchase/pregistration";
 			mav.addObject("msg", "데이터입력완료");
 		} else {
-			view = "/pregistrationfrm";
+			view = "/erp/Purhcase/pregistration";
 			mav.addObject("msg", "데이터입력 실패");
 		}
 		mav.setViewName(view);
 		return mav;
 	}
 
-	public Map<String, List<Purchasebean>> pFrerence() {
-		Map<String, List<Purchasebean>> pMap = null;
-		List<Purchasebean> pList = pDao.pFrerence();
+	public Map<String, List<Purchase>> pFrerence() {
+		Map<String, List<Purchase>> pMap = null;
+		List<Purchase> pList = pDao.pFrerence();
 		if (pList != null) {
 			pMap = new HashMap<>();
 			pMap.put("pList", pList);
@@ -64,9 +65,9 @@ public class PurchaseMM {
 		return pMap;
 	}
 
-	public Map<String, List<Purchasebean>> pfsearch(String search, String choice) {
-		Map<String, List<Purchasebean>> pMap = null;
-		List<Purchasebean> pList = pDao.pfSearch(search, choice);
+	public Map<String, List<Purchase>> pfsearch(String search, String choice) {
+		Map<String, List<Purchase>> pMap = null;
+		List<Purchase> pList = pDao.pfSearch(search, choice);
 		if (pList != null) {
 			pMap = new HashMap<>();
 			pMap.put("pList", pList);
@@ -77,12 +78,12 @@ public class PurchaseMM {
 		return pMap;
 	}
 
-	public Map<String, List<Purchasebean>> pfdelete(String check_list) {
-		Map<String, List<Purchasebean>> pMap = null;
+	public Map<String, List<Purchase>> pfdelete(String check_list) {
+		Map<String, List<Purchase>> pMap = null;
 		System.out.println(check_list);
 
 		if(pDao.pcDelete(check_list) && pDao.pfDelete(check_list)) {
-			List<Purchasebean>pList= pDao.pFrerence();
+			List<Purchase>pList= pDao.pFrerence();
 			pMap = new HashMap<>();
 			pMap.put("pList", pList);
 			System.out.println("지워짐");
@@ -96,8 +97,8 @@ public class PurchaseMM {
 	public ModelAndView pDetail(String check) {
 		ModelAndView mav= new ModelAndView();
 		String view= null;
-		List<Purchasebean> pList= null;
-		Purchasebean ps= new Purchasebean();
+		List<Purchase> pList= null;
+		Purchase ps= new Purchase();
 		
 		if(check!=null) {
 			ps= pDao.pInfo(check);
@@ -106,11 +107,11 @@ public class PurchaseMM {
 				mav.addObject("pList", new Gson().toJson(pList));
 				System.out.println("PLIST"+pList);
 				mav.addObject("ps", ps);
-				view= "/purchasedetail";
+				view= "Purchase/purchasedetail";
 			}
 		}else {
 			mav.addObject("msg", "가지고 올 데이터가 없습니다.");
-			view= "/purchasedetail";
+			view= "Purchase/purchasedetail";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -119,16 +120,16 @@ public class PurchaseMM {
 	public ModelAndView pProgram(String check) {
 		ModelAndView mav= new ModelAndView();
 		String view= null;
-		List<Purchasebean> pList= new ArrayList<Purchasebean>();
+		List<Purchase> pList= null;
 		
 		if(check!=null) {
-			if(pList!=null) {
-				Purchasebean ps= new Purchasebean();
+			Purchase ps= new Purchase();
 				ps= pDao.pBring(check);
 				pList= pDao.pProgram(check);
-				view= "/pprogramwrite";
-				mav.addObject("pList", new Gson().toJson(pList));
-				mav.addObject("ps", ps);
+				if(pList!=null) {
+					mav.addObject("pList", new Gson().toJson(pList));
+					mav.addObject("ps", ps);
+					view= "Purchase/pprogramwrite";
 			}
 		}else {
 			check= null;
@@ -137,90 +138,90 @@ public class PurchaseMM {
 		return mav;
 	}
 	
-	public Map<String, List<approvalLine>> searchName(String name) {
-	      Map<String, List<approvalLine>> aMap=null;
-	      List<approvalLine> aList=null;
-	      if(name!=null) {
-	         aList = pDao.searchName(name);
-	         aMap=new HashMap<>();
-	         aMap.put("aList", aList);
-	      }else {
-	         aMap=null;
-	      }
-	      return aMap;
-	   }
-
-	   public Map<String, List<approvalLine>> addApproval(int cnt, String[] strArray) {
-	      Map<String, List<approvalLine>> aMap=null;
-	      List<approvalLine> aList=null;
-	      System.out.println(cnt);
-	      boolean result=false;
-	      String code="";
-	      for(int i=0; i<cnt; i++) {
-	         approvalLine al = new approvalLine();
-	         code=strArray[i];
-	          aList=pDao.addApproval(code);
-	      }
-	      System.out.println(aList);
-	      if(aList!=null) {
-	         aMap=new HashMap<>();
-	         aMap.put("aList", aList);
-	      }else {
-	         aMap=null;
-	      }
-	      return aMap;
-	   }
-
-	   public Map<String, List<approvalLine>> approLinecom(String[] code01, String[] code02) {
-	      Map<String, List<approvalLine>> aMap=null;
-	      System.out.println(code01[0]);
-	      System.out.println(code02[0]);
-	      
-	      if(code01.length!=0) {
-	            List<approvalLine> tList1 = new ArrayList<>();
-	            List<approvalLine> tList2= new ArrayList<>();
-	            
-	            for(int i=0; i<code01.length; i++) {
-	               approvalLine al = new approvalLine();
-	               al=pDao.approLinecom1(code01[i]); 
-	               tList1.add(al);
-	            }
-	            for(int i=0; i<code02.length; i++) {
-	               approvalLine al = new approvalLine();
-	               al=pDao.approLinecom2(code02[i]); 
-	               tList2.add(al);
-	            }
-	            aMap=new HashMap<>();
-	            System.out.println(tList1);
-	            aMap.put("tList1",tList1);
-	            aMap.put("tList2",tList2);
-	         }else {
-	            
-	            aMap=null;;
-	         }
-	      
-	      return aMap;
-	   
-	   }
-	   
-	   public ModelAndView approvalLine() {
-		   	ModelAndView mav = new ModelAndView();
-		      String view=null;
-		      mav= new ModelAndView();
-		      List<approvalLine> aList = null;
-		      aList=pDao.approvalLine(); 
-		      if(aList.size()!=0) {
-		            mav.addObject("aList",new Gson().toJson(aList));
-		            view="approvalLine";
-		         }else {
-		            
-		             mav.addObject("msg","주소록에 정보가 없습니다");
-		            view="pprogramwrite";
-		         }
-		      
-		      mav.setViewName(view);
-		      return mav;
-		   }
+//	public Map<String, List<approvalLine>> searchName(String name) {
+//	      Map<String, List<approvalLine>> aMap=null;
+//	      List<approvalLine> aList=null;
+//	      if(name!=null) {
+//	         aList = pDao.searchName(name);
+//	         aMap=new HashMap<>();
+//	         aMap.put("aList", aList);
+//	      }else {
+//	         aMap=null;
+//	      }
+//	      return aMap;
+//	   }
+//
+//	   public Map<String, List<approvalLine>> addApproval(int cnt, String[] strArray) {
+//	      Map<String, List<approvalLine>> aMap=null;
+//	      List<approvalLine> aList=null;
+//	      System.out.println(cnt);
+//	      boolean result=false;
+//	      String code="";
+//	      for(int i=0; i<cnt; i++) {
+//	         approvalLine al = new approvalLine();
+//	         code=strArray[i];
+//	          aList=pDao.addApproval(code);
+//	      }
+//	      System.out.println(aList);
+//	      if(aList!=null) {
+//	         aMap=new HashMap<>();
+//	         aMap.put("aList", aList);
+//	      }else {
+//	         aMap=null;
+//	      }
+//	      return aMap;
+//	   }
+//
+//	   public Map<String, List<approvalLine>> approLinecom(String[] code01, String[] code02) {
+//	      Map<String, List<approvalLine>> aMap=null;
+//	      System.out.println(code01[0]);
+//	      System.out.println(code02[0]);
+//	      
+//	      if(code01.length!=0) {
+//	            List<approvalLine> tList1 = new ArrayList<>();
+//	            List<approvalLine> tList2= new ArrayList<>();
+//	            
+//	            for(int i=0; i<code01.length; i++) {
+//	               approvalLine al = new approvalLine();
+//	               al=pDao.approLinecom1(code01[i]); 
+//	               tList1.add(al);
+//	            }
+//	            for(int i=0; i<code02.length; i++) {
+//	               approvalLine al = new approvalLine();
+//	               al=pDao.approLinecom2(code02[i]); 
+//	               tList2.add(al);
+//	            }
+//	            aMap=new HashMap<>();
+//	            System.out.println(tList1);
+//	            aMap.put("tList1",tList1);
+//	            aMap.put("tList2",tList2);
+//	         }else {
+//	            
+//	            aMap=null;;
+//	         }
+//	      
+//	      return aMap;
+//	   
+//	   }
+//	   
+//	   public ModelAndView approvalLine() {
+//		   	ModelAndView mav = new ModelAndView();
+//		      String view=null;
+//		      mav= new ModelAndView();
+//		      List<approvalLine> aList = null;
+//		      aList=pDao.approvalLine(); 
+//		      if(aList.size()!=0) {
+//		            mav.addObject("aList",new Gson().toJson(aList));
+//		            view="approvalLine";
+//		         }else {
+//		            
+//		             mav.addObject("msg","주소록에 정보가 없습니다");
+//		            view="pprogramwrite";
+//		         }
+//		      
+//		      mav.setViewName(view);
+//		      return mav;
+//		   }
 
 	public ModelAndView pprogramwrite(HttpServletRequest request, PurchaseApproval pa) {
 		ModelAndView mav = new ModelAndView();
@@ -244,10 +245,10 @@ public class PurchaseMM {
 			c= pDao.pApproval2(pa); 
 		}
 		if(a&&b&&c) {
-			view = "/pregistrationfrm";
+			view = "/erp/Puerhcase/pregistrationfrm";
 			mav.addObject("msg", "데이터입력완료");
 		} else {
-			view = "/pprogramwrite";
+			view = "/erp/Puerhcase/pprogramwrite";
 			mav.addObject("msg", "데이터입력 실패");
 		}
 		mav.setViewName(view);
@@ -259,10 +260,10 @@ public class PurchaseMM {
 		String view= null;
 		
 		if(pDao.rRegistration(rt)) {
-			view= "/returnregistration";
+			view= "/erp/Puerhcase/returnregistration";
 			mav.addObject("msg", "데이터입력 완료");
 		}else {
-			view="/returnregistration";
+			view="/erp/Puerhcase/returnregistration";
 			mav.addObject("msg", "데이터입력 실패");
 		}
 		mav.setViewName(view);
@@ -310,4 +311,5 @@ public class PurchaseMM {
 		}
 		return rMap;
 	}
+	
 }
