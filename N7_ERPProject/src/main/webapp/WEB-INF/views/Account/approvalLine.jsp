@@ -134,6 +134,7 @@ height:10px;
 <script>
 var count1=0;
 
+
 function sendChildValue(){
 	
 	if(count1==0){
@@ -142,7 +143,7 @@ function sendChildValue(){
 		
 	var code1 = new Array();
 	for(var i =0; i<count1; i++){
-		code1.push($(".addname1"+i).val());
+		code1.push($("#addname1"+i).val());
 	}
 	
 	$.ajax({
@@ -219,10 +220,12 @@ $("#deleteCheck1").click(function() {
 					});
 	
 	   
+		var arr;
 	$("#addapproval1").click(function(){
+		arr = new Array();
 		var hrcode=${hrCode};
 		var cnt = $("input[name='checknum']:checked").length;
-		var arr = new Array();
+		
 		$("input[name='checknum']:checked").each(function() {
 			
 			arr.push($(this).attr('value'));
@@ -231,13 +234,15 @@ $("#deleteCheck1").click(function() {
 		if(arr[0]==hrcode||arr[1]==hrcode||arr[2]==hrcode){
 			alert("자신을 결재자로 추가할 수 없습니다.");
 			console.log(cnt);
-		}else if(count1==2){
+		}else if(cnt>2 || count1==2){
 			alert("2명이상  선택 할 수 없습니다.");
 			console.log(cnt);
 			
 		}else if(cnt == 0){
 			alert("선택한 이름이 없습니다");
 			console.log(cnt);
+	}else if($("#addAp1").html()!="" && arr[0]==$("#addname10").val()){
+	      alert("이미 추가한 이름입니다.");
 	}else{
 			   $.ajax({
 					url : '/erp/rest/Account/addApproval',
@@ -248,7 +253,18 @@ $("#deleteCheck1").click(function() {
 					success : function(data) {
 						console.log(data);
 						var str="";
-						
+						if(data.aList.length==1){
+							
+							for(var i in data.aList){
+								str+="<tr><td><input class='check1' type='checkbox'></td>";
+								str+="<td><input id='addname1"+count1+"' type='text' value='"+data.aList[i].hc_hrcode+"' hidden='true'>"+data.aList[i].m_name+"</td>";
+								str+="<td>"+data.aList[i].hc_position+"</td>";
+								str+="<td>"+data.aList[i].hc_dept+"</td></tr>";
+										
+									}
+							$("#addAp1").append(str);
+						}else{
+							
 							for(var i in data.aList){
 								str+="<tr><td><input class='check1' type='checkbox'></td>";
 								str+="<td><input id='addname1"+i+"' type='text' value='"+data.aList[i].hc_hrcode+"' hidden='true'>"+data.aList[i].m_name+"</td>";
@@ -257,6 +273,8 @@ $("#deleteCheck1").click(function() {
 										
 									}
 							$("#addAp1").append(str);
+						}
+						
 							
 						count1+=Number(cnt);
 					     $("#cnt1").html(count1);
