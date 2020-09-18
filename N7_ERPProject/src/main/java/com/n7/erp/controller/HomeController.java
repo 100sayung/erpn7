@@ -35,15 +35,15 @@ import com.n7.erp.service.MemberMM;
 //전부 이동관련
 @Controller
 public class HomeController {
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);	
-	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
 	ModelAndView mav;
-	
+
 	@Autowired
 	private MemberMM mm;
 	@Autowired
 	private ConsultingBoardMM cbm;
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		logger.info("");
@@ -56,7 +56,7 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/managermode/Company", method = RequestMethod.GET)
 	public String Company() {
-		
+
 		return "/managermode/Company";
 	}
 	@RequestMapping(value = "/introducecompany", method = RequestMethod.GET)
@@ -105,8 +105,8 @@ public class HomeController {
 	public String findPassword() {
 		return "/home/findpassword";
 	}
-	
-	
+
+
 	@PostMapping(value="/access")
 	public ModelAndView access(Member mb, HttpSession session) {
 		mav = mm.access(mb, session);
@@ -122,7 +122,7 @@ public class HomeController {
 		session.invalidate();
 		return "/home/home";
 	}
-	
+
 	@GetMapping(value="/main")
 	public String main() {
 		return "/myInfo/myInfo";
@@ -136,14 +136,14 @@ public class HomeController {
 	public String hrMain() {
 		return "/hr/hrMain";
 	}
-	
+
 	//게시글 페이지로 이동
 	   @RequestMapping(value = "/writeFrm", method = RequestMethod.GET)
 	   public String write() {
 	      logger.info("게시글 창으로 이동");
 	      return "writeFrm";
 	   }
-	   
+
 	   //게시글 작성
 	   @RequestMapping(value = "/writeBoard", method = RequestMethod.POST)
 	   public ModelAndView writeBoard(ConsultingBoard board) {
@@ -156,7 +156,7 @@ public class HomeController {
 	      mav=cbm.boardmodify(board);
 	      return mav;
 	   }
-	   
+
 	   //게시글 수정페이지로 이동
 	   @RequestMapping(value = "/boardmodifyajax", method = RequestMethod.POST)
 	   public @ResponseBody String boardmodifyajax(Integer num) {

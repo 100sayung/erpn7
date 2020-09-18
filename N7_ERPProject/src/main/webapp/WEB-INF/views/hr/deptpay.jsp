@@ -58,8 +58,8 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="#" accesskey="4" title="">내 정보</a></li>
-				<li class="current_page_item"><a href="#" accesskey="2"
+				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내 정보</a></li>
+				<li class="current_page_item"><a href="/erp/hr/hr" accesskey="2"
 					title="">인사 관리</a></li>
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
@@ -79,10 +79,10 @@ ul {
 
 			<li id="showMenu2">근태 관리
 				<ul id="smallMenu2" style="display: none;">
-					<li><a href="">휴가 접수</a></li>
-					<li><a href="">사원 출결 관리</a></li>
-					<li><a href="">근무 조회</a></li>
-					<li><a href="">휴/퇴직 관리</a></li>
+					<li><a href="/erp/hr/receiptholiday">휴가 접수</a></li>
+					<li><a href="/erp/hr/attendance">사원 출결 관리</a></li>
+					<li><a href="/erp/hr/employeestatus">근무 조회</a></li>
+					<li><a href="/erp/hr/retiremm">휴/퇴직 관리</a></li>
 				</ul>
 			</li>
 			<li id="showMenu3">급여 관리
@@ -135,7 +135,7 @@ $("#showMenu3").hover(function() {
 	$("#smallMenu3").attr("style", "display:none");
 })
 
-	
+
 	//현재 부서와 직급 갯수 대로 반복 출력
 	$(function() {
 		var dept = ${dept};
@@ -151,7 +151,7 @@ $("#showMenu3").hover(function() {
 			console.log(dept[i].HDP_num);
 		}
 	});
-	
+
 	//부서 직급 페이지 에서 급여 수정
 	function dify(dept) {
 		var paymodify = $("#modifypay_"+dept).val();
@@ -172,8 +172,8 @@ $("#showMenu3").hover(function() {
 			}
 		});
 	}
-	
-	
+
+
 	//부서 직급 페이지 해당 부서,직급 삭제
 	function erase(deptnum) {
 		console.log(deptnum);
@@ -202,7 +202,7 @@ $("#showMenu3").hover(function() {
 			}
 		});
 	}
-	
+
 
 	//부서 직책 검색전 <select>문 목록
 	$(function(){
@@ -220,10 +220,10 @@ $("#showMenu3").hover(function() {
 			$("#disdept").append("<option name=''>"+distinctdept[i].HDP_dept+"</option>");
 		}
 	});
-	
+
 	//부서 직책 검색기능
 	function distinct(){
-		
+
 		var disdept=$("#disdept").val();
 		var disposition=$("#disposition").val();
 		console.log(disdept);
@@ -250,7 +250,7 @@ $("#showMenu3").hover(function() {
 			error:function(err){
 				console.log(err);
 			}
-			
+
 		});
 	}
 </script>

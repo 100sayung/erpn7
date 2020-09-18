@@ -27,8 +27,7 @@ public class HRDepartmentMM {
 	private HRIDeptDao Ddao;
 
 	ModelAndView mav = new ModelAndView();
-
-	// 부서 등록
+	//부서 등록
 	public ModelAndView deptregistinsert(Department dept, String cCode) {
 		String view = null;
 		System.out.println(dept.getHDP_dept());
@@ -290,7 +289,7 @@ public class HRDepartmentMM {
 		mav.setViewName(view);
 		return mav;
 	}
-	
+
 	public String findmonth(String month, String hrcode) {
 
 		HashMap<String, String> hMap = new HashMap<String, String>();

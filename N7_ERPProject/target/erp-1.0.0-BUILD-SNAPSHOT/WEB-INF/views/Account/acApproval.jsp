@@ -26,20 +26,20 @@ text-align: center;
 .select{
 width: 150px;
 height: 25px;
-}   
+}
 .draft{
-width: 500px; 
-height: 20px; 
-border-style: none; 
+width: 500px;
+height: 20px;
+border-style: none;
 text-align: center;"
 }
 .draft2{
-width: 600px; 
+width: 600px;
 text-align: center;
 }
 .draft3{
 width: 230px;
-border-style: none; 
+border-style: none;
 text-align: center;
 }
 #ect{
@@ -59,7 +59,7 @@ text-align: center;
    <div style="height: auto; padding-top: 5px; background-color: #F8F7F7;">
    <form id="formdata">
          <table>
-         
+
             <tr>
                <th>일자</th>
                <th><input id="time" type="text" name="rs_date"></th>
@@ -72,7 +72,7 @@ text-align: center;
                <th>결재자</th>
                <th id="line"></th>
             </tr>
-            
+
             <tr>
                <th>내용</th>
                <td>
@@ -113,7 +113,7 @@ text-align: center;
 					<th>비고</th>
 				</tr>
                         <tbody id="tbody">
-                        
+
                         </tbody>
                         <tr><th colspan="3">총합계(원)</th><th id="total" colspan="7"></th></tr>
                            <tr>
@@ -170,7 +170,7 @@ $("#total").html(total);
 var time = new Date();
 $("#time").val(time.toLocaleDateString()+time.toLocaleTimeString());
 
- 
+
 
 	function setChildValue(data) {
 		console.log(data);
@@ -193,13 +193,13 @@ $("#time").val(time.toLocaleDateString()+time.toLocaleTimeString());
 			$("#refer"+i).html(str2);
 			}
 		}; */
-	
+
 	};
 
 	$("#approvalLine").click(function() {
 
 		window.open('/erp/Account/approvalLine', 'approvalLine', 'width=1400,height=700');
 	});
-	
+
 </script>
 </html>

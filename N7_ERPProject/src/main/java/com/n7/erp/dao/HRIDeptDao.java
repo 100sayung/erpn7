@@ -36,7 +36,7 @@ public interface HRIDeptDao {
 
 	@Select("SELECT * FROM HR_DEPT WHERE HDP_CCODE = #{cCode}")
 	ArrayList<Department> deptafterselect(String cCode);
-	
+
 	@Select("SELECT * FROM MHR WHERE HC_CCODE=#{cCode}")
 	ArrayList<HR_Card> searchpay(String cCode);
 
@@ -69,9 +69,9 @@ public interface HRIDeptDao {
 	@Update("UPDATE HR_DEPT SET HDP_AUTH = #{hdp_auth} WHERE HDP_CCODE = #{hdp_ccode} AND HDP_POSITION = #{hdp_position} AND HDP_DEPT = #{hdp_dept}")
 	void updateDeptAuth(Department dept);
 
-	
-	
-	
+
+
+
 	@Select("SELECT HC_ID,M_NAME,HC_DEPT,HC_POSITION,HDP_PAY,HDD_AMOUNT,HC_HRCODE FROM HR_CD_D")
 	ArrayList<ViewPay> searchwages();
 

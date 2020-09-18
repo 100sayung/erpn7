@@ -228,7 +228,7 @@ public class HRHomeController {
 		mav=am.approvalLine();
 		return mav;
 	}
-	
+
 	@GetMapping(value="/hr/holidaydetail")
 	public ModelAndView getHolidayDetail(String docunum, HttpSession session) {
 		mav = hm.getHolidayDetail(docunum, session);

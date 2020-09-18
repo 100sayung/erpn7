@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+    <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -74,14 +74,14 @@ height:10px;
 </head>
 <body>
 	<h1>결재라인 주소록</h1>
-	
-	
+
+
 	<div>
 		<div id="main1">
 			<table>
 				<tr class="search">
 					<td>주소록</td>
-					
+
 				</tr>
 				<tr id="Info"></tr>
 			</table>
@@ -113,7 +113,7 @@ height:10px;
 		<button id="deleteCheck1"><</button><br><br><br><br><br>
 	<button id="addapproval2" class="but">></button><br>
 	<button id="deleteCheck2"><</button><br><br>
-	
+
 		</div>
 		<div id="main4">
 			<h3 class="title">
@@ -134,7 +134,7 @@ height:10px;
 					<tbody id="addAp2"></tbody>
 				</table>
 			</div>
-			
+
 		</div>
 	</div><br>
 	<a  href="javascript:sendChildValue()"><button>결제라인 등록</button></a>
@@ -143,36 +143,36 @@ height:10px;
 var count1=0;
 
 function sendChildValue(){
-	
+
 	if(count1==0){
 		alert("선택한 사람이 없습니다");
 	} else{
-		
+
 	var code1 = new Array();
 	//var code2 = new Array();
 	for(var i =0; i<count1; i++){
 		code1.push($(".addname1"+i).val());
 	}
-	
+
 	$.ajax({
 		 url:"/erp/rest/Account/approLinecom?code1="+code1,
 		 type:'post',
 		 datatype:'json',
 		 success:function(data){
 			 console.log(data);
-			 
+
 				 opener.setChildValue(data);
 
 				 window.close();
 		 },
 		 error:function(error){
 			 console.log(error);
-			 
+
 		 }
-		
+
 	});
-	
-	}  
+
+	}
 }
 
 
@@ -209,7 +209,7 @@ $("#deleteCheck1").click(function() {
 	}
 
 	$("#Info").append(str);
-	  
+
 
 
 	$("#namesc").click(function() {
@@ -221,7 +221,7 @@ $("#deleteCheck1").click(function() {
 							datatype : 'json',
 							success : function(data) {
 								console.log(data);
-								
+
 								for ( var i in data.aList) {
 									str += "<tr><td><input name='checknum' type='checkbox' value='"+data.aList[i].hc_hrcode+"'></td>";
 									str += "<td>"+ data.aList[i].m_name+ "</td>";
@@ -236,24 +236,24 @@ $("#deleteCheck1").click(function() {
 									}
 								});
 					});
-	
-	   
+
+
 	$("#addapproval1").click(function(){
 		if(count1==3){
 			alert("3명이상  선택 할 수 없습니다.");
 		}else{
-			
+
 		var cnt = $("input[name='checknum']:checked").length;
 		var arr = new Array();
-		
+
 		if(cnt == 0){
 			alert("선택한 이름이 없습니다");
 	}else {
 		$("input[name='checknum']:checked").each(function() {
-			
+
 			arr.push($(this).attr('value'));
                //var code = $(this).attr('value');
-			   
+
 		});
 			   $.ajax({
 					url : '/erp/rest/Account/addApproval',
@@ -265,19 +265,19 @@ $("#deleteCheck1").click(function() {
 						console.log(data);
 						var str="";
 		                    //console.log(code);
-						
+
 							for(var i in data.aList){
 								str+="<tr><td><input class='check1' type='checkbox'></td>";
 								str+="<td><input class='addname1"+i+"' type='text' value='"+data.aList[i].hc_hrcode+"' hidden='true'>"+data.aList[i].m_name+"</td>";
 								str+="<td>"+data.aList[i].hc_position+"</td>";
 								str+="<td>"+data.aList[i].hc_dept+"</td></tr>";
-										
+
 									}
 							$("#addAp1").append(str);
-							
+
 							/* for(var k=0; k<=count1; k++){
 								name[k]=$(".addname1"+k).val();
-									
+
 								} */
 						count1+=Number(cnt);
 							//console.log(name);
@@ -286,11 +286,11 @@ $("#deleteCheck1").click(function() {
 				},
 					error:function(error){
 						console.log(error);
-					}	
-		
+					}
+
 		});
-		
-	};		
+
+	};
 		}
 		//var name =[];
 	});
@@ -299,14 +299,14 @@ $("#deleteCheck1").click(function() {
 		var name =[];
 		var cnt = $("input[name='checknum']:checked").length;
 		var arr = new Array();
-		
+
 		if(cnt == 0){
 			alert("선택한 이름이 없습니다");
 	}else {
 		$("input[name='checknum']:checked").each(function() {
 			arr.push($(this).attr('value'));
                var code = $(this).attr('value');
-		       
+
 			   $.ajax({
 					url : '/erp/rest/Account/addApproval',
 					type : 'post',
@@ -317,29 +317,29 @@ $("#deleteCheck1").click(function() {
 						console.log(data);
 						var str="";
 		                    console.log(code);
-						
-						
+
+
 							for(var j=0; j<=count; j++){
 								if(code==$(".addname"+j).val()&&count!=0){
 									alert("이미추가되었습니다");
-									
-									}else{ 
+
+									}else{
 							for(var i in data.aList){
 								str+="<tr><td><input class='check2' type='checkbox'></td>";
 								str+="<td><input class='addname2"+count2+"' type='text' value='"+data.aList[i].hc_hrcode+"' hidden='true'>"+data.aList[i].m_name+"</td>";
 								str+="<td>"+data.aList[i].hc_position+"</td>";
 								str+="<td>"+data.aList[i].hc_dept+"</td></tr>";
 							$("#addAp2").append(str);
-										
+
 									}
-								 } 
-							
+								 }
+
 							 }
 							for(var k=0; k<=count2; k++){
 								name[k]=$(".addname2"+k).val();
-									
+
 								}
-							
+
 							console.log(name);
 							console.log(count2);
 					     count2++;
@@ -347,17 +347,17 @@ $("#deleteCheck1").click(function() {
 				},
 					error:function(error){
 						console.log(error);
-					}	
-		
+					}
+
 		});
-			   
+
 		});
-	};		
+	};
 	});
 	    */
-	
-		
-     
+
+
+
 
 </script>
 </html>

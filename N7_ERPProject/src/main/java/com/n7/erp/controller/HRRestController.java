@@ -70,14 +70,14 @@ public class HRRestController {
 		Member mb = hm.getMemberInfo(m_id);
 		return mb;
 	}
-	
+
 	//인사카드 없는 사람들 정보 출력
 	@GetMapping(value="/hr/nohrcard",  produces = "application/text; charset=utf8")
 	public String getNoHrCard(HttpSession session) {
 		String result = hm.getNoHrCard(session);
 		return result;
 	}
-	
+
 	//인사카드 이름 검색 출력
 	@GetMapping(value="/hr/searchfromname")
 	public String getSearchFromName(HttpSession session) {
@@ -140,7 +140,7 @@ public class HRRestController {
 		String result = hm.getEmployeeHoliday(session, yearmonth);
 		return result;
 	}
-	
+
 	@GetMapping(value="/hr/myholidayview")
 	public String getMyHolidayView(HttpSession session, String yearmonth) {
 		String cCode = session.getAttribute("cCode").toString();

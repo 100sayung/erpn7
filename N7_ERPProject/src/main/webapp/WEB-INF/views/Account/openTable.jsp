@@ -7,7 +7,7 @@
 <title>Document</title>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 	<!-- <script src="/js/jquery.serializeObject.js"></script> -->
-	
+
 <style>
 #cal {
 	font-size: 20px;
@@ -87,7 +87,7 @@ float: left;
 		<button id="search2" type="button">검색</button>
 		매출<input onclick="getList('AS')" type='radio' name="sale" value='AS'>
 		매입<input onclick="getList('AP')" type='radio' name="sale" value='AP'>
-	
+
 		<!-- <form action="rest/saleinsert" method="post"> -->
 		<form id="saleInfo">
 		<div id="comInfo"
@@ -123,14 +123,14 @@ float: left;
 		</div>
 		<!-- </form> -->
 			<button id="detaile" type="button">상세정보</button>
-			 <span id='plusorminus'> 
-			<input type="number" id="qty" min="1" style="width: 64px;"> 
+			 <span id='plusorminus'>
+			<input type="number" id="qty" min="1" style="width: 64px;">
 			<button type="button" id="addList"> 행추가</button>
 			<button type="button" id="deleteCheck">삭제</button>
 			</span>
-			
+
 			<!-- <form id="saleInfodetaile"> -->
-			
+
 		<div id="ListTable" style="background-color: #ECEBEA;">
 			<table id="testTable"
 				summary="Code page support in different versions of MS Windows."
@@ -164,18 +164,18 @@ float: left;
 		</div>
 		</form>
  		<button type="button" onclick="saleInsertInfo()">등록</button>
-	
-        
- 		
+
+
+
 	<br>
 	<br>
-	
+
 </body>
 <script type="text/javascript">
 $("#search2").click(function(){
 	var select = $("#select").val();
 	var choice = $("#choice").val();
-	
+
 	$.ajax({
 		url:"/erp/rest/Account/selectSearch",
 		type:"post",
@@ -195,7 +195,7 @@ $("#search2").click(function(){
 				str += "<td><input class='data2' type='text' name='s_employee' value="+data.sList[i].s_employee+"></td></tr>";
 			}
 			$("#testTable").html(str);
-				
+
 			}else{
 				alert("검색할 데이터가 없습니다");
 			}
@@ -203,9 +203,9 @@ $("#search2").click(function(){
 		error:function(error){
 			console.log(error);
 		}
-		
+
 	});
-	
+
 });
 
 
@@ -239,9 +239,9 @@ function saleInsertInfo(){
     		  console.log(error);
     		  alert("데이터 입력실패");
     	  }
-    	  
+
        });
-       
+
 };
 
 
@@ -270,7 +270,7 @@ $("#approval").click(function(){
 								}
 							});
 						}
-	
+
 });
 
 $("#addList").click(function() {
@@ -291,7 +291,7 @@ $("#addList").click(function() {
 
 
  function saleinsert(){
-	//$("#comInfo").attr("display","inline-block");	
+	//$("#comInfo").attr("display","inline-block");
 	//$("#plusorminus").attr("display","inline-block");
 	$("#testTable").html("");
 	var str='';
@@ -304,7 +304,7 @@ $("#addList").click(function() {
 		str += "<td><input class='data' type='text' name='s_tax'/></td>"
 		str += "<td><input class='data' type='text' name='s_total' /></td>"
 		str += "<td><input class='data' name='s_memo' /></td></tr></tbody>"
-	
+
 	$("#testTable").html(str);
 }
 
@@ -327,7 +327,7 @@ $("#addList").click(function() {
                             }
 						});
 			});
-	
+
 	$("#saledetails").click(function() {
 				var check = '';
 		$("input[name='checknum']:checked").each(function() {

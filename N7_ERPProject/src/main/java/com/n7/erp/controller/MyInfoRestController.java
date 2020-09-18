@@ -103,7 +103,5 @@ public class MyInfoRestController {
 		String result = deptmm.getDeptList(session.getAttribute("cCode").toString());
 		return result;
 	}
-	
 
-	
 }

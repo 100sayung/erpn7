@@ -56,6 +56,10 @@
     </div>
     <div id="side_menu">
         <ul id="menuList">
+<<<<<<< HEAD
+=======
+            <li>내 정보</li>
+>>>>>>> origin/yyyyyyyyyyyy
             <li><a href="#" id="acountting">매츌/매입전표 작성</a></li>
             <li><a href="">매출/매입전표 결재확인</a></li>
         </ul>

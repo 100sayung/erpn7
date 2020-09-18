@@ -40,12 +40,12 @@ style>body, td, th, select, textarea {
 					<button type="button" id="codesearch">코드검색</button>
 	                    <!-- </form> -->
 	                    <button type="button" id="Alllist">전체리스트</button>
-				        
+
 	                    <button type="button" id="delete">삭제</button>
-		
+
 			<table id="Info">
 				<tbody id="Tbody">
-					
+
 				</tbody>
 			</table>
 	</div>
@@ -171,7 +171,7 @@ style>body, td, th, select, textarea {
 
 </body>
 <script type="text/javascript">
-	
+
 	 $("#Alllist").click(function(){
 		$.ajax({
 			url : '/erp/rest/Account/serchcomlist',
@@ -212,7 +212,7 @@ style>body, td, th, select, textarea {
 									data : {code:code},
 									dataType : 'json',
 									success : function(data) {
-									
+
 										console.log(data);
 										var List="";
 										List+="<tr><th><input type='checkbox'></th><th>코드</th><th>거래처명</th><th>사업자(주민)번호</th><th>대표자명</th><th>업태</th><th>유형</th></tr>";
@@ -233,8 +233,8 @@ style>body, td, th, select, textarea {
 										console.log(error);
 									}
 								});
-					});  
-	
+					});
+
 	$("#insertcomlist").click(function() {
 						var obj = $("#comInfo").serialize();
 						//var json = JSON.stringify(obj);
@@ -268,13 +268,13 @@ style>body, td, th, select, textarea {
 									}
 								});
 					});
-	
+
 	$("#delete").click(function(){
 		 var cnt = $("input[name='reportChkBxRow']:checked").length;
 	     var arr = new Array();
 	     	$("input[name='reportChkBxRow']:checked").each(function() {
 	            arr.push($(this).attr('value'));
-	            
+
 	        	});
 	     	if(cnt==0){
 	     		alert("선택된 내용이 없습니다");
@@ -308,13 +308,13 @@ style>body, td, th, select, textarea {
 	     			error:function(error){
 	     				console.log(error);
 	     			}
-	     			
+
 	     		});
 	     	}
 	     	console.log(arr);
 	     	console.log(cnt);
-	     	
+
 	});
-	
+
 </script>
 </html>
