@@ -24,12 +24,7 @@ import com.n7.erp.service.ConsultingBoardMM;
 import com.n7.erp.service.AccountMM;
 import com.n7.erp.service.HRDepartmentMM;
 import com.n7.erp.service.HrMM;
-import com.n7.erp.service.MemberMM;
 
-import lombok.Getter;
-import lombok.extern.log4j.Log4j;
-
-@Log4j
 @Controller
 public class HRHomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);

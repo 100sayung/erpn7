@@ -82,9 +82,9 @@ button {
 						placeholder="password를 입력해주세요" required id="pwd">
 				</div>
 			</div>
-			<span class="warnMsg">${warn }</span>
+			<span class="warnMsg">${warn }</span><br>
 			<button>로그인</button><br>
-			<a style="color:black;" href = "/erp/findid">아이디 찾기 </a>
+			<a href = "/erp/findidfrm">아이디 찾기</a>____<a href = "/erp/findpasswordfrm">비밀번호 찾기</a>
 		</div>
 	</form>
 	<script>

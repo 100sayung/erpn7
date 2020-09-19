@@ -109,61 +109,96 @@ input[type='text'], input[type='number'] {
 			<li><a href="/erp/stock/byitemstocklist">품목별 자재현황</a></li>
 			<li><a href="/erp/stock/monthpayment">월수불실적</a></li>
 			<li><a href="/erp/stock/exportstockcheck">출고 양식</a></li>
-			<li><a href="/erp/stock/accountconfirm">거래처 등록</a></li>
 		</ul>
 	</div>
 
 	<div id="description">
-	<div id="getCt_code">
-	</div>
-		<div id="getItemCodeFromItemCcode">
-		</div>
-		<div id="contain">
-		<form id = 'frm0'>
-		<button type="button" onclick="addRow(0)">행 추가</button>
-		<table class="tb">
-		<caption><input type="text"></caption>
-			<tr>
-			<td>분류명</td><td>품목코드</td><td>단가</td><td>수량</td><td>삭제</td>
-			</tr>
-			<tr class="tr"><td></td><td></td><td><input type="number" min="10"></td><td><input type="number" min="0"> </td><td><button type="button" onclick="deleteRow(this)">삭제</button></td>
-			</tr>		
-		</table>
-		</form>
-		</div>
-		<button type="button" id="btn">출고양식 추가</button>
-		<button type="button" id="export">출고 확정</button>
+		<h3>입고 내역 및 수정</h3>
+		${importCheckList} <input type="hidden" value="${id}">
+		<button type="button" id="btn">입고 확정</button>
 	</div>
 	<script>
-	$('#btn').click(function() {
-		var num ;
-		for(var i = 0; ;){
-			if($('#frm'+i).length!=0){
-				i++;
-			}else{
-				num = i;
-				break;
-			}
+		$('#btn')
+				.click(
+						function() {
+							var ipList = [];
+							var num = 1;
+							var num3 = 0;
+							for (var i = 0;;) {
+								console.dir($('.check')[i]);
+								console.log($('#frm' + i).length);
+								if ($('#frm' + i).length != 0) {
+									if ($('.check')[i].checked) {
+										var serial = $('#frm' + i).serialize();
+										var strArr = serial.split(/=|&/);
+										var obj = "{";
+										for (var j = 0; j < strArr.length; j++) {
+											if (strArr.length - 1 == j) {
+												obj += "\"" + strArr[j] + "\"";
+											} else if (j % 2 == 0) {
+												obj += "\"" + strArr[j] + "\":";
+											} else {
+												obj += "\"" + strArr[j] + "\""
+												if (j == (11 * num) + num3) {
+													obj += "}{"
+													num++;
+													num3++;
+												} else {
+													obj += ","
+												}
+											}
+
+										}
+										obj += "}";
+										obj = replaceAll(obj, "}{", "} {");
+										obj = obj.split(" ");
+										for (var x = 0; x < obj.length; x++) {
+											obj[x] = JSON.parse(obj[x]);
+
+											ipList.push(obj[x]);
+										}
+										i++;
+									} else {
+										i++;
+									}
+								} else {
+									break;
+								}
+							}
+
+							let stringifiedIpList = JSON.stringify(ipList);
+							console.log("arr", ipList);
+							$
+									.ajax({
+										url : "/erp/stock/confirmimportcheck",
+										data : stringifiedIpList,
+										type : "post",
+										traditional : true,
+										contentType : "application/json;charset=UTF-8",
+										dataType : "json",
+										success : function(result) {
+											console.log(result)
+											$('#description').html("<h3>입고 내역 및 수정</h3>"+err.responseText+"<button type='button' id='btn'>입고 확정</button>")
+										},
+										error : function(err) {
+											console.log(err)
+											$('#description').html("<h3>입고 내역 및 수정</h3>"+err.responseText+"<button type='button' id='btn'>입고 확정</button>")
+										}
+									})
+
+						});
+
+		function replaceAll(str, searchStr, replaceStr) {
+			return str.split(searchStr).join(replaceStr);
 		}
-		var str = '<form id="frm'+num+'"><button type="button" onclick="addRow('+num+')">행 추가</button>'
-		+'<table class="tb"><caption><input type="text"></caption>'
-		+'<tr><td>분류명</td><td>품목코드</td><td>단가</td><td>수량</td><td>삭제</td>'
-		+'</tr><tr class="tr"><td></td><td></td><td><input type="number" min="10"></td><td><input type="number" min="0"> </td>'
-		+'<td><button type="button" onclick="deleteRow(this)">삭제</button></td>'
-		+'</tr></table>';
-		$('#contain').append(str);/
-	});
-	function addRow(num) {
-		var str = '<tr class="tr"><td></td><td></td>'
-			+'<td><input type="number" min="10"></td>'
-			+'<td><input type="number" min="0"> </td>'
-			+'<td><button type="button" onclick="deleteRow(this)">삭제</button></td></tr>';
-		$('#frm'+num).children(".tb").append(str);
-	}
-	function deleteRow(id) {
-		var child =  id.parentElement.parentElement;
-		child.parentNode.removeChild(child);
-	}
+
+		function modifySum(pnum) {
+			var amount = $('#p_amount' + pnum).val();
+			var unlit = $('#p_amount' + pnum).parent().siblings(
+					'#p_unlit' + pnum).children().val();
+			$('#p_amount' + pnum).parent().siblings('#p_sum' + pnum).children()
+					.val(Number(amount) * Number(unlit));
+		}
 	</script>
 </body>
 </html>
