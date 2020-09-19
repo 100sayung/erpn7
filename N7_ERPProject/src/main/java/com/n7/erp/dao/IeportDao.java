@@ -8,14 +8,9 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-<<<<<<< HEAD
 import com.n7.erp.bean.B_shipment;
 import com.n7.erp.bean.IePort;
 import com.n7.erp.bean.ps.Purchase;
-=======
-import com.n7.erp.bean.IePort;
-import com.n7.erp.bean.Purchase;
->>>>>>> origin/JSJ
 
 public interface IeportDao {
 
@@ -52,10 +47,7 @@ public interface IeportDao {
 	@Select("SELECT IE_ITCODE, SUM(IE_QTY) IE_QTY FROM IE WHERE IE_DATE<TO_DATE(#{date1},'YYYY-MM-DD') AND IE_CPCODE = #{cCode} GROUP BY IE_ITCODE")
 	ArrayList<IePort> getByItemStockListAll(@Param("date1")String date1,@Param("cCode") String cCode);
 
-<<<<<<< HEAD
 	@Select("SELECT * FROM B_SHIPMENT WHERE BS_CCODE = #{cCode} AND BS_STATUS = '3'")
 	List<B_shipment> exportCheckList(String cCode);
 
-=======
->>>>>>> origin/JSJ
 }

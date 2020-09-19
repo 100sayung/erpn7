@@ -132,7 +132,6 @@ text-align: center;
 </body>
 <script>
 
-<<<<<<< HEAD
 
  $(document).ready(function(){
 	$.ajax({
@@ -159,8 +158,6 @@ text-align: center;
  });
  
 
-=======
->>>>>>> origin/JSJ
 $("#commit").click(function(){
 	var data = $("#formdata").serialize();
 	$.ajax({
@@ -211,11 +208,7 @@ $("#time").val(time.toLocaleDateString()+time.toLocaleTimeString());
 				str +="<input style='width:50px;' type='text' name='rs_apname"+i+"' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
 			}
 			console.log(str)
-<<<<<<< HEAD
 			$("#line").append(str);
-=======
-			$("#line").html(str);
->>>>>>> origin/JSJ
 		};
 		/* if (data.tList2 != "") {
 			for ( var i in data.tList2) {

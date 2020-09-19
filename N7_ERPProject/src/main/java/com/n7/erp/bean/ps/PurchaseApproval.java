@@ -26,3 +26,4 @@ public class PurchaseApproval {
 	private String p_approvel1;
 	private String p_approvel2;
 }
+

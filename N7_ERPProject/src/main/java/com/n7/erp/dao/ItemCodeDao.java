@@ -1,21 +1,11 @@
 package com.n7.erp.dao;
 
 import java.util.List;
-<<<<<<< HEAD
-=======
-
-import javax.servlet.http.HttpSession;
-
->>>>>>> origin/JSJ
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/JSJ
 import com.n7.erp.bean.ItemCode;
 
 public interface ItemCodeDao {
@@ -32,16 +22,10 @@ public interface ItemCodeDao {
 	@Delete("DELETE FROM IT WHERE IT_CODE=#{it_code} AND IT_CPCODE = #{it_cpcode}")
 	public boolean deleteItemCode(ItemCode it);
 
-<<<<<<< HEAD
 	@Select("SELECT * FROM IT WHERE IT_CCODE = #{it_ccode} AND IT_CPCODE =  #{cCode}")
 	public List<ItemCode> getItemCodeFromItemCCode(String it_ccode, String cCode);
 
 	@Select("SELECT * FROM IT WHERE IT_CPCODE = #{cCode} AND IT_CODE = #{bs_itcode}")
 	public ItemCode getPname(@Param("cCode")String cCode,@Param("bs_itcode") String bs_itcode);
 
-=======
-	@Select("SELECT * FROM IT WHERE IT_CCODE = #{it_ccode} AND #{cCode}")
-	public List<ItemCode> getItemCodeFromItemCCode(String it_ccode, String cCode);
-
->>>>>>> origin/JSJ
 }

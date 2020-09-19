@@ -118,7 +118,5 @@ public interface IHrDao {
 
 
 
-	JsonElement getDetailHoliday(HashMap<String, String> hMap);
-
 
 }

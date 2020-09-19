@@ -24,6 +24,7 @@ import com.n7.erp.service.ConsultingBoardMM;
 import com.n7.erp.service.AccountMM;
 import com.n7.erp.service.HRDepartmentMM;
 import com.n7.erp.service.HrMM;
+import com.n7.erp.service.MemberMM;
 
 @Controller
 public class HRHomeController {

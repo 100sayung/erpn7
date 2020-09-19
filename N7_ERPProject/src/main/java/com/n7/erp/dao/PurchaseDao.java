@@ -1,6 +1,5 @@
 package com.n7.erp.dao;
 
-<<<<<<< HEAD
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -15,18 +14,10 @@ import com.n7.erp.bean.ps.Return;
 
 @Mapper
 @Component
-=======
-import org.apache.ibatis.annotations.Update;
-
-import com.n7.erp.bean.IePort;
-
-
->>>>>>> origin/JSJ
 public interface PurchaseDao {
 
 	@Update("UPDATE P SET P_SITUATION=1 WHERE P_NUM=#{ie_pnum} AND ")//수정해야함
 	boolean updatePurchase(IePort iePort);
-<<<<<<< HEAD
 	
 	boolean pregistration(Purchase ps);
 
@@ -71,7 +62,5 @@ public interface PurchaseDao {
 	boolean rDelete(String check_list);
 
 	List<Return> rSearch(@Param("search") String search, @Param("choice") String choice);
-=======
->>>>>>> origin/JSJ
 
 }

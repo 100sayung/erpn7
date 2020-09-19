@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-=======
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
->>>>>>> origin/JSJ
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.n7.erp.dao.AccountDao">
 <insert id="saleinsert" parameterType="saleInfo">
 	INSERT INTO AC_SALESTATEMENT
-<<<<<<< HEAD
 	VALUES(#{s_num}||LPAD(AC_REALSALESTATEMENT_SEQ.NEXTVAL,6,0),#{s_ccode},#{s_kind},#{s_comnum},DEFAULT,#{s_employee},#{s_clcode},#{s_company})
 	</insert>
 <insert id="saleinsert2" parameterType="String">
@@ -19,28 +14,12 @@
 	</insert>
 
 
-=======
-	VALUES(#{s_num}||LPAD(AC_REALSALESTATEMENT_SEQ.NEXTVAL,4,0),#{s_ccode},#{s_kind},#{s_comnum},DEFAULT,#{s_employee},#{s_clcode},#{s_company})
-	</insert>
-<insert id="saleinsert2" parameterType="String">
-	INSERT INTO AC_SALESTATEMENTLIST
-	VALUES(#{s_num}||LPAD(AC_REALSALESTATEMENT_SEQ.CURRVAL,4,0),#{s_ccode},#{s_cnt},#{s_pkind},#{s_tax},#{s_price},#{s_price2},
-	#{s_memo},#{s_total})
-	</insert>
-	
-	
->>>>>>> origin/JSJ
 	<insert id="insertcomlist" parameterType="A_com">
 	INSERT INTO AC_COMPANYLIST
 	VALUES(#{cl_code},#{cl_ccode},#{cl_name},#{cl_comnum},#{cl_comnum2},#{cl_ceo},#{cl_employee},#{cl_phone},
 	#{cl_phone2},#{cl_fax},#{cl_email},#{cl_addr},#{cl_kind},#{cl_kind2},#{cl_kind3},#{cl_bank},
 	#{cl_bankholder},#{cl_banknum},#{cl_memo})
 	</insert>
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> origin/JSJ
 	<insert id="approvaldocu" parameterType="rs">
 	INSERT INTO APPROVALDOCU
 	VALUES(#{rs_num},#{rs_ccode},#{rs_title},#{rs_employee},#{rs_apcode1},DEFAULT,DEFAULT)
@@ -50,20 +29,11 @@
 	VALUES(#{rs_num},#{rs_ccode},#{rs_clcode},#{rs_apcode0},#{rs_apcode1},#{rs_apcode2},
 	#{rs_apname0},#{rs_apname1},#{rs_apname2},#{rs_reason},DEFAULT,#{rs_kind},#{rs_company},#{rs_comnum})
 	</insert>
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> origin/JSJ
 	<insert id="approdocument2" parameterType="rs">
 	INSERT INTO AC_REALSALESTATEMENTLIST
 	VALUES(#{rs_num},#{rs_ccode},#{rs_tax},#{rs_price},#{rs_price2},#{rs_cnt},#{rs_pkind},#{rs_total},#{rs_memo})
 	</insert>
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> origin/JSJ
 	<select id="getcomcode" parameterType="String" resultType="A_com">
 	SELECT * FROM AC_COMPANYLIST WHERE CL_COMNUM = #{s_comnum}
 	</select>
@@ -71,11 +41,7 @@
 	SELECT * FROM AC_COMPANYLIST
 	</select>
 	<select id="getcomInfo" parameterType="String" resultType="A_com">
-<<<<<<< HEAD
 	SELECT * FROM AC_COMPANYLIST WHERE CL_NAME=#{company}
-=======
-	SELECT * FROM AC_COMPANYLIST WHERE CL_NAME=#{company} 
->>>>>>> origin/JSJ
 	</select>
 	<select id="getmyCompany" parameterType="String" resultType="myCom">
 	SELECT * FROM COMPANY
@@ -104,7 +70,6 @@
 	<select id="getTaxbill" parameterType="String" resultType="saleInfo">
 	SELECT * FROM AC_SALESTATEMENT WHERE S_NUM=#{check}
 	</select>
-<<<<<<< HEAD
 
 	<select id="approvalLine" parameterType="String" resultType="Line">
 	SELECT * FROM MLIST
@@ -121,21 +86,6 @@
 	SELECT * FROM MLIST  WHERE HC_HRCODE=#{code}
 	</select>
 
-=======
-	
-	<select id="approvalLine" parameterType="String" resultType="Line">
-	SELECT * FROM MLIST 
-	</select>
-	
-	<select id="searchName" parameterType="String" resultType="Line">
-	SELECT * FROM MLIST  WHERE M_NAME=#{name}
-	</select>
-	
-	<select id="addApproval" parameterType="String" resultType="Line">
-	SELECT * FROM MLIST  WHERE HC_HRCODE=#{code}
-	</select>
-	
->>>>>>> origin/JSJ
 	<select id="approLinecom1" parameterType="String" resultType="Line">
 	SELECT * FROM MLIST  WHERE HC_HRCODE=#{code01}
 	</select>
@@ -145,19 +95,11 @@
 	<select id="getpkind" parameterType="String" resultType="saleInfo">
 	SELECT * FROM AC_SALESTATEMENTLIST WHERE S_PKIND=#{pkind}
 	</select>
-<<<<<<< HEAD
 
 	<select id="comparecode" parameterType="String" resultType="approvaldocu">
 	SELECT * FROM APPROVALDOCU WHERE AP_DOCUNUM=#{code}
 	</select>
 
-=======
-	
-	<select id="comparecode" parameterType="String" resultType="ap">
-	SELECT * FROM APPROVALDOCU WHERE AP_DOCUNUM=#{code}
-	</select>
-	
->>>>>>> origin/JSJ
 	<select id="selectSreach" parameterType="String" resultType="saleInfo">
 	SELECT * FROM AC_SALESTATEMENT
 	<where>
@@ -181,16 +123,8 @@
 	<delete id="deleteSale2" parameterType="String">
 	DELETE FROM AC_SALESTATEMENTLIST WHERE S_NUM=#{code}
 	</delete>
-<<<<<<< HEAD
 
 	<delete id="saleListDelete" parameterType="String">
 	DELETE FROM AC_SALESTATEMENT WHERE S_NUM=#{ad_snum}
 	</delete>
 </mapper>
-=======
-	
-	<delete id="saleListDelete" parameterType="String">
-	DELETE FROM AC_SALESTATEMENT WHERE S_NUM=#{ad_snum}
-	</delete>
-</mapper>
->>>>>>> origin/JSJ

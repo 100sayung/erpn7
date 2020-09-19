@@ -15,11 +15,7 @@ import com.n7.erp.dao.AccountDao;
 import com.google.gson.Gson;
 import com.n7.erp.bean.ac.A_company;
 import com.n7.erp.bean.ac.ApprovalDocument;
-<<<<<<< HEAD
 import com.n7.erp.bean.ApprovalDocu;
-=======
-import com.n7.erp.bean.ac.Approvaldocu;
->>>>>>> origin/JSJ
 import com.n7.erp.bean.ac.SaleInfo;
 import com.n7.erp.bean.ac.myCompany;
 import com.n7.erp.bean.ac.approvalLine;
@@ -28,17 +24,10 @@ import com.n7.erp.bean.ac.approvalLine;
 
 @Component
 public class AccountMM {
-<<<<<<< HEAD
 
 	@Autowired
 	AccountDao aDao;
 
-=======
-	
-	@Autowired
-	AccountDao aDao;
-    
->>>>>>> origin/JSJ
 	ModelAndView mav;
 
 	public Map<String, List<A_company>> insertcomlist(A_company ac, HttpSession session) {
@@ -57,13 +46,6 @@ public class AccountMM {
 			aMap=new HashMap<>();
 			aMap.put("aList", aList);
 		}
-<<<<<<< HEAD
-
-
-=======
-			
-	
->>>>>>> origin/JSJ
 		return aMap;
 	}
 
@@ -72,11 +54,6 @@ public class AccountMM {
 			   List<A_company> aList = aDao.getCompanyList();
 			   aMap=new HashMap<>();
 			   aMap.put("aList", aList);
-<<<<<<< HEAD
-
-=======
-			
->>>>>>> origin/JSJ
 		return aMap;
 	}
 
@@ -88,11 +65,6 @@ public class AccountMM {
 			   aMap=new HashMap<>();
 			   aMap.put("aList", aList);
 		   }
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> origin/JSJ
 	return aMap;
 }
 
@@ -131,26 +103,6 @@ public class AccountMM {
 		String [] strtotal=request.getParameterValues("s_total");
 		String [] strmemo=request.getParameterValues("s_memo");
 		     	a = aDao.saleinsert(si);
-<<<<<<< HEAD
-
-=======
-		     	
->>>>>>> origin/JSJ
-		for(int i=0; i<strpkind.length; i++) {
-			si.setS_pkind(strpkind[i]);
-			si.setS_cnt(strcnt[i]);
-			si.setS_price(strprice[i]);
-			si.setS_price2(strprice2[i]);
-			si.setS_tax(strtax[i]);
-			si.setS_total(strtotal[i]);
-			si.setS_memo(strmemo[i]);
-			 	b=aDao.saleinsert2(si);
-		}
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> origin/JSJ
 		if(a && b) {
 			    mav.addObject("msg","전표등록성공");
 			    view="Account/openTable";
@@ -167,22 +119,12 @@ public class AccountMM {
 		   List<SaleInfo> sList1 = aDao.getsaleList();
 		   //List<SaleInfo> sList2 = aDao.getsaleList2();
 		   if(sList1!=null) {
-<<<<<<< HEAD
-
-=======
-			   
->>>>>>> origin/JSJ
 			   aMap=new HashMap<>();
 			   aMap.put("sList1", sList1);
 		   }else {
 			   aMap=null;
 		   }
 		   //aMap.put("sList2", sList2);
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> origin/JSJ
 	return aMap;
 }
 
@@ -193,11 +135,6 @@ public class AccountMM {
 		if(sList!=null){
 			sMap=new HashMap<>();
 			sMap.put("sList", sList);
-<<<<<<< HEAD
-
-=======
-			
->>>>>>> origin/JSJ
 		}
 		return sMap;
 	}
@@ -206,23 +143,13 @@ public class AccountMM {
 		String view=null;
 		System.out.println(check);
 		mav= new ModelAndView();
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> origin/JSJ
 		if(check!=null) {
 			if(check.contains("S")) {
 				List<SaleInfo> tList1 = aDao.saleDetaile(check);
 				List<SaleInfo> tList2 = aDao.saleDetaile2(check);
 				String company=tList1.get(0).getS_company();
-<<<<<<< HEAD
 				myCompany mc = new myCompany();
 				A_company ac = new A_company();
-=======
-				myCompany mc = new myCompany(); 
-				A_company ac = new A_company(); 
->>>>>>> origin/JSJ
 				ac=aDao.getcomInfo(company);
 				mc=aDao.getmyCompany();
 				mav.addObject("mc",mc);
@@ -230,15 +157,9 @@ public class AccountMM {
 				mav.addObject("tList1",tList1);
 				mav.addObject("tList2",new Gson().toJson(tList2));
 				view="Account/taxbillS";
-<<<<<<< HEAD
 
 			}else {
 				myCompany mc = new myCompany();
-=======
-				
-			}else {
-				myCompany mc = new myCompany(); 
->>>>>>> origin/JSJ
 				A_company ac = new A_company();
 				List<SaleInfo> tList1 = aDao.saleDetaile(check);
 				List<SaleInfo> tList2 = aDao.saleDetaile2(check);
@@ -256,11 +177,6 @@ public class AccountMM {
 				mav.addObject("msg","선택한 항목이없습니다");
 				view="Account/openTable";
 			}
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> origin/JSJ
 		mav.setViewName(view);
 		return mav;
 	}
@@ -289,40 +205,22 @@ public class AccountMM {
 		String view=null;
 		System.out.println(check);
 		mav= new ModelAndView();
-<<<<<<< HEAD
 
 		if(check!=null) {
 				List<SaleInfo> tList = new ArrayList<>();
 				tList=aDao.getTaxbill(check);
 				List<SaleInfo> tList2 = aDao.saleDetaile2(check);
 				myCompany mc = new myCompany();
-=======
-		
-		if(check!=null) {
-				List<SaleInfo> tList = new ArrayList<>();
-				tList=aDao.getTaxbill(check); 
-				List<SaleInfo> tList2 = aDao.saleDetaile2(check);
-				myCompany mc = new myCompany(); 
->>>>>>> origin/JSJ
 				mc=aDao.getmyCompany();
 				mav.addObject("mc",mc);
 				mav.addObject("tList",tList);
 				mav.addObject("tList2",new Gson().toJson(tList2));
 				view="Account/saledetails";
 			}else {
-<<<<<<< HEAD
 
 			    mav.addObject("msg","매출만 거래명세서를 볼수 있습니다");
 				view="Account/openTable";
 			}
-
-=======
-				
-			    mav.addObject("msg","매출만 거래명세서를 볼수 있습니다");
-				view="Account/openTable";
-			}
-		
->>>>>>> origin/JSJ
 		mav.setViewName(view);
 		return mav;
 	}
@@ -350,28 +248,16 @@ public class AccountMM {
 		String view=null;
 		mav= new ModelAndView();
 		List<approvalLine> aList = null;
-<<<<<<< HEAD
 		aList=aDao.approvalLine();
-=======
-		aList=aDao.approvalLine(); 
->>>>>>> origin/JSJ
 		if(aList.size()!=0) {
 				mav.addObject("aList",new Gson().toJson(aList));
 				view="Account/approvalLine";
 			}else {
-<<<<<<< HEAD
 
 			    mav.addObject("msg","주소록에 정보가 없습니다");
 				view="Account/acApproval";
 			}
 
-=======
-				
-			    mav.addObject("msg","주소록에 정보가 없습니다");
-				view="Account/acApproval";
-			}
-		
->>>>>>> origin/JSJ
 		mav.setViewName(view);
 		return mav;
 	}
@@ -394,11 +280,6 @@ public class AccountMM {
 		List<approvalLine> aList= new ArrayList<>();
 		System.out.println("숫자="+cnt);
 		System.out.println("이름값="+strArray.length);
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> origin/JSJ
 		String code="";
 		approvalLine al = new approvalLine();
 		for(int i=0; i<cnt; i++) {
@@ -419,7 +300,6 @@ public class AccountMM {
 		Map<String, List<approvalLine>> aMap=null;
 		System.out.println(code01.length);
 		//System.out.println(code02[0]);
-<<<<<<< HEAD
 
 		if(code01.length!=0) {
 				List<approvalLine> tList1 = new ArrayList<>();
@@ -428,25 +308,11 @@ public class AccountMM {
 				for(int i=0; i<code01.length; i++) {
 					approvalLine al = new approvalLine();
 					al=aDao.approLinecom1(code01[i]);
-=======
-		
-		if(code01.length!=0) {
-				List<approvalLine> tList1 = new ArrayList<>();
-				//List<approvalLine> tList2= new ArrayList<>();
-				
-				for(int i=0; i<code01.length; i++) {
-					approvalLine al = new approvalLine();
-					al=aDao.approLinecom1(code01[i]); 
->>>>>>> origin/JSJ
 					tList1.add(al);
 				}
 //				for(int i=0; i<code02.length; i++) {
 //					approvalLine al = new approvalLine();
-<<<<<<< HEAD
 //					al=aDao.approLinecom2(code02[i]);
-=======
-//					al=aDao.approLinecom2(code02[i]); 
->>>>>>> origin/JSJ
 //					tList2.add(al);
 //				}
 				aMap=new HashMap<>();
@@ -454,7 +320,6 @@ public class AccountMM {
 				aMap.put("tList1",tList1);
 				//aMap.put("tList2",tList2);
 			}else {
-<<<<<<< HEAD
 
 				aMap=null;;
 			}
@@ -462,15 +327,6 @@ public class AccountMM {
 		return aMap;
 
 
-=======
-				
-				aMap=null;;
-			}
-		
-		return aMap;
-	
-	
->>>>>>> origin/JSJ
 	}
 
 	public ModelAndView approdocument(HttpServletRequest request, ApprovalDocument ad, HttpSession session) {
@@ -492,11 +348,6 @@ public class AccountMM {
 		String [] strmemo=request.getParameterValues("rs_memo");
 		 		a = aDao.approvaldocu(ad);
 		     	b = aDao.approdocument(ad);
-<<<<<<< HEAD
-
-=======
-		     	
->>>>>>> origin/JSJ
 		for(int i=0; i<strpkind.length; i++) {
 			ad.setRs_pkind(strpkind[i]);
 			ad.setRs_cnt(strcnt[i]);
@@ -538,11 +389,6 @@ public class AccountMM {
 	public ModelAndView SaleDetaile(String check) {
 		String view=null;
 		mav= new ModelAndView();
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> origin/JSJ
 		if(check!=null) {
 			List<SaleInfo> sList1 = aDao.saleDetaile(check);
 			List<SaleInfo> sList2 = aDao.saleDetaile2(check);
@@ -562,11 +408,6 @@ public class AccountMM {
 	public Map<String, List<SaleInfo>> selectSearch(String select, String choice) {
 		Map<String, List<SaleInfo>> sMap=null;
 		List<SaleInfo> sList=null;
-<<<<<<< HEAD
-
-=======
-		
->>>>>>> origin/JSJ
 		sList=aDao.selectSreach(select,choice);
 		System.out.println(sList);
 		if(sList!=null) {
@@ -578,17 +419,10 @@ public class AccountMM {
 		return sMap;
 	}
 
-<<<<<<< HEAD
 	public Map<String, List<ApprovalDocu>> comparecode(String code) {
 		Map<String, List<ApprovalDocu>> sMap=null;
 		List<ApprovalDocu> sList=null;
 
-=======
-	public Map<String, List<Approvaldocu>> comparecode(String code) {
-		Map<String, List<Approvaldocu>> sMap=null;
-		List<Approvaldocu> sList=null;
-		
->>>>>>> origin/JSJ
 		sList=aDao.comparecode(code);
 		System.out.println(sList);
 		if(sList!=null) {
@@ -599,7 +433,6 @@ public class AccountMM {
 		}
 		return sMap;
 	}
-<<<<<<< HEAD
 
 	public Map<String, List<approvalLine>> getMyInfo(HttpSession session) {
 		Map<String, List<approvalLine>> sMap=null;
@@ -616,6 +449,3 @@ public class AccountMM {
 		return sMap;
 	}
 }
-=======
-}
->>>>>>> origin/JSJ

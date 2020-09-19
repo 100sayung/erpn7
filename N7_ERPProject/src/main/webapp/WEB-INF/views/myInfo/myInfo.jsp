@@ -62,12 +62,13 @@ ul {
 		<div id="menu">
 			<ul>
 				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
-				<li><a href="/erp/hr/hr" accesskey="2"
+<!-- 				<li><a href="/erp/hr/hr" accesskey="2"
 					title="">인사 관리</a></li>
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
 				<li><a href="/erp/stock/setcategory" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="/erp/Account/acerp">회계 관리</a></li><ul id="mainmenu">
+				<li><a href="/erp/Account/acerp">회계 관리</a></li -->>
+				<ul id="mainmenu">
 		</div>
 	</div>
 	<div id="side_menu">
@@ -144,13 +145,13 @@ $(function(){
 		console.log(menu);
 
 		if(menu=="인사관리"){
-			$("#"+menu).attr("href","/erp/myInfo/myInfo");
+			$("#"+menu).attr("href","/erp/hr/hr");
 			}else if(menu=="영업관리"){
-			$("#"+menu).attr("href","");
+			$("#"+menu).attr("href","/erp/sales/orderitem");
 			}else if(menu=="구매관리"){
-			$("#"+menu).attr("href","");
+			$("#"+menu).attr("href","/erp/Purchase/erpmain");
 			}else if(menu=="재고관리"){
-			$("#"+menu).attr("href","");
+			$("#"+menu).attr("href","/erp/stock/setcategory");
 			}else if(menu=="회계관리"){
 			$("#"+menu).attr("href","/erp/Account/acerp");
 			}

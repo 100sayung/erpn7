@@ -28,11 +28,7 @@ width:1000px;
 <body>
 	<div id="saledetaile">
 
-<<<<<<< HEAD
 		<table id="table">
-=======
-		<table>
->>>>>>> origin/JSJ
 			<c:forEach var="sale" items="${sList1}">
 				<tr>
 					<td>전표번호</td>
