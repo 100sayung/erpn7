@@ -16,22 +16,34 @@ import java.util.*;
 @RestController // @ResponseBody 생략가능
 @RequestMapping(value = "/rest")
 public class HomeRestController {
+<<<<<<< HEAD
 
 	@Autowired private MemberMM mm;
 
 
+=======
+	
+	@Autowired private MemberMM mm;
+	
+	
+>>>>>>> origin/JSJ
 	@GetMapping(value="/home/searchfromid")
 	public String getSearchFromId(String m_id) {
 		String result = mm.getSearchFromId(m_id);
 		return result;
 	}
 
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> origin/JSJ
 	@PostMapping(value="/home/changegrade")
 	public String updateChangeGrade(String jsonStr) {
 		List<Member> mlist = new Gson().fromJson(jsonStr, new TypeToken<List<Member>>() {}.getType());
 		System.out.println(mlist);
 		String result = mm.updateChangeGrade(mlist);
+<<<<<<< HEAD
 
 		return result;
 	}
@@ -39,6 +51,13 @@ public class HomeRestController {
 	@PostMapping(value="/home/forcewithdrawal")
 	public String forceWithDrawal(String jsonStr) { //강퇴기능
 		System.out.println(jsonStr);
+=======
+		return result;
+	}
+	
+	@PostMapping(value="/home/forcewithdrawal")
+	public String forceWithDrawal(String jsonStr) { //강퇴기능
+>>>>>>> origin/JSJ
 		List<String> slist = new Gson().fromJson(jsonStr, new TypeToken<List<String>>() {}.getType());
 		System.out.println(slist);
 		mm.forceWithDrawal(slist);

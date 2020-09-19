@@ -109,10 +109,15 @@ input[type='text'], input[type='number'] {
 			<li><a href="/erp/stock/byitemstocklist">품목별 자재현황</a></li>
 			<li><a href="/erp/stock/monthpayment">월수불실적</a></li>
 			<li><a href="/erp/stock/exportstockcheck">출고 양식</a></li>
+<<<<<<< HEAD
+=======
+			<li><a href="/erp/stock/accountconfirm">거래처 등록</a></li>
+>>>>>>> origin/JSJ
 		</ul>
 	</div>
 
 	<div id="description">
+<<<<<<< HEAD
 		<h3>입고 내역 및 수정</h3>
 		${importCheckList} <input type="hidden" value="${id}">
 		<button type="button" id="btn">입고 확정</button>
@@ -199,6 +204,58 @@ input[type='text'], input[type='number'] {
 			$('#p_amount' + pnum).parent().siblings('#p_sum' + pnum).children()
 					.val(Number(amount) * Number(unlit));
 		}
+=======
+	<div id="getCt_code">
+	</div>
+		<div id="getItemCodeFromItemCcode">
+		</div>
+		<div id="contain">
+		<form id = 'frm0'>
+		<button type="button" onclick="addRow(0)">행 추가</button>
+		<table class="tb">
+		<caption><input type="text"></caption>
+			<tr>
+			<td>분류명</td><td>품목코드</td><td>단가</td><td>수량</td><td>삭제</td>
+			</tr>
+			<tr class="tr"><td></td><td></td><td><input type="number" min="10"></td><td><input type="number" min="0"> </td><td><button type="button" onclick="deleteRow(this)">삭제</button></td>
+			</tr>		
+		</table>
+		</form>
+		</div>
+		<button type="button" id="btn">출고양식 추가</button>
+		<button type="button" id="export">출고 확정</button>
+	</div>
+	<script>
+	$('#btn').click(function() {
+		var num ;
+		for(var i = 0; ;){
+			if($('#frm'+i).length!=0){
+				i++;
+			}else{
+				num = i;
+				break;
+			}
+		}
+		var str = '<form id="frm'+num+'"><button type="button" onclick="addRow('+num+')">행 추가</button>'
+		+'<table class="tb"><caption><input type="text"></caption>'
+		+'<tr><td>분류명</td><td>품목코드</td><td>단가</td><td>수량</td><td>삭제</td>'
+		+'</tr><tr class="tr"><td></td><td></td><td><input type="number" min="10"></td><td><input type="number" min="0"> </td>'
+		+'<td><button type="button" onclick="deleteRow(this)">삭제</button></td>'
+		+'</tr></table>';
+		$('#contain').append(str);/
+	});
+	function addRow(num) {
+		var str = '<tr class="tr"><td></td><td></td>'
+			+'<td><input type="number" min="10"></td>'
+			+'<td><input type="number" min="0"> </td>'
+			+'<td><button type="button" onclick="deleteRow(this)">삭제</button></td></tr>';
+		$('#frm'+num).children(".tb").append(str);
+	}
+	function deleteRow(id) {
+		var child =  id.parentElement.parentElement;
+		child.parentNode.removeChild(child);
+	}
+>>>>>>> origin/JSJ
 	</script>
 </body>
 </html>

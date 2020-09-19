@@ -42,6 +42,7 @@ a {
 	float: left;
 	height: 100%;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 table{
@@ -56,6 +57,8 @@ table, th, td{
 	width:30px;
 }
 =======
+=======
+>>>>>>> origin/JSJ
 	width: 800px;
 }
 
@@ -68,7 +71,10 @@ td {
 	width: 30px
 }
 
+<<<<<<< HEAD
 >>>>>>> origin/yyyyyyyyyyyy
+=======
+>>>>>>> origin/JSJ
 ul {
 	list-style: none;
 }
@@ -124,6 +130,7 @@ ul {
 		사원들 휴가 등록된거 보는 화면임~!
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<table align="center">
 			<tr>
 				<td style="width : 100px;"><font color="#B3B6B3"><label
@@ -136,6 +143,8 @@ ul {
 		<table align="center" id="calendar">
 		</table>
 =======
+=======
+>>>>>>> origin/JSJ
 		<table align="center" id="calendar">
 			<tr>
 				<td><font size=1%; color="#B3B6B3"><label
@@ -145,7 +154,10 @@ ul {
 						onclick="nextm()" id="next"></label></font></td>
 			</tr>
 		</table>
+<<<<<<< HEAD
 >>>>>>> origin/yyyyyyyyyyyy
+=======
+>>>>>>> origin/JSJ
 
 		<br>
 		<div id="container"></div>
@@ -287,9 +299,12 @@ ul {
 							}
 						}
 <<<<<<< HEAD
+<<<<<<< HEAD
 						designThis(cell);
 =======
 >>>>>>> origin/yyyyyyyyyyyy
+=======
+>>>>>>> origin/JSJ
 						row = calendar.insertRow();
 					}
 					str = data[0].hap_type;
@@ -298,6 +313,7 @@ ul {
 					console.log(err);
 				}
 			});
+<<<<<<< HEAD
 <<<<<<< HEAD
 			
 		}
@@ -312,6 +328,10 @@ ul {
 		}
 
 >>>>>>> origin/yyyyyyyyyyyy
+=======
+		}
+
+>>>>>>> origin/JSJ
 		$("#showMenu1").hover(function() {
 			$("#smallMenu1").attr("style", "display:inline-block");
 		}, function() {

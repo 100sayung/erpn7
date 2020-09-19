@@ -8,7 +8,11 @@ import org.springframework.stereotype.Component;
 
 import com.n7.erp.bean.ac.A_company;
 import com.n7.erp.bean.ac.ApprovalDocument;
+<<<<<<< HEAD
 import com.n7.erp.bean.ApprovalDocu;
+=======
+import com.n7.erp.bean.ac.Approvaldocu;
+>>>>>>> origin/JSJ
 import com.n7.erp.bean.ac.SaleInfo;
 import com.n7.erp.bean.ac.approvalLine;
 import com.n7.erp.bean.ac.myCompany;
@@ -76,9 +80,13 @@ public interface AccountDao {
 
 	A_company getcomcode(String s_comnum);
 
+<<<<<<< HEAD
 	List<ApprovalDocu> comparecode(String code);
 
 	List<com.n7.erp.bean.ac.approvalLine> getMyInfo(String code);
+=======
+	List<Approvaldocu> comparecode(String code);
+>>>>>>> origin/JSJ
 
 
 //	List<SaleInfo> saledetails(String check);
