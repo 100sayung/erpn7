@@ -63,7 +63,7 @@ a{
         <ul id="menuList">
             <li><a href="#" id="pregistration">구매관리</a></li>
             <li><a href="" id="rregistration">반품 관리</a></li>
-            <li><a href="" id="papproval">반품 관리</a></li>
+            <li><a href="" id="papproval">내결재함</a></li>
         </ul>
     </div>
     <center>
@@ -73,7 +73,7 @@ a{
     </center>
 </body>
 <script>
-
+		
     $("#pregistration").click(function(){
 	   $.ajax({
 		   type:'get',
@@ -87,7 +87,7 @@ a{
 			   console.log(err);
 		   }
 	   });
-   });
+   }); 
    
    $("#rregistration").click(function(){
 	   $.ajax({
@@ -96,7 +96,6 @@ a{
 		   dataType: 'html',
 		   success: function(data){
 			   $("#description").html(data);
-			   console.log(data);
 		   },
 		   error: function(err){
 			   console.log(err);

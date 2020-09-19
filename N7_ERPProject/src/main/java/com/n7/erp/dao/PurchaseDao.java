@@ -8,9 +8,8 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
 import com.n7.erp.bean.IePort;
-import com.n7.erp.bean.Purchase;
+import com.n7.erp.bean.ps.Purchase;
 import com.n7.erp.bean.ps.PurchaseApproval;
-import com.n7.erp.bean.ps.Purchasebean;
 import com.n7.erp.bean.ps.Return;
 
 @Mapper
@@ -19,31 +18,31 @@ public interface PurchaseDao {
 
 	@Update("UPDATE P SET P_SITUATION=1 WHERE P_NUM=#{ie_pnum} AND ")//수정해야함
 	boolean updatePurchase(IePort iePort);
+	
+	boolean pregistration(Purchase ps);
 
-	boolean pregistration(Purchasebean ps);
+	boolean pcommom(Purchase ps);
 
-	boolean pcommom(Purchasebean ps);
+	List<Purchase> pFrerence();
 
-	List<Purchasebean> pFrerence();
-
-	List<Purchasebean> pfSearch(@Param("search") String search, @Param("choice") String choice);
+	List<Purchase> pfSearch(@Param("search") String search, @Param("choice") String choice);
 
 	boolean pfDelete(String check_list);
 
 	boolean pcDelete(String check_list);
 
-	List<Purchasebean> pDetail(String check);
+	List<Purchase> pDetail(String check);
 
-	Purchasebean pInfo(String check);
+	Purchase pInfo(String check);
 
-	Purchasebean pBring(String check);
+	Purchase pBring(String check);
 
-	List<Purchasebean> pProgram(String check);
-//
+	List<Purchase> pProgram(String check);
+
 //	com.n7.erp.bean.approvalLine approLinecom1(String code01);
 //
 //	com.n7.erp.bean.approvalLine approLinecom2(String code02);
-//
+//	
 //	List<approvalLine> approvalLine();
 //
 //	List<approvalLine> searchName(String name);
@@ -63,6 +62,5 @@ public interface PurchaseDao {
 	boolean rDelete(String check_list);
 
 	List<Return> rSearch(@Param("search") String search, @Param("choice") String choice);
-
 
 }

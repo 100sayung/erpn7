@@ -14,7 +14,7 @@ input{
 text-align: center;
 }
 #list{
-width: 1140px;
+width: 1140px; 
 border: 1px solid silver;
 }
 </style>
@@ -36,7 +36,7 @@ border: 1px solid silver;
 					<button id="searchbtn">검색</button>
 		<form id="pregistration">
 			<div style="height: 80px; padding-top: 25px; background-color: #F8F7F7;">
-				<div style="margin-left: 55px" >
+				<div style="margin-left: 55px;">
 				<table>
                  	 <tr>
                  	 	<th>구매번호</th>
@@ -123,7 +123,7 @@ border: 1px solid silver;
 	  $('#save').click(function(){
          var obj = $('#pregistration').serialize();
          $.ajax({
-            url: 'rest/pregistration',
+            url: '/erp/rest/Puruchase/pregistration',
             type: 'post',
             data: obj,
             success: function(data){
@@ -138,7 +138,7 @@ border: 1px solid silver;
       
        $('#Pinfo').click(function(){
     		$.ajax({
-    			url: 'rest/pference',
+    			url: '/erp/rest/Purchase/pference',
     			type: 'get',
     			dataType: 'json',
     			success: function(data){
@@ -168,7 +168,7 @@ border: 1px solid silver;
                console.log(check);
                
                if(check!=""){
-               	window.open("purchasedetail?check="+check,"purchasedetail", "width=900, height=600, top=80 left=350");
+               	window.open("/erp/Purchase/purchasedetail?check="+check,"purchasedetail", "width=700, height=460, top=80 left=350");
                }
             });
  		});
@@ -179,7 +179,7 @@ border: 1px solid silver;
 			 console.log(choice);
 			 console.log(search);
 			 $.ajax({
-				 url: 'rest/pfsearch',
+				 url: '/erp/rest/Pruchase/pfsearch',
 				 type: 'post',
 				 data: "choice="+choice+"&search="+search,
 				 dataType: 'json',
@@ -214,7 +214,7 @@ border: 1px solid silver;
 				console.log(check_list); 
 			
 			$.ajax({
-				url: 'rest/pfdelete',
+				url: '/erp/rest/Purchase/pfdelete',
 				type: 'post',
 				data: {check_list:cid},
 				dataType: 'json',
@@ -246,7 +246,7 @@ border: 1px solid silver;
     		 console.log(check);
     		 
     		 if(check!=""){
-                	window.open("pprogramwrite?check="+check,"pprogramwrite", "width=1200, height=620, top=80 left=200");
+                	window.open("/erp/Purchase/pprogramwrite?check="+check,"pprogramwrite", "width=1200, height=620, top=80 left=200");
              }
     	 });
       });

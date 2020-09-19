@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Select;
 
 import com.n7.erp.bean.B_shipment;
 import com.n7.erp.bean.IePort;
-import com.n7.erp.bean.Purchase;
+import com.n7.erp.bean.ps.Purchase;
 
 public interface IeportDao {
 

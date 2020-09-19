@@ -1,6 +1,5 @@
 package com.n7.erp.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,17 +11,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.n7.erp.bean.ps.Purchase;
 import com.n7.erp.bean.ps.PurchaseApproval;
-import com.n7.erp.bean.ps.Purchasebean;
 import com.n7.erp.bean.ps.Return;
 import com.n7.erp.dao.PurchaseDao;
 
 @Component
 public class PurchaseMM {
+	
 	@Autowired
-	private PurchaseDao pDao;
+	PurchaseDao pDao;
 
-	public ModelAndView pregistration(HttpServletRequest request, Purchasebean ps) {
+	public ModelAndView pregistration(HttpServletRequest request, Purchase ps) {
 		ModelAndView mav = new ModelAndView();
 		boolean a = false;
 		boolean b = false;
@@ -42,19 +42,19 @@ public class PurchaseMM {
 			b= pDao.pregistration(ps); 
 		}
 		if(a&&b) {
-			view = "/pregistrationfrm";
+			view = "/erp/Purchase/pregistration";
 			mav.addObject("msg", "데이터입력완료");
 		} else {
-			view = "/pregistrationfrm";
+			view = "/erp/Purhcase/pregistration";
 			mav.addObject("msg", "데이터입력 실패");
 		}
 		mav.setViewName(view);
 		return mav;
 	}
 
-	public Map<String, List<Purchasebean>> pFrerence() {
-		Map<String, List<Purchasebean>> pMap = null;
-		List<Purchasebean> pList = pDao.pFrerence();
+	public Map<String, List<Purchase>> pFrerence() {
+		Map<String, List<Purchase>> pMap = null;
+		List<Purchase> pList = pDao.pFrerence();
 		if (pList != null) {
 			pMap = new HashMap<>();
 			pMap.put("pList", pList);
@@ -65,9 +65,9 @@ public class PurchaseMM {
 		return pMap;
 	}
 
-	public Map<String, List<Purchasebean>> pfsearch(String search, String choice) {
-		Map<String, List<Purchasebean>> pMap = null;
-		List<Purchasebean> pList = pDao.pfSearch(search, choice);
+	public Map<String, List<Purchase>> pfsearch(String search, String choice) {
+		Map<String, List<Purchase>> pMap = null;
+		List<Purchase> pList = pDao.pfSearch(search, choice);
 		if (pList != null) {
 			pMap = new HashMap<>();
 			pMap.put("pList", pList);
@@ -78,12 +78,12 @@ public class PurchaseMM {
 		return pMap;
 	}
 
-	public Map<String, List<Purchasebean>> pfdelete(String check_list) {
-		Map<String, List<Purchasebean>> pMap = null;
+	public Map<String, List<Purchase>> pfdelete(String check_list) {
+		Map<String, List<Purchase>> pMap = null;
 		System.out.println(check_list);
 
 		if(pDao.pcDelete(check_list) && pDao.pfDelete(check_list)) {
-			List<Purchasebean>pList= pDao.pFrerence();
+			List<Purchase>pList= pDao.pFrerence();
 			pMap = new HashMap<>();
 			pMap.put("pList", pList);
 			System.out.println("지워짐");
@@ -97,8 +97,8 @@ public class PurchaseMM {
 	public ModelAndView pDetail(String check) {
 		ModelAndView mav= new ModelAndView();
 		String view= null;
-		List<Purchasebean> pList= null;
-		Purchasebean ps= new Purchasebean();
+		List<Purchase> pList= null;
+		Purchase ps= new Purchase();
 		
 		if(check!=null) {
 			ps= pDao.pInfo(check);
@@ -107,11 +107,11 @@ public class PurchaseMM {
 				mav.addObject("pList", new Gson().toJson(pList));
 				System.out.println("PLIST"+pList);
 				mav.addObject("ps", ps);
-				view= "/purchasedetail";
+				view= "Purchase/purchasedetail";
 			}
 		}else {
 			mav.addObject("msg", "가지고 올 데이터가 없습니다.");
-			view= "/purchasedetail";
+			view= "Purchase/purchasedetail";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -120,16 +120,16 @@ public class PurchaseMM {
 	public ModelAndView pProgram(String check) {
 		ModelAndView mav= new ModelAndView();
 		String view= null;
-		List<Purchasebean> pList= new ArrayList<Purchasebean>();
+		List<Purchase> pList= null;
 		
 		if(check!=null) {
-			if(pList!=null) {
-				Purchasebean ps= new Purchasebean();
+			Purchase ps= new Purchase();
 				ps= pDao.pBring(check);
 				pList= pDao.pProgram(check);
-				view= "/pprogramwrite";
-				mav.addObject("pList", new Gson().toJson(pList));
-				mav.addObject("ps", ps);
+				if(pList!=null) {
+					mav.addObject("pList", new Gson().toJson(pList));
+					mav.addObject("ps", ps);
+					view= "Purchase/pprogramwrite";
 			}
 		}else {
 			check= null;
@@ -137,7 +137,7 @@ public class PurchaseMM {
 		mav.setViewName(view);
 		return mav;
 	}
-//	
+	
 //	public Map<String, List<approvalLine>> searchName(String name) {
 //	      Map<String, List<approvalLine>> aMap=null;
 //	      List<approvalLine> aList=null;
@@ -245,10 +245,10 @@ public class PurchaseMM {
 			c= pDao.pApproval2(pa); 
 		}
 		if(a&&b&&c) {
-			view = "/pregistrationfrm";
+			view = "/erp/Puerhcase/pregistrationfrm";
 			mav.addObject("msg", "데이터입력완료");
 		} else {
-			view = "/pprogramwrite";
+			view = "/erp/Puerhcase/pprogramwrite";
 			mav.addObject("msg", "데이터입력 실패");
 		}
 		mav.setViewName(view);
@@ -260,10 +260,10 @@ public class PurchaseMM {
 		String view= null;
 		
 		if(pDao.rRegistration(rt)) {
-			view= "/returnregistration";
+			view= "/erp/Puerhcase/returnregistration";
 			mav.addObject("msg", "데이터입력 완료");
 		}else {
-			view="/returnregistration";
+			view="/erp/Puerhcase/returnregistration";
 			mav.addObject("msg", "데이터입력 실패");
 		}
 		mav.setViewName(view);
@@ -311,4 +311,5 @@ public class PurchaseMM {
 		}
 		return rMap;
 	}
+	
 }
