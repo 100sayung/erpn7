@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,23 +43,26 @@ public class Salesmm {
 		return sMap;
 	}
 
-	public ModelAndView orderregistrationinput(Salesbean s) {
-		mav=new ModelAndView();
+	public ModelAndView orderregistrationinput(Salesbean s, HttpSession session) {
+		s.setBo_ccode(session.getAttribute("cCode").toString());
+		mav=new ModelAndView();	
 		String view=null;
 		System.out.println("슈밤222222222222");
 		
 		s.setBo_num("O");
 		
 		boolean result=sDao.orderregistrationinput(s);
-		if(result) {
-			mav.addObject("msg", "데이터 입력이 완료되었습니다");
-		    view="sales/orderregistrationfrm";
-		}else {
-			mav.addObject("msg", "데이터 입력이 실패하였습니다");
-		    view="sales/orderregistrationfrm";
+		if(s.getBo_ccode()!="") {
+			if(result) {
+				mav.addObject("msg", "데이터 입력이 완료되었습니다");
+				view="sales/orderregistrationfrm";
+			}else {
+				mav.addObject("msg", "데이터 입력이 실패하였습니다");
+				view="sales/orderregistrationfrm";
+			}
 		}
 		mav.setViewName(view);
-		return mav;
+		return mav;			
 	}
 
 	public Map<String, List<Salesbean>> orderregistrationsearch(String search, String choice) {
@@ -88,21 +93,22 @@ public class Salesmm {
 	}
 
 
-	public ModelAndView shippingrequestinput(Shippingbean ss) {	
+	public ModelAndView shippingrequestinput(Shippingbean ss, HttpSession session) {	
+		ss.setBs_ccode(session.getAttribute("cCode").toString());
 		mav = new ModelAndView();
 		String view = null;
 		
 		//ss.setBs_docunum("S");
 		
 		boolean result = sDao.shippingrequestinput(ss);
+		if(ss.getBs_ccode()!="") {
 		if (result) {
 			mav.addObject("msg", "출하입력이 완료되었습니다.");
-			System.out.println("씨발 들어가라고");
-			view = "shippingrequestinputfrm";
+			view = "sales/shippingrequestinputfrm";
 		} else {
 			mav.addObject("msg", "출하입력이 실패하였습니다.");
-			System.out.println("왜 안들어가는데");
-			view = "shippingrequestinputfrm";
+			view = "sales/shippingrequestinputfrm";
+		  }
 		}
 		mav.setViewName(view);
 		return mav;
