@@ -66,12 +66,12 @@ public class SalesHomeController {
 	      return "sales/clientfrm";
 	}
 	
-//	@RequestMapping(value = "/sales/approvalLine", method = RequestMethod.GET)
-//	   public ModelAndView approvalLine() {
-//	      mav=sm.approvalLine();
-//	      return mav;
-//	}
-//	
+	@RequestMapping(value = "sales/approvalLine", method = RequestMethod.GET)
+	   public ModelAndView approvalLine() {
+	      mav=sm.approvalLine();
+	      return mav;
+	}
+	
 	
 	
 //	@RequestMapping(value = "/introducecompany", method = RequestMethod.GET)

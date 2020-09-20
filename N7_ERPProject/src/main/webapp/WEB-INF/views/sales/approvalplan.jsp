@@ -165,22 +165,10 @@ resize: none;
          return new Date(year, month, 0).getDate();
       }
       
-/*       $('#submit').click(function(){
-         $.ajax({
-            url: 'rest/pprogramwrite',
-            type: 'get',
-            dataType: 'json',
-            success: function(data){
-               console.log(data);
-            },
-            error: function(error){
-               console.log(error);
-            }
-         });
-      }); */
+
       
       $("#approvalLine").click(function() {
-          window.open('approvalLine', 'approvalLine', 'width=1400,height=700');
+          window.open('/erp/sales/approvalLine', 'approvalLine', 'width=1400,height=700');
        });
       
       function setChildValue(data) {
@@ -212,7 +200,7 @@ resize: none;
 		   var obj=$("#approvalinput").serialize();
 		   
 		  $.ajax({
-			 url:'rest/approvalinput',
+			 url:'erp/sales/approvalinput',
 			 type: 'post',
 			 data: obj,
 			 dataType: 'json',

@@ -16,4 +16,7 @@ public class approvalLine {
   private String m_email;
   private String m_phone;
   private String m_colume;
+  private String hc_hrcode;
+  private String hc_dept;
+  private String hc_position;
 }

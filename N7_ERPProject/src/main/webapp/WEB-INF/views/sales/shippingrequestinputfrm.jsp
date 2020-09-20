@@ -10,8 +10,8 @@
 <style>
 html, body {
 text-align:center;
-	height: 100%;
-	margin: 0
+   height: 100%;
+   margin: 0
 }
 
 tr,td{
@@ -74,10 +74,10 @@ border: 1px solid;
                 <thead valign="top">
                     <tr>
                         <th><input type="checkbox" id="allCheck"></th>
-						<th>판매단가</th>
-						<th>수량</th>
-						<th>판매금액</th>						
-					</tr>
+                  <th>판매단가</th>
+                  <th>수량</th>
+                  <th>판매금액</th>                  
+               </tr>
                 </thead>
                 <tbody id="tBody">
                     <tr>
@@ -107,26 +107,26 @@ border: 1px solid;
     <script type="text/javascript">
     $('#shippingitemfrm').click(function(){
       var str="";
-	
-	  $.ajax({
-		url: '/erp/rest/sales/shippingitem',
-		type: 'get',
-		dataType: "json",
-		success:function(data){
-			console.log(data);
-			
-			for(var i in data.sList){
-				str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
-				str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
-				str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
-				str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";				
-			}
-				$('#tBody').html(str);
-		},
-		error:function(error){
-			console.log(error);
-		}
-	});
+   
+     $.ajax({
+      url: '/erp/rest/sales/shippingitem',
+      type: 'get',
+      dataType: "json",
+      success:function(data){
+         console.log(data);
+         
+         for(var i in data.sList){
+            str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
+            str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
+            str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
+            str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";            
+         }
+            $('#tBody').html(str);
+      },
+      error:function(error){
+         console.log(error);
+      }
+   });
   });
       
         //추가삭제
@@ -143,101 +143,101 @@ border: 1px solid;
         
         
     $('#sub').click(function(){
-    	console.log("저장클릭");
+       console.log("저장클릭");
     
-    	var obj= $('#shippingrequestinput').serialize();
+       var obj= $('#shippingrequestinput').serialize();
 
-    	$.ajax({
-    			type : 'post',
-    			url : '/erp/rest/sales/shippingrequestinput',
-    			data:obj,
-    			success : function(data) {
-    				console.log(data);
-    			},
-    			error : function(error) {
-    				console.log(error);
-    			}
-    		});
-    	  $('input').val("");
-    	}); 
+       $.ajax({
+             type : 'post',
+             url : '/erp/rest/sales/shippingrequestinput',
+             data:obj,
+             success : function(data) {
+                console.log(data);
+             },
+             error : function(error) {
+                console.log(error);
+             }
+          });
+         $('input').val("");
+       }); 
     
-		
+      
          $("#approvalplan").click(function(){
-        	 var check='';
-        	 $("input[name=each_check]:checked").each(function(){
-        		check= $(this).attr("value");
-        		
-        		console.log(check);
-        		if(check!=""){
-        			window.open("approvalplan?check="+check,'approvalplan','width=1200,height=700')
-        		}
-        	 }); 
+            var check='';
+            $("input[name=each_check]:checked").each(function(){
+              check= $(this).attr("value");
+              
+              console.log(check);
+              if(check!=""){
+                 window.open("/erp/sales/approvalplan?check="+check,'approvalplan','width=1200,height=700')
+              }
+            }); 
          });
          
          
          $('#searchh').click(function(){
             var choice=$('#choice').val();
-         	var search=$('#search').val();
-         	console.log(choice);
-         	console.log(search);
-         	$.ajax({
-         			type : 'post',
-         			url : 'rest/shippingrequestsearch',
-         			data: "choice="+choice+"&search="+search,
-         			dataType: "json",
-         			success : function(data) {       				
-         				console.log(data);
-         				
-         				var str="";
-             			if(data.sList!=""){
-         				for(var i in data.sList){
-         					str+="<tr class='tr'><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
-         					str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
-         					str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
-         					str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
-             			  }
-             				$('#tBody').html(str);
-             			}else{
-             				alert("데이터가 없습니다.");
-             			}	
-         			},
-         			error : function(error) {
-         				console.log(error);
-         			}
-         		});
-         	});
+            var search=$('#search').val();
+            console.log(choice);
+            console.log(search);
+            $.ajax({
+                  type : 'post',
+                  url : 'erp/rest/sales/shippingrequestsearch',
+                  data: "choice="+choice+"&search="+search,
+                  dataType: "json",
+                  success : function(data) {                   
+                     console.log(data);
+                     
+                     var str="";
+                      if(data.sList!=""){
+                     for(var i in data.sList){
+                        str+="<tr class='tr'><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
+                        str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
+                        str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
+                        str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
+                        }
+                         $('#tBody').html(str);
+                      }else{
+                         alert("데이터가 없습니다.");
+                      }   
+                  },
+                  error : function(error) {
+                     console.log(error);
+                  }
+               });
+            });
          
          
          $('#deleteCheck').click(function(){
-         	var check="";
-         	$("input[name=each_check]:checked").each(function(){
-         		check = $(this).attr("value");
-         		console.log(check);
-         	});
-         	
-         	$.ajax({
-         			type : 'post',
-         			url : 'rest/shippingrequestdelete',
-         			data: {check:check},
-         			dataType: "json",
-         			success : function(data) {       				
-         				console.log(data);
-         				var str="";
-         				
-         				for(var i in data.sList){
-         					str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
-         					str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
-         					str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
-         					str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
-             			}
-             				$('#tBody').html(str);
-         			},
-         			error : function(error) {
-         				console.log(error);
-         			}
-         		});
-         	});
-	
+            var check="";
+            $("input[name=each_check]:checked").each(function(){
+               check = $(this).attr("value");
+               console.log(check);
+            });
+            
+            $.ajax({
+                  type : 'post',
+                  url : 'erp/rest/sales/shippingrequestdelete',
+                  data: {check:check},
+                  dataType: "json",
+                  success : function(data) {                   
+                     console.log(data);
+                     var str="";
+                     
+                     for(var i in data.sList){
+                        str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
+                        str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
+                        str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
+                        str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
+                      }
+                         $('#tBody').html(str);
+                  },
+                  error : function(error) {
+                     console.log(error);
+                  }
+               });
+            });
+   
 </script>
 </body>
 </html>
