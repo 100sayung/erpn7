@@ -7,6 +7,7 @@
 <title>Document</title>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 	<!-- <script src="/js/jquery.serializeObject.js"></script> -->
+	
 <style>
 #cal {
 	font-size: 20px;
@@ -66,7 +67,7 @@ float: left;
 		style="width: auto; background-color: white-space; color: white; padding: 1%;">
 		<span style="padding-left: 5px"><a href="#" onclick="saleinsert()"><button>매출/매입등록</button></a></span>
 		<span style="padding-left: 5px"><a href="#"
-			onclick="window.open('comPany','comlist','width=1350,height=500')"><button>거래처등록</button></a></span>
+			onclick="window.open('comPany','comlist','width=1400,height=700')"><button>거래처등록</button></a></span>
 		<span style="padding-left: 5px"><button id="getList">매출/매입조회</button></span>
 		<span style="padding-left: 5px"><button id="taxbill">세금계산서인쇄</button></span>
 		<span style="padding-left: 5px"><button id="saledetails">거래명세표인쇄</button></span>
@@ -84,9 +85,9 @@ float: left;
 			<option value="employee">입력자</option>
 		</select>
 		<button id="search2" type="button">검색</button>
-		매출<input onclick="getList('AS')" type='radio' name="sale" value='AS'>
-		매입<input onclick="getList('AP')" type='radio' name="sale" value='AP'>
-
+		매출<input onclick="getList('S')" type='radio' name="sale" value='S'>
+		매입<input onclick="getList('P')" type='radio' name="sale" value='P'>
+	
 		<!-- <form action="rest/saleinsert" method="post"> -->
 		<form id="saleInfo">
 		<div id="comInfo"
@@ -122,14 +123,14 @@ float: left;
 		</div>
 		<!-- </form> -->
 			<button id="detaile" type="button">상세정보</button>
-			 <span id='plusorminus'>
-			<input type="number" id="qty" min="1" style="width: 64px;">
+			 <span id='plusorminus'> 
+			<input type="number" id="qty" min="1" style="width: 64px;"> 
 			<button type="button" id="addList"> 행추가</button>
 			<button type="button" id="deleteCheck">삭제</button>
 			</span>
-
+			
 			<!-- <form id="saleInfodetaile"> -->
-
+			
 		<div id="ListTable" style="background-color: #ECEBEA;">
 			<table id="testTable"
 				summary="Code page support in different versions of MS Windows."
@@ -163,17 +164,18 @@ float: left;
 		</div>
 		</form>
  		<button type="button" onclick="saleInsertInfo()">등록</button>
-
-
-
+	
+        
+ 		
 	<br>
 	<br>
-
+	
 </body>
 <script type="text/javascript">
 $("#search2").click(function(){
 	var select = $("#select").val();
 	var choice = $("#choice").val();
+	
 	$.ajax({
 		url:"/erp/rest/Account/selectSearch",
 		type:"post",
@@ -184,7 +186,7 @@ $("#search2").click(function(){
 			var str = '';
 			str += "<tr id='colume'><td>체크</td><td>전표번호</td><td>유형</td><td>거래처명</td><td>사업자번호</td><td>입력날짜</td><td>입력자</td></tr>"
 			for ( var i in data.sList) {
-				str += "<tr><td><input name='checknum' type='radio' class='check' value='"+data.sList[i].s_num+"'></td>";
+				str += "<tr><td><input name='checknum' type='checkbox' class='check' value='"+data.sList[i].s_num+"'></td>";
 				str += "<td><input class='data2' type='text' name='s_num' value="+data.sList[i].s_num+"></td>";
 				str += "<td><input class='data2' type='text' name='s_kind' value="+data.sList[i].s_kind+"></td>";
 				str += "<td><input class='data2' type='text' name='s_company' value="+data.sList[i].s_company+"></td>";
@@ -193,6 +195,7 @@ $("#search2").click(function(){
 				str += "<td><input class='data2' type='text' name='s_employee' value="+data.sList[i].s_employee+"></td></tr>";
 			}
 			$("#testTable").html(str);
+				
 			}else{
 				alert("검색할 데이터가 없습니다");
 			}
@@ -200,9 +203,9 @@ $("#search2").click(function(){
 		error:function(error){
 			console.log(error);
 		}
-
+		
 	});
-
+	
 });
 
 
@@ -236,9 +239,9 @@ function saleInsertInfo(){
     		  console.log(error);
     		  alert("데이터 입력실패");
     	  }
-
+    	  
        });
-
+       
 };
 
 
@@ -267,12 +270,13 @@ $("#approval").click(function(){
 								}
 							});
 						}
+	
 });
 
 $("#addList").click(function() {
 					var str = '';
 					for (var i = 0; i < $("#qty").val(); i++) {
-						str += "<tr><td><input type='radio' class='check'></td>"
+						str += "<tr><td><input type='checkbox' class='check'></td>"
 						str += "<td><input class='data' type='text' name='s_pkind'/></td>"
 						str += "<td><input class='data' type='text' name='s_cnt'/></td>"
 						str += "<td><input class='data' type='text' name='s_price'/></td>"
@@ -287,7 +291,7 @@ $("#addList").click(function() {
 
 
  function saleinsert(){
-	//$("#comInfo").attr("display","inline-block");
+	//$("#comInfo").attr("display","inline-block");	
 	//$("#plusorminus").attr("display","inline-block");
 	$("#testTable").html("");
 	var str='';
@@ -300,6 +304,7 @@ $("#addList").click(function() {
 		str += "<td><input class='data' type='text' name='s_tax'/></td>"
 		str += "<td><input class='data' type='text' name='s_total' /></td>"
 		str += "<td><input class='data' name='s_memo' /></td></tr></tbody>"
+	
 	$("#testTable").html(str);
 }
 
@@ -322,6 +327,7 @@ $("#addList").click(function() {
                             }
 						});
 			});
+	
 	$("#saledetails").click(function() {
 				var check = '';
 		$("input[name='checknum']:checked").each(function() {
@@ -356,7 +362,7 @@ $("#addList").click(function() {
 						var str = '';
 						str += "<tr id='colume'><td>체크</td><td>전표번호</td><td>유형</td><td>거래처명</td><td>사업자번호</td><td>입력날짜</td><td>입력자</td></tr>"
 						for ( var i in data.sList) {
-							str += "<tr><td><input name='checknum' type='radio' class='check' value='"+data.sList[i].s_num+"'></td>";
+							str += "<tr><td><input name='checknum' type='checkbox' class='check' value='"+data.sList[i].s_num+"'></td>";
 							str += "<td><input class='data2' type='text' name='s_num' value="+data.sList[i].s_num+"></td>";
 							str += "<td><input class='data2' type='text' name='s_kind' value="+data.sList[i].s_kind+"></td>";
 							str += "<td><input class='data2' type='text' name='s_company' value="+data.sList[i].s_company+"></td>";
@@ -383,7 +389,7 @@ $("#addList").click(function() {
 										var str = '';
 										str += "<tr id='colume'><td>체크</td><td>전표번호</td><td>유형</td><td>거래처명</td><td>사업자번호</td><td>입력날짜</td><td>입력자</td></tr>"
 										for ( var i in data.sList1) {
-											str += "<tr><td><input name='checknum' type='radio' class='check' value='"+data.sList1[i].s_num+"' readonly></td>"
+											str += "<tr><td><input name='checknum' type='checkbox' class='check' value='"+data.sList1[i].s_num+"' readonly></td>"
 											str += "<td><input class='data2' type='text' name='s_num' value="+data.sList1[i].s_num+" readonly></td>"
 											str += "<td><input class='data2' type='text' name='s_kind' value="+data.sList1[i].s_kind+" readonly></td>"
 											//str += "<td><input class='data2' type='text' name='s_pkind' value="+data.sList[i].s_pkind+"></td>"
@@ -438,7 +444,7 @@ $("#addList").click(function() {
 											var str = '';
 											str += "<tr id='colume'><td>체크</td><td>전표번호</td><td>유형</td><td>거래처명</td><td>사업자번호</td><td>입력날짜</td><td>입력자</td></tr>"
 											for ( var i in data.sList) {
-												str += "<tr><td><input name='checknum' type='radio' class='check' value='"+data.sList[i].s_num+"'></td>";
+												str += "<tr><td><input name='checknum' type='checkbox' class='check' value='"+data.sList[i].s_num+"'></td>";
 												str += "<td><input class='data2' type='text' name='s_num' value="+data.sList[i].s_num+"></td>";
 												str += "<td><input class='data2' type='text' name='s_kind' value="+data.sList[i].s_kind+"></td>";
 												str += "<td><input class='data2' type='text' name='s_company' value="+data.sList[i].s_company+"></td>";

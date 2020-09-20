@@ -44,9 +44,6 @@ button {
 </head>
 
 <body>
-<br>
-비밀번호 변경 해야함.?
-<br>
 	<div id="header" class="container">
 		<div id="logo">
 			<h1>
@@ -82,9 +79,8 @@ button {
 						placeholder="password를 입력해주세요" required id="pwd">
 				</div>
 			</div>
-			<span class="warnMsg">${warn }</span><br>
-			<button>로그인</button><br>
-			<a href = "/erp/findidfrm">아이디 찾기</a>____<a href = "/erp/findpasswordfrm">비밀번호 찾기</a>
+			<span class="warnMsg">${warn }</span>
+			<button>로그인</button>
 		</div>
 	</form>
 	<script>

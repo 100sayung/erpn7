@@ -25,9 +25,11 @@ public class ConsultingBoardMM {
 	ModelAndView mav = new ModelAndView();
 	//게시판 이동시 목록 출력
 	public ModelAndView moveBoardList() {
+		System.out.println("여기로 들어왔나?");
 		String view=null;
 		mav=new ModelAndView();
 		ArrayList<ConsultingBoard> bList=new ArrayList<ConsultingBoard>();
+		System.out.println("그르게 뭐가 문제일까");
 		bList=CBdao.moveBoardList();
 		System.out.println("게시판 목록 불러오기="+bList);
 		Integer pageNum=bList.size();
@@ -43,18 +45,20 @@ public class ConsultingBoardMM {
 			String json=gson.toJson(bList);
 			mav.addObject("bList", json);
 			mav.addObject("paging", getPaging(pageNum));
-			view="/home/erpboard";
+			view="erpboard";
+		}else {
+			view="home";
 		}
 		mav.setViewName(view);
 		return mav;
 	}
 	//페이징
 	private Object getPaging(Integer pageNum) {
-		Integer maxNum=CBdao.getBoardList();
+		int maxNum=CBdao.getBoardList();
 		System.out.println("maxnum="+maxNum);
 		int listCount=5;
 		int pageCount=2;
-		String boardName="/erp/home/erpboard";
+		String boardName="erpboard";
 		Paging paging=new Paging(pageNum,maxNum, listCount, pageCount, boardName);
 		System.out.println("======"+paging.makeHtmlPaging());
 		return paging.makeHtmlPaging();
@@ -63,9 +67,9 @@ public class ConsultingBoardMM {
 	public ModelAndView writeBoard(ConsultingBoard board) {
 		String view=null;
 		if(CBdao.writeBoard(board)) {
-			view="/home/erpboard";
+			view="erpapply";
 		}else {
-			view="/home/erpboard";
+			view="writeFrm";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -88,7 +92,7 @@ public class ConsultingBoardMM {
 	public ModelAndView boardmodify(ConsultingBoard board) {
 		String view=null;
 		if(CBdao.boardmodify(board)) {
-			view="redirect:/home/erpboard";
+			view="redirect:erpboard";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -98,9 +102,9 @@ public class ConsultingBoardMM {
 		String view=null;
 		if(num!=null) {
 			if(CBdao.writelistdelete(num)) {
-				view="/home/erpboard";
+				view="erpboard";
 			}else {
-				view="/home/erpboard";
+				view="erpboard";
 			}
 		}
 		mav.setViewName(view);

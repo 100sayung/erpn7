@@ -37,17 +37,4 @@
 		<property name="defaultEncoding" value="UTF-8" />
 		<property name="maxUploadSize" value="10000000" /> <!-- 10MB -->
 	</bean>
-	 <bean id="mailSender"
-      class="org.springframework.mail.javamail.JavaMailSenderImpl">
-      <property name="host" value="smtp.gmail.com" />
-      <property name="port" value="587" />
-      <property name="username" value="mykyj2000@gmail.com" />
-      <property name="password" value="rladPwls1@" />
-      <property name="javaMailProperties">
-         <props>
-            <prop key="mail.smtp.auth">true</prop>
-            <prop key="mail.smtp.starttls.enable">true</prop>
-         </props>
-      </property>
-   </bean>
 </beans>

@@ -3,6 +3,7 @@ package com.n7.erp.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,9 +41,9 @@ public class SalesController {
    }
    
    @PostMapping(value = "sales/orderregistrationinput",produces="application/json;charset=utf-8") //수주등록
-   public ModelAndView orderregistrationinput(Salesbean s) {
+   public ModelAndView orderregistrationinput(Salesbean s, HttpSession session) {
 	  System.out.println("슈밤111111");
-	  mav=sm.orderregistrationinput(s);
+	  mav=sm.orderregistrationinput(s, session);
       return mav;
    }
    
@@ -56,12 +57,11 @@ public class SalesController {
    public Map<String, List<Salesbean>> orderregistrationdelete(String check) {
 	   Map<String, List<Salesbean>> sMap=sm.orderregistrationdelete(check);
 	   return sMap;
-  } 
+   } 
    
    @PostMapping(value = "sales/insertcomlist",produces="application/json;charset=utf-8" ) //거래처 전체리스트
-   public  Map<String, List<A_company>> insertcomlist( A_company ac) {
+   public  Map<String, List<A_company>> insertcomlist(A_company ac) {
 	   Map<String, List<A_company>> aMap=sm.insertcomlist(ac);
-	   //System.out.println(ac.getC_code());
 	   return aMap;
    }
    
@@ -88,9 +88,9 @@ public class SalesController {
    }
    
    @PostMapping(value = "sales/shippingrequestinput",produces="application/json;charset=utf-8") //출하의뢰등록
-   public ModelAndView shippingrequestinput(Shippingbean ss) {
+   public ModelAndView shippingrequestinput(Shippingbean ss, HttpSession session) {
 	  System.out.println("슈밤22222222222222");
-	  mav=sm.shippingrequestinput(ss);
+	  mav=sm.shippingrequestinput(ss, session);
       return mav;
    }
    

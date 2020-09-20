@@ -26,17 +26,6 @@ text-align: center;
 .select{
 width: 150px;
 height: 25px;
-<<<<<<< HEAD
-}
-.draft{
-width: 500px;
-height: 20px;
-border-style: none;
-text-align: center;"
-}
-.draft2{
-width: 600px;
-=======
 }   
 .draft{
 width: 500px; 
@@ -46,16 +35,11 @@ text-align: center;"
 }
 .draft2{
 width: 600px; 
->>>>>>> origin/JSJ
 text-align: center;
 }
 .draft3{
 width: 230px;
-<<<<<<< HEAD
-border-style: none;
-=======
 border-style: none; 
->>>>>>> origin/JSJ
 text-align: center;
 }
 #ect{
@@ -75,16 +59,6 @@ text-align: center;
    <div style="height: auto; padding-top: 5px; background-color: #F8F7F7;">
    <form id="formdata">
          <table>
-<<<<<<< HEAD
-
-            <tr>
-               <th>일자</th>
-               <th><input id="time" type="text" name="rs_date"></th>
-            </tr>
-            <tr>
-               <th>제목</th>
-               <th><textarea rows="1" cols="190" name="rs_title"></textarea></th>
-=======
          
             <tr>
                <th>일자</th>
@@ -93,17 +67,12 @@ text-align: center;
             <tr>
                <th>제목</th>
                <th><textarea rows="1" cols="190" name="ad_title"></textarea></th>
->>>>>>> origin/JSJ
             </tr>
             <tr>
                <th>결재자</th>
                <th id="line"></th>
             </tr>
-<<<<<<< HEAD
-
-=======
             
->>>>>>> origin/JSJ
             <tr>
                <th>내용</th>
                <td>
@@ -116,24 +85,6 @@ text-align: center;
                            </tr>
                            <tr>
                            <th>전표번호</th>
-<<<<<<< HEAD
-                           <th colspan="2"><input type="text" name="rs_num" value="${approval.s_num}"></th>
-                              <th>유형</th>
-                              <th><input type="text" name="rs_kind" value="${approval.s_kind}"></th>
-                              <th colspan="2">거래처</th>
-                              <th colspan="3"><input type="text" name="rs_company" value="${approval.s_company}"></th>
-                           </tr>
-                           <tr>
-                           <th>사업자번호</th>
-                           <th colspan="2"><input type="text" name="rs_comnum" value="${approval.s_comnum}"></th>
-                              <th>매출일자</th>
-                              <th><input type="text" name="rs_sdate" value="${approval.s_date}"></th>
-                              <th>담당자</th>
-                              <th>부서명</th>
-                              <th><input type="text" name="rs_dept" value="회계팀"></th>
-                              <th>성명</th>
-                              <th><input type="text" name="rs_employee" value="${approval.s_employee}"></th>
-=======
                            <th colspan="2"><input type="text" name="ad_num" value="${approval.s_num}"></th>
                               <th>유형</th>
                               <th><input type="text" name="ad_kind" value="${approval.s_kind}"></th>
@@ -150,7 +101,6 @@ text-align: center;
                               <th><input type="text" name="ad_dept" value="회계팀"></th>
                               <th>성명</th>
                               <th><input type="text" name="ad_employee" value="${approval.s_employee}"></th>
->>>>>>> origin/JSJ
                            </tr>
                            </c:forEach>
                            <tr>
@@ -163,20 +113,12 @@ text-align: center;
 					<th>비고</th>
 				</tr>
                         <tbody id="tbody">
-<<<<<<< HEAD
-
-=======
                         
->>>>>>> origin/JSJ
                         </tbody>
                         <tr><th colspan="3">총합계(원)</th><th id="total" colspan="7"></th></tr>
                            <tr>
                               <th>기타</th>
-<<<<<<< HEAD
-                              <th colspan="10"><textarea rows="5" cols="163" name="rs_reason"></textarea></th>
-=======
                               <th colspan="10"><textarea rows="5" cols="163" name="ad_reason"></textarea></th>
->>>>>>> origin/JSJ
                            </tr>
                         </table>
                      </div>
@@ -190,26 +132,6 @@ text-align: center;
 </body>
 <script>
 
-<<<<<<< HEAD
-
- $(document).ready(function(){
-	$.ajax({
-		url:'/erp/rest/Account/getMyInfo',
-		type:'get',
-		datatype:'json',
-		success:function(data){
-			console.log(data);
-		},
-		error:function(error){
-			console.log(error);
-		}
-	});
-	 
- });
- 
-
-=======
->>>>>>> origin/JSJ
 $("#commit").click(function(){
 	var data = $("#formdata").serialize();
 	$.ajax({
@@ -232,15 +154,6 @@ var saleList = ${sList2};
 var total=0;
 var str="";
 for(var i in saleList){
-<<<<<<< HEAD
-	str+="<tr><td colspan='2'><input type='text' name='rs_pkind' value="+saleList[i].s_pkind+"></td>";
-	str+="<td><input type='text' name='rs_cnt' value="+saleList[i].s_cnt+"></td>";
-	str+="<td><input type='text' name='rs_price' value="+saleList[i].s_price+"></td>";
-	str+="<td colspan='2'><input type='text' name='rs_price2' value="+saleList[i].s_price2+"></td>";
-	str+="<td colspan='2'><input type='text' name='rs_tax' value="+saleList[i].s_tax+"></td>";
-	str+="<td><input type='text' name='rs_total' value="+saleList[i].s_total+"></td>";
-	str+="<td><input type='text' name='rs_memo' value="+saleList[i].s_memo+"></td></tr>";
-=======
 	str+="<tr><td colspan='2'><input type='text' name='ad_pkind' value="+saleList[i].s_pkind+"></td>";
 	str+="<td><input type='text' name='ad_cnt' value="+saleList[i].s_cnt+"></td>";
 	str+="<td><input type='text' name='ad_price' value="+saleList[i].s_price+"></td>";
@@ -248,7 +161,6 @@ for(var i in saleList){
 	str+="<td colspan='2'><input type='text' name='ad_tax' value="+saleList[i].s_tax+"></td>";
 	str+="<td><input type='text' name='ad_total' value="+saleList[i].s_total+"></td>";
 	str+="<td><input type='text' name='ad_memo' value="+saleList[i].s_memo+"></td></tr>";
->>>>>>> origin/JSJ
 	total+=Number(saleList[i].s_total);
 }
 $("#tbody").html(str);
@@ -258,32 +170,19 @@ $("#total").html(total);
 var time = new Date();
 $("#time").val(time.toLocaleDateString()+time.toLocaleTimeString());
 
-<<<<<<< HEAD
-
-=======
  
->>>>>>> origin/JSJ
 
 	function setChildValue(data) {
 		console.log(data);
 		if (data.tList1 != "") {
 		var str = "";
 			for ( var i in data.tList1) {
-<<<<<<< HEAD
-		        str +="<input type='text' name='rs_apcode"+i+"' value='"+data.tList1[i].hc_hrcode+"' hidden='true'>";
-				str +=data.tList1[i].hc_position+"/";
-				str +="<input style='width:50px;' type='text' name='rs_apname"+i+"' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
-			}
-			console.log(str)
-			$("#line").append(str);
-=======
 		        str +="<input type='text' name='ad_apcode"+i+"' value='"+data.tList1[i].m_code+"' hidden='true'>";
 				str +=data.tList1[i].m_grade+"/";
 				str +="<input style='width:50px;' type='text' name='ad_apname"+i+"' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
 			}
 			console.log(str)
 			$("#line").html(str);
->>>>>>> origin/JSJ
 		};
 		/* if (data.tList2 != "") {
 			for ( var i in data.tList2) {
@@ -294,23 +193,13 @@ $("#time").val(time.toLocaleDateString()+time.toLocaleTimeString());
 			$("#refer"+i).html(str2);
 			}
 		}; */
-<<<<<<< HEAD
-
-=======
 	
->>>>>>> origin/JSJ
 	};
 
 	$("#approvalLine").click(function() {
 
 		window.open('/erp/Account/approvalLine', 'approvalLine', 'width=1400,height=700');
 	});
-<<<<<<< HEAD
-
-</script>
-</html>
-=======
 	
 </script>
 </html>
->>>>>>> origin/JSJ

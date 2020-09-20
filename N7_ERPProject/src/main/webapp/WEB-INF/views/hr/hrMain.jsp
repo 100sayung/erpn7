@@ -63,7 +63,7 @@ ul {
 					title="">인사 관리</a></li>
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="/erp/stock/setcategory" accesskey="6" title="">자재 관리</a></li>
+				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
 				<li><a href="/erp/Account/acerp">회계 관리</a></li>
 			</ul>
 		</div>
@@ -89,7 +89,7 @@ ul {
 				<ul id="smallMenu3" style="display: none;">
 					<li><a href="/erp/hr/deptpay">부서/직급별 급여</a></li>
 					<li><a href="/erp/hr/deduct">공제사항 관리</a></li>
-					<li><a href="/erp/hr/searchpaymm">급여 관리</a></li>
+					<li><a href="">급여 관리</a></li>
 				</ul>
 			</li>
 		</ul>

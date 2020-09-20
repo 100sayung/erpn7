@@ -19,5 +19,5 @@ public interface IConsultingBoardDao {
 
 	boolean writelistdelete(Integer num);
 
-	Integer getBoardList();
+	int getBoardList();
 }

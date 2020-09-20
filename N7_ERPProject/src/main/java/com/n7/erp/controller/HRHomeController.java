@@ -20,12 +20,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.n7.erp.bean.hr.ApplyHoliday;
 import com.n7.erp.bean.hr.Department;
 import com.n7.erp.bean.hr.HR_Card;
-import com.n7.erp.service.ConsultingBoardMM;
-import com.n7.erp.service.AccountMM;
 import com.n7.erp.service.HRDepartmentMM;
 import com.n7.erp.service.HrMM;
 import com.n7.erp.service.MemberMM;
 
+import lombok.Getter;
+import lombok.extern.log4j.Log4j;
+
+@Log4j
 @Controller
 public class HRHomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -35,8 +37,6 @@ public class HRHomeController {
 	@Autowired private HRDepartmentMM dm;
 	@Autowired private HrMM hm;
 	@Autowired private MemberMM mm;
-	@Autowired private ConsultingBoardMM cbm;
-		@Autowired private AccountMM am;
 
 	//인사카드 세부정보 페이지로 이동
 	@GetMapping(value="/hr/hrModifyDetail")
@@ -111,7 +111,7 @@ public class HRHomeController {
 	}
 
 	// 급여 조회 페이지 이동
-	@RequestMapping(value = "/hr/searchpaymm", method = RequestMethod.GET)
+	@RequestMapping(value = "/hr/searchpay", method = RequestMethod.GET)
 	public ModelAndView moveSearchPay(HttpSession session) {
 		mav = dm.searchpay(session.getAttribute("cCode").toString());
 
@@ -178,57 +178,6 @@ public class HRHomeController {
 	@GetMapping(value="/hr/receiptholiday")
 	public String moveReceiptHoliady() {
 		return "/hr/receiptholiday";
-	}
-
-
-
-	// 급여조회 페이지 목록
-	@RequestMapping(value = "/hr/searchwages", method = RequestMethod.POST)
-	public @ResponseBody String searchwages() {
-		String wages = dm.searchwages();
-		return wages;
-	}
-	// 급여조회 상세페이지 이동
-	@RequestMapping(value = "/hr/paydetai", method = RequestMethod.GET)
-	public String detailpay(@RequestParam("hc") String hc) {
-		System.out.println("zjsxmfhffj="+hc);
-		mav=dm.detailpay(hc);
-		return "/hr/searchpaymm";
-	}
-	@RequestMapping(value = "/hr/payinputmodify", method = RequestMethod.GET)
-	public ModelAndView detailp() {
-		String view=null;
-		view="/hr/payinputmodify";
-		mav.setViewName(view);
-		return mav;
-	}
-	// 급여조회 상세페이지
-	@RequestMapping(value = "/hr/paydetail", method = RequestMethod.GET)
-	public ModelAndView paydetail() {
-		String view=null;
-		view="/hr/paydetail";
-		mav.setViewName(view);
-		return mav;
-	}
-	//사원 급여 명세서 목록
-	@PostMapping(value = "/hr/findmonth")
-	public @ResponseBody String findmonth(String month,String hrcode,HttpSession session) {
-		System.out.println("123야!="+session);
-		System.out.println("123="+month);
-		System.out.println("45="+hrcode);
-			String result=dm.findmonth(month,hrcode);
-		return result;
-	}
-	@GetMapping(value="/hr/holidayap")
-	public ModelAndView holidayAp() {
-		mav=am.approvalLine();
-		return mav;
-	}
-
-	@GetMapping(value="/hr/holidaydetail")
-	public ModelAndView getHolidayDetail(String docunum, HttpSession session) {
-		mav = hm.getHolidayDetail(docunum, session);
-		return mav;
 	}
 
 }

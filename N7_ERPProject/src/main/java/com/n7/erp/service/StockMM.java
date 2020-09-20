@@ -11,11 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
-import com.n7.erp.bean.B_shipment;
 import com.n7.erp.bean.Category;
 import com.n7.erp.bean.IePort;
 import com.n7.erp.bean.ItemCode;
-import com.n7.erp.bean.ps.Purchase;
+import com.n7.erp.bean.Purchase;
 import com.n7.erp.dao.CategoryDao;
 import com.n7.erp.dao.IeportDao;
 import com.n7.erp.dao.ItemCodeDao;
@@ -137,116 +136,115 @@ public class StockMM {
 	}
 
 	private String makeImportCheckHtml(List<Purchase> ipList, String id) {
-//		StringBuilder sb = new StringBuilder();
-//		for (int i = 0; i < ipList.size(); i++) {
-//			if ((ipList.size() - 1) != i && i >= 1) {
-//				if (!(ipList.get(i).getP_account().equals(ipList.get(i - 1).getP_account()))) {
-//					sb.append(
-//							"<form id = 'frm" + i + "'><table><caption>" + ipList.get(i).getP_account() + "</caption>");
-//					sb.append("<tr><td colspan='8'><input class='check' type='checkbox'></td></tr>");
-//					sb.append(
-//							"<tr><td>품명</td><td>제품코드</td><td>규격</td><td>단위</td><td>수량</td><td>단가</td><td>금액</td><td>기타</td></tr>");
-//				}
-//				sb.append("<tr><td>" + ipList.get(i).getIt_pname() + "<input type='hidden' name='ie_account' value='"
-//						+ ipList.get(i).getP_account() + "'></td>");
-//				sb.append("<td><input type='text' name='ie_itcode' value='" + ipList.get(i).getIt_code()
-//						+ "' readonly></td>");
-//				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_size() + "' readonly></td>");
-//				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
-//				sb.append("<td><input id='p_amount" + ipList.get(i).getP_num() + "' onclick='modifySum(\""
-//						+ ipList.get(i).getP_num() + "\")' name='ie_qty' type='number' value='"
-//						+ ipList.get(i).getP_amount() + "'>");
-//				sb.append("<input type='hidden' value='" + ipList.get(i).getP_amount() + "'></td>");
-//				sb.append("<td id='p_unlit" + ipList.get(i).getP_num() + "'><input type='number' value='"
-//						+ ipList.get(i).getP_unlit() + "' readonly></td>");
-//				sb.append("<td id='p_sum" + ipList.get(i).getP_num() + "'><input name='ie_price' type='number' value='"
-//						+ ipList.get(i).getP_sum() + "' readonly></td>");
-//				sb.append("<td><input type='text' name = 'ie_etc'>");
-//				sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getP_num() + "'></td>");
-//				if (!(ipList.get(i).getP_account().equals(ipList.get(i + 1).getP_account()))) {
-//					sb.append("</tr></table></form>");
-//				} else {
-//					sb.append("</tr>");
-//				}
-//			} else if (i == 0) {
-//				sb.append("<form id = 'frm" + i + "'><table><caption>" + ipList.get(i).getP_account() + "</caption>");
-//				sb.append("<tr><td colspan='8'><input class='check' type='checkbox'></td></tr>");
-//				sb.append(
-//						"<tr><td>품명</td><td>제품코드</td><td>규격</td><td>단위</td><td>수량</td><td>단가</td><td>금액</td><td>기타</td></tr>");
-//				if (ipList.size() != 1) {
-//					sb.append(
-//							"<tr><td>" + ipList.get(i).getIt_pname() + "<input type='hidden' name='ie_account' value='"
-//									+ ipList.get(i).getP_account() + "'></td>");
-//					sb.append("<td><input type='text' name='ie_itcode' value='" + ipList.get(i).getIt_code()
-//							+ "' readonly></td>");
-//					sb.append("<td><input type='text' value='" + ipList.get(i).getIt_size() + "' readonly></td>");
-//					sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
-//					sb.append("<td><input id='p_amount" + ipList.get(i).getP_num() + "' onclick='modifySum(\""
-//							+ ipList.get(i).getP_num() + "\")' name='ie_qty' type='number' value='"
-//							+ ipList.get(i).getP_amount() + "'>");
-//					sb.append("<input type='hidden' value='" + ipList.get(i).getP_amount() + "'></td>");
-//					sb.append("<td id='p_unlit" + ipList.get(i).getP_num() + "'><input type='number' value='"
-//							+ ipList.get(i).getP_unlit() + "' readonly></td>");
-//					sb.append("<td id='p_sum" + ipList.get(i).getP_num()
-//							+ "'><input name='ie_price' type='number' value='" + ipList.get(i).getP_sum()
-//							+ "' readonly></td>");
-//					sb.append("<td><input type='text' name = 'ie_etc'>");
-//					sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getP_num() + "'></td>");
-//					if (!(ipList.get(i).getP_account().equals(ipList.get(i + 1).getP_account()))) {
-//						sb.append("</tr></table></form>");
-//					} else {
-//						sb.append("</tr>");
-//					}
-//				} else {
-//					sb.append(
-//							"<tr><td>" + ipList.get(i).getIt_pname() + "<input type='hidden' name='ie_account' value='"
-//									+ ipList.get(i).getP_account() + "'></td>");
-//					sb.append("<td><input type='text' name='ie_itcode' value='" + ipList.get(i).getIt_code()
-//							+ "' readonly></td>");
-//					sb.append("<td><input type='text' value='" + ipList.get(i).getIt_size() + "' readonly></td>");
-//					sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
-//					sb.append("<td><input id='p_amount" + ipList.get(i).getP_num() + "' onclick='modifySum(\""
-//							+ ipList.get(i).getP_num() + "\")' name='ie_qty' type='number' value='"
-//							+ ipList.get(i).getP_amount() + "'>");
-//					sb.append("<input type='hidden' value='" + ipList.get(i).getP_amount() + "'></td>");
-//					sb.append("<td id='p_unlit" + ipList.get(i).getP_num() + "'><input type='number' value='"
-//							+ ipList.get(i).getP_unlit() + "' readonly></td>");
-//					sb.append("<td id='p_sum" + ipList.get(i).getP_num()
-//							+ "'><input name='ie_price' type='number' value='" + ipList.get(i).getP_sum()
-//							+ "' readonly></td>");
-//					sb.append("<td><input type='text' name = 'ie_etc'>");
-//					sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getP_num() + "'></td>");
-//					sb.append("</tr></table></form>");
-//				}
-//			} else {
-//				if (!(ipList.get(i).getP_account().equals(ipList.get(i - 1).getP_account()))) {
-//					sb.append(
-//							"<form id = 'frm" + i + "'><table><caption>" + ipList.get(i).getP_account() + "</caption>");
-//					sb.append("<tr><td colspan='8'><input class='check' type='checkbox'></td></tr>");
-//					sb.append(
-//							"<tr><td>품명</td><td>제품코드</td><td>규격</td><td>단위</td><td>수량</td><td>단가</td><td>금액</td><td>기타</td></tr>");
-//				}
-//				sb.append("<tr><td>" + ipList.get(i).getIt_pname() + "<input type='hidden' name='ie_account' value='"
-//						+ ipList.get(i).getP_account() + "'></td>");
-//				sb.append("<td><input type='text' name='ie_itcode' value='" + ipList.get(i).getIt_code()
-//						+ "' readonly></td>");
-//				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_size() + "' readonly></td>");
-//				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
-//				sb.append("<td><input id='p_amount" + ipList.get(i).getP_num() + "' onclick='modifySum(\""
-//						+ ipList.get(i).getP_num() + "\")' name='ie_qty' type='number' value='"
-//						+ ipList.get(i).getP_amount() + "'>");
-//				sb.append("<input type='hidden' value='" + ipList.get(i).getP_amount() + "'></td>");
-//				sb.append("<td id='p_unlit" + ipList.get(i).getP_num() + "'><input type='number' value='"
-//						+ ipList.get(i).getP_unlit() + "' readonly></td>");
-//				sb.append("<td id='p_sum" + ipList.get(i).getP_num() + "'><input name='ie_price' type='number' value='"
-//						+ ipList.get(i).getP_sum() + "' readonly></td>");
-//				sb.append("<td><input type='text' name = 'ie_etc'>");
-//				sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getP_num() + "'></td>");
-//				sb.append("</tr></table></form>");
-//			}
-//		}
-//		return sb.toString();
-		return "여기 잠깐 없앴음..";
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < ipList.size(); i++) {
+			if ((ipList.size() - 1) != i && i >= 1) {
+				if (!(ipList.get(i).getP_account().equals(ipList.get(i - 1).getP_account()))) {
+					sb.append(
+							"<form id = 'frm" + i + "'><table><caption>" + ipList.get(i).getP_account() + "</caption>");
+					sb.append("<tr><td colspan='8'><input class='check' type='checkbox'></td></tr>");
+					sb.append(
+							"<tr><td>품명</td><td>제품코드</td><td>규격</td><td>단위</td><td>수량</td><td>단가</td><td>금액</td><td>기타</td></tr>");
+				}
+				sb.append("<tr><td>" + ipList.get(i).getIt_pname() + "<input type='hidden' name='ie_account' value='"
+						+ ipList.get(i).getP_account() + "'></td>");
+				sb.append("<td><input type='text' name='ie_itcode' value='" + ipList.get(i).getIt_code()
+						+ "' readonly></td>");
+				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_size() + "' readonly></td>");
+				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
+				sb.append("<td><input id='p_amount" + ipList.get(i).getP_num() + "' onclick='modifySum(\""
+						+ ipList.get(i).getP_num() + "\")' name='ie_qty' type='number' value='"
+						+ ipList.get(i).getP_amount() + "'>");
+				sb.append("<input type='hidden' value='" + ipList.get(i).getP_amount() + "'></td>");
+				sb.append("<td id='p_unlit" + ipList.get(i).getP_num() + "'><input type='number' value='"
+						+ ipList.get(i).getP_unlit() + "' readonly></td>");
+				sb.append("<td id='p_sum" + ipList.get(i).getP_num() + "'><input name='ie_price' type='number' value='"
+						+ ipList.get(i).getP_sum() + "' readonly></td>");
+				sb.append("<td><input type='text' name = 'ie_etc'>");
+				sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getP_num() + "'></td>");
+				if (!(ipList.get(i).getP_account().equals(ipList.get(i + 1).getP_account()))) {
+					sb.append("</tr></table></form>");
+				} else {
+					sb.append("</tr>");
+				}
+			} else if (i == 0) {
+				sb.append("<form id = 'frm" + i + "'><table><caption>" + ipList.get(i).getP_account() + "</caption>");
+				sb.append("<tr><td colspan='8'><input class='check' type='checkbox'></td></tr>");
+				sb.append(
+						"<tr><td>품명</td><td>제품코드</td><td>규격</td><td>단위</td><td>수량</td><td>단가</td><td>금액</td><td>기타</td></tr>");
+				if (ipList.size() != 1) {
+					sb.append(
+							"<tr><td>" + ipList.get(i).getIt_pname() + "<input type='hidden' name='ie_account' value='"
+									+ ipList.get(i).getP_account() + "'></td>");
+					sb.append("<td><input type='text' name='ie_itcode' value='" + ipList.get(i).getIt_code()
+							+ "' readonly></td>");
+					sb.append("<td><input type='text' value='" + ipList.get(i).getIt_size() + "' readonly></td>");
+					sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
+					sb.append("<td><input id='p_amount" + ipList.get(i).getP_num() + "' onclick='modifySum(\""
+							+ ipList.get(i).getP_num() + "\")' name='ie_qty' type='number' value='"
+							+ ipList.get(i).getP_amount() + "'>");
+					sb.append("<input type='hidden' value='" + ipList.get(i).getP_amount() + "'></td>");
+					sb.append("<td id='p_unlit" + ipList.get(i).getP_num() + "'><input type='number' value='"
+							+ ipList.get(i).getP_unlit() + "' readonly></td>");
+					sb.append("<td id='p_sum" + ipList.get(i).getP_num()
+							+ "'><input name='ie_price' type='number' value='" + ipList.get(i).getP_sum()
+							+ "' readonly></td>");
+					sb.append("<td><input type='text' name = 'ie_etc'>");
+					sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getP_num() + "'></td>");
+					if (!(ipList.get(i).getP_account().equals(ipList.get(i + 1).getP_account()))) {
+						sb.append("</tr></table></form>");
+					} else {
+						sb.append("</tr>");
+					}
+				} else {
+					sb.append(
+							"<tr><td>" + ipList.get(i).getIt_pname() + "<input type='hidden' name='ie_account' value='"
+									+ ipList.get(i).getP_account() + "'></td>");
+					sb.append("<td><input type='text' name='ie_itcode' value='" + ipList.get(i).getIt_code()
+							+ "' readonly></td>");
+					sb.append("<td><input type='text' value='" + ipList.get(i).getIt_size() + "' readonly></td>");
+					sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
+					sb.append("<td><input id='p_amount" + ipList.get(i).getP_num() + "' onclick='modifySum(\""
+							+ ipList.get(i).getP_num() + "\")' name='ie_qty' type='number' value='"
+							+ ipList.get(i).getP_amount() + "'>");
+					sb.append("<input type='hidden' value='" + ipList.get(i).getP_amount() + "'></td>");
+					sb.append("<td id='p_unlit" + ipList.get(i).getP_num() + "'><input type='number' value='"
+							+ ipList.get(i).getP_unlit() + "' readonly></td>");
+					sb.append("<td id='p_sum" + ipList.get(i).getP_num()
+							+ "'><input name='ie_price' type='number' value='" + ipList.get(i).getP_sum()
+							+ "' readonly></td>");
+					sb.append("<td><input type='text' name = 'ie_etc'>");
+					sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getP_num() + "'></td>");
+					sb.append("</tr></table></form>");
+				}
+			} else {
+				if (!(ipList.get(i).getP_account().equals(ipList.get(i - 1).getP_account()))) {
+					sb.append(
+							"<form id = 'frm" + i + "'><table><caption>" + ipList.get(i).getP_account() + "</caption>");
+					sb.append("<tr><td colspan='8'><input class='check' type='checkbox'></td></tr>");
+					sb.append(
+							"<tr><td>품명</td><td>제품코드</td><td>규격</td><td>단위</td><td>수량</td><td>단가</td><td>금액</td><td>기타</td></tr>");
+				}
+				sb.append("<tr><td>" + ipList.get(i).getIt_pname() + "<input type='hidden' name='ie_account' value='"
+						+ ipList.get(i).getP_account() + "'></td>");
+				sb.append("<td><input type='text' name='ie_itcode' value='" + ipList.get(i).getIt_code()
+						+ "' readonly></td>");
+				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_size() + "' readonly></td>");
+				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
+				sb.append("<td><input id='p_amount" + ipList.get(i).getP_num() + "' onclick='modifySum(\""
+						+ ipList.get(i).getP_num() + "\")' name='ie_qty' type='number' value='"
+						+ ipList.get(i).getP_amount() + "'>");
+				sb.append("<input type='hidden' value='" + ipList.get(i).getP_amount() + "'></td>");
+				sb.append("<td id='p_unlit" + ipList.get(i).getP_num() + "'><input type='number' value='"
+						+ ipList.get(i).getP_unlit() + "' readonly></td>");
+				sb.append("<td id='p_sum" + ipList.get(i).getP_num() + "'><input name='ie_price' type='number' value='"
+						+ ipList.get(i).getP_sum() + "' readonly></td>");
+				sb.append("<td><input type='text' name = 'ie_etc'>");
+				sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getP_num() + "'></td>");
+				sb.append("</tr></table></form>");
+			}
+		}
+		return sb.toString();
 	}
 
 	public ResponseEntity<String> cofirmImportCheck(String ipList, HttpSession session) {
@@ -480,128 +478,4 @@ public class StockMM {
 		}sb.append("</table>");
 		return sb.toString();
 	}
-
-	public ModelAndView exportStockCheck(HttpSession session) {
-		mav = new ModelAndView();
-		List<B_shipment> ipList = ieDao.exportCheckList(session.getAttribute("cCode").toString());
-		for(int i = 0 ; i < ipList.size();i++) {
-			ItemCode it = itDao.getPname(session.getAttribute("cCode").toString(),ipList.get(i).getBs_itcode());
-			ipList.get(i).setIt_ccode(it.getIt_ccode()).setIt_code(it.getIt_code()).setIt_pname(it.getIt_pname()).setIt_pstock(it.getIt_pstock()).setIt_size(it.getIt_size()).setIt_unit(it.getIt_unit());
-		}
-//		mav.addObject("exportStockCheck", makeExportCheckHtml(ipList, session.getAttribute("id").toString()));
-		mav.setViewName("stock/exportstockcheck");
-		return mav;
-	}
-
-//	private String makeExportCheckHtml(List<B_shipment> ipList, String id) {
-//		StringBuilder sb = new StringBuilder();
-//		for (int i = 0; i < ipList.size(); i++) {
-//			if ((ipList.size() - 1) != i && i >= 1) {
-//				if (!(ipList.get(i).getBs_clcode().equals(ipList.get(i - 1).getBs_clcode()))) {
-//					sb.append(
-//							"<form id = 'frm" + i + "'><table><caption>" + ipList.get(i).getBs_clcode() + "</caption>");
-//					sb.append("<tr><td colspan='8'><input class='check' type='checkbox'></td></tr>");
-//					sb.append(
-//							"<tr><td>품명</td><td>제품코드</td><td>규격</td><td>단위</td><td>수량</td><td>단가</td><td>금액</td><td>기타</td></tr>");
-//				}
-//				sb.append("<tr><td>" + ipList.get(i).getIt_pname() + "<input type='hidden' name='ie_account' value='"
-//						+ ipList.get(i).getBs_clcode() + "'></td>");
-//				sb.append("<td><input type='text' name='ie_itcode' value='" + ipList.get(i).getIt_code()
-//						+ "' readonly></td>");
-//				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_size() + "' readonly></td>");
-//				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
-//				sb.append("<td><input id='p_amount" + ipList.get(i).getP_num() + "' onclick='modifySum(\""
-//						+ ipList.get(i).getP_num() + "\")' name='ie_qty' type='number' value='"
-//						+ ipList.get(i).getP_amount() + "'>");
-//				sb.append("<input type='hidden' value='" + ipList.get(i).getBs_ + "'></td>");
-//				sb.append("<td id='p_unlit" + ipList.get(i).getP_num() + "'><input type='number' value='"
-//						+ ipList.get(i).getP_unlit() + "' readonly></td>");
-//				sb.append("<td id='p_sum" + ipList.get(i).getP_num() + "'><input name='ie_price' type='number' value='"
-//						+ ipList.get(i).getP_sum() + "' readonly></td>");
-//				sb.append("<td><input type='text' name = 'ie_etc'>");
-//				sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getP_num() + "'></td>");
-//				if (!(ipList.get(i).getBs_clcode().equals(ipList.get(i + 1).getBs_clcode()))) {
-//					sb.append("</tr></table></form>");
-//				} else {
-//					sb.append("</tr>");
-//				}
-//			} else if (i == 0) {
-//				sb.append("<form id = 'frm" + i + "'><table><caption>" + ipList.get(i).getBs_clcode() + "</caption>");
-//				sb.append("<tr><td colspan='8'><input class='check' type='checkbox'></td></tr>");
-//				sb.append(
-//						"<tr><td>품명</td><td>제품코드</td><td>규격</td><td>단위</td><td>수량</td><td>단가</td><td>금액</td><td>기타</td></tr>");
-//				if (ipList.size() != 1) {
-//					sb.append(
-//							"<tr><td>" + ipList.get(i).getIt_pname() + "<input type='hidden' name='ie_account' value='"
-//									+ ipList.get(i).getBs_clcode() + "'></td>");
-//					sb.append("<td><input type='text' name='ie_itcode' value='" + ipList.get(i).getIt_code()
-//							+ "' readonly></td>");
-//					sb.append("<td><input type='text' value='" + ipList.get(i).getIt_size() + "' readonly></td>");
-//					sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
-//					sb.append("<td><input id='p_amount" + ipList.get(i).getP_num() + "' onclick='modifySum(\""
-//							+ ipList.get(i).getP_num() + "\")' name='ie_qty' type='number' value='"
-//							+ ipList.get(i).getBs_quantity() + "'>");
-//					sb.append("<input type='hidden' value='" + ipList.get(i).getBs_quantity() + "'></td>");
-//					sb.append("<td id='p_unlit" + ipList.get(i).getP_num() + "'><input type='number' value='"
-//							+ ipList.get(i).getP_unlit() + "' readonly></td>");
-//					sb.append("<td id='p_sum" + ipList.get(i).getP_num()
-//							+ "'><input name='ie_price' type='number' value='" + ipList.get(i).getP_sum()
-//							+ "' readonly></td>");
-//					sb.append("<td><input type='text' name = 'ie_etc'>");
-//					sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getP_num() + "'></td>");
-//					if (!(ipList.get(i).getBs_clcode().equals(ipList.get(i + 1).getBs_clcode()))) {
-//						sb.append("</tr></table></form>");
-//					} else {
-//						sb.append("</tr>");
-//					}
-//				} else {
-//					sb.append(
-//							"<tr><td>" + ipList.get(i).getIt_pname() + "<input type='hidden' name='ie_account' value='"
-//									+ ipList.get(i).getBs_clcode() + "'></td>");
-//					sb.append("<td><input type='text' name='ie_itcode' value='" + ipList.get(i).getIt_code()
-//							+ "' readonly></td>");
-//					sb.append("<td><input type='text' value='" + ipList.get(i).getIt_size() + "' readonly></td>");
-//					sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
-//					sb.append("<td><input id='p_amount" + ipList.get(i).getP_num() + "' onclick='modifySum(\""
-//							+ ipList.get(i).getP_num() + "\")' name='ie_qty' type='number' value='"
-//							+ ipList.get(i).getBs_quantity() + "'>");
-//					sb.append("<input type='hidden' value='" + ipList.get(i).getBs_quantity() + "'></td>");
-//					sb.append("<td id='p_unlit" + ipList.get(i).getP_num() + "'><input type='number' value='"
-//							+ ipList.get(i).getP_unlit() + "' readonly></td>");
-//					sb.append("<td id='p_sum" + ipList.get(i).getP_num()
-//							+ "'><input name='ie_price' type='number' value='" + ipList.get(i).getP_sum()
-//							+ "' readonly></td>");
-//					sb.append("<td><input type='text' name = 'ie_etc'>");
-//					sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getP_num() + "'></td>");
-//					sb.append("</tr></table></form>");
-//				}
-//			} else {
-//				if (!(ipList.get(i).getBs_clcode().equals(ipList.get(i - 1).getBs_clcode()))) {
-//					sb.append(
-//							"<form id = 'frm" + i + "'><table><caption>" + ipList.get(i).getBs_clcode() + "</caption>");
-//					sb.append("<tr><td colspan='8'><input class='check' type='checkbox'></td></tr>");
-//					sb.append(
-//							"<tr><td>품명</td><td>제품코드</td><td>규격</td><td>단위</td><td>수량</td><td>단가</td><td>금액</td><td>기타</td></tr>");
-//				}
-//				sb.append("<tr><td>" + ipList.get(i).getIt_pname() + "<input type='hidden' name='ie_account' value='"
-//						+ ipList.get(i).getBs_clcode() + "'></td>");
-//				sb.append("<td><input type='text' name='ie_itcode' value='" + ipList.get(i).getIt_code()
-//						+ "' readonly></td>");
-//				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_size() + "' readonly></td>");
-//				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
-//				sb.append("<td><input id='p_amount" + ipList.get(i).getP_num() + "' onclick='modifySum(\""
-//						+ ipList.get(i).getP_num() + "\")' name='ie_qty' type='number' value='"
-//						+ ipList.get(i).getBs_quantity() + "'>");
-//				sb.append("<input type='hidden' value='" + ipList.get(i).getBs_quantity() + "'></td>");
-//				sb.append("<td id='p_unlit" + ipList.get(i).getP_num() + "'><input type='number' value='"
-//						+ ipList.get(i).getBs_u + "' readonly></td>");
-//				sb.append("<td id='p_sum" + ipList.get(i).getP_num() + "'><input name='ie_price' type='number' value='"
-//						+ ipList.get(i).getP_sum() + "' readonly></td>");
-//				sb.append("<td><input type='text' name = 'ie_etc'>");
-//				sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getP_num() + "'></td>");
-//				sb.append("</tr></table></form>");
-//			}
-//		}
-//		return sb.toString();
-//	}
 }
