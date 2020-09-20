@@ -469,4 +469,18 @@ public class Salesmm {
       }
       return sMap;
    }
+
+	public Map<String, List<Businessbean>> businessactivitiesdelete(String check) {
+		Map<String, List<Businessbean>> sMap = null;
+		if (sDao.businessactivitiesdelete(check)) {
+			List<Businessbean> sList = sDao.businessitem();
+			sMap = new HashMap<>();
+			sMap.put("sList", sList);
+			System.out.println(sList);
+		} else {
+			System.out.println("지워짐?");
+			sMap = null;
+		}
+		return sMap;
+	}
 }

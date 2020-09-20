@@ -198,5 +198,9 @@
 	       </if>
 	   </where>
 	</select>
+	
+	<delete id="businessactivitiesdelete" parameterType="business">
+	   DELETE FROM B_ACTIVITES WHERE BA_OCODE = #{check}
+	</delete>
 </mapper>
 

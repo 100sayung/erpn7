@@ -205,4 +205,10 @@ public class SalesController {
      Map<String, List<Businessbean>> sMap=sm.businessactivitiessearch(search, choice);
       return sMap;
    }
+   
+   @PostMapping(value = "/sales/businessactivitiesdelete") //영업삭제
+   public Map<String, List<Businessbean>> businessactivitiesdelete(String check) {
+      Map<String, List<Businessbean>> sMap=sm.businessactivitiesdelete(check);
+      return sMap;
+   } 
 } 

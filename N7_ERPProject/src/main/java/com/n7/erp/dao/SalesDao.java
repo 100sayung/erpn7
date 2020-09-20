@@ -83,6 +83,8 @@ public interface SalesDao {
 
 	List<Businessbean> businessactivitiessearch(@Param("search") String search, @Param("choice") String choice); //영업활동 검색
 
+	boolean businessactivitiesdelete(String check);
+
 
 
 

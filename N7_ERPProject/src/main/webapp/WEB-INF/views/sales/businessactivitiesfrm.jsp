@@ -81,7 +81,7 @@
         </form>
             <br>
             <button type="button" id="addList" value="추가">추가</button>
-            <button type="button" id="change" value="변경" >변경</button>
+            <!-- <button type="button" id="change" value="변경" >변경</button> -->
             <button type="button" id="deleteCheck" value="삭제">삭제</button>
             <button type="button" id="sub" value="저장">저장</button>
             
@@ -182,6 +182,39 @@
     	      } 
     	  });
        });
+       
+       $('#deleteCheck').click(function(){
+       	var check="";
+       	$("input[name=each_check]:checked").each(function(){
+       		check = $(this).attr("value");
+       		console.log(check);
+       	});
+       	
+       	$.ajax({
+       			type : 'post',
+       			url : '/erp/rest/sales/businessactivitiesdelete',
+       			data: {check:check},
+       			dataType: "json",
+       			success : function(data) {       				
+       				console.log(data);
+       				var str="";
+       				for(var i in data.sList){
+           				str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].ba_ocode+"></td>";
+           				str+="<td><input type='text' value="+data.sList[i].ba_date+"></td>";
+           				str+="<td><input type='text' value="+data.sList[i].ba_content+"></td>";
+           				str+="<td><input type='text' value="+data.sList[i].ba_estimatedsalesamount+"></td>";
+           				str+="<td><input type='text' value="+data.sList[i].ba_actualsalesamount+"></td>";
+           				str+="<td><input type='text' value="+data.sList[i].ba_enddate+"></td>";
+           				str+="<td><input type='text' value="+data.sList[i].ba_memo+"></td>";
+
+           			}
+           				$('#tBody').html(str);
+       			},
+       			error : function(error) {
+       				console.log(error);
+       			}
+       		});
+       	}); 
 
 </script>
 </body>
