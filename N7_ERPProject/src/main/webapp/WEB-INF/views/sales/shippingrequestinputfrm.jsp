@@ -182,7 +182,7 @@ border: 1px solid;
             console.log(search);
             $.ajax({
                   type : 'post',
-                  url : 'erp/rest/sales/shippingrequestsearch',
+                  url : '/erp/rest/sales/shippingrequestsearch',
                   data: "choice="+choice+"&search="+search,
                   dataType: "json",
                   success : function(data) {                   
@@ -217,7 +217,7 @@ border: 1px solid;
             
             $.ajax({
                   type : 'post',
-                  url : 'erp/rest/sales/shippingrequestdelete',
+                  url : '/erp/rest/sales/shippingrequestdelete',
                   data: {check:check},
                   dataType: "json",
                   success : function(data) {                   

@@ -41,7 +41,7 @@ public interface SalesDao {
 	
 	boolean insertcomlist(A_company ac);
 
-	List<A_company> getComList(String cl_code);
+	List<A_company> getComList(String c_code);
 
 	List<A_company> getCompanyList();
 

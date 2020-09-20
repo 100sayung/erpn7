@@ -141,7 +141,7 @@ public class Salesmm {
       return sMap;
    }
    
-   public ModelAndView businessactivitiesinput(Businessbean b,  HttpSession session) {
+   public ModelAndView businessactivitiesinput(Businessbean b, HttpSession session) {
       b.setBa_ccode(session.getAttribute("cCode").toString());
       mav=new ModelAndView();
       String view=null;
@@ -173,9 +173,9 @@ public class Salesmm {
       return sMap;
    }
    
-   public Map<String, List<A_company>> insertcomlist(A_company ac) {
+   public Map<String, List<A_company>> insertcomlist(A_company ac, HttpSession session) {
          Map<String, List<A_company>> aMap=null;
-         //System.out.println(ac.getcl_code());
+         ac.setCl_ccode(session.getAttribute("cCode").toString());
          if(ac.getCl_code()!="") {
             if(sDao.insertcomlist(ac)) {
                List<A_company> aList = sDao.getComList(ac.getCl_code());
@@ -202,7 +202,7 @@ public class Salesmm {
          return aMap;
       }
    
-   public Map<String, List<A_company>> searchcode(A_company ac) {
+   public Map<String, List<A_company>> searchcode(A_company ac, String code) {
          Map<String, List<A_company>> aMap=null;
             List<A_company> aList = sDao.getsearchCode(ac);
             if(aList!=null) {

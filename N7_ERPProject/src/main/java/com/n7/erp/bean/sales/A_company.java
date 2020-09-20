@@ -28,4 +28,5 @@ public class A_company {
     private String cl_bankholder;
     private String cl_memo;
     private String cl_banknum;
+    private String cl_addrnum;
 }

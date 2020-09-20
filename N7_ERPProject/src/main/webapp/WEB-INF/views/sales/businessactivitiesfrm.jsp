@@ -90,30 +90,25 @@
     <br>
 
     
-    <script type="text/javascript">
-        $("#addList").click(function() {
-            var str = '';
-            for (var i = 0; i < $("#add").val(); i++) {
-                str += '<tr><td><input type="checkbox" class="each"></td><td><input type="text" name="date" id="add" required></td><td><input type="text" name="client"  required></td><td><input type="text" name="content" required></td><td><input type="text" name="estimated_sales_amount" required></td><td><input type="text" name="actual_sales_amount" required></td><td><input type="text" name="end_date"></td></tr>';
-            }
-            $("#tBody").append(str);
-            $("#add").val(1);
-        });
+    <script type="text/javascript">        
+        //추가삭제
+        $(document).ready(function(){
+              $('.addList').click(function(){
+                 $('#tBody').append('<tr><td><input type="checkbox" name="each_check" class="each"></td><td><input type="text" name="ba_date" class="input-text"></td><td><input type="text" name="ba_content" class="input-text" ></td><td><input type="number" name="ba_estimatedsalesamount" class="input-text" ></td><td><input type="number" name="ba_actualsalesamount" class="input-text" ></td><td><input type="text" name="ba_enddate" class="input-text" ></td><td><input type="text" name="ba_memo" class="input-text" ></td><td><input type="button" value="삭제" id="deleteCheck" onclick="javascript:thisRowDel(this);"></td></tr>');
+              });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+          }); 
+           function thisRowDel(row){
+                console.log(row);
+                let tr = row.parentNode.parentNode;
+                tr.parentNode.removeChild(tr);
+         }   
         
-        $("#deleteCheck").click(function() {
-            for (var i = 0; i < $(".each").length; i++) {
-                if ($(".each")[i].checked == true) {
-                    $(".each")[i].parentElement.parentElement.remove();
-                    i--;
-                }
-            }
-        })
         
       $('#businessitemfrm').click(function(){
         	var str="";
         	
         	$.ajax({
-        		url:'rest/businessitem',
+        		url:'/erp/rest/sales/businessitem',
         		type: 'get',
         		dataType: "json",
         		success:function(data){
@@ -142,7 +137,7 @@
 
         	$.ajax({
         			type : 'post',
-        			url : 'rest/businessactivitiesinput',
+        			url : '/erp/rest/sales/businessactivitiesinput',
         			data:obj,
         			success : function(data) {
         				console.log(data);
@@ -160,7 +155,7 @@
     	  
     	  $.ajax({
     		  type : 'post',
-    	      url : 'rest/businessactivitiessearch',
+    	      url : '/erp/rest/sales/businessactivitiessearch',
     	      data: "choice="+choice+"&search="+search,
     	      dataType: "json",
     	      success : function(data){
