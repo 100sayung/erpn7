@@ -17,6 +17,7 @@ import com.n7.erp.bean.hr.Attendance;
 import com.n7.erp.bean.hr.Career;
 import com.n7.erp.bean.hr.Certification;
 import com.n7.erp.bean.hr.HR_Card;
+import com.n7.erp.bean.hr.Payroll;
 
 public interface IHrDao {
 	@Select("SELECT * FROM HR_CARD WHERE HC_ID = #{m_id}")
@@ -98,13 +99,24 @@ public interface IHrDao {
 	ArrayList<HR_Card> getEmployeeStatus(String cCode);
 
 	ArrayList<NameHoliday> getEmployeeHoliday(HashMap<String, String> hMap);
+	ArrayList<NameHoliday> getMyHolidayView(HashMap<String, String> hMap);
 
-	
+
 	boolean checkMemberHrCardCnt(String cCode);
 	ArrayList<Member> getNoHrCard(String cCode);
+	@Select("SELECT * FROM MEMBER WHERE M_CCODE = #{cCode}")
+	ArrayList<Member> getSearchFromName(String cCode);
 
 	@Select("SELECT * FROM HR_APPLYHOLIDAY WHERE HAP_DOCUNUM = #{docunum} AND HAP_CCODE = #{cCode}")
 	ApplyHoliday getDetailHoliday(HashMap<String, String> hMap);
+
+
+	@Select("SELECT * FROM MHR WHERE HC_HRCODE=#{hrCode}")
+	HR_Card selectcheckpay(String hrCode);
+	@Select("SELECT * FROM HR_CDD_PAY WHERE HP_HRCODE=#{hrCode} AND HP_PAYDATE=#{month}")
+	Payroll getMyPaySelect(HashMap<String, String> hMap);
+
+
 
 
 }

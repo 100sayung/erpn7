@@ -7,7 +7,11 @@
 <title>Document</title>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 	<!-- <script src="/js/jquery.serializeObject.js"></script> -->
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> origin/JSJ
 <style>
 #cal {
 	font-size: 20px;
@@ -67,7 +71,11 @@ float: left;
 		style="width: auto; background-color: white-space; color: white; padding: 1%;">
 		<span style="padding-left: 5px"><a href="#" onclick="saleinsert()"><button>매출/매입등록</button></a></span>
 		<span style="padding-left: 5px"><a href="#"
+<<<<<<< HEAD
+			onclick="window.open('comPany','comlist','width=1350,height=500')"><button>거래처등록</button></a></span>
+=======
 			onclick="window.open('comPany','comlist','width=1400,height=700')"><button>거래처등록</button></a></span>
+>>>>>>> origin/JSJ
 		<span style="padding-left: 5px"><button id="getList">매출/매입조회</button></span>
 		<span style="padding-left: 5px"><button id="taxbill">세금계산서인쇄</button></span>
 		<span style="padding-left: 5px"><button id="saledetails">거래명세표인쇄</button></span>
@@ -85,9 +93,15 @@ float: left;
 			<option value="employee">입력자</option>
 		</select>
 		<button id="search2" type="button">검색</button>
+<<<<<<< HEAD
+		매출<input onclick="getList('AS')" type='radio' name="sale" value='AS'>
+		매입<input onclick="getList('AP')" type='radio' name="sale" value='AP'>
+
+=======
 		매출<input onclick="getList('S')" type='radio' name="sale" value='S'>
 		매입<input onclick="getList('P')" type='radio' name="sale" value='P'>
 	
+>>>>>>> origin/JSJ
 		<!-- <form action="rest/saleinsert" method="post"> -->
 		<form id="saleInfo">
 		<div id="comInfo"
@@ -123,6 +137,16 @@ float: left;
 		</div>
 		<!-- </form> -->
 			<button id="detaile" type="button">상세정보</button>
+<<<<<<< HEAD
+			 <span id='plusorminus'>
+			<input type="number" id="qty" min="1" style="width: 64px;">
+			<button type="button" id="addList"> 행추가</button>
+			<button type="button" id="deleteCheck">삭제</button>
+			</span>
+
+			<!-- <form id="saleInfodetaile"> -->
+
+=======
 			 <span id='plusorminus'> 
 			<input type="number" id="qty" min="1" style="width: 64px;"> 
 			<button type="button" id="addList"> 행추가</button>
@@ -131,6 +155,7 @@ float: left;
 			
 			<!-- <form id="saleInfodetaile"> -->
 			
+>>>>>>> origin/JSJ
 		<div id="ListTable" style="background-color: #ECEBEA;">
 			<table id="testTable"
 				summary="Code page support in different versions of MS Windows."
@@ -164,18 +189,31 @@ float: left;
 		</div>
 		</form>
  		<button type="button" onclick="saleInsertInfo()">등록</button>
+<<<<<<< HEAD
+
+
+
+	<br>
+	<br>
+
+=======
 	
         
  		
 	<br>
 	<br>
 	
+>>>>>>> origin/JSJ
 </body>
 <script type="text/javascript">
 $("#search2").click(function(){
 	var select = $("#select").val();
 	var choice = $("#choice").val();
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> origin/JSJ
 	$.ajax({
 		url:"/erp/rest/Account/selectSearch",
 		type:"post",
@@ -186,7 +224,11 @@ $("#search2").click(function(){
 			var str = '';
 			str += "<tr id='colume'><td>체크</td><td>전표번호</td><td>유형</td><td>거래처명</td><td>사업자번호</td><td>입력날짜</td><td>입력자</td></tr>"
 			for ( var i in data.sList) {
+<<<<<<< HEAD
+				str += "<tr><td><input name='checknum' type='radio' class='check' value='"+data.sList[i].s_num+"'></td>";
+=======
 				str += "<tr><td><input name='checknum' type='checkbox' class='check' value='"+data.sList[i].s_num+"'></td>";
+>>>>>>> origin/JSJ
 				str += "<td><input class='data2' type='text' name='s_num' value="+data.sList[i].s_num+"></td>";
 				str += "<td><input class='data2' type='text' name='s_kind' value="+data.sList[i].s_kind+"></td>";
 				str += "<td><input class='data2' type='text' name='s_company' value="+data.sList[i].s_company+"></td>";
@@ -195,7 +237,11 @@ $("#search2").click(function(){
 				str += "<td><input class='data2' type='text' name='s_employee' value="+data.sList[i].s_employee+"></td></tr>";
 			}
 			$("#testTable").html(str);
+<<<<<<< HEAD
+
+=======
 				
+>>>>>>> origin/JSJ
 			}else{
 				alert("검색할 데이터가 없습니다");
 			}
@@ -203,9 +249,15 @@ $("#search2").click(function(){
 		error:function(error){
 			console.log(error);
 		}
+<<<<<<< HEAD
+
+	});
+
+=======
 		
 	});
 	
+>>>>>>> origin/JSJ
 });
 
 
@@ -223,6 +275,10 @@ $("input[name='checknum']:checked").each(function() {
                 }
 			});
 });
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/JSJ
 function saleInsertInfo(){
        var obj = $("#saleInfo").serialize();
        $.ajax({
@@ -238,6 +294,14 @@ function saleInsertInfo(){
     		  console.log(error);
     		  alert("데이터 입력실패");
     	  }
+<<<<<<< HEAD
+
+       });
+
+};
+
+
+=======
     	  
        });
        
@@ -248,10 +312,61 @@ function saleInsertInfo(){
 
 
 
+>>>>>>> origin/JSJ
 $("#approval").click(function(){
 	var check = '';
 	$("input[name='checknum']:checked").each(function() {
 						check = $(this).attr('value');
+<<<<<<< HEAD
+	      });
+						if(check==""){
+							alert("체크한 항목이 없습니다");
+						}else{
+							$.ajax({
+								url:'/erp/rest/Account/comparecode?code='+check,
+								type:'post',
+								datatype:'json',
+								success:function(data){
+									console.log(data);
+									if(data.sList.length==1){
+										alert("이미 결재요청된 데이터 입니다.");
+									}else{
+										window.open('/erp/Account/acApproval?check='+check,'acApproval','width=1400,height=700');
+									}
+								},
+								error:function(error){
+									console.log(error);
+								}
+							});
+						}
+
+});
+
+$("#addList").click(function() {
+					var str = '';
+					for (var i = 0; i < $("#qty").val(); i++) {
+						str += "<tr><td><input type='radio' class='check'></td>"
+						str += "<td><input class='data' type='text' name='s_pkind'/></td>"
+						str += "<td><input class='data' type='text' name='s_cnt'/></td>"
+						str += "<td><input class='data' type='text' name='s_price'/></td>"
+						str += "<td><input class='data' type='text' name='s_price2'/></td>"
+						str += "<td><input class='data' type='text' name='s_tax'/></td>"
+						str += "<td><input class='data' type='text' name='s_total' /></td>"
+						str += "<td><input class='data' name='s_memo' /></td></tr>"
+					}
+					$("#tBody").append(str);
+					$("#qty").val(1);
+				});
+
+
+ function saleinsert(){
+	//$("#comInfo").attr("display","inline-block");
+	//$("#plusorminus").attr("display","inline-block");
+	$("#testTable").html("");
+	var str='';
+	str += "<thead><tr><td>체크</td><td>품목</td><td>수량</td><td>단가(원)</td><td>공급가액(원)</td><td>부가세액(원)</td><td>합계(원)</td><td>적요</td></tr></thead>"
+	str += "<tbody id='tBody'><tr><td><input type='checkbox' class='check'></td>"
+=======
 						if(check!=""){
 							
 						window.open('/erp/Account/acApproval?check='+check,'acApproval','width=1400,height=700');
@@ -271,15 +386,22 @@ function saleinsert(){
 	var str='';
 	str += "<tr><td>체크</td><td>품목</td><td>수량</td><td>단가(원)</td><td>공급가액(원)</td><td>부가세액(원)</td><td>합계(원)</td><td>적요</td></tr>"
 	str += "<tr><td><input type='checkbox' class='check'></td>"
+>>>>>>> origin/JSJ
 		str += "<td><input class='data' type='text' name='s_pkind'/></td>"
 		str += "<td><input class='data' type='text' name='s_cnt'/></td>"
 		str += "<td><input class='data' type='text' name='s_price'/></td>"
 		str += "<td><input class='data' type='text' name='s_price2'/></td>"
 		str += "<td><input class='data' type='text' name='s_tax'/></td>"
 		str += "<td><input class='data' type='text' name='s_total' /></td>"
+<<<<<<< HEAD
+		str += "<td><input class='data' name='s_memo' /></td></tr></tbody>"
+
+	$("#testTable").html(str);
+=======
 		str += "<td><input class='data' name='s_memo' /></td></tr>"
 	
 	$("#testTable").append(str);
+>>>>>>> origin/JSJ
 }
 
 	$("#taxbill").click(function() {
@@ -301,7 +423,11 @@ function saleinsert(){
                             }
 						});
 			});
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> origin/JSJ
 	$("#saledetails").click(function() {
 				var check = '';
 		$("input[name='checknum']:checked").each(function() {
@@ -336,7 +462,11 @@ function saleinsert(){
 						var str = '';
 						str += "<tr id='colume'><td>체크</td><td>전표번호</td><td>유형</td><td>거래처명</td><td>사업자번호</td><td>입력날짜</td><td>입력자</td></tr>"
 						for ( var i in data.sList) {
+<<<<<<< HEAD
+							str += "<tr><td><input name='checknum' type='radio' class='check' value='"+data.sList[i].s_num+"'></td>";
+=======
 							str += "<tr><td><input name='checknum' type='checkbox' class='check' value='"+data.sList[i].s_num+"'></td>";
+>>>>>>> origin/JSJ
 							str += "<td><input class='data2' type='text' name='s_num' value="+data.sList[i].s_num+"></td>";
 							str += "<td><input class='data2' type='text' name='s_kind' value="+data.sList[i].s_kind+"></td>";
 							str += "<td><input class='data2' type='text' name='s_company' value="+data.sList[i].s_company+"></td>";
@@ -363,7 +493,11 @@ function saleinsert(){
 										var str = '';
 										str += "<tr id='colume'><td>체크</td><td>전표번호</td><td>유형</td><td>거래처명</td><td>사업자번호</td><td>입력날짜</td><td>입력자</td></tr>"
 										for ( var i in data.sList1) {
+<<<<<<< HEAD
+											str += "<tr><td><input name='checknum' type='radio' class='check' value='"+data.sList1[i].s_num+"' readonly></td>"
+=======
 											str += "<tr><td><input name='checknum' type='checkbox' class='check' value='"+data.sList1[i].s_num+"' readonly></td>"
+>>>>>>> origin/JSJ
 											str += "<td><input class='data2' type='text' name='s_num' value="+data.sList1[i].s_num+" readonly></td>"
 											str += "<td><input class='data2' type='text' name='s_kind' value="+data.sList1[i].s_kind+" readonly></td>"
 											//str += "<td><input class='data2' type='text' name='s_pkind' value="+data.sList[i].s_pkind+"></td>"
@@ -426,8 +560,12 @@ function saleinsert(){
 							alert("선택된 내용이 없습니다");
 						} else {
 
+<<<<<<< HEAD
+							$.ajax({
+=======
 							$
 									.ajax({
+>>>>>>> origin/JSJ
 										url : '/erp/rest/Account/deleteSale',
 										type : 'post',
 										traditional : true,
@@ -437,7 +575,11 @@ function saleinsert(){
 											var str = '';
 											str += "<tr id='colume'><td>체크</td><td>전표번호</td><td>유형</td><td>거래처명</td><td>사업자번호</td><td>입력날짜</td><td>입력자</td></tr>"
 											for ( var i in data.sList) {
+<<<<<<< HEAD
+												str += "<tr><td><input name='checknum' type='radio' class='check' value='"+data.sList[i].s_num+"'></td>";
+=======
 												str += "<tr><td><input name='checknum' type='checkbox' class='check' value='"+data.sList[i].s_num+"'></td>";
+>>>>>>> origin/JSJ
 												str += "<td><input class='data2' type='text' name='s_num' value="+data.sList[i].s_num+"></td>";
 												str += "<td><input class='data2' type='text' name='s_kind' value="+data.sList[i].s_kind+"></td>";
 												str += "<td><input class='data2' type='text' name='s_company' value="+data.sList[i].s_company+"></td>";
@@ -456,4 +598,8 @@ function saleinsert(){
 					});
 </script>
 
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> origin/JSJ

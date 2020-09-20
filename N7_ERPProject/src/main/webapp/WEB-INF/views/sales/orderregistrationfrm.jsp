@@ -79,7 +79,7 @@ border: 1px solid ;
                   <th>프로젝트기간 끝</th>
                   <th>수량</th>
                   <th>판매금액</th>
-                  <th>수주예산</th>
+                  <th>수주예산</t>
                </tr>
                 </thead>
                 <tbody id="tBody">
@@ -133,7 +133,7 @@ border: 1px solid ;
         });
         
         
-        //추가삭제
+        //추가삭제TR.
         
       $(document).ready(function(){
             $('.addList').click(function(){
@@ -151,7 +151,7 @@ border: 1px solid ;
 
         	$.ajax({
         			type : 'post',
-        			url : '/erp/rest/sales/orderregistrationinput',
+        			url : 'orderregistrationinput',
         			data:obj,
         			success : function(data) {
         				console.log(data);
@@ -170,7 +170,7 @@ border: 1px solid ;
         	console.log(search);
         	$.ajax({
         			type : 'post',
-        			url : '/erp/rest/sales/orderregistrationsearch',
+        			url : 'rest/orderregistrationsearch',
         			data: "choice="+choice+"&search="+search,
         			dataType: "json",
         			success : function(data) {       				
@@ -208,7 +208,7 @@ border: 1px solid ;
         	
         	$.ajax({
         			type : 'post',
-        			url : '/erp/rest/sales/orderregistrationdelete',
+        			url : 'rest/orderregistrationdelete',
         			data: {check:check},
         			dataType: "json",
         			success : function(data) {       				

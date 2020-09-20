@@ -109,7 +109,7 @@ border: 1px solid;
       var str="";
 	
 	  $.ajax({
-		url: '/erp/rest/sales/shippingitem',
+		url:'rest/shippingitem',
 		type: 'get',
 		dataType: "json",
 		success:function(data){
@@ -149,7 +149,7 @@ border: 1px solid;
 
     	$.ajax({
     			type : 'post',
-    			url : '/erp/rest/sales/shippingrequestinput',
+    			url : 'rest/shippingrequestinput',
     			data:obj,
     			success : function(data) {
     				console.log(data);

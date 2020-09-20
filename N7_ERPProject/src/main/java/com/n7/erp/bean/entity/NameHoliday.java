@@ -13,4 +13,5 @@ public class NameHoliday { //달력 표시용으로 그냥 만들엇음 귀찮�
 	String hap_endday;
 	String hap_status;
 	String m_name;
+	String hap_docunum;
 }

@@ -1,21 +1,13 @@
 package com.n7.erp.controller;
 
-import java.util.Date;
 import java.util.List;
-
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.n7.erp.bean.Member;
 import com.n7.erp.bean.hr.Academic;
 import com.n7.erp.bean.hr.Career;
@@ -70,11 +62,18 @@ public class HRRestController {
 		Member mb = hm.getMemberInfo(m_id);
 		return mb;
 	}
-	
+
 	//인사카드 없는 사람들 정보 출력
-	@GetMapping(value="/hr/nohrcard")
+	@GetMapping(value="/hr/nohrcard",  produces = "application/text; charset=utf8")
 	public String getNoHrCard(HttpSession session) {
 		String result = hm.getNoHrCard(session);
+		return result;
+	}
+
+	//인사카드 이름 검색 출력
+	@GetMapping(value="/hr/searchfromname")
+	public String getSearchFromName(HttpSession session) {
+		String result = hm.getSearchFromName(session);
 		return result;
 	}
 
@@ -131,6 +130,14 @@ public class HRRestController {
 	@GetMapping(value="/hr/employeeholiday")
 	public String getEmployeeHoliday(HttpSession session, String yearmonth) {
 		String result = hm.getEmployeeHoliday(session, yearmonth);
+		return result;
+	}
+
+	@GetMapping(value="/hr/myholidayview")
+	public String getMyHolidayView(HttpSession session, String yearmonth) {
+		String cCode = session.getAttribute("cCode").toString();
+		String hrCode = session.getAttribute("hrCode").toString();
+		String result = hm.getEmployeeHoliday(cCode, yearmonth, hrCode);
 		return result;
 	}
 

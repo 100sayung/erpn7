@@ -47,13 +47,14 @@ public class StockController {
 	public String monthPayment() {
 		return "stock/monthpayment";
 	}
-	@RequestMapping(value = "/exportstockcheck", method = RequestMethod.GET)
-	public String exportCheck() {
-		return "stock/exportstockcheck";
-	}
 	@RequestMapping(value = "/accountconfirm", method = RequestMethod.GET)
 	public String accountConfirm() {
 		return "stock/accountconfirm";
+	}
+	@RequestMapping(value = "/exportstockcheck", method = RequestMethod.GET)
+	public ModelAndView exportStockCheck(HttpSession session) {
+		mav = stmm.exportStockCheck(session);
+		return mav;
 	}
 	
 }
