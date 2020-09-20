@@ -87,7 +87,7 @@
     	var str="";
     	
     	$.ajax({
-    		url:'erp/rest/sales/uncollectedmoneyitem',
+    		url:'/erp/rest/sales/uncollectedmoneyitem',
     		type: 'get',
     		dataType: "json",
     		success:function(data){
@@ -121,7 +121,7 @@
 
      	$.ajax({
      			type : 'post',
-     			url : 'erp/rest/sales/uncollectedmoneyinput',
+     			url : '/erp/rest/sales/uncollectedmoneyinput',
      			data:obj,
      			success : function(data) {
      				console.log(data);
@@ -153,7 +153,7 @@
       	console.log(search);
       	$.ajax({
       			type : 'post',
-      			url : 'erp/rest/sales/uncollectedmoneysearch',
+      			url : '/erp/rest/sales/uncollectedmoneysearch',
       			data: "choice="+choice+"&search="+search,
       			dataType: "json",
       			success : function(data) {       				
@@ -191,7 +191,7 @@
           		}else{
 	         			
        	$.ajax({
-     		url: 'erp/rest/sales/fullpaymentprocess',
+     		url: '/erp/rest/sales/fullpaymentprocess',
      		type: 'post',
      		data: {check:check},
      		dataType: "json",
@@ -223,7 +223,7 @@
      $('#uncollectedsearch').click(function(){
     
     	$.ajax({
-    		url:'erp/rest/sales/creditsearch',
+    		url:'/erp/rest/sales/creditsearch',
     		type: 'get',
     		dataType: "json",
     		success:function(data){
@@ -250,7 +250,7 @@
      $('#fullpaymentsearch').click(function(){
     	    
      	$.ajax({
-     		url:'erp/rest/sales/fullpaymentsearch',
+     		url:'/erp/rest/sales/fullpaymentsearch',
      		type: 'get',
      		dataType: "json",
      		success:function(data){

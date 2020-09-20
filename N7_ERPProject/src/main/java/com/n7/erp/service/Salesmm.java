@@ -103,7 +103,7 @@ public class Salesmm {
       
       boolean result = sDao.shippingrequestinput(ss);
       if(ss.getBs_ccode()!="") {
-      if (result) {
+        if (result) {
          mav.addObject("msg", "출하입력이 완료되었습니다.");
          view = "sales/shippingrequestinputfrm";
       } else {
