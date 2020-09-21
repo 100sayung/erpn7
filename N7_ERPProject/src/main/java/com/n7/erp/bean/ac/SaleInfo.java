@@ -8,8 +8,8 @@ import org.apache.ibatis.type.Alias;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-@Alias("saleInfo")
 @Data
+@Alias("saleInfo")
 @Accessors(chain=true)
 public class SaleInfo {
    private String s_num;

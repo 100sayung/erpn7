@@ -26,7 +26,6 @@ public class AcHomeController {
 		
 		return "Account/acerp";
 	}
-
 	@RequestMapping(value = "Account/openTable", method = RequestMethod.GET)
 	public String openTable() {
 	
@@ -37,13 +36,13 @@ public class AcHomeController {
 		
 		return "Account/comPany";
 	}
+	
 	@RequestMapping(value = "Account/taxbill", method = RequestMethod.GET)
 	public ModelAndView taxbill(String check) {
 		System.out.println(check);
 		mav=am.getTaxbill(check);
 		return mav;
 	}
-
 	@RequestMapping(value = "Account/acApproval", method = RequestMethod.GET)
 	public ModelAndView acApproval(String check) {
 		System.out.println(check);

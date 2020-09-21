@@ -75,7 +75,7 @@ ul {
 		<ul id="menuList">
 			<li><a href="/erp/myinfo/checkattendance">출/퇴근 등록</a></li>
 			<li><a href="/erp/myinfo/myinfo">내 정보 보기</li>
-			<li><a href="#">급여명세서 보기</li>
+			<li><a href="/erp/myinfo/myPaycheck">급여명세서 보기</li>
 			<li><a href="/erp/myinfo/myattendance">내 출결 보기</li>
 			<li><a href="/erp/myinfo/myholiday">내 휴가 보기</li>
 			<li><a href="/erp/myinfo/applyholiday">휴가신청</a></li>
@@ -84,13 +84,15 @@ ul {
 	</div>
 	<div id="description"> 휴가신청폼<br>
 
+	<h1> CSS / 결재버튼 눌러서 결재자2 등록하기 /</h1>
+
 	<form action="/erp/hr/applyholiday" method="post">
 	<input type="text" name="hap_docuname" placeholder="문서 제목을 입력해주세요 글자제한 20자" required="required">
 	<input type="text" name="hap_type" placeholder="휴가 종류를 입력해주세요 글자제한 20자" required="required">
 	<br>
 	<input type="date" name="hap_startday" required="required" id="start">
-	<span id="myleader"></span>
 	<input type="date" name="hap_endday" required="required" onchange='checkDateValue(start, end);' id="end">
+	<button id="approval">결재</button>
 	<br>
 	<textarea rows="10" cols="10" name="hap_reason"></textarea>
 	<input type="submit" value="제출">
@@ -118,10 +120,15 @@ ul {
 			}
 		});
 	});
+	
+	$("#approval").click(function(){
+		window.open('/erp/hr/holidayap', '사람선택', 'width=1400, heigth=700');
+	});
 
 	function replaceAll(str, searchStr, replaceStr) {
 	    return str.split(searchStr).join(replaceStr);
 	 }
+	
 
 	function checkDateValue(val1, val2){
 		let date1 = Number(replaceAll(val1.value, "-", ""));

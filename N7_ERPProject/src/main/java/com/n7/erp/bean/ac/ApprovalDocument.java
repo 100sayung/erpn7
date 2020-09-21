@@ -5,8 +5,8 @@ import org.apache.ibatis.type.Alias;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-@Alias("rs")
 @Data
+@Alias("rs")
 @Accessors(chain=true)
 public class ApprovalDocument {
 	

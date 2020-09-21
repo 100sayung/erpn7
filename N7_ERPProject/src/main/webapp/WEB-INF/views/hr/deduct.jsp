@@ -89,7 +89,7 @@ ul {
 				<ul id="smallMenu3" style="display: none;">
 					<li><a href="/erp/hr/deptpay">부서/직급별 급여</a></li>
 					<li><a href="/erp/hr/deduct">공제사항 관리</a></li>
-					<li><a href="">급여 관리</a></li>
+					<li><a href="/erp/hr/searchpaymm">급여 관리</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -106,6 +106,7 @@ ul {
 </table> 본 화면 </div>
 </body>
 <script>
+
 $("#showMenu1").hover(function() {
 	$("#smallMenu1").attr("style", "display:inline-block");
 }, function() {
@@ -125,7 +126,7 @@ $("#showMenu3").hover(function() {
 	$(function(){
 		var str='<tr align="center"><td width="150px">공제 명</td><td width="150px">현재 공제금액</td><td width="150px">수정 금액</td><td width="150px"></td></tr>';
 		var deduct=${deduct};
-		console.log(${deduct})
+		console.log(deduct);
 		for(var i=0;i<deduct.length;i++){
 			str+="<tr align='center'><td width='100px'>"+deduct[i].HDD_NAME+"</td>"
 				 +"<td id='123"+deduct[i].HDD_NAME+"' width='100px'>"+deduct[i].HDD_AMOUNT+"</td>"

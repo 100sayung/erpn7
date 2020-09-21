@@ -24,6 +24,7 @@ import com.n7.erp.bean.hr.Attendance;
 import com.n7.erp.bean.hr.Career;
 import com.n7.erp.bean.hr.Certification;
 import com.n7.erp.bean.hr.HR_Card;
+import com.n7.erp.bean.hr.Payroll;
 import com.n7.erp.dao.HRIDeptDao;
 import com.n7.erp.dao.IBaiscDao;
 import com.n7.erp.dao.IHrDao;
@@ -182,30 +183,34 @@ public class HrMM {
 	}
 
 	public ModelAndView hrCard(HttpSession session) {
-		String m_id = session.getAttribute("id").toString();
 		String m_ccode = session.getAttribute("cCode").toString();
 
 		System.out.println(m_ccode);
 
 		ArrayList<Member> hrCardList = new ArrayList<>();
 		hrCardList = mDao.getHRCard(m_ccode);
-
+		
 		mav.addObject("hrCard", makeHRCardList(hrCardList));
 		mav.setViewName("/hr/hrCard");
+		
+		if(!checkMemberHrCardCnt(m_ccode)) {
+			mav.addObject("msg", "인사카드/사원코드를 전부 다 부여해주세요");
+			
+		}
+		
 		return mav;
 	}
 
 	private String makeHRCardList(ArrayList<Member> hList) {
 		StringBuilder str = new StringBuilder();
 		str.append("<table id='table1'>");
-		str.append("<tr><td></td><td>�</td><td></td><td></td><td></td></tr>");
+		str.append("<tr><td>사진</td><td>이름</td><td>생년월일</td><td>이메일</td><td>수정하기</td></tr>");
 		for (int i = 0; i < hList.size(); i++) {
-			str.append("<tr><td><img src='/erp/upload/" + hList.get(i).getM_photo() + "'></td>");
+			str.append("<tr><td><img style='width:200px; height: 250px;' src='/erp/upload/" + hList.get(i).getM_photo() + "'></td>");
 			str.append("<td>" + hList.get(i).getM_name() + "</td>");
 			str.append("<td>" + hList.get(i).getM_birth() + "</td>");
 			str.append("<td>" + hList.get(i).getM_email() + "</td><td>");
-			str.append("<input type='button' value='' onclick='modifyDetail(\"" + hList.get(i).getM_id()
-					+ "\")'></td></tr>");
+			str.append("<input type='button' value='수정' onclick='modifyDetail(\"" + hList.get(i).getM_id() + "\")'></td></tr>");
 		}
 		str.append("</table>");
 		return str.toString();
@@ -428,7 +433,24 @@ public class HrMM {
 		String result = new Gson().toJson(holiList);
 		return result;
 	}
-
+	
+	public String getEmployeeHoliday(String cCode, String yearmonth, String hrCode) {
+		System.out.println(yearmonth);
+		String month = yearmonth.substring(6);
+		month = month.substring(0, month.length()-1);
+		if(Integer.parseInt(month) < 10) {
+			month = "0" + month;
+		}
+		String date = yearmonth.substring(0, 4) + "-" + month + "%";
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("cCode", cCode);
+		hMap.put("date", date);
+		hMap.put("hrCode", hrCode);
+		ArrayList<NameHoliday> holiList = hDao.getMyHolidayView(hMap);
+		System.out.println(holiList);
+		String result = new Gson().toJson(holiList);
+		return result;
+	}
 
 	private String monthConvert(String number) {
 		String month = "";
@@ -460,4 +482,92 @@ public class HrMM {
 		return month;
 	}
 
+	public ModelAndView checkMemberHrCard(HttpSession session, String address) {
+		String cCode = session.getAttribute("cCode").toString();
+		if(checkMemberHrCardCnt(cCode)) {
+			mav.setViewName(address);
+		}else {
+			mav.setViewName("redirect:/hr/movehrcardpage");
+		}
+		return mav;
+	}
+	
+	private boolean checkMemberHrCardCnt(String cCode) {
+		if(hDao.checkMemberHrCardCnt(cCode)) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+
+	public String getNoHrCard(HttpSession session) {
+		String cCode = session.getAttribute("cCode").toString();
+		
+		
+		ArrayList<Member> hrCardList = new ArrayList<>();
+		hrCardList = hDao.getNoHrCard(cCode);
+		
+		String list = makeHRCardList(hrCardList);
+		return list;
+	}
+
+	public String getSearchFromName(HttpSession session) {
+		String cCode = session.getAttribute("cCode").toString();
+		
+		
+		ArrayList<Member> hrCardList = new ArrayList<>();
+		hrCardList = hDao.getSearchFromName(cCode);
+		
+		String list = makeHRCardList(hrCardList);
+		return list;
+	}
+
+	public ModelAndView checkMyHrCard(HttpSession session, String address) {
+		if(hDao.haveHrCode(session.getAttribute("id").toString())) {
+			mav.setViewName(address);
+		}else {
+			mav.setViewName("redirect:/myinfo/myinfo");
+		}
+		return mav;
+	}
+	
+	//내 급여 명세서 이동
+	public ModelAndView moveMyPayCheck(HttpSession session) {
+		String hrCode=session.getAttribute("hrCode").toString();
+		HR_Card check=hDao.selectcheckpay(hrCode);
+		System.out.println("값이 나옴="+check);
+		if(check!=null) {
+			mav.addObject("paycheck", check);
+			view="/myInfo/myPaycheck";
+		}else {
+			view="/myInfo/myInfo";
+		}
+		mav.setViewName(view);
+		return mav;	
+	}
+	
+	//내 급여명세서 목록
+	public String getMyPaySelect(String hrCode, String month) {
+		HashMap<String, String> hMap=new HashMap<String, String>();
+		hMap.put("hrCode", hrCode);
+		hMap.put("month", month);
+		Payroll pay=hDao.getMyPaySelect(hMap);
+		System.out.println("긁어온 pay="+pay);
+		if(pay!=null) {
+			Gson gson=new Gson();
+			String json=gson.toJson(pay);
+			return json;
+		}
+		return null;
+	}
+
+	public ModelAndView getHolidayDetail(String docunum, HttpSession session) {
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("cCode", session.getAttribute("cCode").toString());
+		hMap.put("docunum", docunum);
+		ApplyHoliday apholi = hDao.getDetailHoliday(hMap);
+		mav.addObject("apholi", apholi);
+		mav.setViewName("/hr/holidayDetail");
+		return mav;
+	}
 }

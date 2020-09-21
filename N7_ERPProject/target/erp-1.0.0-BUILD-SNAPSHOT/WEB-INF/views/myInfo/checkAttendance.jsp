@@ -49,7 +49,19 @@ ul {
 }
 .attendance{
 	border: 1px solid black;
+<<<<<<< HEAD
+<<<<<<< HEAD
+	width: 200px;
+	text-align: center;
+	height: 150px;
 }
+
+=======
+}
+>>>>>>> origin/yyyyyyyyyyyy
+=======
+}
+>>>>>>> origin/JSJ
 </style>
 </head>
 <body onload="build();">
@@ -84,9 +96,25 @@ ul {
 	</div>
 	<div id="description">
 	
+<<<<<<< HEAD
+<<<<<<< HEAD
+	<h1> CSS 가운데로, 크게</h1>
+	
+	<h1 id="clock"></h1><br>
+	
+	현재상태 <div id="currentStatus"></div>
+	
+	<br>
+=======
 	<h1 align="center">오늘 날짜 현재 시각 출력해야함. 현재 등록버튼누르면 오늘날짜가 입력되는데 현재시각이 들어가도록 바꿔야함</h1>
 	<h1 id="clock"></h1>
 	<div id="currentStatus"></div>
+>>>>>>> origin/yyyyyyyyyyyy
+=======
+	<h1 align="center">오늘 날짜 현재 시각 출력해야함. 현재 등록버튼누르면 오늘날짜가 입력되는데 현재시각이 들어가도록 바꿔야함</h1>
+	<h1 id="clock"></h1>
+	<div id="currentStatus"></div>
+>>>>>>> origin/JSJ
 	<br>
 	<span id="in" class="attendance"> 출근 등록 </span>
 	<span id="out" class="attendance"> 퇴근 등록 </span>

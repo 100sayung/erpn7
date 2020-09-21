@@ -1,6 +1,8 @@
 package com.n7.erp.service;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import javax.mail.Address;
 import javax.mail.Authenticator;
@@ -24,6 +26,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.google.gson.Gson;
 import com.n7.erp.bean.Member;
 import com.n7.erp.bean.entity.Gmail;
@@ -69,6 +73,9 @@ public class MemberMM {
 		System.out.println("m_ccode = " + multi.getParameter("m_ccode"));
 		if (multi.getParameter("m_ccode").toString().equals("")) {
 			mb.setM_ccode("N7");
+		}else {
+			String cCode = multi.getParameter("m_ccode");
+			mb.setM_ccode(cCode);
 		}
 		String id = multi.getParameter("m_id");
 		String pw = multi.getParameter("m_pw");
@@ -93,6 +100,44 @@ public class MemberMM {
 		mav.setViewName("/home/home");
 		return mav;
 	}
+
+public String getSearchFromId(String m_id) {
+	ArrayList<Member> mlist = new ArrayList<Member>();
+	if (m_id.equals("")) {
+		System.out.println("ㄴ");
+		mlist = mDao.getAllMember();
+	} else {
+		m_id = "%" + m_id + "%";
+		System.out.println("m_id : " + m_id);
+		mlist = mDao.getSearchFromId(m_id);
+	}
+	String result = new Gson().toJson(mlist);
+	System.out.println(result);
+	return result;
+}
+
+public String updateChangeGrade(List<Member> mlist) {
+	for (int i = 0; i < mlist.size(); i++) {
+		mDao.updateChangeGrade(mlist.get(i));
+	}
+
+	return null;
+}
+
+public void forceWithDrawal(List<String> slist) {
+	for (int i = 0; i < slist.size(); i++) {
+		mDao.forceWithDrawal(slist.get(i));
+	}
+
+}
+
+public ModelAndView moveMyInfo(HttpSession session) {
+	if(!hDao.haveHrCode(session.getAttribute("id").toString())) {
+		mav.addObject("msg", "우선 인사카드 등록을 요청해주세요.");
+	}
+	mav.setViewName("myInfo/myInfo");
+	return mav;
+}
 
 	public ResponseEntity<String> findId(String userEmail) {
 		Member mb = mDao.findId(userEmail);
