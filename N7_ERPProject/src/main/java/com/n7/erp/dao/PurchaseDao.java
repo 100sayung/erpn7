@@ -16,7 +16,7 @@ import com.n7.erp.bean.ps.Return;
 @Component
 public interface PurchaseDao {
 
-	@Update("UPDATE P SET P_SITUATION=1 WHERE P_NUM=#{ie_pnum} AND ")//수정해야함
+	@Update("UPDATE P SET P_SITUATION=1 WHERE P_NUM=#{ie_pnum} AND P.P_CCODE = #{ie_cpcode} ")
 	boolean updatePurchase(IePort iePort);
 	
 	boolean pregistration(Purchase ps);
