@@ -170,19 +170,20 @@ resize: none;
       $("#approvalLine").click(function() {
           window.open('/erp/sales/approvalLine', 'approvalLine', 'width=1400,height=700');
        });
-      
-      function setChildValue(data) {
-	      console.log(data);
-	      if (data.tList1 != "") {
-	      var str = "";
-	         for ( var i in data.tList1) {
-	            str +="<input type='text' name='bs_approver"+i+"' value='"+data.tList1[i].m_code+"' hidden='true'>";
-	            str +=data.tList1[i].m_grade+"/";
-	            str +="<input style='width:50px;' type='text' name='bs_approver"+i+"' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;"; /* ad_apname */
-	         }
-	         console.log(str)
-	         $("#line").html(str);
-	      };
+      	   
+       function setChildValue(data) {
+	          console.log(data);
+	          if (data.tList1 != "") {
+	          var str = "";
+	             for ( var i in data.tList1) {
+	                  str +="<input type='text' name='rs_apcode"+i+"' value='"+data.tList1[i].hc_hrcode+"' hidden='true'>";
+	                str +=data.tList1[i].hc_position+"/";
+	                str +="<input style='width:50px;' type='text' name='rs_apname"+i+"' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
+	             }
+	             console.log(str)
+	             $("#line").append(str);
+	          };
+	       };
 	      
 	      /* if (data.tList2 != "") {
 	         for ( var i in data.tList2) {
@@ -194,7 +195,6 @@ resize: none;
 	         }
 	      }; */
 	   
-	   };
 	   
 	   $("#submit").click(function(){
 		   var obj=$("#approvalinput").serialize();

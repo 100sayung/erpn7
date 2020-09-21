@@ -55,7 +55,7 @@
                 <thead valign="top">
                     <tr>
                         <th><input type="checkbox" id="allCheck"></th>
-                        <th>날짜</th>
+                        <th>날짜(출하의뢰일)</th>
                         <th>판매단가</th>
                         <th>수량</th>
 						<th>현미수액</th>
@@ -102,7 +102,7 @@
     			}
      			for(var i in data.sList2){ //결재창에서 끌고 온거
      				str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_bonum+"></td>";
-     				str+="<td><input type='text' value="+data.sList[i].bs_date+"></td>";
+     				str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
@@ -163,7 +163,7 @@
           			if(data.sList!=""){
       				for(var i in data.sList){
       					str+="<tr class='tr'><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_clcode+"></td>";
-         				str+="<td><input type='text' value="+data.sList[i].bs_date+"></td>";
+         				str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
       					str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
       					str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
       					str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
@@ -182,10 +182,11 @@
     
       //완납 처리 버튼
       $('#fullpaymentcheck').click(function(){
-
+        console.log('들어오냐');
     	var check="";
           	$("input[name=each_check]:checked").each(function(){
           		check = $(this).attr("value");
+          		console.log(check);
           		if(check==""){
           			alert('체크해주세요');
           		}else{
@@ -202,7 +203,7 @@
      			
      			for(var i in data.sList){
      				str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_bonum+"></td>";
-     				str+="<td><input type='text' value="+data.sList[i].bs_date+"></td>";
+     				str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
@@ -233,7 +234,7 @@
     			
     			for(var i in data.sList){
     				str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
-     				str+="<td><input type='text' value="+data.sList[i].bs_date+"></td>";
+     				str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
@@ -260,7 +261,7 @@
      			
      			for(var i in data.sList){
      				str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_credit+"></td>";
-     				str+="<td><input type='text' value="+data.sList[i].bs_date+"></td>";
+     				str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";

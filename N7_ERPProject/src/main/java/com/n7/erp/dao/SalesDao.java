@@ -79,16 +79,11 @@ public interface SalesDao {
 	
 	List<Uncollectedbean> uncollectedmoneysearch(@Param("search") String search, @Param("choice") String choice); //미수금 검색
 
-	boolean fullpaymentprocess(String check); //완납처리
+	boolean fullpaymentprocess(String check); //완납처리 왜안됨
 
 	List<Businessbean> businessactivitiessearch(@Param("search") String search, @Param("choice") String choice); //영업활동 검색
 
 	boolean businessactivitiesdelete(String check);
-
-
-
-
-
 
 }
 

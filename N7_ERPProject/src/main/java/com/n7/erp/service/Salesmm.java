@@ -445,6 +445,7 @@ public class Salesmm {
       Map<String, List<approvaldetail>> sMap= null; 
       List<approvaldetail> sList=new ArrayList<>();
       System.out.println("여기옴?");
+      System.out.println(check); //여기까지는 됨
       if(sDao.fullpaymentprocess(check)){
           System.out.println("들어옴!");
           sList=sDao.uncollectedmoneyitem2();

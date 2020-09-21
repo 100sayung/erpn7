@@ -198,7 +198,7 @@ public class SalesController {
       System.out.println("여긴들어와?333333333");
       Map<String, List<Businessbean>> sMap=sm.businessitem();
       return sMap;
-   }
+   } 
    
    @PostMapping(value = "/sales/businessactivitiessearch") //영업활동 검색
    public Map<String, List<Businessbean>> businessactivitiessearch(String search, String choice) {
