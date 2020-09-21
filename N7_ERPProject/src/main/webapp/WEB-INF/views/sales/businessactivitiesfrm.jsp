@@ -81,7 +81,7 @@
         </form>
             <br>
             <button type="button" id="addList" value="추가">추가</button>
-            <!-- <button type="button" id="change" value="변경" >변경</button> -->
+            <button type="button" id="change" value="변경" >변경</button>
             <button type="button" id="deleteCheck" value="삭제">삭제</button>
             <button type="button" id="sub" value="저장">저장</button>
             
@@ -90,25 +90,30 @@
     <br>
 
     
-    <script type="text/javascript">        
-        //추가삭제
-        $(document).ready(function(){
-              $('.addList').click(function(){
-                 $('#tBody').append('<tr><td><input type="checkbox" name="each_check" class="each"></td><td><input type="text" name="ba_date" class="input-text"></td><td><input type="text" name="ba_content" class="input-text" ></td><td><input type="number" name="ba_estimatedsalesamount" class="input-text" ></td><td><input type="number" name="ba_actualsalesamount" class="input-text" ></td><td><input type="text" name="ba_enddate" class="input-text" ></td><td><input type="text" name="ba_memo" class="input-text" ></td><td><input type="button" value="삭제" id="deleteCheck" onclick="javascript:thisRowDel(this);"></td></tr>');
-              });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-          }); 
-           function thisRowDel(row){
-                console.log(row);
-                let tr = row.parentNode.parentNode;
-                tr.parentNode.removeChild(tr);
-         }   
+    <script type="text/javascript">
+        $("#addList").click(function() {
+            var str = '';
+            for (var i = 0; i < $("#add").val(); i++) {
+                str += '<tr><td><input type="checkbox" class="each"></td><td><input type="text" name="date" id="add" required></td><td><input type="text" name="client"  required></td><td><input type="text" name="content" required></td><td><input type="text" name="estimated_sales_amount" required></td><td><input type="text" name="actual_sales_amount" required></td><td><input type="text" name="end_date"></td></tr>';
+            }
+            $("#tBody").append(str);
+            $("#add").val(1);
+        });
         
+        $("#deleteCheck").click(function() {
+            for (var i = 0; i < $(".each").length; i++) {
+                if ($(".each")[i].checked == true) {
+                    $(".each")[i].parentElement.parentElement.remove();
+                    i--;
+                }
+            }
+        })
         
       $('#businessitemfrm').click(function(){
         	var str="";
         	
         	$.ajax({
-        		url:'/erp/rest/sales/businessitem',
+        		url:'rest/businessitem',
         		type: 'get',
         		dataType: "json",
         		success:function(data){
@@ -137,7 +142,7 @@
 
         	$.ajax({
         			type : 'post',
-        			url : '/erp/rest/sales/businessactivitiesinput',
+        			url : 'rest/businessactivitiesinput',
         			data:obj,
         			success : function(data) {
         				console.log(data);
@@ -155,7 +160,7 @@
     	  
     	  $.ajax({
     		  type : 'post',
-    	      url : '/erp/rest/sales/businessactivitiessearch',
+    	      url : 'rest/businessactivitiessearch',
     	      data: "choice="+choice+"&search="+search,
     	      dataType: "json",
     	      success : function(data){
@@ -182,39 +187,6 @@
     	      } 
     	  });
        });
-       
-       $('#deleteCheck').click(function(){
-       	var check="";
-       	$("input[name=each_check]:checked").each(function(){
-       		check = $(this).attr("value");
-       		console.log(check);
-       	});
-       	
-       	$.ajax({
-       			type : 'post',
-       			url : '/erp/rest/sales/businessactivitiesdelete',
-       			data: {check:check},
-       			dataType: "json",
-       			success : function(data) {       				
-       				console.log(data);
-       				var str="";
-       				for(var i in data.sList){
-           				str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].ba_ocode+"></td>";
-           				str+="<td><input type='text' value="+data.sList[i].ba_date+"></td>";
-           				str+="<td><input type='text' value="+data.sList[i].ba_content+"></td>";
-           				str+="<td><input type='text' value="+data.sList[i].ba_estimatedsalesamount+"></td>";
-           				str+="<td><input type='text' value="+data.sList[i].ba_actualsalesamount+"></td>";
-           				str+="<td><input type='text' value="+data.sList[i].ba_enddate+"></td>";
-           				str+="<td><input type='text' value="+data.sList[i].ba_memo+"></td>";
-
-           			}
-           				$('#tBody').html(str);
-       			},
-       			error : function(error) {
-       				console.log(error);
-       			}
-       		});
-       	}); 
 
 </script>
 </body>

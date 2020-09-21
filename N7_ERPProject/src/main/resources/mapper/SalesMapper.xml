@@ -72,21 +72,17 @@
 	
 	<insert id="insertcomlist" parameterType="A_comp">
      INSERT INTO AC_COMPANYLIST
-	VALUES(#{cl_code},#{cl_ccode},#{cl_name},#{cl_comnum},#{cl_comnum2},#{cl_ceo},#{cl_employee},#{cl_phone},
-	#{cl_phone2},#{cl_fax},#{cl_email},#{cl_addr},#{cl_kind},#{cl_kind2},#{cl_kind3},#{cl_bank},
-	#{cl_bankholder},#{cl_banknum},#{cl_memo})
+     VALUES(#{cl_code},#{cl_ccode},#{cl_name},#{cl_comnum},#{cl_comnum2},#{cl_ceo},#{cl_employee},#{cl_phone},
+     #{cl_phone2},#{cl_fax},#{cl_email},#{cl_addr},#{cl_kind},#{cl_kind2},#{cl_kind3},#{cl_bank},
+     #{cl_bankholder},#{cl_memo},#{cl_banknum})
    </insert>
    
-   	<select id="getcomcode" parameterType="String" resultType="A_comp">
-	SELECT * FROM AC_COMPANYLIST WHERE CL_COMNUM = #{s_comnum}
-	</select>
-	
    <select id="getComList" parameterType="String" resultType="A_comp">
      SELECT * FROM AC_COMPANYLIST
    </select>
    
    <select id="getcomInfo" parameterType="String" resultType="A_comp">
-     SELECT * FROM AC_COMPANYLIST WHERE CL_NAME=#{company} 
+     SELECT * FROM AC_COMPANYLIST
    </select>
    
    <select id="getCompanyList" parameterType="String" resultType="A_comp">
@@ -105,7 +101,7 @@
      SELECT * FROM B_SHIPREGIST    
    </select> 
    
-<!--    <select id="approvalLine" parameterType="String" resultType="Linee">
+   <select id="approvalLine" parameterType="String" resultType="Linee">
    SELECT * FROM MEMBER2 
    </select>
    
@@ -123,23 +119,7 @@
    
    <select id="approLinecom2" parameterType="String" resultType="Linee">
    SELECT * FROM MEMBER2 WHERE M_CODE=#{code02}
-   </select> -->
-   
-   	<select id="approvalLine" parameterType="String" resultType="Linee">
-	SELECT * FROM MLIST 
-	</select>
-	
-	<select id="searchName" parameterType="String" resultType="Linee">
-	SELECT * FROM MLIST  WHERE M_NAME=#{name}
-	</select>
-	
-	<select id="addApproval" parameterType="String" resultType="Linee">
-	SELECT * FROM MLIST  WHERE HC_HRCODE=#{code}
-	</select>
-	
-	<select id="approLinecom1" parameterType="String" resultType="Linee">
-	SELECT * FROM MLIST  WHERE HC_HRCODE=#{code01}
-	</select>
+   </select>
    
    <insert id="approvalinput" parameterType="appdetail">
 	   INSERT INTO APPROVALDOCU VALUES(#{bs_docunum},#{bs_ccode},#{bs_docuname},#{bs_approver0},#{bs_approver1},#{bs_date},DEFAULT) <!-- #{bs_date} -->
@@ -198,9 +178,5 @@
 	       </if>
 	   </where>
 	</select>
-	
-	<delete id="businessactivitiesdelete" parameterType="business">
-	   DELETE FROM B_ACTIVITES WHERE BA_OCODE = #{check}
-	</delete>
 </mapper>
 

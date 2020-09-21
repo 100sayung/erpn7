@@ -77,6 +77,11 @@ button {
 			</ul>
 		</div>
 	</div>
+	이미 회사가 있다 -> 회사코드에 자기 회사 쓰면됨 우리는 현재 빈칸으로 두거나 N7입력.<br></br>
+	회사가 없는데 새로 만들 예정이다 -> 빈칸으로 두고 가입한 뒤에 erp신청 후 회사테이블에 값입력 -> 회사코드가 생기므로 그 회사코드 후에 입력
+	<br></br>
+	(ERP 신청 -> ADMIN이 승인(우리가 승인) -> 회사ERP 생성(생성할때 회사코드는 우리가?))<br>
+	ID중복체크 해야함 <br>
 	<form action="join" method="post" enctype="multipart/form-data" onsubmit="return sum();">
 		<div id="joinContainer">
 			<div class="table-responsive">

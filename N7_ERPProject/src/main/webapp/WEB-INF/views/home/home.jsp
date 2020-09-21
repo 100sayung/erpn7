@@ -73,6 +73,7 @@ margin-left: 200px;
 </head>
 
 <body>
+사원코드 : ${hrCode }
 	<div id="header" class="container">
 		<div id="logo">
 			<h1>
@@ -86,18 +87,29 @@ margin-left: 200px;
 						소개</a></li>
 				<li><a href="/erp/erpboard" accesskey="3" title="">신청 게시판</a></li>
 				<li><a href="/erp/erpapply" accesskey="4" title="">ERP 신청</a></li>
-				<c:if test="${id==null}">
+				<c:choose>
+				<c:when test="${id==null}">
 				<li><a href="/erp/login" accesskey="5" title="">LOGIN</a></li>
 				<li><a href="/erp/join" accesskey="6" title="">JOIN</a></li>
-				</c:if>
-				<c:if test="${id!=null}">
-             	<li><form action="logout" method="post"><button>LOGOUT</button></form></li>
+				</c:when>
+				<c:when test="${id!=null and id eq 'manager'}">
+				<li><form action="logout" method="post"><button>LOGOUT</button></form></li>
+				<li class="current_page_item"><a href="#" onClick='window.open("/erp/managermode/managermode", "ERP START", "width=1200, height=900, toolbar=no, menubar=no, resizable=yes"); return false;'>ERP관리하기</a></li>
+				</c:when>
+				<c:when test="${id!=null and id ne 'manager'}">
+				<li><form action="logout" method="post"><button>LOGOUT</button></form></li>
 				<li class="current_page_item"><a href="#" onClick='window.open("/erp/main", "ERP START", "width=1200, height=900, toolbar=no, menubar=no, resizable=yes"); return false;'>ERP시작</a></li>
-				</c:if>
+				</c:when>
+				</c:choose>
+				
 			</ul>
 		</div>
 	</div>
-
+<br><br><br><br> 
+메인 메뉴 통일해야함 이름이 다름
+<br>
+ERP창 내부에서도 메뉴 클릭 되게 만들어야함
+<br>
 	<div id="description">
 		<center>
 		<div class="icons" id="personManagement">
@@ -118,13 +130,14 @@ margin-left: 200px;
 		</div>
 		</center>
 	</div>
-	<div id="desc" style="float: left;"></div>
+	<div id="desc"></div>
 	<script>
 	$("#introduce").click(function(){
 		$.ajax({
 			url:'introducecompany',
 			type:"get",
 			success:function(data){
+				
 				$("#description").hide();
 				$("#desc").html(data);
 			},

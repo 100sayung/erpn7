@@ -55,7 +55,7 @@
                 <thead valign="top">
                     <tr>
                         <th><input type="checkbox" id="allCheck"></th>
-                        <th>날짜(출하의뢰일)</th>
+                        <th>날짜</th>
                         <th>판매단가</th>
                         <th>수량</th>
 						<th>현미수액</th>
@@ -87,7 +87,7 @@
     	var str="";
     	
     	$.ajax({
-    		url:'/erp/rest/sales/uncollectedmoneyitem',
+    		url:'rest/uncollectedmoneyitem',
     		type: 'get',
     		dataType: "json",
     		success:function(data){
@@ -102,7 +102,7 @@
     			}
      			for(var i in data.sList2){ //결재창에서 끌고 온거
      				str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_bonum+"></td>";
-     				str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
+     				str+="<td><input type='text' value="+data.sList[i].bs_date+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
@@ -121,7 +121,7 @@
 
      	$.ajax({
      			type : 'post',
-     			url : '/erp/rest/sales/uncollectedmoneyinput',
+     			url : 'rest/uncollectedmoneyinput',
      			data:obj,
      			success : function(data) {
      				console.log(data);
@@ -153,7 +153,7 @@
       	console.log(search);
       	$.ajax({
       			type : 'post',
-      			url : '/erp/rest/sales/uncollectedmoneysearch',
+      			url : 'rest/uncollectedmoneysearch',
       			data: "choice="+choice+"&search="+search,
       			dataType: "json",
       			success : function(data) {       				
@@ -163,7 +163,7 @@
           			if(data.sList!=""){
       				for(var i in data.sList){
       					str+="<tr class='tr'><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_clcode+"></td>";
-         				str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
+         				str+="<td><input type='text' value="+data.sList[i].bs_date+"></td>";
       					str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
       					str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
       					str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
@@ -182,17 +182,16 @@
     
       //완납 처리 버튼
       $('#fullpaymentcheck').click(function(){
-        console.log('들어오냐');
+
     	var check="";
           	$("input[name=each_check]:checked").each(function(){
           		check = $(this).attr("value");
-          		console.log(check);
           		if(check==""){
           			alert('체크해주세요');
           		}else{
 	         			
        	$.ajax({
-     		url: '/erp/rest/sales/fullpaymentprocess',
+     		url: 'rest/fullpaymentprocess',
      		type: 'post',
      		data: {check:check},
      		dataType: "json",
@@ -203,7 +202,7 @@
      			
      			for(var i in data.sList){
      				str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_bonum+"></td>";
-     				str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
+     				str+="<td><input type='text' value="+data.sList[i].bs_date+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
@@ -224,7 +223,7 @@
      $('#uncollectedsearch').click(function(){
     
     	$.ajax({
-    		url:'/erp/rest/sales/creditsearch',
+    		url:'rest/creditsearch',
     		type: 'get',
     		dataType: "json",
     		success:function(data){
@@ -234,7 +233,7 @@
     			
     			for(var i in data.sList){
     				str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
-     				str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
+     				str+="<td><input type='text' value="+data.sList[i].bs_date+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
@@ -251,7 +250,7 @@
      $('#fullpaymentsearch').click(function(){
     	    
      	$.ajax({
-     		url:'/erp/rest/sales/fullpaymentsearch',
+     		url:'rest/fullpaymentsearch',
      		type: 'get',
      		dataType: "json",
      		success:function(data){
@@ -261,7 +260,7 @@
      			
      			for(var i in data.sList){
      				str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_credit+"></td>";
-     				str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
+     				str+="<td><input type='text' value="+data.sList[i].bs_date+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
   					str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";

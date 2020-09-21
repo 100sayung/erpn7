@@ -21,57 +21,57 @@ public class SalesHomeController {
 	
 	ModelAndView mav;
 	
-	@RequestMapping(value = "/sales/", method = RequestMethod.GET)
+	@RequestMapping(value = "sales/", method = RequestMethod.GET)
 	public String home() {
 		return "/sales/home";
 	}
-	@RequestMapping(value = "/sales/main", method = RequestMethod.GET)
+	@RequestMapping(value = "sales/main", method = RequestMethod.GET)
 	   public String main() {
-		   return "/sales/main";
+		   return "sales/main";
 	}
 	
-	@RequestMapping(value = "/sales/orderregistrationfrm", method = RequestMethod.GET)
+	@RequestMapping(value = "sales/orderregistrationfrm", method = RequestMethod.GET)
 	   public String orderregistrationfrm() {
-	      return "/sales/orderregistrationfrm";
+	      return "sales/orderregistrationfrm";
 	}
 	
-	@RequestMapping(value = "/sales/shippingrequestinputfrm", method = RequestMethod.GET)
+	@RequestMapping(value = "sales/shippingrequestinputfrm", method = RequestMethod.GET)
 	   public String shippingrequestinputfrm() {
-	      return "/sales/shippingrequestinputfrm";
+	      return "sales/shippingrequestinputfrm";
 	}
 	
-	@RequestMapping(value = "/sales/uncollectedmoneyregistrationfrm", method = RequestMethod.GET)
+	@RequestMapping(value = "sales/uncollectedmoneyregistrationfrm", method = RequestMethod.GET)
 	   public String uncollectedmoneyregistrationfrm() {
-	      return "/sales/uncollectedmoneyregistrationfrm";
+	      return "sales/uncollectedmoneyregistrationfrm";
 	}
 	
-	@RequestMapping(value = "/sales/businessactivitiesfrm", method = RequestMethod.GET)
+	@RequestMapping(value = "sales/businessactivitiesfrm", method = RequestMethod.GET)
 	   public String businessactivitiesfrm() {
-	      return "/sales/businessactivitiesfrm";
+	      return "sales/businessactivitiesfrm";
 	}
 	
-	@RequestMapping(value = "/sales/businessactivitiesdetail", method = RequestMethod.GET)
+	@RequestMapping(value = "sales/businessactivitiesdetail", method = RequestMethod.GET)
 	   public String businessactivitiesdetail() {
-	      return "/sales/businessactivitiesdetail";
+	      return "sales/businessactivitiesdetail";
 	}
 	
-	@RequestMapping(value = "/sales/approvalplan", method = RequestMethod.GET)
+	@RequestMapping(value = "sales/approvalplan", method = RequestMethod.GET)
 	   public ModelAndView approvalplan(String check) {
 		  mav=sm.approvalplan(check);
 	      return mav;
 	}
 	
-	@RequestMapping(value = "/sales/clientfrm", method = RequestMethod.GET)
+	@RequestMapping(value = "sales/clientfrm", method = RequestMethod.GET)
 	   public String clientfrm() {
-	      return "/sales/clientfrm";
+	      return "sales/clientfrm";
 	}
 	
-	@RequestMapping(value = "/sales/approvalLine", method = RequestMethod.GET)
-	   public ModelAndView approvalLine() {
-	      mav=sm.approvalLine();
-	      return mav;
-	}
-	
+//	@RequestMapping(value = "/sales/approvalLine", method = RequestMethod.GET)
+//	   public ModelAndView approvalLine() {
+//	      mav=sm.approvalLine();
+//	      return mav;
+//	}
+//	
 	
 	
 //	@RequestMapping(value = "/introducecompany", method = RequestMethod.GET)

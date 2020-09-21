@@ -75,7 +75,7 @@ ul {
 		<ul id="menuList">
 			<li><a href="/erp/myinfo/checkattendance">출/퇴근 등록</a></li>
 			<li><a href="/erp/myinfo/myinfo">내 정보 보기</li>
-			<li><a href="#">급여명세서 보기</li>
+			<li><a href="/erp/myinfo/myPaycheck">급여명세서 보기</li>
 			<li><a href="/erp/myinfo/myattendance">내 출결 보기</li>
 			<li><a href="/erp/myinfo/myholiday">내 휴가 보기</li>
 			<li><a href="/erp/myinfo/applyholiday">휴가신청</a></li>

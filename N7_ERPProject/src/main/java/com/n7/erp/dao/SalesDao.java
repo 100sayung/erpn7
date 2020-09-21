@@ -41,7 +41,7 @@ public interface SalesDao {
 	
 	boolean insertcomlist(A_company ac);
 
-	List<A_company> getComList(String c_code);
+	List<A_company> getComList(String cl_code);
 
 	List<A_company> getCompanyList();
 
@@ -53,15 +53,15 @@ public interface SalesDao {
 
 	Shippingbean approvalplanchoice(String check);
 	
-	List<com.n7.erp.bean.sales.approvalLine> approvalLine();
-
-	List<com.n7.erp.bean.sales.approvalLine> searchName(String name);
-
-	List<com.n7.erp.bean.sales.approvalLine> addApproval(String code01); //name
-
-	com.n7.erp.bean.sales.approvalLine approLinecom1(String code01);
-
-	//com.n7.erp.bean.sales.approvalLine approLinecom2(String code02);
+//	List<approvalLine> approvalLine();
+//
+//	List<approvalLine> searchName(String name);
+//
+//	List<approvalLine> addApproval(String name);
+//
+//	com.n7.erp.bean.approvalLine approLinecom1(String code01);
+//
+//	com.n7.erp.bean.approvalLine approLinecom2(String code02);
 
 	boolean approvalinput(approvaldetail app); //결재창 등록
 
@@ -79,11 +79,14 @@ public interface SalesDao {
 	
 	List<Uncollectedbean> uncollectedmoneysearch(@Param("search") String search, @Param("choice") String choice); //미수금 검색
 
-	boolean fullpaymentprocess(String check); //완납처리 왜안됨
+	boolean fullpaymentprocess(String check); //완납처리
 
 	List<Businessbean> businessactivitiessearch(@Param("search") String search, @Param("choice") String choice); //영업활동 검색
 
-	boolean businessactivitiesdelete(String check);
+
+
+
+
 
 }
 
