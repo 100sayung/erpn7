@@ -75,7 +75,7 @@ ul {
 		<ul id="menuList">
 			<li><a href="/erp/myinfo/checkattendance">출/퇴근 등록</a></li>
 			<li><a href="/erp/myinfo/myinfo">내 정보 보기</li>
-			<li><a href="#">급여명세서 보기</li>
+			<li><a href="/erp/myinfo/myPaycheck">급여명세서 보기</li>
 			<li><a href="/erp/myinfo/myattendance">내 출결 보기</li>
 			<li><a href="/erp/myinfo/myholiday">내 휴가 보기</li>
 			<li><a href="/erp/myinfo/applyholiday">휴가신청</a></li>
@@ -83,23 +83,55 @@ ul {
 		</ul>
 	</div>
 	<div id="description"> 휴가신청폼<br>
-	
+
+	<h1> CSS</h1>
+
+	</form>
+
+
+	<button id="approval">결재</button>
+	<div id="line"></div><br>
 	<form action="/erp/hr/applyholiday" method="post">
 	<input type="text" name="hap_docuname" placeholder="문서 제목을 입력해주세요 글자제한 20자" required="required">
 	<input type="text" name="hap_type" placeholder="휴가 종류를 입력해주세요 글자제한 20자" required="required">
 	<br>
-	<input type="date" name="hap_startday" required="required">
-	<span id="myleader"></span>
-	<input type="date" name="hap_endday" required="required">
+	<input type="date" name="hap_startday" required="required" id="start">
+	<input type="date" name="hap_endday" required="required" onchange='checkDateValue(start, end);' id="end">
 	<br>
-	<textarea rows="10" cols="10" name="hap_reason"></textarea>
+	<textarea rows="10" cols="10" name="hap_reason"></textarea>0
 	<input type="submit" value="제출">
-	</form>
-	
-	
-	
+
 	</div>
 	<script>
+
+	String hap_docunum;
+	String hap_ccode;
+	String hap_hrcode;
+	String hap_docuname;
+	String hap_fromapprover;
+	String hap_toapprover;
+	String hap_applydate;
+	String hap_type;
+	String hap_reason;
+	String hap_startday;
+	String hap_endday;
+	String hap_status;
+	
+	function setChildValue(data) {
+		console.log(data);
+		if (data.tList1 != "") {
+		var str = "";
+			for ( var i in data.tList1) {
+		        str +="<input type='text' name='hap_toapprover' value='"+data.tList1[i].hc_hrcode+"' hidden='true'>";
+				str +=data.tList1[i].hc_position+"/";
+				str +="<input style='width:50px;' type='text' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
+			}
+			console.log(str)
+			$("#line").append(str);
+		};
+	};
+
+		
 	$(document).ready(function() {
 		$.ajax({
 			url : "/erp/rest/hr/myleaderlist",
@@ -118,7 +150,26 @@ ul {
 			}
 		});
 	});
+	$("#approval").click(function() {
+		console.log("123");
+		window.open('/erp/Account/approvalLine', 'approvalLine', 'width=1400,height=700');
+	});
 	
+
+	function replaceAll(str, searchStr, replaceStr) {
+	    return str.split(searchStr).join(replaceStr);
+	 }
+	
+
+	function checkDateValue(val1, val2){
+		let date1 = Number(replaceAll(val1.value, "-", ""));
+		let date2 = Number(replaceAll(val2.value, "-", ""));
+		if(date1>date2){
+			alert("종료일은 시작일보다 이전일 수 없습니다.");
+			val2.value = "";
+		}
+	}
+
 	</script>
 </body>
 </html>

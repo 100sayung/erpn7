@@ -30,8 +30,6 @@ width:100px;
 		<table id="comInfo" style="text-align: center;">
 		
 			<tr><td colspan="6" style="height:50px;">거 래 명 세 표</td></tr>
-<<<<<<< HEAD
-<<<<<<< HEAD
 			<tr><td id="date" rowspan="3" style="width:350px;"></td><td rowspan="5">공급자</td><td class="colume">등록번호</td><td colspan="3">${mc.c_comnum}</td></tr>
 			<tr><td class="colume">상호</td><td>${mc.c_name}</td><td class="colume">성명</td><td>${mc.c_ceo}</td></tr>
 			<tr><td class="colume">주소</td><td colspan="3">${mc.c_addr}</td></tr>
@@ -39,20 +37,6 @@ width:100px;
 			<tr><td class="colume">전화번호</td><td colspan="3"></td></tr>
 		<!-- </table>
 		<table id="comInfo2"> -->
-=======
-=======
->>>>>>> origin/JSJ
-			<tr><td id="date" rowspan="3" style="width:350px;"></td><td rowspan="5">공급자</td><td class="colume">등록번호</td><td colspan="3">${mc.mc_num}</td></tr>
-			<tr><td class="colume">상호</td><td>${mc.mc_name}</td><td class="colume">성명</td><td>${mc.mc_ceo}</td></tr>
-			<tr><td class="colume">주소</td><td colspan="3">${mc.mc_addr}</td></tr>
-			<tr><td rowspan="2" style="width:350px;">위 날짜로 영수함.</td><td class="colume">업태</td><td>${mc.mc_kind}"</td><td class="colume">종목</td><td>${mc.mc_kind2}</td></tr>
-			<tr><td class="colume">전화번호</td><td colspan="3"></td></tr>
-		</table>
-		<table id="comInfo2">
-<<<<<<< HEAD
->>>>>>> origin/yyyyyyyyyyyy
-=======
->>>>>>> origin/JSJ
 		<tr><td colspan="2">합계금액</td><td colspan="5" id="alltotal"></td></tr>
 		<tr><td>품명</td><td>단가(원)</td><td>수량</td><td>공금가액(원)</td><td>세액(원)</td><td>합계(원)</td></tr>
 		<tbody id="tbody">

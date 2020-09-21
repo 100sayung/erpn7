@@ -58,11 +58,5 @@
 	<logger name="jdbc.sqltiming">
 		<level value="off" />
 	</logger>
-	
+
 </log4j:configuration>
-
-
-
-
-
-
