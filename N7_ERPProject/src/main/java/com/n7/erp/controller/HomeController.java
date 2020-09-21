@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import com.n7.erp.bean.ConsultingBoard;
-import com.n7.erp.bean.Member;
 import com.n7.erp.service.ConsultingBoardMM;
 import com.n7.erp.service.MemberMM;
 

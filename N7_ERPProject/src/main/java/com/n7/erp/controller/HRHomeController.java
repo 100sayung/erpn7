@@ -16,10 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.n7.erp.bean.hr.ApplyHoliday;
-import com.n7.erp.bean.hr.Department;
-import com.n7.erp.bean.hr.HR_Card;
 import com.n7.erp.service.ConsultingBoardMM;
 import com.n7.erp.service.AccountMM;
 import com.n7.erp.service.HRDepartmentMM;
