@@ -52,7 +52,7 @@
     <div id="side_menu">
         <ul id="menuList">
             <li><a href="#" id="acountting">매츌/매입전표 작성</a></li>
-            <li><a href="">분개전표입력</a></li>
+             <li><a href="#" id="acWriting">분개전표 작성</a></li>
             <li><a href="">매출/매입전표 결재확인</a></li>
         </ul>
     </div>
@@ -115,6 +115,20 @@ $("#acountting").click(function(){
 		}
 	});
 
+});
+
+$("#acWriting").click(function(){
+	$.ajax({
+		url:'/erp/Account/acWritefrm',
+		type:'get',
+		success:function(data){
+			$("#description").html(data);
+		},
+		error:function(){
+			
+		}
+	});
+	
 });
 </script>
 </html>

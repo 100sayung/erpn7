@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.n7.erp.dao.PurchaseDao">
+	<insert id="pregistration" parameterType="Purchase">
+		INSERT INTO O_PURCHASELIST VALUES(#{p_documentcode}||LPAD(P_SEQ.CURRVAL,4,0), #{p_ccode}, #{p_itcode}, #{p_name}, #{p_unlit}, #{p_amount}, #{p_budget})
+	</insert>
+	
+	<insert id="pcommom" parameterType="Purchase">
+		INSERT INTO O_PURCHASECOMMOM VALUES(#{p_documentcode}||LPAD(P_SEQ.NEXTVAL,4,0), #{p_ccode}, #{p_productnum}, #{p_day}, #{p_clcode}, #{p_writer})
+	</insert>
+	
+	<select id="pFrerence" resultType="Purchase">
+		SELECT * FROM O_PURCHASECOMMOM
+	</select>
+	
+	<select id="pfSearch" parameterType="String" resultType="Purchase">
+		SELECT * FROM O_PURCHASECOMMOM 
+		<where>
+			<if test="choice.equals('p_documentcode')">
+				P_DOCUMENTCODE = #{search}
+			</if>
+			<if test="choice.equals('p_writer')">
+				P_WRITER = #{search}
+			</if>
+			<if test="choice.equals('p_day')">
+				P_DAY = #{search} 
+			</if>
+		</where>
+	</select>
+	
+	<delete id="pcDelete" parameterType="Purchase">
+		DELETE FROM O_PURCHASELIST WHERE P_DOCUMENTCODE = #{check_list}
+	</delete>
+	
+	<delete id="pfDelete" parameterType="Purchase">
+		DELETE FROM O_PURCHASECOMMOM WHERE P_DOCUMENTCODE = #{check_list}
+	</delete>
+	
+	<select id="pInfo" parameterType="String" resultType="Purchase">
+		SELECT * FROM O_PURCHASECOMMOM WHERE P_DOCUMENTCODE = #{check}
+	</select>
+	
+	<select id="pDetail" parameterType="String" resultType="Purchase">
+		SELECT * FROM O_PURCHASELIST WHERE P_DOCUMENTCODE = #{check}
+	</select>
+	
+	<select id="pBring" parameterType="String" resultType="Purchase">
+		SELECT * FROM O_PURCHASECOMMOM WHERE P_DOCUMENTCODE = #{check}
+	</select>
+	
+	<select id="pProgram" parameterType="String" resultType="Purchase">
+		SELECT * FROM O_PURCHASELIST WHERE P_DOCUMENTCODE= #{check}
+	</select>
+	
+	<select id="approvalLine" parameterType="String" resultType="Line">
+   		SELECT * FROM MEMBER2 
+   </select>
+   
+   <select id="searchName" parameterType="String" resultType="Line">
+   		SELECT * FROM MEMBER2 WHERE M_NAME=#{name}
+   </select>
+   
+   <select id="addApproval" parameterType="String" resultType="Line">
+   		SELECT * FROM MEMBER2 WHERE M_CODE=#{code}
+   </select>
+   
+   <select id="approLinecom1" parameterType="String" resultType="Line">
+   		SELECT * FROM MEMBER2 WHERE M_CODE=#{code01}
+   </select>
+   
+   <select id="approLinecom2" parameterType="String" resultType="Line">
+  		SELECT * FROM MEMBER2 WHERE M_CODE=#{code02}
+   </select>
+   
+	<insert id="Approval" parameterType="Approval" >
+		INSERT INTO APPROVALDOCU VALUES(#{p_docunum}, #{p_ccode}, #{p_docuname}, #{p_approver0}, #{p_approver1}, DEFAULT, 1)
+	</insert>
+	
+	<insert id="pApproval1" parameterType="Approval">
+		INSERT INTO O_PURCHASEPROGRAMCOMMOM VALUES(#{p_docunum}, #{p_ccode}, #{p_docuname}, #{p_clcode}, DEFAULT, #{p_productnum}, #{p_day}, #{p_ect,jdbcType=VARCHAR}, #{p_approver0}, #{p_approver1}, #{p_approver2})
+	</insert>
+	
+	<insert id="pApproval2" parameterType="Approval">
+		INSERT INTO O_PURCHASEPROGRAM VALUES(#{p_docunum}, #{p_ccode}, #{p_name}, #{p_itcode}, #{p_unlit}, #{p_amount}, #{p_budget})
+	</insert>
+	
+	<insert id="rRegistration" parameterType="Return">
+		INSERT INTO O_RETURN VALUES(#{r_documentcode}||LPAD(R_SEQ.NEXTVAL,4,0), #{r_ccode}, #{r_ieseqnum}, #{r_itcode}, #{r_clcode}, DEFAULT, #{r_amount}, #{r_unlit}, #{r_budget}, #{r_name}, #{r_reason}, 3)
+	</insert>
+	
+	<select id="rInfo" resultType="Return">
+		SELECT * FROM O_RETURN
+	</select>
+	
+  	<delete id="rDelete" parameterType="Return">
+		DELETE FROM RETURN1  WHERE R_DOCUMENTCODE= #{check_list}
+	</delete> 
+	
+	<select id="rSearch" resultType="Return">
+		SELECT * FROM O_RETURN
+		<where>
+			<if test="choice.equals('r_documentcode')">
+				R_DOCUMENTCODE = #{search}
+			</if>
+			<if test="choice.equals('r_ieseqnum')">
+				R_IESEQNUM = #{search}
+			</if>
+			<if test="choice.equals('r_writer')">
+				R_WRITER = #{search}
+			</if>
+			<if test="choice.equals('r_day')">
+				R_DAY = #{search}
+			</if>
+		</where>
+	</select>
+</mapper>

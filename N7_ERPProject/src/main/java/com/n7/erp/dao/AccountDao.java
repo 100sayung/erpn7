@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import com.n7.erp.bean.ac.A_company;
+import com.n7.erp.bean.ac.Account;
 import com.n7.erp.bean.ac.ApprovalDocument;
 import com.n7.erp.bean.ApprovalDocu;
 import com.n7.erp.bean.ac.SaleInfo;
@@ -28,7 +29,7 @@ public interface AccountDao {
 	boolean deleteCom(String code);
 
 	boolean saleinsert(SaleInfo si);
-	
+
 	boolean saleinsert2(SaleInfo si);
 
 	List<SaleInfo> getsaleList();
@@ -48,7 +49,7 @@ public interface AccountDao {
 	List<approvalLine> searchName(String name);
 
 	com.n7.erp.bean.ac.approvalLine addApproval(String code);
-	
+
 	com.n7.erp.bean.ac.approvalLine approLinecom1(String code01);
 
 	/*
@@ -66,7 +67,7 @@ public interface AccountDao {
 
 	boolean deleteSale2(String code);
 
-	List<SaleInfo> selectSreach(@Param("select") String select,@Param("choice") String choice);
+	List<SaleInfo> selectSreach(@Param("select") String select, @Param("choice") String choice);
 
 	boolean approvaldocu(ApprovalDocument ad);
 
@@ -80,9 +81,37 @@ public interface AccountDao {
 
 	List<com.n7.erp.bean.ac.approvalLine> getMyInfo(String code);
 
-
 //	List<SaleInfo> saledetails(String check);
 
 	/* List<SaleInfo> selectsale(String search); */
+
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+
+	public List<Account> aclist(String cCode);
+
+	public Account acrequest(String j_docunum); // 내가올린결재안상세
+
+	public Account acrequest2(String j_docunum); // 내가받은결재안상세
+
+	public boolean acCart(Account ac);
+
+	public boolean acSign(Account ac);
+
+	public boolean acSign2(Account ac);
+
+	public boolean acDelete(String j_docunum);
+
+	public boolean acBack(Account ac);
+
+	public int acCheck(String j_docunum);
+
+	public boolean apCart2(ApprovalDocu ap);
+
+	public boolean apSign2(ApprovalDocu ap);
+
+	public boolean apBack2(String ap_docunum);
+
+	public List<Account> aplist2(String cCode);
 
 }

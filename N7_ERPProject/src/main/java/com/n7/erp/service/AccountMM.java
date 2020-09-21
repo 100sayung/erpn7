@@ -1,11 +1,14 @@
 package com.n7.erp.service;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.n7.erp.dao.AccountDao;
 import com.google.gson.Gson;
 import com.n7.erp.bean.ac.A_company;
+import com.n7.erp.bean.ac.Account;
 import com.n7.erp.bean.ac.ApprovalDocument;
 import com.n7.erp.bean.ApprovalDocu;
 import com.n7.erp.bean.ac.SaleInfo;
 import com.n7.erp.bean.ac.myCompany;
 import com.n7.erp.bean.ac.approvalLine;
-
-
 
 @Component
 public class AccountMM {
@@ -31,324 +33,324 @@ public class AccountMM {
 	ModelAndView mav;
 
 	public Map<String, List<A_company>> insertcomlist(A_company ac, HttpSession session) {
-		Map<String, List<A_company>> aMap=null;
+		Map<String, List<A_company>> aMap = null;
 		ac.setCl_ccode(session.getAttribute("cCode").toString());
-		if(ac.getCl_code()!="") {
-			if(aDao.insertcomlist(ac)) {
-			   List<A_company> aList = aDao.getComList(ac.getCl_code());
-			   aMap=new HashMap<>();
-			   aMap.put("aList", aList);
-			}else {
-				aMap=null;
+		if (ac.getCl_code() != "") {
+			if (aDao.insertcomlist(ac)) {
+				List<A_company> aList = aDao.getComList(ac.getCl_code());
+				aMap = new HashMap<>();
+				aMap.put("aList", aList);
+			} else {
+				aMap = null;
 			}
-		}else {
+		} else {
 			List<A_company> aList = aDao.getComList(ac.getCl_code());
-			aMap=new HashMap<>();
+			aMap = new HashMap<>();
 			aMap.put("aList", aList);
 		}
 		return aMap;
 	}
 
 	public Map<String, List<A_company>> serchcomlist() {
-		Map<String, List<A_company>> aMap=null;
-			   List<A_company> aList = aDao.getCompanyList();
-			   aMap=new HashMap<>();
-			   aMap.put("aList", aList);
+		Map<String, List<A_company>> aMap = null;
+		List<A_company> aList = aDao.getCompanyList();
+		aMap = new HashMap<>();
+		aMap.put("aList", aList);
 		return aMap;
 	}
 
 	public Map<String, List<A_company>> searchcode(A_company ac, String code) {
-		Map<String, List<A_company>> aMap=null;
+		Map<String, List<A_company>> aMap = null;
 		ac.setCl_code(code);
-		   List<A_company> aList = aDao.getsearchCode(ac);
-		   if(aList!=null) {
-			   aMap=new HashMap<>();
-			   aMap.put("aList", aList);
-		   }
-	return aMap;
-}
+		List<A_company> aList = aDao.getsearchCode(ac);
+		if (aList != null) {
+			aMap = new HashMap<>();
+			aMap.put("aList", aList);
+		}
+		return aMap;
+	}
 
 	public Map<String, List<A_company>> deleteCom(int cnt, String[] strArray) {
-		Map<String, List<A_company>> aMap=null;
-		boolean result=false;
-		String code="";
-		for(int i=0; i<cnt; i++) {
-			code=strArray[i];
-			result=aDao.deleteCom(code);
+		Map<String, List<A_company>> aMap = null;
+		boolean result = false;
+		String code = "";
+		for (int i = 0; i < cnt; i++) {
+			code = strArray[i];
+			result = aDao.deleteCom(code);
 		}
-		if(result) {
+		if (result) {
 			List<A_company> aList = aDao.getCompanyList();
-			aMap=new HashMap<>();
-			   aMap.put("aList", aList);
-		}else {
-			aMap=null;
+			aMap = new HashMap<>();
+			aMap.put("aList", aList);
+		} else {
+			aMap = null;
 		}
 		return aMap;
 	}
 
 	public ModelAndView saleinsert(HttpServletRequest request, SaleInfo si, HttpSession session) {
-		String view=null;
-		boolean a=false;
-		boolean b= false;
-		mav= new ModelAndView();
+		String view = null;
+		boolean a = false;
+		boolean b = false;
+		mav = new ModelAndView();
 		A_company ac = new A_company();
 		ac = aDao.getcomcode(si.getS_comnum());
 		si.setS_clcode(ac.getCl_code());
 		si.setS_ccode(session.getAttribute("cCode").toString());
-		String [] strpkind=request.getParameterValues("s_pkind");
-		String [] strcnt=request.getParameterValues("s_cnt");
-		String [] strprice=request.getParameterValues("s_price");
-		String [] strprice2=request.getParameterValues("s_price2");
-		String [] strtax=request.getParameterValues("s_tax");
-		String [] strtotal=request.getParameterValues("s_total");
-		String [] strmemo=request.getParameterValues("s_memo");
-		     	a = aDao.saleinsert(si);
-		if(a && b) {
-			    mav.addObject("msg","전표등록성공");
-			    view="Account/openTable";
-			}else {
-				mav.addObject("msg","전표등록실패");
-				view="Account/openTable";
-			}
+		String[] strpkind = request.getParameterValues("s_pkind");
+		String[] strcnt = request.getParameterValues("s_cnt");
+		String[] strprice = request.getParameterValues("s_price");
+		String[] strprice2 = request.getParameterValues("s_price2");
+		String[] strtax = request.getParameterValues("s_tax");
+		String[] strtotal = request.getParameterValues("s_total");
+		String[] strmemo = request.getParameterValues("s_memo");
+		a = aDao.saleinsert(si);
+		if (a && b) {
+			mav.addObject("msg", "전표등록성공");
+			view = "Account/openTable";
+		} else {
+			mav.addObject("msg", "전표등록실패");
+			view = "Account/openTable";
+		}
 		mav.setViewName(view);
 		return mav;
 	}
 
 	public Map<String, List<SaleInfo>> getsaleList() {
-		Map<String, List<SaleInfo>> aMap=null;
-		   List<SaleInfo> sList1 = aDao.getsaleList();
-		   //List<SaleInfo> sList2 = aDao.getsaleList2();
-		   if(sList1!=null) {
-			   aMap=new HashMap<>();
-			   aMap.put("sList1", sList1);
-		   }else {
-			   aMap=null;
-		   }
-		   //aMap.put("sList2", sList2);
-	return aMap;
-}
+		Map<String, List<SaleInfo>> aMap = null;
+		List<SaleInfo> sList1 = aDao.getsaleList();
+		// List<SaleInfo> sList2 = aDao.getsaleList2();
+		if (sList1 != null) {
+			aMap = new HashMap<>();
+			aMap.put("sList1", sList1);
+		} else {
+			aMap = null;
+		}
+		// aMap.put("sList2", sList2);
+		return aMap;
+	}
 
 	public Map<String, List<SaleInfo>> getList(String code) {
 		System.out.println(code);
-		Map<String, List<SaleInfo>> sMap=null;
+		Map<String, List<SaleInfo>> sMap = null;
 		List<SaleInfo> sList = aDao.getList(code);
-		if(sList!=null){
-			sMap=new HashMap<>();
+		if (sList != null) {
+			sMap = new HashMap<>();
 			sMap.put("sList", sList);
 		}
 		return sMap;
 	}
 
 	public ModelAndView getTaxbill(String check) {
-		String view=null;
+		String view = null;
 		System.out.println(check);
-		mav= new ModelAndView();
-		if(check!=null) {
-			if(check.contains("S")) {
+		mav = new ModelAndView();
+		if (check != null) {
+			if (check.contains("S")) {
 				List<SaleInfo> tList1 = aDao.saleDetaile(check);
 				List<SaleInfo> tList2 = aDao.saleDetaile2(check);
-				String company=tList1.get(0).getS_company();
+				String company = tList1.get(0).getS_company();
 				myCompany mc = new myCompany();
 				A_company ac = new A_company();
-				ac=aDao.getcomInfo(company);
-				mc=aDao.getmyCompany();
-				mav.addObject("mc",mc);
-				mav.addObject("ac",ac);
-				mav.addObject("tList1",tList1);
-				mav.addObject("tList2",new Gson().toJson(tList2));
-				view="Account/taxbillS";
+				ac = aDao.getcomInfo(company);
+				mc = aDao.getmyCompany();
+				mav.addObject("mc", mc);
+				mav.addObject("ac", ac);
+				mav.addObject("tList1", tList1);
+				mav.addObject("tList2", new Gson().toJson(tList2));
+				view = "Account/taxbillS";
 
-			}else {
+			} else {
 				myCompany mc = new myCompany();
 				A_company ac = new A_company();
 				List<SaleInfo> tList1 = aDao.saleDetaile(check);
 				List<SaleInfo> tList2 = aDao.saleDetaile2(check);
-				String company=tList1.get(0).getS_company();
-				mc=aDao.getmyCompany();
-				ac=aDao.getcomInfo(company);
-				mav.addObject("mc",mc);
-				mav.addObject("ac",ac);
-				mav.addObject("tList1",tList1);
-				mav.addObject("tList2",new Gson().toJson(tList2));
-				mav.addObject("msg","세금계산서 등록");
-				view="Account/taxbillP";
+				String company = tList1.get(0).getS_company();
+				mc = aDao.getmyCompany();
+				ac = aDao.getcomInfo(company);
+				mav.addObject("mc", mc);
+				mav.addObject("ac", ac);
+				mav.addObject("tList1", tList1);
+				mav.addObject("tList2", new Gson().toJson(tList2));
+				mav.addObject("msg", "세금계산서 등록");
+				view = "Account/taxbillP";
 			}
-			}else {
-				mav.addObject("msg","선택한 항목이없습니다");
-				view="Account/openTable";
-			}
+		} else {
+			mav.addObject("msg", "선택한 항목이없습니다");
+			view = "Account/openTable";
+		}
 		mav.setViewName(view);
 		return mav;
 	}
 
 	public Map<String, List<SaleInfo>> deleteSale(int cnt, String[] strArray) {
-		Map<String, List<SaleInfo>> aMap=null;
-		boolean result=false;
-		boolean result2=false;
-		String code="";
-		for(int i=0; i<cnt; i++) {
-			code=strArray[i];
-			result2=aDao.deleteSale2(code);
-			result=aDao.deleteSale(code);
+		Map<String, List<SaleInfo>> aMap = null;
+		boolean result = false;
+		boolean result2 = false;
+		String code = "";
+		for (int i = 0; i < cnt; i++) {
+			code = strArray[i];
+			result2 = aDao.deleteSale2(code);
+			result = aDao.deleteSale(code);
 		}
-		if(result && result2) {
+		if (result && result2) {
 			List<SaleInfo> sList = aDao.getsaleList();
-			aMap=new HashMap<>();
-			   aMap.put("sList", sList);
-		}else {
-			aMap=null;
+			aMap = new HashMap<>();
+			aMap.put("sList", sList);
+		} else {
+			aMap = null;
 		}
 		return aMap;
 	}
 
 	public ModelAndView saledetails(String check) {
-		String view=null;
+		String view = null;
 		System.out.println(check);
-		mav= new ModelAndView();
+		mav = new ModelAndView();
 
-		if(check!=null) {
-				List<SaleInfo> tList = new ArrayList<>();
-				tList=aDao.getTaxbill(check);
-				List<SaleInfo> tList2 = aDao.saleDetaile2(check);
-				myCompany mc = new myCompany();
-				mc=aDao.getmyCompany();
-				mav.addObject("mc",mc);
-				mav.addObject("tList",tList);
-				mav.addObject("tList2",new Gson().toJson(tList2));
-				view="Account/saledetails";
-			}else {
+		if (check != null) {
+			List<SaleInfo> tList = new ArrayList<>();
+			tList = aDao.getTaxbill(check);
+			List<SaleInfo> tList2 = aDao.saleDetaile2(check);
+			myCompany mc = new myCompany();
+			mc = aDao.getmyCompany();
+			mav.addObject("mc", mc);
+			mav.addObject("tList", tList);
+			mav.addObject("tList2", new Gson().toJson(tList2));
+			view = "Account/saledetails";
+		} else {
 
-			    mav.addObject("msg","매출만 거래명세서를 볼수 있습니다");
-				view="Account/openTable";
-			}
+			mav.addObject("msg", "매출만 거래명세서를 볼수 있습니다");
+			view = "Account/openTable";
+		}
 		mav.setViewName(view);
 		return mav;
 	}
 
 	public ModelAndView acApproval(String check) {
-		mav= new ModelAndView();
-		String view ="";
-		if(check!=null) {
+		mav = new ModelAndView();
+		String view = "";
+		if (check != null) {
 			List<SaleInfo> sList1 = aDao.saleDetaile(check);
 			List<SaleInfo> sList2 = aDao.saleDetaile2(check);
-			   if(sList1!=null) {
-				   mav.addObject("sList1", sList1);
-				   mav.addObject("sList2", new Gson().toJson(sList2));
-				   view="Account/acApproval";
-			   }
-		}else {
-			mav.addObject("msg","불러올 데이터가 없습니다");
-			view="opentable";
+			if (sList1 != null) {
+				mav.addObject("sList1", sList1);
+				mav.addObject("sList2", new Gson().toJson(sList2));
+				view = "Account/acApproval";
+			}
+		} else {
+			mav.addObject("msg", "불러올 데이터가 없습니다");
+			view = "opentable";
 		}
 		mav.setViewName(view);
 		return mav;
 	}
 
 	public ModelAndView approvalLine() {
-		String view=null;
-		mav= new ModelAndView();
+		String view = null;
+		mav = new ModelAndView();
 		List<approvalLine> aList = null;
-		aList=aDao.approvalLine();
-		if(aList.size()!=0) {
-				mav.addObject("aList",new Gson().toJson(aList));
-				view="Account/approvalLine";
-			}else {
+		aList = aDao.approvalLine();
+		if (aList.size() != 0) {
+			mav.addObject("aList", new Gson().toJson(aList));
+			view = "Account/approvalLine";
+		} else {
 
-			    mav.addObject("msg","주소록에 정보가 없습니다");
-				view="Account/acApproval";
-			}
+			mav.addObject("msg", "주소록에 정보가 없습니다");
+			view = "Account/acApproval";
+		}
 
 		mav.setViewName(view);
 		return mav;
 	}
 
 	public Map<String, List<approvalLine>> searchName(String name) {
-		Map<String, List<approvalLine>> aMap=null;
-		List<approvalLine> aList=null;
-		if(name!=null) {
+		Map<String, List<approvalLine>> aMap = null;
+		List<approvalLine> aList = null;
+		if (name != null) {
 			aList = aDao.searchName(name);
-			aMap=new HashMap<>();
+			aMap = new HashMap<>();
 			aMap.put("aList", aList);
-		}else {
-			aMap=null;
+		} else {
+			aMap = null;
 		}
 		return aMap;
 	}
 
 	public Map<String, List<approvalLine>> addApproval(int cnt, String[] strArray) {
-		Map<String, List<approvalLine>> aMap=null;
-		List<approvalLine> aList= new ArrayList<>();
-		System.out.println("숫자="+cnt);
-		System.out.println("이름값="+strArray.length);
-		String code="";
+		Map<String, List<approvalLine>> aMap = null;
+		List<approvalLine> aList = new ArrayList<>();
+		System.out.println("숫자=" + cnt);
+		System.out.println("이름값=" + strArray.length);
+		String code = "";
 		approvalLine al = new approvalLine();
-		for(int i=0; i<cnt; i++) {
-			code=strArray[i];
-			al=aDao.addApproval(code);
-		    aList.add(al);
+		for (int i = 0; i < cnt; i++) {
+			code = strArray[i];
+			al = aDao.addApproval(code);
+			aList.add(al);
 		}
-		if(aList!=null) {
-			aMap=new HashMap<>();
+		if (aList != null) {
+			aMap = new HashMap<>();
 			aMap.put("aList", aList);
-		}else {
-			aMap=null;
+		} else {
+			aMap = null;
 		}
 		return aMap;
 	}
 
 	public Map<String, List<approvalLine>> approLinecom(String[] code01) {
-		Map<String, List<approvalLine>> aMap=null;
+		Map<String, List<approvalLine>> aMap = null;
 		System.out.println(code01.length);
-		//System.out.println(code02[0]);
+		// System.out.println(code02[0]);
 
-		if(code01.length!=0) {
-				List<approvalLine> tList1 = new ArrayList<>();
-				//List<approvalLine> tList2= new ArrayList<>();
+		if (code01.length != 0) {
+			List<approvalLine> tList1 = new ArrayList<>();
+			// List<approvalLine> tList2= new ArrayList<>();
 
-				for(int i=0; i<code01.length; i++) {
-					approvalLine al = new approvalLine();
-					al=aDao.approLinecom1(code01[i]);
-					tList1.add(al);
-				}
+			for (int i = 0; i < code01.length; i++) {
+				approvalLine al = new approvalLine();
+				al = aDao.approLinecom1(code01[i]);
+				tList1.add(al);
+			}
 //				for(int i=0; i<code02.length; i++) {
 //					approvalLine al = new approvalLine();
 //					al=aDao.approLinecom2(code02[i]);
 //					tList2.add(al);
 //				}
-				aMap=new HashMap<>();
-				System.out.println(tList1);
-				aMap.put("tList1",tList1);
-				//aMap.put("tList2",tList2);
-			}else {
+			aMap = new HashMap<>();
+			System.out.println(tList1);
+			aMap.put("tList1", tList1);
+			// aMap.put("tList2",tList2);
+		} else {
 
-				aMap=null;;
-			}
+			aMap = null;
+			;
+		}
 
 		return aMap;
-
 
 	}
 
 	public ModelAndView approdocument(HttpServletRequest request, ApprovalDocument ad, HttpSession session) {
-		String view=null;
-		mav= new ModelAndView();
-		boolean a=false;
-		boolean b=false;
-		boolean c=false;
+		String view = null;
+		mav = new ModelAndView();
+		boolean a = false;
+		boolean b = false;
+		boolean c = false;
 		A_company ac = new A_company();
 		ac = aDao.getcomcode(ad.getRs_comnum());
 		ad.setRs_clcode(ac.getCl_code());
 		ad.setRs_ccode(session.getAttribute("cCode").toString());
-		String [] strpkind=request.getParameterValues("rs_pkind");
-		String [] strcnt=request.getParameterValues("rs_cnt");
-		String [] strprice=request.getParameterValues("rs_price");
-		String [] strprice2=request.getParameterValues("rs_price2");
-		String [] strtax=request.getParameterValues("rs_tax");
-		String [] strtotal=request.getParameterValues("rs_total");
-		String [] strmemo=request.getParameterValues("rs_memo");
-		 		a = aDao.approvaldocu(ad);
-		     	b = aDao.approdocument(ad);
-		for(int i=0; i<strpkind.length; i++) {
+		String[] strpkind = request.getParameterValues("rs_pkind");
+		String[] strcnt = request.getParameterValues("rs_cnt");
+		String[] strprice = request.getParameterValues("rs_price");
+		String[] strprice2 = request.getParameterValues("rs_price2");
+		String[] strtax = request.getParameterValues("rs_tax");
+		String[] strtotal = request.getParameterValues("rs_total");
+		String[] strmemo = request.getParameterValues("rs_memo");
+		a = aDao.approvaldocu(ad);
+		b = aDao.approdocument(ad);
+		for (int i = 0; i < strpkind.length; i++) {
 			ad.setRs_pkind(strpkind[i]);
 			ad.setRs_cnt(strcnt[i]);
 			ad.setRs_price(strprice[i]);
@@ -356,96 +358,329 @@ public class AccountMM {
 			ad.setRs_tax(strtax[i]);
 			ad.setRs_total(strtotal[i]);
 			ad.setRs_memo(strmemo[i]);
-			 	c=aDao.approdocument2(ad);
+			c = aDao.approdocument2(ad);
 		}
-		if(a && b && c) {
-			//aDao.saleListDelete(ad);
-			mav.addObject("num","1");
-				view="Account/openTable";
-			}else {
-				mav.addObject("num","0");
-				view="Account/openTable";
-			}
+		if (a && b && c) {
+			// aDao.saleListDelete(ad);
+			mav.addObject("num", "1");
+			view = "Account/openTable";
+		} else {
+			mav.addObject("num", "0");
+			view = "Account/openTable";
+		}
 		mav.setViewName(view);
 		return mav;
 	}
 
 	public Map<String, List<SaleInfo>> getpkind(String pkind) {
-		Map<String, List<SaleInfo>> sMap=null;
-		List<SaleInfo> sList=null;
-		//SaleInfo si = new SaleInfo();
-		sList=aDao.getpkind(pkind);
-		//sList.add(si);
+		Map<String, List<SaleInfo>> sMap = null;
+		List<SaleInfo> sList = null;
+		// SaleInfo si = new SaleInfo();
+		sList = aDao.getpkind(pkind);
+		// sList.add(si);
 		System.out.println(sList);
-		if(sList!=null) {
-			sMap=new HashMap<>();
+		if (sList != null) {
+			sMap = new HashMap<>();
 			sMap.put("sList", sList);
-		}else {
-			sMap=null;
+		} else {
+			sMap = null;
 		}
 		return sMap;
 	}
 
 	public ModelAndView SaleDetaile(String check) {
-		String view=null;
-		mav= new ModelAndView();
-		if(check!=null) {
+		String view = null;
+		mav = new ModelAndView();
+		if (check != null) {
 			List<SaleInfo> sList1 = aDao.saleDetaile(check);
 			List<SaleInfo> sList2 = aDao.saleDetaile2(check);
-			   if(sList1!=null) {
-				   mav.addObject("sList1", sList1);
-				   mav.addObject("sList2", new Gson().toJson(sList2));
-				   view="Account/SaleDetaile";
-			   }
-		}else {
-			mav.addObject("msg","불러올 데이터가 없습니다");
-			view="Account/opentable";
+			if (sList1 != null) {
+				mav.addObject("sList1", sList1);
+				mav.addObject("sList2", new Gson().toJson(sList2));
+				view = "Account/SaleDetaile";
+			}
+		} else {
+			mav.addObject("msg", "불러올 데이터가 없습니다");
+			view = "Account/opentable";
 		}
 		mav.setViewName(view);
 		return mav;
 	}
 
 	public Map<String, List<SaleInfo>> selectSearch(String select, String choice) {
-		Map<String, List<SaleInfo>> sMap=null;
-		List<SaleInfo> sList=null;
-		sList=aDao.selectSreach(select,choice);
+		Map<String, List<SaleInfo>> sMap = null;
+		List<SaleInfo> sList = null;
+		sList = aDao.selectSreach(select, choice);
 		System.out.println(sList);
-		if(sList!=null) {
-			sMap=new HashMap<>();
+		if (sList != null) {
+			sMap = new HashMap<>();
 			sMap.put("sList", sList);
-		}else {
-			sMap=null;
+		} else {
+			sMap = null;
 		}
 		return sMap;
 	}
 
 	public Map<String, List<ApprovalDocu>> comparecode(String code) {
-		Map<String, List<ApprovalDocu>> sMap=null;
-		List<ApprovalDocu> sList=null;
+		Map<String, List<ApprovalDocu>> sMap = null;
+		List<ApprovalDocu> sList = null;
 
-		sList=aDao.comparecode(code);
+		sList = aDao.comparecode(code);
 		System.out.println(sList);
-		if(sList!=null) {
-			sMap=new HashMap<>();
+		if (sList != null) {
+			sMap = new HashMap<>();
 			sMap.put("sList", sList);
-		}else {
-			sMap=null;
+		} else {
+			sMap = null;
 		}
 		return sMap;
 	}
 
 	public Map<String, List<approvalLine>> getMyInfo(HttpSession session) {
-		Map<String, List<approvalLine>> sMap=null;
-		List<approvalLine> sList=null;
+		Map<String, List<approvalLine>> sMap = null;
+		List<approvalLine> sList = null;
 		String code = session.getAttribute("hrCode").toString();
-		sList=aDao.getMyInfo(code);
+		sList = aDao.getMyInfo(code);
 		System.out.println(sList);
-		if(sList!=null) {
-			sMap=new HashMap<>();
+		if (sList != null) {
+			sMap = new HashMap<>();
 			sMap.put("sList", sList);
-		}else {
-			sMap=null;
+		} else {
+			sMap = null;
 		}
 		return sMap;
 	}
+	/////////////////////////////////////////////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////////////////////////////////////////
+
+	public int acCart(Account ac, HttpSession session) {
+		String cCode = (String) session.getAttribute("cCode");
+		String hrCode = (String) session.getAttribute("hrCode");
+
+		ac.setJ_ccode(cCode);
+		ac.setJ_docunum("AC");
+		ac.setJ_reasion("사유");
+		ac.setJ_none(hrCode);
+		ac.setJ_ntwo("결재자2");
+		ac.setJ_nthr("결재자3");
+
+		if (aDao.acCart(ac)) {
+			System.out.println("ac전표 등록이 완료되었습니다.");
+			return 1;
+		} else {
+			System.out.println("ac전표 등록을 실패하였습니다.");
+			return 0;
+		}
+
+	}
+
+	public Map<String, List<Account>> aclist(HttpSession session) {
+		Map<String, List<Account>> aMap = null;
+		String hrCode = (String) session.getAttribute("hrCode");
+		List<Account> aList = aDao.aclist(hrCode);
+
+		if (aList != null) {
+			aMap = new HashMap<>();
+			aMap.put("aList", aList);
+			System.out.println("jList가져왓어");
+		} else {
+			System.out.println("못가져왓져");
+		}
+		return aMap;
+	}
+
+	public Map<String, List<Account>> aclist2(HttpSession session) {
+		Map<String, List<Account>> aMap = null;
+		String hrCode = (String) session.getAttribute("hrCode");
+		System.out.println("사원코드: " + hrCode);
+
+		List<Account> aList = aDao.aplist2(hrCode);
+
+		if (aList != null) {
+			aMap = new HashMap<>();
+			aMap.put("aList", aList);
+			System.out.println("내가받은 jList가져왓어");
+		} else {
+			System.out.println("못가져왓져");
+		}
+
+		return aMap;
+	}
+
+	// 내가올린결재안 상세
+	public ModelAndView acRequest(String j_docunum) {
+		mav = new ModelAndView();
+		String view = null;
+
+		Account ac = aDao.acrequest(j_docunum);
+
+		if (ac != null) {
+
+			mav.addObject("ac", ac);
+			view = "Account/acCartinfo";
+			System.out.println(ac.getJ_none());
+			System.out.println("성공했다 이시키야");
+		} else {
+			view = "Account/acPend";
+			System.out.println("야 못했다 미안하다...");
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+
+	// 내가받은결재안 상세
+	public ModelAndView acRequest2(String j_docunum) {
+		mav = new ModelAndView();
+		String view = null;
+
+		Account ac = aDao.acrequest2(j_docunum);
+
+		if (ac != null) {
+			mav.addObject("ac", ac);
+			view = "Account/acApinfo";
+			System.out.println(ac.getJ_none());
+			System.out.println("성공했다 이시키야");
+		} else {
+			view = "Account/acDownlist";
+			System.out.println("야 못했다 미안하다...");
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+
+	// 내가 결재할때
+	public ModelAndView acSign(Account ac, ApprovalDocu ap, HttpServletRequest req, HttpServletResponse rep,
+			HttpSession session) {
+		mav = new ModelAndView();
+		String view = null;
+
+		ac.setJ_none(req.getParameter("rs_apcode0"));
+		ac.setJ_ntwo(req.getParameter("rs_apcode1"));
+		ac.setJ_nthr(req.getParameter("rs_apcode2"));
+//		if (ac.getJ_grade().equals("0")) {
+		ac.setJ_grade("1");
+//		} 
+
+//		확인용
+//		System.out.println("결재자1: " + ac.getJ_none());
+		System.out.println("결재자2: " + ac.getJ_ntwo());
+		System.out.println("결재자3: " + ac.getJ_nthr());
+		System.out.println("결재등급: " + ac.getJ_grade());
+
+		if (ac.getJ_reasion() == null || ac.getJ_reasion() == "" || ac.getJ_reasion().equals("사유")) {
+			ac.setJ_reasion("사유없음");
+		}
+
+//		ap세팅
+		ap.setAp_docunum(ac.getJ_docunum()); // 결재안
+		ap.setAp_ccode(ac.getJ_ccode()); // 회사코드
+		ap.setAp_docuname(ac.getJ_title()); // 결재문서이름
+		ap.setAp_fromapprover(ac.getJ_none());// 결재올린사람
+		ap.setAp_toapprover(ac.getJ_ntwo()); // 결재받을사람
+		ap.setAp_status((ac.getJ_grade())); // 결재상태
+
+		boolean sa = aDao.acSign(ac); // 결재사람1,2,3 넣는거 업데이트
+		boolean sp = aDao.apCart2(ap); // 결재문서 테이블에 인서트
+
+		if (sa && sp) {
+			try {
+				rep.setContentType("text/html; charset=UTF-8");
+				PrintWriter out;
+				out = rep.getWriter();
+				out.println("<script>alert('결재요청완료');</script>");
+				out.println("<script>window.close();</script>");
+				out.flush();
+				out.close();
+				mav.setViewName("Account/acPend");
+				System.out.println("결재요청했음");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			mav.setViewName("Account/acPend");
+			System.out.println("야 결재요청못했다 미안하다..");
+		}
+//		mav.setViewName(view);
+		return mav;
+	}
+
+	// 결재2,3
+	public ModelAndView acSign2(Account ac, ApprovalDocu ap, HttpServletRequest req, HttpServletResponse rep,
+			HttpSession session) {
+		mav = new ModelAndView();
+		String view = null;
+		String hrCode = (String) session.getAttribute("hrCode");
+
+		if (ac.getJ_grade().equals("1") && hrCode.equals(ac.getJ_ntwo())) {
+			ac.setJ_grade("2");
+			ap.setAp_toapprover(ac.getJ_nthr());
+		} else if (ac.getJ_grade().equals("2") && hrCode.equals(ac.getJ_nthr())) {
+			ac.setJ_grade("3");
+			ap.setAp_toapprover(ac.getJ_nthr());
+		}
+		ap.setAp_toapprover(ac.getJ_nthr());
+
+		if (ac.getJ_grade().equals("1")) {
+			ap.setAp_status("1");
+		} else if (ac.getJ_grade().equals("2")) {
+			ap.setAp_status("2");
+		} else if (ac.getJ_grade().equals("3")) {
+			ap.setAp_status("3");
+		} else {
+			ap.setAp_docunum(ac.getJ_docunum());
+		}
+		
+		boolean sa = aDao.acSign2(ac);
+		boolean sp = aDao.apSign2(ap);
+
+		if (sa && sp) {
+			view = "Account/acDownlist";
+			System.out.println("결재요청했음");
+		} else {
+			view = "Account/acDownlist";
+			System.out.println("야 결재요청못했다 미안하다..");
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+
+	public int acDelete(String j_docunum, Account ac, HttpServletRequest req, HttpServletResponse rep) {
+
+		// 결재상태1?2면 딜리트안되게해야돼
+		if (aDao.acCheck(j_docunum) != 0 && aDao.acDelete(j_docunum)) {
+			System.out.println("결재안삭제 완료");
+			return 1;
+		} else {
+			System.out.println("결재안삭제 실패");
+			return 0;
+		}
+	}
+
+	public ModelAndView acBack(Account ac, ApprovalDocu ap, HttpServletRequest req, HttpServletResponse rep) {
+		mav = new ModelAndView();
+		String view = null;
+		System.out.println("acBack까지 들어왔어: " + ac.getJ_docunum());
+		System.out.println("acBack까지 들어왔어: " + ac.getJ_reasion());
+
+		if (ac.getJ_reasion() == null || ac.getJ_reasion() == "" || ac.getJ_reasion().equals("사유")) {
+			ac.setJ_reasion("사유없음");
+		}
+
+		ap.setAp_docunum(ac.getJ_docunum());
+
+		boolean ba = aDao.acBack(ac);
+		boolean bp = aDao.apBack2(ap.getAp_docunum());
+
+		if (ba && bp) {
+			view = "Account/acDownlist";
+			System.out.println("반려요청했음");
+		} else {
+			view = "Account/acDownlist";
+			System.out.println("야 반려요청못했다 미안하다..");
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+
 }

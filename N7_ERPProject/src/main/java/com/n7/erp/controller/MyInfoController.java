@@ -54,6 +54,10 @@ public class MyInfoController {
 		mav = hm.checkMyHrCard(session, "myInfo/myHoliday");
 		return mav;
 	}
+	@GetMapping(value="/myinfo/mydocument")
+	public String mydocument() {
+		return "myInfo/mydocument";
+	}
 	
 	//여기까지 이동관련
 	

@@ -84,17 +84,17 @@ ul {
 
 			<li id="showMenu2">근태 관리
 				<ul id="smallMenu2" style="display: none;">
-					<li><a href="">휴가 접수</a></li>
-					<li><a href="">사원 출결 관리</a></li>
-					<li><a href="">근무 조회</a></li>
-					<li><a href="">휴/퇴직 관리</a></li>
+					<li><a href="/erp/hr/receiptholiday">휴가 접수</a></li>
+					<li><a href="/erp/hr/attendance">사원 출결 관리</a></li>
+					<li><a href="/erp/hr/employeestatus">근무 조회</a></li>
+					<li><a href="/erp/hr/retiremm">휴/퇴직 관리</a></li>
 				</ul>
 			</li>
 			<li id="showMenu3">급여 관리
 				<ul id="smallMenu3" style="display: none;">
 					<li><a href="/erp/hr/deptpay">부서/직급별 급여</a></li>
 					<li><a href="/erp/hr/deduct">공제사항 관리</a></li>
-					<li><a href="">급여 관리</a></li>
+					<li><a href="/erp/hr/searchpaymm">급여 관리</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -113,7 +113,7 @@ ul {
 			</tr>
 		</table>
 	</form>
-	<button type="button" id="deptbutton">+부서등록추가</button>
+<!-- 	<button type="button" id="deptbutton">+부서등록추가</button> -->
 	</div>
 </body>
 <script>
@@ -133,18 +133,18 @@ $("#showMenu3").hover(function() {
 	$("#smallMenu3").attr("style", "display:none");
 })
 
-	$("#deptbutton")
-			.click(
-					function() {
-						$("#depttable")
-								.append(
-										"<tr>"
-												+ "<td>부서 : </td>"
-												+ "<td><input type'text' name='HDP_position' id='position'></td>"
-												+ "<td>직책 : </td>"
-												+ "<td><input type'text' name='HDP_dept' id='dept'></td>"
-												+ "</tr>");
-					});
+// 	$("#deptbutton")
+// 			.click(
+// 					function() {
+// 						$("#depttable")
+// 								.append(
+// 										"<tr>"
+// 												+ "<td>부서 : </td>"
+// 												+ "<td><input type'text' name='HDP_position' id='position'></td>"
+// 												+ "<td>직책 : </td>"
+// 												+ "<td><input type'text' name='HDP_dept' id='dept'></td>"
+// 												+ "</tr>");
+// 					});
 
 	$("#showMenu1").hover(function() {
 		$("#smallMenu1").attr("style", "display:inline-block");

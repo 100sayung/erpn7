@@ -140,13 +140,6 @@ public class HRRestController {
 		String result = hm.getEmployeeHoliday(cCode, yearmonth, hrCode);
 		return result;
 	}
-	//휴가 승인/반려
-	@PostMapping(value="/hr/holidaystatus")
-	public String registHoliday(HttpSession session, String yesno, String docunum) {
-		hm.registHolidayStatus(session, docunum, yesno);
-		return "ok";
-	}
-
 
 
 	//사원 휴/퇴직 상태 조회

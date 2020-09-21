@@ -4,16 +4,21 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.n7.erp.bean.ac.A_company;
+import com.n7.erp.bean.ac.Account;
 import com.n7.erp.bean.ApprovalDocu;
 import com.n7.erp.bean.ac.ApprovalDocument;
 import com.n7.erp.bean.ApprovalDocu;
@@ -28,6 +33,9 @@ public class AccountionCotroller {
 	AccountMM am;
 	
 	ModelAndView mav;
+	
+	private static final Logger logger = LoggerFactory.getLogger(AccountionCotroller.class);
+	
 	
 	@PostMapping(value = "/Account/insertcomlist",produces="application/json;charset=utf-8" )
 	public  Map<String, List<A_company>> insertcomlist( A_company ac, HttpSession session) {
@@ -132,5 +140,89 @@ public class AccountionCotroller {
 		Map<String, List<ApprovalDocu>> sMap=am.comparecode(code);
 		return sMap;
 	}
+	
+	
+
+	///////////////////////////////////////////////////////////////////////////////
+	
+	///////////////////////////////////////////////////////////////////////////////
+	
+	// 분개전표 작성
+	@PostMapping(value = "Account/acCart", produces = "application/json;charset=utf-8")
+	public int acCart(Account ac, HttpSession session) {
+		logger.info("임시저장 acCart");
+		int a = am.acCart(ac, session);
+		return a; // DAO
+	}
+
+	// 미들-메뉴
+	@GetMapping(value = "Account/acPendList", produces = "application/json;charset=utf-8")
+	public Map<String, List<Account>> acPend(HttpSession session) {
+		Map<String, List<Account>> aMap = am.aclist(session);
+		return aMap;
+	}
+
+	// 미들-메뉴
+	@GetMapping(value = "Account/acPendList2", produces = "application/json;charset=utf-8")
+	public Map<String, List<Account>> acPend2(HttpSession session) {
+		Map<String, List<Account>> aMap = am.aclist2(session);
+		return aMap;
+	} 
+ 
+	// 내가올린결재안 상세보기
+	@GetMapping(value = "Account/acRequest", produces = "application/json;charset=utf-8")
+	public ModelAndView acRequest(String j_docunum) {
+		mav = am.acRequest(j_docunum);
+		System.out.println(j_docunum);
+		return mav;
+	}
+	
+	// 내가받은결재안 상세보기
+	@GetMapping(value = "Account/acRequest2", produces = "application/json;charset=utf-8")
+	public ModelAndView acRequest2(String j_docunum) {
+		mav = am.acRequest2(j_docunum);
+		System.out.println(j_docunum);
+		return mav;
+	}
+
+	// 내문서결재요청(업데이트)
+	@PostMapping(value = "Account/acSign", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public ModelAndView acSign(Account ac, ApprovalDocu ap, HttpServletRequest req, HttpServletResponse rep, HttpSession session) {
+		logger.info("acSign 결재요청");
+		mav = am.acSign(ac, ap, req, rep, session);
+		return mav; // DAO 
+	}
+	
+	// 다른사람이 내문서 결재(업데이트)
+	@PostMapping(value = "Account/acSign2", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public ModelAndView acSign2(Account ac,  ApprovalDocu ap, HttpServletRequest req, HttpServletResponse rep, HttpSession session) {
+		logger.info("acSign2 결재요청");
+		mav = am.acSign2(ac, ap, req, rep, session);
+		return mav; // DAO
+	} 
+ 
+	// 결재안 삭제 
+	@RequestMapping(value = "Account/acDelete", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public int acDelete(String j_docunum, Account ac,  HttpServletRequest req, HttpServletResponse rep) {
+		System.out.println(j_docunum);
+		logger.info("acDelete 결재안 삭제요청");
+		int a = am.acDelete(j_docunum, ac, req, rep);
+		return (int)a; // DAO
+	} 
+
+	// 반려(업데이트)
+	@RequestMapping(value = "Account/acBack", produces = "application/json;charset=utf-8")
+	@ResponseBody 
+	public ModelAndView acBack(Account ac, ApprovalDocu ap,  HttpServletRequest req, HttpServletResponse rep) {
+		System.out.println(ac.getJ_docunum());
+		logger.info("acBack 반려요청");
+		mav = am.acBack(ac, ap, req, rep);  
+		return mav; // DAO
+	}
+	
+
 	
 }

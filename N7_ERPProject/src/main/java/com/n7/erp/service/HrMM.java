@@ -570,18 +570,4 @@ public class HrMM {
 		mav.setViewName("/hr/holidayDetail");
 		return mav;
 	}
-
-	public void registHolidayStatus(HttpSession session, String docunum, String yesno) { //현재 1이면 승인 2 면 반려
-		System.out.println(docunum);
-		System.out.println(yesno);
-		HashMap<String, String> hMap = new HashMap<String, String>();
-		hMap.put("cCode", session.getAttribute("cCode").toString());
-		hMap.put("docunum", docunum);
-		if(yesno.equals("ok")) {
-			hMap.put("status", "1");
-		}else {
-			hMap.put("status", "2");
-		}
-	//	hDao.registHolidayStatus(hMap);
-	}
 }

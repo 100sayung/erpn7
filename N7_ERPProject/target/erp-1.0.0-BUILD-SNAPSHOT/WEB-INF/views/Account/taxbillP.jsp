@@ -47,31 +47,15 @@ font-size: 20px;
 				<tr>
 					<th rowspan="4">공급자</th>
 					<th>사업자번호</th>
-<<<<<<< HEAD
-<<<<<<< HEAD
 					<td colspan="3"><input type="text" value="${ac.cl_comnum}"
 						readonly></td>
 					<th rowspan="4">공급받는자</th>
 					<th>사업자번호</th>
 					<td colspan="3"><input type="text" value="${mc.c_comnum}"
-=======
-=======
->>>>>>> origin/JSJ
-					<td colspan="3"><input type="text" value="${ac.c_comnum}"
-						readonly></td>
-					<th rowspan="4">공급받는자</th>
-					<th>사업자번호</th>
-					<td colspan="3"><input type="text" value="${mc.mc_num}"
-<<<<<<< HEAD
->>>>>>> origin/yyyyyyyyyyyy
-=======
->>>>>>> origin/JSJ
 						readonly></td>
 				</tr>
 				<tr>
 					<th>상호(법인명)</th>
-<<<<<<< HEAD
-<<<<<<< HEAD
 					<td><input type="text" value="${ac.cl_name}" readonly></td>
 					<th>성명(대표자)</th>
 					<td><input type="text" value="${ac.cl_ceo}" readonly></td>
@@ -86,33 +70,10 @@ font-size: 20px;
 						readonly></td>
 					<th>사업장주소</th>
 					<td colspan="3"><input type="text" value="${mc.c_addr}"
-=======
-=======
->>>>>>> origin/JSJ
-					<td><input type="text" value="${ac.c_name}" readonly></td>
-					<th>성명(대표자)</th>
-					<td><input type="text" value="${ac.c_ceo}" readonly></td>
-					<th>상호(법인명)</th>
-					<td><input type="text" value="${mc.mc_name}" readonly></td>
-					<th>성명(대표자)</th>
-					<td><input type="text" value="${mc.mc_ceo}" readonly></td>
-				</tr>
-				<tr>
-					<th>사업장주소</th>
-					<td colspan="3"><input type="text" value="${ac.c_addr}"
-						readonly></td>
-					<th>사업장주소</th>
-					<td colspan="3"><input type="text" value="${mc.mc_addr}"
-<<<<<<< HEAD
->>>>>>> origin/yyyyyyyyyyyy
-=======
->>>>>>> origin/JSJ
 						readonly></td>
 				</tr>
 				<tr>
 					<th>업태</th>
-<<<<<<< HEAD
-<<<<<<< HEAD
 					<td><input type="text" value="${ac.cl_kind}" readonly></td>
 					<th>종목</th>
 					<td><input type="text" value="${ac.cl_kind2}" readonly></td>
@@ -120,20 +81,6 @@ font-size: 20px;
 					<td><input type="text" value="${mc.c_kind}" readonly></td>
 					<th>종목</th>
 					<td><input type="text" value="${mc.c_kind2}" readonly></td>
-=======
-=======
->>>>>>> origin/JSJ
-					<td><input type="text" value="${ac.c_kind}" readonly></td>
-					<th>종목</th>
-					<td><input type="text" value="${ac.c_kind2}" readonly></td>
-					<th>업태</th>
-					<td><input type="text" value="${mc.mc_kind}" readonly></td>
-					<th>종목</th>
-					<td><input type="text" value="${mc.mc_kind2}" readonly></td>
-<<<<<<< HEAD
->>>>>>> origin/yyyyyyyyyyyy
-=======
->>>>>>> origin/JSJ
 				</tr>
 				<tr>
 					<th colspan="2" >작성날자</th>

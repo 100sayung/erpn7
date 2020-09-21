@@ -84,54 +84,24 @@ ul {
 	</div>
 	<div id="description"> 휴가신청폼<br>
 
-	<h1> CSS</h1>
+	<h1> CSS / 결재버튼 눌러서 결재자2 등록하기 /</h1>
 
-	</form>
-
-
-	<button id="approval">결재</button>
-	<div id="line"></div><br>
 	<form action="/erp/hr/applyholiday" method="post">
 	<input type="text" name="hap_docuname" placeholder="문서 제목을 입력해주세요 글자제한 20자" required="required">
 	<input type="text" name="hap_type" placeholder="휴가 종류를 입력해주세요 글자제한 20자" required="required">
 	<br>
 	<input type="date" name="hap_startday" required="required" id="start">
 	<input type="date" name="hap_endday" required="required" onchange='checkDateValue(start, end);' id="end">
+	<button id="approval">결재</button>
 	<br>
-	<textarea rows="10" cols="10" name="hap_reason"></textarea>0
+	<textarea rows="10" cols="10" name="hap_reason"></textarea>
 	<input type="submit" value="제출">
+	</form>
+
+
 
 	</div>
 	<script>
-
-	String hap_docunum;
-	String hap_ccode;
-	String hap_hrcode;
-	String hap_docuname;
-	String hap_fromapprover;
-	String hap_toapprover;
-	String hap_applydate;
-	String hap_type;
-	String hap_reason;
-	String hap_startday;
-	String hap_endday;
-	String hap_status;
-	
-	function setChildValue(data) {
-		console.log(data);
-		if (data.tList1 != "") {
-		var str = "";
-			for ( var i in data.tList1) {
-		        str +="<input type='text' name='hap_toapprover' value='"+data.tList1[i].hc_hrcode+"' hidden='true'>";
-				str +=data.tList1[i].hc_position+"/";
-				str +="<input style='width:50px;' type='text' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
-			}
-			console.log(str)
-			$("#line").append(str);
-		};
-	};
-
-		
 	$(document).ready(function() {
 		$.ajax({
 			url : "/erp/rest/hr/myleaderlist",
@@ -150,11 +120,10 @@ ul {
 			}
 		});
 	});
-	$("#approval").click(function() {
-		console.log("123");
-		window.open('/erp/Account/approvalLine', 'approvalLine', 'width=1400,height=700');
-	});
 	
+	$("#approval").click(function(){
+		window.open('/erp/hr/holidayap', '사람선택', 'width=1400, heigth=700');
+	});
 
 	function replaceAll(str, searchStr, replaceStr) {
 	    return str.split(searchStr).join(replaceStr);

@@ -28,7 +28,7 @@ width:1000px;
 <body>
 	<div id="saledetaile">
 
-		<table>
+		<table id="table">
 			<c:forEach var="sale" items="${sList1}">
 				<tr>
 					<td>전표번호</td>
