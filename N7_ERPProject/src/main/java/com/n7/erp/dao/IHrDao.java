@@ -116,6 +116,9 @@ public interface IHrDao {
 	@Select("SELECT * FROM HR_CDD_PAY WHERE HP_HRCODE=#{hrCode} AND HP_PAYDATE=#{month}")
 	Payroll getMyPaySelect(HashMap<String, String> hMap);
 
+	@Update("UPDATE HR_APPLYHOLIDAY SET HAP_STATUS = #{status} WHERE HAP_CCODE = #{cCode} AND HAP_DOCUNUM = #{docunum}")
+	void registHolidayStatus(HashMap<String, String> hMap);
+
 
 
 
