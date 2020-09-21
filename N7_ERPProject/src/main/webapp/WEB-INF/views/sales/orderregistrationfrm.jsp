@@ -10,8 +10,8 @@
 <style>
 html, body {
 text-align:center;
-	height: 100%;
-	margin: 0
+   height: 100%;
+   margin: 0
 }
 
 tr,td{
@@ -79,7 +79,7 @@ border: 1px solid ;
                   <th>프로젝트기간 끝</th>
                   <th>수량</th>
                   <th>판매금액</th>
-                  <th>수주예산</t>
+                  <th>수주예산</th>
                </tr>
                 </thead>
                 <tbody id="tBody">
@@ -97,43 +97,43 @@ border: 1px solid ;
             </div>
             <br>
             <div>
-           		<button type="button" class="addList" value="추가">추가</button>
-            	<button type="button" id="change" value="변경" >변경</button>
-           		<button type="button" id="deleteCheck" value="삭제">삭제</button>
-            	<button type="button" id="subb" value="저장">저장</button> 
+                 <button type="button" class="addList" value="추가">추가</button>
+               <button type="button" id="change" value="변경" >변경</button>
+                 <button type="button" id="deleteCheck" value="삭제">삭제</button>
+               <button type="button" id="subb" value="저장">저장</button> 
             </div>
           </form>
 </body>
     <script type="text/javascript">
         $('#orderitemfrm').click(function(){
-        	var str="";
-        	
-        	$.ajax({
-        		url:'/erp/rest/sales/orderitem',
-        		type: 'get',
-        		dataType: "json",
-        		success:function(data){
-        			console.log(data);
-        			
-        			for(var i in data.sList){
-        				str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bo_num+"></td>";
-        				str+="<td><input type='text' value="+data.sList[i].bo_pronum+"></td>";
-        				str+="<td><input type='text' value="+data.sList[i].bo_orderdate+"></td>";
-        				str+="<td><input type='text' value="+data.sList[i].bo_duedate+"></td>";
-        				str+="<td><input type='number' value="+data.sList[i].bo_proquantity+"></td>";
-        				str+="<td><input type='number' value="+data.sList[i].bo_prosalesamount+"></td>";
-        				str+="<td><input type='number' value="+data.sList[i].bo_orderbudget+"></td>";
-        			}
-        				$('#tBody').html(str);
-        		},
-        		error:function(error){
-        			console.log(error);
-        		}
-        	})
+           var str="";
+           
+           $.ajax({
+              url:'/erp/rest/sales/orderitem',
+              type: 'get',
+              dataType: "json",
+              success:function(data){
+                 console.log(data);
+                 
+                 for(var i in data.sList){
+                    str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bo_num+"></td>";
+                    str+="<td><input type='text' value="+data.sList[i].bo_pronum+"></td>";
+                    str+="<td><input type='text' value="+data.sList[i].bo_orderdate+"></td>";
+                    str+="<td><input type='text' value="+data.sList[i].bo_duedate+"></td>";
+                    str+="<td><input type='number' value="+data.sList[i].bo_proquantity+"></td>";
+                    str+="<td><input type='number' value="+data.sList[i].bo_prosalesamount+"></td>";
+                    str+="<td><input type='number' value="+data.sList[i].bo_orderbudget+"></td>";
+                 }
+                    $('#tBody').html(str);
+              },
+              error:function(error){
+                 console.log(error);
+              }
+           })
         });
         
         
-        //추가삭제TR.
+        //추가삭제
         
       $(document).ready(function(){
             $('.addList').click(function(){
@@ -147,88 +147,88 @@ border: 1px solid ;
        } 
          
         $('#subb').click(function(){
-        	var obj= $('#orderregistrationinput').serialize();
+           var obj= $('#orderregistrationinput').serialize();
 
-        	$.ajax({
-        			type : 'post',
-        			url : 'orderregistrationinput',
-        			data:obj,
-        			success : function(data) {
-        				console.log(data);
-        			},
-        			error : function(error) {
-        				console.log(error);
-        			}
-        		});
-        	$('input').val("");
-        	});   
-	
+           $.ajax({
+                 type : 'post',
+                 url : '/erp/rest/sales/orderregistrationinput',
+                 data:obj,
+                 success : function(data) {
+                    console.log(data);
+                 },
+                 error : function(error) {
+                    console.log(error);
+                 }
+              });
+           $('input').val("");
+           });   
+   
          $('#searchh').click(function(){
             var choice=$('#choice').val();
-        	var search=$('#search').val();
-        	console.log(choice);
-        	console.log(search);
-        	$.ajax({
-        			type : 'post',
-        			url : 'rest/orderregistrationsearch',
-        			data: "choice="+choice+"&search="+search,
-        			dataType: "json",
-        			success : function(data) {       				
-        				console.log(data);
-        				
-        				var str="";
-            			if(data.sList!=""){
-        				for(var i in data.sList){
-            				str+="<tr class='tr'><td><input type='checkbox' name='each_check' value="+data.sList[i].bo_num+"></td>";
-            				str+="<td><input type='text' value="+data.sList[i].bo_pronum+"></td>";
-            				str+="<td><input type='text' value="+data.sList[i].bo_orderdate+"></td>";
-            				str+="<td><input type='text' value="+data.sList[i].bo_duedate+"></td>";
-            				str+="<td><input type='number' value="+data.sList[i].bo_proquantity+"></td>";
-            				str+="<td><input type='number' value="+data.sList[i].bo_prosalesamount+"></td>";
-            				str+="<td><input type='number' value="+data.sList[i].bo_orderbudget+"></td>";
-            			  }
-            				$('#tBody').html(str);
-            			}else{
-            				alert("데이터가 없습니다.");
-            			}	
-        			},
-        			error : function(error) {
-        				console.log(error);
-        			}
-        		});
-        	});
+           var search=$('#search').val();
+           console.log(choice);
+           console.log(search);
+           $.ajax({
+                 type : 'post',
+                 url : '/erp/rest/sales/orderregistrationsearch',
+                 data: "choice="+choice+"&search="+search,
+                 dataType: "json",
+                 success : function(data) {                   
+                    console.log(data);
+                    
+                    var str="";
+                     if(data.sList!=""){
+                    for(var i in data.sList){
+                        str+="<tr class='tr'><td><input type='checkbox' name='each_check' value="+data.sList[i].bo_num+"></td>";
+                        str+="<td><input type='text' value="+data.sList[i].bo_pronum+"></td>";
+                        str+="<td><input type='text' value="+data.sList[i].bo_orderdate+"></td>";
+                        str+="<td><input type='text' value="+data.sList[i].bo_duedate+"></td>";
+                        str+="<td><input type='number' value="+data.sList[i].bo_proquantity+"></td>";
+                        str+="<td><input type='number' value="+data.sList[i].bo_prosalesamount+"></td>";
+                        str+="<td><input type='number' value="+data.sList[i].bo_orderbudget+"></td>";
+                       }
+                        $('#tBody').html(str);
+                     }else{
+                        alert("데이터가 없습니다.");
+                     }   
+                 },
+                 error : function(error) {
+                    console.log(error);
+                 }
+              });
+           });
 
         
          $('#deleteCheck').click(function(){
-        	var check="";
-        	$("input[name=each_check]:checked").each(function(){
-        		check = $(this).attr("value");
-        		console.log(check);
-        	});
-        	
-        	$.ajax({
-        			type : 'post',
-        			url : 'rest/orderregistrationdelete',
-        			data: {check:check},
-        			dataType: "json",
-        			success : function(data) {       				
-        				console.log(data);
-        				var str="";
-        				for(var i in data.sList){
-            				str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bo_num+"></td>";
-            				str+="<td><input type='text' value="+data.sList[i].bo_pronum+"></td>";
-            				str+="<td><input type='text' value="+data.sList[i].bo_orderdate+"></td>";
-            				str+="<td><input type='text' value="+data.sList[i].bo_duedate+"></td>";
-            				str+="<td><input type='number' value="+data.sList[i].bo_proquantity+"></td>";
-            				str+="<td><input type='number' value="+data.sList[i].bo_prosalesamount+"></td>";
-            				str+="<td><input type='number' value="+data.sList[i].bo_orderbudget+"></td>";
-            			}
-            				$('#tBody').html(str);
-        			},
-        			error : function(error) {
-        				console.log(error);
-        			}
-        		});
-        	});    
+           var check="";
+           $("input[name=each_check]:checked").each(function(){
+              check = $(this).attr("value");
+              console.log(check);
+           });
+           
+           $.ajax({
+                 type : 'post',
+                 url : '/erp/rest/sales/orderregistrationdelete',
+                 data: {check:check},
+                 dataType: "json",
+                 success : function(data) {                   
+                    console.log(data);
+                    var str="";
+                    for(var i in data.sList){
+                        str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bo_num+"></td>";
+                        str+="<td><input type='text' value="+data.sList[i].bo_pronum+"></td>";
+                        str+="<td><input type='text' value="+data.sList[i].bo_orderdate+"></td>";
+                        str+="<td><input type='text' value="+data.sList[i].bo_duedate+"></td>";
+                        str+="<td><input type='number' value="+data.sList[i].bo_proquantity+"></td>";
+                        str+="<td><input type='number' value="+data.sList[i].bo_prosalesamount+"></td>";
+                        str+="<td><input type='number' value="+data.sList[i].bo_orderbudget+"></td>";
+                     }
+                        $('#tBody').html(str);
+                 },
+                 error : function(error) {
+                    console.log(error);
+                 }
+              });
+           });    
 </script>
 </html>

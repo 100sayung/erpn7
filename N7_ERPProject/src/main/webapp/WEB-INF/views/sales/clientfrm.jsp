@@ -5,12 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>거래처등록</title>
-<script
-   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="resources/js/jquery.serializeObject.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- <script src="js/jquery.serializeObject.js"></script> -->
 <style>
-<style>body, td, th, select, textarea {
-   /* font-family: Nanum Gothic, Gulim, Arial, ms sans serif; */
+<
+style>body, td, th, select, textarea {
+   font-family: Nanum Gothic, Gulim, Arial, ms sans serif;
    font-size: 11px;
    color: #000;
 }
@@ -20,7 +20,7 @@
    height: 50%;
    display: inline;
    float: left;
-   overflow: auto;
+   overflow: auto:
 }
 
 #search {
@@ -30,122 +30,140 @@
 #Info {
    text-align: center;
 }
-#mainhead{
-   margin-top:40px;
-
-}
-#maincontents{
-   background-color:#F8F7F7;
-}
 </style>
 </head>
 <body>
    <div id="mainhead" class="main">
       <br>
-      <form id="code">
-               <input type="text" name="cl_code">
+      <!-- <form id="code"> -->
+               <input type="text" id="code">
                <button type="button" id="codesearch">코드검색</button>
-      </form>
-      <br>
-           <button type="button" id="Alllist">전체리스트</button>
-           <button type="button" id="delete">삭제</button>
+                       <!-- </form> -->
+                       <button type="button" id="Alllist">전체리스트</button>
+                    
+                       <button type="button" id="delete">삭제</button>
       
          <table id="Info">
-            <tbody id="Tbody"> 
-            
+            <tbody id="Tbody">
+               
             </tbody>
          </table>
    </div>
-   <div style="width:auto; background-color:#FFB2D9;  color:white; padding:1%;">거래처 등록양식</div>
    <div id="maincontents" class="main">
-      <form id="comInfo" style="margin-left:20px;">
+      <form id="comInfo">
          <br>
-         <table width="580px">
+         <table>
             <tbody>
                <tr>
                   <th class="th1">거래처코드</th>
-                  <th class="th2"><input type="text" name="cl_code" class="noline00"></th>
-                     <!-- style="width: 45px; background: #FFFFFF;" -->
-                  <th class="th3">회사코드</th>
-                  <th class="th4"><input type="text" name="cl_ccode" class="noline00"></th>
-                     <!-- style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;" -->
-               </tr>
-               <tr>
+                  <td class="th2"><input type="text" name="cl_code"
+                     class="noline00"
+                     style="width: 45px; background: #FFFFFF;"></td>
                   <th class="th3">거래처명</th>
-                  <th class="th4"><input type="text" name="cl_name" class="noline00"></th>
-                     <!-- style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;" -->
-                  <th class="th1">사업자번호</th>
-                  <th class="th2"><input type="text" autocomplete="off" name="cl_comnum" class="nolineEx"></td>
+                  <td class="th4"><input type="text" name="cl_name"
+                     class="noline00"
+                     style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"></td>
                </tr>
                <tr>
-                  <th class="th3">종사장번호</th>
-                  <th class="th4"><input type="text" name="cl_comnum2" class="noline00"></th>
-                  <!-- style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;" -->
-                    <th class="th3">대표자명</th>
-                  <th class="th4"><input type="text" name="cl_ceo" class="noline00"></th>
-                  <!-- style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;" -->
+                  <th class="th1">사업자번호</th>
+                  <td class="th2"><input type="text" autocomplete="off"
+                     name="cl_comnum" class="nolineEx"></td>
+                  <th class="th3">대표자명</th>
+                  <td class="th4"><input type="text" name="cl_ceo"
+                     class="noline00"
+                     style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"></td>
                </tr>
                <tr>
                   <th class="th1">담당자명</th>
-                  <th class="th2"><input type="text" name="cl_employee" class="noline00"></th>
-                     <!--style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"-->
-                  <th class="th3">회사 전화번호</th>
-                  <th class="th4"><input type="text" name="cl_phone" class="noline00"></th>
-                     <!-- style="width: 145px; background: #FFFFFF;"-->
+                  <td class="th2"><input type="text" name="cl_employee"
+                     class="noline00"
+                     style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"></td>
+                  <th class="th3">전화번호</th>
+                  <td class="th4"><input type="text" name="cl_phone"
+                     class="noline00"
+                     style="width: 145px; background: #FFFFFF;"></td>
                </tr>
                <tr>
-                  <th class="th1">휴대번호</th>
-                  <th class="th2"><input type="text" name="cl_phone2" class="noline00"></th>
-                     <!--style="width: 145px; background: #FFFFFF;" -->
+                  <th class="th1">핸드폰번호</th>
+                  <td class="th2"><input type="text" name="cl_phone2"
+                     class="noline00"
+                     style="width: 145px; background: #FFFFFF;"></td>
                   <th class="th3">팩스번호</th>
-                  <th class="th4"><input type="text" name="cl_fax" class="noline00"></th>
-                     <!--style="width: 145px; background: #FFFFFF;" value=""-->
+                  <td class="th4"><input type="text" name="cl_fax"
+                     class="noline00"
+                     style="width: 145px; background: #FFFFFF;" value=""></td>
                </tr>
                <tr>
+
                   <th class="th3">email</th>
-                  <th class="th4"><input type="text" autocomplete="off" name="cl_email" class="noline00"></th>
-                     <!-- style="ime-mode: inactive; width: 145px; background: #FFFFFF;" value="" -->
+                  <td class="th4"><input type="text" autocomplete="off"
+                     name="cl_email" class="noline00"
+                     style="ime-mode: inactive; width: 145px; background: #FFFFFF;"
+                     value=""></td>
                </tr>
+               <tr>
+                  <th class="th1">우편번호</th>
+                  <td class="th2"><input type="text" name="cl_addrnum"
+                     class="noline00"
+                     style="width: 80px; background: #FFFFFF;"></td>
+
+               </tr>
+
+
                <tr>
                   <th class="th1">주소</th>
-                  <th colspan="3"><input type="text" name="cl_addr" class="noline00" style="width: 450px;><br>
-                     <!--style="width: 380px; background: #FFFFFF; -ms-ime-mode: active;" -->
-                  </th>
+                  <td colspan="3"><input type="text" name="cl_addr"
+                     class="noline00"
+                     style="width: 380px; background: #FFFFFF; -ms-ime-mode: active;"><br>
+                  </td>
                </tr>
                <tr>
                   <th class="th1">업태</th>
-                  <th class="th2"><input type="text" name="cl_kind" class="noline00"></th>
-                     <!-- style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;" -->
+                  <td class="th2"><input type="text" name="cl_kind"
+                     class="noline00"
+                     style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"></td>
                   <th class="th3">종목</th>
-                  <th class="th4"><input type="text" name="cl_kind2" class="noline00"></th>
-                     <!--style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"  -->
+                  <td class="th4"><input type="text" name="cl_kind2"
+                     class="noline00"
+                     style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"></td>
                </tr>
                <tr>
                   <th class="th1">거래은행</th>
-                  <th class="th2"><input type="text" name="cl_bank" class="noline00"></th>
-                     <!-- style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"  -->
+                  <td class="th2"><input type="text" name="cl_bank"
+                     class="noline00"
+                     style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"></td>
                   <th class="th3">예금주</th>
-                  <th class="th4"><input type="text" name="cl_bankholder" class="noline00"></th>
-                     <!-- style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;" -->
+                  <td class="th4"><input type="text" name="cl_bankholder"
+                     class="noline00"
+                     style="width: 145px; background: #FFFFFF; -ms-ime-mode: active;"></td>
                </tr>
                <tr>
                   <th class="th1">계좌번호</th>
-                  <th><input type="text" name="cl_banknum" class="noline00"></th> <!--style="width: 145px; background: #FFFFFF;" -->
-                  <th class="th1" >유형</th>
-                  <th class="th2" style="padding-left: 10px;">
-                    <select name="cl_kind3" class="select1"> <!-- style="width: 60px;"-->
+                  <td><input type="text" name="cl_banknum"
+                     class="noline00" style="width: 145px; background: #FFFFFF;"></td>
+                  <th>종사업장번호</th>
+                  <td><input type="text" name="cl_comnum2"
+                     class="noline00" style="width: 145px; background: #FFFFFF;"></td>
+               </tr>
+               <tr>
+                  <th class="th1">유형</th>
+                  <td class="th2" style="padding-left: 10px;"><select
+                     name="cl_kind3" class="select1"
+                     style="width: 60px;">
                         <option value="">--</option>
                         <option value="매출">매출</option>
                         <option value="매입">매입</option>
-                    </select>                 
-                  </th>
+                  </select></td>
+
                </tr>
+
                <tr>
                   <th class="th1">메모</th>
-                  <th colspan="3"><textarea name="cl_memo" style="width: 450px; height: 75px; background: #FFFFFF; 
-                  -ms-ime-mode: active;"></textarea></th>
+                  <td colspan="3"><textarea name="cl_memo"
+                        style="width: 380px; height: 75px; background: #FFFFFF; -ms-ime-mode: active;"></textarea></td>
                </tr>
             </tbody>
+
          </table>
          <button type="button" id="insertcomlist">저장</button>
       </form>
@@ -156,21 +174,21 @@
    
     $("#Alllist").click(function(){
       $.ajax({
-         url : 'rest/serchcomlist',
+         url : '/erp/rest/sales/serchcomlist',
          type : 'get',
          contentType : 'application/json; charset=UTF-8',
          dataType : 'json',
          success : function(data) {
             console.log(data);
             var List="";
-            List+="<tr><th><input name='Allcheck' type='checkbox'></th><th>코드&nbsp;&nbsp;</th><th>거래처명&nbsp;&nbsp;</th><th>사업자(주민)번호&nbsp;&nbsp;</th><th>대표자명&nbsp;&nbsp;</th><th>업태&nbsp;&nbsp;</th><th>유형&nbsp;&nbsp;</th></tr>";
+            List+="<tr><th><input name='Allcheck' type='checkbox'></th><th>코드</th><th>거래처명</th><th>사업자(주민)번호</th><th>대표자명</th><th>업태</th><th>유형</th></tr>";
             for ( var i in data.aList) {
                List+="<tr>";
                List+="<td><input type='checkbox' name='reportChkBxRow' value="+data.aList[i].cl_code+"></td>";
                List+="<td>" + data.aList[i].cl_code + "</td>";
                List+="<td>" + data.aList[i].cl_name + "</td>";
                List+="<td>" + data.aList[i].cl_comnum + "</td>";
-               List+="<td>" + data.aList[i].cl_ceo + "</td>";
+                List+="<td>" + data.aList[i].cl_ceo + "</td>";
                List+="<td>" + data.aList[i].cl_kind + "</td>";
                List+="<td>" + data.aList[i].cl_kind3 + "</td>";
                List+="</tr>";
@@ -186,20 +204,18 @@
    });
 
    $("#codesearch").click(function() {
-      var obj = $("#code").serializeObject();
-      var json = JSON.stringify(obj);
-      console.log(json);
+      var code = $("#code").val();
+      console.log(code);
                   $.ajax({
-                           url : 'rest/searchcode',
+                           url : '/erp/rest/sales/searchcode',
                            type : 'post',
-                           contentType : 'application/json; charset=UTF-8',
-                           data : json,
+                           data : {code:code},
                            dataType : 'json',
                            success : function(data) {
                            
                               console.log(data);
                               var List="";
-                              List+="<tr><th><input type='checkbox'></th><th>코드&nbsp;&nbsp;</th><th>거래처명&nbsp;&nbsp;</th><th>사업자(주민)번호&nbsp;&nbsp;</th><th>대표자명&nbsp;&nbsp;</th><th>업태&nbsp;&nbsp;</th><th>유형&nbsp;&nbsp;</th></tr>";
+                              List+="<tr><th><input type='checkbox'></th><th>코드</th><th>거래처명</th><th>사업자(주민)번호</th><th>대표자명</th><th>업태</th><th>유형</th></tr>";
                               for ( var i in data.aList) {
                                  List+="<tr>";
                                  List+="<td><input type='checkbox' name='reportChkBxRow' value="+data.aList[i].cl_code+"></td>";
@@ -220,11 +236,11 @@
                });  
    
    $("#insertcomlist").click(function() {
-                  var obj = $("#comInfo").serializeObject();
+                  var obj = $("#comInfo").serialize();
                   //var json = JSON.stringify(obj);
                   //console.log(json)
                   $.ajax({
-                           url : 'rest/insertcomlist',
+                           url : '/erp/rest/sales/insertcomlist',
                            type : 'post',
                            //contentType : 'application/json; charset=UTF-8',
                            data : obj,
@@ -232,7 +248,7 @@
                            success : function(data) {
                               console.log(data);
                               var List="";
-                              List+="<tr><th><input type='checkbox'></th><th>코드&nbsp;&nbsp;</th><th>거래처명&nbsp;&nbsp;</th><th>사업자(주민)번호&nbsp;&nbsp;</th><th>대표자명&nbsp;&nbsp;</th><th>업태&nbsp;&nbsp;</th><th>유형&nbsp;&nbsp;</th></tr>";
+                              List+="<tr><th><input type='checkbox'></th><th>코드</th><th>거래처명</th><th>사업자(주민)번호</th><th>대표자명</th><th>업태</th><th>유형</th></tr>";
                               for ( var i in data.aList) {
                                  List+="<tr>";
                                  List+="<td><input  type='checkbox' name='reportChkBxRow' value="+data.aList[i].cl_code+"></td>";
@@ -245,7 +261,7 @@
                                  List+="</tr>";
                               }
                                    $("#Tbody").html(List);
-                                   $("input").html("");
+                                   $("input").val("");
                            },
                            error : function(error) {
                               console.log(error);
@@ -265,7 +281,7 @@
            }else{
       //var json = JSON.stringify(arr);
               $.ajax({
-                 url:'rest/deleteCom',
+                 url:'/erp/rest/sales/deleteCom',
                  type:'post',
                  traditional : true,
                  //contentType : 'application/json; charset=UTF-8',
@@ -274,7 +290,7 @@
                  success:function(data){
                     console.log(data);
                     var List="";
-                  List+="<tr><th><input type='checkbox'></th><th>코드&nbsp;&nbsp;</th><th>거래처명&nbsp;&nbsp;</th><th>사업자(주민)번호&nbsp;&nbsp;</th><th>대표자명&nbsp;&nbsp;</th><th>업태&nbsp;&nbsp;</th><th>유형&nbsp;&nbsp;</th></tr>";
+                  List+="<tr><th><input type='checkbox'></th><th>코드</th><th>거래처명</th><th>사업자(주민)번호</th><th>대표자명</th><th>업태</th><th>유형</th></tr>";
                   for ( var i in data.aList) {
                      List+="<tr>";
                      List+="<td><input  type='checkbox' name='reportChkBxRow' value="+data.aList[i].cl_code+"></td>";
