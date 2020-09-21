@@ -7,7 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
+import com.n7.erp.bean.ApprovalDocu;
 import com.n7.erp.bean.IePort;
+import com.n7.erp.bean.ps.approvalLine;
 import com.n7.erp.bean.ps.Purchase;
 import com.n7.erp.bean.ps.PurchaseApproval;
 import com.n7.erp.bean.ps.Return;
@@ -39,17 +41,17 @@ public interface PurchaseDao {
 
 	List<Purchase> pProgram(String check);
 
-//	com.n7.erp.bean.approvalLine approLinecom1(String code01);
-//
-//	com.n7.erp.bean.approvalLine approLinecom2(String code02);
-//	
-//	List<approvalLine> approvalLine();
-//
-//	List<approvalLine> searchName(String name);
-//
-//	List<approvalLine> addApproval(String name);
+	List<approvalLine> approvalLine();
 
-	boolean Approval(PurchaseApproval pa);
+	List<approvalLine> searchName(String name);
+
+    List<com.n7.erp.bean.ps.approvalLine> addApproval(String code01); //name
+
+    com.n7.erp.bean.ps.approvalLine approLinecom1(String code01);
+
+  //com.n7.erp.bean.sales.approvalLine approLinecom2(String code02);
+    
+	boolean Approval(ApprovalDocu ad);
 
 	boolean pApproval1(PurchaseApproval pa);
 

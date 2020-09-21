@@ -22,6 +22,7 @@ border: 1px solid silver;
 <body>
 	<div id="aaa">
 		 <div style="width: auto; background-color: white; padding: 1%;">
+		 	<button id="account">거래처등록</button>
          	<button id="stock">재고현황</button>
          	<button id="Pinfo">구매조회</button>
 			<button type="button" id="pDetail">상세보기</button>
@@ -34,7 +35,8 @@ border: 1px solid silver;
 					</select>
 					<input type="text" id="search" name="search" style="height: 18px;">
 					<button id="searchbtn">검색</button>
-		<form id="pregistration">
+		<form id="a">
+	
 			<div style="height: 80px; padding-top: 25px; background-color: #F8F7F7;">
 				<div style="margin-left: 55px;">
 				<table>
@@ -49,7 +51,6 @@ border: 1px solid silver;
                      	<th><input type="text" name="p_clcode"></th>
                      	<th>구매일</th>
                      	<th><input type="date" name="p_day" min="2000-01-01" max="2030-12-31" style="width: 161px;"></th>
-                     	<th><input type="hidden" name="o_sqe"></th>
                   	</tr>
             	</table>
 				</div>
@@ -89,7 +90,7 @@ border: 1px solid silver;
 			</div>
 			<div style="float: left;">
 				<button type="button" id="approval">결재</button>
-				<button type="button" id="save">저장</button>
+				<button type="button" id="save">등록</button>
 				<button type="button" id="Pdelete">삭제</button>
 				<button type="button" id="print" onclick="window.print()">인쇄</button>
 				<button type="button" class="addList">추가</button>
@@ -121,19 +122,20 @@ border: 1px solid silver;
 		}); 
 
 	  $('#save').click(function(){
-         var obj = $('#pregistration').serialize();
+         var obj = $("#a").serialize();
+         console.log(obj);
          $.ajax({
-            url: '/erp/rest/Puruchase/pregistration',
+            url: '/erp/rest/Purchrase/pregistration',
             type: 'post',
             data: obj,
             success: function(data){
                //consloe.log(data);
+            $('input').val("");
             },
             error: function(error){
             	console.log(error);
             }
          });
-            $('input').val("");
       });
       
        $('#Pinfo').click(function(){
@@ -179,7 +181,7 @@ border: 1px solid silver;
 			 console.log(choice);
 			 console.log(search);
 			 $.ajax({
-				 url: '/erp/rest/Pruchase/pfsearch',
+				 url: '/erp/rest/Purchase/pfsearch',
 				 type: 'post',
 				 data: "choice="+choice+"&search="+search,
 				 dataType: 'json',
@@ -246,7 +248,7 @@ border: 1px solid silver;
     		 console.log(check);
     		 
     		 if(check!=""){
-                	window.open("/erp/Purchase/pprogramwrite?check="+check,"pprogramwrite", "width=1200, height=620, top=80 left=200");
+    			 window.open("/erp/Purchase/pprogramwrite?check="+check,"pprogramwrite", "width=1200, height=620, top=80 left=200");
              }
     	 });
       });

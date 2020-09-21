@@ -65,23 +65,26 @@ text-align: center;
          <table id="table">
             <tr>
                <th>일자</th>
-               <th><input type="date" name="p_date" class="draft2"></tr>
+               <th><input type="text" name="p_date" class="draft2" placeholder="자동생성" readonly></tr>
             <tr>
                <th>제목</th>
                <th><input type="text" name="p_docuname" class="draft2"></th>
             </tr>
+           <tr>
+           		<th>상신자</th> 
+           		<th><input type="text" name="p_writer" class="draft2" value="${ps.p_writer}" readonly></th>
+           </tr>
             <tr>
                <th>결재자</th>
                <th id="line"></th>
             </tr>
-
             <tr>
                <th>내용</th>
                <td>
                         <table>
                            <tr>
                               <th colspan="8">구매 계획서</th>
-                              <th><input type="text" name="p_docunum" class="txt" value="${ps.p_documentcode}" readonly></th>
+                              <th><input type="text" name="p_documentcode" class="txt" value="${ps.p_documentcode}" readonly></th>
                            </tr>
                            <tr>
                               <th colspan="4">거래처</th>
@@ -125,38 +128,27 @@ text-align: center;
     	
     	
     	$("#approvalLine").click(function() {
-    	      window.open('approvalLine', 'approvalLine', 'width=1400,height=700');
+    	      window.open('/erp/Purchase/approvalLine', 'approvalLine', 'width=1400,height=700');
     	   });
     		
-    	
     	function setChildValue(data) {
-    	      console.log(data);
-    	      if (data.tList1 != "") {
-    	      var str = "";
-    	         for ( var i in data.tList1) {
-    	            str +="<input type='text' name='p_approver"+i+"' value='"+data.tList1[i].m_code+"' hidden='true'>";
-    	            str +=data.tList1[i].m_grade+"/";
-    	            str +="<input style='width:50px;' type='text' name='p_approver"+i+"' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
-    	         }
-    	         console.log(str)
-    	         $("#line").html(str);
-    	      };
-    	      /* if (data.tList2 != "") {
-    	         for ( var i in data.tList2) {
-    	      var str2 = "";
-    	            str2 +="<input type='text' name='ad_recode"+i+"' value='"+data.tList2[i].m_code+"' hidden='true'>";
-    	            str2 += data.tList2[i].m_grade + "<br>";
-    	            str2 += data.tList2[i].m_name;
-    	         $("#refer"+i).html(str2);
-    	         }
-    	      }; */
-    	   
-    	   };
+    		console.log(data);
+    		if (data.tList1 != "") {
+    		var str = "";
+    			for ( var i in data.tList1) {
+    		        str +="<input type='text' name='rs_apcode"+i+"' value='"+data.tList1[i].hc_hrcode+"' hidden='true'>";
+    				str +=data.tList1[i].hc_position+"/";
+    				str +="<input style='width:50px;' type='text' name='p_approvel"+i+"' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
+    			}
+    			console.log(str)
+    			$("#line").append(str);
+    		};
+    	};
     	   
       	    $('#submit').click(function(){
     		   var obj = $('#pprogramwrite').serialize();
     		   $.ajax({
-    			   url: 'rest/pprogramwrite',
+    			   url: '/erp/rest/Purchase/purchaseApproval',
     			   type: 'post',
     			   data: obj,
     			   dataType: 'json',
@@ -166,8 +158,8 @@ text-align: center;
     			   error: function(error){
     				   console.log(error);
     			   }
-    		   })
-    	   })    
+    		   });
+    	   });    
     	
    </script>
 </body>

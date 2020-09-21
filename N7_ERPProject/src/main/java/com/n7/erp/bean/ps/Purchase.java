@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 @Data
-@Alias("purchase")
+@Alias("Purchase")
 @Accessors(chain = true)
 public class Purchase {
 	private String p_documentcode; 

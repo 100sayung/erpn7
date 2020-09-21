@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-@Alias("Approval")
+@Alias("pApproval")
 public class PurchaseApproval {
 	private String p_documentcode;
 	private String p_ccode;
