@@ -170,7 +170,7 @@ color: red;
 						type : 'post',
 						success : function(result) {
 							console.log(result);
-							var str = '<tr><td>분류명</td><td>품목 코드</td><td></td><td></td></tr>';
+							var str = '<tr><td>분류명</td><td>품목 번호</td><td></td><td></td></tr>';
 							for (var i = 0; i < result.length; i++) {
 								str += '<tr><td class="ct_name"><input type="text" value="'
 										+ result[i].ct_name

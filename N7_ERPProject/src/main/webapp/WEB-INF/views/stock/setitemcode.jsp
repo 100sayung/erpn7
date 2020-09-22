@@ -150,13 +150,13 @@ text-align: center;
 			<tr>
 			<tr>
 				<td colspan="2" style="border: 0px;"><button type="button"
-						id="btn">확정</button></td>
+						id="btn">확정</button></td> <!--itemcode cofirm btn #btn -->
 			</tr>
 		</table>
 		</form>
 		<span id='msg'></span><br><br>
 		<h3>분류명 내역</h3>
-		<button type="button" id="modify">수정</button>
+		<button type="button" id="modify">수정</button><!--itemcode modify btn #modify -->
 	<div id="smalldescription">
 	</div>
 	</div>
