@@ -134,13 +134,19 @@ ul {
 				console.log(data);
 				let str = "<table>";
 				let type = "";
-				for(let i = 0; i<data.length ; i++){
-					if(data[i].ha_type=="1"){
-						type = "출근"
+    			for(let i = 0 ; i<data.length ; i++){
+       				let time = data[i].ha_time.substr(16, 8);
+    				if(data[i].ha_type=="1"){
+    					type += "<font style='color:blue'>"
+        				type += time;
+						type+= " 출근</font>"
 					}else{
-						type = "퇴근"
+						type += "<font style='color:red'>"
+	    				type += time;
+						type+= " 퇴근</font>"
 					}
-					str += "<tr><td>"+data[i].m_name+"</td><td>" + data[i].ha_time + "</td><td>" + type + "</td></tr>";
+    				console.log(date);
+					str += "<tr><td>"+data[i].m_name+"</td><td>" + time + "</td><td>" + type + "</td></tr>";
 				}
 				str += "</table>";
 				$("#at").html(str);

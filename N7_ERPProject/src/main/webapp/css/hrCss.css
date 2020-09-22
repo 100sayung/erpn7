@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+
+.infobtn{
+	background-color: #0033ff;
+	opacity: 70%;
+	border-radius: 5px;
+	width: 70px;
+	height: 30px;
+	color:white;
+	font-weight: bold;
+	font-size:13px;
+}
+
+.infomenu{
+	background-color: #0033ff;
+	opacity: 70%;
+	color:white;
+	font-weight: bold;
+	font-size:13px;
+}

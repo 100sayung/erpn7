@@ -5,6 +5,8 @@
 <head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css"
+	media="all" />
 <title>Insert title here</title>
 <style>
 .modifyMode{
@@ -23,6 +25,33 @@ span{
 .info{
 	height:60px;
 }
+
+.attendance{
+	border: 1px solid black;
+}
+#dataTable{
+	border: 1px solid black;
+	width: 300px;
+}
+tr{
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+.dataSpan{
+	width:250px;
+	float:left;
+	align-content: center;
+	text-align: center;
+}
+#hrmenu{
+	float:none;
+	width:800px;
+}
+#member{
+	height:300px;
+}
+
+
 </style>
 
 <meta charset="UTF-8">
@@ -33,23 +62,22 @@ span{
 
 <br><br><br>
 
-<table>
-<div id="menu"></div>
-</table>
+
+<div id="hrmenu">1</div>
 
 <form id="form" method="post">
 <div id="hrDetailInfo">
 
-
-<table border='1px solid black'>
-<div id="addRecord"></div>
+<table id="hrDetail" border="1" cellspacing="0">
 </table>
+
+<div id="addRecord">
+</div>
 </div>
 <input type='hidden' value='' id='current'>
-<input type='button' value='추가하기' onclick='addRecord()' id='addRecordBtn'>
-<br>
-<input type='button' value='수정하기' onclick='changeMode()' id='changeBtn'>
-<input type='submit' value='등록하기' disabled="disabled" id='registBtn'>
+<input type='button' value='추가하기' class = 'infobtn' onclick='addRecord()' id='addRecordBtn'>
+<input type='button' value='수정하기'  class = 'infobtn' onclick='changeMode()' id='changeBtn'>
+<input type='submit' value='등록하기'  class = 'infobtn' disabled="disabled" id='registBtn'>
 </form>
 
 
@@ -64,13 +92,18 @@ $(document).ready(function(){
 		method:"get",
 		contentType : 'application/json',
 		success : function(data){
-			console.log(data);
-			let info = "";
-			info += '<span style="height:200px;"><img src="/erp/upload/'+data.m_photo+'"></span>&nbsp;'
-			info += '<span style="height:200px;"><table style="width:500px"><tr class="info"><td id="m_name">'+data.m_name+'</td><td id="m_gender">'+data.m_gender+'</td></tr>';
-			info += '<tr class="info"><td id="m_phonenum">'+data.m_phonenum+'</td><td id="m_birth">'+data.m_birth+'</td></tr>';
-			info += '<tr style="height:80px;"><td id="m_address" colspan="2">'+data.m_address+'</td></tr></table></span>';
-			$("#member").html(info);
+				console.log(data);
+				let info = "";
+				info += '<div class="dataSpan"><img style="width:200px; height: 250px;" src="/erp/upload/'+data.m_photo+'"></div>';
+				info += '<div class="dataSpan"><table id="dataTable"><tr  class="infomenu"><td>이름</td></tr>'
+				info += '<tr><td id="m_name">'+data.m_name+'</td></tr>';
+				info += '<tr  class="infomenu"><td>생년월일</td></tr>';
+				info += '<tr><td id="m_birth">'+data.m_birth+'</td></tr>';
+				info += '<tr  class="infomenu"><td>전화번호</td></tr>';
+				info += '<tr><td id="m_phonenum">'+data.m_phonenum+'</td></tr>';
+				info += '<tr  class="infomenu"><td conlspan="2">주소</td></tr>'
+				info += '<tr style="height:80px;"><td id="m_address" colspan="2">'+data.m_address+'</td></tr></table></div>';
+				$("#member").html(info);
 		},error : function(err){
 		}
 	});
@@ -82,14 +115,14 @@ $(document).ready(function(){
 		contentType: 'application/json',
 		success : function(data){
 			let str="";
-			str+='<tr><td><a href="javascript:InCompanyInfo()"> 사내정보 </a></td>';
+			str+='<tr><td><a href="javascript:InCompanyInfo()"><button class = "infobtn" >사내정보</button></a></td>';
 			if(data){
-				str +='<td><a href="javascript:AcademicInfo()"> 학력 </a></td>';
-				str +='<td><a href="javascript:CareerInfo() "> 이력 </a></td>';
-				str +='<td><a href="javascript:CertificationInfo()"> 자격증 </a></td>';
+				str +='<td><a href="javascript:AcademicInfo()"> <button class = "infobtn">학력</button></a></td>';
+				str +='<td><a href="javascript:CareerInfo() "> <button class = "infobtn">이력</button> </a></td>';
+				str +='<td><a href="javascript:CertificationInfo()"> <button class = "infobtn">자격증</button> </a></td>';
 			}
 			str+='</tr>';
-			$("#menu").html(str);
+			$("#hrmenu").html(str);
 		}, error : function(err){
 			console.log(err);
 		}
@@ -121,7 +154,7 @@ function checkDateValue(val1, val2){
 		val2.value = "";
 	}
 }
- 
+
 function addRecord(){
 	let str ="";
 	let cntAc = 0;
@@ -147,7 +180,8 @@ function addRecord(){
 		str += "<td><input type='button' value='삭제' onclick='javascript:thisRowDel(this);'></td></tr>";
 		num++;
 	}
-	$("#hrDetailInfo").append(str);
+//		$("#hrDetail > tbody:last").append(str);
+	$("#infoTable > tbody:last").append(str);
 }
 
 function thisRowDel(row){
@@ -168,15 +202,14 @@ function changeMode(){
 	$("#changeBtn").toggleClass("mf");
 }
 
-var formURL = "/erp/hr";
+var formURL = "/erp/myinfo";
 
 
 function AcademicInfo(){
-	$("#form").attr("action", formURL + "/newacademic/" +id);
+	$("#form").attr("action", formURL + "/newacademic");
 	$("#current").val("Academic");
 	$.ajax({
-		url:"/erp/rest/hr/academic",
-		data:{m_id:id},
+		url:"/erp/rest/myinfo/academic",
 		dataType:"json",
 		method:"get",
 		contentType: 'application/json',
@@ -186,8 +219,8 @@ function AcademicInfo(){
 				data = arr;
 				}
 			let str ="";
-			str += "<table border='1px solid black'><tr>";
-			str += "<td>학교/학위</td><td>전공</td><td>날짜</td></tr>";
+			str += "<table border='1px solid black' id='infoTable' border='1' cellspacing='0'><tr class='infomenu'>";
+			str += "<td style='width:170px;'>학교/학위</td><td style='width:170px;'>전공</td><td style='width:140px;' colspan='2'>날짜</td></tr>";
 			for(let i = 0 ; i <data.length ; i++){
 			console.log(data[i].hac_year);
 			str += "<tr><td><input type='text' name='hac_school' class='detailInfo' value='"+data[i].hac_school+"' readonly></td>"
@@ -206,16 +239,15 @@ function AcademicInfo(){
 			str += "<td><input type='date' name='hac_year' class='detailInfo'></td></tr>";
 			str += "</table>";
 			$("#hrDetailInfo").html(str); */
-		} 
-	}); 
+		}
+	});
 }
 
 function CertificationInfo(){
-	$("#form").attr("action", formURL + "/newcertification/" +id);
+	$("#form").attr("action", formURL + "/newcertification");
 	$("#current").val("Certification");
 	$.ajax({
-		url:"/erp/rest/hr/certification",
-		data:{m_id:id},
+		url:"/erp/rest/myinfo/certification",
 		dataType:"json",
 		method:"get",
 		success : function(data){
@@ -225,8 +257,8 @@ function CertificationInfo(){
 			data = arr;
 			}
 			let str ="";
-			str += "<table border='1px solid black'><tr>";
-			str += "<td>자격증</td><td>발급처</td><td>발급일</td></tr>";
+			str += "<table border='1px solid black' id='infoTable' border='1' cellspacing='0'><tr class='infomenu'>";
+			str += "<td style='width:170px;'>자격증</td><td style='width:170px;'>발급처</td><td style='width:140px;' colspan='2'>발급일</td></tr>";
 			for(let i = 0 ; i <data.length ; i++){
 			str += "<tr><td><input type='text' name='hct_name' class='detailInfo' value='"+data[i].hct_name+"' readonly ></td>"
 			str += "<td><input type='text' name='hct_agency' class='detailInfo' value='"+data[i].hct_agency+"' readonly ></td>";
@@ -243,26 +275,25 @@ function CertificationInfo(){
 			str += "<td><input type='date' name='hct_date' class='detailInfo' required pattern='\d{4}-\d{2}-\d{2}'></td></tr>";
 			str += "</table>";
 			$("#hrDetailInfo").html(str); */
-		} 
-	}); 
+		}
+	});
 }
 function CareerInfo(){
-	$("#form").attr("action", formURL + "/newcareer/" +id);
+	$("#form").attr("action", formURL + "/newcareer");
 	$("#current").val("Career");
 	$.ajax({
-		url:"/erp/rest/hr/career",
-		data:{m_id:id},
+		url:"/erp/rest/myinfo/career",
 		dataType:"json",
 		method:"get",
 		success : function(data){
 			console.log("안됨?");
 			let str ="";
-			str += "<table border='1px solid black'><tr>";
-			str += "<td>회사/프로젝트명</td><td>기간</td><td>직책</td><td>내용</td></tr>";
+			str += "<table border='1px solid black' id='infoTable' border='1' cellspacing='0'><tr class='infomenu'>";
+			str += "<td style='width:140px;'>회사/프로젝트명</td><td style='width:140px;'>기간</td><td style='width:140px;'>직책</td><td style='width:170px;' colspan='2'>내용</td></tr>";
 			for(let i=0; i<data.length ; i++){
 			str += "<tr><td><input type='text' name='hcr_cname' class='detailInfo' value='"+data[i].hcr_cname+"' readonly ></td>"
-			str += "<td><input type='date' name='hcr_startperiod' id='chk"+(i*2)+"'class='detailInfo checkDate' value='"+data[i].hcr_startperiod+"' readonly ><br>"
-			str += "<input type='date' name='hcr_endperiod' id='chk"+((i*2)+1)+"' class='detailInfo checkDate' value='"+data[i].hcr_endperiod+"' readonly onchange='checkDateValue(chk"+(i*2)+", chk"+((i*2)+1)+")'> </td>"
+			str += "<td><input type='date' name='hcr_startperiod' id='chk"+(i*2)+"'class='detailInfo checkDate' value='"+data[i].hcr_startperiod+"' readonly >부터"
+			str += "<input type='date' name='hcr_endperiod' id='chk"+((i*2)+1)+"' class='detailInfo checkDate' value='"+data[i].hcr_endperiod+"' readonly onchange='checkDateValue(chk"+(i*2)+", chk"+((i*2)+1)+")'>까지</td>"
 			str += "<td><input type='text' name='hcr_position' class='detailInfo' value='"+data[i].hcr_position+"' readonly ></td>";
 			str += "<td><textarea rows='3' cols='20' name='hcr_content' class='detailInfo' value='"+data[i].hcr_content+"'></textarea>";
 			str += "<input type='hidden' name='hcr_num' value='"+data[i].hcr_num+"'></td></tr>'";
@@ -272,24 +303,17 @@ function CareerInfo(){
 			num=data.length;
 		},error : function(err){
 			console.log(err);
-		} 
-	}); 
+		}
+	});
 }
 function InCompanyInfo(){
-	$("#form").attr("action", formURL + "/newhrcard/" +id);
+	$("#form").attr("action", formURL + "/newhrcard");
 	$("#current").val("HRCard");
 	$.ajax({
-		url :"/erp/rest/hr/deptlist",
+		url:"/erp/rest/myinfo/hrcard",
 		dataType:"json",
-		method :"get",
-		success : function(deptList){
-			$.ajax({
-				url:"/erp/rest/hr/hrcard",
-				data:{m_id:id},
-				dataType:"json",
-				method:"get",
+		method:"get",
 				success : function(data){
-					console.log(deptList);
 					console.log(data);
 					var married ="";
 					var status ="";
@@ -309,61 +333,36 @@ function InCompanyInfo(){
 						work="퇴사";
 					}
 					let str ="";
-					str += "<table border='1px solid black'><tr>";
+					str += "<table border='1px solid black'><tr class='infomenu'>";
 					str += "<td>사원코드</td><td>부서</td><td>직책</td></tr>";
-					str += "<tr><td><input type='text' name='hc_code' value='"+data.hc_hrcode+"' readonly></td>"
-					str += "<td><select name='hc_dept' class='detailInfo'>"
-						for(let i = 0 ; i<deptList.deptList.length ; i++){
-							if(data.hc_dept===deptList.deptList[i]){
-								str += "<option value='"+deptList.deptList[i]+"' selected='selected'>"+deptList.deptList[i]+"</option>";
-							}else{
-							str += "<option value='"+deptList.deptList[i]+"'>"+deptList.deptList[i]+"</option>";
-							}
-						}
-						str += "</select></td><td><select name='hc_position' class='detailInfo'>";
-						for(let i = 0 ; i<deptList.positionList.length ; i++){
-							if(data.hc_position===deptList.positionList[i]){
-								str += "<option value='"+deptList.positionList[i]+"' selected='selected'>"+deptList.positionList[i]+"</option>";
-							}else{
-							str += "<option value='"+deptList.positionList[i]+"'>"+deptList.positionList[i]+"</option>";
-							}
-						}
-						str += "</select></td></tr><td colspan='3'>입사일</td></tr>";
+					str += "<tr><td><input type='text' name='hc_code' value='"+data.hc_hrcode+"' readonly></td>";
+					str += "<td><input type='text' name='hc_dept' value='"+data.hc_dept+"' readonly></td>";
+					str += "<td><input type='text' name='hc_position' value='"+data.hc_position+"' readonly></td>";
+					str += "</tr><td colspan='3' class='infomenu'>입사일</td></tr>";
 					str += "<td colspan='3'><input type='date' name='hc_joindate' value='"+data.hc_joindate+"' class='detailInfo' readonly></td>"
-					str += "<tr><td>현재 상태</td><td>재/휴직 상태</td><td>사용한 월차</td></tr>";
+					str += "<tr class='infomenu'><td>현재 상태</td><td>재/휴직 상태</td><td>사용한 월차</td></tr>";
 					str += "<td><input type='text' value='"+status+"' readonly></td>"
 					str += "<td><input type='text' value='"+work+"'readonly></td>"
 					str += "<td><input type='text' value='"+data.hc_numholi+"' readonly></td></tr></table>";
-					console.log(data.hc_joindate);
 					$("#hrDetailInfo").html(str);
 				},error : function(err){
 					console.log(deptList);
 					console.log(err);
 					let str ="";
-					str += "<table border='1px solid black'><tr>";
+					str += "<table border='1px solid black'><tr class='infomenu'>";
 					str += "<td>사원코드</td><td>부서</td><td>직책</td></tr>";
 					str += "<tr><td><input type='text' name='hc_code' placeholder='---' readonly></td>"
-					str += "<td><select name='hc_dept' class='detailInfo'>"
-					for(let i = 0 ; i<deptList.deptList.length ; i++){
-						str += "<option value='"+deptList.deptList[i]+"'>"+deptList.deptList[i]+"</option>";
-					}
-					str += "</select></td><td><select name='hc_position' class='detailInfo'>";
-					for(let i = 0 ; i<deptList.positionList.length ; i++){
-						str += "<option value='"+deptList.positionList[i]+"'>"+deptList.positionList[i]+"</option>";
-					}
-					str += "</select></td></tr><td colspan='3'>입사일</td></tr>";
-					str += "<td colspan='3'><input type='date' name='hc_joindate' class='detailInfo'></td></tr>"
+					str += "<td><input type='text' name='hc_dept' value='"+data.hc_dept+"' readonly></td>";
+					str += "<td><input type='text' name='hc_position' value='"+data.hc_position+"' readonly></td>";
+					str += "</tr><td colspan='3'>입사일</td></tr>";
+					str += "<td colspan='3'><input type='date' name='hc_joindate' readonly></td></tr>"
 					str += "<tr><td>현재 상태</td><td>재/휴직 상태</td><td>사용한 월차</td></tr>";
 					str += "<td><input type='text' placeholder='---' readonly></td>"
 					str += "<td><input type='text' placeholder='---' readonly></td>"
 					str += "<td><input type='text' placeholder='---' readonly></td></tr></table>";
 					$("#hrDetailInfo").html(str);
-				} 
-			}); 
-		},error : function(err){
-			console.log(err);
-		}
-	});
+				}
+			});
 }
 </script>
 </body>

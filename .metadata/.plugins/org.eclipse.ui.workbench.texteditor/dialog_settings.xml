@@ -1,37 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="get"/>
+		<item key="selection" value="정말"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="get"/>
-			<item value="HR_CARD"/>
-			<item value="HrCard"/>
-			<item value="fromid"/>
-			<item value="gethr"/>
+			<item value="정말"/>
+			<item value="str"/>
+			<item value="ready"/>
+			<item value="member"/>
+			<item value="사내정보"/>
+			<item value="내용"/>
+			<item value="detailInfo"/>
+			<item value="add"/>
+			<item value="hrDetailIn"/>
+			<item value="hrDetailI"/>
+			<item value="hrDetail"/>
+			<item value="150"/>
+			<item value="employee"/>
+			<item value="myholiday"/>
 			<item value="employeeholi"/>
-			<item value="erpboard"/>
-			<item value="board"/>
-			<item value="saleInfo"/>
-			<item value="saleIn"/>
-			<item value="sale"/>
-			<item value="getHoli"/>
-			<item value="NameHo"/>
-			<item value="getDetailH"/>
-			<item value="getDetail"/>
 		</list>
 		<list key="replacehistory">
+			<item value="type"/>
+			<item value="300"/>
 			<item value="end"/>
 			<item value="receipt"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1000"/>
-		<item key="DIALOG_Y_ORIGIN" value="223"/>
+		<item key="DIALOG_X_ORIGIN" value="1340"/>
+		<item key="DIALOG_Y_ORIGIN" value="222"/>
 		<item key="DIALOG_WIDTH" value="288"/>
 		<item key="DIALOG_HEIGHT" value="390"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>

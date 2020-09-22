@@ -58,8 +58,8 @@ ul {
 }
 
 table{
-	width : 1400px;
-	height: 900px;
+	width : 1300px;
+	height: 850px;
 }
 td{
 	width:200px;

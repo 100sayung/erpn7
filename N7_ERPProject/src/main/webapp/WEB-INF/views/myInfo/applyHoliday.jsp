@@ -10,6 +10,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
+<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css"
+	media="all" />
 <style>
 #header {
 	width: 100%;
@@ -86,45 +88,40 @@ ul {
 
 	<h1> CSS</h1>
 
-	</form>
 
 
 	<button id="approval">결재</button>
-	<div id="line"></div><br>
 	<form action="/erp/hr/applyholiday" method="post">
-	<input type="text" name="hap_docuname" placeholder="문서 제목을 입력해주세요 글자제한 20자" required="required">
-	<input type="text" name="hap_type" placeholder="휴가 종류를 입력해주세요 글자제한 20자" required="required">
-	<br>
-	<input type="date" name="hap_startday" required="required" id="start">
-	<input type="date" name="hap_endday" required="required" onchange='checkDateValue(start, end);' id="end">
-	<br>
-	<textarea rows="10" cols="10" name="hap_reason"></textarea>0
-	<input type="submit" value="제출">
-
+	<table style='text-align: center;'>
+	<tr><td class='infomenu'>결재자</td><td><div id='line'></div></td></tr>
+	<tr class='infomenu'>
+		<td>문서제목</td><td>휴가종류</td>
+	</tr><tr>
+		<td><input type="text" name="hap_docuname" placeholder="문서 제목을 입력해주세요 글자제한 20자" required="required" style="width:300px;"></td>
+		<td><input type="text" name="hap_type" placeholder="휴가 종류를 입력해주세요 글자제한 20자" required="required"  style="width:300px;"></td>
+	</tr><tr class='infomenu'>
+		<td>휴가시작일</td><td>휴가종료일</td>
+	</tr><tr>
+		<td><input type="date" name="hap_startday" required="required" id="start" style="width:300px;"></td>
+		<td><input type="date" name="hap_endday" required="required" onchange='checkDateValue(start, end);' id="end" style="width:300px;"></td>
+	</tr><tr>
+		<td colspan='2' class='infomenu'>사유</td>
+	</tr><tr>
+		<td colspan='2'><textarea rows="10" cols="10" name="hap_reason" style="width:620px; heigth:1000px; resize:none;"></textarea></td>
+	</tr>
+	</table>
+	<input type="submit" class='infobtn' value="제출">
+	</form>
 	</div>
 	<script>
 
-	String hap_docunum;
-	String hap_ccode;
-	String hap_hrcode;
-	String hap_docuname;
-	String hap_fromapprover;
-	String hap_toapprover;
-	String hap_applydate;
-	String hap_type;
-	String hap_reason;
-	String hap_startday;
-	String hap_endday;
-	String hap_status;
-	
 	function setChildValue(data) {
 		console.log(data);
 		if (data.tList1 != "") {
 		var str = "";
 			for ( var i in data.tList1) {
 		        str +="<input type='text' name='hap_toapprover' value='"+data.tList1[i].hc_hrcode+"' hidden='true'>";
-				str +=data.tList1[i].hc_position+"/";
-				str +="<input style='width:50px;' type='text' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
+				str +=data.tList1[i].hc_position+"/" + data.tList1[i].m_name;
 			}
 			console.log(str)
 			$("#line").append(str);

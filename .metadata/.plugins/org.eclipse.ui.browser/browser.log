@@ -35,3 +35,9 @@
 9월 15, 2020 16:19:47.850 [3304:5104:0915/161947.850:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
 9월 15, 2020 16:19:54.126 [3304:5104:0915/161954.126:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
 9월 15, 2020 16:27:02.25 [7052:5440:0915/162702.024:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+
+9월 22, 2020 15:04:55.641 NEW SESSION
+9월 22, 2020 15:04:55.641 [1492:9284:0922/150455.435:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 22, 2020 15:05:10.274 [1492:18396:0922/150510.274:ERROR:device_event_log_impl.cc(208)] [15:05:10.274] Bluetooth: bluetooth_adapter_winrt.cc:1074 Getting Default Adapter failed.
+9월 22, 2020 19:09:16.244 [1492:18396:0922/190916.244:ERROR:CONSOLE(0)] "TypeError: Cannot read property 'isAnonymousInlineStyleSheet' of null", source:  (0)
+9월 22, 2020 19:09:18.08 [1492:18396:0922/190918.007:ERROR:CONSOLE(0)] "TypeError: Cannot read property 'isAnonymousInlineStyleSheet' of null", source:  (0)

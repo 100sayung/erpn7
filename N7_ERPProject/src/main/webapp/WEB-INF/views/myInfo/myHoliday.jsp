@@ -195,7 +195,7 @@ table, th, td{
 				}
 			}
 			$.ajax({
-				url : "/erp/rest/hr/employeeholiday",
+				url : "/erp/rest/hr/myholidayview",
 				dataType : "json",
 				data : {
 					yearmonth : $("#yearmonth").html()

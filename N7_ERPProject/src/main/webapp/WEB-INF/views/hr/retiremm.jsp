@@ -98,7 +98,6 @@ ul {
 
 	<div id="description">
 	<br> 재직중일때 검색 기능 추가해야함 !! 정말 그럴거냐고 물어봐야함 !!<br>
-	<br><h1>인사카드 등록이 한개라도 안되어있을땐 인사카드부터 하게해야함. 전부 예외처리해서 인사카드로 이동시켜야함.</h1>
 		<a href="javascript:CheckRetired(0)"> 재직중(0) </a> 
 		<a href="javascript:CheckRetired(1)"> 휴직중(1) </a> 
 		<a href="javascript:CheckRetired(2)"> 퇴사(2) </a> <br>
@@ -121,7 +120,8 @@ ul {
 			method:"get",
 			data : {status : status},
 			success : function(data){
-				let str = "<table>";
+				let str = "";
+				str += "<table>";
 				console.log(data);
 				for(let i = 0 ; i<data.length ; i++){
 					str += "<tr>"
@@ -155,6 +155,8 @@ ul {
 
 
 		function thisRowDel(row){
+
+			if(confirm("정말 하시겠습니까?") == true){
 			console.log(row);
 			let tr = row.parentNode.parentNode;
 			console.log(tr.firstChild.firstChild.value);
@@ -171,6 +173,9 @@ ul {
 				}
 			});
 			tr.parentNode.removeChild(tr);
+			}else{
+				alert("취소되었습니다.");
+			}
 		}
 	//업데이트시
 
