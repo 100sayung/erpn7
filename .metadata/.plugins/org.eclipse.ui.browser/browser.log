@@ -35,3 +35,9 @@
 9월 15, 2020 16:19:47.850 [3304:5104:0915/161947.850:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
 9월 15, 2020 16:19:54.126 [3304:5104:0915/161954.126:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
 9월 15, 2020 16:27:02.25 [7052:5440:0915/162702.024:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+
+9월 22, 2020 16:19:37.758 NEW SESSION
+9월 22, 2020 16:19:37.759 [5472:9632:0922/161937.755:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 22, 2020 16:57:09.848 [2264:9320:0922/165709.847:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 22, 2020 17:09:31.396 [2588:1276:0922/170931.395:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 22, 2020 17:32:00.796 [7336:3972:0922/173200.796:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.

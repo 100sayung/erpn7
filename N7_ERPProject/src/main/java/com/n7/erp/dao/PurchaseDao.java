@@ -63,4 +63,6 @@ public interface PurchaseDao {
 
 	List<Return> rSearch(@Param("search") String search, @Param("choice") String choice);
 
+	List<com.n7.erp.bean.ps.approvalLine> getMyInfo(String code);
+
 }

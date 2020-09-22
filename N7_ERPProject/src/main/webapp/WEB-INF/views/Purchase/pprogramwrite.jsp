@@ -55,11 +55,11 @@ text-align: center;
 </style>
 </head>
 <body>
-   <form id="pa">
    <div style="width: auto; background-color: white; padding: 1%;">
       <button type="button" id="approvalLine">결재라인 불러오기</button>
       <input type="button" id="submit" value="제출"> 
    </div>
+   <form id="pa">
    <div style="width: auto; background-color: #FFB2D9; color: white; padding: 1%;">기안문 작성</div>
    <div style="height: auto; padding-top: 5px; background-color: #F8F7F7;">
          <table id="table">
@@ -72,7 +72,8 @@ text-align: center;
             </tr>
            <tr>
            		<th>상신자</th> 
-           		<th><input type="text" name="p_approvel" class="draft2" value="${ps.p_writer}" readonly></th>
+           		<th><input type="text" name="p_approvel2" class="draft2" value="${ps.p_writer}" readonly></th>
+           		<th><input type="text" name="p_pacode2" value="2020091169" hidden="true"></th>
            </tr>
             <tr>
                <th>결재자</th>
@@ -113,6 +114,30 @@ text-align: center;
       </div>
    </form>
    <script>
+   $(document).ready(function(){
+	      $.ajax({
+	         url:'/erp/rest/Purchase/getMyInfo',
+	         type:'get',
+	         datatype:'json',
+	         success:function(data){
+	            console.log(data);
+	            var str = "";
+	            for ( var i in data.sList) {
+	                 str +="<input type='text' name='p_apcode"+(Number(i)+Number(1))+"' value='"+data.sList[i].hc_hrcode+"' hidden='true'>";
+	               str +=data.sList[i].hc_position+"/";
+	               str +="<input style='width:50px;' type='text' name='p_approver"+(Number(i)+Number(1))+"' value='"+ data.sList[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
+	            }
+	            console.log(str)
+	            $("#line").html(str);
+	         
+	         },
+	         error:function(error){
+	            console.log(error);
+	         }
+	      });
+	       
+	    });
+   
     	var pList = ${pList};
     	console.log(pList);
    		var str="";
@@ -122,10 +147,8 @@ text-align: center;
 			str+="<td><input type='text' class='aaa'  name='p_amount' value='"+pList[i].p_amount+"' readonly></td>";
 			str+="<td><input type='text' class='aaa' name='p_unlit' value='"+pList[i].p_unlit+"' readonly></td>";
 			str+="<td colspan='1'><input type='text' class='aaa' name='p_budget' value='"+pList[i].p_budget+"' readonly></td></tr>";
-			
    		};
     	$('#tbody').html(str);
-    	
     	
     	$("#approvalLine").click(function() {
     	      window.open('/erp/Purchase/approvalLine', 'approvalLine', 'width=1400,height=700');
@@ -136,9 +159,9 @@ text-align: center;
     		if (data.tList1 != "") {
     		var str = "";
     			for ( var i in data.tList1) {
-    		        str +="<input type='text' name='p_pacode"+i+"' value='"+data.tList1[i].hc_hrcode+"' hidden='true'>";
+    		        str +="<input type='text' name='p_apcode"+(Number(i)+Number(2))+"' value='"+data.tList1[i].hc_hrcode+"' hidden='true'>";
     				str +=data.tList1[i].hc_position+"/";
-    				str +="<input style='width:50px;' type='text' name='p_approvel"+i+"' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
+    				str +="<input style='width:50px;' type='text' name='p_approver"+(Number(i)+Number(2))+"' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
     			}
     			console.log(str)
     			$("#line").append(str);
@@ -148,14 +171,14 @@ text-align: center;
       	    $('#submit').click(function(){
     		   var obj = $('#pa').serialize();
     		   $.ajax({
-    			   url: '/erp/rest/Purchase/purchaseApproval',
-    			   type: 'post',
+    			   url:'/erp/rest/Purchase/purchaseApproval',
+    			   type:'post',
     			   data: obj,
     			   success: function(data){
     				   alert("결재 요청 완료");
-    				   window.close();
     				   console.log(data);
-    			   },
+    				   window.close();
+    			   }, 
     			   error: function(error){
     				   console.log(error);
     			   } 

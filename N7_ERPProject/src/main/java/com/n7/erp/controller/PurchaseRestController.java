@@ -90,7 +90,11 @@ public class PurchaseRestController {
 		 mav= pm.purchaseApproval(request, pa, session);
 		 return mav;
 	 }
-	
+	 @GetMapping(value = "/Purchase/getMyInfo",produces="application/json;charset=utf-8" )
+	   public  Map<String, List<approvalLine>> getMyInfo(HttpSession session) {
+	      Map<String, List<approvalLine>> mMap=pm.getMyInfo(session);
+	      return mMap;
+	   }
 	 
 	@PostMapping(value = "/Purchase/rRegistration", produces= "application/json;charest=utf-8" )
 	public ModelAndView rRegistration(Return rt) {

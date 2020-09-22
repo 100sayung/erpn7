@@ -252,10 +252,10 @@ public class PurchaseMM {
 			}
 			if(a&&b&&c) {
 				System.out.println("다 들어가는거야?");
-				view = "/Puerhcase/pregistrationfrm";
+				view = "/Purchase/pregistration";
 				mav.addObject("msg", "데이터입력완료");
 			} else {
-				view = "/Puerhcase/pprogramwrite";
+				view = "/Purchase/pprogramwrite";
 				mav.addObject("msg", "데이터입력 실패");
 			}
 		}
@@ -268,10 +268,10 @@ public class PurchaseMM {
 		String view= null;
 		
 		if(pDao.rRegistration(rt)) {
-			view= "/Puerhcase/returnregistration";
+			view= "/Purchase/returnregistration";
 			mav.addObject("msg", "데이터입력 완료");
 		}else {
-			view="/Puerhcase/returnregistration";
+			view="/Purchase/returnregistration";
 			mav.addObject("msg", "데이터입력 실패");
 		}
 		mav.setViewName(view);
@@ -320,4 +320,18 @@ public class PurchaseMM {
 		return rMap;
 	}
 	
+	public Map<String, List<approvalLine>> getMyInfo(HttpSession session) {
+        Map<String, List<approvalLine>> sMap=null;
+        List<approvalLine> sList=null;
+        String code = session.getAttribute("hrCode").toString();
+        sList=pDao.getMyInfo(code);
+        System.out.println(sList);
+        if(sList!=null) {
+           sMap=new HashMap<>();
+           sMap.put("sList", sList);
+        }else {
+           sMap=null;
+        }
+        return sMap;   
+ }
 }
