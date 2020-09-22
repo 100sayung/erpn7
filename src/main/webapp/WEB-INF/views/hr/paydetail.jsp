@@ -51,9 +51,37 @@ ul {
 	border: 1px solid black;
 	border-collapse: collapse;
 }
-table{
-	border: 1px solid black;
-	border-collapse: collapse;
+
+ul {
+	list-style: none;
+}
+td, th, table {
+	border: 1px solid white;
+}
+
+td, th {
+	width: 100px;
+	height: 30px;
+}
+
+tr {
+	text-align: center;
+}
+
+button,.cssbutton {
+	width: 100px;
+	height: 30px;
+	background-color: #FFB2D9;
+	border: 0px;
+	border-radius: 8px;
+	font-weight: bolder;
+	font-size: 14px;
+	color: white;
+}
+
+span {
+	text-align: center;
+	color: red;
 }
 </style>
 </head>
@@ -115,9 +143,9 @@ table{
 			<td><input style="border: none;" type="text" readonly="readonly" value="${card.hc_joindate}"></td>
 		</tr>
 		<tr>
-			<td>부서 : </td>
-			<td><input style="border: none;" type="text" readonly="readonly" value="${card.hc_position}"></td>
 			<td>직급 : </td>
+			<td><input style="border: none;" type="text" readonly="readonly" value="${card.hc_position}"></td>
+			<td>부서 : </td>
 			<td><input style="border: none;" type="text" readonly="readonly" value="${card.hc_dept}"></td>
 			<td>급여일 : </td>
 			<td><input type="month" id="month" name="month"></td>
@@ -126,7 +154,7 @@ table{
 	</form>
 	<div id="detailpage">
 	</div>
-	<input type="button" onclick="moving()" value="확인">
+	<input type="button" class="cssbutton" onclick="moving()" value="확인">
 	
 	<script>
 		function moving(){

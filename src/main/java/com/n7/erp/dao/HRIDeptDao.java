@@ -20,7 +20,7 @@ import com.n7.erp.bean.hr.ViewPay;
 
 
 public interface HRIDeptDao {
-
+	//맨처음에 부서-직책 이렇게 입력해야하는데 직책-부서로 적용됨
 	@Insert("INSERT INTO HR_DEPT VALUES(#{HDP_position},#{HDP_dept},#{hdp_ccode}, 0, HR_DEPT_SEQ.nextval, DEFAULT)")
 	boolean deptregistinsert(Department dept);
 

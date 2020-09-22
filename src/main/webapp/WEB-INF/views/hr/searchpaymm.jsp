@@ -47,6 +47,35 @@ a {
 ul {
 	list-style: none;
 }
+td, th, table {
+	border: 1px solid white;
+}
+
+td, th {
+	width: 100px;
+	height: 30px;
+}
+
+tr {
+	text-align: center;
+}
+
+button,.cssbutton {
+	width: 100px;
+	height: 30px;
+	background-color: #FFB2D9;
+	border: 0px;
+	border-radius: 8px;
+	font-weight: bolder;
+	font-size: 14px;
+	color: white;
+}
+
+span {
+	text-align: center;
+	color: red;
+}
+
 </style>
 </head>
 <body>
@@ -94,21 +123,30 @@ ul {
 			</li>
 		</ul>
 	</div>
-	<h1>급여 관리 페이지</h1>
+	<h1>사원 이름이나 아이디로 검색</h1>
 	<input type="text" id="findcheckpayid" placeholder="아이디 이름 검색">
-	<input type="button" onclick="checkpayid()" value="검색">
+	<input type="button" id="checkpayid" class="cssbutton" onclick="checkpayid()" value="검색">
+	<br><br>
+	<h1>급여관리</h1>
 	<table id="wages" style="text-align: center; width: 800px;">
 		<tr>
 			<td>아이디</td>
 			<td>이름</td>
-			<td>부서</td>
 			<td>직책</td>
+			<td>부서</td>
 			<td>급여</td>
 			<td>기본공제액</td>
 			<td>기본수령액</td>
 		</tr>
 	</table>
 	<script>
+	//검색창에 포커스 들어가서 Enter치면 검색 클릭
+	$("#findcheckpayid").keyup(function(event){
+		if(event.keyCode==13){
+			$("#checkpayid").click();
+		}
+	})
+	
 	//사원들 급여 조회
 	$(function(){
 	$.ajax({
@@ -206,6 +244,7 @@ ul {
 		}, function() {
 			$("#smallMenu3").attr("style", "display:none");
 		})
+		
 		
 	</script>
 </body>

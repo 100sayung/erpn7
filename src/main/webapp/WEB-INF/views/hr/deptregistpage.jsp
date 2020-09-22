@@ -48,6 +48,34 @@ a {
 ul {
 	list-style: none;
 }
+td, th, table {
+	border: 1px solid white;
+}
+
+td, th {
+	width: 100px;
+	height: 30px;
+}
+
+tr {
+	text-align: center;
+}
+
+button,.cssbutton {
+	width: 100px;
+	height: 30px;
+	background-color: #FFB2D9;
+	border: 0px;
+	border-radius: 8px;
+	font-weight: bolder;
+	font-size: 14px;
+	color: white;
+}
+
+span {
+	text-align: center;
+	color: red;
+}
 </style>
 </head>
 <body>
@@ -103,7 +131,7 @@ ul {
 
 	<h1 align="center">부서 등록 페이지</h1>
 	<form action="/erp/hr/deptregistinsert" name="deptregistinsert" method="post" accept-charset="utf-8">
-		<button>등록</button>
+		<button class="cssbutton">등록</button>
 		<table id="depttable">
 			<tr>
 				<td>부서 :</td>
@@ -146,8 +174,10 @@ $("#showMenu3").hover(function() {
 // 												+ "<td><input type'text' name='HDP_dept' id='dept'></td>"
 // 												+ "</tr>");
 // 					});
+	
+	
 
-
+	
 
 	function modifyDetail(id) {
 		window.open('/erp/hr/hrModifyDetail?id=' + id, '사원 인사카드 등록',

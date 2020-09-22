@@ -146,7 +146,7 @@ public class HomeController {
 	   }
 
 	   //게시글 수정페이지로 이동
-	   @RequestMapping(value = "/boardmodifyajax", method = RequestMethod.POST)
+	   @RequestMapping(value = "/home/boardmodifyajax", method = RequestMethod.POST)
 	   public @ResponseBody String boardmodifyajax(Integer num) {
 	      String result=cbm.boardmodifyajax(num);
 	      return result;

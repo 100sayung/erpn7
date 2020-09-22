@@ -85,7 +85,7 @@ margin-left: 200px;
 				<li><a href="/erp/adminpage"  title="">ADMIN관리</a></li>
 				<li><a href="#" id="introduce" accesskey="2" title="">회사
 						소개</a></li>
-				<li><a href="/erp/erpboard" accesskey="3" title="">신청 게시판</a></li>
+				<li><a href="/erp/home/erpboard" accesskey="3" title="">신청 게시판</a></li>
 				<li><a href="/erp/erpapply" accesskey="4" title="">ERP 신청</a></li>
 				<c:choose>
 				<c:when test="${id==null}">

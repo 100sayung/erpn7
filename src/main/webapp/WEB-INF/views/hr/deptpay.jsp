@@ -47,6 +47,34 @@ a {
 ul {
 	list-style: none;
 }
+td, th, table {
+	border: 1px solid white;
+}
+
+td, th {
+	width: 100px;
+	height: 30px;
+}
+
+tr {
+	text-align: center;
+}
+
+button,.cssbutton {
+	width: 100px;
+	height: 30px;
+	background-color: #FFB2D9;
+	border: 0px;
+	border-radius: 8px;
+	font-weight: bolder;
+	font-size: 14px;
+	color: white;
+}
+
+span {
+	text-align: center;
+	color: red;
+}
 </style>
 </head>
 <body>
@@ -96,22 +124,25 @@ ul {
 		</ul>
 	</div>
 	<div id="description">
+		<h1>부서 직급 검색</h1>
 		<table>
 			<tr id="seldplist">
 				<td><select id="disposition" name="disposition"><option
-							selected="selected" value="">부서 선택</option>
+							selected="selected" value="">직급 선택</option>
 				</select></td>
 				<td><select id="disdept" name="disdept"><option
-							selected="selected" value="">직급 선택</option>
+							selected="selected" value="">부서 선택</option>
 				</select></td>
 				<td><button type="button" onclick="distinct()">검색</button></td>
 				<!-- 검색 버튼 클릭시  -->
 			</tr>
 		</table>
+		<br><br>
+		<h1>부서 직급별 금액 수정 및 삭제</h1>
 		<table id="id">
 			<tr align="center">
-				<td>부서</td>
 				<td>직급</td>
+				<td>부서</td>
 				<td>금액</td>
 				<td>수정 금액</td>
 				<td></td>
@@ -140,24 +171,22 @@ $("#showMenu3").hover(function() {
 	//현재 부서와 직급 갯수 대로 반복 출력
 	$(function() {
 		var dept = ${dept};
-		console.log(${dept});
+		console.log(dept);
 		console.log(dept.length);
 		for(var i=0;i<dept.length;i++){
 			$("#id").append("<tr align='center'><td width='100px'>"+dept[i].HDP_position+"</td>"
 			+"<td width='100px'>"+dept[i].HDP_dept+"</td>"
 			+"<td id='"+dept[i].HDP_num+"' width='100px'>"+dept[i].HDP_pay+"</td>"
 			+"<td><input autocomplete='off' id='modifypay_"+dept[i].HDP_num+"'></td>"
-			+"<td><button type='button' onclick='dify("+dept[i].HDP_num+")'>수정</button></td>"
-			+"<td><button type='button' onclick='erase("+dept[i].HDP_num+")'>삭제</button></td></tr>");
+			+"<td><button type='button' class='cssbutton' onclick='dify("+dept[i].HDP_num+")'>수정</button></td>"
+			+"<td><button type='button' class='cssbutton' onclick='erase("+dept[i].HDP_num+")'>삭제</button></td></tr>");
 			console.log(dept[i].HDP_num);
 		}
 	});
 
 	//부서 직급 페이지 에서 급여 수정
 	function dify(dept) {
-		if($("#"+dept).val()==""){
-			alert("금액을 입력해 주세요");
-		}else{
+		
 		var paymodify = $("#modifypay_"+dept).val();
 		console.log("paynum("+dept+")="+paymodify);
 		console.log(dept);
@@ -176,7 +205,6 @@ $("#showMenu3").hover(function() {
 			}
 		});
 		}
-	}
 
 
 	//부서 직급 페이지 해당 부서,직급 삭제
@@ -189,14 +217,14 @@ $("#showMenu3").hover(function() {
 			dataType: 'JSON',
 			success : function(data) {
 				console.log(data.length);
-				var str='<tr align="center"><td width="100px">부서</td><td width="100px">직급</td><td width="100px">금액</td><td width="100px">수정 금액</td></tr>';
+				var str='<tr align="center"><td width="100px">직급</td><td width="100px">부서</td><td width="100px">금액</td><td width="100px">수정 금액</td></tr>';
 				for(var i=0;i<data.length;i++){
 					str+="<tr align='center'><td width='100px'>"+data[i].HDP_position+"</td>"
 					+"<td width='100px'>"+data[i].HDP_dept+"</td>"
 					+"<td id='"+data[i].HDP_num+"' width='100px'>"+data[i].HDP_pay+"</td>"
 					+"<td><input id='modifypay_"+data[i].HDP_num+"'></td>"
-					+"<td><button type='button' onclick='dify("+data[i].HDP_num+")'>수정</button></td>"
-					+"<td><button type='button' onclick='erase("+data[i].HDP_num+")'>삭제</button></td></tr>";
+					+"<td><button type='button' class='cssbutton' onclick='dify("+data[i].HDP_num+")'>수정</button></td>"
+					+"<td><button type='button' class='cssbutton' onclick='erase("+data[i].HDP_num+")'>삭제</button></td></tr>";
 					console.log(data[i].HDP_num);
 				}
 				console.log(str);
@@ -214,9 +242,6 @@ $("#showMenu3").hover(function() {
 		var str='';
 		var distinctposition=${distinctposition};
 		var distinctdept=${distinctdept};
- 		console.log(${distinctposition});
-		console.log(${distinctdept});
-		console.log(${distinctposition}.length);
 		for(var i=0;i<distinctposition.length;i++){
 			console.log(distinctposition[i].HDP_position);
 			$("#disposition").append("<option>"+distinctposition[i].HDP_position+"</option>");
@@ -239,14 +264,14 @@ $("#showMenu3").hover(function() {
 			data:{disdept:disdept,disposition:disposition},
 			dataType:'json',
 			success:function(data){
-				var str='<tr align="center"><td width="100px">부서</td><td width="100px">직급</td><td width="100px">금액</td><td width="100px">수정 금액</td></tr>';
+				var str='<tr align="center"><td width="100px">직급</td><td width="100px">부서</td><td width="100px">금액</td><td width="100px">수정 금액</td></tr>';
 				for(var i=0;i<data.length;i++){
 					str+="<tr align='center'><td width='100px'>"+data[i].HDP_position+"</td>"
 					+"<td width='100px'>"+data[i].HDP_dept+"</td>"
 					+"<td id='"+data[i].HDP_num+"' width='100px'>"+data[i].HDP_pay+"</td>"
 					+"<td><input id	='modifypay_"+data[i].HDP_num+"'></td>"
-					+"<td><button type='button' onclick='dify("+data[i].HDP_num+")' class='mopay'>수정</button></td>"
-					+"<td><button type='button' onclick='erase("+data[i].HDP_num+")' class='mopay'>삭제</button></td></tr>";
+					+"<td><button type='button' class='cssbutton' onclick='dify("+data[i].HDP_num+")' class='mopay'>수정</button></td>"
+					+"<td><button type='button' class='cssbutton' onclick='erase("+data[i].HDP_num+")' class='mopay'>삭제</button></td></tr>";
 					console.log(data[i].HDP_num);
 				}
 				console.log(str);

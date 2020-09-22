@@ -47,14 +47,36 @@ a {
 ul {
 	list-style: none;
 }
-#payinputmodify{
+td, th, table {
 	border: 1px solid black;
 	border-collapse: collapse;
 }
-table{
-	border: 1px solid black;
-	border-collapse: collapse;
+
+td, th {
+	width: 100px;
+	height: 30px;
 }
+
+tr {
+	text-align: center;
+}
+
+button,.cssbutton {
+	width: 100px;
+	height: 30px;
+	background-color: #FFB2D9;
+	border: 0px;
+	border-radius: 8px;
+	font-weight: bolder;
+	font-size: 14px;
+	color: white;
+}
+
+span {
+	text-align: center;
+	color: red;
+}
+
 </style>
 </head>
 <body>
@@ -103,7 +125,7 @@ table{
 		</ul>
 	</div>
 	<h1>사원 급여명세서 입력 및 수정 페이지</h1>
-	<form action="searchpaymm" method="post" name="payroll" onsubmit="checkpayinputmodify()">
+	<form action="searchpaymm" method="post" name="payroll" onsubmit="return checkpayinputmodify()">
 	<input type="hidden" value="${card.hc_ccode}" name="HC_CCODE">
 	<table id="payinputmodify" style="align-self: center; width: 800px; height: 100px;" >
 		<tr>
@@ -115,9 +137,9 @@ table{
 			<td><input style="border: none;" type="text" readonly="readonly" value="${card.hc_joindate}"></td>
 		</tr>
 		<tr>
-			<td>부서 : </td>
-			<td><input style="border: none;" type="text" readonly="readonly" value="${card.hc_position}"></td>
 			<td>직급 : </td>
+			<td><input style="border: none;" type="text" readonly="readonly" value="${card.hc_position}"></td>
+			<td>부서 : </td>
 			<td><input style="border: none;" type="text" readonly="readonly" value="${card.hc_dept}"></td>
 			<td>급여일 : </td>
 			<td><input id="HP_PAYDATE" type="month" name="HP_PAYDATE"></td>
@@ -134,13 +156,16 @@ table{
 			<td>기본급</td>
 			<td><input style="border: none;" type="text" readonly="readonly" value="${pay.HDP_PAY}"></td>
 			<td>${deduct[0].HDD_NAME}</td>
-			<td><input id="insurance" autocomplete="off" type="text" name="HP_INSURANCE" required="required" value="${deduct[0].HDD_AMOUNT}"></td>
+			<td><input id="insurance" autocomplete="off" type="text" name="HP_INSURANCE" required="required"
+						 value="${deduct[0].HDD_AMOUNT}" onkeypress="return checkinsurance(event)"></td>
 		</tr>
 		<tr>
 			<td>인센티브</td>
-			<td><input id="incen" autocomplete="off" type="text" required="required" value="0" name="HP_INCEN"></td>
+			<td><input id="incen" autocomplete="off" type="text" required="required" value="0"
+					 name="HP_INCEN" onkeypress="return checkincen(event)"></td>
 			<td>${deduct[1].HDD_NAME}</td>
-			<td><input id="tax" autocomplete="off" type="text" name="HP_TAX" required="required" value="${deduct[1].HDD_AMOUNT}"></td>
+			<td><input id="tax" autocomplete="off" type="text" name="HP_TAX" required="required"
+			 value="${deduct[1].HDD_AMOUNT}" onkeypress="return checktax(event)"></td>
 		</tr>
 		<tr>
 			<td></td>
@@ -155,10 +180,20 @@ table{
 			<td><input id="receive" style="border: none;" type="text" readonly="readonly" value="0" name="HP_REALMONEY"></td>
 		</tr>
 	</table>
-	<input type="submit" value="확인">
-	<a href="/erp/hr/searchpaymm">돌아가기</a>
+	<input type="submit" value="확인" id="ok" class="cssbutton">
+	<a href="/erp/hr/searchpaymm" class="cssbutton" style="padding: 6px 15px;">돌아가기</a>
 	</form>
 	<script>
+		//input창 클릭스 해당 창 문자 전체 선택
+		$("#incen").click(function(){
+			$(this).select();
+		});
+		$("#insurance").click(function(){
+			$(this).select();
+		});
+		$("#tax").click(function(){
+			$(this).select();
+		});
 		$("#incen").change(function(){
 			console.log($("#incen").val());
 			var total=Number($(this).val())+${pay.HDP_PAY};
@@ -167,6 +202,7 @@ table{
 			var power=Number($("#incen").val())+${pay.HDP_PAY}-Number($("#tax").val())-Number($("#insurance").val());
 			$("#receive").val(power);
 		});
+		//금액 실시간 변경
 		$("#insurance").change(function(){
 			var sum=Number($(this).val())+Number($("#tax").val());
 			console.log(sum);
@@ -183,7 +219,15 @@ table{
 			var power=Number($("#incen").val())+${pay.HDP_PAY}-Number($("#tax").val())-Number($("#insurance").val());
 			$("#receive").val(power);
 		});
-		
+		//맨처음 화면 나올때 총 수령액
+		$(document).ready(function(){
+			var sul=Number($(this).val())+Number($("#insurance").val());
+			console.log(sul);
+			$("#deductsum").val(sul);
+			
+			var power=Number($("#incen").val())+${pay.HDP_PAY}-Number($("#tax").val())-Number($("#insurance").val());
+			$("#receive").val(power);
+		});
 	
 		$("#showMenu1").hover(function() {
 			$("#smallMenu1").attr("style", "display:inline-block");
@@ -206,9 +250,38 @@ table{
 		function checkpayinputmodify(){
 			if($("#HP_PAYDATE").val()==""){
 				alert("급여일을 안고르셨습니다 선택해주세요.");
+				return false;
 			}
 		}
-		
+		//숫자만 입력 가능하게
+		function checkinsurance(e){
+			var keyVal=event.keyCode;
+			
+			if(((keyVal>=48)&&(keyVal<=57))||keyVal==13){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		function checkincen(e){
+			var keyVal=event.keyCode;
+			
+			if(((keyVal>=48)&&(keyVal<=57))||keyVal==13){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		function checktax(e){
+			var keyVal=event.keyCode;
+			
+			if(((keyVal>=48)&&(keyVal<=57))||keyVal==13){
+				return true;
+			}else{
+				return false;
+			}
+		}
+	
 	</script>
 </body>
 </html>

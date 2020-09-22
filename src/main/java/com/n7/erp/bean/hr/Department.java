@@ -11,9 +11,9 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Data
 public class Department {
-	private String HDP_dept;
-	private String HDP_position;
-	private int HDP_pay;
+	private String HDP_dept;	//부서로 적용됨
+	private String HDP_position;//직책으로 적용됨
+	private int HDP_pay;		
 	private String HDP_num;
 	private String hdp_ccode;
 	private String hdp_auth;

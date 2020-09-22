@@ -156,15 +156,8 @@ public class HRHomeController {
 	@RequestMapping(value = "/hr/deptregistinsert", method = RequestMethod.POST)
 	public ModelAndView deptregistinsert(Department dept, HttpSession session) {
 		System.out.println("dept="+dept.getHDP_dept()+" ...position="+dept.getHDP_position());
-		if(dept.getHDP_dept()=="" || dept.getHDP_position()=="") {
-			String view="/hr/deptregistpage";
-			mav.addObject("failure","遺��꽌�굹 吏곴툒�쓣 �엯�젰�븯吏� �븡�쑝�뀲�뒿�땲�떎 �떎�떆 �떆�룄�빐二쇱꽭�슂");
-			mav.setViewName(view);
-			return mav;
-		}else {
 			mav = dm.deptregistinsert(dept, session.getAttribute("cCode").toString());
 			return mav;
-		}
 	}
 
 	// 遺��꽌 吏곴툒 蹂� 寃��깋

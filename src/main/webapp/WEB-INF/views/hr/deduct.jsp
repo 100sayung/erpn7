@@ -47,6 +47,34 @@ a {
 ul {
 	list-style: none;
 }
+td, th, table {
+	border: 1px solid white;
+}
+
+td, th {
+	width: 100px;
+	height: 30px;
+}
+
+tr {
+	text-align: center;
+}
+
+button,.cssbutton {
+	width: 100px;
+	height: 30px;
+	background-color: #FFB2D9;
+	border: 0px;
+	border-radius: 8px;
+	font-weight: bolder;
+	font-size: 14px;
+	color: white;
+}
+
+span {
+	text-align: center;
+	color: red;
+}
 </style>
 </head>
 <body>
@@ -95,7 +123,7 @@ ul {
 		</ul>
 	</div>
 	<div id="description">
-<h1>공제사항 관리 페이지</h1>
+<h1>공제사항 관리</h1>
 <table id="deductiontable">
 <tr align="center">
 	<td width="100px">항목</td>
@@ -131,8 +159,8 @@ $("#showMenu3").hover(function() {
 		for(var i=0;i<deduct.length;i++){
 			str+="<tr align='center'><td width='100px'>"+deduct[i].HDD_NAME+"</td>"
 				 +"<td id='123"+deduct[i].HDD_NAME+"' width='100px'>"+deduct[i].HDD_AMOUNT+"</td>"
-				 +"<td width='100px'><input type='text' id='deduct_"+deduct[i].HDD_NAME+"'></td>"
-				 +"<td width='100px'><button type='button' onclick='modifydeduction(\""+deduct[i].HDD_NAME+"\")'>수정</button></td></tr>";
+				 +"<td width='100px'><input type='number' id='deduct_"+deduct[i].HDD_NAME+"'></td>"
+				 +"<td width='100px'><button type='button' class='cssbutton' onclick='modifydeduction(\""+deduct[i].HDD_NAME+"\")'>수정</button></td></tr>";
 		}
 		$("#deductiontable").html(str);
 	});
@@ -144,19 +172,23 @@ $("#showMenu3").hover(function() {
 		var denum = $("#deduct_"+deduct).val();
 		console.log(deduct);
 		console.log(denum);
-		$.ajax({
-			url : '/erp/hr/modifydeduction',
-			method : 'post',
-			data : {deduct : deduct,denum : denum},
-			success : function(data) {
-				$("#123"+deduct).html(data);
-				$("#deduct_"+deduct).val('');
-				console.log(data);
-			},
-			error : function(err) {
-				console.log(err);
-			}
-		});
+		if(denum!=""){
+			$.ajax({
+				url : '/erp/hr/modifydeduction',
+				method : 'post',
+				data : {deduct : deduct,denum : denum},
+				success : function(data) {
+					$("#123"+deduct).html(data);
+					$("#deduct_"+deduct).val('');
+					console.log(data);
+				},
+				error : function(err) {
+					console.log(err);
+				}
+			});
+		}else{
+			return alert("수정되지 않았습니다.");
+		}
 	}
 </script>
 </html>

@@ -35,9 +35,13 @@ public class HRDepartmentMM {
 		String view = null;
 		System.out.println(dept.getHDP_dept());
 		dept.setHdp_ccode(cCode);
-		if (Ddao.deptregistinsert(dept)) {
-			view = "hr/deptregistpage";
-
+		if(dept.getHDP_dept()!="" && dept.getHDP_position()!="") {
+			if (Ddao.deptregistinsert(dept)) {
+				view = "hr/deptregistpage";
+			}
+		}else {
+			mav.addObject("failure", "부서 및 직책이 입력되지 않았습니다 입력해주세요.");
+			view="hr/deptregistpage";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -145,6 +149,7 @@ public class HRDepartmentMM {
 	// 怨듭젣 湲덉븸 �닔�젙
 	public String modifyDeduction(String deduct, Integer denum, String cCode) {
 		HashMap<String, String> duMap = new HashMap<String, String>();
+		System.out.println(deduct+","+denum);
 		duMap.put("deduct", deduct);
 		duMap.put("denum", denum.toString());
 		duMap.put("cCode", cCode);
