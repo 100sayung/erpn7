@@ -70,16 +70,16 @@
    		SELECT * FROM MLIST  WHERE HC_HRCODE=#{code01}
    </select>
    
-	<insert id="Approval" parameterType="pApproval" >
-		INSERT INTO APPROVALDOCU VALUES(#{p_docunum}, #{p_ccode}, #{p_docuname}, #{p_approver0}, #{p_approver1}, DEFAULT, 1)
+	<insert id="Approval" parameterType="pApproval">
+		INSERT INTO APPROVALDOCU VALUES(#{p_documentcode}, #{p_ccode}, #{p_title}, #{p_approvel0}, #{p_approvel1}, DEFAULT, 0)
 	</insert>
 	
 	<insert id="pApproval1" parameterType="pApproval">
-		INSERT INTO O_PURCHASEPROGRAMCOMMOM VALUES(#{p_docunum}, #{p_ccode}, #{p_docuname}, #{p_clcode}, DEFAULT, #{p_productnum}, #{p_day}, #{p_ect,jdbcType=VARCHAR}, #{p_approver0}, #{p_approver1}, #{p_approver2})
+		INSERT INTO O_PURCHASEPROGRAMCOMMOM VALUES(#{p_documentcode}, #{p_ccode}, #{p_title}, #{p_day}, #{p_clcode}, DEFAULT, #{p_productnum}, #{p_etc,jdbcType=VARCHAR}, #{p_approvel}, #{p_approvel0}, #{p_approvel1}, #{p_pacode0}, #{p_pacode1}, #{p_pacode2})
 	</insert>
 	
 	<insert id="pApproval2" parameterType="pApproval">
-		INSERT INTO O_PURCHASEPROGRAM VALUES(#{p_docunum}, #{p_ccode}, #{p_name}, #{p_itcode}, #{p_unlit}, #{p_amount}, #{p_budget})
+		INSERT INTO O_PURCHASEPROGRAM VALUES(#{p_documentcode}, #{p_ccode}, #{p_budget}, #{p_name}, #{p_itcode}, #{p_unlit}, #{p_amount})
 	</insert>
 	
 	<insert id="rRegistration" parameterType="Return">

@@ -49,9 +49,7 @@ public interface PurchaseDao {
 
     com.n7.erp.bean.ps.approvalLine approLinecom1(String code01);
 
-  //com.n7.erp.bean.sales.approvalLine approLinecom2(String code02);
-    
-	boolean Approval(ApprovalDocu ad);
+	boolean Approval(PurchaseApproval pa);
 
 	boolean pApproval1(PurchaseApproval pa);
 

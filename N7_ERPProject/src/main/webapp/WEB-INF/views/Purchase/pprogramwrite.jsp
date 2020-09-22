@@ -55,7 +55,7 @@ text-align: center;
 </style>
 </head>
 <body>
-   <form id="pprogramwrite">
+   <form id="pa">
    <div style="width: auto; background-color: white; padding: 1%;">
       <button type="button" id="approvalLine">결재라인 불러오기</button>
       <input type="button" id="submit" value="제출"> 
@@ -68,11 +68,11 @@ text-align: center;
                <th><input type="text" name="p_date" class="draft2" placeholder="자동생성" readonly></tr>
             <tr>
                <th>제목</th>
-               <th><input type="text" name="p_docuname" class="draft2"></th>
+               <th><input type="text" name="p_title" class="draft2"></th>
             </tr>
            <tr>
            		<th>상신자</th> 
-           		<th><input type="text" name="p_writer" class="draft2" value="${ps.p_writer}" readonly></th>
+           		<th><input type="text" name="p_approvel" class="draft2" value="${ps.p_writer}" readonly></th>
            </tr>
             <tr>
                <th>결재자</th>
@@ -104,7 +104,7 @@ text-align: center;
                            <tbody id=tbody></tbody>
                            <tr>
                               <th>기타</th>
-                              <th colspan="9"><textarea rows="10" cols="125" name="p_ect" id="ect"></textarea></th>
+                              <th colspan="9"><textarea rows="10" cols="125" name="p_etc" id="ect"></textarea></th>
                            </tr>
                     </table>
                </td>
@@ -136,7 +136,7 @@ text-align: center;
     		if (data.tList1 != "") {
     		var str = "";
     			for ( var i in data.tList1) {
-    		        str +="<input type='text' name='rs_apcode"+i+"' value='"+data.tList1[i].hc_hrcode+"' hidden='true'>";
+    		        str +="<input type='text' name='p_pacode"+i+"' value='"+data.tList1[i].hc_hrcode+"' hidden='true'>";
     				str +=data.tList1[i].hc_position+"/";
     				str +="<input style='width:50px;' type='text' name='p_approvel"+i+"' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
     			}
@@ -146,18 +146,19 @@ text-align: center;
     	};
     	   
       	    $('#submit').click(function(){
-    		   var obj = $('#pprogramwrite').serialize();
+    		   var obj = $('#pa').serialize();
     		   $.ajax({
     			   url: '/erp/rest/Purchase/purchaseApproval',
     			   type: 'post',
     			   data: obj,
-    			   dataType: 'json',
     			   success: function(data){
+    				   alert("결재 요청 완료");
+    				   window.close();
     				   console.log(data);
     			   },
     			   error: function(error){
     				   console.log(error);
-    			   }
+    			   } 
     		   });
     	   });    
     	

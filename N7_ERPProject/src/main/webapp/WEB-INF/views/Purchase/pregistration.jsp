@@ -20,6 +20,7 @@ border: 1px solid silver;
 </style>
 </head>
 <body>
+${msg}
 	<div id="aaa">
 		 <div style="width: auto; background-color: white; padding: 1%;">
 		 	<button id="account">거래처등록</button>
@@ -131,6 +132,7 @@ border: 1px solid silver;
             success: function(data){
                //consloe.log(data);
             $('input').val("");
+            alert("등록이 완료되었습니다.");
             },
             error: function(error){
             	console.log(error);
@@ -222,6 +224,7 @@ border: 1px solid silver;
 				dataType: 'json',
 				success: function(data){
 					console.log(data);
+					alert("데이터 삭제 완료");
 					var str="";
      				str+="<tr class='tr'><th><input type='checkbox' id='allCheck'></th><th>구매번호</th><th>제품번호</th><th>담당자</th><th>거래처</th><th>구매일</th></tr>";
     				for(var i in data.pList){

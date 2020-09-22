@@ -48,10 +48,10 @@ public class PurchaseMM {
 				b= pDao.pregistration(ps); 
 			}
 			if(a&&b) {
-				view = "Purchase/pregistration";
+				view = "/Purchase/pregistration";
 				mav.addObject("msg", "데이터입력완료");
 			} else {
-				view = "Purhcase/pregistration";
+				view = "/Purhcase/pregistration";
 				mav.addObject("msg", "데이터입력 실패");
 			}
 		}
@@ -114,11 +114,11 @@ public class PurchaseMM {
 				mav.addObject("pList", new Gson().toJson(pList));
 				System.out.println("PLIST"+pList);
 				mav.addObject("ps", ps);
-				view= "Purchase/purchasedetail";
+				view= "/Purchase/purchasedetail";
 			}
 		}else {
 			mav.addObject("msg", "가지고 올 데이터가 없습니다.");
-			view= "Purchase/purchasedetail";
+			view= "/Purchase/purchasedetail";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -136,7 +136,7 @@ public class PurchaseMM {
 				if(pList!=null) {
 					mav.addObject("pList", new Gson().toJson(pList));
 					mav.addObject("ps", ps);
-					view= "Purchase/pprogramwrite";
+					view= "/Purchase/pprogramwrite";
 			}
 		}else {
 			check= null;
@@ -216,44 +216,48 @@ public class PurchaseMM {
             aList=pDao.approvalLine(); 
             if(aList.size()!=0) {
                   mav.addObject("aList",new Gson().toJson(aList));
-                  view="Purchase/approvalLine";
+                  view="/Purchase/approvalLine";
                }else {
                   
                    mav.addObject("msg","주소록에 정보가 없습니다");
-                  view="Purchase/pprogramwrite";
+                  view="/Purchase/pprogramwrite";
                }
             
             mav.setViewName(view);
             return mav;
          }
       
-	public ModelAndView purchaseApproval(HttpServletRequest request, PurchaseApproval pa, ApprovalDocu ad) {
+	public ModelAndView purchaseApproval(HttpServletRequest request, PurchaseApproval pa, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		pa.setP_ccode(session.getAttribute("cCode").toString());
 		boolean a = false;
 		boolean b = false;
 		boolean c = false;
 		String view = null;
-		a= pDao.Approval(ad);
-		b= pDao.pApproval1(pa);
-		String [] p_name = request.getParameterValues("p_name");
-		String [] p_itcode = request.getParameterValues("p_itcode");
-		String [] p_amount = request.getParameterValues("p_amount");
-		String [] p_unlit = request.getParameterValues("p_unlit");
-		String [] p_budget = request.getParameterValues("p_budget");
-		for(int i=0; i<p_name.length; i++ ) {
-			pa.setP_name(p_name[i]);
-			pa.setP_itcode(p_itcode[i]);
-			pa.setP_amount(Integer.parseInt(p_amount[i]));
-			pa.setP_unlit(Integer.parseInt(p_unlit[i]));
-			pa.setP_budget(Integer.parseInt(p_budget[i]));
-			c= pDao.pApproval2(pa); 
-		}
-		if(a&&b&&c) {
-			view = "Puerhcase/pregistrationfrm";
-			mav.addObject("msg", "데이터입력완료");
-		} else {
-			view = "/erp/Puerhcase/pprogramwrite";
-			mav.addObject("msg", "데이터입력 실패");
+		if(pa.getP_ccode()!="") {
+			a= pDao.Approval(pa);
+			b= pDao.pApproval1(pa);
+			String [] p_name = request.getParameterValues("p_name");
+			String [] p_itcode = request.getParameterValues("p_itcode");
+			String [] p_amount = request.getParameterValues("p_amount");
+			String [] p_unlit = request.getParameterValues("p_unlit");
+			String [] p_budget = request.getParameterValues("p_budget");
+			for(int i=0; i<p_name.length; i++ ) {
+				pa.setP_name(p_name[i]);
+				pa.setP_itcode(p_itcode[i]);
+				pa.setP_amount(Integer.parseInt(p_amount[i]));
+				pa.setP_unlit(Integer.parseInt(p_unlit[i]));
+				pa.setP_budget(Integer.parseInt(p_budget[i]));
+				c= pDao.pApproval2(pa); 
+			}
+			if(a&&b&&c) {
+				System.out.println("다 들어가는거야?");
+				view = "/Puerhcase/pregistrationfrm";
+				mav.addObject("msg", "데이터입력완료");
+			} else {
+				view = "/Puerhcase/pprogramwrite";
+				mav.addObject("msg", "데이터입력 실패");
+			}
 		}
 		mav.setViewName(view);
 		return mav;
@@ -264,10 +268,10 @@ public class PurchaseMM {
 		String view= null;
 		
 		if(pDao.rRegistration(rt)) {
-			view= "/erp/Puerhcase/returnregistration";
+			view= "/Puerhcase/returnregistration";
 			mav.addObject("msg", "데이터입력 완료");
 		}else {
-			view="/erp/Puerhcase/returnregistration";
+			view="/Puerhcase/returnregistration";
 			mav.addObject("msg", "데이터입력 실패");
 		}
 		mav.setViewName(view);

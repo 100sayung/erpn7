@@ -86,8 +86,8 @@ public class PurchaseRestController {
 	 
 	 
 	 @PostMapping(value = "/Purchase/purchaseApproval", produces= "application/json;charest=utf-8" )
-	 public ModelAndView pprogramwrite(HttpServletRequest request, PurchaseApproval pa, ApprovalDocu ad) {
-		 mav= pm.purchaseApproval(request, pa, ad);
+	 public ModelAndView pprogramwrite(HttpServletRequest request, PurchaseApproval pa, HttpSession session) {
+		 mav= pm.purchaseApproval(request, pa, session);
 		 return mav;
 	 }
 	
