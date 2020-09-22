@@ -8,6 +8,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <style>
+#center{
+text-align:center;
+}
 html, body {
 text-align:center;
    height: 100%;
@@ -19,10 +22,13 @@ text-align: center;
 width: 150px;
 border: 1px solid ;
 }
-
+#item{
+text-align:center;
+}
 
 </style>
 <body>
+    <div id="center">
     <div style="width:auto; background-color:white; color:white; padding:1%;">
            <button type="button" id="orderitemfrm">수주품목 현황</button>
            <span style="padding-left: 5px"><a href="#"
@@ -38,7 +44,7 @@ border: 1px solid ;
         <button id="searchh">검색</button>   
         <form id="orderregistrationinput">
         <div border="1" style="height:80px; padding-top:25px; background-color:#F8F7F7;">
-        <table>
+        <table style="margin-left:250px;">
          <thead>
             <tr>
                <th>수주번호</th>
@@ -98,12 +104,13 @@ border: 1px solid ;
             <br>
             <div>
                  <button type="button" class="addList" value="추가">추가</button>
-               <button type="button" id="change" value="변경" >변경</button>
+               <!-- <button type="button" id="change" value="변경" >변경</button> -->
                  <button type="button" id="deleteCheck" value="삭제">삭제</button>
                <button type="button" id="subb" value="저장">저장</button> 
             </div>
           </form>
-</body>
+         </div>
+
     <script type="text/javascript">
         $('#orderitemfrm').click(function(){
            var str="";
@@ -232,4 +239,5 @@ border: 1px solid ;
               });
            });    
 </script>
+</body>
 </html>

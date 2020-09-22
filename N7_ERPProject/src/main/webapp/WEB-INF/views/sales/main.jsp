@@ -78,6 +78,7 @@ ul {
 			<li id="showMenu2">출하의뢰입력  </li>
 			<li id="showMenu3">미수금등록</li>
 			<li id="showMenu4">영업활동 조회</li>
+			<li id="showMenu5">내 결재함</li>
 		</ul>
 	</div>
 	<div id="description">
@@ -163,6 +164,23 @@ ul {
        $.ajax({
           type : 'get',
           url : 'businessactivitiesfrm',
+          dataType : 'html',
+          success : function(data) {
+             console.log(data);
+             $('#description').html(data);
+          },
+          error: function(error){
+             console.log(error);
+          }
+       });
+    });
+   
+   $('#showMenu5').on('click', function(e) {
+       e.preventDefault();
+
+       $.ajax({
+          type : 'get',
+          url : 'salesapprovaldetail',
           dataType : 'html',
           success : function(data) {
              console.log(data);

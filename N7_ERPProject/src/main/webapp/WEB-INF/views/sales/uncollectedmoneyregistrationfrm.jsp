@@ -100,13 +100,13 @@
                  str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
                  str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
              }
-/*               for(var i in data.sList2){ //결재창에서 끌고 온거 시바
+               for(var i in data.sList2){ //결재창에서 끌고 온거 시바
                  str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_bonum+"></td>";
-                 str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
+                 str+="<td><input type='text' value="+data.sList[i].bs_date+"></td>";
                  str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
                  str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
                  str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
-              } */
+              } 
                $('#tBody').html(str);
            
           },
@@ -163,7 +163,7 @@
                    if(data.sList!=""){
                   for(var i in data.sList){
                      str+="<tr class='tr'><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_clcode+"></td>";
-                     str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
+                     str+="<td><input type='text' value="+data.sList[i].bs_date+"></td>";
                      str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
                      str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
                      str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";

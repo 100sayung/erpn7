@@ -78,7 +78,7 @@ public interface SalesDao {
 
 	List<approvaldetail> uncollectedmoneyitem2(); //미수금품목2
 	
-	List<Uncollectedbean> uncollectedmoneysearch(@Param("search") String search, @Param("choice") String choice); //미수금 검색
+	List<approvaldetail> uncollectedmoneysearch(@Param("search") String search, @Param("choice") String choice); //미수금 검색
 
 	boolean fullpaymentprocess(String check); //완납처리
 

@@ -74,14 +74,14 @@
      INSERT INTO AC_COMPANYLIST
    VALUES(#{cl_code},#{cl_ccode},#{cl_name},#{cl_comnum},#{cl_comnum2},#{cl_ceo},#{cl_employee},#{cl_phone},
    #{cl_phone2},#{cl_fax},#{cl_email},#{cl_addr},#{cl_kind},#{cl_kind2},#{cl_kind3},#{cl_bank},
-   #{cl_bankholder},#{cl_banknum},#{cl_memo})
+   #{cl_bankholder},#{cl_memo},#{cl_banknum})
    </insert>
    
-      <select id="getcomcode" parameterType="String" resultType="A_comp">
+      <select id="getcomcode" parameterType="String" resultType="A_comp"> 
    SELECT * FROM AC_COMPANYLIST WHERE CL_COMNUM = #{s_comnum}
    </select>
    
-   <select id="getComList" parameterType="String" resultType="A_comp">
+   <select id="getComList" parameterType="String" resultType="A_comp"> <!-- 전체리스트 -->
      SELECT * FROM AC_COMPANYLIST
    </select>
    
@@ -176,8 +176,8 @@
    <select id="uncollectedmoneysearch" parameterType="String" resultType="appdetail">
       SELECT * FROM B_UNCOLLECTEDMONEY
       <where>
-          <if test="choice.equals('bu_clcode')">
-              BU_CLCODE = #{search}
+          <if test="choice.equals('bs_clcode')">
+              BS_CLCODE = #{search}
           </if>
           <if test="choice.equals('bu_person')">
               BU_PERSON = #{search}

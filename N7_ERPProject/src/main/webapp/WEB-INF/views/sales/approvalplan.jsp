@@ -227,9 +227,9 @@ resize: none;
           url:'/erp/rest/sales/approvalinput',
           type: 'post',
           data: obj,
-          dataType: 'json',
+          //dataType: 'json',
           success:function(data){
-              alert("제출이 완료되었습니다.");           
+              alert("제출이 완료되었습니다");           
               console.log(data);           	  
               window.close();             
           },

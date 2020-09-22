@@ -60,7 +60,7 @@ public class SalesController {
       return sMap;
    } 
    
-   @PostMapping(value = "/sales/insertcomlist",produces="application/json;charset=utf-8" ) //거래처 전체리스트
+   @PostMapping(value = "/sales/insertcomlist",produces="application/json;charset=utf-8" ) //거래처 등록
    public  Map<String, List<A_company>> insertcomlist(A_company ac, HttpSession session) {
       Map<String, List<A_company>> aMap=sm.insertcomlist(ac, session);
       return aMap;
@@ -82,9 +82,9 @@ public class SalesController {
       return aMap;
    }
    
-   @GetMapping(value = "/sales/serchcomlist",produces="application/json;charset=utf-8" ) //거래처 회사검색?
+   @GetMapping(value = "/sales/searchcomlist",produces="application/json;charset=utf-8" ) //거래처 조회
    public  Map<String, List<A_company>> serchcomlist() {
-      Map<String, List<A_company>> aMap=sm.serchcomlist();
+      Map<String, List<A_company>> aMap=sm.searchcomlist();
       return aMap;
    }
    
@@ -159,8 +159,8 @@ public class SalesController {
    }
    
    @PostMapping(value = "/sales/uncollectedmoneysearch") //미수금 검색
-   public Map<String, List<Uncollectedbean>> uncollectedmoneysearch(String search, String choice) {
-     Map<String, List<Uncollectedbean>> sMap=sm.uncollectedmoneysearch(search, choice);
+   public Map<String, List<approvaldetail>> uncollectedmoneysearch(String search, String choice) {
+     Map<String, List<approvaldetail>> sMap=sm.uncollectedmoneysearch(search, choice);
       return sMap;
    }
 

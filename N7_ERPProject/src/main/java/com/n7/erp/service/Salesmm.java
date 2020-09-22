@@ -99,7 +99,7 @@ public class Salesmm {
       mav = new ModelAndView();
       String view = null;
       
-      //ss.setBs_docunum("S");
+      ss.setBs_docunum("S");
       
       boolean result = sDao.shippingrequestinput(ss);
       if(ss.getBs_ccode()!="") {
@@ -193,7 +193,7 @@ public class Salesmm {
          return aMap;
       }
    
-   public Map<String, List<A_company>> serchcomlist() {
+   public Map<String, List<A_company>> searchcomlist() {
          Map<String, List<A_company>> aMap=null;
                List<A_company> aList = sDao.getCompanyList();
                aMap=new HashMap<>();
@@ -433,9 +433,9 @@ public class Salesmm {
       return sMap;
    }
 
-   public Map<String, List<Uncollectedbean>> uncollectedmoneysearch(String search, String choice) {
-      Map<String, List<Uncollectedbean>> sMap= null; 
-      List<Uncollectedbean> sList=new ArrayList<>();
+   public Map<String, List<approvaldetail>> uncollectedmoneysearch(String search, String choice) {
+      Map<String, List<approvaldetail>> sMap= null; 
+      List<approvaldetail> sList=new ArrayList<>();
       sList=sDao.uncollectedmoneysearch(search, choice);
       if(sList!=null) {
          sMap=new HashMap<>();

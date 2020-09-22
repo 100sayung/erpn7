@@ -11,6 +11,7 @@
     <center>
       <br>
         <button type="button" id="businessitemfrm">영업 실적조회</button>${msg}
+        <button type="button" id="print" onclick="window.print()">영업실적 인쇄</button>
         <br>
         <br>
         <div style="width:auto; background-color:#FFB2D9;  color:white; padding:1%;">영업활동</div>
