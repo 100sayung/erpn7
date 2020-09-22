@@ -5,6 +5,22 @@
 <head>
 <meta charset="UTF-8">
 <title>거래처등록</title>
+<!-- BOOTSTRAP STYLES-->
+    <link href="/erp/assets/css/bootstrap.css" rel="stylesheet">
+     <!-- FONTAWESOME STYLES-->
+    <link href="/erp/assets/css/font-awesome.css" rel="stylesheet">
+        <!-- CUSTOM STYLES-->
+    <link href="/erp/assets/css/custom.css" rel="stylesheet">
+     <!-- GOOGLE FONTS-->
+   <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+     <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="/erp/assets/js/jquery-1.10.2.js"></script>
+      <!-- BOOTSTRAP SCRIPTS -->
+    <script src="/erp/assets/js/bootstrap.min.js"></script>
+      <!-- CUSTOM SCRIPTS -->
+    <script src="/erp/assets/js/custom.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- <script src="js/jquery.serializeObject.js"></script> -->
 <style>

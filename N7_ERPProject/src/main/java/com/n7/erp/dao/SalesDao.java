@@ -58,7 +58,7 @@ public interface SalesDao {
 
 	List<com.n7.erp.bean.sales.approvalLine> searchName(String name);
 
-	List<com.n7.erp.bean.sales.approvalLine> addApproval(String code01); //name
+	List<com.n7.erp.bean.sales.approvalLine> addApproval(approvaldetail app); //String code01
 
 	com.n7.erp.bean.sales.approvalLine approLinecom1(String code01);
 
@@ -85,6 +85,8 @@ public interface SalesDao {
 	List<Businessbean> businessactivitiessearch(@Param("search") String search, @Param("choice") String choice); //영업활동 검색
 
 	boolean businessactivitiesdelete(String check);
+
+	List<com.n7.erp.bean.sales.approvalLine> getMyInfo(String code);
 
 
 

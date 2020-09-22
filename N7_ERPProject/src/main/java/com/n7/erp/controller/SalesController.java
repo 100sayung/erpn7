@@ -115,10 +115,10 @@ public class SalesController {
    } 
    //결재라인
    @PostMapping(value = "/sales/addApproval",produces="application/json;charset=utf-8" )
-   public  Map<String, List<approvalLine>> addApprovale(String CNT, String ARR) {
+   public  Map<String, List<approvalLine>> addApprovale(String CNT, String ARR, approvaldetail app, HttpSession session) {
       int cnt = Integer.parseInt(CNT);
       String [] strArray = ARR.split(",");
-      Map<String, List<approvalLine>> sMap=sm.addApproval(cnt,strArray);
+      Map<String, List<approvalLine>> sMap=sm.addApproval(cnt,strArray,app,session);
       return sMap;
    }
    @PostMapping(value = "/sales/approLinecom",produces="application/json;charset=utf-8")
@@ -210,5 +210,11 @@ public class SalesController {
    public Map<String, List<Businessbean>> businessactivitiesdelete(String check) {
       Map<String, List<Businessbean>> sMap=sm.businessactivitiesdelete(check);
       return sMap;
-   } 
+   }
+   
+   @GetMapping(value = "/sales/getMyInfo",produces="application/json;charset=utf-8" )
+   public  Map<String, List<approvalLine>> getMyInfo(HttpSession session) {
+      Map<String, List<approvalLine>> mMap=sm.getMyInfo(session);
+      return mMap;
+   }
 } 

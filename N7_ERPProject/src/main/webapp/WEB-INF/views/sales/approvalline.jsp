@@ -159,13 +159,10 @@ function sendChildValue(){
           console.log(error);
           
        }
-      
    });
    
    }  
 }
-
-
 
 
 $("#deleteCheck1").click(function() {

@@ -260,23 +260,29 @@ public class Salesmm {
          }
          return sMap;
       }
-
-      public Map<String, List<approvalLine>> addApproval(int cnt, String[] strArray) {
-         Map<String, List<approvalLine>> sMap=null;
+      //사원코드, 아이디, cCode???
+      public Map<String, List<approvalLine>> addApproval(int cnt, String[] strArray, approvaldetail app, HttpSession session) {
+         app.setBs_apcode1(session.getAttribute("hc_hrcode").toString());
+         
+    	 Map<String, List<approvalLine>> sMap=null;
          List<approvalLine> aList=null;
-         System.out.println(cnt);
-         String code="";
+         System.out.println(cnt);         
+         
+         String code="";       
          for(int i=0; i<cnt; i++) {
             code=strArray[i];
-             aList=sDao.addApproval(code);
+             aList=sDao.addApproval(app); //(code)
          }
          System.out.println(aList);
-         if(aList!=null) {
+         
+         if(app.getBs_apcode1()!="") {
+           if(aList!=null) {
             sMap=new HashMap<>();
             sMap.put("aList", aList);
          }else {
             sMap=null;
          }
+        }
          return sMap;
       }
 
@@ -329,9 +335,9 @@ public class Salesmm {
             mav.setViewName(view);
             return mav;
          }
- 
+   //제출하기 버튼 
    public ModelAndView approvalinput(approvaldetail app, HttpSession session) {
-     app.setBs_ccode(session.getAttribute("cCode").toString());
+      app.setBs_ccode(session.getAttribute("cCode").toString());
       mav=new ModelAndView();
       String view=null;
    
@@ -484,4 +490,19 @@ public class Salesmm {
       }
       return sMap;
    }
+
+public Map<String, List<com.n7.erp.bean.sales.approvalLine>> getMyInfo(HttpSession session) {
+	      Map<String, List<approvalLine>> sMap=null;
+	      List<approvalLine> sList=null;
+	      String code = session.getAttribute("hrCode").toString();
+	      sList=sDao.getMyInfo(code);
+	      System.out.println(sList);
+	      if(sList!=null) {
+	         sMap=new HashMap<>();
+	         sMap.put("sList", sList);
+	      }else {
+	         sMap=null;
+	      }
+	      return sMap;   
+  }
 }
