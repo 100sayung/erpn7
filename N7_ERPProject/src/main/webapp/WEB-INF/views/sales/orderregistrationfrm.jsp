@@ -155,6 +155,7 @@ border: 1px solid ;
                  data:obj,
                  success : function(data) {
                     console.log(data);
+                    alert("등록이 완료되었습니다.");
                  },
                  error : function(error) {
                     console.log(error);

@@ -229,15 +229,13 @@ resize: none;
           data: obj,
           dataType: 'json',
           success:function(data){
-              console.log(data)  
-              alert("제출이 완료되었습니다.");
-              
-              window.close();
+              alert("제출이 완료되었습니다.");           
+              console.log(data);           	  
+              window.close();             
           },
           error:function(error){
-             console.log(error)
-          }
-          
+             console.log(error);
+          }         
         });  
       });
       

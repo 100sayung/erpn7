@@ -188,7 +188,7 @@
                 check = $(this).attr("value");
                 console.log(check);
                 if(check==""){
-                   alert('체크해주세요');
+                   alert("체크해주세요");
                 }else{
                      
           $.ajax({
