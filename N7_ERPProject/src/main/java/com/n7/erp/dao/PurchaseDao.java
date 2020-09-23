@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
@@ -64,15 +65,5 @@ public interface PurchaseDao {
 	boolean rDelete(String check_list);
 
 	List<Return> rSearch(@Param("search") String search, @Param("choice") String choice);
-
-	boolean insertcomlist(A_company ac);
-
-	List<A_company> getComList(String c_code);
-
-	List<A_company> getCompanyList();
-
-	List<A_company> getsearchCode(A_company ac);
-
-	boolean deleteCom(String code);
 
 }

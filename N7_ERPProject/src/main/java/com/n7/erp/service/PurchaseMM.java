@@ -73,6 +73,7 @@ public class PurchaseMM {
 		return pMap;
 	}
 
+
 	public Map<String, List<Purchase>> pfsearch(String search, String choice) {
 		Map<String, List<Purchase>> pMap = null;
 		List<Purchase> pList = pDao.pfSearch(search, choice);
@@ -337,62 +338,4 @@ public class PurchaseMM {
 		return rMap;
 	}
 	
-
-	public Map<String, List<A_company>> insertcomlist(A_company ac, HttpSession session) {
-		Map<String, List<A_company>> aMap=null;
-		ac.setCl_ccode(session.getAttribute("cCode").toString());
-		if(ac.getCl_code()!="") {
-			if(pDao.insertcomlist(ac)) {
-			   List<A_company> aList = pDao.getComList(ac.getCl_code());
-			   aMap=new HashMap<>();
-			   aMap.put("aList", aList);
-			}else {
-				aMap=null;
-			}
-		}else {
-			List<A_company> aList = pDao.getComList(ac.getCl_code());
-			aMap=new HashMap<>();
-			aMap.put("aList", aList);
-		}
-		return aMap;
-	}
-
-	public Map<String, List<A_company>> searchcode(A_company ac, String code) {
-		Map<String, List<A_company>> aMap=null;
-		ac.setCl_code(code);
-		   List<A_company> aList = pDao.getsearchCode(ac);
-		   if(aList!=null) {
-			   aMap=new HashMap<>();
-			   aMap.put("aList", aList);
-		   }
-		   	return aMap;
-	}
-
-	public Map<String, List<A_company>> deleteCom(int cnt, String[] strArray) {
-		Map<String, List<A_company>> aMap=null;
-		boolean result=false;
-		String code="";
-		for(int i=0; i<cnt; i++) {
-			code=strArray[i];
-			result=pDao.deleteCom(code);
-		}
-		if(result) {
-			List<A_company> aList = pDao.getCompanyList();
-			aMap=new HashMap<>();
-			   aMap.put("aList", aList);
-		}else {
-			aMap=null;
-		}
-		return aMap;
-	}
-
-	public Map<String, List<A_company>> serchcomlist() {
-		Map<String, List<A_company>> aMap=null;
-			   List<A_company> aList = pDao.getCompanyList();
-			   aMap=new HashMap<>();
-			   aMap.put("aList", aList);
-		return aMap;
-	}
-	
-
 }

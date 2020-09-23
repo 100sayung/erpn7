@@ -8,10 +8,8 @@
 <fullyQualifiedTypeName name="org.omg.CosNaming.NameHolder"/>
 <fullyQualifiedTypeName name="com.n7.erp.bean.entity.NameHoliday"/>
 <fullyQualifiedTypeName name="org.hamcrest.core.SubstringMatcher"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="com.n7.erp.service.MemberMM"/>
-<fullyQualifiedTypeName name="org.apache.ibatis.annotations.Select"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="com.google.gson.reflect.TypeToken"/>
@@ -20,13 +18,19 @@
 <fullyQualifiedTypeName name="com.n7.erp.bean.Member"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="org.springframework.web.servlet.ModelAndView"/>
-<fullyQualifiedTypeName name="com.google.gson.Gson"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
 <fullyQualifiedTypeName name="com.n7.erp.bean.ac.A_company"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
 <fullyQualifiedTypeName name="com.n7.erp.bean.hr.ApplyHoliday"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="com.n7.erp.bean.ps.A_company"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ControllerAdvice"/>
+<fullyQualifiedTypeName name="lombok.extern.log4j.Log4j"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ExceptionHandler"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="com.google.gson.Gson"/>
+<fullyQualifiedTypeName name="com.n7.erp.userClass.Paging"/>
+<fullyQualifiedTypeName name="org.springframework.web.servlet.ModelAndView"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="org.apache.ibatis.annotations.Select"/>
 </qualifiedTypeNameHistroy>

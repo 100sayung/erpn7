@@ -54,11 +54,10 @@ public class PurchaseController {
 		return "Purchase/retrunregistration";
 	}
 	
-	@RequestMapping(value = "Purchase/comPany", method = RequestMethod.GET)
-	public String comPany() {
-		
-		return "Purchase/comPany";
+	@RequestMapping(value = "Purchase/purchaseApprovalInfo", method = RequestMethod.GET)
+	public String purchaseApprovalInfo() {
+		return "Purchase/purchaseApprovalInfo";
+	
 	}
 	
-
 }

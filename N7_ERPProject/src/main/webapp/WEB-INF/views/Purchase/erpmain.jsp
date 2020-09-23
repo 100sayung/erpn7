@@ -63,7 +63,6 @@ a{
         <ul id="menuList">
             <li><a href="#" id="pregistration">구매관리</a></li>
             <li><a href="#" id="rregistration">반품 관리</a></li>
-            <li><a href="" id="papproval">내결재함</a></li>
         </ul>
     </div>
     <center>

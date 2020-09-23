@@ -45,3 +45,16 @@
 9월 22, 2020 21:18:00.182 NEW SESSION
 9월 22, 2020 21:18:00.182 [8896:9520:0922/211800.177:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
 9월 22, 2020 21:25:38.733 [11776:14596:0922/212538.733:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+
+9월 23, 2020 14:32:32.296 NEW SESSION
+9월 23, 2020 14:32:32.297 [14304:13592:0923/143232.271:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 23, 2020 15:46:51.67 [17228:15488:0923/154651.066:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 23, 2020 16:12:03.775 [17904:17756:0923/161203.774:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+
+9월 23, 2020 17:36:21.942 NEW SESSION
+9월 23, 2020 17:36:21.942 [12440:18312:0923/173621.939:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+
+9월 23, 2020 17:42:05.877 NEW SESSION
+9월 23, 2020 17:42:05.877 [14920:19092:0923/174205.860:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 23, 2020 17:42:14.962 [14920:14436:0923/174214.962:ERROR:socket_stream.cc(219)] Closing stream with result -2
+9월 23, 2020 17:42:21.572 [14920:14436:0923/174221.571:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106

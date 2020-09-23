@@ -120,36 +120,5 @@ public class PurchaseRestController {
 		Map<String, List<Return>> rMap= pm.rSearch(search, choice);
 		return rMap;
 	}
-	
-	//거래처등록
-	@PostMapping(value = "/Purchase/insertcomlist",produces="application/json;charset=utf-8" )
-	public  Map<String, List<A_company>> insertcomlist( A_company ac, HttpSession session) {
-	Map<String, List<A_company>> aMap=pm.insertcomlist(ac, session);
-		return aMap;
-	}
-	
-	@PostMapping(value = "/Purchase/searchcode",produces="application/json;charset=utf-8" )
-	public  Map<String, List<A_company>> searchcode(A_company ac, String code) {
-		System.out.println(code);
-		Map<String, List<A_company>> aMap=pm.searchcode(ac,code);
-		return aMap;
-	}
-	
-	@PostMapping(value = "/Purchase/deleteCom",produces="application/json;charset=utf-8" )
-	public  Map<String, List<A_company>> deleteCom(String CNT, String ARR) {
-		int cnt = Integer.parseInt(CNT);
-		System.out.println(cnt);
-        String [] strArray = ARR.split(",");
-        System.out.println(strArray);
-		Map<String, List<A_company>> aMap=pm.deleteCom(cnt,strArray);
-		return aMap;
-	}
-	
-	@GetMapping(value = "/Purchase/serchcomlist",produces="application/json;charset=utf-8" )
-	public  Map<String, List<A_company>> serchcomlist() {
-		Map<String, List<A_company>> aMap=pm.serchcomlist();
-		return aMap;
-	}
-	
 
 }

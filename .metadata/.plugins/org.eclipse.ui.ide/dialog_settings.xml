@@ -113,6 +113,9 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="D:\spring work\rest_FrontEnd"/>
+			<item value="D:\spring work\SpringMVCBoard (2)"/>
+			<item value="D:\work\Spring\SpringMVCBoard (2)"/>
 			<item value="C:\Users\ye\Desktop\erpn7\N7_ERPProject"/>
 			<item value="C:\Users\ye\Desktop\erpn7"/>
 			<item value="J:\erpn7\N7_ERPProject"/>
