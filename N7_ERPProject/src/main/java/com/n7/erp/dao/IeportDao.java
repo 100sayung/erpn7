@@ -37,7 +37,7 @@ public interface IeportDao {
 	@Select("SELECT * FROM IE WHERE IE_ITCODE = #{it_code} AND IE_CPCODE = #{cCode}")
 	ArrayList<IePort> getByItemDealList(@Param("it_code")String it_code,@Param("cCode") String cCode);
 
-	@Select("SELECT * FROM IT JOIN S_IEPORT IE ON IT.IT_CPCODE = IE.IE_CPCODE WHERE IT.IT_CODE IN(SELECT P.P_ITCODE FROM P) OR IT.IT_CODE IN(SELECT BS.BS_ITCODE FROM B_SHIPMENT BS) AND IT.IT_CCODE = #{it_ccode}")
+	@Select("SELECT IE_ITCODE , SUM(IE_QTY) IE_QTY FROM IE JOIN IT ON IT_CODE = IE_ITCODE WHERE IT_CCODE = #{it_ccode} AND IE_CPCODE = #{cCode} GROUP BY IE_ITCODE")
 	ArrayList<IePort> getByItemDealListFromItCcode(@Param("it_ccode") String it_ccode, @Param("cCode") String cCode);
 	
 	@Select("SELECT IE_ITCODE , SUM(IE_QTY) IE_QTY FROM IE  WHERE IE_ITCODE = #{it_code} GROUP BY IE_ITCODE")
@@ -52,10 +52,14 @@ public interface IeportDao {
 	@Select("SELECT * FROM B_SHIPMENT WHERE BS_CCODE = #{cCode} AND BS_STATUS = '3'")
 	List<B_shipment> exportCheckList(String cCode);
 
-	@Update("UPDATE B_SHIPMENT SET BS_STATUS = '4' WHERE BS_DOCUNUM = #{bs_docunum}")
-	void updateBship(String bs_docunum);
-
 	@Select("SELECT COUNT(IE_QTY) FROM S_IEPORT WHERE IE_CPCODE = #{cCode}")
 	List<IePort> getStockList(String cCode);
 
+	@Update("UPDATE B_SHIPMENT SET BS_STATUS = '4' WHERE BS_DOCUNUM = {ip_ocode}")
+	boolean updateBshipment(IePort ip);
+
+	
+	@Select("INSERT INTO S_IEPORT VALUES(S_IEPORT_SEQ.NEXTVAL,#{ip_cpcode},DEFAULT,#{ie_hrcode},#{ie_etc},'2',{ie_clcode},#{ie_ocode},#{ie_itcode},-#{ie_qty},#{ie_price})")
+	boolean insertExport(IePort ip);
+	
 }

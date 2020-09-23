@@ -166,7 +166,6 @@ span {
 			},
 			error : function(err) {
 				console.log(err);
-				console.log("실패이")
 			}
 		});
 	}
