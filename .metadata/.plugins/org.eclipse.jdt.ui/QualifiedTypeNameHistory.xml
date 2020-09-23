@@ -28,4 +28,8 @@
 <fullyQualifiedTypeName name="com.n7.erp.bean.hr.ApplyHoliday"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="com.n7.erp.bean.sales.Shippingbean"/>
+<fullyQualifiedTypeName name="javax.crypto.SealedObject"/>
+<fullyQualifiedTypeName name="com.n7.erp.service.Salesmm"/>
+<fullyQualifiedTypeName name="com.n7.erp.bean.sales.Salesbean"/>
 </qualifiedTypeNameHistroy>

@@ -88,6 +88,8 @@ public interface SalesDao {
 
 	List<com.n7.erp.bean.sales.approvalLine> getMyInfo(String code);
 
+	Shippingbean getbonum(String check);
+
 
 
 

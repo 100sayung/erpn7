@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-=======
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
->>>>>>> origin/JSJ
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.n7.erp.dao.AccountDao">
 <insert id="saleinsert" parameterType="saleInfo">
-<<<<<<< HEAD
 	INSERT INTO AC_SALESTATEMENT
 	VALUES(#{s_num}||LPAD(AC_REALSALESTATEMENT_SEQ.NEXTVAL,6,0),#{s_ccode},#{s_kind},#{s_comnum},DEFAULT,#{s_employee},#{s_clcode},#{s_company})
 	</insert>
@@ -25,7 +20,6 @@
 	#{cl_phone2},#{cl_fax},#{cl_email},#{cl_addr},#{cl_kind},#{cl_kind2},#{cl_kind3},#{cl_bank},
 	#{cl_bankholder},#{cl_banknum},#{cl_memo})
 	</insert>
-
 	<insert id="approvaldocu" parameterType="rs">
 	INSERT INTO APPROVALDOCU
 	VALUES(#{rs_num},#{rs_ccode},#{rs_title},#{rs_employee},#{rs_apcode1},DEFAULT,DEFAULT)
@@ -40,7 +34,6 @@
 	INSERT INTO AC_REALSALESTATEMENTLIST
 	VALUES(#{rs_num},#{rs_ccode},#{rs_tax},#{rs_price},#{rs_price2},#{rs_cnt},#{rs_pkind},#{rs_total},#{rs_memo})
 	</insert>
-
 	<select id="getcomcode" parameterType="String" resultType="A_com">
 	SELECT * FROM AC_COMPANYLIST WHERE CL_COMNUM = #{s_comnum}
 	</select>
@@ -65,12 +58,13 @@
 	<select id="getsaleList2" parameterType="String" resultType="saleInfo">
 	SELECT * FROM AC_SALESTATEMENTLIST
 	</select>
+	
 	<select id="getList" parameterType="String" resultType="saleInfo">
 	SELECT * FROM AC_SALESTATEMENT WHERE S_NUM LIKE '%'||#{code}||'%'
 	</select>
-	<select id="getCompanyList" parameterType="String" resultType="A_com">
+<!-- 	<select id="getCompanyList" parameterType="String" resultType="A_com">
 	SELECT * FROM AC_COMPANYLIST
-	</select>
+	</select> -->
 	<select id="getsearchCode" parameterType="String" resultType="A_com">
 	SELECT * FROM AC_COMPANYLIST WHERE CL_CODE=#{cl_code}
 	</select>
@@ -89,7 +83,7 @@
 	<select id="addApproval" parameterType="String" resultType="Line">
 	SELECT * FROM MLIST  WHERE HC_HRCODE=#{code}
 	</select>
-	<select id="addApproval" parameterType="String" resultType="Line">
+	<select id="getMyInfo" parameterType="String" resultType="Line">
 	SELECT * FROM MLIST  WHERE HC_HRCODE=#{code}
 	</select>
 
@@ -103,104 +97,12 @@
 	SELECT * FROM AC_SALESTATEMENTLIST WHERE S_PKIND=#{pkind}
 	</select>
 
-	<select id="comparecode" parameterType="String" resultType="ap">
+	<select id="comparecode" parameterType="String" resultType="approvaldocu">
 	SELECT * FROM APPROVALDOCU WHERE AP_DOCUNUM=#{code}
 	</select>
 
 	<select id="selectSreach" parameterType="String" resultType="saleInfo">
 	SELECT * FROM AC_SALESTATEMENT
-=======
-	INSERT INTO S
-	VALUES(#{s_num}||LPAD(S_SEQ.NEXTVAL,4,0),#{s_kind},#{s_company},#{s_comnum},DEFAULT,#{s_employee})
-	</insert>
-<insert id="saleinsert2" parameterType="saleInfo">
-	INSERT INTO SS
-	VALUES(#{s_num}||LPAD(S_SEQ.CURRVAL,4,0),#{s_pkind},#{s_cnt},#{s_price},#{s_price2},
-	#{s_tax},#{s_total},#{s_memo})
-	</insert>
-	
-	
-	<insert id="insertcomlist" parameterType="A_com">
-	INSERT INTO COMPANYLIST
-	VALUES(#{c_code},#{c_name},#{c_comnum},#{c_ceo},#{c_employee},#{c_phone},
-	#{c_phone2},#{c_fax},#{c_email},#{c_addrnum},#{c_addr},#{c_kind},#{c_kind2},#{c_bank},
-	#{c_bankholder},#{c_banknum},#{c_comnum2},#{c_kind3},#{c_finish},#{c_memo})
-	</insert>
-	
-	<insert id="approvaldocu" parameterType="ad">
-	INSERT INTO AP
-	VALUES(#{ad_num},DEFAULT,#{ad_title},#{ad_employee},#{ad_dept},#{ad_date},DEFAULT)
-	</insert>
-	<insert id="approdocument" parameterType="ad">
-	INSERT INTO AD
-	VALUES(#{ad_num},#{ad_kind},#{ad_sdate},#{ad_apcode0},#{ad_apcode1},#{ad_apcode2},
-	#{ad_apname0},#{ad_apname1},#{ad_apname2},#{ad_company},#{ad_comnum},#{ad_reason})
-	</insert>
-	
-	<insert id="approdocument2" parameterType="ad">
-	INSERT INTO AD2
-	VALUES(#{ad_num},#{ad_pkind},#{ad_cnt},#{ad_price},#{ad_price2},#{ad_tax},#{ad_total},#{ad_memo})
-	</insert>
-	
-	<select id="getComList" parameterType="String" resultType="A_com">
-	SELECT * FROM COMPANYLIST
-	</select>
-	<select id="getcomInfo" parameterType="String" resultType="A_com">
-	SELECT * FROM COMPANYLIST
-	</select>
-	<select id="getmyCompany" parameterType="String" resultType="myCom">
-	SELECT * FROM MY
-	</select>
-	<select id="getsaleList" parameterType="String" resultType="saleInfo">
-	SELECT * FROM S
-	</select>
-	<select id="saleDetaile" parameterType="String" resultType="saleInfo">
-	SELECT * FROM S WHERE S_NUM= #{check}
-	</select>
-	<select id="saleDetaile2" parameterType="String" resultType="saleInfo">
-	SELECT * FROM SS WHERE S_NUM = #{check}
-	</select>
-	<select id="getsaleList2" parameterType="String" resultType="saleInfo">
-	SELECT * FROM SS
-	</select>
-	<select id="getList" parameterType="String" resultType="saleInfo">
-	SELECT * FROM S WHERE S_NUM LIKE '%'||#{code}||'%'
-	</select>
-	<select id="getCompanyList" parameterType="String" resultType="A_com">
-	SELECT * FROM COMPANYLIST
-	</select>
-	<select id="getsearchCode" parameterType="String" resultType="A_com">
-	SELECT * FROM COMPANYLIST WHERE C_CODE=#{c_code}
-	</select>
-	<select id="getTaxbill" parameterType="String" resultType="saleInfo">
-	SELECT * FROM S WHERE S_NUM=#{check}
-	</select>
-	
-	<select id="approvalLine" parameterType="String" resultType="Line">
-	SELECT * FROM MEMBER2 
-	</select>
-	
-	<select id="searchName" parameterType="String" resultType="Line">
-	SELECT * FROM MEMBER2 WHERE M_NAME=#{name}
-	</select>
-	
-	<select id="addApproval" parameterType="String" resultType="Line">
-	SELECT * FROM MEMBER2 WHERE M_CODE=#{code}
-	</select>
-	
-	<select id="approLinecom1" parameterType="String" resultType="Line">
-	SELECT * FROM MEMBER2 WHERE M_CODE=#{code01}
-	</select>
-	<select id="approLinecom2" parameterType="String" resultType="Line">
-	SELECT * FROM MEMBER2 WHERE M_CODE=#{code02}
-	</select>
-	<select id="getpkind" parameterType="String" resultType="saleInfo">
-	SELECT * FROM SS WHERE S_PKIND=#{pkind}
-	</select>
-	
-	<select id="selectSreach" parameterType="String" resultType="saleInfo">
-	SELECT * FROM S
->>>>>>> origin/JSJ
 	<where>
 	<if test="choice.equals('num')">
 	S_NUM=#{select}
@@ -214,7 +116,6 @@
 	</where>
 	</select>
 	<delete id="deleteCom" parameterType="String">
-<<<<<<< HEAD
 	DELETE FROM AC_COMPANYLIST WHERE CL_CODE=#{code}
 	</delete>
 	<delete id="deleteSale" parameterType="String">
@@ -228,18 +129,3 @@
 	DELETE FROM AC_SALESTATEMENT WHERE S_NUM=#{ad_snum}
 	</delete>
 </mapper>
-=======
-	DELETE FROM COMPANYLIST WHERE C_CODE=#{code}
-	</delete>
-	<delete id="deleteSale" parameterType="String">
-	DELETE FROM S WHERE S_NUM=#{code}
-	</delete>
-	<delete id="deleteSale2" parameterType="String">
-	DELETE FROM SS WHERE S_NUM=#{code}
-	</delete>
-	
-	<delete id="saleListDelete" parameterType="String">
-	DELETE FROM S WHERE S_NUM=#{ad_snum}
-	</delete>
-</mapper>
->>>>>>> origin/JSJ

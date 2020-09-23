@@ -35,14 +35,14 @@ public class AccountMM {
 		ac.setCl_ccode(session.getAttribute("cCode").toString());
 		if(ac.getCl_code()!="") {
 			if(aDao.insertcomlist(ac)) {
-			   List<A_company> aList = aDao.getComList(ac.getCl_code());
+			   List<A_company> aList = aDao.getComList();
 			   aMap=new HashMap<>();
 			   aMap.put("aList", aList);
 			}else {
 				aMap=null;
 			}
 		}else {
-			List<A_company> aList = aDao.getComList(ac.getCl_code());
+			List<A_company> aList = aDao.getComList();
 			aMap=new HashMap<>();
 			aMap.put("aList", aList);
 		}
@@ -51,7 +51,7 @@ public class AccountMM {
 
 	public Map<String, List<A_company>> serchcomlist() {
 		Map<String, List<A_company>> aMap=null;
-			   List<A_company> aList = aDao.getCompanyList();
+			   List<A_company> aList = aDao.getComList();
 			   aMap=new HashMap<>();
 			   aMap.put("aList", aList);
 		return aMap;
@@ -77,7 +77,7 @@ public class AccountMM {
 			result=aDao.deleteCom(code);
 		}
 		if(result) {
-			List<A_company> aList = aDao.getCompanyList();
+			List<A_company> aList = aDao.getComList();
 			aMap=new HashMap<>();
 			   aMap.put("aList", aList);
 		}else {

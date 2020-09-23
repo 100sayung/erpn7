@@ -72,6 +72,10 @@ public class SalesHomeController {
          return mav;
    }
    
+   @RequestMapping(value = "/sales/salesapprovaldetail", method = RequestMethod.GET)
+      public String salesapprovaldetail() {
+	   return "/sales/salesapprovaldetail"; 
+   }
    
    
 //   @RequestMapping(value = "/introducecompany", method = RequestMethod.GET)

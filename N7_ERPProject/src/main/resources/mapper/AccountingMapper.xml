@@ -58,12 +58,13 @@
 	<select id="getsaleList2" parameterType="String" resultType="saleInfo">
 	SELECT * FROM AC_SALESTATEMENTLIST
 	</select>
+	
 	<select id="getList" parameterType="String" resultType="saleInfo">
 	SELECT * FROM AC_SALESTATEMENT WHERE S_NUM LIKE '%'||#{code}||'%'
 	</select>
-	<select id="getCompanyList" parameterType="String" resultType="A_com">
+<!-- 	<select id="getCompanyList" parameterType="String" resultType="A_com">
 	SELECT * FROM AC_COMPANYLIST
-	</select>
+	</select> -->
 	<select id="getsearchCode" parameterType="String" resultType="A_com">
 	SELECT * FROM AC_COMPANYLIST WHERE CL_CODE=#{cl_code}
 	</select>

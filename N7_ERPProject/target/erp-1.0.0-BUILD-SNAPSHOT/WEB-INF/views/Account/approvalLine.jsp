@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-    <%@ page language="java" contentType="text/html; charset=UTF-8"
-=======
 <%@ page language="java" contentType="text/html; charset=UTF-8"
->>>>>>> origin/JSJ
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -62,9 +58,9 @@ tr, td {
 }
 
 .addtable {
-	height: 200px;
+	height: 450px;
 	overflow: auto;
-}
+	}
 
 .but{
 margin-top: 110px;
@@ -78,23 +74,14 @@ height:10px;
 </head>
 <body>
 	<h1>결재라인 주소록</h1>
-<<<<<<< HEAD
-
-
-=======
 	
 	
->>>>>>> origin/JSJ
 	<div>
 		<div id="main1">
 			<table>
 				<tr class="search">
 					<td>주소록</td>
-<<<<<<< HEAD
-
-=======
 					
->>>>>>> origin/JSJ
 				</tr>
 				<tr id="Info"></tr>
 			</table>
@@ -126,11 +113,7 @@ height:10px;
 		<button id="deleteCheck1"><</button><br><br><br><br><br>
 	<button id="addapproval2" class="but">></button><br>
 	<button id="deleteCheck2"><</button><br><br>
-<<<<<<< HEAD
-
-=======
 	
->>>>>>> origin/JSJ
 		</div>
 		<div id="main4">
 			<h3 class="title">
@@ -142,43 +125,14 @@ height:10px;
 					<tbody id="addAp1"></tbody>
 				</table>
 			</div>
-			<h3 class="title">
-				참조<span id="cnt2" style="color:green;">0</span>
-			</h3>
-			<div class="addtable">
-				<table class="table">
-				<tr class="search"><td>체크</td><td>이름</td><td>작급</td><td>부서</td></tr>
-					<tbody id="addAp2"></tbody>
-				</table>
-			</div>
-<<<<<<< HEAD
-
-=======
 			
->>>>>>> origin/JSJ
 		</div>
 	</div><br>
 	<a  href="javascript:sendChildValue()"><button>결제라인 등록</button></a>
 </body>
 <script>
-<<<<<<< HEAD
 var count1=0;
 
-function sendChildValue(){
-
-	if(count1==0){
-		alert("선택한 사람이 없습니다");
-	} else{
-
-	var code1 = new Array();
-	//var code2 = new Array();
-	for(var i =0; i<count1; i++){
-		code1.push($(".addname1"+i).val());
-	}
-
-	$.ajax({
-		 url:"/erp/rest/Account/approLinecom?code1="+code1,
-=======
 function sendChildValue(){
 	
 	if(count1==0){
@@ -186,57 +140,36 @@ function sendChildValue(){
 	} else{
 		
 	var code1 = new Array();
-	var code2 = new Array();
 	for(var i =0; i<count1; i++){
-		code1.push($(".addname1"+i).val());
-	}
-	for(var i =0; i<count2; i++){
-		code2.push($(".addname2"+i).val());
+		code1.push($("#addname1"+i).val());
 	}
 	
 	$.ajax({
-		 url:"/erp/rest/Account/approLinecom?code1="+code1+"&code2="+code2,
->>>>>>> origin/JSJ
+		 url:"/erp/rest/Account/approLinecom?code1="+code1,
 		 type:'post',
 		 datatype:'json',
 		 success:function(data){
 			 console.log(data);
-<<<<<<< HEAD
-
-=======
 			 
->>>>>>> origin/JSJ
 				 opener.setChildValue(data);
 
 				 window.close();
 		 },
 		 error:function(error){
 			 console.log(error);
-<<<<<<< HEAD
-
-		 }
-
-	});
-
-	}
-=======
 			 
 		 }
 		
 	});
 	
 	}  
->>>>>>> origin/JSJ
 }
 
 
 
 
 $("#deleteCheck1").click(function() {
-<<<<<<< HEAD
 	var cnt = $("input[name='checknum']:checked").length;
-=======
->>>>>>> origin/JSJ
 	for (var i = 0; i < $(".check1").length; i++) {
 		if ($(".check1")[i].checked == true) {
 			$(".check1")[i].parentElement.parentElement.remove();
@@ -246,43 +179,16 @@ $("#deleteCheck1").click(function() {
 		}
 	}
 });
-<<<<<<< HEAD
-/* $("#deleteCheck2").click(function() {
-=======
-$("#deleteCheck2").click(function() {
->>>>>>> origin/JSJ
-	for (var i = 0; i < $(".check2").length; i++) {
-		if ($(".check2")[i].checked == true) {
-			$(".check2")[i].parentElement.parentElement.remove();
-			i--;
-			count2--;
-			$("#cnt2").html(count2);
-		}
-	}
-});
-<<<<<<< HEAD
- */
-=======
-
->>>>>>> origin/JSJ
 	var list = ${aList};
 	console.log(list);
 	var str = "";
 	for (var i = 0; i < list.length; i++) {
-<<<<<<< HEAD
 		str += "<tr><td><input name='checknum' type='checkbox' value="+list[i].hc_hrcode+"></td><td>"
-=======
-		str += "<tr><td><input name='checknum' type='checkbox' value="+list[i].m_code+"></td><td>"
->>>>>>> origin/JSJ
 				+ list[i].m_name + "(" + list[i].m_email + ")" + "</td></tr>";
 	}
 
 	$("#Info").append(str);
-<<<<<<< HEAD
-
-=======
 	  
->>>>>>> origin/JSJ
 
 
 	$("#namesc").click(function() {
@@ -294,21 +200,12 @@ $("#deleteCheck2").click(function() {
 							datatype : 'json',
 							success : function(data) {
 								console.log(data);
-<<<<<<< HEAD
-
+								
 								for ( var i in data.aList) {
 									str += "<tr><td><input name='checknum' type='checkbox' value='"+data.aList[i].hc_hrcode+"'></td>";
 									str += "<td>"+ data.aList[i].m_name+ "</td>";
 									str += "<td>"+ data.aList[i].hc_dept+ "</td>";
 									str += "<td>"+ data.aList[i].hc_position+ "</td>";
-=======
-								
-								for ( var i in data.aList) {
-									str += "<tr><td><input name='checknum' type='checkbox' value='"+data.aList[i].m_code+"'></td>";
-									str += "<td>"+ data.aList[i].m_name+ "</td>";
-									str += "<td>"+ data.aList[i].m_colume+ "</td>";
-									str += "<td>"+ data.aList[i].m_grade+ "</td>";
->>>>>>> origin/JSJ
 									str += "<td>"+ data.aList[i].m_email+ "</td></tr>";
 									}
 										$("#nameInfo").html(str);
@@ -318,42 +215,32 @@ $("#deleteCheck2").click(function() {
 									}
 								});
 					});
-<<<<<<< HEAD
-
-
-	$("#addapproval1").click(function(){
-		if(count1==3){
-			alert("3명이상  선택 할 수 없습니다.");
-		}else{
-
-		var cnt = $("input[name='checknum']:checked").length;
-		var arr = new Array();
-
-=======
 	
-	    var count1=0;
+	   
+		var arr;
 	$("#addapproval1").click(function(){
-		var name =[];
+		arr = new Array();
+		var hrcode=${hrCode};
 		var cnt = $("input[name='checknum']:checked").length;
-		var arr = new Array();
 		
->>>>>>> origin/JSJ
-		if(cnt == 0){
-			alert("선택한 이름이 없습니다");
-	}else {
 		$("input[name='checknum']:checked").each(function() {
-<<<<<<< HEAD
-
-			arr.push($(this).attr('value'));
-               //var code = $(this).attr('value');
-
-		});
-=======
 			
 			arr.push($(this).attr('value'));
-               var code = $(this).attr('value');
-		       
->>>>>>> origin/JSJ
+		});
+		
+		if(arr[0]==hrcode||arr[1]==hrcode||arr[2]==hrcode){
+			alert("자신을 결재자로 추가할 수 없습니다.");
+			console.log(cnt);
+		}else if(cnt>2 || count1==2){
+			alert("2명이상  선택 할 수 없습니다.");
+			console.log(cnt);
+			
+		}else if(cnt == 0){
+			alert("선택한 이름이 없습니다");
+			console.log(cnt);
+	}else if($("#addAp1").html()!="" && arr[0]==$("#addname10").val()){
+	      alert("이미 추가한 이름입니다.");
+	}else{
 			   $.ajax({
 					url : '/erp/rest/Account/addApproval',
 					type : 'post',
@@ -363,190 +250,43 @@ $("#deleteCheck2").click(function() {
 					success : function(data) {
 						console.log(data);
 						var str="";
-<<<<<<< HEAD
-		                    //console.log(code);
-
+						if(data.aList.length==1){
+							
 							for(var i in data.aList){
 								str+="<tr><td><input class='check1' type='checkbox'></td>";
-								str+="<td><input class='addname1"+i+"' type='text' value='"+data.aList[i].hc_hrcode+"' hidden='true'>"+data.aList[i].m_name+"</td>";
+								str+="<td><input id='addname1"+count1+"' type='text' value='"+data.aList[i].hc_hrcode+"' hidden='true'>"+data.aList[i].m_name+"</td>";
 								str+="<td>"+data.aList[i].hc_position+"</td>";
 								str+="<td>"+data.aList[i].hc_dept+"</td></tr>";
-
-									}
-							$("#addAp1").append(str);
-
-							/* for(var k=0; k<=count1; k++){
-								name[k]=$(".addname1"+k).val();
-
-								} */
-						count1+=Number(cnt);
-							//console.log(name);
-							//console.log(count1);
-=======
-		                    console.log(code);
-						
-							for(var i in data.aList){
-								str+="<tr><td><input class='check1' type='checkbox'></td>";
-								str+="<td><input class='addname1"+i+"' type='text' value='"+data.aList[i].m_code+"' hidden='true'>"+data.aList[i].m_name+"</td>";
-								str+="<td>"+data.aList[i].m_grade+"</td>";
-								str+="<td>"+data.aList[i].m_colume+"</td></tr>";
 										
 									}
 							$("#addAp1").append(str);
+						}else{
 							
-							for(var k=0; k<=count1; k++){
-								name[k]=$(".addname1"+k).val();
-									
-								}
-							if(cnt==1){
-								count1=1;
-							}else if(cnt==2){
-								count1=2;
-							}else if(cnt==3){
-								count1=3;
-							}
+							for(var i in data.aList){
+								str+="<tr><td><input class='check1' type='checkbox'></td>";
+								str+="<td><input id='addname1"+i+"' type='text' value='"+data.aList[i].hc_hrcode+"' hidden='true'>"+data.aList[i].m_name+"</td>";
+								str+="<td>"+data.aList[i].hc_position+"</td>";
+								str+="<td>"+data.aList[i].hc_dept+"</td></tr>";
+										
+									}
+							$("#addAp1").append(str);
+						}
+						
 							
-							console.log(name);
-							console.log(count1);
->>>>>>> origin/JSJ
+						count1+=Number(cnt);
 					     $("#cnt1").html(count1);
 				},
 					error:function(error){
 						console.log(error);
-<<<<<<< HEAD
-					}
-
-		});
-
-	};
-		}
-		//var name =[];
-	});
-	 /*    var count2=0;
-=======
 					}	
 		
 		});
-			   
-		});
-	};		
-	});
-	    var count2=0;
->>>>>>> origin/JSJ
-	$("#addapproval2").click(function(){
-		var name =[];
-		var cnt = $("input[name='checknum']:checked").length;
-		var arr = new Array();
-<<<<<<< HEAD
-
-=======
 		
->>>>>>> origin/JSJ
-		if(cnt == 0){
-			alert("선택한 이름이 없습니다");
-	}else {
-		$("input[name='checknum']:checked").each(function() {
-			arr.push($(this).attr('value'));
-               var code = $(this).attr('value');
-<<<<<<< HEAD
-
-=======
-		       
->>>>>>> origin/JSJ
-			   $.ajax({
-					url : '/erp/rest/Account/addApproval',
-					type : 'post',
-					traditional : true,
-					data : 'ARR=' + arr + '&CNT=' + cnt,
-					datatype : 'json',
-					success : function(data) {
-						console.log(data);
-						var str="";
-		                    console.log(code);
-<<<<<<< HEAD
-
-
-							for(var j=0; j<=count; j++){
-								if(code==$(".addname"+j).val()&&count!=0){
-									alert("이미추가되었습니다");
-
-									}else{
-							for(var i in data.aList){
-								str+="<tr><td><input class='check2' type='checkbox'></td>";
-								str+="<td><input class='addname2"+count2+"' type='text' value='"+data.aList[i].hc_hrcode+"' hidden='true'>"+data.aList[i].m_name+"</td>";
-								str+="<td>"+data.aList[i].hc_position+"</td>";
-								str+="<td>"+data.aList[i].hc_dept+"</td></tr>";
-							$("#addAp2").append(str);
-
-									}
-								 }
-
-							 }
-							for(var k=0; k<=count2; k++){
-								name[k]=$(".addname2"+k).val();
-
-								}
-
-=======
-						
-						
-							/* for(var j=0; j<=count; j++){
-								if(code==$(".addname"+j).val()&&count!=0){
-									alert("이미추가되었습니다");
-									
-									}else{ */
-							for(var i in data.aList){
-								str+="<tr><td><input class='check2' type='checkbox'></td>";
-								str+="<td><input class='addname2"+count2+"' type='text' value='"+data.aList[i].m_code+"' hidden='true'>"+data.aList[i].m_name+"</td>";
-								str+="<td>"+data.aList[i].m_grade+"</td>";
-								str+="<td>"+data.aList[i].m_colume+"</td></tr>";
-							$("#addAp2").append(str);
-										
-									}
-								/* } */
-							
-							/* } */
-							for(var k=0; k<=count2; k++){
-								name[k]=$(".addname2"+k).val();
-									
-								}
-							
->>>>>>> origin/JSJ
-							console.log(name);
-							console.log(count2);
-					     count2++;
-					     $("#cnt2").html(count2);
-				},
-					error:function(error){
-						console.log(error);
-<<<<<<< HEAD
-					}
-
-		});
-
-		});
-	};
-	});
-	    */
-
-
-
-
-</script>
-</html>
-=======
-					}	
-		
-		});
-			   
-		});
 	};		
+		
 	});
-	   
-	
 		
      
 
 </script>
 </html>
->>>>>>> origin/JSJ

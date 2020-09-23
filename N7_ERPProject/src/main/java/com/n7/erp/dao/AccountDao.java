@@ -19,9 +19,9 @@ public interface AccountDao {
 
 	boolean insertcomlist(A_company ac);
 
-	List<A_company> getComList(String c_code);
+	List<A_company> getComList();
 
-	List<A_company> getCompanyList();
+//	List<A_company> getCompanyList();
 
 	List<A_company> getsearchCode(A_company ac);
 

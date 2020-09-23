@@ -7,8 +7,13 @@
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+<style>
+#center{
+text-align:center;
+}
+</style>
 <body>
-    <center>
+      <div id="center">
       <br>
         <button type="button" id="businessitemfrm">영업 실적조회</button>${msg}
         <button type="button" id="print" onclick="window.print()">영업실적 인쇄</button>
@@ -22,7 +27,7 @@
           <button type="button" id="searchh" value="검색">검색</button>   
         <form id="businessactivitiesinput">
         <div border="1" style="height:80px; padding-top:25px; background-color:#F8F7F7;">
-        <table>
+        <table style="margin-left:180px;">
          <thead>
             <tr>
                <th>영업코드</th>
@@ -46,7 +51,8 @@
       </table>
       </div> 
             <div style="background-color:#ECEBEA;">
-            <table id="item" summary="Code page support in different versions of MS Windows." rules="groups" frame="hsides" border="1">
+            <table id="item" summary="Code page support in different versions of MS Windows." rules="groups" frame="hsides" border="1"
+              style="margin-left:140px;">
                 <colgroup align="center">
                 </colgroup>
                 <colgroup align="left">
@@ -57,18 +63,18 @@
                 </colgroup>
                 <thead valign="top">
                     <tr>
-                        <th><input type="checkbox" id="allCheck"></th>
+                        <th><input type="radio" id="allCheck"></th>
                         <th>날짜</th>
-                  <th>내용</th>
-                  <th>예상매출금액</th>
-                  <th>실제매출금액</th>
-                  <th>종료일자</th>
-                  <th>메모</th>               
-               </tr>
+                        <th>내용</th>
+						<th>예상매출금액</th>
+						<th>실제매출금액</th>
+						<th>종료일자</th>
+						<th>메모</th>
+						</tr>
                 </thead>
                 <tbody id="tBody">
                     <tr>
-                        <td><input type="checkbox" class="each"></td>          
+                        <td><input type="radio" class="each"></td>          
                         <td><input type="date" name="ba_date" id="add"></td>
                         <td><input type="text" name="ba_content"  required></td>
                         <td><input type="number" name="ba_estimatedsalesamount" required></td>
@@ -80,13 +86,13 @@
             </table>
             </div>  
         </form>
-            <br>
+        <br>
+        <br>
             <button type="button" id="addList" value="추가">추가</button>
-            <!-- <button type="button" id="change" value="변경" >변경</button> -->
             <button type="button" id="deleteCheck" value="삭제">삭제</button>
             <button type="button" id="sub" value="저장">저장</button>
-            
-    </center>
+      </div>
+     <br>
     <br>
     <br>
 
@@ -95,7 +101,7 @@
         //추가삭제
         $(document).ready(function(){
               $('.addList').click(function(){
-                 $('#tBody').append('<tr><td><input type="checkbox" name="each_check" class="each"></td><td><input type="text" name="ba_date" class="input-text"></td><td><input type="text" name="ba_content" class="input-text" ></td><td><input type="number" name="ba_estimatedsalesamount" class="input-text" ></td><td><input type="number" name="ba_actualsalesamount" class="input-text" ></td><td><input type="text" name="ba_enddate" class="input-text" ></td><td><input type="text" name="ba_memo" class="input-text" ></td><td><input type="button" value="삭제" id="deleteCheck" onclick="javascript:thisRowDel(this);"></td></tr>');
+                 $('#tBody').append('<tr><td><input type="radio" name="each_check" class="each"></td><td><input type="text" name="ba_date" class="input-text"></td><td><input type="text" name="ba_content" class="input-text" ></td><td><input type="number" name="ba_estimatedsalesamount" class="input-text" ></td><td><input type="number" name="ba_actualsalesamount" class="input-text" ></td><td><input type="text" name="ba_enddate" class="input-text" ></td><td><input type="text" name="ba_memo" class="input-text" ></td><td><input type="button" value="삭제" id="deleteCheck" onclick="javascript:thisRowDel(this);"></td></tr>');
               });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
           }); 
            function thisRowDel(row){
@@ -116,7 +122,7 @@
                  console.log(data);
                  
                  for(var i in data.bList){
-                    str+="<tr><td><input type='checkbox' name='checknum' value="+data.bList[i].ba_ocode+"></td>";
+                    str+="<tr><td><input type='radio' name='checknum' value="+data.bList[i].ba_ocode+"></td>";
                     str+="<td><input type='text' value="+data.bList[i].ba_date+"></td>";
                     str+="<td><input type='text' value="+data.bList[i].ba_content+"></td>";
                     str+="<td><input type='text' value="+data.bList[i].ba_estimatedsalesamount+"></td>";
@@ -142,6 +148,7 @@
                  data:obj,
                  success : function(data) {
                     console.log(data);
+                    alert("등록이 완료되었습니다.");
                  },
                  error : function(error) {
                     console.log(error);
@@ -165,7 +172,7 @@
                 var str="";
                 if(data.bList!=""){
                  for(var i in data.bList){
-                  str+="<tr class='tr'><td><input type='checkbox' name='each_check' value="+data.bList[i].ba_ocode+"></td>";
+                  str+="<tr class='tr'><td><input type='radio' name='each_check' value="+data.bList[i].ba_ocode+"></td>";
                 str+="<td><input type='text' value="+data.bList[i].ba_date+"></td>";
                 str+="<td><input type='text' value="+data.bList[i].ba_content+"></td>";
                 str+="<td><input type='text' value="+data.bList[i].ba_estimatedsalesamount+"></td>";
@@ -200,7 +207,7 @@
                    console.log(data);
                    var str="";
                    for(var i in data.sList){
-                       str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].ba_ocode+"></td>";
+                       str+="<tr><td><input type='radio' name='each_check' value="+data.sList[i].ba_ocode+"></td>";
                        str+="<td><input type='text' value="+data.sList[i].ba_date+"></td>";
                        str+="<td><input type='text' value="+data.sList[i].ba_content+"></td>";
                        str+="<td><input type='text' value="+data.sList[i].ba_estimatedsalesamount+"></td>";

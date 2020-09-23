@@ -254,7 +254,6 @@ font-size: 20px;
 		$.ajax({
 			url : '/erp/rest/Account/serchcomlist',
 			type : 'get',
-			contentType : 'application/json; charset=UTF-8',
 			dataType : 'json',
 			success : function(data) {
 				console.log(data);
@@ -320,7 +319,6 @@ font-size: 20px;
 						$.ajax({
 									url : '/erp/rest/Account/insertcomlist',
 									type : 'post',
-									//contentType : 'application/json; charset=UTF-8',
 									data : obj,
 									dataType : 'json',
 									success : function(data) {

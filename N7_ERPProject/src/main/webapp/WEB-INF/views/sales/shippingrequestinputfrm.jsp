@@ -8,6 +8,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <style>
+#center{
+text-align:center;
+}
 html, body {
 text-align:center;
    height: 100%;
@@ -22,7 +25,7 @@ border: 1px solid;
 
 </style>
 <body>
-    <center>
+    <div id="center">
         <br>
         <button type="button" id="shippingitemfrm">출하등록 현황</button>
         <button type="button" id="approvalplan">결재 요청하기</button>
@@ -37,8 +40,8 @@ border: 1px solid;
         <input type="text" name="search" id="search">    
         <button id="searchh">검색</button>   
         <form id="shippingrequestinput">
-        <div border="1" style="height:60px; padding-top:25px; background-color:#F8F7F7;">
-        <table>
+        <div border="1" style="height:80px; padding-top:25px; background-color:#F8F7F7;">
+        <table style="margin-left:200px;">
          <thead>
             <tr>
                <th>출하번호</th>
@@ -62,7 +65,8 @@ border: 1px solid;
       </table>
       </div> 
             <div style="background-color:#ECEBEA;">
-            <table id="item" summary="Code page support in different versions of MS Windows." rules="groups" frame="hsides" border="1">
+            <table id="item" summary="Code page support in different versions of MS Windows." rules="groups" frame="hsides" border="1"
+              style="margin-left:380px;">
                 <colgroup align="center">
                 </colgroup>
                 <colgroup align="left">
@@ -73,7 +77,7 @@ border: 1px solid;
                 </colgroup>
                 <thead valign="top">
                     <tr>
-                        <th><input type="checkbox" id="allCheck"></th>
+                        <th><input type="radio" id="allCheck"></th>
                   <th>판매단가</th>
                   <th>수량</th>
                   <th>판매금액</th>                  
@@ -81,7 +85,7 @@ border: 1px solid;
                 </thead>
                 <tbody id="tBody">
                     <tr>
-                        <td><input type="checkbox" name="each_check" class="each"></td>          
+                        <td><input type="radio" name="each_check" class="each"></td>          
                         <td><input type="number" name="bs_unit"  required></td>
                         <td><input type="number" name="bs_quantity" required></td>
                         <td><input type="number" name="bs_price" required></td>           
@@ -96,7 +100,7 @@ border: 1px solid;
               <button type="button" id="sub">저장</button>
             </div>
             </form>
-    </center>
+          </div>
     <br>
     <br>
     <div id="a">
@@ -116,7 +120,7 @@ border: 1px solid;
          console.log(data);
          
          for(var i in data.sList){
-            str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
+            str+="<tr><td><input type='radio' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
             str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
             str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
             str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";            
@@ -132,7 +136,7 @@ border: 1px solid;
         //추가삭제
         $(document).ready(function(){
               $('.addList').click(function(){
-                 $('#tBody').append('<tr><td><input type="checkbox" name="each_check" class="each"></td><td><input type="number" name="bs_unit" class="input-text" ></td><td><input type="number" name="bs_quantity" class="input-text"></td><td><input type="number" name="bs_price" class="input-text" ></td><td><input type="button" value="삭제" onclick="javascript:thisRowDel(this);"></td></tr>');
+                 $('#tBody').append('<tr><td><input type="radio" name="each_check" class="each"></td><td><input type="number" name="bs_unit" class="input-text" ></td><td><input type="number" name="bs_quantity" class="input-text"></td><td><input type="number" name="bs_price" class="input-text" ></td><td><input type="button" value="삭제" onclick="javascript:thisRowDel(this);"></td></tr>');
               });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
           }); 
            function thisRowDel(row){
@@ -153,6 +157,7 @@ border: 1px solid;
              data:obj,
              success : function(data) {
                 console.log(data);
+                alert("등록이 완료되었습니다.");
              },
              error : function(error) {
                 console.log(error);
@@ -191,7 +196,7 @@ border: 1px solid;
                      var str="";
                       if(data.sList!=""){
                      for(var i in data.sList){
-                        str+="<tr class='tr'><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
+                        str+="<tr class='tr'><td><input type='radio' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
                         str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
                         str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
                         str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
@@ -225,7 +230,7 @@ border: 1px solid;
                      var str="";
                      
                      for(var i in data.sList){
-                        str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
+                        str+="<tr><td><input type='radio' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
                         str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
                         str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
                         str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";

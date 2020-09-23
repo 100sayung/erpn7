@@ -32,7 +32,9 @@ text-align:center;
     <div style="width:auto; background-color:white; color:white; padding:1%;">
            <button type="button" id="orderitemfrm">수주품목 현황</button>
            <span style="padding-left: 5px"><a href="#"
-         onclick="window.open('clientfrm','clientfrm','width=1200,height=700')"><button>거래처등록</button></a></span>
+			onclick="window.open('/erp/Account/comPany','comlist','width=1350,height=500')"><button>거래처등록</button></a></span>
+           <!-- <span style="padding-left: 5px"><a href="#"
+         onclick="window.open('clientfrm','clientfrm','width=1200,height=700')"><button>거래처등록</button></a></span> -->
         </div> 
         <div style="width:auto; background-color:#FFB2D9;  color:white; padding:1%;">수주관리 양식</div>
               <select id="choice" style="width:180px;">                    
@@ -44,7 +46,7 @@ text-align:center;
         <button id="searchh">검색</button>   
         <form id="orderregistrationinput">
         <div border="1" style="height:80px; padding-top:25px; background-color:#F8F7F7;">
-        <table style="margin-left:250px;">
+        <table style="margin-left:300px;">
          <thead>
             <tr>
                <th>수주번호</th>
@@ -68,7 +70,8 @@ text-align:center;
       </table>
       </div> 
             <div style="background-color:#ECEBEA;">
-            <table id="item" summary="Code page support in different versions of MS Windows." rules="groups" frame="hsides" border="1">
+            <table id="item" summary="Code page support in different versions of MS Windows." rules="groups" frame="hsides" border="1"
+              style="margin-left:80px; , border-color:gray;">
                 <colgroup align="center">
                 </colgroup>
                 <colgroup align="left">
@@ -79,7 +82,7 @@ text-align:center;
                 </colgroup>
                 <thead valign="top">
                 <tr>
-                  <th><input type="checkbox" id="allCheck"></th>
+                  <th><input type="radio" id="allCheck"></th>
                   <th>프로젝트명</th>
                   <th>프로젝트기간 시작</th>
                   <th>프로젝트기간 끝</th>
@@ -90,7 +93,7 @@ text-align:center;
                 </thead>
                 <tbody id="tBody">
                     <tr>
-                        <td><input type="checkbox" name="each_check" class="each"></td> 
+                        <td><input type="radio" name="each_check" class="each"></td> 
                         <td><input type="text" name="bo_pronum" id="add"  required></td>
                         <td><input type="date" name="bo_orderdate" min="2000-01-01" max="2030-12-31" style="width:180px;"></td>
                         <td><input type="date" name="bo_duedate" min="2000-01-01" max="2030-12-31" style="width:180px;"></td>
@@ -123,7 +126,7 @@ text-align:center;
                  console.log(data);
                  
                  for(var i in data.sList){
-                    str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bo_num+"></td>";
+                    str+="<tr><td><input type='radio' name='each_check' value="+data.sList[i].bo_num+"></td>";
                     str+="<td><input type='text' value="+data.sList[i].bo_pronum+"></td>";
                     str+="<td><input type='text' value="+data.sList[i].bo_orderdate+"></td>";
                     str+="<td><input type='text' value="+data.sList[i].bo_duedate+"></td>";
@@ -144,7 +147,7 @@ text-align:center;
         
       $(document).ready(function(){
             $('.addList').click(function(){
-               $('#tBody').append('<tr><td><input type="checkbox" name="each_check" class="each"></td><td><input type="text" name="bo_pronum" class="input-text"></td><td><input type="text" name="bo_orderdate" class="input-text" ></td><td><input type="text" name="bo_duedate" class="input-text" ></td><td><input type="number" name="bo_proquantity" class="input-text"></td><td><input type="number" name="bo_prosalesamount" class="input-text" ></td><td><input type="number" name="bo_orderbudget" class="input-text" ></td><td><input type="button" value="삭제" id="deleteCheck" onclick="javascript:thisRowDel(this);"></td></tr>');
+               $('#tBody').append('<tr><td><input type="radio" name="each_check" class="each"></td><td><input type="text" name="bo_pronum" class="input-text"></td><td><input type="text" name="bo_orderdate" class="input-text" ></td><td><input type="text" name="bo_duedate" class="input-text" ></td><td><input type="number" name="bo_proquantity" class="input-text"></td><td><input type="number" name="bo_prosalesamount" class="input-text" ></td><td><input type="number" name="bo_orderbudget" class="input-text" ></td><td><input type="button" value="삭제" id="deleteCheck" onclick="javascript:thisRowDel(this);"></td></tr>');
             });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
         }); 
          function thisRowDel(row){
@@ -187,7 +190,7 @@ text-align:center;
                     var str="";
                      if(data.sList!=""){
                     for(var i in data.sList){
-                        str+="<tr class='tr'><td><input type='checkbox' name='each_check' value="+data.sList[i].bo_num+"></td>";
+                        str+="<tr class='tr'><td><input type='radio' name='each_check' value="+data.sList[i].bo_num+"></td>";
                         str+="<td><input type='text' value="+data.sList[i].bo_pronum+"></td>";
                         str+="<td><input type='text' value="+data.sList[i].bo_orderdate+"></td>";
                         str+="<td><input type='text' value="+data.sList[i].bo_duedate+"></td>";
@@ -222,8 +225,12 @@ text-align:center;
                  success : function(data) {                   
                     console.log(data);
                     var str="";
+                    if(data.sList[0].bo_num==check){
+                    	alert("출하 등록된 자료입니다.");
+                    }else{
+                    	
                     for(var i in data.sList){
-                        str+="<tr><td><input type='checkbox' name='each_check' value="+data.sList[i].bo_num+"></td>";
+                        str+="<tr><td><input type='radio' name='each_check' value="+data.sList[i].bo_num+"></td>";
                         str+="<td><input type='text' value="+data.sList[i].bo_pronum+"></td>";
                         str+="<td><input type='text' value="+data.sList[i].bo_orderdate+"></td>";
                         str+="<td><input type='text' value="+data.sList[i].bo_duedate+"></td>";
@@ -232,6 +239,7 @@ text-align:center;
                         str+="<td><input type='number' value="+data.sList[i].bo_orderbudget+"></td>";
                      }
                         $('#tBody').html(str);
+                    }
                  },
                  error : function(error) {
                     console.log(error);

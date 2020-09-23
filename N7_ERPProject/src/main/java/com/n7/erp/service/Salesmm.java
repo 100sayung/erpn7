@@ -81,15 +81,28 @@ public class Salesmm {
 
    public Map<String, List<Salesbean>> orderregistrationdelete(String check) {
       Map<String, List<Salesbean>> sMap = null;
-      if(sDao.orderregistrationdelete(check)) {
-         List<Salesbean> sList = sDao.orderitem();
-         sMap = new HashMap<>();
-         sMap.put("sList", sList);
-         System.out.println(sList);
+      List<Salesbean> sList = new ArrayList<>();
+      Shippingbean sb =new Shippingbean();
+      sb= sDao.getbonum(check);
+      System.out.println(sb);
+      if(sb==null) {
+    	  if(sDao.orderregistrationdelete(check)) {
+    		  sList = sDao.orderitem();
+    		  sMap = new HashMap<>();
+    		  sMap.put("sList", sList);
+    		  System.out.println(sList);
+    	  }else {
+    		  sMap = null;
+    	  }
+    	  
       }else {
-         System.out.println("지워짐?");
-         sMap = null;
+    	  Salesbean sb2 = new Salesbean();
+    	  sb2.setBo_num(sb.getBs_bonum());
+    	  sList.add(sb2);
+    	  sMap = new HashMap<>();
+		  sMap.put("sList", sList);
       }
+      
       return sMap;
    }
 
@@ -99,7 +112,7 @@ public class Salesmm {
       mav = new ModelAndView();
       String view = null;
       
-      ss.setBs_docunum("S");
+      ss.setBs_docunum("G");
       
       boolean result = sDao.shippingrequestinput(ss);
       if(ss.getBs_ccode()!="") {
@@ -341,6 +354,8 @@ public class Salesmm {
       mav=new ModelAndView();
       String view=null;
    
+      //app.setBs_docunum("D");
+      
       boolean result=sDao.approvalinput(app);
       boolean result2=sDao.approvalinput2(app);
       if(app.getBs_ccode()!="") {

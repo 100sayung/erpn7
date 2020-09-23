@@ -32,7 +32,7 @@
    </delete>
    
     <insert id="shippingrequestinput" parameterType="shipping">
-      INSERT INTO B_SHIPREGIST VALUES(#{bs_docunum}||LPAD(B_SHIPMENT_SEQ.NEXTVAL,4,0),#{bs_ccode},#{bs_bonum},#{bs_itcode},#{bs_proname},#{bs_clcode},#{bs_basedate},#{bs_unit},#{bs_quantity},#{bs_price})
+      INSERT INTO B_SHIPREGIST VALUES(#{bs_docunum}||LPAD(B_SHIPREGIST_SEQ.NEXTVAL,4,0),#{bs_ccode},#{bs_bonum},#{bs_itcode},#{bs_proname},#{bs_clcode},#{bs_basedate},#{bs_unit},#{bs_quantity},#{bs_price})
    </insert>
    
    <select id="shippingitem" parameterType="String" resultType="shipping">
@@ -195,6 +195,10 @@
               BA_CODE = #{search}
           </if>
       </where>
+   </select>
+   
+     <select id="getbonum" parameterType="String" resultType="shipping">
+       SELECT * FROM B_SHIPREGIST WHERE BS_BONUM =#{check}
    </select>
    
    <delete id="businessactivitiesdelete" parameterType="business">
