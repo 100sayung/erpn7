@@ -11,6 +11,13 @@
 	
 	<select id="getHRCard" parameterType="String" resultType="Member">
 		SELECT * FROM MEMBER WHERE M_CCODE = #{m_ccode}
+		SELECT 
+			MEMBER.M_NAME, MEMBER.M_PHOTO, MEMBER.M_BIRTH, MEMBER_M.EMAIL
+		FROM MEMBER 
+			LEFT OUTER JOIN HR_CARD
+			ON M_ID = HC_ID 
+		WHERE
+			M_CCODE = #{cCode} AND HR_CARD.HC_WORK !='2'
 	</select>
 	
 </mapper>

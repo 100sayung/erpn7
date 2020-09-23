@@ -285,6 +285,11 @@ $(function(){
 				$("#registBtn").attr("disabled", true);
 			}
 			$("#changeBtn").toggleClass("mf");
+			
+			console.log($(".origin").length);
+			for(let i = 0 ; i <$(".origin").length ; i++){
+				console.log($(".origin:first-child"));
+			}
 		}
 
 		var formURL = "/erp/myinfo";
@@ -308,7 +313,7 @@ $(function(){
 					str += "<td>학교/학위</td><td>전공</td><td>날짜</td></tr>";
 					for(let i = 0 ; i <data.length ; i++){
 					console.log(data[i].hac_year);
-					str += "<tr><td><input type='text' name='hac_school' class='detailInfo' value='"+data[i].hac_school+"' readonly></td>"
+					str += "<tr class='origin'><td><input type='text' name='hac_school' class='detailInfo' value='"+data[i].hac_school+"' readonly></td>"
 					str += "<td><input type='text' name='hac_major' class='detailInfo' value='"+data[i].hac_major+"' readonly></td>";
 					str += "<td><input type='date' name='hac_year' class='detailInfo' value='"+data[i].hac_year+"' readonly>";
 					str += "<input type='hidden' name='hac_num' value='"+data[i].hac_num+"'></td></tr>";
@@ -345,7 +350,7 @@ $(function(){
 					str += "<table border='1px solid black' id='infoTable' border='1' cellspacing='0'><tr class='infomenu'>";
 					str += "<td>자격증</td><td>발급처</td><td>발급일</td></tr>";
 					for(let i = 0 ; i <data.length ; i++){
-					str += "<tr><td><input type='text' name='hct_name' class='detailInfo' value='"+data[i].hct_name+"' readonly ></td>"
+					str += "<tr class='origin'><td><input type='text' name='hct_name' class='detailInfo' value='"+data[i].hct_name+"' readonly ></td>"
 					str += "<td><input type='text' name='hct_agency' class='detailInfo' value='"+data[i].hct_agency+"' readonly ></td>";
 					str += "<td><input type='date' name='hct_date' class='detailInfo' value='"+data[i].hct_date+"' readonly></td>";
 					str += "<input type='hidden' name='hct_num' value='"+data[i].hct_num+"'></td></tr>";
@@ -376,7 +381,7 @@ $(function(){
 					str += "<table border='1px solid black' id='infoTable' border='1' cellspacing='0'><tr class='infomenu'>";
 					str += "<td>회사/프로젝트명</td><td>기간</td><td>직책</td><td colspan='2'>내용</td></tr>";
 					for(let i=0; i<data.length ; i++){
-					str += "<tr><td><input type='text' name='hcr_cname' class='detailInfo' value='"+data[i].hcr_cname+"' readonly ></td>"
+					str += "<tr class='origin'><td><input type='text' name='hcr_cname' class='detailInfo' value='"+data[i].hcr_cname+"' readonly ></td>"
 					str += "<td><input type='date' name='hcr_startperiod' id='chk"+(i*2)+"'class='detailInfo checkDate' value='"+data[i].hcr_startperiod+"' readonly >부터"
 					str += "<input type='date' name='hcr_endperiod' id='chk"+((i*2)+1)+"' class='detailInfo checkDate' value='"+data[i].hcr_endperiod+"' readonly onchange='checkDateValue(chk"+(i*2)+", chk"+((i*2)+1)+")'>까지</td>"
 					str += "<td><input type='text' name='hcr_position' class='detailInfo' value='"+data[i].hcr_position+"' readonly ></td>";

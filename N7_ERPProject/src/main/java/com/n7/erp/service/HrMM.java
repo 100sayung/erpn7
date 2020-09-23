@@ -143,6 +143,7 @@ public class HrMM {
 		ctfMap.put("hrcode", hc_hrcode);
 		ctfMap.put("cCode", cCode);
 		Integer cnt = hDao.selectCertification(ctfMap);
+		System.out.println(cnt);
 		for (int i = 0; i < request.getParameterValues("hct_agency").length; i++) {
 			Certification ctf = new Certification();
 			ctf.setHct_ccode(cCode);
@@ -196,7 +197,7 @@ public class HrMM {
 		mav.setViewName("/hr/hrCard");
 		
 		if(!checkMemberHrCardCnt(m_ccode)) {
-			mav.addObject("msg", "인사카드/사원코드를 전부 다 부여해주세요");
+			mav.addObject("msg", "�씤�궗移대뱶/�궗�썝肄붾뱶瑜� �쟾遺� �떎 遺��뿬�빐二쇱꽭�슂");
 			
 		}
 		
@@ -233,7 +234,7 @@ public class HrMM {
 			type = "0";
 		}
 		logAtMap.put("type", type);
-		System.out.println("type은? " + logAtMap.get("type"));
+		System.out.println("type��? " + logAtMap.get("type"));
 		hDao.logAttendance(logAtMap);
 		hDao.logStatusToHrCard(logAtMap);
 		return type;
@@ -244,7 +245,7 @@ public class HrMM {
 		String cCode = session.getAttribute("cCode").toString();
 		String hrCode = hDao.getHrCodeFromID(id);
 
-		// 결재문서양식부터 등록
+		// 寃곗옱臾몄꽌�뼇�떇遺��꽣 �벑濡�
 		ApprovalDocu docu = new ApprovalDocu();
 		docu.setAp_ccode(cCode).setAp_docuname(apholi.getHap_docuname()).setAp_docunum("H");
 		docu.setAp_fromapprover(hrCode).setAp_toapprover(apholi.getHap_toapprover());
@@ -281,35 +282,35 @@ public class HrMM {
 		String cCode = session.getAttribute("cCode").toString();
 		String hrCode = hDao.getHrCodeFromID(id);
 
-		// 검색을 위해서 양식 만들기
 		int dayInt = Integer.parseInt(day);
 		if (dayInt < 10) {
 			day = "0" + day;
 		}
+		
 		String month = "";
-		if (yearmonth.substring(6).equals("1월")) {
+		if (yearmonth.substring(6).equals("1�썡")) {
 			month = "Jan";
-		} else if (yearmonth.substring(6).equals("2월")) {
+		} else if (yearmonth.substring(6).equals("2�썡")) {
 			month = "Feb";
-		} else if (yearmonth.substring(6).equals("3월")) {
+		} else if (yearmonth.substring(6).equals("3�썡")) {
 			month = "Mar";
-		} else if (yearmonth.substring(6).equals("4월")) {
+		} else if (yearmonth.substring(6).equals("4�썡")) {
 			month = "Apr";
-		} else if (yearmonth.substring(6).equals("5월")) {
+		} else if (yearmonth.substring(6).equals("5�썡")) {
 			month = "May";
-		} else if (yearmonth.substring(6).equals("6월")) {
+		} else if (yearmonth.substring(6).equals("6�썡")) {
 			month = "Jun";
-		} else if (yearmonth.substring(6).equals("7월")) {
+		} else if (yearmonth.substring(6).equals("7�썡")) {
 			month = "Jul";
-		} else if (yearmonth.substring(6).equals("8월")) {
+		} else if (yearmonth.substring(6).equals("8�썡")) {
 			month = "Aug";
-		} else if (yearmonth.substring(6).equals("9월")) {
+		} else if (yearmonth.substring(6).equals("9�썡")) {
 			month = "Sep";
-		} else if (yearmonth.substring(6).equals("10월")) {
+		} else if (yearmonth.substring(6).equals("10�썡")) {
 			month = "Oct";
-		} else if (yearmonth.substring(6).equals("11월")) {
+		} else if (yearmonth.substring(6).equals("11�썡")) {
 			month = "Nov";
-		} else if (yearmonth.substring(6).equals("12월")) {
+		} else if (yearmonth.substring(6).equals("12�썡")) {
 			month = "Dec";
 		}
 		String dateStandard = "%" + month + " " + day + " " + yearmonth.substring(0, 4) + "%";
@@ -365,7 +366,7 @@ public class HrMM {
 		String id = session.getAttribute("id").toString();
 		String cCode = session.getAttribute("cCode").toString();
 
-		// 검색을 위해서 양식 만들기
+		// 寃��깋�쓣 �쐞�빐�꽌 �뼇�떇 留뚮뱾湲�
 		int dayInt = Integer.parseInt(day);
 		if (dayInt < 10) {
 			day = "0" + day;
@@ -390,7 +391,7 @@ public class HrMM {
 		ArrayList<HR_Card> hList = hDao.getCheckRetired(hMap);
 		System.out.println(hList);
 		String result = new Gson().toJson(hList);
-		System.out.println("테스트중" + result);
+		System.out.println("�뀒�뒪�듃以�" + result);
 		return result;
 	}
 
@@ -456,29 +457,29 @@ public class HrMM {
 
 	private String monthConvert(String number) {
 		String month = "";
-		if (number.equals("1월")) {
+		if (number.equals("1�썡")) {
 			month = "Jan";
-		} else if (number.equals("2월")) {
+		} else if (number.equals("2�썡")) {
 			month = "Feb";
-		} else if (number.equals("3월")) {
+		} else if (number.equals("3�썡")) {
 			month = "Mar";
-		} else if (number.equals("4월")) {
+		} else if (number.equals("4�썡")) {
 			month = "Apr";
-		} else if (number.equals("5월")) {
+		} else if (number.equals("5�썡")) {
 			month = "May";
-		} else if (number.equals("6월")) {
+		} else if (number.equals("6�썡")) {
 			month = "Jun";
-		} else if (number.equals("7월")) {
+		} else if (number.equals("7�썡")) {
 			month = "Jul";
-		} else if (number.equals("8월")) {
+		} else if (number.equals("8�썡")) {
 			month = "Aug";
-		} else if (number.equals("9월")) {
+		} else if (number.equals("9�썡")) {
 			month = "Sep";
-		} else if (number.equals("10월")) {
+		} else if (number.equals("10�썡")) {
 			month = "Oct";
-		} else if (number.equals("11월")) {
+		} else if (number.equals("11�썡")) {
 			month = "Nov";
-		} else if (number.equals("12월")) {
+		} else if (number.equals("12�썡")) {
 			month = "Dec";
 		}
 		return month;
@@ -536,11 +537,11 @@ public class HrMM {
 		return mav;
 	}
 	
-	//내 급여 명세서 이동
+	//�궡 湲됱뿬 紐낆꽭�꽌 �씠�룞
 	public ModelAndView moveMyPayCheck(HttpSession session) {
 		String hrCode=session.getAttribute("hrCode").toString();
 		HR_Card check=hDao.selectcheckpay(hrCode);
-		System.out.println("값이 나옴="+check);
+		System.out.println("媛믪씠 �굹�샂="+check);
 		if(check!=null) {
 			mav.addObject("paycheck", check);
 			view="/myInfo/myPaycheck";
@@ -551,19 +552,19 @@ public class HrMM {
 		return mav;	
 	}
 	
-	//내 급여명세서 목록
+	//�궡 湲됱뿬紐낆꽭�꽌 紐⑸줉
 	public String getMyPaySelect(String hrCode, String month) {
 		HashMap<String, String> hMap=new HashMap<String, String>();
 		hMap.put("hrCode", hrCode);
 		hMap.put("month", month);
 		Payroll pay=hDao.getMyPaySelect(hMap);
-		System.out.println("긁어온 pay="+pay);
+		System.out.println("湲곸뼱�삩 pay="+pay);
 		if(pay!=null) {
 			Gson gson=new Gson();
 			String json=gson.toJson(pay);
 			return json;
 		}
-		return null;
+		return "1";
 	}
 
 	public ModelAndView getHolidayDetail(String docunum, HttpSession session) {
@@ -576,7 +577,7 @@ public class HrMM {
 		return mav;
 	}
 
-	public void registHolidayStatus(HttpSession session, String docunum, String yesno) { //현재 1이면 승인 2 면 반려
+	public void registHolidayStatus(HttpSession session, String docunum, String yesno) { //�쁽�옱 1�씠硫� �듅�씤 2 硫� 諛섎젮
 		System.out.println(docunum);
 		System.out.println(yesno);
 		HashMap<String, String> hMap = new HashMap<String, String>();

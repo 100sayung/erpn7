@@ -34,7 +34,7 @@ public interface IHrDao {
 	List<Career> getCareerInfo(HashMap<String, String> hMap);
 
 
-	//HC_CODE 대신에 해보는중
+	//HC_CODE ���떊�뿉 �빐蹂대뒗以�
 
 	@Select("SELECT C_NAME FROM COMPANY WHERE C_CODE = #{cCode}")
 	String getCName(String cCode);
@@ -46,7 +46,7 @@ public interface IHrDao {
 	boolean selectHRCard(String hc_id);
 	@Select("SELECT COUNT(*) FROM HR_CAREER WHERE Hcr_HRCODE = #{hrcode} AND HCR_CCODE = #{cCode}")
 	Integer selectCareer(HashMap<String, String> crMap);
-	@Select("SELECT COUNT(*) FROM HR_CERTIFICATION WHERE Hct_HRCODE = #{hct_hrcode} AND HCT_CCODE = #{hct_ccode}")
+	@Select("SELECT COUNT(*) FROM HR_CERTIFICATION WHERE Hct_HRCODE = #{hrcode} AND HCT_CCODE = #{ccode}")
 	Integer selectCertification(HashMap<String, String> ctfMap);
 
 	@Insert("INSERT INTO HR_CARD VALUES(#{hc_hrcode}||HR_CARD_SEQ.NEXTVAL, #{hc_ccode}, #{hc_id}, #{hc_dept}, #{hc_position}, #{hc_joindate}, DEFAULT, DEFAULT, DEFAULT)")
@@ -72,7 +72,7 @@ public interface IHrDao {
 	void logStatusToHrCard(HashMap<String, String> logAtMap);
 
 	@Insert("INSERT INTO HR_APPLYHOLIDAY VALUES(#{hap_docunum}||HR_APPLYHOLIDAY_SEQ.currval, #{hap_ccode}, #{hap_hrcode}, #{hap_docuname},"
-			+ "#{hap_fromapprover}, #{hap_toapprover}, DEFAULT, #{hap_type}, #{hap_reason}, #{hap_startday}, #{hap_endday}, DEFAULT")
+			+ "#{hap_fromapprover}, #{hap_toapprover}, DEFAULT, #{hap_type}, #{hap_reason}, #{hap_startday}, #{hap_endday}, DEFAULT)")
 	void registHoliday(ApplyHoliday apholi);
 
 	@Select("SELECT * FROM HR_ATTENDANCE WHERE HA_HRCODE = #{hrCode} AND HA_CCODE = #{cCode} AND HA_TIME LIKE #{dateStandard} ORDER BY HA_TIME")
@@ -114,7 +114,7 @@ public interface IHrDao {
 
 	@Select("SELECT * FROM MHR WHERE HC_HRCODE=#{hrCode}")
 	HR_Card selectcheckpay(String hrCode);
-	@Select("SELECT * FROM HR_CDD_PAY WHERE HP_HRCODE=#{hrCode} AND HP_PAYDATE=#{month}")
+	@Select("SELECT * FROM HR_CDD_PAY WHERE HC_HRCODE=#{hrCode} AND HP_PAYDATE=#{month}")
 	Payroll getMyPaySelect(HashMap<String, String> hMap);
 
 	@Update("UPDATE HR_APPLYHOLIDAY SET HAP_STATUS = #{status} WHERE HAP_CCODE = #{cCode} AND HAP_DOCUNUM = #{docunum}")
