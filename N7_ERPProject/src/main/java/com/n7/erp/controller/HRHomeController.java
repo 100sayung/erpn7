@@ -168,7 +168,6 @@ public class HRHomeController {
 		return duction;
 	}
 
-
 	//휴가신청
 	@PostMapping(value="/hr/applyholiday")
 	public ModelAndView applyHoliday(ApplyHoliday apholi, HttpSession session) {

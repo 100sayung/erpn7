@@ -133,16 +133,14 @@ ul {
 			success : function(data){
 				console.log(data);
 				let str = "<table>";
-				let type = "";
     			for(let i = 0 ; i<data.length ; i++){
+					let type = "";
        				let time = data[i].ha_time.substr(16, 8);
     				if(data[i].ha_type=="1"){
     					type += "<font style='color:blue'>"
-        				type += time;
 						type+= " 출근</font>"
 					}else{
 						type += "<font style='color:red'>"
-	    				type += time;
 						type+= " 퇴근</font>"
 					}
     				console.log(date);

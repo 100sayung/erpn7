@@ -10,6 +10,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
+<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css" media="all" />
 <style>
 #header {
 	width: 100%;
@@ -46,6 +47,10 @@ a {
 
 ul {
 	list-style: none;
+}
+
+.menu{
+	width:200px;
 }
 </style>
 </head>
@@ -95,7 +100,10 @@ ul {
 		</ul>
 	</div>
 
-	<div id="description"> 검색 기능 만들어야함 <br> 그리고 표 형식으로 정리 <br>
+	<button onclick="searchFromStatus(1)" class="infobtn">출근중</button><button onclick="searchFromStatus(0)" class="infobtn">퇴근중</button>
+	<br>
+	<input type="text" id="nameSearch"> <- 이름으로 검색
+	<button onclick="searchFromName()" class="infobtn">검색</button>
 	<div id ="container">
 
 	</div>
@@ -109,18 +117,19 @@ ul {
 			dataType:"json",
 			method:"get",
 			success : function(data){
-				console.log(data);
-				let str = "";
+				let str = "<table>";
+				str += "<tr class='infomenu'><td class='menu'>부서</td><td class='menu'>직책</td><td class='menu'>이름</td><td style='width:150px;'>상태</td></tr>";
 				for(let i = 0 ; i<data.length ; i++){
-					str += data[i].hc_dept + " . " + data[i].hc_position + " 의 " +data[i].m_name + " 은(는) 현재 ";
+					str += "<tr><td>" + data[i].hc_dept + "</td><td>" + data[i].hc_position + "</td><td>" +data[i].m_name + "</td><td>";
 					if(data[i].hc_status == 1){
-						str += "출근";
+						str += "<font style='color:blue;'>출근</font>";
 					}else{
-						str += "퇴근";
+						str += "<font style='color:red;'>퇴근</font>";
 					}
-					str += " 상태입니다. <br>";
+					str += "</td></tr>";
 				}
-				$("container").html(str);
+				str +="</table>"
+				$("#container").html(str);
 			}, error : function(err){
 				console.log(err);
 			}
@@ -128,7 +137,56 @@ ul {
 	});
 
 
+	function searchFromStatus(status){
+		$.ajax({
+			url:"/erp/rest/hr/searchfromstatus",
+			data:{status:status},
+			dataType:"text",
+			method:"get",
+			success : function(data){
+				console.log(data);
+				makeContainer(data);	
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+	}
+	
+	
+	function searchFromName(){
+		$name = $("#nameSearch").val();
+		console.log($name);
+		$.ajax({
+			url:"/erp/rest/hr/searchstatusfromname",
+			data:{name:$name},
+			dataType:"text",
+			method:"get",
+			success : function(data){
+				console.log(data);
+				makeContainer(data);	
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+	}
+	
 
+	function makeContainer(data){
+		data = JSON.parse(data);
+		let str = "<table>";
+		str += "<tr class='infomenu'><td class='menu'>부서</td><td class='menu'>직책</td><td class='menu'>이름</td><td style='width:150px;'>상태</td></tr>";
+		for(let i = 0 ; i<data.length ; i++){
+			str += "<tr><td>" + data[i].hc_dept + "</td><td>" + data[i].hc_position + "</td><td>" +data[i].m_name + "</td><td>";
+			if(data[i].hc_status == 1){
+				str += "<font style='color:blue;'>출근</font>";
+			}else{
+				str += "<font style='color:red;'>퇴근</font>";
+			}
+			str += "</td></tr>";
+		}
+		str +="</table>"
+		$("#container").html(str);
+	}
 
 		$("#showMenu1").hover(function() {
 			$("#smallMenu1").attr("style", "display:inline-block");

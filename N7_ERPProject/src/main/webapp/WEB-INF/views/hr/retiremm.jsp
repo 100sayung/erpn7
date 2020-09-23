@@ -10,6 +10,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
+<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css" media="all" />
 <style>
 #header {
 	width: 100%;
@@ -97,14 +98,13 @@ ul {
 	</div>
 
 	<div id="description">
-	<br> 재직중일때 검색 기능 추가해야함 !! 정말 그럴거냐고 물어봐야함 !!<br>
-		<a href="javascript:CheckRetired(0)"> 재직중(0) </a> 
-		<a href="javascript:CheckRetired(1)"> 휴직중(1) </a> 
-		<a href="javascript:CheckRetired(2)"> 퇴사(2) </a> <br>
+		<input type="text" id="nameSearch"> <button onclick="searchFromName()" class="infobtn">검색</button> <br>
+		<a href="javascript:CheckRetired(0)"><button class='infobtn'>재직중0</button></a> 
+		<a href="javascript:CheckRetired(1)"><button class='infobtn'>휴직중1</button></a> 
+		<a href="javascript:CheckRetired(2)"><button class='infobtn'>퇴사2</button></a> <br>
 		<div id="container">
 			<input type="hidden" value="" id="status">
 		</div>
-
 	</div>
 	<script>
 	//검색 조건들 생성
@@ -182,6 +182,21 @@ ul {
 
 
 
+	function searchFromName(){
+		$name = $("#nameSearch").val();
+		console.log($name);
+		$.ajax({
+			url:"/erp/rest/hr/searchfromname",
+			data:{name:$name},
+			dataType:"text",
+			method:"get",
+			success : function(data){
+				console.log(data);
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+	}
 
 
 

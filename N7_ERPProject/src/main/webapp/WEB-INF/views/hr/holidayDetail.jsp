@@ -56,7 +56,7 @@
 			if(confirm("정말 등록하시겠습니까?")){
 				regist(this.id);
 			}else{
-				alert("알겟습니다")
+				alert("알겠습니다")
 			}
 		});
 		

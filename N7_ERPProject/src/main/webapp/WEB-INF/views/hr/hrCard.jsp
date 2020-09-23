@@ -10,6 +10,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
+<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css"
+	media="all" />
 <style>
 #header {
 	width: 100%;
@@ -97,7 +99,7 @@ ul {
 	<div id="description"> ${msg }<br><br>
 	<div id="noHaveHrCard"></div>
 	<input type="text" id="nameSearch"> <- 이름으로 검색
-	<button onclick="searchFromName()">검색</button>
+	<button onclick="searchFromName()" class='infobtn'>검색</button>
 	
 	<div id="container">
 	${hrCard} 

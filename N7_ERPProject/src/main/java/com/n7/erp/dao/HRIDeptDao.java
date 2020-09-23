@@ -25,7 +25,7 @@ public interface HRIDeptDao {
 
 	@Select("SELECT * FROM HR_DEPT WHERE HDP_CCODE = #{cCode}")
 	ArrayList<Department> deptpayselect(String cCode);
-
+	
 	@Update("UPDATE HR_DEPT SET HDP_PAY=#{pay} WHERE HDP_NUM=#{dept} AND HDP_CCODE = #{cCode}")
 	boolean deptpayupdate(HashMap<String, String> hMap);
 

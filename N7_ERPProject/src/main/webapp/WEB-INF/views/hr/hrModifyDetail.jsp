@@ -5,8 +5,7 @@
 <head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css"
-	media="all" />
+<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css" media="all" />
 <title>Insert title here</title>
 <style>
 .modifyMode{
@@ -192,7 +191,7 @@ function thisRowDel(row){
 
 function changeMode(){
 	console.log($("#changeBtn").attr('class'));
-	if($("#changeBtn").attr('class')=="mf"){
+	if($("#changeBtn").attr('class')=="infobtn mf"){
 		$(".detailInfo").attr("readonly", true).addClass("modifyMode").removeClass("registMode");
 		$("#registBtn").attr("disabled", false);
 	}else{
@@ -202,14 +201,14 @@ function changeMode(){
 	$("#changeBtn").toggleClass("mf");
 }
 
-var formURL = "/erp/myinfo";
+var formURL = "/erp/hr";
 
 
 function AcademicInfo(){
 	$("#form").attr("action", formURL + "/newacademic");
 	$("#current").val("Academic");
 	$.ajax({
-		url:"/erp/rest/myinfo/academic",
+		url:"/erp/rest/hr/academic",
 		dataType:"json",
 		method:"get",
 		contentType: 'application/json',
@@ -247,7 +246,7 @@ function CertificationInfo(){
 	$("#form").attr("action", formURL + "/newcertification");
 	$("#current").val("Certification");
 	$.ajax({
-		url:"/erp/rest/myinfo/certification",
+		url:"/erp/rest/hr/certification",
 		dataType:"json",
 		method:"get",
 		success : function(data){
@@ -282,7 +281,7 @@ function CareerInfo(){
 	$("#form").attr("action", formURL + "/newcareer");
 	$("#current").val("Career");
 	$.ajax({
-		url:"/erp/rest/myinfo/career",
+		url:"/erp/rest/hr/career",
 		dataType:"json",
 		method:"get",
 		success : function(data){
@@ -305,15 +304,21 @@ function CareerInfo(){
 			console.log(err);
 		}
 	});
-}
-function InCompanyInfo(){
-	$("#form").attr("action", formURL + "/newhrcard");
+}function InCompanyInfo(){
+	$("#form").attr("action", formURL + "/newhrcard/" +id);
 	$("#current").val("HRCard");
 	$.ajax({
-		url:"/erp/rest/myinfo/hrcard",
+		url :"/erp/rest/hr/deptlist",
 		dataType:"json",
-		method:"get",
+		method :"get",
+		success : function(deptList){
+			$.ajax({
+				url:"/erp/rest/hr/hrcard",
+				data:{m_id:id},
+				dataType:"json",
+				method:"get",
 				success : function(data){
+					console.log(deptList);
 					console.log(data);
 					var married ="";
 					var status ="";
@@ -333,36 +338,84 @@ function InCompanyInfo(){
 						work="퇴사";
 					}
 					let str ="";
-					str += "<table border='1px solid black'><tr class='infomenu'>";
+					str += "<table border='1px solid black'><tr>";
 					str += "<td>사원코드</td><td>부서</td><td>직책</td></tr>";
-					str += "<tr><td><input type='text' name='hc_code' value='"+data.hc_hrcode+"' readonly></td>";
-					str += "<td><input type='text' name='hc_dept' value='"+data.hc_dept+"' readonly></td>";
-					str += "<td><input type='text' name='hc_position' value='"+data.hc_position+"' readonly></td>";
-					str += "</tr><td colspan='3' class='infomenu'>입사일</td></tr>";
+					str += "<tr><td><input type='text' name='hc_code' value='"+data.hc_hrcode+"' readonly></td>"
+					str += "<td><select name='hc_dept' class='detailInfo' onchange='changeDept(this)'>"
+					for(let i = 0 ; i<deptList.deptList.length ; i++){
+						if(data.hc_dept===deptList.deptList[i]){
+							str += "<option value='"+deptList.deptList[i]+"' selected='selected'>"+deptList.deptList[i]+"</option>";
+						}else{
+						str += "<option value='"+deptList.deptList[i]+"'>"+deptList.deptList[i]+"</option>";
+						}
+					}
+					str += "</select></td><td><span id='position'></td></tr>";
+					str += "<tr><td colspan='3'>입사일</td></tr>";
 					str += "<td colspan='3'><input type='date' name='hc_joindate' value='"+data.hc_joindate+"' class='detailInfo' readonly></td>"
-					str += "<tr class='infomenu'><td>현재 상태</td><td>재/휴직 상태</td><td>사용한 월차</td></tr>";
+					str += "<tr><td>현재 상태</td><td>재/휴직 상태</td><td>사용한 월차</td></tr>";
 					str += "<td><input type='text' value='"+status+"' readonly></td>"
 					str += "<td><input type='text' value='"+work+"'readonly></td>"
 					str += "<td><input type='text' value='"+data.hc_numholi+"' readonly></td></tr></table>";
+					console.log(data.hc_joindate);
 					$("#hrDetailInfo").html(str);
 				},error : function(err){
 					console.log(deptList);
 					console.log(err);
 					let str ="";
-					str += "<table border='1px solid black'><tr class='infomenu'>";
+					str += "<table border='1px solid black'><tr>";
 					str += "<td>사원코드</td><td>부서</td><td>직책</td></tr>";
 					str += "<tr><td><input type='text' name='hc_code' placeholder='---' readonly></td>"
-					str += "<td><input type='text' name='hc_dept' value='"+data.hc_dept+"' readonly></td>";
-					str += "<td><input type='text' name='hc_position' value='"+data.hc_position+"' readonly></td>";
-					str += "</tr><td colspan='3'>입사일</td></tr>";
-					str += "<td colspan='3'><input type='date' name='hc_joindate' readonly></td></tr>"
+					str += "<td><select name='hc_dept' class='detailInfo'>"
+					for(let i = 0 ; i<deptList.deptList.length ; i++){
+						str += "<option value='"+deptList.deptList[i]+"'>"+deptList.deptList[i]+"</option>";
+					}
+					str += "</select></td><td><select name='hc_position' class='detailInfo'>";
+					for(let i = 0 ; i<deptList.positionList.length ; i++){
+						str += "<option value='"+deptList.positionList[i]+"'>"+deptList.positionList[i]+"</option>";
+					}
+					str += "</select></td></tr><td colspan='3'>입사일</td></tr>";
+					str += "<td colspan='3'><input type='date' name='hc_joindate' class='detailInfo'></td></tr>"
 					str += "<tr><td>현재 상태</td><td>재/휴직 상태</td><td>사용한 월차</td></tr>";
 					str += "<td><input type='text' placeholder='---' readonly></td>"
 					str += "<td><input type='text' placeholder='---' readonly></td>"
 					str += "<td><input type='text' placeholder='---' readonly></td></tr></table>";
 					$("#hrDetailInfo").html(str);
-				}
-			});
+				} 
+			}); 
+		},error : function(err){
+			console.log(err);
+		}
+	});
+}
+
+function changeDept(id){
+
+	console.log(id.value)
+	$.ajax({
+		url:"/erp/rest/hr/positionfromdept",
+		method : "get",
+		dataType : "json",
+		data : {"dept" : id.value},
+		success : function(data){
+			console.log(data);
+			let str = "";
+			str += "<select name='hc_position' class='detailInfo'>";
+			for(let i = 0 ; i<data.length ; i++){
+				str += "<option value='"+data[i]+"'>"+data[i]+"</option>";
+			}
+			$("#position").html(str);
+		}, error : function(err){
+			console.log(err);
+		}
+	});
+	
+/*	for(let i = 0 ; i<deptList.positionList.length ; i++){
+		if(data.hc_position===deptList.positionList[i]){
+			str += "<option value='"+deptList.positionList[i]+"' selected='selected'>"+deptList.positionList[i]+"</option>";
+		}else{
+		str += "<option value='"+deptList.positionList[i]+"'>"+deptList.positionList[i]+"</option>";
+		}
+	} */
 }
 </script>
 </body>

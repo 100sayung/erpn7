@@ -190,6 +190,8 @@ public class HrMM {
 		ArrayList<Member> hrCardList = new ArrayList<>();
 		hrCardList = mDao.getHRCard(m_ccode);
 		
+		System.out.println(hrCardList);
+		
 		mav.addObject("hrCard", makeHRCardList(hrCardList));
 		mav.setViewName("/hr/hrCard");
 		
@@ -203,14 +205,14 @@ public class HrMM {
 
 	private String makeHRCardList(ArrayList<Member> hList) {
 		StringBuilder str = new StringBuilder();
-		str.append("<table id='table1'>");
-		str.append("<tr><td>사진</td><td>이름</td><td>생년월일</td><td>이메일</td><td>수정하기</td></tr>");
+		str.append("<table id='table1' border='1' cellspacing='0'>");
+		str.append("<tr class='infomenu'><td>사진</td><td>이름</td><td>생년월일</td><td>이메일</td><td>수정</td></tr>");
 		for (int i = 0; i < hList.size(); i++) {
 			str.append("<tr><td><img style='width:200px; height: 250px;' src='/erp/upload/" + hList.get(i).getM_photo() + "'></td>");
 			str.append("<td>" + hList.get(i).getM_name() + "</td>");
 			str.append("<td>" + hList.get(i).getM_birth() + "</td>");
 			str.append("<td>" + hList.get(i).getM_email() + "</td><td>");
-			str.append("<input type='button' value='수정' onclick='modifyDetail(\"" + hList.get(i).getM_id() + "\")'></td></tr>");
+			str.append("<input type='button' value='수정' class='infobtn' onclick='modifyDetail(\"" + hList.get(i).getM_id() + "\")'></td></tr>");
 		}
 		str.append("</table>");
 		return str.toString();
@@ -511,12 +513,15 @@ public class HrMM {
 		return list;
 	}
 
-	public String getSearchFromName(HttpSession session) {
+	public String getSearchFromName(HttpSession session, String name) {
 		String cCode = session.getAttribute("cCode").toString();
 		
-		
-		ArrayList<Member> hrCardList = new ArrayList<>();
-		hrCardList = hDao.getSearchFromName(cCode);
+		name = "%" + name + "%";
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		ArrayList<Member> hrCardList = new ArrayList<>();		
+		hMap.put("cCode", cCode);
+		hMap.put("name", name);
+		hrCardList = hDao.getSearchFromName(hMap);
 		
 		String list = makeHRCardList(hrCardList);
 		return list;
@@ -583,5 +588,46 @@ public class HrMM {
 			hMap.put("status", "2");
 		}
 	//	hDao.registHolidayStatus(hMap);
+	}
+
+	public String getSearchStatusFromName(HttpSession session, String name) {
+
+		String cCode = session.getAttribute("cCode").toString();
+		
+		name = "%" + name + "%";
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("cCode", cCode);
+		hMap.put("name", name);
+		ArrayList<Member> memberList = new ArrayList<>();
+		memberList = hDao.getSearchFromName(hMap);
+		ArrayList<HR_Card> hrCardList = new ArrayList<HR_Card>();
+		for(int i = 0 ; i <memberList.size() ; i++) {
+			HR_Card hCard = new HR_Card();
+			hCard = hDao.getHrCardDetail(memberList.get(i).getM_id());
+			hCard.setM_name(memberList.get(i).getM_name());
+			hrCardList.add(hCard);
+		}
+		String list = new Gson().toJson(hrCardList);
+		return list;
+	}
+
+	public String getSearchFromStatus(HttpSession session, String status) {
+		ArrayList<HR_Card> hrCardList = new ArrayList<HR_Card>();
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("cCode", session.getAttribute("cCode").toString());
+		hMap.put("status", status);
+		hrCardList = hDao.getHrCodeFromStatus(hMap);
+		String list = new Gson().toJson(hrCardList);
+		return list;
+	}
+
+	public String getPositionFromDept(HttpSession session, String dept) {
+		ArrayList<String> positionList = new ArrayList<String>();
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("cCode", session.getAttribute("cCode").toString());
+		hMap.put("dept", dept);
+		positionList = hDao.getPositionFromDept(hMap);
+		String list = new Gson().toJson(positionList);
+		return list;
 	}
 }

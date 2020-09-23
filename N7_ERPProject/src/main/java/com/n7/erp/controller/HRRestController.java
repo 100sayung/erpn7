@@ -62,7 +62,13 @@ public class HRRestController {
 		Member mb = hm.getMemberInfo(m_id);
 		return mb;
 	}
-
+	
+	//부서로 직책가져오기
+	@GetMapping(value="/hr/positionfromdept")
+	public String getPositionFromDept(HttpSession session, String dept) {
+		String result = hm.getPositionFromDept(session, dept);
+		return result;
+	}
 	//인사카드 없는 사람들 정보 출력
 	@GetMapping(value="/hr/nohrcard",  produces = "application/text; charset=utf8")
 	public String getNoHrCard(HttpSession session) {
@@ -71,9 +77,19 @@ public class HRRestController {
 	}
 
 	//인사카드 이름 검색 출력
-	@GetMapping(value="/hr/searchfromname")
-	public String getSearchFromName(HttpSession session) {
-		String result = hm.getSearchFromName(session);
+	@GetMapping(value="/hr/searchfromname",  produces = "application/text; charset=utf8")
+	public String getSearchFromName(HttpSession session, String name) {
+		String result = hm.getSearchFromName(session, name);
+		return result;
+	}
+	@GetMapping(value="/hr/searchstatusfromname",  produces = "application/text; charset=utf8")
+	public String getSearchStatusFromName(HttpSession session, String name) {
+		String result = hm.getSearchStatusFromName(session, name);
+		return result;
+	}
+	@GetMapping(value="/hr/searchfromstatus",  produces = "application/text; charset=utf8")
+	public String getSearchFromStatus(HttpSession session, String status) {
+		String result = hm.getSearchFromStatus(session, status);
 		return result;
 	}
 

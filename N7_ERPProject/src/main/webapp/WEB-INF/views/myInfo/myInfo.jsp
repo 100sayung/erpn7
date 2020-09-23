@@ -269,15 +269,15 @@ $(function(){
 			$("#infoTable > tbody:last").append(str);
 		}
 
-		function thisRowDel(row){
+		function thisRowDel(row){	
 			console.log(row);
 			let tr = row.parentNode.parentNode;
 			tr.parentNode.removeChild(tr);
-		}
+		}	
 
 		function changeMode(){
 			console.log($("#changeBtn").attr('class'));
-			if($("#changeBtn").attr('class')=="mf"){
+			if($("#changeBtn").attr('class')=="infobtn mf"){
 				$(".detailInfo").attr("readonly", true).addClass("modifyMode").removeClass("registMode");
 				$("#registBtn").attr("disabled", false);
 			}else{

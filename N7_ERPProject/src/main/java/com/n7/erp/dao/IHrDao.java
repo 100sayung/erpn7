@@ -71,7 +71,7 @@ public interface IHrDao {
 	@Insert("UPDATE HR_CARD SET HC_STATUS = #{type} WHERE HC_CCODE = #{cCode} AND HC_HRCODE = #{hrCode}")
 	void logStatusToHrCard(HashMap<String, String> logAtMap);
 
-	@Insert("INSERT INTO HR_APPLYHOLIDAY VALUES(${hap_docunum}||HR_APPLYHOLIDAY_SEQ.currval, #{hap_ccode}, #{hap_hrcode}, #{hap_docuname},"
+	@Insert("INSERT INTO HR_APPLYHOLIDAY VALUES(#{hap_docunum}||HR_APPLYHOLIDAY_SEQ.currval, #{hap_ccode}, #{hap_hrcode}, #{hap_docuname},"
 			+ "#{hap_fromapprover}, #{hap_toapprover}, DEFAULT, #{hap_type}, #{hap_reason}, #{hap_startday}, #{hap_endday}, DEFAULT")
 	void registHoliday(ApplyHoliday apholi);
 
@@ -104,9 +104,10 @@ public interface IHrDao {
 
 	boolean checkMemberHrCardCnt(String cCode);
 	ArrayList<Member> getNoHrCard(String cCode);
-	@Select("SELECT * FROM MEMBER WHERE M_CCODE = #{cCode}")
-	ArrayList<Member> getSearchFromName(String cCode);
-
+	@Select("SELECT * FROM MEMBER WHERE M_CCODE = #{cCode} AND M_NAME LIKE #{name}")
+	ArrayList<Member> getSearchFromName(HashMap<String, String> hMap);
+	ArrayList<HR_Card> getHrCodeFromStatus(HashMap<String, String> hMap);
+	
 	@Select("SELECT * FROM HR_APPLYHOLIDAY WHERE HAP_DOCUNUM = #{docunum} AND HAP_CCODE = #{cCode}")
 	ApplyHoliday getDetailHoliday(HashMap<String, String> hMap);
 
@@ -118,6 +119,10 @@ public interface IHrDao {
 
 	@Update("UPDATE HR_APPLYHOLIDAY SET HAP_STATUS = #{status} WHERE HAP_CCODE = #{cCode} AND HAP_DOCUNUM = #{docunum}")
 	void registHolidayStatus(HashMap<String, String> hMap);
+	
+	@Select("SELECT HDP_POSITION FROM HR_DEPT WHERE HDP_CCODE = #{cCode} AND HDP_DEPT = #{dept}")
+	ArrayList<String> getPositionFromDept(HashMap<String, String> hMap);
+
 
 
 
