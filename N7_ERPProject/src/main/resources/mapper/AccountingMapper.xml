@@ -182,28 +182,52 @@
 		#{j_none}, #{j_ntwo}, #{j_nthr}, DEFAULT)
 	</insert>
 
-	<!-- 임시저장 결재안까지 다불러오기 -->
-	<select id="aclist" resultType="account">
+	<!-- 내가 올린 결재안 목록 -->
+	<select id="aplist" resultType="approvaldocu" parameterType="approvaldocu">
 		SELECT *
-		FROM AC_JNOB
-		WHERE J_NONE
-		= #{hrCode}
+		FROM APPROVALDOCU
+		WHERE AP_FROMAPPROVER = #{hrCode}
+	</select>
+	
+	<!-- 내가 받은 결재안 목록 -->
+	<select id="aplist2" resultType="approvaldocu"
+		parameterType="approvaldocu">
+		SELECT *
+		FROM APPROVALDOCU
+		WHERE AP_TOAPPROVER = #{hrCode} 
+<!-- 		AND AP_STATUS!= '0' -->
+		<!-- WHERE (J_NTWO = #{cCode} OR J_NTHR = #{cCode}) AND J_GRADE != '0' -->
+	</select> 
+	
+	<!-- 임시저장 결재안 -->
+	<select id="aclist" resultType="account" parameterType="account">
+		SELECT *
+		FROM AC_JNOB 
+		WHERE J_NONE = #{hrCode} AND J_GRADE = '0'
 	</select>
 
+	<!-- 내가올린 결재 상세 -->
 	<select id="acrequest" resultType="account">
 		SELECT *
 		FROM AC_JNOB
-		WHERE
-		J_DOCUNUM=#{j_docunum}
+		WHERE J_DOCUNUM=#{j_docunum}
 	</select>
 
+<!-- 내가 받은 결재 상세 -->
 	<select id="acrequest2" resultType="account">
 		SELECT *
 		FROM AC_JNOB
-		WHERE
-		J_DOCUNUM=#{j_docunum}
+		WHERE J_DOCUNUM=#{j_docunum} AND J_GRADE !='4'
+	</select>
+	
+<!-- 임시저장 결재 상세 -->
+	<select id="acrequest3" resultType="account">
+		SELECT *
+		FROM AC_JNOB
+		WHERE J_DOCUNUM=#{j_docunum}
 	</select>
 
+	<!-- 결재자 2,3 넣어서 업데이트 -->
 	<update id="acSign">
 		UPDATE AC_JNOB
 		SET J_GRADE = #{j_grade}, J_NONE =
@@ -213,11 +237,19 @@
 		WHERE J_DOCUNUM = #{j_docunum}
 	</update>
 
+	<!-- 결재하면 등급 업데이트 -->
 	<update id="acSign2">
 		UPDATE AC_JNOB
 		SET J_GRADE = #{j_grade}
 		WHERE J_DOCUNUM
 		=#{j_docunum}
+	</update>
+	
+	<!-- 공통결재안 결재업데이트 -->
+	<update id="apSign2">
+		UPDATE APPROVALDOCU
+		SET AP_STATUS = #{ap_status}, AP_TOAPPROVER = #{ap_toapprover}
+		WHERE AP_DOCUNUM = #{ap_docunum}
 	</update>
 
 	<update id="acBack">
@@ -239,6 +271,7 @@
 		WHERE J_DOCUNUM = #{j_docunum}
 	</delete>
 
+	<!--공통결재함에 INSERT-->
 	<insert id="apCart2" parameterType="approvaldocu">
 		INSERT INTO APPROVALDOCU
 		VALUES (#{ap_docunum}, #{ap_ccode}, #{ap_docuname},
@@ -246,21 +279,7 @@
 	</insert>
 
 
-	<select id="aplist2" resultType="approvaldocu"
-		parameterType="approvaldocu">
-		SELECT *
-		FROM APPROVALDOCU
-		WHERE AP_TOAPPROVER = #{cCode} AND AP_STATUS
-		!= '0'
-		<!-- WHERE (J_NTWO = #{cCode} OR J_NTHR = #{cCode}) AND J_GRADE != '0' -->
-	</select>
-
-	<update id="apSign2">
-		UPDATE APPROVALDOCU
-		SET AP_STATUS = #{ap_status}, AP_TOAPPROVER = #{ap_toapprover}
-		WHERE AP_DOCUNUM = #{ap_docunum}
-	</update>
-
+	<!-- 공통결재안 반려 -->
 	<update id="apBack2">
 		UPDATE APPROVALDOCU
 		SET AP_STATUS = '4'
@@ -268,4 +287,8 @@
 		AP_DOCUNUM = #{ap_docunum}
 	</update>
 
+	<select id="getApprinfo" parameterType="String"
+		resultType="Line">
+		SELECT * FROM MLIST WHERE HC_HRCODE=#{code}
+	</select>
 </mapper>

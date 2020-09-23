@@ -88,30 +88,40 @@ public interface AccountDao {
 ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////
 
-	public List<Account> aclist(String cCode);
+	public List<ApprovalDocu> aplist(String hrCode); //내가 올린 결재안
 
-	public Account acrequest(String j_docunum); // 내가올린결재안상세
+	public List<ApprovalDocu> aplist2(String hrCode); //내가 받은 결재안
+	
+	public List<Account> aclist(String hrCode); //임시저장 결재함
+	
+	public Account acrequest(String j_docunum); // 내가올린 결재안상세
 
 	public Account acrequest2(String j_docunum); // 내가받은결재안상세
+	
+	public Account acrequest3(String j_docunum); // 임시저장 결재안상세
 
-	public boolean acCart(Account ac);
+	public boolean acCart(Account ac); //처음에 임시저장으로 insert할때
 
-	public boolean acSign(Account ac);
+	public boolean acSign(Account ac); //결재자1이 결재자 2, 3, 결재등급, 기타등등 업데이트
 
-	public boolean acSign2(Account ac);
+	public boolean acSign2(Account ac); //결재자 2,3이 결재할때
 
-	public boolean acDelete(String j_docunum);
+	public int acCheck(String j_docunum); //결재안 삭제 위한 체크
 
-	public boolean acBack(Account ac);
+	public boolean acDelete(String j_docunum); //결재안 삭제 임시저장이면 할수있음
 
-	public int acCheck(String j_docunum);
+	public boolean acBack(Account ac); //결재안 반려
 
-	public boolean apCart2(ApprovalDocu ap);
+	public boolean apCart2(ApprovalDocu ap); //공통결재함에 insert(결재자1이 임시저장에서 결재해야함)
 
-	public boolean apSign2(ApprovalDocu ap);
+	public boolean apSign2(ApprovalDocu ap); //공통결재함에서 toapprover update
 
-	public boolean apBack2(String ap_docunum);
+	public boolean apBack2(String ap_docunum); //공통결재함 반려
 
-	public List<Account> aplist2(String cCode);
+	com.n7.erp.bean.ac.approvalLine getApprinfo(String name);
 
+
+	
+
+	
 }

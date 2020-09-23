@@ -283,6 +283,7 @@ public class AccountMM {
 		System.out.println("숫자=" + cnt);
 		System.out.println("이름값=" + strArray.length);
 		String code = "";
+
 		approvalLine al = new approvalLine();
 		for (int i = 0; i < cnt; i++) {
 			code = strArray[i];
@@ -477,59 +478,73 @@ public class AccountMM {
 
 	public Map<String, List<Account>> aclist(HttpSession session) {
 		Map<String, List<Account>> aMap = null;
-		String hrCode = (String) session.getAttribute("hrCode");
+		String hrCode = session.getAttribute("hrCode").toString();
 		List<Account> aList = aDao.aclist(hrCode);
 
 		if (aList != null) {
 			aMap = new HashMap<>();
 			aMap.put("aList", aList);
-			System.out.println("jList가져왓어");
+			System.out.println("임시저장 리스트 가져왓어");
 		} else {
 			System.out.println("못가져왓져");
 		}
 		return aMap;
 	}
 
-	public Map<String, List<Account>> aclist2(HttpSession session) {
-		Map<String, List<Account>> aMap = null;
+	public Map<String, List<ApprovalDocu>> aplist(HttpSession session) {
+		Map<String, List<ApprovalDocu>> pMap = null;
+		String hrCode = (String) session.getAttribute("hrCode");
+		List<ApprovalDocu> pList = aDao.aplist(hrCode);
+
+		if (pList != null) {
+			pMap = new HashMap<>();
+			pMap.put("pList", pList);
+			System.out.println("내가올린 pList가져왓어");
+		} else {
+			System.out.println("못가져왓져");
+		}
+		return pMap;
+	}
+
+	public Map<String, List<ApprovalDocu>> aplist2(HttpSession session) {
+		Map<String, List<ApprovalDocu>> pMap = null;
 		String hrCode = (String) session.getAttribute("hrCode");
 		System.out.println("사원코드: " + hrCode);
 
-		List<Account> aList = aDao.aplist2(hrCode);
+		List<ApprovalDocu> pList = aDao.aplist2(hrCode);
 
-		if (aList != null) {
-			aMap = new HashMap<>();
-			aMap.put("aList", aList);
+		if (pList != null) {
+			pMap = new HashMap<>();
+			pMap.put("pList", pList);
 			System.out.println("내가받은 jList가져왓어");
 		} else {
 			System.out.println("못가져왓져");
 		}
 
-		return aMap;
+		return pMap;
 	}
 
-	// 내가올린결재안 상세
-	public ModelAndView acRequest(String j_docunum) {
+	// 임시저장 결재안 상세보기
+	public ModelAndView acRequest3(String j_docunum) {
 		mav = new ModelAndView();
 		String view = null;
 
-		Account ac = aDao.acrequest(j_docunum);
+		Account ac = aDao.acrequest3(j_docunum);
 
 		if (ac != null) {
-
 			mav.addObject("ac", ac);
-			view = "Account/acCartinfo";
+			view = "Account/acapPreinfo";
 			System.out.println(ac.getJ_none());
 			System.out.println("성공했다 이시키야");
 		} else {
-			view = "Account/acPend";
+			view = "Account/acCartinfo";
 			System.out.println("야 못했다 미안하다...");
 		}
 		mav.setViewName(view);
 		return mav;
 	}
 
-	// 내가받은결재안 상세
+	// 내가받은결재안 상세보기
 	public ModelAndView acRequest2(String j_docunum) {
 		mav = new ModelAndView();
 		String view = null;
@@ -542,7 +557,27 @@ public class AccountMM {
 			System.out.println(ac.getJ_none());
 			System.out.println("성공했다 이시키야");
 		} else {
-			view = "Account/acDownlist";
+			view = "Account/acApinfo";
+			System.out.println("야 못했다 미안하다...");
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+
+	// 내가올린결재안 상세
+	public ModelAndView acRequest(String j_docunum) {
+		mav = new ModelAndView();
+		String view = null;
+
+		Account ac = aDao.acrequest(j_docunum);
+
+		if (ac != null) {
+			mav.addObject("ac", ac);
+			view = "Account/acCartinfo";
+			System.out.println(ac.getJ_none());
+			System.out.println("성공했다 이시키야");
+		} else {
+			view = "Account/acCartinfo";
 			System.out.println("야 못했다 미안하다...");
 		}
 		mav.setViewName(view);
@@ -590,6 +625,7 @@ public class AccountMM {
 				out = rep.getWriter();
 				out.println("<script>alert('결재요청완료');</script>");
 				out.println("<script>window.close();</script>");
+				out.println("<script>window.opener.location.reload();</script>");
 				out.flush();
 				out.close();
 				mav.setViewName("Account/acPend");
@@ -611,7 +647,10 @@ public class AccountMM {
 		mav = new ModelAndView();
 		String view = null;
 		String hrCode = (String) session.getAttribute("hrCode");
-
+		ac.setJ_none(req.getParameter("rs_apcode0"));
+		ac.setJ_ntwo(req.getParameter("rs_apcode1"));
+		ac.setJ_nthr(req.getParameter("rs_apcode2"));
+		
 		if (ac.getJ_grade().equals("1") && hrCode.equals(ac.getJ_ntwo())) {
 			ac.setJ_grade("2");
 			ap.setAp_toapprover(ac.getJ_nthr());
@@ -628,9 +667,11 @@ public class AccountMM {
 		} else if (ac.getJ_grade().equals("3")) {
 			ap.setAp_status("3");
 		} else {
-			ap.setAp_docunum(ac.getJ_docunum());
+			ap.setAp_status("3");
 		}
-		
+
+		ap.setAp_docunum(ac.getJ_docunum());
+
 		boolean sa = aDao.acSign2(ac);
 		boolean sp = aDao.apSign2(ap);
 
@@ -645,18 +686,25 @@ public class AccountMM {
 		return mav;
 	}
 
+	// 결재안 삭제
 	public int acDelete(String j_docunum, Account ac, HttpServletRequest req, HttpServletResponse rep) {
+		int a = aDao.acCheck(j_docunum);
+		boolean b = aDao.acDelete(j_docunum);
 
 		// 결재상태1?2면 딜리트안되게해야돼
-		if (aDao.acCheck(j_docunum) != 0 && aDao.acDelete(j_docunum)) {
-			System.out.println("결재안삭제 완료");
+		if (a != 0 && b) { // 결재상태 '0'인게 있고 삭제가 되면 결재안삭제완료
+			System.out.println("결재안삭제가 완료되었습니다.");
 			return 1;
+		} else if (a == 0) { // 결재상태 '0'인게 없을경우
+			System.out.println("결재중인 결재안입니다.");
+			return 2;
 		} else {
-			System.out.println("결재안삭제 실패");
+			System.out.println("");
 			return 0;
 		}
 	}
 
+	// 결재안 반려
 	public ModelAndView acBack(Account ac, ApprovalDocu ap, HttpServletRequest req, HttpServletResponse rep) {
 		mav = new ModelAndView();
 		String view = null;
@@ -683,4 +731,26 @@ public class AccountMM {
 		return mav;
 	}
 
+
+	public Map<String, List<approvalLine>> getApprinfo(int cnt, String[] strArray) {
+		Map<String, List<approvalLine>> aMap = null;
+		List<approvalLine> aList = new ArrayList<>();
+		System.out.println("숫자=" + cnt);
+		System.out.println("이름값=" + strArray.length);
+		String code = "";
+		
+		approvalLine al = new approvalLine();
+		for (int i = 0; i < cnt; i++) {
+			code = strArray[i];
+			al = aDao.getApprinfo(code);
+			aList.add(al);
+		}
+		if (aList != null) {
+			aMap = new HashMap<>();
+			aMap.put("aList", aList);
+		} else {
+			aMap = null;
+		}
+		return aMap;
+	}
 }

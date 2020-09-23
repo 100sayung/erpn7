@@ -6,7 +6,22 @@
 <meta charset="UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<!-- BOOTSTRAP STYLES-->
+    <link href="/erp/assets/css/bootstrap.css" rel="stylesheet">
+     <!-- FONTAWESOME STYLES-->
+    <link href="/erp/assets/css/font-awesome.css" rel="stylesheet">
+        <!-- CUSTOM STYLES-->
+    <link href="/erp/assets/css/custom.css" rel="stylesheet">
+     <!-- GOOGLE FONTS-->
+   <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+     <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="/erp/assets/js/jquery-1.10.2.js"></script>
+      <!-- BOOTSTRAP SCRIPTS -->
+    <script src="/erp/assets/js/bootstrap.min.js"></script>
+      <!-- CUSTOM SCRIPTS -->
+    <script src="/erp/assets/js/custom.js"></script>
 <title>Insert title here</title>
 <style>
 table, tr, td {
@@ -20,11 +35,19 @@ td {
 	width: 58px;
 	height: 10px;
 }
+
+#table{
+	width: 1400px;
+	height: auto;
+}
+#m {
+	background-color: gray;
+}
 </style>
 </head>
 <body>
 	<!-- 	<h1>acPend.jsp(임시저장)</h1> -->
-	<table>
+	<table id="table">
 		<tr id="m">
 			<td>check</td>
 			<td>문서번호</td>
@@ -35,8 +58,9 @@ td {
 			<td>올린시간</td>
 			<td>결재상태</td>
 		</tr>
+		<tbody id="Info">
+		</tbody>
 	</table>
-	<div id="Info"></div>
 	<br>
 	<button id="approval">결재안 상세보기</button>
 <!-- 	<button id="acBack2">반려요청</button> -->
@@ -52,16 +76,16 @@ td {
 				success : function(data) {
 					console.log(data);
 					var str = "";
-					for ( var i in data.aList) {
-						str += "<tr>"
-						str += "<td><input type='radio' name='checknum' class='check' value='"+data.aList[i].ap_docunum+"'></td>"
-						str += '<td>' + data.aList[i].ap_docunum + '</td>'
-						str += '<td>' + data.aList[i].ap_ccode + '</td>'
-						str += '<td>' + data.aList[i].ap_docuname + '</td>'
-						str += '<td>' + data.aList[i].ap_fromapprover + '</td>'
-						str += '<td>' + data.aList[i].ap_toapprover + '</td>'
-						str += '<td>' + data.aList[i].ap_date + '</td>'
-						str += '<td>' + data.aList[i].ap_status + '</td>'
+					for ( var i in data.pList) {
+						str += "<tr class='success'>"
+						str += "<td><input type='radio' name='checknum' class='check' value='"+data.pList[i].ap_docunum+"'></td>"
+						str += '<td>' + data.pList[i].ap_docunum + '</td>'
+						str += '<td>' + data.pList[i].ap_ccode + '</td>'
+						str += '<td>' + data.pList[i].ap_docuname + '</td>'
+						str += '<td>' + data.pList[i].ap_fromapprover + '</td>'
+						str += '<td>' + data.pList[i].ap_toapprover + '</td>'
+						str += '<td>' + data.pList[i].ap_date + '</td>'
+						str += '<td>' + data.pList[i].ap_status + '</td>'
 						str += '</tr>'
 					}
 					$("#Info").html(str);

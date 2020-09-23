@@ -75,9 +75,12 @@ table, tr, th, td {
 				<tr>
 					<th>결재자</th>
 					<th id="line">
-					<input type="hidden" value="${ac.j_none}" name="j_none">결재자1: ${ac.j_none} || 
-						<input type="hidden" value="${ac.j_ntwo}" name="j_ntwo">결재자2: ${ac.j_ntwo} || 
-						<input type="hidden" value="${ac.j_nthr}" name="j_nthr">결재자3:${ac.j_nthr}
+						<input type="hidden" value="${ac.j_none}" name="code">
+						<input type="hidden" value="${ac.j_ntwo}" name="code">
+						<input type="hidden" value="${ac.j_nthr}" name="code">
+<%-- 						<input type="hidden" value="${ac.j_none}" name="j_none"> --%>
+<%-- 						<input type="hidden" value="${ac.j_ntwo}" name="j_ntwo"> --%>
+<%-- 						<input type="hidden" value="${ac.j_nthr}" name="j_nthr"> --%>
 					</th>
 
 				</tr>
@@ -151,6 +154,39 @@ table, tr, th, td {
 	</form>
 </body>
 <script>
+$(document).ready(
+		function() {
+			arr = new Array();
+			var cnt = $("input[name='code']").length;
+
+			$("input[name='code']").each(function() {
+				arr.push($(this).attr('value'));
+			});
+
+			$.ajax({
+						url : '/erp/rest/Account/getApprinfo',
+						type : 'post',
+						traditional : true,
+						data : 'ARR=' + arr + '&CNT=' + cnt,
+						success : function(data) {
+							console.log(data);
+							var str = "";
+							for ( var i in data.aList) {
+								str += "<input type='text' name='rs_apcode"+i+"' value='"+data.aList[i].hc_hrcode+"' hidden='true'>";
+								str += data.aList[i].hc_position
+										+ "/";
+								str += "<input style='width:50px;' type='text' name='rs_apname"+i+"' value='"+ data.aList[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
+							}
+							console.log(str)
+							$("#line").html(str);
+
+						},
+						error : function(error) {
+							console.log(error);
+						}
+					});
+		});
+
 	$('#acSign2').click(function() {
 
 		var obj = $("#fo").serialize();
@@ -165,7 +201,7 @@ table, tr, th, td {
 			success : function(data) {
 				alert("결재요청이 완료되었습니다.");
 				window.close();
-// 				window.opener.location.reload();
+				window.opener.location.reload();
 				console.log(data);
 			},
 			error : function(error) {

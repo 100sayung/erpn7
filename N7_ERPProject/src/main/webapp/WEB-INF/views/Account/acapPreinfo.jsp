@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,7 +60,7 @@ table, tr, th, td {
 </style>
 </head>
 <body>
-	<form id="fo">
+	<form action="/erp/rest/Account/acSign" method="post">
 		<div
 			style="width: auto; background-color: #FFB2D9; color: white; padding: 1%;">기안문
 			상세보기</div>
@@ -68,17 +69,25 @@ table, tr, th, td {
 			<table>
 				<tr>
 					<th>제목</th>
-					<th><input type="hidden" name="j_title" value="${ac.j_title}">${ac.j_title}
-					</th>
-
+					<th><input type="hidden" name="j_title" value="${ac.j_title}">${ac.j_title}</th>
 				</tr>
 				<tr>
 					<th>결재자</th>
-					<th id="line">
-					<input type="hidden" value="${ac.j_none}" name="j_none">결재자1: ${ac.j_none} || 
-						<input type="hidden" value="${ac.j_ntwo}" name="j_ntwo">결재자2: ${ac.j_ntwo} || 
-						<input type="hidden" value="${ac.j_nthr}" name="j_nthr">결재자3:${ac.j_nthr}
-					</th>
+					<th id="line"><c:set var="name" value="${ac.j_ntwo}" /> <c:choose>
+							<c:when test="${name eq '결재자2'}">
+								<input type="hidden" value="${ac.j_none}" id="j_none"
+									name="j_none">
+								<input type="hidden" value="${ac.j_ntwo}" id="j_ntwo"
+									name="j_ntwo">
+								<input type="hidden" value="${ac.j_nthr}" id="j_nthr"
+									name="j_nthr">
+							</c:when>
+							<c:when test="${name != '결재자2'}">
+								<input type="hidden" value="${ac.j_none}" name="j_none" readonly>결재자1: ${ac.j_none} ||
+								<input type="hidden" value="${ac.j_ntwo}" name="j_ntwo" readonly>결재자2: ${ac.j_ntwo} ||
+								<input type="hidden" value="${ac.j_nthr}" name="j_nthr" readonly>결재자3: ${ac.j_nthr}
+							</c:when>
+						</c:choose></th>
 
 				</tr>
 				<tr>
@@ -94,7 +103,7 @@ table, tr, th, td {
 										<th colspan="2">문서번호</th>
 										<th colspan="2"><input type="text" name="j_docunum"
 											class="txt" value="${ac.j_docunum}" readonly><input
-											type="hidden" name="j_grade" class="draft3"
+											type="hidden" name="j_grade" id="j_grade" class="draft3"
 											value="${ac.j_grade}" readonly></th>
 										<!-- 										<td>결재상태</td> -->
 
@@ -145,58 +154,70 @@ table, tr, th, td {
 					</td>
 				</tr>
 			</table>
-			<button type="button" id="acSign2">결재</button>
-			<button type="button" id="acBack2">반려</button>
+			<%-- 			<c:set var="name" value="${ac.j_ntwo}" /> --%>
+			<%-- 			<c:set var="code" value=" ${cCode}" /> --%>
+			<%-- 			<c:choose> --%>
+			<%-- 				<c:when test="${name eq '결재자2'}"> --%>
+			<button type="button" id="approvalLine2">결재라인 불러오기</button>
+			<button type="submit">결재요청</button>
+			<%-- 				</c:when> --%>
+			<%-- 			</c:choose> --%>
 		</div>
 	</form>
+	<script>
+		$(document).ready(
+						function() {
+
+							$.ajax({
+										url : '/erp/rest/Account/getMyInfo',
+										type : 'get',
+										success : function(data) {
+											console.log(data);
+											var str = "";
+											for ( var i in data.sList) {
+												str += "<input type='text' name='rs_apcode"+i+"' value='"+data.sList[i].hc_hrcode+"' hidden='true'>";
+												str += data.sList[i].hc_position
+														+ "/";
+												str += "<input style='width:50px;' type='text' name='rs_apname"+i+"' value='"+ data.sList[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
+											}
+											console.log(str)
+											$("#line").html(str);
+
+										},
+										error : function(error) {
+											console.log(error);
+										}
+									});
+						});
+
+		function setChildValue(data) {
+			console.log(data);
+			if (data.tList1 != "") {
+				var str = "";
+				for ( var i in data.tList1) {
+					str += "<input type='text' name='rs_apcode"
+							+ (Number(i) + Number(1)) + "' value='"
+							+ data.tList1[i].hc_hrcode + "' hidden='true'>";
+					str += data.tList1[i].hc_position + "/";
+					str += "<input style='width:50px;' type='text' name='rs_apname"
+							+ (Number(i) + Number(1))
+							+ "' value='"
+							+ data.tList1[i].m_name
+							+ "'>&nbsp;&nbsp;||&nbsp;&nbsp;";
+
+				}
+				console.log(str)
+				$("#line").append(str);
+			}
+			;
+		};
+
+		$("#approvalLine2").click(
+				function() {
+
+					window.open('/erp/Account/approvalLine', 'approvalLine',
+							'width=1400,height=700');
+				});
+	</script>
 </body>
-<script>
-	$('#acSign2').click(function() {
-
-		var obj = $("#fo").serialize();
-		console.log(obj);
-
-		$.ajax({
-			url : '/erp/rest/Account/acSign2',
-			type : 'post',
-			data : obj,
-// 			dataType : 'json',
-// 			contentType : 'application/json; charset=UTF-8',
-			success : function(data) {
-				alert("결재요청이 완료되었습니다.");
-				window.close();
-// 				window.opener.location.reload();
-				console.log(data);
-			},
-			error : function(error) {
-				alert("결재요청이 실패했습니다.")
-				console.log(error);
-			}
-		})
-	});
-
-	$('#acBack2').click(function() {
-		
-		var obj = $("#fo").serialize();
-		console.log(obj);
-
-		$.ajax({
-			url : '/erp/rest/Account/acBack',
-			type : 'post',
-			data : obj,
-// 			dataType : 'json',
-// 			contentType : 'application/json; charset=UTF-8',
-			success : function(data) {
-				alert("반려가 완료되었습니다.");
-				window.close();
-				window.opener.location.reload();
-				console.log(data);
-			},
-			error : function(error) {
-				alert("반려가 실패했습니다.")
-				console.log(error);
-			}
-		})
-	});
-</script>
 </html>

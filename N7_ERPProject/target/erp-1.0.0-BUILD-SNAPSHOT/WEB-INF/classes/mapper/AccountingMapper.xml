@@ -92,7 +92,7 @@
 		SELECT * FROM AC_COMPANYLIST WHERE CL_CODE=#{cl_code}
 	</select>
 	
-	<select id="getTaxbill" parameterType="String"
+	<select id="getTaxbill" parameterType="String" 
 		resultType="saleInfo">
 		SELECT * FROM AC_SALESTATEMENT WHERE S_NUM=#{check}
 	</select>
@@ -182,26 +182,46 @@
 		#{j_none}, #{j_ntwo}, #{j_nthr}, DEFAULT)
 	</insert>
 
-	<!-- 임시저장 결재안까지 다불러오기 -->
-	<select id="aclist" resultType="account">
+	<!-- 내가 올린 결재안 목록 -->
+	<select id="aplist" resultType="approvaldocu" parameterType="approvaldocu">
+		SELECT *
+		FROM APPROVALDOCU
+		WHERE AP_FROMAPPROVER = #{hrCode}
+	</select>
+	
+	<!-- 내가받은결재안 -->
+	<select id="aplist2" resultType="approvaldocu"
+		parameterType="approvaldocu">
+		SELECT *
+		FROM APPROVALDOCU
+		WHERE AP_TOAPPROVER = #{hrCode} 
+<!-- 		AND AP_STATUS!= '0' -->
+		<!-- WHERE (J_NTWO = #{cCode} OR J_NTHR = #{cCode}) AND J_GRADE != '0' -->
+	</select> 
+	
+	<!-- 임시저장 결재안 -->
+	<select id="aclist" resultType="account" parameterType="account">
 		SELECT *
 		FROM AC_JNOB
-		WHERE J_NONE
-		= #{hrCode}
+		WHERE J_NONE = '${hrCode}' AND J_GRADE = '0'
 	</select>
+
+<!-- 	<select id="acPreviewlist" resultType="account" parameterType="account"> -->
+<!-- 	SELECT * -->
+<!-- 	FROM AC_JNOB -->
+<!-- 	WHERE J_NONE = #{hrCode} AND J_GRADE = '0' -->
+<!-- 	</select> -->
 
 	<select id="acrequest" resultType="account">
 		SELECT *
 		FROM AC_JNOB
-		WHERE
-		J_DOCUNUM=#{j_docunum}
+		WHERE J_DOCUNUM=#{j_docunum}
 	</select>
 
 	<select id="acrequest2" resultType="account">
 		SELECT *
 		FROM AC_JNOB
-		WHERE
-		J_DOCUNUM=#{j_docunum}
+		WHERE J_DOCUNUM=#{j_docunum}
 	</select>
 
 	<update id="acSign">
@@ -246,22 +266,15 @@
 	</insert>
 
 
-	<select id="aplist2" resultType="approvaldocu"
-		parameterType="approvaldocu">
-		SELECT *
-		FROM APPROVALDOCU
-		WHERE AP_TOAPPROVER = #{cCode} AND AP_STATUS
-		!= '0'
-		<!-- WHERE (J_NTWO = #{cCode} OR J_NTHR = #{cCode}) AND J_GRADE != '0' -->
-	</select>
 
+<!-- 공통결재안 결재업데이트 -->
 	<update id="apSign2">
 		UPDATE APPROVALDOCU
-		SET AP_STATUS = #{ap_status}
-		WHERE
-		AP_DOCUNUM = #{ap_docunum}
+		SET AP_STATUS = #{ap_status}, AP_TOAPPROVER = #{ap_toapprover}
+		WHERE AP_DOCUNUM = #{ap_docunum}
 	</update>
 
+	<!-- 공통결재안 반려 -->
 	<update id="apBack2">
 		UPDATE APPROVALDOCU
 		SET AP_STATUS = '4'

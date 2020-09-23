@@ -60,7 +60,7 @@ table, tr, th, td {
 </style>
 </head>
 <body>
-	<form action="/erp/rest/Account/acSign" method="post">
+	<form id="for">
 		<div
 			style="width: auto; background-color: #FFB2D9; color: white; padding: 1%;">기안문
 			상세보기</div>
@@ -73,19 +73,11 @@ table, tr, th, td {
 				</tr>
 				<tr>
 					<th>결재자</th>
-					<th id="line"><c:set var="name" value="${ac.j_ntwo}" /> <c:choose>
-							<c:when test="${name eq '결재자2'}">
-								<input type="hidden" value="${ac.j_none}" name="j_none">
-								<input type="hidden" value="${ac.j_ntwo}" name="j_ntwo">
-								<input type="hidden" value="${ac.j_nthr}" name="j_nthr">
-							</c:when>
-							<c:when test="${name != '결재자2'}">
-								<input type="hidden" value="${ac.j_none}" name="j_none" readonly>결재자1: ${ac.j_none} ||
-								<input type="hidden" value="${ac.j_ntwo}" name="j_ntwo" readonly>결재자2: ${ac.j_ntwo} ||
-								<input type="hidden" value="${ac.j_nthr}" name="j_nthr" readonly>결재자3: ${ac.j_nthr}
-							</c:when>
-						</c:choose></th>
-
+					<th id="line">
+					<input type="hidden" value="${ac.j_none}" id="j_none" name="code"> 
+					<input type="hidden" value="${ac.j_ntwo}" id="j_ntwo" name="code"> 
+					<input type="hidden" value="${ac.j_nthr}" id="j_nthr" name="code">
+					</th>
 				</tr>
 				<tr>
 					<th>내용</th>
@@ -100,7 +92,7 @@ table, tr, th, td {
 										<th colspan="2">문서번호</th>
 										<th colspan="2"><input type="text" name="j_docunum"
 											class="txt" value="${ac.j_docunum}" readonly><input
-											type="hidden" name="j_grade" class="draft3"
+											type="hidden" name="j_grade" id="j_grade" class="draft3"
 											value="${ac.j_grade}" readonly></th>
 										<!-- 										<td>결재상태</td> -->
 
@@ -151,33 +143,32 @@ table, tr, th, td {
 					</td>
 				</tr>
 			</table>
-			<c:set var="name" value="${ac.j_ntwo}" />
-			<c:set var="code" value=" ${cCode}" />
-			<c:choose>
-				<c:when test="${name eq '결재자2'}">
-					<button type="button" id="approvalLine2">결재라인 불러오기</button>
-					<button type="submit">결재요청</button>
-				</c:when>
-			</c:choose>
 		</div>
 	</form>
 	<script>
-		$(document)
-				.ready(
+		//레디 펑션 줘서 결재자 info 불러오기
+		$(document).ready(
 						function() {
-							$
-									.ajax({
-										url : '/erp/rest/Account/getMyInfo',
-										type : 'get',
-										// 		      datatype:'json',
+							arr = new Array();
+							var cnt = $("input[name='code']").length;
+
+							$("input[name='code']").each(function() {
+								arr.push($(this).attr('value'));
+							});
+
+							$.ajax({
+										url : '/erp/rest/Account/getApprinfo',
+										type : 'post',
+										traditional : true,
+										data : 'ARR=' + arr + '&CNT=' + cnt,
 										success : function(data) {
 											console.log(data);
 											var str = "";
-											for ( var i in data.sList) {
-												str += "<input type='text' name='rs_apcode"+i+"' value='"+data.sList[i].hc_hrcode+"' hidden='true'>";
-												str += data.sList[i].hc_position
+											for ( var i in data.aList) {
+												str += "<input type='text' name='rs_apcode"+i+"' value='"+data.aList[i].hc_hrcode+"' hidden='true'>";
+												str += data.aList[i].hc_position
 														+ "/";
-												str += "<input style='width:50px;' type='text' name='rs_apname"+i+"' value='"+ data.sList[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
+												str += "<input style='width:50px;' type='text' name='rs_apname"+i+"' value='"+ data.aList[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
 											}
 											console.log(str)
 											$("#line").html(str);
@@ -188,38 +179,6 @@ table, tr, th, td {
 										}
 									});
 						});
-
-		function setChildValue(data) {
-			console.log(data);
-			if (data.tList1 != "") {
-				var str = "";
-				for ( var i in data.tList1) {
-					str += "<input type='text' name='rs_apcode"+(Number(i)+ Number(1))+"' value='"+data.tList1[i].hc_hrcode+"' hidden='true'>";
-					str += data.tList1[i].hc_position + "/";
-					str += "<input style='width:50px;' type='text' name='rs_apname"+(Number(i)+ Number(1))+"' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
-
-				}
-				console.log(str)
-				$("#line").append(str);
-			}
-			;
-		};
-		/* if (data.tList2 != "") {
-		   for ( var i in data.tList2) {
-		var str2 = "";
-		      str2 +="<input type='text' name='ad_recode"+i+"' value='"+data.tList2[i].m_code+"' hidden='true'>";
-		      str2 += data.tList2[i].m_grade + "<br>";
-		      str2 += data.tList2[i].m_name;
-		   $("#refer"+i).html(str2);
-		   }
-		}; */
-
-		$("#approvalLine2").click(
-				function() {
-
-					window.open('/erp/Account/approvalLine', 'approvalLine',
-							'width=1400,height=700');
-				});
-	</script>
+</script> 
 </body>
 </html>

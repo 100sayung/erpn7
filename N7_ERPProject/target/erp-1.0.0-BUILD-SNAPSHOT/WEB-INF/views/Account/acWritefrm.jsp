@@ -210,9 +210,14 @@ input {
 						data : obj,
 						dateType : "json",
 						success : function(data) {
-							console.log(data);
-							$("#form1")[0].reset();
-							alert("야 들어가써");
+							if (data == 1) {
+								console.log(data);
+								$("#form1")[0].reset();
+								alert("결재안 임시저장을 완료하였습니다.");
+							} else {
+								alert("결재안 임시저장이 실패하였습니다.");
+								console.log(data);
+							}
 						},
 						error : function(error) {
 							console.log(error);

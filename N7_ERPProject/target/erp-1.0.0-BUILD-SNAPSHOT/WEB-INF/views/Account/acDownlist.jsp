@@ -24,7 +24,7 @@ td {
 </head>
 <body>
 	<!-- 	<h1>acPend.jsp(임시저장)</h1> -->
-	<table>
+	<table id="table">
 		<tr id="m">
 			<td>check</td>
 			<td>문서번호</td>
@@ -52,16 +52,16 @@ td {
 				success : function(data) {
 					console.log(data);
 					var str = "";
-					for ( var i in data.aList) {
+					for ( var i in data.pList) {
 						str += "<tr>"
-						str += "<td><input type='radio' name='checknum' class='check' value='"+data.aList[i].ap_docunum+"'></td>"
-						str += '<td>' + data.aList[i].ap_docunum + '</td>'
-						str += '<td>' + data.aList[i].ap_ccode + '</td>'
-						str += '<td>' + data.aList[i].ap_docuname + '</td>'
-						str += '<td>' + data.aList[i].ap_fromapprover + '</td>'
-						str += '<td>' + data.aList[i].ap_toapprover + '</td>'
-						str += '<td>' + data.aList[i].ap_date + '</td>'
-						str += '<td>' + data.aList[i].ap_status + '</td>'
+						str += "<td><input type='radio' name='checknum' class='check' value='"+data.pList[i].ap_docunum+"'></td>"
+						str += '<td>' + data.pList[i].ap_docunum + '</td>'
+						str += '<td>' + data.pList[i].ap_ccode + '</td>'
+						str += '<td>' + data.pList[i].ap_docuname + '</td>'
+						str += '<td>' + data.pList[i].ap_fromapprover + '</td>'
+						str += '<td>' + data.pList[i].ap_toapprover + '</td>'
+						str += '<td>' + data.pList[i].ap_date + '</td>'
+						str += '<td>' + data.pList[i].ap_status + '</td>'
 						str += '</tr>'
 					}
 					$("#Info").html(str);
