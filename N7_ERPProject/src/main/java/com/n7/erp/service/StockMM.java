@@ -489,7 +489,6 @@ public class StockMM {
 		List<B_shipment> ipList = ieDao.exportCheckList(session.getAttribute("cCode").toString());
 		for(int i = 0 ; i < ipList.size();i++) {
 			ItemCode it = itDao.getPname(session.getAttribute("cCode").toString(),ipList.get(i).getBs_itcode());
-			ieDao.updateBship(ipList.get(i).getBs_docunum());
 			ipList.get(i).setIt_ccode(it.getIt_ccode()).setIt_code(it.getIt_code()).setIt_pname(it.getIt_pname()).setIt_pstock(it.getIt_pstock()).setIt_size(it.getIt_size()).setIt_unit(it.getIt_unit()).setBs_ccode(session.getAttribute("cCode").toString());
 		}
 		mav.addObject("exportStockCheck", makeExportCheckHtml(ipList));
@@ -518,8 +517,7 @@ public class StockMM {
 						+ ipList.get(i).getBs_quantity()+ "'></td>");
 				sb.append("<td ><input type='number' value='" + ipList.get(i).getBs_unit() + "' readonly></td>");
 				sb.append("<td><input name='ie_price' type='number' value='"
-						+ (ipList.get(i).getBs_price()*ipList.get(i).getBs_quantity()) + "' readonly></td>");
-				sb.append("<td><input type='text' name = 'ie_etc'>");
+						+ ipList.get(i).getBs_price() + "' readonly></td>");
 				sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getBs_docunum() + "'></td>");
 				if (!(ipList.get(i).getBs_clcode().equals(ipList.get(i + 1).getBs_clcode()))) {
 					sb.append("</tr></table></form>");
@@ -542,8 +540,7 @@ public class StockMM {
 					sb.append("<td><input type='number' value='"+ ipList.get(i).getBs_quantity() + "'></td>");
 					sb.append("<td><input type='number' value='"+ ipList.get(i).getBs_unit() + "' readonly></td>");
 					sb.append("<td"
-							+ "'><input name='ie_price' type='number' value='" + (ipList.get(i).getBs_price()*ipList.get(i).getBs_unit())
-							+ "' readonly></td>");
+							+ "'><input name='ie_price' type='number' value='" + ipList.get(i).getBs_price() + "' readonly></td>");
 					sb.append("<td><input type='text' name = 'ie_etc'>");
 					sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getBs_docunum() + "'></td>");
 					if (!(ipList.get(i).getBs_clcode().equals(ipList.get(i + 1).getBs_clcode()))) {
@@ -562,8 +559,7 @@ public class StockMM {
 					sb.append("<td><input type='number' value='"
 							+ ipList.get(i).getBs_quantity() + "'></td>");
 					sb.append("<td><input type='number' value='"+ ipList.get(i).getBs_unit() + "' readonly></td>");
-					sb.append("<td><input name='ie_price' type='number' value='" + (ipList.get(i).getBs_price()*ipList.get(i).getBs_unit())
-							+ "' readonly></td>");
+					sb.append("<td><input name='ie_price' type='number' value='" + ipList.get(i).getBs_price() + "' readonly></td>");
 					sb.append("<td><input type='text' name = 'ie_etc'>");
 					sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getBs_docunum() + "'></td>");
 					sb.append("</tr></table></form>");
@@ -584,7 +580,7 @@ public class StockMM {
 				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
 				sb.append("<td><input type='number' value='"+ ipList.get(i).getBs_quantity() + "'></td>");
 				sb.append("<td><input type='number' value='"+ ipList.get(i).getBs_unit() + "' readonly></td>");
-				sb.append("<td><input name='ie_price' type='number' value='"+  (ipList.get(i).getBs_price()*ipList.get(i).getBs_unit())
+				sb.append("<td><input name='ie_price' type='number' value='"+  + ipList.get(i).getBs_price() 
 						+ "' readonly></td>");
 				sb.append("<td><input type='text' name = 'ie_etc'>");
 				sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getBs_docunum() + "'></td>");
@@ -593,4 +589,28 @@ public class StockMM {
 		}
 		return sb.toString();
 	}
+
+//	@Transactional
+//	public ResponseEntity<String> cofirmExportCheck(String ipList, HttpSession session) {
+//		ipList = ipList.replace("},", "} ");
+//		String[] arr = ipList.split(" ");
+//		List<IePort> imList = new ArrayList<IePort>();
+//		boolean a = false, b = false;
+//		for (int i = 0; i < arr.length; i++) {
+//			imList.add(new Gson().fromJson(arr[i], IePort.class));
+//		}
+//		for (int i = 0; i < imList.size(); i++) {
+//			IePort ip = new IePort();
+//			ip = imList.get(i);
+//			ip.setIe_cpcode(session.getAttribute("cCode").toString());
+//			ip.setIe_hrcode(session.getAttribute("id").toString());
+//			a = pDao.updateBshipment(imList.get(i));
+//			b = ieDao.insertExport(imList.get(i));
+//		}
+//		if (a && b) {
+//			List<Purchase> pList = ieDao.importCheckList(session.getAttribute("cCode").toString());
+//			return ResponseEntity.ok(makeExportCheckHtml(pList));
+//		}
+//		return ResponseEntity.ok(new Gson().toJson("입고 확정에 실패하였습니다."));
+//	}
 }

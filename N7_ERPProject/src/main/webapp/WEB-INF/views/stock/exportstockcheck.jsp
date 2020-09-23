@@ -113,14 +113,12 @@ input[type='text'], input[type='number'] {
 	</div>
 
 	<div id="description">
-		<h3>입고 내역 및 수정</h3>
-		${importCheckList} <input type="hidden" value="${id}">
-		<button type="button" id="btn">입고 확정</button>
+		<h3>출고 확정</h3>
+		${exportStockCheck} <input type="hidden" value="${id}">
+		<button type="button" id="btn">출고 확정</button>
 	</div>
 	<script>
-		$('#btn')
-				.click(
-						function() {
+		$('#btn').click(function() {
 							var ipList = [];
 							var num = 1;
 							var num3 = 0;
@@ -170,7 +168,7 @@ input[type='text'], input[type='number'] {
 							console.log("arr", ipList);
 							$
 									.ajax({
-										url : "/erp/stock/confirmimportcheck",
+										url : "/erp/stock/confirmexportcheck",
 										data : stringifiedIpList,
 										type : "post",
 										traditional : true,

@@ -137,9 +137,7 @@ color: red;
 	//카테고리 출력	
 	category('/erp/stock/getcategory');
 	//카테고리 추가	
-	$('#btn')
-				.click(
-						function() {
+	$('#btn').click(function() {
 							if ($('#ct_name').val() == ''
 									|| $('#ct_code').val() == '') {
 								$('#msg').html('값을 입력해주세요!');
@@ -162,8 +160,7 @@ color: red;
 							});
 						})
 		function category(url, data) {
-			$
-					.ajax({
+			$.ajax({
 						url : url,
 						data : data,
 						dataType : 'json',
