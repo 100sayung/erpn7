@@ -252,7 +252,7 @@ font-size: 20px;
 	
 	 $("#Alllist").click(function(){
 		$.ajax({
-			url : '/erp/rest/Account/serchcomlist',
+			url : '/erp/rest/Purchase/serchcomlist',
 			type : 'get',
 			contentType : 'application/json; charset=UTF-8',
 			dataType : 'json',
@@ -285,7 +285,7 @@ font-size: 20px;
 		var code = $("#code").val();
 		console.log(code);
 						$.ajax({
-									url : '/erp/rest/Account/searchcode',
+									url : '/erp/rest/Purchase/searchcode',
 									type : 'post',
 									data : {code:code},
 									dataType : 'json',
@@ -318,7 +318,7 @@ font-size: 20px;
 						//var json = JSON.stringify(obj);
 						//console.log(json)
 						$.ajax({
-									url : '/erp/rest/Account/insertcomlist',
+									url : '/erp/rest/Purchase/insertcomlist',
 									type : 'post',
 									//contentType : 'application/json; charset=UTF-8',
 									data : obj,
@@ -359,7 +359,7 @@ font-size: 20px;
 	     	}else{
 		//var json = JSON.stringify(arr);
 	     		$.ajax({
-	     			url:'/erp/rest/Account/deleteCom',
+	     			url:'/erp/rest/Purchase/deleteCom',
 	     			type:'post',
 	     			traditional : true,
 	     			//contentType : 'application/json; charset=UTF-8',

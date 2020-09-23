@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.n7.erp.bean.ApprovalDocu;
+import com.n7.erp.bean.ps.A_company;
 import com.n7.erp.bean.ps.Purchase;
 import com.n7.erp.bean.ps.PurchaseApproval;
 import com.n7.erp.bean.ps.approvalLine;
@@ -207,8 +208,7 @@ public class PurchaseMM {
                }
             return sMap;
       }
-      
-    //결재라인 끝
+
       public ModelAndView approvalLine() {
             String view=null;
             ModelAndView mav= new ModelAndView();
@@ -262,17 +262,34 @@ public class PurchaseMM {
 		mav.setViewName(view);
 		return mav;
 	}
+	
+	public Map<String, List<approvalLine>> getMyInfo(HttpSession session) {
+        Map<String, List<approvalLine>> sMap=null;
+        List<approvalLine> sList=null;
+        String code = session.getAttribute("hrCode").toString();
+        sList=pDao.getMyInfo(code);
+        System.out.println(sList);
+        if(sList!=null) {
+           sMap=new HashMap<>();
+           sMap.put("sList", sList);
+        }else {
+           sMap=null;
+        }
+        return sMap;   
+	}
 
-	public ModelAndView rRegistration(Return rt) {
+	public ModelAndView rRegistration(Return rt, HttpSession session) {
 		ModelAndView mav= new ModelAndView();
 		String view= null;
-		
-		if(pDao.rRegistration(rt)) {
-			view= "/Purchase/returnregistration";
-			mav.addObject("msg", "데이터입력 완료");
-		}else {
-			view="/Purchase/returnregistration";
-			mav.addObject("msg", "데이터입력 실패");
+		rt.setR_ccode(session.getAttribute("cCode").toString());
+		if(rt.getR_ccode()!="") {
+			if(pDao.rRegistration(rt)) {
+				view= "/Purchase/returnregistration";
+				mav.addObject("msg", "데이터입력 완료");
+			}else {
+				view="/Purchase/returnregistration";
+				mav.addObject("msg", "데이터입력 실패");
+			}
 		}
 		mav.setViewName(view);
 		return mav;
@@ -320,18 +337,62 @@ public class PurchaseMM {
 		return rMap;
 	}
 	
-	public Map<String, List<approvalLine>> getMyInfo(HttpSession session) {
-        Map<String, List<approvalLine>> sMap=null;
-        List<approvalLine> sList=null;
-        String code = session.getAttribute("hrCode").toString();
-        sList=pDao.getMyInfo(code);
-        System.out.println(sList);
-        if(sList!=null) {
-           sMap=new HashMap<>();
-           sMap.put("sList", sList);
-        }else {
-           sMap=null;
-        }
-        return sMap;   
- }
+
+	public Map<String, List<A_company>> insertcomlist(A_company ac, HttpSession session) {
+		Map<String, List<A_company>> aMap=null;
+		ac.setCl_ccode(session.getAttribute("cCode").toString());
+		if(ac.getCl_code()!="") {
+			if(pDao.insertcomlist(ac)) {
+			   List<A_company> aList = pDao.getComList(ac.getCl_code());
+			   aMap=new HashMap<>();
+			   aMap.put("aList", aList);
+			}else {
+				aMap=null;
+			}
+		}else {
+			List<A_company> aList = pDao.getComList(ac.getCl_code());
+			aMap=new HashMap<>();
+			aMap.put("aList", aList);
+		}
+		return aMap;
+	}
+
+	public Map<String, List<A_company>> searchcode(A_company ac, String code) {
+		Map<String, List<A_company>> aMap=null;
+		ac.setCl_code(code);
+		   List<A_company> aList = pDao.getsearchCode(ac);
+		   if(aList!=null) {
+			   aMap=new HashMap<>();
+			   aMap.put("aList", aList);
+		   }
+		   	return aMap;
+	}
+
+	public Map<String, List<A_company>> deleteCom(int cnt, String[] strArray) {
+		Map<String, List<A_company>> aMap=null;
+		boolean result=false;
+		String code="";
+		for(int i=0; i<cnt; i++) {
+			code=strArray[i];
+			result=pDao.deleteCom(code);
+		}
+		if(result) {
+			List<A_company> aList = pDao.getCompanyList();
+			aMap=new HashMap<>();
+			   aMap.put("aList", aList);
+		}else {
+			aMap=null;
+		}
+		return aMap;
+	}
+
+	public Map<String, List<A_company>> serchcomlist() {
+		Map<String, List<A_company>> aMap=null;
+			   List<A_company> aList = pDao.getCompanyList();
+			   aMap=new HashMap<>();
+			   aMap.put("aList", aList);
+		return aMap;
+	}
+	
+
 }

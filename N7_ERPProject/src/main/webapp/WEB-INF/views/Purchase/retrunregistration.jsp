@@ -110,7 +110,7 @@ border: 1px solid silver;
 	  $('#save').click(function(){
 	         var obj = $('#rRegistration').serialize();
 	         $.ajax({
-	            url: 'rest/rRegistration',
+	            url: '/erp/rest/Purchase/rRegistration',
 	            type: 'post',
 	            data: obj,
 	            success: function(data){
@@ -125,7 +125,7 @@ border: 1px solid silver;
 	  
 	  $('#rInfo').click(function(){
 		  $.ajax({
-			  url: 'rest/rInfo',
+			  url: '/erp/rest/Purchase/rInfo',
 			  type: 'get',
 			  dataType: 'json',
 			  success: function(data){
@@ -161,7 +161,7 @@ border: 1px solid silver;
   	  			  console.log(check_list);
   	  			  
   	  			  $.ajax({
-  	  				  url: 'rest/rdelete',
+  	  				  url: '/erp/rest/Purchase/rdelete',
   	  				  type: 'post',
   	  				  data: {check_list:cid},
   	  				  dataType: 'json',
@@ -199,7 +199,7 @@ border: 1px solid silver;
 			console.log(choice);
 			console.log(search);
 			$.ajax({
-				url: 'rest/retrunsearch',
+				url: '/erp/rest/Purchase/retrunsearch',
 				type: 'post',
 				data: "choice="+choice+"&search="+search,
 				dataType: 'json',

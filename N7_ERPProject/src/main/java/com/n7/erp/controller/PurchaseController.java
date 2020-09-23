@@ -19,39 +19,45 @@ public class PurchaseController {
 
 	ModelAndView mav;
 
-	@RequestMapping(value = "/Purchase/erpmain", method = RequestMethod.GET)
+	@RequestMapping(value = "Purchase/erpmain", method = RequestMethod.GET)
 	public String purchasemain() {
-		return "/Purchase/erpmain";
+		return "Purchase/erpmain";
 	}
 	
-	@RequestMapping(value = "/Purchase/pregistration", method = RequestMethod.GET)
+	@RequestMapping(value = "Purchase/pregistration", method = RequestMethod.GET)
 	public String pregistration() {
-		return "/Purchase/pregistration";
+		return "Purchase/pregistration";
 	}
 	
-	@RequestMapping(value = "/Purchase/purchasedetail", method = RequestMethod.GET)
+	@RequestMapping(value = "Purchase/purchasedetail", method = RequestMethod.GET)
 	public ModelAndView purchasedetail(String check) {
 		mav = pm.pDetail(check);
 		System.out.println("check들어감?="+check);
 		return mav;
 	}
 	
-	@RequestMapping(value = "/Purchase/pprogramwrite", method = RequestMethod.GET)
+	@RequestMapping(value = "Purchase/pprogramwrite", method = RequestMethod.GET)
 	public ModelAndView pprogramwrite(String check) {
 		System.out.println("check="+check);
 		mav = pm.pProgram(check);
 		return mav;
 	}
 	
-	@RequestMapping(value = "/Purchase/approvalLine", method = RequestMethod.GET)
-	   public ModelAndView approvalLine() {
-	      mav=pm.approvalLine();
-	      return mav;
+	@RequestMapping(value = "Purchase/approvalLine", method = RequestMethod.GET)
+	public ModelAndView approvalLine() {
+		mav=pm.approvalLine();
+		return mav;
 	}
 	
-	@RequestMapping(value = "/Purchase/retrunregistration", method = RequestMethod.GET)
+	@RequestMapping(value = "Purchase/retrunregistration", method = RequestMethod.GET)
 	public String returnregistration() {
-		return "/Purchase/retrunregistration";
+		return "Purchase/retrunregistration";
+	}
+	
+	@RequestMapping(value = "Purchase/comPany", method = RequestMethod.GET)
+	public String comPany() {
+		
+		return "Purchase/comPany";
 	}
 	
 

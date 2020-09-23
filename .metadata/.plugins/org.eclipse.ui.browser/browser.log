@@ -41,3 +41,7 @@
 9월 22, 2020 16:57:09.848 [2264:9320:0922/165709.847:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
 9월 22, 2020 17:09:31.396 [2588:1276:0922/170931.395:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
 9월 22, 2020 17:32:00.796 [7336:3972:0922/173200.796:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+
+9월 22, 2020 21:18:00.182 NEW SESSION
+9월 22, 2020 21:18:00.182 [8896:9520:0922/211800.177:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 22, 2020 21:25:38.733 [11776:14596:0922/212538.733:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.

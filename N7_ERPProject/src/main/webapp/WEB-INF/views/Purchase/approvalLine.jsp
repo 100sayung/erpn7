@@ -1,66 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>결재라인</title>
 <style>
 div {
-	border: 1px gray dotted;
-	text-align: center;
+   border: 1px gray dotted;
+   text-align: center;
 }
 
 table {
-	width: 100%;
+   width: 100%;
 }
 
 tr, td {
-	border: 1px gray dotted;
-	width: auto%;
+   border: 1px gray dotted;
+   width: auto%;
 }
 
 #main1 {
-	width: 28%;
-	height: 500px;
-	float: left;
-	overflow: auto;
+   width: 28%;
+   height: 500px;
+   float: left;
+   overflow: auto;
 }
 
 #main2 {
-	width: 40%;
-	height: 500px;
-	float: left;
-	overflow: auto;
+   width: 40%;
+   height: 500px;
+   float: left;
+   overflow: auto;
 }
 
 #main3 {
-	width: 5%;
-	height: 500px;
-	float: left;
-	overflow: auto;
+   width: 5%;
+   height: 500px;
+   float: left;
+   overflow: auto;
 }
 #main4 {
-	width: 20%;
-	height: 500px;
-	float: left;
-	overflow: auto;
+   width: 20%;
+   height: 500px;
+   float: left;
+   overflow: auto;
 }
 
 .search {
-	height: 10px;
-	font-size: 15px;
-	background-color: #3B77AF;
-	color: white;
+   height: 10px;
+   font-size: 15px;
+   background-color: #3B77AF;
+   color: white;
 }
 
 .addtable {
-	height: 450px;
-	overflow: auto;
-	}
+   height: 450px;
+   overflow: auto;
+   }
 
 .but{
 margin-top: 110px;
@@ -73,62 +73,62 @@ height:10px;
 </style>
 </head>
 <body>
-	<h1>결재라인 주소록</h1>
-	
-	
-	<div>
-		<div id="main1">
-			<table>
-				<tr class="search">
-					<td>주소록</td>
-					
-				</tr>
-				<tr id="Info"></tr>
-			</table>
-		</div>
+   <h1>결재라인 주소록</h1>
+   
+   
+   <div>
+      <div id="main1">
+         <table>
+            <tr class="search">
+               <td>주소록</td>
+               
+            </tr>
+            <tr id="Info"></tr>
+         </table>
+      </div>
 
-		<div id="main2">
-			<table>
-				<tr class="search">
-					<td colspan="5">이름으로 찾기</td>
-				</tr>
-				<tr>
-					<td colspan="4"><input id="name" type="text" name="m_name"></td>
-					<td><button id="namesc">검색</button></td>
-				</tr>
-				<tr>
-					<td style="width: 45px;">체크</td>
-					<td style="width: 70px;">이름</td>
-					<td style="width:112px;">부서</td>
-					<td style="width:48px;">직급</td>
-					<td style="width:214px;">이메일</td>
-				</tr>
-				<tbody id="nameInfo">
+      <div id="main2">
+         <table>
+            <tr class="search">
+               <td colspan="5">이름으로 찾기</td>
+            </tr>
+            <tr>
+               <td colspan="4"><input id="name" type="text" name="m_name"></td>
+               <td><button id="namesc">검색</button></td>
+            </tr>
+            <tr>
+               <td style="width: 45px;">체크</td>
+               <td style="width: 70px;">이름</td>
+               <td style="width:112px;">부서</td>
+               <td style="width:48px;">직급</td>
+               <td style="width:214px;">이메일</td>
+            </tr>
+            <tbody id="nameInfo">
 
-				</tbody>
-			</table>
-		</div>
-		<div id="main3"><br>
-		<button id="addapproval1" class="but">></button><br>
-		<button id="deleteCheck1"><</button><br><br><br><br><br>
-	<button id="addapproval2" class="but">></button><br>
-	<button id="deleteCheck2"><</button><br><br>
-	
-		</div>
-		<div id="main4">
-			<h3 class="title">
-				결재자<span id="cnt1" style="color:green;">0</span>
-			</h3>
-			<div class="addtable">
-				<table class="table">
-				<tr class="search"><td>체크</td><td>이름</td><td>작급</td><td>부서</td></tr>
-					<tbody id="addAp1"></tbody>
-				</table>
-			</div>
-			
-		</div>
-	</div><br>
-	<a  href="javascript:sendChildValue()"><button>결제라인 등록</button></a>
+            </tbody>
+         </table>
+      </div>
+      <div id="main3"><br>
+      <button id="addapproval1" class="but">></button><br>
+      <button id="deleteCheck1"><</button><br><br><br><br><br>
+   <button id="addapproval2" class="but">></button><br>
+   <button id="deleteCheck2"><</button><br><br>
+   
+      </div>
+      <div id="main4">
+         <h3 class="title">
+            결재자<span id="cnt1" style="color:green;">0</span>
+         </h3>
+         <div class="addtable">
+            <table class="table">
+            <tr class="search"><td>체크</td><td>이름</td><td>작급</td><td>부서</td></tr>
+               <tbody id="addAp1"></tbody>
+            </table>
+         </div>
+         
+      </div>
+   </div><br>
+   <a  href="javascript:sendChildValue()"><button>결제라인 등록</button></a>
 </body>
 <script>
 var count1=0;
@@ -145,7 +145,7 @@ function sendChildValue(){
    }
    
    $.ajax({
-       url:"/erp/rest/Purchase/approLinecom?code1="+code1,
+       url:"/erp/rest/Account/approLinecom?code1="+code1,
        type:'post',
        datatype:'json',
        success:function(data){
@@ -159,13 +159,10 @@ function sendChildValue(){
           console.log(error);
           
        }
-      
    });
    
    }  
 }
-
-
 
 
 $("#deleteCheck1").click(function() {
@@ -195,7 +192,7 @@ $("#deleteCheck1").click(function() {
       var str='';
                   var name = $("#name").val();
                   $.ajax({
-                     url : '/erp/rest/Purchase/searchName?name=' + name,
+                     url : '/erp/rest/Account/searchName?name=' + name,
                      type : 'post',
                      datatype : 'json',
                      success : function(data) {
@@ -244,7 +241,7 @@ $("#deleteCheck1").click(function() {
       alert("총 2명만 추가 할 수 있습니다.");
    }else{
             $.ajax({
-               url : '/erp/rest/Purchase/addApproval',
+               url : '/erp/rest/Account/addApproval',
                type : 'post',
                traditional : true,
                data : 'ARR=' + arr + '&CNT=' + cnt,
@@ -287,8 +284,6 @@ $("#deleteCheck1").click(function() {
    };      
       
    });
-		
-     
-
+   
 </script>
 </html>

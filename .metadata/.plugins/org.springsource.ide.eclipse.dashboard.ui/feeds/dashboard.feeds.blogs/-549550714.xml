@@ -5,7 +5,33 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2020-09-21T20:18:20Z</updated>
+  <updated>2020-09-22T14:51:17Z</updated>
+  <entry>
+    <title>Spring Security SAML Extensions 1.x EOL on October 6, 2021</title>
+    <link rel="alternate" href="https://spring.io/blog/2020/09/22/spring-security-saml-extensions-1-x-eol-on-october-6-2021" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Josh Cummings</name>
+    </author>
+    <id>tag:spring.io,2020-09-21:4213</id>
+    <updated>2020-09-22T14:51:17Z</updated>
+    <content type="html">&lt;div class="paragraph"&gt;
+&lt;p&gt;With the recent release of Spring Security 5.4, we¡¯d like to announce that maintenance for &lt;a href="https://github.com/spring-projects/spring-security-saml"&gt;Spring Security SAML Extensions 1.x&lt;/a&gt; will end on 6 October 2021.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;&lt;a href="https://docs.spring.io/spring-security/site/docs/current/reference/html5/#servlet-saml2"&gt;SAML 2.0 support&lt;/a&gt; has been added to the core Spring Security framework over the last three minor releases. There are two main reasons for this.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;First, the extension project is based on a version of OpenSAML that the OpenSAML team no longer supports. This version has known CVEs that make it unsafe for use in a production system.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Second, moving the support to the core Spring Security framework allowed us to simplify the API, use the latest OpenSAML, and add long-requested support for features like &lt;a href="https://docs.spring.io/spring-security/site/docs/current/reference/html5/#servlet-saml2login-relyingpartyregistration"&gt;multi-tenancy&lt;/a&gt; and &lt;a href="https://docs.spring.io/spring-security/site/docs/current/reference/html5/#servlet-saml2login-minimalconfiguration"&gt;Spring Boot integration&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;More SAML work is planned for Spring Security to bring it closer into alignment with the extension&amp;#8217;s capabilities. Please feel free to &lt;a href="https://github.com/spring-projects/spring-security/issues/new/choose"&gt;file tickets&lt;/a&gt; or &lt;a href="https://github.com/spring-projects/spring-security/issues?q=is%3Aissue+is%3Aopen+label%3A%22in%3A+saml2%22"&gt;contribute features&lt;/a&gt;!&lt;/p&gt;
+&lt;/div&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>Spring Boot for Apache Geode 1.1.10.RELEASE, 1.2.10.RELEASE, 1.3.4.RELEASE and 1.4.0-M3 available!</title>
     <link rel="alternate" href="https://spring.io/blog/2020/09/21/spring-boot-for-apache-geode-1-1-10-release-1-2-10-release-1-3-4-release-and-1-4-0-m3-available" />
@@ -576,23 +602,6 @@ Artem&lt;/p&gt;
     <updated>2020-09-14T12:00:00Z</updated>
     <content type="html">&lt;p&gt;Hi, Spring fans! I was on the Microsoft Azure YouTube show &lt;em&gt;Azure in the Enterprise&lt;/em&gt; with Lyle Dodge where I did a quick demonstration introducing the Spring for Microsoft Azure support for the Microsoft Azure Cosmos DB. Check it out!&lt;/p&gt;
 &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/IWQboyBohEI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>You spoke, we listened: State of Spring 2020 report is here!</title>
-    <link rel="alternate" href="https://spring.io/blog/2020/09/11/you-spoke-we-listened-state-of-spring-2020-report-is-here" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Ben Wilcock</name>
-    </author>
-    <id>tag:spring.io,2020-09-11:4195</id>
-    <updated>2020-09-11T15:00:00Z</updated>
-    <content type="html">&lt;p&gt;&lt;img src="https://github.com/spring-io/spring-io-static/raw/master/blog/bwilcock/20201011/state-of-spring-2020.png" alt="headline" /&gt;&lt;/p&gt;
-&lt;p&gt;Back in July the Spring team asked for your input on a range of Spring-related topics. And wow! What a response!&lt;/p&gt;
-&lt;p&gt;Thank you to the 1024 developers, architects, and managers across the globe that took time out of their day to complete the survey. We¡¯ve crunched the numbers, filtered &amp;amp; mashed up the results to distill the most compelling insights into the State of Spring 2020 report.&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://github.com/spring-io/spring-io-static/raw/master/blog/bwilcock/20201011/state-of-spring-2020-key-findings.png" alt="overview" /&gt;&lt;/p&gt;
-&lt;p&gt;Thanks to everyone that completed the survey. We look forward to making this report an annual event, following the growth, success, and evolution of our community.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href="https://tanzu.vmware.com/content/ebooks/state-of-spring-2020"&gt;Download your copy of &amp;lsquo;The State Of Spring 2020&amp;rsquo; NOW!&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>

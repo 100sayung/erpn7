@@ -23,8 +23,10 @@ border: 1px solid silver;
 ${msg}
 	<div id="aaa">
 		 <div style="width: auto; background-color: white; padding: 1%;">
-		 	<button id="account">거래처등록</button>
-         	<button id="stock">재고현황</button>
+		 	<span style="padding-left: 5px"><a href="#" onclick="window.open('comPany','comlist','width=1350,height=500')">
+		 	<button>거래처등록</button></a></span>
+		 	<span style="padding-left: 5px"><a href="#" onclick="window.open('/erp/stock/byitemstocklist','stock','width=1200, height=620, top=80 left=200')"><button>재고현황</button></a></span>
+         	<!-- <button id="stock">재고현황</button> -->
          	<button id="Pinfo">구매조회</button>
 			<button type="button" id="pDetail">상세보기</button>
       	</div>
@@ -255,7 +257,6 @@ ${msg}
              }
     	 });
       });
-      
       
 /*       function Tot(){
     	  var seip=0;

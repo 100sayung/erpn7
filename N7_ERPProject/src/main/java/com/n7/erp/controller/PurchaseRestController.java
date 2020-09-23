@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.n7.erp.bean.ApprovalDocu;
+import com.n7.erp.bean.ps.A_company;
 import com.n7.erp.bean.ps.Purchase;
 import com.n7.erp.bean.ps.PurchaseApproval;
 import com.n7.erp.bean.ps.Return;
@@ -28,6 +29,7 @@ public class PurchaseRestController {
 	
 	ModelAndView mav;
 
+	//구매
 	@PostMapping(value = "/Purchrase/pregistration", produces= "application/json;charest=utf-8" )
 	public ModelAndView pregistration(HttpServletRequest request, Purchase ps, HttpSession session) {
 		System.out.println(ps);
@@ -58,47 +60,42 @@ public class PurchaseRestController {
 		return pMap;
 	}
 	
-	   //결재라인
-	 @PostMapping(value = "/Purchase/addApproval",produces="application/json;charset=utf-8" )
-	 public  Map<String, List<approvalLine>> addApprovale(String CNT, String ARR) {
-	      int cnt = Integer.parseInt(CNT);
-	      String [] strArray = ARR.split(",");
-	      Map<String, List<approvalLine>> sMap=pm.addApproval(cnt,strArray);
-	      return sMap;
-	 }
-	 
-	 @PostMapping(value = "/Purchase/approLinecom",produces="application/json;charset=utf-8")
-	 public  Map<String, List<approvalLine>> approLinecom(String code1, String code2) {
-	      String [] code01 = code1.split(",");
-//	      String [] code02 = code2.split(",");
-	      
-	      System.out.println(code01[0]);
-//	      System.out.println(code02[0]);
-	      Map<String, List<approvalLine>> sMap=pm.approLinecom(code01);
-	      return sMap;
-	 }
-	   
-	 @PostMapping(value = "/Purchase/searchName",produces="application/json;charset=utf-8" )
-	 public  Map<String, List<approvalLine>> searchName(String name) {
-	      Map<String, List<approvalLine>> sMap=pm.searchName(name);
-	      return sMap;
+	 //결재
+	@PostMapping(value = "/Purchase/addApproval",produces="application/json;charset=utf-8" )
+	public  Map<String, List<approvalLine>> addApprovale(String CNT, String ARR) {
+		int cnt = Integer.parseInt(CNT);
+		String [] strArray = ARR.split(",");
+		Map<String, List<approvalLine>> aMap=pm.addApproval(cnt,strArray);
+		return aMap;
 	}
-	 
-	 
+	@PostMapping(value = "/Purchase/approLinecom",produces="application/json;charset=utf-8")
+	public  Map<String, List<approvalLine>> approLinecom(String code1) {
+		String [] code01 = code1.split(",");
+		Map<String, List<approvalLine>> aMap=pm.approLinecom(code01);
+		return aMap;
+	}
+	@PostMapping(value = "/Purchase/searchName",produces="application/json;charset=utf-8" )
+	public  Map<String, List<approvalLine>> searchName(String name) {
+		Map<String, List<approvalLine>> aMap=pm.searchName(name);
+		return aMap;
+	}
+	   
 	 @PostMapping(value = "/Purchase/purchaseApproval", produces= "application/json;charest=utf-8" )
 	 public ModelAndView pprogramwrite(HttpServletRequest request, PurchaseApproval pa, HttpSession session) {
 		 mav= pm.purchaseApproval(request, pa, session);
 		 return mav;
 	 }
+	 
 	 @GetMapping(value = "/Purchase/getMyInfo",produces="application/json;charset=utf-8" )
 	   public  Map<String, List<approvalLine>> getMyInfo(HttpSession session) {
 	      Map<String, List<approvalLine>> mMap=pm.getMyInfo(session);
 	      return mMap;
-	   }
+	 }
 	 
+	//반품 
 	@PostMapping(value = "/Purchase/rRegistration", produces= "application/json;charest=utf-8" )
-	public ModelAndView rRegistration(Return rt) {
-		mav= pm.rRegistration(rt);
+	public ModelAndView rRegistration(Return rt, HttpSession session) {
+		mav= pm.rRegistration(rt, session);
 		return mav;
 	}
 	
@@ -122,6 +119,36 @@ public class PurchaseRestController {
 		System.out.println("search="+search);
 		Map<String, List<Return>> rMap= pm.rSearch(search, choice);
 		return rMap;
+	}
+	
+	//거래처등록
+	@PostMapping(value = "/Purchase/insertcomlist",produces="application/json;charset=utf-8" )
+	public  Map<String, List<A_company>> insertcomlist( A_company ac, HttpSession session) {
+	Map<String, List<A_company>> aMap=pm.insertcomlist(ac, session);
+		return aMap;
+	}
+	
+	@PostMapping(value = "/Purchase/searchcode",produces="application/json;charset=utf-8" )
+	public  Map<String, List<A_company>> searchcode(A_company ac, String code) {
+		System.out.println(code);
+		Map<String, List<A_company>> aMap=pm.searchcode(ac,code);
+		return aMap;
+	}
+	
+	@PostMapping(value = "/Purchase/deleteCom",produces="application/json;charset=utf-8" )
+	public  Map<String, List<A_company>> deleteCom(String CNT, String ARR) {
+		int cnt = Integer.parseInt(CNT);
+		System.out.println(cnt);
+        String [] strArray = ARR.split(",");
+        System.out.println(strArray);
+		Map<String, List<A_company>> aMap=pm.deleteCom(cnt,strArray);
+		return aMap;
+	}
+	
+	@GetMapping(value = "/Purchase/serchcomlist",produces="application/json;charset=utf-8" )
+	public  Map<String, List<A_company>> serchcomlist() {
+		Map<String, List<A_company>> aMap=pm.serchcomlist();
+		return aMap;
 	}
 	
 

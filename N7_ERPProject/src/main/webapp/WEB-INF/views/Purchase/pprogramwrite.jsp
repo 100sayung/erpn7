@@ -73,7 +73,6 @@ text-align: center;
            <tr>
            		<th>상신자</th> 
            		<th><input type="text" name="p_approvel2" class="draft2" value="${ps.p_writer}" readonly></th>
-           		<th><input type="text" name="p_pacode2" value="2020091169" hidden="true"></th>
            </tr>
             <tr>
                <th>결재자</th>

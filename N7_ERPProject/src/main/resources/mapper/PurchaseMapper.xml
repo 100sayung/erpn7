@@ -70,6 +70,10 @@
    		SELECT * FROM MLIST  WHERE HC_HRCODE=#{code01}
    </select>
    
+	<select id="getMyInfo" parameterType="String" resultType="pALine">
+   SELECT * FROM MLIST  WHERE HC_HRCODE=#{code}
+   </select>
+   
 	<insert id="Approval" parameterType="pApproval">
 		INSERT INTO APPROVALDOCU VALUES(#{p_documentcode}, #{p_ccode}, #{p_title}, #{p_approver1}, #{p_approver2}, DEFAULT, 0)
 	</insert>
@@ -83,7 +87,7 @@
 	</insert>
 	
 	<insert id="rRegistration" parameterType="Return">
-		INSERT INTO O_RETURN VALUES(#{r_documentcode}||LPAD(R_SEQ.NEXTVAL,4,0), #{r_ccode}, #{r_ieseqnum}, #{r_itcode}, #{r_clcode}, DEFAULT, #{r_amount}, #{r_unlit}, #{r_budget}, #{r_name}, #{r_reason}, 3)
+		INSERT INTO O_RETURN VALUES(#{r_documentcode}||LPAD(R_SEQ.NEXTVAL,4,0), #{r_ccode}, #{r_ieseqnum}, #{r_itcode}, #{r_clcode}, #{r_amount}, #{r_unlit}, #{r_budget}, #{r_name}, #{r_reason}, 3, DEFAULT)
 	</insert>
 	
 	<select id="rInfo" resultType="Return">
@@ -111,8 +115,33 @@
 			</if>
 		</where>
 	</select>
+   
+   	<insert id="insertcomlist" parameterType="A_company">
+		INSERT INTO AC_COMPANYLIST
+		VALUES(#{cl_code},#{cl_ccode},#{cl_name},#{cl_comnum},#{cl_comnum2},#{cl_ceo},#{cl_employee},#{cl_phone},
+		#{cl_phone2},#{cl_fax},#{cl_email},#{cl_addr},#{cl_kind},#{cl_kind2},#{cl_kind3},#{cl_bank},
+		#{cl_bankholder},#{cl_banknum},#{cl_memo})
+	</insert>
 	
-	<select id="getMyInfo" parameterType="String" resultType="pALine">
-   SELECT * FROM MLIST  WHERE HC_HRCODE=#{code}
-   </select>
+	<select id="getcomcode" parameterType="String" resultType="A_company">
+		SELECT * FROM AC_COMPANYLIST WHERE CL_COMNUM = #{s_comnum}
+	</select>
+	
+	<select id="getComList" parameterType="String" resultType="A_company">
+		SELECT * FROM AC_COMPANYLIST
+	</select>
+	
+	<select id="getCompanyList" parameterType="String" resultType="A_company">
+		SELECT * FROM AC_COMPANYLIST
+	</select>
+	
+	<select id="getsearchCode" parameterType="String" resultType="A_company">
+		SELECT * FROM AC_COMPANYLIST WHERE CL_CODE=#{cl_code}
+	</select>
+	
+	<delete id="deleteCom" parameterType="String">
+		DELETE FROM AC_COMPANYLIST WHERE CL_CODE=#{code}
+	</delete>
+	
+	
 </mapper>

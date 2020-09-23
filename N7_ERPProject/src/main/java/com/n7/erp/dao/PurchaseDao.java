@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
-import com.n7.erp.bean.ApprovalDocu;
 import com.n7.erp.bean.IePort;
 import com.n7.erp.bean.ps.approvalLine;
+import com.n7.erp.bean.ps.A_company;
 import com.n7.erp.bean.ps.Purchase;
 import com.n7.erp.bean.ps.PurchaseApproval;
 import com.n7.erp.bean.ps.Return;
@@ -49,7 +49,9 @@ public interface PurchaseDao {
 
     com.n7.erp.bean.ps.approvalLine approLinecom1(String code01);
 
-	boolean Approval(PurchaseApproval pa);
+    List<com.n7.erp.bean.ps.approvalLine> getMyInfo(String code);
+
+    boolean Approval(PurchaseApproval pa);
 
 	boolean pApproval1(PurchaseApproval pa);
 
@@ -63,6 +65,14 @@ public interface PurchaseDao {
 
 	List<Return> rSearch(@Param("search") String search, @Param("choice") String choice);
 
-	List<com.n7.erp.bean.ps.approvalLine> getMyInfo(String code);
+	boolean insertcomlist(A_company ac);
+
+	List<A_company> getComList(String c_code);
+
+	List<A_company> getCompanyList();
+
+	List<A_company> getsearchCode(A_company ac);
+
+	boolean deleteCom(String code);
 
 }
