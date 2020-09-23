@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.google.gson.JsonElement;
 import com.n7.erp.bean.B_shipment;
 import com.n7.erp.bean.IePort;
 import com.n7.erp.bean.ps.Purchase;
@@ -53,5 +54,8 @@ public interface IeportDao {
 
 	@Update("UPDATE B_SHIPMENT SET BS_STATUS = '4' WHERE BS_DOCUNUM = #{bs_docunum}")
 	void updateBship(String bs_docunum);
+
+	@Select("SELECT COUNT(IE_QTY) FROM S_IEPORT WHERE IE_CPCODE = #{cCode}")
+	List<IePort> getStockList(String cCode);
 
 }

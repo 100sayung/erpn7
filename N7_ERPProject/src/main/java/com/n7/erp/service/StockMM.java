@@ -312,6 +312,9 @@ public class StockMM {
 	}
 
 	public ResponseEntity<String> getByItemStockList(ItemCode it, HttpSession session) {
+		if(it==null) {
+			return ResponseEntity.ok(new Gson().toJson(ieDao.getStockList(session.getAttribute("cCode").toString())));
+		}
 		return ResponseEntity.ok(new Gson().toJson(ieDao.getByItemStockList(it.getIt_code(),session.getAttribute("cCode").toString())));
 	}
 
@@ -346,9 +349,9 @@ public class StockMM {
 			for (int i = 0; i < ieList.size();) {
 				if (ieList.size() - 3 > i) {
 					if (ieList.get(i).getIe_itcode().equals(ieList.get(i + 1).getIe_itcode())) {
-						if (ieList.get(i + 1).getIe_status() == 1) {
+						if (ieList.get(i + 1).getIe_status() == "1") {
 							if (ieList.get(i + 1).getIe_itcode().equals(ieList.get(i + 2).getIe_itcode())) {
-								if (ieList.get(i + 2).getIe_status() == 2) {
+								if (ieList.get(i + 2).getIe_status() == "2") {
 									sb.append("<tr><td>" + ieList.get(i).getIe_itcode() + "</td>");
 									if(ieList2.size()<a+1||ieList2.size()==0) {
 									sb.append("<td>0</td>");	
@@ -425,7 +428,7 @@ public class StockMM {
 					}
 				} else if (ieList.size() - 2 >= i) {
 					if (ieList.get(i).getIe_itcode().equals(ieList.get(i + 1).getIe_itcode())) {
-						if (ieList.get(i + 1).getIe_status() == 1) {
+						if (ieList.get(i + 1).getIe_status() == "1") {
 							sb.append("<tr><td>" + ieList.get(i).getIe_itcode() + "</td>");
 							if(ieList2.size()<a+1||ieList2.size()==0) {
 								sb.append("<td>0</td>");
@@ -589,28 +592,27 @@ public class StockMM {
 		}
 		return sb.toString();
 	}
-
-//	@Transactional
-//	public ResponseEntity<String> cofirmExportCheck(String ipList, HttpSession session) {
-//		ipList = ipList.replace("},", "} ");
-//		String[] arr = ipList.split(" ");
-//		List<IePort> imList = new ArrayList<IePort>();
-//		boolean a = false, b = false;
-//		for (int i = 0; i < arr.length; i++) {
-//			imList.add(new Gson().fromJson(arr[i], IePort.class));
-//		}
-//		for (int i = 0; i < imList.size(); i++) {
-//			IePort ip = new IePort();
-//			ip = imList.get(i);
-//			ip.setIe_cpcode(session.getAttribute("cCode").toString());
-//			ip.setIe_hrcode(session.getAttribute("id").toString());
-//			a = pDao.updateBshipment(imList.get(i));
-//			b = ieDao.insertExport(imList.get(i));
-//		}
-//		if (a && b) {
-//			List<Purchase> pList = ieDao.importCheckList(session.getAttribute("cCode").toString());
-//			return ResponseEntity.ok(makeExportCheckHtml(pList));
-//		}
-//		return ResponseEntity.ok(new Gson().toJson("입고 확정에 실패하였습니다."));
-//	}
+	@Transactional
+	public ResponseEntity<String> cofirmExportCheck(String ipList, HttpSession session) {
+		ipList = ipList.replace("},", "} ");
+		String[] arr = ipList.split(" ");
+		List<IePort> imList = new ArrayList<IePort>();
+		boolean a = false, b = false;
+		for (int i = 0; i < arr.length; i++) {
+			imList.add(new Gson().fromJson(arr[i], IePort.class));
+		}
+		for (int i = 0; i < imList.size(); i++) {
+			IePort ip = new IePort();
+			ip = imList.get(i);
+			ip.setIe_cpcode(session.getAttribute("cCode").toString());
+			ip.setIe_hrcode(session.getAttribute("id").toString());
+			a = ieDao.updateBshipment(imList.get(i));
+			b = ieDao.insertExport(imList.get(i));
+		}
+		if (a && b) {
+			List<Purchase> pList = ieDao.importCheckList(session.getAttribute("cCode").toString());
+			return ResponseEntity.ok(makeExportCheckHtml(pList));
+		}
+		return ResponseEntity.ok(new Gson().toJson("입고 확정에 실패하였습니다."));
+	}
 }

@@ -9,15 +9,16 @@ import lombok.experimental.Accessors;
 @Accessors(chain=true)
 public class IePort {
 
-	private String ie_itcode;
-	private String ie_account;
-	private String ie_date;
-	private String ie_etc;
-	private int ie_status;
-	private String ie_pnum;
-	private int ie_price;
-	private String ie_hrcode;
-	private int ie_qty;
+	private String ie_seqnum;
 	private String ie_cpcode;
+	private String ie_date;
+	private String ie_hrcode;
+	private String ie_etc;
+	private String ie_status;
+	private String ie_clcode;
+	private String ie_ocode;
+	private String ie_itcode;
+	private int ie_qty;
+	private int ie_price;
 	
 }
