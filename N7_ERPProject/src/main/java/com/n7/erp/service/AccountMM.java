@@ -459,7 +459,7 @@ public class AccountMM {
 		String cCode = (String) session.getAttribute("cCode");
 		String hrCode = (String) session.getAttribute("hrCode");
 
-		ac.setJ_ccode(cCode);
+		ac.setJ_ccode(cCode); //회사코드
 		ac.setJ_docunum("AC");
 		ac.setJ_reasion("사유");
 		ac.setJ_none(hrCode);
@@ -479,7 +479,8 @@ public class AccountMM {
 	public Map<String, List<Account>> acTemporaryList(HttpSession session) {
 		Map<String, List<Account>> aMap = null;
 		String hrCode = session.getAttribute("hrCode").toString();
-		List<Account> aList = aDao.acTemporaryList(hrCode);
+		String cCode = (String) session.getAttribute("cCode");
+		List<Account> aList = aDao.acTemporaryList(hrCode, cCode);
 
 		if (aList != null) {
 			aMap = new HashMap<>();
@@ -494,7 +495,9 @@ public class AccountMM {
 	public Map<String, List<ApprovalDocu>> apupPaymentList(HttpSession session) {
 		Map<String, List<ApprovalDocu>> pMap = null;
 		String hrCode = (String) session.getAttribute("hrCode");
-		List<ApprovalDocu> pList = aDao.apupPaymentList(hrCode);
+		String cCode = (String) session.getAttribute("cCode");
+		
+		List<ApprovalDocu> pList = aDao.apupPaymentList(hrCode, cCode);
 
 		if (pList != null) {
 			pMap = new HashMap<>();
@@ -509,9 +512,10 @@ public class AccountMM {
 	public Map<String, List<ApprovalDocu>> apdownPaymentList(HttpSession session) {
 		Map<String, List<ApprovalDocu>> pMap = null;
 		String hrCode = (String) session.getAttribute("hrCode");
+		String cCode = (String) session.getAttribute("cCode");
 		System.out.println("사원코드: " + hrCode);
 
-		List<ApprovalDocu> pList = aDao.apdownPaymentList(hrCode);
+		List<ApprovalDocu> pList = aDao.apdownPaymentList(hrCode, cCode);
 
 		if (pList != null) {
 			pMap = new HashMap<>();
@@ -525,11 +529,12 @@ public class AccountMM {
 	}
 
 	// 임시저장 결재안 상세보기
-	public ModelAndView acRequest3(String j_docunum) {
+	public ModelAndView acRequest(String j_docunum, HttpSession session) {
 		mav = new ModelAndView();
 		String view = null;
+		String cCode = (String) session.getAttribute("cCode");
 
-		Account ac = aDao.acrequest3(j_docunum);
+		Account ac = aDao.acRequest(j_docunum, cCode);
 
 		if (ac != null) {
 			mav.addObject("ac", ac);
@@ -545,19 +550,20 @@ public class AccountMM {
 	}
 
 	// 내가받은결재안 상세보기
-	public ModelAndView acRequest2(String j_docunum) {
+	public ModelAndView apRequest2(String j_docunum, HttpSession session) {
 		mav = new ModelAndView();
 		String view = null;
+		String cCode = (String) session.getAttribute("cCode");
 
-		Account ac = aDao.acrequest2(j_docunum);
+		Account ac = aDao.apRequest2(j_docunum, cCode);
 
 		if (ac != null) {
 			mav.addObject("ac", ac);
-			view = "Account/acDowninfo";
+			view = "Account/apDowninfo";
 			System.out.println(ac.getJ_none());
 			System.out.println("성공했다 이시키야");
 		} else {
-			view = "Account/acDowninfo";
+			view = "Account/apDowninfo";
 			System.out.println("야 못했다 미안하다...");
 		}
 		mav.setViewName(view);
@@ -565,11 +571,12 @@ public class AccountMM {
 	}
 
 	// 내가올린결재안 상세
-	public ModelAndView acRequest(String j_docunum) {
+	public ModelAndView apRequest(String j_docunum, HttpSession session) {
 		mav = new ModelAndView();
 		String view = null;
+		String cCode = (String) session.getAttribute("cCode");
 
-		Account ac = aDao.acrequest(j_docunum);
+		Account ac = aDao.apRequest(j_docunum, cCode);
 
 		if (ac != null) {
 			mav.addObject("ac", ac);
@@ -589,6 +596,7 @@ public class AccountMM {
 			HttpSession session) {
 		mav = new ModelAndView();
 		String view = null;
+		String cCode = (String) session.getAttribute("cCode");
 
 		ac.setJ_none(req.getParameter("rs_apcode0"));
 		ac.setJ_ntwo(req.getParameter("rs_apcode1"));
@@ -615,8 +623,8 @@ public class AccountMM {
 		ap.setAp_toapprover(ac.getJ_ntwo()); // 결재받을사람
 		ap.setAp_status((ac.getJ_grade())); // 결재상태
 
-		boolean sa = aDao.acSign(ac); // 결재사람1,2,3 넣는거 업데이트
-		boolean sp = aDao.apCart2(ap); // 결재문서 테이블에 인서트
+		boolean sa = aDao.acSign(ac, cCode); // 결재사람1,2,3 넣는거 업데이트
+		boolean sp = aDao.apCart2(ap, cCode); // 결재문서 테이블에 인서트
 
 		if (sa && sp) {
 			try {
@@ -647,6 +655,8 @@ public class AccountMM {
 		mav = new ModelAndView();
 		String view = null;
 		String hrCode = (String) session.getAttribute("hrCode");
+		String cCode = (String) session.getAttribute("cCode");
+		
 		ac.setJ_none(req.getParameter("rs_apcode0"));
 		ac.setJ_ntwo(req.getParameter("rs_apcode1"));
 		ac.setJ_nthr(req.getParameter("rs_apcode2"));
@@ -672,8 +682,8 @@ public class AccountMM {
 
 		ap.setAp_docunum(ac.getJ_docunum());
 
-		boolean sa = aDao.acSign2(ac);
-		boolean sp = aDao.apSign2(ap);
+		boolean sa = aDao.acSign2(ac, cCode);
+		boolean sp = aDao.apSign2(ap, cCode);
 
 		if (sa && sp) {
 			view = "Account/acDownlist";
@@ -687,9 +697,11 @@ public class AccountMM {
 	}
 
 	// 결재안 삭제
-	public int acDelete(String j_docunum, Account ac, HttpServletRequest req, HttpServletResponse rep) {
-		int a = aDao.acCheck(j_docunum);
-		boolean b = aDao.acDelete(j_docunum);
+	public int acDelete(String j_docunum, Account ac, HttpServletRequest req, HttpServletResponse rep, HttpSession session) {
+		String cCode = (String) session.getAttribute("cCode");
+		
+		int a = aDao.acCheck(j_docunum, cCode);
+		boolean b = aDao.acDelete(j_docunum, cCode);
 
 		// 결재상태1?2면 딜리트안되게해야돼
 		if (a != 0 && b) { // 결재상태 '0'인게 있고 삭제가 되면 결재안삭제완료
@@ -705,9 +717,11 @@ public class AccountMM {
 	}
 
 	// 결재안 반려
-	public ModelAndView acBack(Account ac, ApprovalDocu ap, HttpServletRequest req, HttpServletResponse rep) {
+	public ModelAndView acBack(Account ac, ApprovalDocu ap, HttpServletRequest req, HttpServletResponse rep, HttpSession session) {
 		mav = new ModelAndView();
 		String view = null;
+		String cCode = (String) session.getAttribute("cCode");
+		
 		System.out.println("acBack까지 들어왔어: " + ac.getJ_docunum());
 		System.out.println("acBack까지 들어왔어: " + ac.getJ_reasion());
 
@@ -717,8 +731,8 @@ public class AccountMM {
 
 		ap.setAp_docunum(ac.getJ_docunum());
 
-		boolean ba = aDao.acBack(ac);
-		boolean bp = aDao.apBack2(ap.getAp_docunum());
+		boolean ba = aDao.acBack(ac, cCode);
+		boolean bp = aDao.apBack2(ap.getAp_docunum(), cCode);
 
 		if (ba && bp) {
 			view = "Account/acDownlist";
@@ -732,9 +746,10 @@ public class AccountMM {
 	}
 
 
-	public Map<String, List<approvalLine>> getApprinfo(int cnt, String[] strArray) {
+	public Map<String, List<approvalLine>> getApprinfo(int cnt, String[] strArray, HttpSession session) {
 		Map<String, List<approvalLine>> aMap = null;
 		List<approvalLine> aList = new ArrayList<>();
+		
 		System.out.println("숫자=" + cnt);
 		System.out.println("이름값=" + strArray.length);
 		String code = "";

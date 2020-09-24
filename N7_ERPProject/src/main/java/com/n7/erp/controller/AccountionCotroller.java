@@ -167,8 +167,8 @@ public class AccountionCotroller {
 
 	// 내가올린 결재안 상세보기
 	@GetMapping(value = "Account/apRequest", produces = "application/json;charset=utf-8")
-	public ModelAndView acRequest(String j_docunum) {
-		mav = am.acRequest(j_docunum);
+	public ModelAndView apRequest(String j_docunum, HttpSession session) {
+		mav = am.apRequest(j_docunum, session);
 		System.out.println(j_docunum);
 		return mav;
 	}
@@ -181,9 +181,9 @@ public class AccountionCotroller {
 	}
 	
 	// 내가받은 결재안 상세보기
-	@GetMapping(value = "Account/acRequest2", produces = "application/json;charset=utf-8")
-	public ModelAndView acRequest2(String j_docunum) {
-		mav = am.acRequest2(j_docunum);
+	@GetMapping(value = "Account/apRequest2", produces = "application/json;charset=utf-8")
+	public ModelAndView apRequest2(String j_docunum, HttpSession session) {
+		mav = am.apRequest2(j_docunum, session);
 		System.out.println(j_docunum);
 		return mav;
 	}
@@ -197,9 +197,9 @@ public class AccountionCotroller {
 	}
 
 	// 임시저장 결재안 상세보기
-	@GetMapping(value = "Account/acRequest3", produces = "application/json;charset=utf-8")
-	public ModelAndView acRequest3(String j_docunum) {
-		mav = am.acRequest3(j_docunum);
+	@GetMapping(value = "Account/acRequest", produces = "application/json;charset=utf-8")
+	public ModelAndView acRequest(String j_docunum, HttpSession session) {
+		mav = am.acRequest(j_docunum, session);
 		System.out.println(j_docunum);
 		return mav;
 	}
@@ -228,29 +228,31 @@ public class AccountionCotroller {
 	// 결재안 삭제
 	@RequestMapping(value = "Account/acDelete", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public int acDelete(String j_docunum, Account ac, HttpServletRequest req, HttpServletResponse rep) {
+	public int acDelete(String j_docunum, Account ac, HttpServletRequest req, HttpServletResponse rep, 
+			HttpSession session) {
 		System.out.println(j_docunum);
 		logger.info("acDelete 결재안 삭제요청");
-		int a = am.acDelete(j_docunum, ac, req, rep);
+		int a = am.acDelete(j_docunum, ac, req, rep, session);
 		return (int) a; // DAO
 	}
 
 	// 반려(업데이트)
 	@RequestMapping(value = "Account/acBack", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public ModelAndView acBack(Account ac, ApprovalDocu ap, HttpServletRequest req, HttpServletResponse rep) {
+	public ModelAndView acBack(Account ac, ApprovalDocu ap, HttpServletRequest req, HttpServletResponse rep,
+			HttpSession session) {
 		System.out.println(ac.getJ_docunum());
 		logger.info("acBack 반려요청");
-		mav = am.acBack(ac, ap, req, rep);
+		mav = am.acBack(ac, ap, req, rep, session);
 		return mav; // DAO
 	}
 
 	// 내가올린결재안에서 이름찾아오기
 	@PostMapping(value = "/Account/getApprinfo", produces = "application/json;charset=utf-8")
-	public Map<String, List<approvalLine>> getApprinfo(String CNT, String ARR) {
+	public Map<String, List<approvalLine>> getApprinfo(String CNT, String ARR, HttpSession session) {
 		int cnt = Integer.parseInt(CNT);
 		String[] strArray = ARR.split(",");
-		Map<String, List<approvalLine>> mMap = am.getApprinfo(cnt,strArray);
+		Map<String, List<approvalLine>> mMap = am.getApprinfo(cnt,strArray, session);
 		return mMap;
 	}
 

@@ -186,7 +186,7 @@
 	<select id="apupPaymentList" resultType="approvaldocu" parameterType="approvaldocu">
 		SELECT *
 		FROM APPROVALDOCU
-		WHERE AP_FROMAPPROVER = #{hrCode}
+		WHERE AP_FROMAPPROVER = #{hrCode} AND AP_CCODE = #{cCode}
 	</select>
 	
 	<!-- 내가 받은 결재안 목록 -->
@@ -194,7 +194,7 @@
 		parameterType="approvaldocu">
 		SELECT *
 		FROM APPROVALDOCU
-		WHERE AP_TOAPPROVER = #{hrCode} 
+		WHERE AP_TOAPPROVER = #{hrCode} AND AP_CCODE = #{cCode}
 <!-- 		AND AP_STATUS!= '0' -->
 		<!-- WHERE (J_NTWO = #{cCode} OR J_NTHR = #{cCode}) AND J_GRADE != '0' -->
 	</select> 
@@ -203,28 +203,28 @@
 	<select id="acTemporaryList" resultType="account" parameterType="account">
 		SELECT *
 		FROM AC_JNOB 
-		WHERE J_NONE = #{hrCode} AND J_GRADE = '0'
+		WHERE J_NONE = #{hrCode} AND J_GRADE = '0' AND J_CCODE = #{cCode}
 	</select>
 
 	<!-- 내가올린 결재 상세 -->
-	<select id="acrequest" resultType="account">
+	<select id="apRequest" resultType="account">
 		SELECT *
 		FROM AC_JNOB
-		WHERE J_DOCUNUM=#{j_docunum}
+		WHERE J_DOCUNUM=#{j_docunum} AND J_CCODE = #{cCode}
 	</select>
 
 <!-- 내가 받은 결재 상세 -->
-	<select id="acrequest2" resultType="account">
+	<select id="apRequest2" resultType="account">
 		SELECT *
 		FROM AC_JNOB
-		WHERE J_DOCUNUM=#{j_docunum} AND J_GRADE !='4'
+		WHERE J_DOCUNUM=#{j_docunum} AND J_GRADE !='4' AND J_CCODE = #{cCode}
 	</select>
 	
 <!-- 임시저장 결재 상세 -->
-	<select id="acrequest3" resultType="account">
+	<select id="acRequest" resultType="account">
 		SELECT *
 		FROM AC_JNOB
-		WHERE J_DOCUNUM=#{j_docunum}
+		WHERE J_DOCUNUM=#{j_docunum} AND J_CCODE = #{cCode}
 	</select>
 
 	<!-- 결재자 2,3 넣어서 업데이트 -->
@@ -234,41 +234,40 @@
 		#{j_none}, J_NTWO = #{j_ntwo}, J_NTHR = #{j_nthr},
 		J_REASION =
 		#{j_reasion}, J_DATE = DEFAULT
-		WHERE J_DOCUNUM = #{j_docunum}
+		WHERE J_DOCUNUM = #{j_docunum} AND J_CCODE = #{cCode}
 	</update>
 
 	<!-- 결재하면 등급 업데이트 -->
 	<update id="acSign2">
 		UPDATE AC_JNOB
 		SET J_GRADE = #{j_grade}
-		WHERE J_DOCUNUM
-		=#{j_docunum}
+		WHERE J_DOCUNUM = #{j_docunum} AND J_CCODE = #{cCode}
 	</update>
 	
 	<!-- 공통결재안 결재업데이트 -->
 	<update id="apSign2">
 		UPDATE APPROVALDOCU
 		SET AP_STATUS = #{ap_status}, AP_TOAPPROVER = #{ap_toapprover}
-		WHERE AP_DOCUNUM = #{ap_docunum}
+		WHERE AP_DOCUNUM = #{ap_docunum} AND AP_CCODE = #{cCode}
 	</update>
 
 	<update id="acBack">
 		UPDATE AC_JNOB
 		SET J_GRADE = '4', J_REASION =
 		#{j_reasion}
-		WHERE J_DOCUNUM = #{j_docunum}
+		WHERE J_DOCUNUM = #{j_docunum} AND J_CCODE = #{cCode}
 	</update>
 
 	<select id="acCheck" resultType="int">
 		SELECT COUNT(*)
 		FROM AC_JNOB
-		WHERE J_DOCUNUM = #{j_docunum} AND J_GRADE = '0'
+		WHERE J_DOCUNUM = #{j_docunum} AND J_GRADE = '0' AND J_CCODE = #{cCode}
 	</select>
 
 	<delete id="acDelete">
 		DELETE
 		FROM AC_JNOB
-		WHERE J_DOCUNUM = #{j_docunum} 
+		WHERE J_DOCUNUM = #{j_docunum} AND J_CCODE = #{cCode}
 	</delete>
 
 	<!--공통결재함에 INSERT-->
@@ -284,7 +283,7 @@
 		UPDATE APPROVALDOCU
 		SET AP_STATUS = '4'
 		WHERE
-		AP_DOCUNUM = #{ap_docunum}
+		AP_DOCUNUM = #{ap_docunum} AND AP_CCODE = #{cCode}
 	</update>
 
 	<select id="getApprinfo" parameterType="String"

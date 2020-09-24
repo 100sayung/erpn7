@@ -102,8 +102,8 @@ td {
 						function() {
 							check = $(this).attr('value');
 
-							window.open('/erp/rest/Account/acRequest2?j_docunum=' + check,
-									'/erp/rest/Account/acRequest2', 'width=1500, height=600');
+							window.open('/erp/rest/Account/apRequest2?j_docunum=' + check,
+									'/erp/rest/Account/apRequest2', 'width=1500, height=600');
 						});
 			});
 	

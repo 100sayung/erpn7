@@ -131,7 +131,7 @@ td {
 							check = $(this).attr('value');
 
 							window.open(
-									'/erp/rest/Account/acRequest3?j_docunum='
+									'/erp/rest/Account/acRequest?j_docunum='
 											+ check, 'acRequest',
 									'width=1500, height=600');
 						});
