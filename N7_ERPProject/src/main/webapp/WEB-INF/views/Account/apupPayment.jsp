@@ -67,7 +67,7 @@ td {
 <script>
 	$.ajax({
 				type : 'get',
-				url : '/erp/rest/Account/acPendList',
+				url : '/erp/rest/Account/apupPaymentList',
 				dataType : 'json',
 	 			contentType : 'application/json; charset=UTF-8',
 				success : function(data) {
@@ -100,13 +100,29 @@ td {
 							check = $(this).attr('value');
 
 							window.open(
-									'/erp/rest/Account/acRequest?j_docunum='
-											+ check, 'acRequest3',
+									'/erp/rest/Account/apRequest?j_docunum='
+											+ check, 'apRequest',
 									'width=1500, height=600');
 						});
 			});
 </script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

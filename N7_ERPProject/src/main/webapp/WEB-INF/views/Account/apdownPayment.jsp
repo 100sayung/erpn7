@@ -70,7 +70,7 @@ td {
 	$
 			.ajax({
 				type : 'get',
-				url : '/erp/rest/Account/acPendList2',
+				url : '/erp/rest/Account/apdownPaymentList',
 				dataType : 'json',
 	 			contentType : 'application/json; charset=UTF-8',
 				success : function(data) {

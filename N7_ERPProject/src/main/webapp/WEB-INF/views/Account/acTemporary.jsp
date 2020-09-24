@@ -75,7 +75,7 @@ td {
 
 						$.ajax({
 									type : 'get',
-									url : '/erp/rest/Account/acPendList3',
+									url : '/erp/rest/Account/acTemporaryList',
 									dataType : 'json',
 									success : function(data) {
 										console.log(data);

@@ -76,10 +76,10 @@ a {
 	</div>
 	<div id="side_menu">
 		<ul id="menuList">
-			<li><a href="#" id="acPend">내가 올린 결재함</a></li>
-			<li><a href="#" id="acDownlist">내가 받은 결재함</a></li>
+			<li><a href="#" id="apupPayment">내가 올린 결재함</a></li>
+			<li><a href="#" id="apdownPayment">내가 받은 결재함</a></li>
 			<!-- 			<li><a href="/erp/Account/acpreList" id="prelist">임시저장 결재함</a></li> -->
-			<li><a href="#" id="acList">임시저장 결재함</a></li>
+			<li><a href="#" id="acTemporary">임시저장 결재함</a></li>
 			<!-- 			<li><a href="javascript:Aj('/erp/Account/acpreList', '#description')"> 결재함</a></li> -->
 		</ul>
 	</div>
@@ -88,9 +88,9 @@ a {
 	</center>
 </body>
 <script>
-	$("#acPend").click(function() {
+	$("#apupPayment").click(function() {
 		$.ajax({
-			url : '/erp/Account/acPend',
+			url : '/erp/Account/apupPayment',
 			type : 'get',
 			success : function(data) {
 				$("#description").html(data);
@@ -101,9 +101,9 @@ a {
 
 	});
 
-	$("#acDownlist").click(function() {
+	$("#apdownPayment").click(function() {
 		$.ajax({
-			url : '/erp/Account/acDownlist',
+			url : '/erp/Account/apdownPayment',
 			type : 'get',
 			success : function(data) {
 				$("#description").html(data);
@@ -143,9 +143,9 @@ a {
 
 	// 	});
 
-		$("#acList").click(function() {
+		$("#acTemporary").click(function() {
 			$.ajax({
-				url:'/erp/Account/acpreList',
+				url:'/erp/Account/acTemporary',
 				success:function(data) {
 					console.log(data);
 					$("#description").html(data);

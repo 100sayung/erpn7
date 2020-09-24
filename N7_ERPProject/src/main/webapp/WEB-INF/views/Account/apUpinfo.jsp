@@ -179,6 +179,8 @@ table, tr, th, td {
 										}
 									});
 						});
+		
+		
 </script> 
 </body>
 </html>

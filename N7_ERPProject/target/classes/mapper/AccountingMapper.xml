@@ -171,7 +171,7 @@
 
 
 	<!-- 임시저장 (결재등급0으로 INSERT) -->
-	<insert id="acCart" parameterType="account">
+	<insert id="actempoInsert" parameterType="account">
 		INSERT INTO AC_JNOB
 		VALUES(#{j_ccode}, #{j_docunum}||LPAD(AC_JNOB_SEQ.NEXTVAL,8,0),
 		#{j_title},
@@ -183,14 +183,14 @@
 	</insert>
 
 	<!-- 내가 올린 결재안 목록 -->
-	<select id="aplist" resultType="approvaldocu" parameterType="approvaldocu">
+	<select id="apupPaymentList" resultType="approvaldocu" parameterType="approvaldocu">
 		SELECT *
 		FROM APPROVALDOCU
 		WHERE AP_FROMAPPROVER = #{hrCode}
 	</select>
 	
 	<!-- 내가 받은 결재안 목록 -->
-	<select id="aplist2" resultType="approvaldocu"
+	<select id="apdownPaymentList" resultType="approvaldocu"
 		parameterType="approvaldocu">
 		SELECT *
 		FROM APPROVALDOCU
@@ -200,7 +200,7 @@
 	</select> 
 	
 	<!-- 임시저장 결재안 -->
-	<select id="aclist" resultType="account" parameterType="account">
+	<select id="acTemporaryList" resultType="account" parameterType="account">
 		SELECT *
 		FROM AC_JNOB 
 		WHERE J_NONE = #{hrCode} AND J_GRADE = '0'
@@ -268,7 +268,7 @@
 	<delete id="acDelete">
 		DELETE
 		FROM AC_JNOB
-		WHERE J_DOCUNUM = #{j_docunum}
+		WHERE J_DOCUNUM = #{j_docunum} 
 	</delete>
 
 	<!--공통결재함에 INSERT-->
@@ -291,4 +291,5 @@
 		resultType="Line">
 		SELECT * FROM MLIST WHERE HC_HRCODE=#{code}
 	</select>
+	
 </mapper>

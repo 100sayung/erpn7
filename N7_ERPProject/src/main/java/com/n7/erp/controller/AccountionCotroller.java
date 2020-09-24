@@ -151,22 +151,22 @@ public class AccountionCotroller {
 	///////////////////////////////////////////////////////////////////////////////
 
 	// 분개전표 작성
-	@PostMapping(value = "Account/acCart", produces = "application/json;charset=utf-8")
+	@PostMapping(value = "Account/actempoInsert", produces = "application/json;charset=utf-8")
 	public int acCart(Account ac, HttpSession session) {
 		logger.info("임시저장 acCart");
-		int a = am.acCart(ac, session);
+		int a = am.actempoInsert(ac, session);
 		return a; // DAO
 	}
 
 	// 내가올린 결재안 목록
-	@GetMapping(value = "Account/acPendList", produces = "application/json;charset=utf-8")
-	public Map<String, List<ApprovalDocu>> acPend(HttpSession session) {
-		Map<String, List<ApprovalDocu>> pMap = am.aplist(session);
+	@GetMapping(value = "Account/apupPaymentList", produces = "application/json;charset=utf-8")
+	public Map<String, List<ApprovalDocu>> apupPaymentList(HttpSession session) {
+		Map<String, List<ApprovalDocu>> pMap = am.apupPaymentList(session);
 		return pMap;
 	}
 
 	// 내가올린 결재안 상세보기
-	@GetMapping(value = "Account/acRequest", produces = "application/json;charset=utf-8")
+	@GetMapping(value = "Account/apRequest", produces = "application/json;charset=utf-8")
 	public ModelAndView acRequest(String j_docunum) {
 		mav = am.acRequest(j_docunum);
 		System.out.println(j_docunum);
@@ -174,9 +174,9 @@ public class AccountionCotroller {
 	}
 
 	// 내가받은 결재안 목록
-	@GetMapping(value = "Account/acPendList2", produces = "application/json;charset=utf-8")
-	public Map<String, List<ApprovalDocu>> acPend2(HttpSession session) {
-		Map<String, List<ApprovalDocu>> pMap = am.aplist2(session);
+	@GetMapping(value = "Account/apdownPaymentList", produces = "application/json;charset=utf-8")
+	public Map<String, List<ApprovalDocu>> apdownPaymentList(HttpSession session) {
+		Map<String, List<ApprovalDocu>> pMap = am.apdownPaymentList(session);
 		return pMap;
 	}
 	
@@ -190,9 +190,9 @@ public class AccountionCotroller {
 
 
 	// 임시저장 결재안 목록
-	@GetMapping(value = "Account/acPendList3", produces = "application/json;charset=utf-8")
-	public Map<String, List<Account>> acPend3(HttpSession session) {
-		Map<String, List<Account>> aMap = am.aclist(session);
+	@GetMapping(value = "Account/acTemporaryList", produces = "application/json;charset=utf-8")
+	public Map<String, List<Account>> acTemporaryList(HttpSession session) {
+		Map<String, List<Account>> aMap = am.acTemporaryList(session);
 		return aMap;
 	}
 

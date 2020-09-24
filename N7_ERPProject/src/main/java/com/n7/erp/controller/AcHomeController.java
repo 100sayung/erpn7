@@ -94,40 +94,40 @@ public class AcHomeController {
 		return "Account/acWritefrm";
 	}
 
-	// 분개전표 전체리스트
-	@RequestMapping(value = "Account/acPend", method = RequestMethod.GET)
+	// 내가올린 결재함 - 공통
+	@RequestMapping(value = "Account/apupPayment", method = RequestMethod.GET)
 	public String acPend(Locale locale) {
-		return "Account/acPend";
+		return "Account/apupPayment";
 	}
 
-	// 분개전표 임시저장
-	@RequestMapping(value = "Account/acDownlist", method = RequestMethod.GET)
+	// 내가받은 결재함 -공통
+	@RequestMapping(value = "Account/apdownPayment", method = RequestMethod.GET)
 	public String acDownlist(Locale locale) {
-		return "Account/acDownlist";
+		return "Account/apdownPayment";
 	}
 
-	// 내가올린결재안 상세보기
-	@RequestMapping(value = "Account/acapPreinfo", method = RequestMethod.GET)
-	public String acapPreinfo(Locale locale) {
-		return "Account/acapPreinfo";
-	}
-
-	// 임시저장 분개전표 상세보기
-	@RequestMapping(value = "Account/acCartinfo", method = RequestMethod.GET)
-	public String acCartinfo(Locale locale) {
-		return "Account/acCartinfo";
-	}
-
-	// 내가 결재할 분개전표 상세보기
-	@RequestMapping(value = "Account/acApinfo", method = RequestMethod.GET)
-	public String acApinfo(Locale locale) {
-		return "Account/acCartinfo";
-	}
-
-	// 임시저장 목록보기
-	@RequestMapping(value = "Account/acpreList", method = RequestMethod.GET)
+	// 임시저장 결재함
+	@RequestMapping(value = "Account/acTemporary", method = RequestMethod.GET)
 	public String acpreList(Locale locale) {
-		return "Account/acpreList";
+		return "Account/acTemporary";
+	}
+
+	// 내가올린 결재안 상세보기
+	@RequestMapping(value = "Account/apUpinfo", method = RequestMethod.GET)
+	public String acCartinfo(Locale locale) {
+		return "Account/apUpinfo";
+	}
+
+	// 내가받은 결재안 상세보기
+	@RequestMapping(value = "Account/apDowninfo", method = RequestMethod.GET)
+	public String acApinfo(Locale locale) {
+		return "Account/apDowninfo";
+	}
+
+	// 임시저장 결재안 상세보기
+	@RequestMapping(value = "Account/acTemroinfo", method = RequestMethod.GET)
+	public String acapPreinfo(Locale locale) {
+		return "Account/acTemroinfo";
 	}
 
 }

@@ -88,11 +88,11 @@ public interface AccountDao {
 ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////
 
-	public List<ApprovalDocu> aplist(String hrCode); //내가 올린 결재안
+	public List<ApprovalDocu> apupPaymentList(String hrCode); //내가 올린 결재안
 
-	public List<ApprovalDocu> aplist2(String hrCode); //내가 받은 결재안
+	public List<ApprovalDocu> apdownPaymentList(String hrCode); //내가 받은 결재안
 	
-	public List<Account> aclist(String hrCode); //임시저장 결재함
+	public List<Account> acTemporaryList(String hrCode); //임시저장 결재함
 	
 	public Account acrequest(String j_docunum); // 내가올린 결재안상세
 
@@ -100,7 +100,7 @@ public interface AccountDao {
 	
 	public Account acrequest3(String j_docunum); // 임시저장 결재안상세
 
-	public boolean acCart(Account ac); //처음에 임시저장으로 insert할때
+	public boolean actempoInsert(Account ac); //처음에 임시저장으로 insert할때
 
 	public boolean acSign(Account ac); //결재자1이 결재자 2, 3, 결재등급, 기타등등 업데이트
 
@@ -118,7 +118,7 @@ public interface AccountDao {
 
 	public boolean apBack2(String ap_docunum); //공통결재함 반려
 
-	com.n7.erp.bean.ac.approvalLine getApprinfo(String name);
+	com.n7.erp.bean.ac.approvalLine getApprinfo(String code); //결재안에서 결재자 표시
 
 
 	

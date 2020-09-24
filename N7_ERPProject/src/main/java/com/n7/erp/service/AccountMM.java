@@ -455,7 +455,7 @@ public class AccountMM {
 
 	/////////////////////////////////////////////////////////////////////////////////////////
 
-	public int acCart(Account ac, HttpSession session) {
+	public int actempoInsert(Account ac, HttpSession session) {
 		String cCode = (String) session.getAttribute("cCode");
 		String hrCode = (String) session.getAttribute("hrCode");
 
@@ -466,7 +466,7 @@ public class AccountMM {
 		ac.setJ_ntwo("결재자2");
 		ac.setJ_nthr("결재자3");
 
-		if (aDao.acCart(ac)) {
+		if (aDao.actempoInsert(ac)) {
 			System.out.println("ac전표 등록이 완료되었습니다.");
 			return 1;
 		} else {
@@ -476,10 +476,10 @@ public class AccountMM {
 
 	}
 
-	public Map<String, List<Account>> aclist(HttpSession session) {
+	public Map<String, List<Account>> acTemporaryList(HttpSession session) {
 		Map<String, List<Account>> aMap = null;
 		String hrCode = session.getAttribute("hrCode").toString();
-		List<Account> aList = aDao.aclist(hrCode);
+		List<Account> aList = aDao.acTemporaryList(hrCode);
 
 		if (aList != null) {
 			aMap = new HashMap<>();
@@ -491,10 +491,10 @@ public class AccountMM {
 		return aMap;
 	}
 
-	public Map<String, List<ApprovalDocu>> aplist(HttpSession session) {
+	public Map<String, List<ApprovalDocu>> apupPaymentList(HttpSession session) {
 		Map<String, List<ApprovalDocu>> pMap = null;
 		String hrCode = (String) session.getAttribute("hrCode");
-		List<ApprovalDocu> pList = aDao.aplist(hrCode);
+		List<ApprovalDocu> pList = aDao.apupPaymentList(hrCode);
 
 		if (pList != null) {
 			pMap = new HashMap<>();
@@ -506,12 +506,12 @@ public class AccountMM {
 		return pMap;
 	}
 
-	public Map<String, List<ApprovalDocu>> aplist2(HttpSession session) {
+	public Map<String, List<ApprovalDocu>> apdownPaymentList(HttpSession session) {
 		Map<String, List<ApprovalDocu>> pMap = null;
 		String hrCode = (String) session.getAttribute("hrCode");
 		System.out.println("사원코드: " + hrCode);
 
-		List<ApprovalDocu> pList = aDao.aplist2(hrCode);
+		List<ApprovalDocu> pList = aDao.apdownPaymentList(hrCode);
 
 		if (pList != null) {
 			pMap = new HashMap<>();
@@ -533,11 +533,11 @@ public class AccountMM {
 
 		if (ac != null) {
 			mav.addObject("ac", ac);
-			view = "Account/acapPreinfo";
+			view = "Account/acTemroinfo";
 			System.out.println(ac.getJ_none());
 			System.out.println("성공했다 이시키야");
 		} else {
-			view = "Account/acCartinfo";
+			view = "Account/acTemroinfo";
 			System.out.println("야 못했다 미안하다...");
 		}
 		mav.setViewName(view);
@@ -553,11 +553,11 @@ public class AccountMM {
 
 		if (ac != null) {
 			mav.addObject("ac", ac);
-			view = "Account/acApinfo";
+			view = "Account/acDowninfo";
 			System.out.println(ac.getJ_none());
 			System.out.println("성공했다 이시키야");
 		} else {
-			view = "Account/acApinfo";
+			view = "Account/acDowninfo";
 			System.out.println("야 못했다 미안하다...");
 		}
 		mav.setViewName(view);
@@ -573,11 +573,11 @@ public class AccountMM {
 
 		if (ac != null) {
 			mav.addObject("ac", ac);
-			view = "Account/acCartinfo";
+			view = "Account/apUpinfo";
 			System.out.println(ac.getJ_none());
 			System.out.println("성공했다 이시키야");
 		} else {
-			view = "Account/acCartinfo";
+			view = "Account/apUpinfo";
 			System.out.println("야 못했다 미안하다...");
 		}
 		mav.setViewName(view);
