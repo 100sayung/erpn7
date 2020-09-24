@@ -10,7 +10,7 @@ html, body {
    text-align: center;
 }
 
-table, tr, th, td {
+#table, tr, th, td {
    border: 1px solid silver;
    text-align: center;
    margin-left: auto;
@@ -60,19 +60,19 @@ table, tr, th, td {
 <form id="fo">
       <div style="width: auto; background-color: #FFB2D9; color: white; padding: 1%;">기안문  상세보기</div>
       <div style="height: auto; padding-top: 5px; background-color: #F8F7F7;">
-         <table>
+         <table id="table">
             <tr>
                <th>제목</th>
-               <th><input type="hidden" name="j_title" value="${ac.j_title}">${ac.j_title}
+               <th><input type="hidden" name="j_title" value="${pa.p_title}">${pa.p_title}
                </th>
 
             </tr>
             <tr>
                <th>결재자</th>
                <th id="line">
-               <input type="hidden" value="${ac.j_none}" name="j_none">결재자1: ${ac.j_none} || 
-                  <input type="hidden" value="${ac.j_ntwo}" name="j_ntwo">결재자2: ${ac.j_ntwo} || 
-                  <input type="hidden" value="${ac.j_nthr}" name="j_nthr">결재자3:${ac.j_nthr}
+               <input type="hidden" value="${pa.p_approver1}" name="appval">결재자1: ${pa.p_approver1} || 
+                  <input type="hidden" value="${pa.p_approver2}" name="appval">결재자2: ${pa.p_approver2} || 
+                  <input type="hidden" value="${pa.p_approver3}" name="appval">결재자3:${pa.p_approver3}
                </th>
 
             </tr>
@@ -83,51 +83,38 @@ table, tr, th, td {
                      <div>
                         <table>
                            <tr>
-                              <th colspan="2">계정과목</th>
-                              <th colspan="2"><input type="text" name="j_account"
-                                 class="txt" value="${ac.j_account}" readonly></th>
                               <th colspan="2">문서번호</th>
-                              <th colspan="2"><input type="text" name="j_docunum"
-                                 class="txt" value="${ac.j_docunum}" readonly><input
-                                 type="hidden" name="j_grade" class="draft3"
-                                 value="${ac.j_grade}" readonly></th>
-                              <!--                               <td>결재상태</td> -->
+                              <th colspan="6"><input type="text" name="p_documentcode"
+                                 class="txt" value="${pa.p_documentcode}" readonly>
+                           </tr>
+                           <tr>
+                              <th colspan="2">거래처</th>
+                              <td colspan="6"><input type="text" name="p_clcode"
+                                 class="draft3" value="${pa.p_clcode}" readonly></td>
+                               <%-- <th colspan="2">비용구분</th>
+                              <td colspan="2"><input type="text" name="p_budget"
+                                 class="draft3" value="${pa.p_budget}" readonly></td> --%>
 
                            </tr>
                            <tr>
-                              <th colspan="2">활동센터</th>
-                              <th colspan="2"><input type="text" name="j_centre"
-                                 class="txt" value="${ac.j_centre}" readonly><input
-                                 type="hidden" name="j_ccode" class="txt"
-                                 value="${ac.j_ccode}" readonly></th>
-                              <th colspan="2">귀속부서</th>
-                              <th colspan="2"><input type="text" name="j_section"
-                                 class="txt" value="${ac.j_section}" readonly></th>
+                              <th colspan="2">제품일련번호</th>
+                              <td colspan="2"><input type="text" name="p_productnum"
+                                 class="txt" value="${pa.p_productnum}" readonly></td>
+                              <th colspan="2">구매일</th>
+                              <td colspan="2"><input type="text" name="p_day" class="txt" value="${pa.p_day}" readonly></td>
                            </tr>
                            <tr>
-                              <th colspan="2">비용구분</th>
-                              <td colspan="2"><input type="text" name="j_group"
-                                 class="draft3" value="${ac.j_group}" readonly></td>
-                              <th colspan="2">관계회사</th>
-                              <td colspan="2"><input type="text" name="j_company"
-                                 class="draft3" value="${ac.j_company}" readonly></td>
-
+                           	  <th colspan="3">상품명</th>
+							  <th >품목코드</th> 
+							  <th >수량</th>
+							  <th >단가</th>
+							  <th colspan="2">합계</th>
                            </tr>
+                           <tbody id="tbody"></tbody>
                            <tr>
-                              <th colspan="2">차변금액</th>
-                              <td colspan="5"><input type="text" name="j_debit"
-                                 class="draft" value="${ac.j_debit}" readonly></td>
-                           </tr>
-                           <tr>
-                              <th colspan="2">대변금액</th>
-                              <td colspan="5"><input type="text" name="j_credit"
-                                 class="draft" value="${ac.j_credit}" readonly></td>
-                           </tr>
-
-                           <tr>
-                              <th>적요</th>
-                              <td colspan="7"><input type="text" name="j_sumup"
-                                 class="draft" value="${ac.j_sumup}" readonly></td>
+                              <th colspan="2">기타</th>
+                              <td colspan="6"><input type="text" name="p_etc"
+                                 class="draft" value="${pa.p_etc}" readonly></td>
                            </tr>
                            <tr>
                               <th>반려사유</th>
@@ -142,5 +129,40 @@ table, tr, th, td {
          </table>
        </div>
      </form>
+     
+     <script type="text/javascript">
+     	$(document).ready(function(){
+     		var arr = new Array();
+     	    var cnt = $("input[name='checknum']:checked").length;
+     	      $("input[name='checknum']:checked").each(function() {
+     	         arr.push($(this).attr('value'));
+     	      });
+     			
+     		$.ajax({
+     		   url : '/erp/rest/Purchase/addApproval',
+               type : 'post',
+               traditional : true,
+               data : 'ARR=' + arr + '&CNT=' + cnt,
+               datatype : 'json',
+               success : function(data) {
+            	   
+               }
+     		})
+     		
+        	
+     		var pList = ${pList};
+        	console.log(pList);
+       		var str="";
+        	for(var i in pList){
+    			str+="<tr><td colspan=5'><input type='text' class='aaa' name='p_name' value='"+pList[i].p_name+"' readonly></td>";
+    			str+="<td colspan='1'><input type='text' class='aaa' name='p_itcode' value='"+pList[i].p_itcode+"' readonly></td>";
+    			str+="<td><input type='text' class='aaa'  name='p_amount' value='"+pList[i].p_amount+"' readonly></td>";
+    			str+="<td><input type='text' class='aaa' name='p_unlit' value='"+pList[i].p_unlit+"' readonly></td>";
+    			str+="<td colspan='1'><input type='text' class='aaa' name='p_budget' value='"+pList[i].p_budget+"' readonly></td></tr>";
+       		};
+        	$('#tbody').html(str);
+   
+     	})
+     </script>
 </body>
 </html>

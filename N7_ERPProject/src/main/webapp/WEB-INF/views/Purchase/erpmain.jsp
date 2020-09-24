@@ -47,7 +47,7 @@ a{
     <div id="header">
         <div id="logo">
             <h1><a href="#">N7 ERP SYSTEM</a></h1>
-        </div>
+    </div>
         <div id="menu">
             <ul>
                 <li  ><a href="#" accesskey="4" title="">내 정보</a></li>
@@ -63,6 +63,7 @@ a{
         <ul id="menuList">
             <li><a href="#" id="pregistration">구매관리</a></li>
             <li><a href="#" id="rregistration">반품 관리</a></li>
+            <li><a href="#" id="puchaseAppvalInfo">결재 상세보기</a></li>
         </ul>
     </div>
     <center>
@@ -92,6 +93,20 @@ a{
 	   $.ajax({
 		   type:'get',
 		   url:' /erp/Purchase/retrunregistration',
+		   dataType: 'html',
+		   success: function(data){
+			   $("#description").html(data);
+		   },
+		   error: function(err){
+			   console.log(err);
+		   }
+	   });
+   });
+   
+   $("#puchaseAppvalInfo").click(function(){
+	   $.ajax({
+		   type:'get',
+		   url:' /erp/Purchase/purchaseApprovalInfo',
 		   dataType: 'html',
 		   success: function(data){
 			   $("#description").html(data);

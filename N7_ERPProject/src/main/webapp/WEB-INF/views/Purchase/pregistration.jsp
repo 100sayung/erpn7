@@ -103,7 +103,7 @@ ${msg}
          	</div>
          </form>
 	</div>
-	<div align="center">${paging}</div>
+	
 	  <script type="text/javascript">
 	  
 	 $(document).ready(function(){
@@ -160,7 +160,7 @@ ${msg}
     					str+="<td>"+data.pList[i].p_productnum+"</td>";
     					str+="<td>"+data.pList[i].p_writer+"</td>";
     					str+="<td>"+data.pList[i].p_clcode+"</td>";
-    					str+="<td>"+data.pList[i].p_day+"</td>";
+    					str+="<td>"+data.pList[i].p_day+"</td></tr>";
     				}
     				$('#list').html(str); 
     			},

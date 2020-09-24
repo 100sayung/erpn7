@@ -2,15 +2,14 @@ package com.n7.erp.dao;
 
 import java.util.List;
 
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
-import com.n7.erp.bean.IePort;
 import com.n7.erp.bean.ps.approvalLine;
-import com.n7.erp.bean.ps.A_company;
+import com.n7.erp.bean.IePort;
 import com.n7.erp.bean.ps.Purchase;
 import com.n7.erp.bean.ps.PurchaseApproval;
 import com.n7.erp.bean.ps.Return;
@@ -26,21 +25,21 @@ public interface PurchaseDao {
 
 	boolean pcommom(Purchase ps);
 
-	List<Purchase> pFrerence();
+	List<Purchase> pFrerence(@Param("cCode") String cCode);
 
-	List<Purchase> pfSearch(@Param("search") String search, @Param("choice") String choice);
+	List<Purchase> pfSearch(@Param("search") String search, @Param("choice") String choice, @Param("cCode") String cCode);
 
-	boolean pfDelete(String check_list);
+	boolean pfDelete(@Param("check_list") String check_list, @Param("cCode") String cCode);
 
-	boolean pcDelete(String check_list);
+	boolean pcDelete(@Param("check_list") String check_list, @Param("cCode") String cCode);
 
-	List<Purchase> pDetail(String check);
+	List<Purchase> pDetail(@Param("check")String check, @Param("cCode") String cCode);
 
-	Purchase pInfo(String check);
+	Purchase pInfo(@Param("check")String check, @Param("cCode") String cCode);
 
-	Purchase pBring(String check);
+	Purchase pBring(@Param("check")String check, @Param("cCode") String cCode);
 
-	List<Purchase> pProgram(String check);
+	List<Purchase> pProgram(@Param("check")String check, @Param("cCode") String cCode);
 
 	List<approvalLine> approvalLine();
 
@@ -60,10 +59,11 @@ public interface PurchaseDao {
 
 	boolean rRegistration(Return rt);
 
-	List<Return> rInfo();
+	List<Return> rInfo(@Param("cCode") String cCode);
 
-	boolean rDelete(String check_list);
+	boolean rDelete(@Param("check_list")String check_list, @Param("cCode") String cCode);
 
-	List<Return> rSearch(@Param("search") String search, @Param("choice") String choice);
+	List<Return> rSearch(@Param("search") String search, @Param("choice") String choice, @Param("cCode") String cCode);
+
 
 }

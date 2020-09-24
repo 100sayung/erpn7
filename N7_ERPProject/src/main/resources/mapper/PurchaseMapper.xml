@@ -12,46 +12,46 @@
 	</insert>
 	
 	<select id="pFrerence" resultType="Purchase">
-		SELECT * FROM O_PURCHASECOMMOM
-	</select>
+		SELECT * FROM O_PURCHASECOMMOM WHERE P_CCODE=#{cCode}
+	</select> 
 	
 	<select id="pfSearch" parameterType="String" resultType="Purchase">
 		SELECT * FROM O_PURCHASECOMMOM 
 		<where>
 			<if test="choice.equals('p_documentcode')">
-				P_DOCUMENTCODE = #{search}
+				P_DOCUMENTCODE = #{search} AND P_CCODE=#{cCode}
 			</if>
 			<if test="choice.equals('p_writer')">
-				P_WRITER = #{search}
+				P_WRITER = #{search} AND P_CCODE=#{cCode}
 			</if>
 			<if test="choice.equals('p_day')">
-				P_DAY = #{search} 
+				P_DAY = #{search} AND P_CCODE=#{cCode}
 			</if>
 		</where>
 	</select>
 	
 	<delete id="pcDelete" parameterType="Purchase">
-		DELETE FROM O_PURCHASELIST WHERE P_DOCUMENTCODE = #{check_list}
+		DELETE FROM O_PURCHASELIST WHERE P_DOCUMENTCODE = #{check_list} AND P_CCODE=#{cCode}
 	</delete>
 	
 	<delete id="pfDelete" parameterType="Purchase">
-		DELETE FROM O_PURCHASECOMMOM WHERE P_DOCUMENTCODE = #{check_list}
+		DELETE FROM O_PURCHASECOMMOM WHERE P_DOCUMENTCODE = #{check_list} AND P_CCODE=#{cCode}
 	</delete>
 	
 	<select id="pInfo" parameterType="String" resultType="Purchase">
-		SELECT * FROM O_PURCHASECOMMOM WHERE P_DOCUMENTCODE = #{check}
+		SELECT * FROM O_PURCHASECOMMOM WHERE P_DOCUMENTCODE = #{check} AND P_CCODE=#{cCode}
 	</select>
 	
 	<select id="pDetail" parameterType="String" resultType="Purchase">
-		SELECT * FROM O_PURCHASELIST WHERE P_DOCUMENTCODE = #{check}
+		SELECT * FROM O_PURCHASELIST WHERE P_DOCUMENTCODE = #{check} AND P_CCODE=#{cCode}
 	</select>
 	
 	<select id="pBring" parameterType="String" resultType="Purchase">
-		SELECT * FROM O_PURCHASECOMMOM WHERE P_DOCUMENTCODE = #{check}
+		SELECT * FROM O_PURCHASECOMMOM WHERE P_DOCUMENTCODE = #{check} AND P_CCODE=#{cCode}
 	</select>
 	
 	<select id="pProgram" parameterType="String" resultType="Purchase">
-		SELECT * FROM O_PURCHASELIST WHERE P_DOCUMENTCODE= #{check}
+		SELECT * FROM O_PURCHASELIST WHERE P_DOCUMENTCODE= #{check} AND P_CCODE=#{cCode}
 	</select>
 	
     <select id="approvalLine" parameterType="String" resultType="pALine">
@@ -75,7 +75,7 @@
    </select>
    
 	<insert id="Approval" parameterType="pApproval">
-		INSERT INTO APPROVALDOCU VALUES(#{p_documentcode}, #{p_ccode}, #{p_title}, #{p_approver1}, #{p_approver2}, DEFAULT, 0)
+		INSERT INTO APPROVALDOCU VALUES(#{p_documentcode}, #{p_ccode}, #{p_title}, #{p_apcode1}, #{p_apcode2}, DEFAULT, 0)
 	</insert>
 	
 	<insert id="pApproval1" parameterType="pApproval">
@@ -91,29 +91,29 @@
 	</insert>
 	
 	<select id="rInfo" resultType="Return">
-		SELECT * FROM O_RETURN
+		SELECT * FROM O_RETURN WHERE R_CCODE=#{cCode}
 	</select>
 	
   	<delete id="rDelete" parameterType="Return">
-		DELETE FROM RETURN1  WHERE R_DOCUMENTCODE= #{check_list}
+		DELETE FROM RETURN1  WHERE R_DOCUMENTCODE= #{check_list} AND R_CCODE=#{cCode}
 	</delete> 
 	
 	<select id="rSearch" resultType="Return">
-		SELECT * FROM O_RETURN
+		SELECT * FROM O_RETURN 
 		<where>
 			<if test="choice.equals('r_documentcode')">
-				R_DOCUMENTCODE = #{search}
+				R_DOCUMENTCODE = #{search} AND R_CCODE=#{cCode}
 			</if>
 			<if test="choice.equals('r_ieseqnum')">
-				R_IESEQNUM = #{search}
+				R_IESEQNUM = #{search} AND R_CCODE=#{cCode}
 			</if>
 			<if test="choice.equals('r_writer')">
-				R_WRITER = #{search}
+				R_WRITER = #{search} AND R_CCODE=#{cCode}
 			</if>
 			<if test="choice.equals('r_day')">
-				R_DAY = #{search}
+				R_DAY = #{search} AND R_CCODE=#{cCode}
 			</if>
 		</where>
 	</select>
-
+	
 </mapper>

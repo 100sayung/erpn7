@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="pDao"/>
+		<item key="selection" value="add"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="add"/>
+			<item value="search"/>
+			<item value="searchcode"/>
+			<item value="pinfo"/>
+			<item value="&lt;!-- AND P_CCODE=#{p_ccode} --&gt;"/>
 			<item value="aDao"/>
 			<item value="get"/>
 			<item value="HR_CARD"/>
@@ -18,11 +23,6 @@
 			<item value="erpboard"/>
 			<item value="board"/>
 			<item value="saleInfo"/>
-			<item value="saleIn"/>
-			<item value="sale"/>
-			<item value="getHoli"/>
-			<item value="NameHo"/>
-			<item value="getDetailH"/>
 		</list>
 		<list key="replacehistory">
 			<item value="pDao"/>
@@ -31,8 +31,8 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1000"/>
-		<item key="DIALOG_Y_ORIGIN" value="223"/>
+		<item key="DIALOG_X_ORIGIN" value="1478"/>
+		<item key="DIALOG_Y_ORIGIN" value="172"/>
 		<item key="DIALOG_WIDTH" value="340"/>
 		<item key="DIALOG_HEIGHT" value="454"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
