@@ -165,10 +165,11 @@ text-align:center;
                  data:obj,
                  success : function(data) {
                     console.log(data);
-                    alert("등록이 완료되었습니다.");
+                    alert("수주등록이 완료되었습니다.");
                  },
                  error : function(error) {
                     console.log(error);
+                    alert("수주등록에 실패하였습니다.");
                  }
               });
            $('input').val("");

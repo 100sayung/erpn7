@@ -178,9 +178,16 @@ ul {
    $('#showMenu5').on('click', function(e) {
        e.preventDefault();
 
+/*        var check='';
+       $("input[name=each_check]:checked").each(function(){
+    	   check= $(this).attr("value");
+    	   
+    	   console.log(check);
+    	   if(check!=""){ */
+	   
        $.ajax({
           type : 'get',
-          url : 'salesapprovaldetail',
+          url :  'salesapprovaldetail',
           dataType : 'html',
           success : function(data) {
              console.log(data);
@@ -189,7 +196,7 @@ ul {
           error: function(error){
              console.log(error);
           }
-       });
+        });
     });
    
 	</script>

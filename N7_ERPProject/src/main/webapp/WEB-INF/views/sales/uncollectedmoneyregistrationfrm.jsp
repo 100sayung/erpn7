@@ -131,10 +131,11 @@ text-align:center;
               data:obj,
               success : function(data) {
                  console.log(data);
-                 alert("등록이 완료되었습니다.");
+                 alert("미수금 등록이 완료되었습니다.");
               },
               error : function(error) {
                  console.log(error);
+                 alert("미수금 등록에 실패하였습니다.");
               }
            });
             $('input').val("");
@@ -193,8 +194,8 @@ text-align:center;
        var check="";
              $("input[name=each_check]:checked").each(function(){
                 check = $(this).attr("value");
-                if(check==null){
-                   alert("체크해주세요");
+                if(check==""){
+                   alert("완납처리할 버튼을 체크해주세요");
                 }else{
                      
           $.ajax({
@@ -204,6 +205,7 @@ text-align:center;
            dataType: "json",
            success:function(data){
               console.log(data);
+              alert("완납처리 되었습니다.");
  
               var str="";
               

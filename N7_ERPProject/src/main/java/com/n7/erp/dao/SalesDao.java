@@ -18,27 +18,27 @@ import com.n7.erp.bean.sales.approvaldetail;
 @Component
 public interface SalesDao {
 	
-	List<Salesbean> orderitem(); //수주품목
+	List<Salesbean> orderitem(@Param("cCode") String cCode); //수주품목
 
 	boolean orderregistrationinput(Salesbean s); //수주등록
 
-	List<Salesbean> orderregistrationsearch(@Param("search") String search, @Param("choice") String choice); //수주검색
+	List<Salesbean> orderregistrationsearch(@Param("search") String search, @Param("choice") String choice, @Param("cCode") String cCode); //수주검색
 
 	//boolean shippingdelete(String check); //출하삭제
 
-	boolean orderregistrationdelete(String check); //수주삭제
+	boolean orderregistrationdelete(@Param("check") String check, @Param("cCode") String cCode); //수주삭제
 
 	boolean shippingrequestinput(Shippingbean ss); //출하등록
 	
-	List<Shippingbean> shippingitem(); //출하품목
+	List<Shippingbean> shippingitem(@Param("cCode") String cCode); //출하품목
 	
-	List<Shippingbean> shippingrequestsearch(@Param("search") String search, @Param("choice") String choice); //출하검색
+	List<Shippingbean> shippingrequestsearch(@Param("search") String search, @Param("choice") String choice, @Param("cCode") String cCode); //출하검색
 	
-	boolean shippingrequestdelete(String check); //출하삭제
+	boolean shippingrequestdelete(@Param("check") String check, @Param("cCode") String cCode); //출하삭제
 
 	boolean businessactivitiesinput(Businessbean b); //영업활동 등록
 
-	List<Businessbean> businessitem();
+	List<Businessbean> businessitem(@Param("cCode") String cCode);
 	
 	boolean insertcomlist(A_company ac);
 
@@ -50,9 +50,9 @@ public interface SalesDao {
 
 	boolean deleteCom(String code);
 
-	List<Shippingbean> approvalplan(); //출하결재창
+	List<Shippingbean> approvalplan(@Param("cCode") String cCode); //출하결재창
 
-	Shippingbean approvalplanchoice(String check);
+	Shippingbean approvalplanchoice(@Param("check") String check, @Param("cCode") String cCode);
 	
 	List<com.n7.erp.bean.sales.approvalLine> approvalLine();
 
@@ -68,27 +68,33 @@ public interface SalesDao {
 
 	boolean approvalinput2(approvaldetail app); //결재창 등록2
 
-	List<approvaldetail> creditsearch(); //외상
+	List<approvaldetail> creditsearch(@Param("cCode") String cCode); //외상
 
-	List<approvaldetail> fullpaymentsearch(); //완납
+	List<approvaldetail> fullpaymentsearch(@Param("cCode") String cCode); //완납
 	
 	boolean uncollectedmoneyinput(approvaldetail ap); //미수금 등록
 	
-	List<approvaldetail> uncollectedmoneyitem(); //미수금 품목
+	List<approvaldetail> uncollectedmoneyitem(@Param("cCode") String cCode); //미수금 품목
 
-	List<approvaldetail> uncollectedmoneyitem2(); //미수금품목2
+	List<approvaldetail> uncollectedmoneyitem2(@Param("cCode") String cCode); //미수금품목2
 	
-	List<approvaldetail> uncollectedmoneysearch(@Param("search") String search, @Param("choice") String choice); //미수금 검색
+	List<approvaldetail> uncollectedmoneysearch(@Param("search") String search, @Param("choice") String choice, @Param("cCode") String cCode); //미수금 검색
 
-	boolean fullpaymentprocess(String check); //완납처리
+	boolean fullpaymentprocess(@Param("check") String check, @Param("cCode") String cCode); //완납처리
 
-	List<Businessbean> businessactivitiessearch(@Param("search") String search, @Param("choice") String choice); //영업활동 검색
+	List<Businessbean> businessactivitiessearch(@Param("search") String search, @Param("choice") String choice, @Param("cCode") String cCode); //영업활동 검색
 
-	boolean businessactivitiesdelete(String check);
+	boolean businessactivitiesdelete(@Param("check") String check, @Param("cCode") String cCode);
 
 	List<com.n7.erp.bean.sales.approvalLine> getMyInfo(String code);
 
-	Shippingbean getbonum(String check);
+	Shippingbean getbonum(@Param("check") String check, @Param("cCode") String cCode);
+
+	boolean approvaldetailinput(approvaldetail app); //결재 상세 등록
+
+	List<com.n7.erp.bean.sales.approvalLine> addApproval(String code);
+
+//	boolean approvaldelete(String check); //결재완료 삭제
 
 
 

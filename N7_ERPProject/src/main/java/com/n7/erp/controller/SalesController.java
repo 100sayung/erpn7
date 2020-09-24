@@ -35,9 +35,9 @@ public class SalesController {
    ModelAndView mav;
    
    @GetMapping(value = "/sales/orderitem") //수주 DB데이터 긁어온 거
-   public @ResponseBody Map<String, List<Salesbean>> orderitem() {
+   public @ResponseBody Map<String, List<Salesbean>> orderitem(HttpSession session) {
      System.out.println("여긴들어와?1");
-     Map<String, List<Salesbean>> sMap=sm.orderitem();
+     Map<String, List<Salesbean>> sMap=sm.orderitem(session);
       return sMap;
    }
    
@@ -49,44 +49,44 @@ public class SalesController {
    }
    
    @PostMapping(value = "/sales/orderregistrationsearch") //수주검색
-   public Map<String, List<Salesbean>> orderregistrationsearch(String search, String choice) {
-     Map<String, List<Salesbean>> sMap=sm.orderregistrationsearch(search, choice);
+   public Map<String, List<Salesbean>> orderregistrationsearch(String search, String choice, HttpSession session) {
+     Map<String, List<Salesbean>> sMap=sm.orderregistrationsearch(search, choice, session);
       return sMap;
    }
    
    @PostMapping(value = "/sales/orderregistrationdelete") //수주삭제
-   public Map<String, List<Salesbean>> orderregistrationdelete(String check) {
-      Map<String, List<Salesbean>> sMap=sm.orderregistrationdelete(check);
+   public Map<String, List<Salesbean>> orderregistrationdelete(String check, HttpSession session) {
+      Map<String, List<Salesbean>> sMap=sm.orderregistrationdelete(check, session);
       return sMap;
    } 
    
-   @PostMapping(value = "/sales/insertcomlist",produces="application/json;charset=utf-8" ) //거래처 등록
-   public  Map<String, List<A_company>> insertcomlist(A_company ac, HttpSession session) {
-      Map<String, List<A_company>> aMap=sm.insertcomlist(ac, session);
-      return aMap;
-   }
-   
-   @PostMapping(value = "/sales/searchcode",produces="application/json;charset=utf-8" ) //거래처 코드검색
-   public  Map<String, List<A_company>> searchcode(A_company ac, String code) {
-      Map<String, List<A_company>> aMap=sm.searchcode(ac,code);
-      return aMap;
-   }
-   
-   @PostMapping(value = "/sales/deleteCom",produces="application/json;charset=utf-8" ) //거래처 삭제
-   public  Map<String, List<A_company>> deleteCom(String CNT, String ARR) {
-      int cnt = Integer.parseInt(CNT);
-      System.out.println(cnt);
-      String [] strArray = ARR.split(",");
-      System.out.println(strArray);
-      Map<String, List<A_company>> aMap=sm.deleteCom(cnt,strArray);
-      return aMap;
-   }
-   
-   @GetMapping(value = "/sales/searchcomlist",produces="application/json;charset=utf-8" ) //거래처 조회
-   public  Map<String, List<A_company>> serchcomlist() {
-      Map<String, List<A_company>> aMap=sm.searchcomlist();
-      return aMap;
-   }
+//   @PostMapping(value = "/sales/insertcomlist",produces="application/json;charset=utf-8" ) //거래처 등록
+//   public  Map<String, List<A_company>> insertcomlist(A_company ac, HttpSession session) {
+//      Map<String, List<A_company>> aMap=sm.insertcomlist(ac, session);
+//      return aMap;
+//   }
+//   
+//   @PostMapping(value = "/sales/searchcode",produces="application/json;charset=utf-8" ) //거래처 코드검색
+//   public  Map<String, List<A_company>> searchcode(A_company ac, String code) {
+//      Map<String, List<A_company>> aMap=sm.searchcode(ac,code);
+//      return aMap;
+//   }
+//   
+//   @PostMapping(value = "/sales/deleteCom",produces="application/json;charset=utf-8" ) //거래처 삭제
+//   public  Map<String, List<A_company>> deleteCom(String CNT, String ARR) {
+//      int cnt = Integer.parseInt(CNT);
+//      System.out.println(cnt);
+//      String [] strArray = ARR.split(",");
+//      System.out.println(strArray);
+//      Map<String, List<A_company>> aMap=sm.deleteCom(cnt,strArray);
+//      return aMap;
+//   }
+//   
+//   @GetMapping(value = "/sales/searchcomlist",produces="application/json;charset=utf-8" ) //거래처 조회
+//   public  Map<String, List<A_company>> serchcomlist() {
+//      Map<String, List<A_company>> aMap=sm.searchcomlist();
+//      return aMap;
+//   }
    
    @PostMapping(value = "/sales/shippingrequestinput",produces="application/json;charset=utf-8") //출하의뢰등록
    public ModelAndView shippingrequestinput(Shippingbean ss, HttpSession session) {
@@ -96,29 +96,29 @@ public class SalesController {
    }
    
    @GetMapping(value = "/sales/shippingitem") //출하 DB데이터 긁어온 거
-   public @ResponseBody Map<String, List<Shippingbean>> shippingitem() {
+   public @ResponseBody Map<String, List<Shippingbean>> shippingitem(Shippingbean ss, HttpSession session) {
      System.out.println("여긴들어와?1");
-     Map<String, List<Shippingbean>> sMap=sm.shippingitem();
+     Map<String, List<Shippingbean>> sMap=sm.shippingitem(session);
       return sMap;
    }
    
    @PostMapping(value = "/sales/shippingrequestsearch") //출하검색
-   public Map<String, List<Shippingbean>> shippingrequestsearch(String search, String choice) {
-     Map<String, List<Shippingbean>> sMap=sm.shippingrequestsearch(search, choice);
+   public Map<String, List<Shippingbean>> shippingrequestsearch(String search, String choice, HttpSession session) {
+     Map<String, List<Shippingbean>> sMap=sm.shippingrequestsearch(search, choice, session);
       return sMap;
    }
    
    @PostMapping(value = "/sales/shippingrequestdelete") //출하삭제
-   public Map<String, List<Shippingbean>> shippingrequestdelete(String check) {
-      Map<String, List<Shippingbean>> sMap=sm.shippingrequestdelete(check);
+   public Map<String, List<Shippingbean>> shippingrequestdelete(String check, HttpSession session) {
+      Map<String, List<Shippingbean>> sMap=sm.shippingrequestdelete(check, session);
       return sMap;
    } 
    //결재라인
    @PostMapping(value = "/sales/addApproval",produces="application/json;charset=utf-8" )
-   public  Map<String, List<approvalLine>> addApprovale(String CNT, String ARR, approvaldetail app, HttpSession session) {
+   public  Map<String, List<approvalLine>> addApproval(String CNT, String ARR) {
       int cnt = Integer.parseInt(CNT);
       String [] strArray = ARR.split(",");
-      Map<String, List<approvalLine>> sMap=sm.addApproval(cnt,strArray,app,session);
+      Map<String, List<approvalLine>> sMap=sm.addApproval(cnt,strArray);
       return sMap;
    }
    @PostMapping(value = "/sales/approLinecom",produces="application/json;charset=utf-8")
@@ -152,37 +152,36 @@ public class SalesController {
    }
    
    @GetMapping(value = "/sales/uncollectedmoneyitem") //미수금 DB데이터 긁어온 거
-   public @ResponseBody Map<String, List<approvaldetail>> uncollectedmoneyitem() {
+   public @ResponseBody Map<String, List<approvaldetail>> uncollectedmoneyitem(HttpSession session) {
       System.out.println("여긴들어와?444444");
-      Map<String, List<approvaldetail>> sMap=sm.uncollectedmoneyitem();
+      Map<String, List<approvaldetail>> sMap=sm.uncollectedmoneyitem(session);
       return sMap;
    }
    
    @PostMapping(value = "/sales/uncollectedmoneysearch") //미수금 검색
-   public Map<String, List<approvaldetail>> uncollectedmoneysearch(String search, String choice) {
-     Map<String, List<approvaldetail>> sMap=sm.uncollectedmoneysearch(search, choice);
+   public Map<String, List<approvaldetail>> uncollectedmoneysearch(String search, String choice, HttpSession session) {
+     Map<String, List<approvaldetail>> sMap=sm.uncollectedmoneysearch(search, choice, session);
       return sMap;
    }
 
 
    @PostMapping(value = "/sales/fullpaymentprocess") //완납 처리
-   public Map<String, List<approvaldetail>> fullpaymentprocess(String check) {
+   public Map<String, List<approvaldetail>> fullpaymentprocess(String check, HttpSession session) {
       System.out.println(check);
-      System.out.println("오냐오냐");
-      Map<String, List<approvaldetail>> sMap=sm.fullpaymentprocess(check);
+      Map<String, List<approvaldetail>> sMap=sm.fullpaymentprocess(check, session);
       return sMap;
    } 
    
      
    @GetMapping(value = "/sales/creditsearch") //외상
-   public Map<String, List<approvaldetail>> creditsearch() {
-     Map<String, List<approvaldetail>> sMap=sm.creditsearch();
+   public Map<String, List<approvaldetail>> creditsearch(HttpSession session) {
+     Map<String, List<approvaldetail>> sMap=sm.creditsearch(session);
       return sMap;
    }
    
    @GetMapping(value = "/sales/fullpaymentsearch") //완납
-   public Map<String, List<approvaldetail>> fullpaymentsearch() {
-     Map<String, List<approvaldetail>> sMap=sm.fullpaymentsearch();
+   public Map<String, List<approvaldetail>> fullpaymentsearch(HttpSession session) {
+     Map<String, List<approvaldetail>> sMap=sm.fullpaymentsearch(session);
       return sMap;
    }
    
@@ -194,21 +193,21 @@ public class SalesController {
    }
    
    @GetMapping(value = "/sales/businessitem") //영업 DB데이터 긁어온 거
-   public @ResponseBody Map<String, List<Businessbean>> businessitem() {
+   public @ResponseBody Map<String, List<Businessbean>> businessitem(HttpSession session) {
       System.out.println("여긴들어와?333333333");
-      Map<String, List<Businessbean>> sMap=sm.businessitem();
+      Map<String, List<Businessbean>> sMap=sm.businessitem(session);
       return sMap;
    } 
    
    @PostMapping(value = "/sales/businessactivitiessearch") //영업활동 검색
-   public Map<String, List<Businessbean>> businessactivitiessearch(String search, String choice) {
-     Map<String, List<Businessbean>> sMap=sm.businessactivitiessearch(search, choice);
+   public Map<String, List<Businessbean>> businessactivitiessearch(String search, String choice, HttpSession session) {
+     Map<String, List<Businessbean>> sMap=sm.businessactivitiessearch(search, choice, session);
       return sMap;
    }
    
    @PostMapping(value = "/sales/businessactivitiesdelete") //영업삭제
-   public Map<String, List<Businessbean>> businessactivitiesdelete(String check) {
-      Map<String, List<Businessbean>> sMap=sm.businessactivitiesdelete(check);
+   public Map<String, List<Businessbean>> businessactivitiesdelete(String check, HttpSession session) {
+      Map<String, List<Businessbean>> sMap=sm.businessactivitiesdelete(check, session);
       return sMap;
    }
    
@@ -216,5 +215,17 @@ public class SalesController {
    public  Map<String, List<approvalLine>> getMyInfo(HttpSession session) {
       Map<String, List<approvalLine>> mMap=sm.getMyInfo(session);
       return mMap;
+   }
+   
+//   @PostMapping(value = "/sales/approvaldelete") //결재완료 삭제
+//   public Map<String, List<approvaldetail>> approvaldelete(String check) {
+//      Map<String, List<approvaldetail>> sMap=sm.approvaldelete(check);
+//      return sMap;
+//   }
+   
+   @PostMapping(value = "/sales/approvaldetailinput",produces="application/json;charset=utf-8") //결재 상세보기 등록
+   public ModelAndView approvaldetailinput(approvaldetail app, HttpSession session) {
+     mav=sm.approvaldetailinput(app, session);
+      return mav;
    }
 } 

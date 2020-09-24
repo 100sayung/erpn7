@@ -15,7 +15,7 @@ public class approvaldetail {
 	private String bs_ccode;
 	private String bs_docuname; 
 	private String bs_approver1; //원래 이거였음-ad_apcode0
-	private String bs_date; //날짜
+	private String bs_date; //날짜  //private String bs_date;
 //	private String bs_toapprover; //결재자 
 	private String bs_bonum;
 	private String bs_itcode;

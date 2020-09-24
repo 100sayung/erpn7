@@ -3,6 +3,8 @@
 package com.n7.erp.controller;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,8 +58,8 @@ public class SalesHomeController {
    }
    
    @RequestMapping(value = "/sales/approvalplan", method = RequestMethod.GET)
-      public ModelAndView approvalplan(String check) {
-        mav=sm.approvalplan(check);
+      public ModelAndView approvalplan(String check, HttpSession session) {
+        mav=sm.approvalplan(check, session);
          return mav;
    }
    
@@ -73,7 +75,7 @@ public class SalesHomeController {
    }
    
    @RequestMapping(value = "/sales/salesapprovaldetail", method = RequestMethod.GET)
-      public String salesapprovaldetail() {
+      public String salesapprovaldetail(HttpSession session) {
 	   return "/sales/salesapprovaldetail"; 
    }
    

@@ -58,15 +58,15 @@ border: 1px solid;
                <th><input type="text" name="bs_proname"></th>
                <th>거래처회사코드</th>
                <th><input type="text" name="bs_clcode"></th>
-               <th>출하의뢰일</th>
-               <th><input type="date" name="bs_basedate"></th>         
+<!--           <th>출하의뢰일</th>
+               <th><input type="date" name="bs_basedate"></th>       -->   
             </tr>
          </thead>
       </table>
       </div> 
             <div style="background-color:#ECEBEA;">
             <table id="item" summary="Code page support in different versions of MS Windows." rules="groups" frame="hsides" border="1"
-              style="margin-left:380px;">
+              style="margin-left:300px;">
                 <colgroup align="center">
                 </colgroup>
                 <colgroup align="left">
@@ -78,14 +78,16 @@ border: 1px solid;
                 <thead valign="top">
                     <tr>
                         <th><input type="radio" id="allCheck"></th>
-                  <th>판매단가</th>
-                  <th>수량</th>
-                  <th>판매금액</th>                  
-               </tr>
-                </thead>
+                        <th>출하의뢰일</th>
+                        <th>판매단가</th>
+                        <th>수량</th>
+                        <th>판매금액</th>                  
+                   </tr>
+                </thead>               
                 <tbody id="tBody">
                     <tr>
                         <td><input type="radio" name="each_check" class="each"></td>          
+                        <td><input type="date" name="bs_basedate" required></td>
                         <td><input type="number" name="bs_unit"  required></td>
                         <td><input type="number" name="bs_quantity" required></td>
                         <td><input type="number" name="bs_price" required></td>           
@@ -121,6 +123,7 @@ border: 1px solid;
          
          for(var i in data.sList){
             str+="<tr><td><input type='radio' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
+            str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
             str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
             str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
             str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";            
@@ -136,7 +139,7 @@ border: 1px solid;
         //추가삭제
         $(document).ready(function(){
               $('.addList').click(function(){
-                 $('#tBody').append('<tr><td><input type="radio" name="each_check" class="each"></td><td><input type="number" name="bs_unit" class="input-text" ></td><td><input type="number" name="bs_quantity" class="input-text"></td><td><input type="number" name="bs_price" class="input-text" ></td><td><input type="button" value="삭제" onclick="javascript:thisRowDel(this);"></td></tr>');
+                 $('#tBody').append('<tr><td><input type="radio" name="each_check" class="each"></td><td><input type="text" name="bs_basedate" class="input-text" ></td><td><input type="number" name="bs_unit" class="input-text" ></td><td><input type="number" name="bs_quantity" class="input-text"></td><td><input type="number" name="bs_price" class="input-text" ></td><td><input type="button" value="삭제" onclick="javascript:thisRowDel(this);"></td></tr>');
               });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
           }); 
            function thisRowDel(row){
@@ -157,10 +160,11 @@ border: 1px solid;
              data:obj,
              success : function(data) {
                 console.log(data);
-                alert("등록이 완료되었습니다.");
+                alert("출하등록이 완료되었습니다.");
              },
              error : function(error) {
                 console.log(error);
+                alert("출하등록에 실패하였습니다.");
              }
           });
          $('input').val("");
@@ -197,6 +201,7 @@ border: 1px solid;
                       if(data.sList!=""){
                      for(var i in data.sList){
                         str+="<tr class='tr'><td><input type='radio' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
+                        str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
                         str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
                         str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
                         str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
@@ -231,6 +236,7 @@ border: 1px solid;
                      
                      for(var i in data.sList){
                         str+="<tr><td><input type='radio' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
+                        str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
                         str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
                         str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
                         str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";

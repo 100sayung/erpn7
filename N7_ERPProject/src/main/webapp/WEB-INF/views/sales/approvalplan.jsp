@@ -83,13 +83,13 @@ resize: none;
                               <th><input type="text" name="bs_docunum" value="${sb.bs_docunum}" placeholder="출하번호" class="txt"></th>
                            </tr>
                            <tr>
-                          <th colspan="3">상신자</th>
-                              <th colspan="1"><input type="text"></th> <!-- name="bs_approver1" --> <!--bo_num-->
-                              <th colspan="2">거래처 회사코드</th>
-                              <th colspan="2"><input type="text" name="bs_clcode" value="${sb.bs_clcode}" class="txt"></th>
+<!--                       <th colspan="3">상신자</th>
+                              <th colspan="1"><input type="text"> --></th> <!-- name="bs_approver1" --> <!--bo_num-->
+                              <th colspan="4">거래처 회사코드</th>
+                              <th colspan="4"><input type="text" name="bs_clcode" value="${sb.bs_clcode}" class="txt"></th>
                            </tr>
                            <tr>
-                              <th rowspan="8" colspan="2">조회</th>   
+                              <th rowspan="15" colspan="2">조회</th>   
                            </tr>
                            <tr>
                               <td>회사코드</td>
@@ -219,19 +219,24 @@ resize: none;
             } */
          /* };  */
       
-      
+      //결재 제출하기
       $("#submit").click(function(){
          var obj=$("#approvalinput").serialize();
          
+/*          var check="";
+         $("input[name=each_check]:checked").each(function(){
+        	 check = $(this).attr("value"); */
+        	 
         $.ajax({
           url:'/erp/rest/sales/approvalinput',
           type: 'post',
           data: obj,
           //dataType: 'json',
           success:function(data){
-              alert("제출이 완료되었습니다");           
+              alert("기안문 제출이 완료되었습니다.");           
               console.log(data);           	  
-              window.close();             
+                
+              window.close();   
           },
           error:function(error){
              console.log(error);
