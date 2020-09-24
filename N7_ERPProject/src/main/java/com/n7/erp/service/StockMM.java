@@ -68,7 +68,7 @@ public class StockMM {
 	public ResponseEntity<String> deleteCategory(Category ct, HttpSession session) {
 		ct.setCt_cpcode(session.getAttribute("cCode").toString());
 		if (ctDao.deleteCategory(ct)) {
-			return ResponseEntity.ok(new Gson().toJson(ctDao.getCategory(session.getAttribute("cCdoe").toString())));
+			return ResponseEntity.ok(new Gson().toJson(ctDao.getCategory(session.getAttribute("cCode").toString())));
 		} else {
 			return ResponseEntity.status(304).body("분류명 삭제에 실패하였습니다. 재고 현황에 해당 분류를 가진 재고가 존재합니다. 재고를 먼저 삭제해주세요!");
 		}
@@ -106,9 +106,13 @@ public class StockMM {
 
 	public ResponseEntity<String> deleteItemCode(ItemCode it, HttpSession session) {
 		it.setIt_cpcode(session.getAttribute("cCode").toString());
-		return setResponseEntity(itDao.deleteItemCode(it),
-				"품목코드 삭제에 실패하였습니다. 재고 현황에 해당 품목코드를 가진 재고가 존재합니다. 재고를 먼저 삭제해주세요!",session);
-
+		try {
+			return setResponseEntity(itDao.deleteItemCode(it),
+					"품목코드 삭제에 실패하였습니다. 재고 현황에 해당 품목코드를 가진 재고가 존재합니다. 재고를 먼저 삭제해주세요!",session);
+		}catch (Exception e) {
+			return setResponseEntity(itDao.deleteItemCode(it),
+					"품목코드 삭제에 실패하였습니다. 재고 현황에 해당 품목코드를 가진 재고가 존재합니다. 재고를 먼저 삭제해주세요!",session);
+		}
 	}
 
 	public ItemCode setItemCode(MultiValueMap<String, String> formData, ItemCode it) {
@@ -134,12 +138,12 @@ public class StockMM {
 
 		mav = new ModelAndView();
 		List<Purchase> ipList = ieDao.importCheckList(session.getAttribute("cCode").toString());
-		mav.addObject("importCheckList", makeImportCheckHtml(ipList, session.getAttribute("id").toString()));
+		mav.addObject("importCheckList", makeImportCheckHtml(ipList));
 		mav.setViewName("stock/importcheck");
 		return mav;
 	}
 
-	private String makeImportCheckHtml(List<Purchase> ipList, String id) {
+	private String makeImportCheckHtml(List<Purchase> ipList) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < ipList.size(); i++) {
 			if ((ipList.size() - 1) != i && i >= 1) {
@@ -163,9 +167,9 @@ public class StockMM {
 				sb.append("<td id='p_unlit" + ipList.get(i).getP_productnum() + "'><input type='number' value='"
 						+ ipList.get(i).getP_unlit() + "' readonly></td>");
 				sb.append("<td id='p_sum" + ipList.get(i).getP_productnum() + "'><input name='ie_price' type='number' value='"
-						+ ipList.get(i).getP_unlit() + "' readonly></td>");
+						+ (ipList.get(i).getP_unlit()*ipList.get(i).getP_amount()) + "' readonly></td>");
 				sb.append("<td><input type='text' name = 'ie_etc'>");
-				sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getP_productnum() + "'></td>");
+				sb.append("<input type='hidden' name = 'ie_ocode' value='" + ipList.get(i).getO_code() + "'></td>");
 				if (!(ipList.get(i).getP_clcode().equals(ipList.get(i + 1).getP_clcode()))) {
 					sb.append("</tr></table></form>");
 				} else {
@@ -191,10 +195,10 @@ public class StockMM {
 					sb.append("<td id='p_unlit" + ipList.get(i).getP_productnum() + "'><input type='number' value='"
 							+ ipList.get(i).getP_unlit() + "' readonly></td>");
 					sb.append("<td id='p_sum" + ipList.get(i).getP_documentcode()
-							+ "'><input name='ie_price' type='number' value='" + ipList.get(i).getIt_unit()
+							+ "'><input name='ie_price' type='number' value='" +(ipList.get(i).getP_unlit()*ipList.get(i).getP_amount())
 							+ "' readonly></td>");
 					sb.append("<td><input type='text' name = 'ie_etc'>");
-					sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getP_productnum() + "'></td>");
+					sb.append("<input type='hidden' name = 'ie_ocode' value='" + ipList.get(i).getO_code()+ "'></td>");
 					if (!(ipList.get(i).getP_clcode().equals(ipList.get(i + 1).getP_clcode()))) {
 						sb.append("</tr></table></form>");
 					} else {
@@ -215,10 +219,10 @@ public class StockMM {
 					sb.append("<td id='p_unlit" + ipList.get(i).getP_productnum() + "'><input type='number' value='"
 							+ ipList.get(i).getP_unlit() + "' readonly></td>");
 					sb.append("<td id='p_sum" + ipList.get(i).getP_productnum()
-							+ "'><input name='ie_price' type='number' value='" + ipList.get(i).getIt_unit()
+							+ "'><input name='ie_price' type='number' value='" + (ipList.get(i).getP_unlit()*ipList.get(i).getP_amount())
 							+ "' readonly></td>");
 					sb.append("<td><input type='text' name = 'ie_etc'>");
-					sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getP_productnum() + "'></td>");
+					sb.append("<input type='hidden' name = 'ie_ocode' value='" + ipList.get(i).getO_code() + "'></td>");
 					sb.append("</tr></table></form>");
 				}
 			} else {
@@ -242,9 +246,9 @@ public class StockMM {
 				sb.append("<td id='p_unlit" + ipList.get(i).getP_productnum() + "'><input type='number' value='"
 						+ ipList.get(i).getP_unlit() + "' readonly></td>");
 				sb.append("<td id='p_sum" + ipList.get(i).getP_productnum() + "'><input name='ie_price' type='number' value='"
-						+ ipList.get(i).getIt_unit() + "' readonly></td>");
+						+ (ipList.get(i).getP_unlit()*ipList.get(i).getP_amount()) + "' readonly></td>");
 				sb.append("<td><input type='text' name = 'ie_etc'>");
-				sb.append("<input type='hidden' name = 'ie_pnum' value='" + ipList.get(i).getP_productnum() + "'></td>");
+				sb.append("<input type='hidden' name = 'ie_ocode' value='" + ipList.get(i).getO_code()+ "'></td>");
 				sb.append("</tr></table></form>");
 			}
 		}
@@ -265,13 +269,13 @@ public class StockMM {
 			IePort ip = new IePort();
 			ip = imList.get(i);
 			ip.setIe_cpcode(session.getAttribute("cCode").toString());
-			ip.setIe_hrcode(session.getAttribute("id").toString());
+			ip.setIe_hrcode(session.getAttribute("hrCode").toString());
 			a = pDao.updatePurchase(imList.get(i));
 			b = ieDao.insertImport(imList.get(i));
 		}
 		if (a && b) {
 			List<Purchase> pList = ieDao.importCheckList(session.getAttribute("cCode").toString());
-			return ResponseEntity.ok(makeImportCheckHtml(pList, session.getAttribute("id").toString()));
+			return ResponseEntity.ok(makeImportCheckHtml(pList));
 		}
 		return ResponseEntity.ok(new Gson().toJson("입고 확정에 실패하였습니다."));
 	}
@@ -540,8 +544,8 @@ public class StockMM {
 							+ "' readonly></td>");
 					sb.append("<td>" + ipList.get(i).getIt_size() + "</td>");
 					sb.append("<td>" + ipList.get(i).getIt_unit() + "</td>");
-					sb.append("<td><input type='number' value='"+ ipList.get(i).getBs_quantity() + "'></td>");
-					sb.append("<td><input type='number' value='"+ ipList.get(i).getBs_unit() + "' readonly></td>");
+					sb.append("<td><input type='number' name='ie_qty' value='"+ ipList.get(i).getBs_quantity() + "'></td>");
+					sb.append("<td>"+ ipList.get(i).getBs_unit() + "' readonly></td>");
 					sb.append("<td"
 							+ "'><input name='ie_price' type='number' value='" + ipList.get(i).getBs_price() + "' readonly></td>");
 					sb.append("<td><input type='text' name = 'ie_etc'>");
@@ -609,11 +613,12 @@ public class StockMM {
 			b = ieDao.insertExport(ip);
 		}
 		if (a && b) {
-			List<Purchase> pList = ieDao.importCheckList(session.getAttribute("cCode").toString());
 			List<B_shipment> bsList = ieDao.exportCheckList(session.getAttribute("cCode").toString());
 			for(int i = 0 ; i < bsList.size();i++) {
-				ItemCode it = itDao.getPname(session.getAttribute("cCode").toString(),ipList.get(i).getBs_itcode());
-				bsList.get(i).setIt_ccode(it.getIt_ccode()).setIt_code(it.getIt_code()).setIt_pname(it.getIt_pname()).setIt_pstock(it.getIt_pstock()).setIt_size(it.getIt_size()).setIt_unit(it.getIt_unit()).setBs_ccode(session.getAttribute("cCode").toString());
+				B_shipment bs = bsList.get(i);
+				bs.setBs_ccode(session.getAttribute("cCode").toString());
+				ItemCode it = itDao.getPnnnname(bs);
+				bsList.get(i).setIt_ccode(it.getIt_ccode()).setIt_code(it.getIt_code()).setIt_pname(it.getIt_pname()).setIt_pstock(it.getIt_pstock()).setIt_size(it.getIt_size()).setIt_unit(it.getIt_unit());
 			}
 			return ResponseEntity.ok(new Gson().toJson(makeExportCheckHtml(bsList)));
 		}

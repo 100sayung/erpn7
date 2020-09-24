@@ -26,5 +26,6 @@ public class Purchase {
 	private String it_code;
 	private String it_unit;
 	private String it_size;
+	private String o_code;
 	
 }

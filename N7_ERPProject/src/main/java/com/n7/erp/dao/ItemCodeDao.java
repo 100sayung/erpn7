@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import com.n7.erp.bean.B_shipment;
 import com.n7.erp.bean.ItemCode;
 
 public interface ItemCodeDao {
@@ -27,5 +29,8 @@ public interface ItemCodeDao {
 
 	@Select("SELECT * FROM IT WHERE IT_CPCODE = #{cCode} AND IT_CODE = #{bs_itcode}")
 	public ItemCode getPname(@Param("cCode")String cCode,@Param("bs_itcode") String bs_itcode);
+
+	@Select("SELECT *FROM IT WHERE IT_CODE = #{bs_itcode} AND IT_CPCODE = #{bs_ccode}")
+	public ItemCode getPnnnname(B_shipment bs);
 
 }

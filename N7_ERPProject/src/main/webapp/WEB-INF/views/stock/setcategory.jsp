@@ -182,10 +182,12 @@ color: red;
 							$('#ct_code').val("");
 						},
 						error : function(err) {
-							console.log(err);
+							$('#msg')
+							.html(
+									'분류명 삭제에 실패하였습니다. 현재 분류명을 사용하는 재고가 있습니다.');
 						}
 					})
-		};
+		}; 
 		//카테고리 수정
 		function modifyCategory(id) {
 			var ct_name = $(id).parent().siblings('.ct_name').children()[0].value;
