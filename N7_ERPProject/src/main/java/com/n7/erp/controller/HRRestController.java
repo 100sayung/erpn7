@@ -48,6 +48,12 @@ public class HRRestController {
 		List<Career> crList = hm.getCareerInfo(m_id, request.getServletPath().substring(9), request.getSession().getAttribute("cCode").toString());
 		return crList;
 	}
+	//열 삭제하면서 데이터지우기
+	@PostMapping(value="/hr/removeinfo")
+	public String removeInfo(HttpSession session, String num, String type) {
+		String result = hm.removeInfo(session, num, type);
+		return result;
+	}
 
 	//id로부터 hrCard가 존재하는지 안하는지 체크함!!!
 	@GetMapping(value="/hr/hrcodefromid")

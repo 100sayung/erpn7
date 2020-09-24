@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="정말"/>
+		<item key="selection" value="DOCU"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="정말"/>
-			<item value="str"/>
-			<item value="ready"/>
-			<item value="member"/>
-			<item value="사내정보"/>
-			<item value="내용"/>
-			<item value="detailInfo"/>
-			<item value="add"/>
-			<item value="hrDetailIn"/>
-			<item value="hrDetailI"/>
-			<item value="hrDetail"/>
-			<item value="150"/>
-			<item value="employee"/>
-			<item value="myholiday"/>
-			<item value="employeeholi"/>
+			<item value="docu"/>
+			<item value="showde"/>
+			<item value="js"/>
+			<item value="getMy"/>
+			<item value="getholid"/>
+			<item value="btn"/>
+			<item value="src"/>
+			<item value="css"/>
+			<item value="myinfo/myinfo"/>
+			<item value="mainme"/>
+			<item value="myInfo"/>
+			<item value="mainmenu"/>
+			<item value="main"/>
+			<item value="calendar"/>
+			<item value="before"/>
 		</list>
 		<list key="replacehistory">
+			<item value="myInfo/myInfo"/>
+			<item value="id=&apos;origin_&quot;+i+&quot;"/>
+			<item value="hr"/>
 			<item value="type"/>
 			<item value="300"/>
 			<item value="end"/>

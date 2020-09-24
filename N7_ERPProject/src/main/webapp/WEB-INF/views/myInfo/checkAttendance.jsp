@@ -83,19 +83,13 @@ ul {
 		<div id="menu">
 			<ul>
 				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
-				<li><a href="/erp/hr/hr" accesskey="2"
-					title="">인사 관리</a></li>
-				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
-				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="#">회계 관리</a></li>
-			</ul>
+				<ul id="mainmenu">
 		</div>
 	</div>
 	<div id="side_menu">
 		<ul id="menuList">
 			<li><a href="/erp/myinfo/checkattendance">출/퇴근 등록</a></li>
-			<li><a href="/erp/myinfo/myinfo">내 정보 보기</li>
+			<li><a href="/erp/myInfo/myInfo">내 정보 보기</li>
 			<li><a href="/erp/myinfo/myPaycheck">급여명세서 보기</li>
 			<li><a href="/erp/myinfo/myattendance">내 출결 보기</li>
 			<li><a href="/erp/myinfo/myholiday">내 휴가 보기</li>
@@ -137,6 +131,7 @@ ul {
 	
 
 
+	<script src=/erp/js/menu.js></script> <!-- 메뉴Ajax로 출력 -->
 <script>
 	var status = "";
 	var load = function(){
@@ -186,7 +181,6 @@ ul {
 			}
 		}); 
 	});
-	
 
 	var clockTarget = document.getElementById("clock");
 

@@ -116,14 +116,14 @@ public class HomeController {
 	public String main() {
 		return "/myInfo/myInfo";
 	}
-	@GetMapping(value="/myinfo/myinfo")
+	@GetMapping(value="/myInfo/myInfo")
 	public ModelAndView myinfoMain(HttpSession session) {
 		mav = mm.moveMyInfo(session);
 		return mav;
 	}
 	@GetMapping(value="/hr/hr")
 	public String hrMain() {
-		return "/hr/hrMain";
+		return "/hr/hrCard";
 	}
 
 	//게시글 페이지로 이동

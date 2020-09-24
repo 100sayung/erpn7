@@ -87,19 +87,13 @@ tr{
 		<div id="menu">
 			<ul>
 				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
-<!-- 				<li><a href="/erp/hr/hr" accesskey="2"
-					title="">인사 관리</a></li>
-				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
-				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="/erp/stock/setcategory" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="/erp/Account/acerp">회계 관리</a></li -->>
 				<ul id="mainmenu">
 		</div>
 	</div>
 	<div id="side_menu">
 		<ul id="menuList">
 			<li><a href="/erp/myinfo/checkattendance">출/퇴근 등록</a></li>
-			<li><a href="/erp/myinfo/myinfo">내 정보 보기</li>
+			<li><a href="/erp/myInfo/myInfo">내 정보 보기</li>
 			<li><a href="/erp/myinfo/myPaycheck">급여명세서 보기</li>
 			<li><a href="/erp/myinfo/myattendance">내 출결 보기</li>
 			<li><a href="/erp/myinfo/myholiday">내 휴가 보기</li>
@@ -136,51 +130,8 @@ tr{
 
 
 </div>
+	<script src=/erp/js/menu.js></script> <!-- 메뉴Ajax로 출력 -->
 	<script>
-$(function(){
-		var responseMessage = "<c:out value="${msg}" />";
-		if (responseMessage != ""){
-			alert(responseMessage)
-	 }
-});
-	$(document).ready(function(){
-		$.ajax({
-			url:'/erp/rest/managermode/getaddmenu',
-			type:'get',
-			datatype:'json',
-			success:function(data){
-				console.log(data);
-				var str="";
-
-				for(var i in data.mList){
-					str+="<li><a id="+data.mList[i].f_functions+" onclick=menu('"+data.mList[i].f_functions+"')>"+data.mList[i].f_functions+"</a></li>";
-				}
-
-				$("#mainmenu").html(str);
-			},
-			error:function(error){
-				console.log(error);
-			}
-
-		});
-
-	});
-
-	function menu(menu){
-		console.log(menu);
-
-		if(menu=="인사관리"){
-			$("#"+menu).attr("href","/erp/hr/hr");
-			}else if(menu=="영업관리"){
-			$("#"+menu).attr("href","/erp/sales/orderitem");
-			}else if(menu=="구매관리"){
-			$("#"+menu).attr("href","/erp/Purchase/erpmain");
-			}else if(menu=="재고관리"){
-			$("#"+menu).attr("href","/erp/stock/setcategory");
-			}else if(menu=="회계관리"){
-			$("#"+menu).attr("href","/erp/Account/acerp");
-			}
-	}
 		var num;
 		$(document).ready(function(){
 			$.ajax({
@@ -265,14 +216,40 @@ $(function(){
 				str += "<td><input type='button' value='삭제' onclick='javascript:thisRowDel(this);'></td></tr>";
 				num++;
 			}
-	//		$("#hrDetail > tbody:last").append(str);
 			$("#infoTable > tbody:last").append(str);
 		}
 
 		function thisRowDel(row){	
-			console.log(row);
 			let tr = row.parentNode.parentNode;
+			console.log(tr);
 			tr.parentNode.removeChild(tr);
+			var $current = $("#current").val();
+			var num;
+			if(tr.className=="origin"){
+				if(confirm("정말 삭제하시겠습니까?")){
+					if($current=="Academic"){
+						num = tr.childNodes[2].children.hac_num.value;
+					}else if($current == "Career"){
+						num=tr.childNodes[3].children.hcr_num.value;
+					}else if($current == "Certification"){
+						num=tr.childNodes[2].children.hct_num.value;
+					}
+					$.ajax({
+						url:"/erp/rest/hr/removeinfo",
+						data:{num : num, type : $current},
+						dataType:"text",
+						method:"post",
+						success : function(data){
+							console.log(data);
+						}, error : function(err){
+							console.log(err);
+						}
+					});
+				}else{
+					alert("취소되었습니다.")
+				}
+				
+			}
 		}	
 
 		function changeMode(){
@@ -280,16 +257,20 @@ $(function(){
 			if($("#changeBtn").attr('class')=="infobtn mf"){
 				$(".detailInfo").attr("readonly", true).addClass("modifyMode").removeClass("registMode");
 				$("#registBtn").attr("disabled", false);
+				for(let i = 0 ; i<$(".origin").length ; i++){
+					if($("#origin_"+i)[0].lastChild.className=="removebtn"){
+						$("#origin_"+i)[0].lastChild.remove();
+					}
+				}
 			}else{
 				$(".detailInfo").removeAttr("readonly").removeClass("modifyMode").addClass("registMode");
 				$("#registBtn").attr("disabled", true);
+				for(let i = 0 ; i <$(".origin").length ; i++){
+					$("#origin_"+i).append("<td class='removebtn'><input type='button' value='삭제' onclick='javascript:thisRowDel(this);'></td>");
+				}
 			}
 			$("#changeBtn").toggleClass("mf");
 			
-			console.log($(".origin").length);
-			for(let i = 0 ; i <$(".origin").length ; i++){
-				console.log($(".origin:first-child"));
-			}
 		}
 
 		var formURL = "/erp/myinfo";
@@ -313,7 +294,7 @@ $(function(){
 					str += "<td>학교/학위</td><td>전공</td><td>날짜</td></tr>";
 					for(let i = 0 ; i <data.length ; i++){
 					console.log(data[i].hac_year);
-					str += "<tr class='origin'><td><input type='text' name='hac_school' class='detailInfo' value='"+data[i].hac_school+"' readonly></td>"
+					str += "<tr class='origin' id='origin_"+i+"'><td><input type='text' name='hac_school' class='detailInfo' value='"+data[i].hac_school+"' readonly></td>"
 					str += "<td><input type='text' name='hac_major' class='detailInfo' value='"+data[i].hac_major+"' readonly></td>";
 					str += "<td><input type='date' name='hac_year' class='detailInfo' value='"+data[i].hac_year+"' readonly>";
 					str += "<input type='hidden' name='hac_num' value='"+data[i].hac_num+"'></td></tr>";
@@ -350,9 +331,9 @@ $(function(){
 					str += "<table border='1px solid black' id='infoTable' border='1' cellspacing='0'><tr class='infomenu'>";
 					str += "<td>자격증</td><td>발급처</td><td>발급일</td></tr>";
 					for(let i = 0 ; i <data.length ; i++){
-					str += "<tr class='origin'><td><input type='text' name='hct_name' class='detailInfo' value='"+data[i].hct_name+"' readonly ></td>"
+					str += "<tr class='origin' id='origin_"+i+"'><td><input type='text' name='hct_name' class='detailInfo' value='"+data[i].hct_name+"' readonly ></td>"
 					str += "<td><input type='text' name='hct_agency' class='detailInfo' value='"+data[i].hct_agency+"' readonly ></td>";
-					str += "<td><input type='date' name='hct_date' class='detailInfo' value='"+data[i].hct_date+"' readonly></td>";
+					str += "<td><input type='date' name='hct_date' class='detailInfo' value='"+data[i].hct_date+"' readonly>";
 					str += "<input type='hidden' name='hct_num' value='"+data[i].hct_num+"'></td></tr>";
 					}str += "</table>";
 					$("#hrDetailInfo").html(str);
@@ -381,7 +362,7 @@ $(function(){
 					str += "<table border='1px solid black' id='infoTable' border='1' cellspacing='0'><tr class='infomenu'>";
 					str += "<td>회사/프로젝트명</td><td>기간</td><td>직책</td><td colspan='2'>내용</td></tr>";
 					for(let i=0; i<data.length ; i++){
-					str += "<tr class='origin'><td><input type='text' name='hcr_cname' class='detailInfo' value='"+data[i].hcr_cname+"' readonly ></td>"
+					str += "<tr class='origin' id='origin_"+i+"'><td><input type='text' name='hcr_cname' class='detailInfo' value='"+data[i].hcr_cname+"' readonly ></td>"
 					str += "<td><input type='date' name='hcr_startperiod' id='chk"+(i*2)+"'class='detailInfo checkDate' value='"+data[i].hcr_startperiod+"' readonly >부터"
 					str += "<input type='date' name='hcr_endperiod' id='chk"+((i*2)+1)+"' class='detailInfo checkDate' value='"+data[i].hcr_endperiod+"' readonly onchange='checkDateValue(chk"+(i*2)+", chk"+((i*2)+1)+")'>까지</td>"
 					str += "<td><input type='text' name='hcr_position' class='detailInfo' value='"+data[i].hcr_position+"' readonly ></td>";

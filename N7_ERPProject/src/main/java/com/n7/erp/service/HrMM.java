@@ -82,6 +82,7 @@ public class HrMM {
 		hMap.put("cCode", cCode);
 		hMap.put("column", "hac");
 		List<Academic> acList = hDao.getAcademicInfo(hMap);
+		System.out.println(acList);
 		return acList;
 	}
 
@@ -92,6 +93,7 @@ public class HrMM {
 		acMap.put("hrcode", hc_hrcode);
 		acMap.put("cCode", cCode);
 		Integer cnt = hDao.selectAcademic(acMap);
+		System.out.println(cnt);
 		for (int i = 0; i < request.getParameterValues("hac_school").length; i++) {
 			Academic ac = new Academic();
 			ac.setHac_ccode(cCode);
@@ -190,17 +192,17 @@ public class HrMM {
 
 		ArrayList<Member> hrCardList = new ArrayList<>();
 		hrCardList = mDao.getHRCard(m_ccode);
-		
+
 		System.out.println(hrCardList);
-		
+
 		mav.addObject("hrCard", makeHRCardList(hrCardList));
 		mav.setViewName("/hr/hrCard");
-		
-		if(!checkMemberHrCardCnt(m_ccode)) {
-			mav.addObject("msg", "�씤�궗移대뱶/�궗�썝肄붾뱶瑜� �쟾遺� �떎 遺��뿬�빐二쇱꽭�슂");
-			
+
+		if (!checkMemberHrCardCnt(m_ccode)) {
+			mav.addObject("msg", "입력하세요");
+
 		}
-		
+
 		return mav;
 	}
 
@@ -209,11 +211,13 @@ public class HrMM {
 		str.append("<table id='table1' border='1' cellspacing='0'>");
 		str.append("<tr class='infomenu'><td>사진</td><td>이름</td><td>생년월일</td><td>이메일</td><td>수정</td></tr>");
 		for (int i = 0; i < hList.size(); i++) {
-			str.append("<tr><td><img style='width:200px; height: 250px;' src='/erp/upload/" + hList.get(i).getM_photo() + "'></td>");
+			str.append("<tr><td><img style='width:200px; height: 250px;' src='/erp/upload/" + hList.get(i).getM_photo()
+					+ "'></td>");
 			str.append("<td>" + hList.get(i).getM_name() + "</td>");
 			str.append("<td>" + hList.get(i).getM_birth() + "</td>");
 			str.append("<td>" + hList.get(i).getM_email() + "</td><td>");
-			str.append("<input type='button' value='수정' class='infobtn' onclick='modifyDetail(\"" + hList.get(i).getM_id() + "\")'></td></tr>");
+			str.append("<input type='button' value='수정' class='infobtn' onclick='modifyDetail(\""
+					+ hList.get(i).getM_id() + "\")'></td></tr>");
 		}
 		str.append("</table>");
 		return str.toString();
@@ -286,7 +290,7 @@ public class HrMM {
 		if (dayInt < 10) {
 			day = "0" + day;
 		}
-		
+
 		String month = "";
 		if (yearmonth.substring(6).equals("1�썡")) {
 			month = "Jan";
@@ -325,6 +329,7 @@ public class HrMM {
 		String result = new Gson().toJson(atList);
 		return result;
 	}
+
 	public String getAllMyAttendance(HttpSession session, String yearmonth) {
 		String cCode = session.getAttribute("cCode").toString();
 		String hrCode = session.getAttribute("hrCode").toString();
@@ -418,13 +423,12 @@ public class HrMM {
 		return result;
 	}
 
-
 	public String getEmployeeHoliday(HttpSession session, String yearmonth) {
 		String cCode = session.getAttribute("cCode").toString();
 		System.out.println(yearmonth);
 		String month = yearmonth.substring(6);
-		month = month.substring(0, month.length()-1);
-		if(Integer.parseInt(month) < 10) {
+		month = month.substring(0, month.length() - 1);
+		if (Integer.parseInt(month) < 10) {
 			month = "0" + month;
 		}
 		String date = yearmonth.substring(0, 4) + "-" + month + "%";
@@ -436,12 +440,12 @@ public class HrMM {
 		String result = new Gson().toJson(holiList);
 		return result;
 	}
-	
+
 	public String getEmployeeHoliday(String cCode, String yearmonth, String hrCode) {
 		System.out.println(yearmonth);
 		String month = yearmonth.substring(6);
-		month = month.substring(0, month.length()-1);
-		if(Integer.parseInt(month) < 10) {
+		month = month.substring(0, month.length() - 1);
+		if (Integer.parseInt(month) < 10) {
 			month = "0" + month;
 		}
 		String date = yearmonth.substring(0, 4) + "-" + month + "%";
@@ -487,81 +491,80 @@ public class HrMM {
 
 	public ModelAndView checkMemberHrCard(HttpSession session, String address) {
 		String cCode = session.getAttribute("cCode").toString();
-		if(checkMemberHrCardCnt(cCode)) {
+		if (checkMemberHrCardCnt(cCode)) {
 			mav.setViewName(address);
-		}else {
+		} else {
 			mav.setViewName("redirect:/hr/movehrcardpage");
 		}
 		return mav;
 	}
-	
+
 	private boolean checkMemberHrCardCnt(String cCode) {
-		if(hDao.checkMemberHrCardCnt(cCode)) {
+		if (hDao.checkMemberHrCardCnt(cCode)) {
 			return false;
-		}else {
+		} else {
 			return true;
 		}
 	}
 
 	public String getNoHrCard(HttpSession session) {
 		String cCode = session.getAttribute("cCode").toString();
-		
-		
+
 		ArrayList<Member> hrCardList = new ArrayList<>();
 		hrCardList = hDao.getNoHrCard(cCode);
-		
+
 		String list = makeHRCardList(hrCardList);
 		return list;
 	}
 
 	public String getSearchFromName(HttpSession session, String name) {
 		String cCode = session.getAttribute("cCode").toString();
-		
+
 		name = "%" + name + "%";
 		HashMap<String, String> hMap = new HashMap<String, String>();
-		ArrayList<Member> hrCardList = new ArrayList<>();		
+		ArrayList<Member> hrCardList = new ArrayList<>();
 		hMap.put("cCode", cCode);
 		hMap.put("name", name);
 		hrCardList = hDao.getSearchFromName(hMap);
-		
+
 		String list = makeHRCardList(hrCardList);
 		return list;
 	}
 
 	public ModelAndView checkMyHrCard(HttpSession session, String address) {
-		if(hDao.haveHrCode(session.getAttribute("id").toString())) {
+		if (hDao.haveHrCode(session.getAttribute("id").toString())) {
 			mav.setViewName(address);
-		}else {
+		} else {
 			mav.setViewName("redirect:/myinfo/myinfo");
 		}
 		return mav;
 	}
-	
-	//�궡 湲됱뿬 紐낆꽭�꽌 �씠�룞
+
+	// �궡 湲됱뿬 紐낆꽭�꽌 �씠�룞
 	public ModelAndView moveMyPayCheck(HttpSession session) {
-		String hrCode=session.getAttribute("hrCode").toString();
-		HR_Card check=hDao.selectcheckpay(hrCode);
-		System.out.println("媛믪씠 �굹�샂="+check);
-		if(check!=null) {
+		String hrCode = session.getAttribute("hrCode").toString();
+		HR_Card check = hDao.selectcheckpay(hrCode);
+		System.out.println("媛믪씠 �굹�샂=" + check);
+		if (check != null) {
 			mav.addObject("paycheck", check);
-			view="/myInfo/myPaycheck";
-		}else {
-			view="/myInfo/myInfo";
+			view = "/myInfo/myPaycheck";
+		} else {
+			view = "/myInfo/myInfo";
 		}
 		mav.setViewName(view);
-		return mav;	
+		return mav;
 	}
-	
-	//�궡 湲됱뿬紐낆꽭�꽌 紐⑸줉
+
+	// �궡 湲됱뿬紐낆꽭�꽌 紐⑸줉
 	public String getMyPaySelect(String hrCode, String month) {
-		HashMap<String, String> hMap=new HashMap<String, String>();
+		HashMap<String, String> hMap = new HashMap<String, String>();
 		hMap.put("hrCode", hrCode);
 		hMap.put("month", month);
-		Payroll pay=hDao.getMyPaySelect(hMap);
-		System.out.println("湲곸뼱�삩 pay="+pay);
-		if(pay!=null) {
-			Gson gson=new Gson();
-			String json=gson.toJson(pay);
+		Payroll pay = hDao.getMyPaySelect(hMap);
+		System.out.println("湲곸뼱�삩 pay=" + pay);
+		if (pay != null) {
+			Gson gson = new Gson();
+			String json = gson.toJson(pay);
 			return json;
 		}
 		return "1";
@@ -569,32 +572,40 @@ public class HrMM {
 
 	public ModelAndView getHolidayDetail(String docunum, HttpSession session) {
 		HashMap<String, String> hMap = new HashMap<String, String>();
+		String hrCode = session.getAttribute("hrCode").toString();
 		hMap.put("cCode", session.getAttribute("cCode").toString());
 		hMap.put("docunum", docunum);
 		ApplyHoliday apholi = hDao.getDetailHoliday(hMap);
+		apholi.setHap_fromapprover(hDao.getFromApprover(apholi.getHap_fromapprover()));
+		apholi.setHap_toapprover(hDao.getToApprover(apholi.getHap_toapprover()));
 		mav.addObject("apholi", apholi);
+		mav.addObject("hrCode", hrCode);
 		mav.setViewName("/hr/holidayDetail");
 		return mav;
 	}
 
-	public void registHolidayStatus(HttpSession session, String docunum, String yesno) { //�쁽�옱 1�씠硫� �듅�씤 2 硫� 諛섎젮
+	public void registHolidayStatus(HttpSession session, String docunum, String yesno) { // 쁽 옱 1 씠硫 듅 씤 2 硫 諛섎젮
 		System.out.println(docunum);
 		System.out.println(yesno);
 		HashMap<String, String> hMap = new HashMap<String, String>();
 		hMap.put("cCode", session.getAttribute("cCode").toString());
 		hMap.put("docunum", docunum);
-		if(yesno.equals("ok")) {
-			hMap.put("status", "1");
-		}else {
-			hMap.put("status", "2");
+		if (yesno.equals("ok")) {
+			hMap.put("status", "3");
+			System.out.println(hMap);
+			hDao.registHolidayStatus(hMap);
+		} else if (yesno.equals("no")) {
+			hMap.put("status", "4");
+			System.out.println(hMap);
+			hDao.registHolidayStatus(hMap);
 		}
-	//	hDao.registHolidayStatus(hMap);
+
 	}
 
 	public String getSearchStatusFromName(HttpSession session, String name) {
 
 		String cCode = session.getAttribute("cCode").toString();
-		
+
 		name = "%" + name + "%";
 		HashMap<String, String> hMap = new HashMap<String, String>();
 		hMap.put("cCode", cCode);
@@ -602,7 +613,7 @@ public class HrMM {
 		ArrayList<Member> memberList = new ArrayList<>();
 		memberList = hDao.getSearchFromName(hMap);
 		ArrayList<HR_Card> hrCardList = new ArrayList<HR_Card>();
-		for(int i = 0 ; i <memberList.size() ; i++) {
+		for (int i = 0; i < memberList.size(); i++) {
 			HR_Card hCard = new HR_Card();
 			hCard = hDao.getHrCardDetail(memberList.get(i).getM_id());
 			hCard.setM_name(memberList.get(i).getM_name());
@@ -630,5 +641,24 @@ public class HrMM {
 		positionList = hDao.getPositionFromDept(hMap);
 		String list = new Gson().toJson(positionList);
 		return list;
+	}
+
+	public String removeInfo(HttpSession session, String num, String type) {
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("cCode", session.getAttribute("cCode").toString());
+		hMap.put("num", num);
+		System.out.println(type);
+		switch (type) {
+		case "Academic":
+			hDao.removeAcademicInfo(hMap);
+			break;
+		case "Career":
+			hDao.removeCareerInfo(hMap);
+			break;
+		case "Certification":
+			hDao.removeCertificationInfo(hMap);
+			break;
+		}
+		return "good";
 	}
 }
