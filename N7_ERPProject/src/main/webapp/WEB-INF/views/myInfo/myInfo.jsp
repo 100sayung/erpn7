@@ -92,13 +92,6 @@ tr{
 	</div>
 	<div id="side_menu">
 		<ul id="menuList">
-			<li><a href="/erp/myinfo/checkattendance">출/퇴근 등록</a></li>
-			<li><a href="/erp/myInfo/myInfo">내 정보 보기</li>
-			<li><a href="/erp/myinfo/myPaycheck">급여명세서 보기</li>
-			<li><a href="/erp/myinfo/myattendance">내 출결 보기</li>
-			<li><a href="/erp/myinfo/myholiday">내 휴가 보기</li>
-			<li><a href="/erp/myinfo/applyholiday">휴가신청</a></li>
-			<li><a href="/erp/myinfo/mydocument">나의 결재함</a></li>
 		</ul>
 	</div>
 <div id="description">
@@ -132,8 +125,35 @@ tr{
 </div>
 	<script src=/erp/js/menu.js></script> <!-- 메뉴Ajax로 출력 -->
 	<script>
+		var flag;
 		var num;
 		$(document).ready(function(){
+
+			$.ajax({
+				url:"/erp/rest/managermode/myinfomenu",
+				dataType:"json",
+				method:"get",
+				success : function(data){
+					console.log(data);
+					flag = data;
+					let str = "";
+					if(data){
+						str += '<li><a href="/erp/myinfo/checkattendance">출/퇴근 등록</a></li>';
+						str += '<li><a href="/erp/myInfo/myInfo">내 정보 보기</li>';
+						str += '<li><a href="/erp/myinfo/myPaycheck">급여명세서 보기</li>';
+						str += '<li><a href="/erp/myinfo/myattendance">내 출결 보기</li>';
+						str += '<li><a href="/erp/myinfo/myholiday">내 휴가 보기</li>';
+						str += '<li><a href="/erp/myinfo/applyholiday">휴가신청</a></li>';
+						str += '<li><a href="/erp/myinfo/mydocument">나의 결재함</a></li>';
+					}else{
+						str += '<li><a href="/erp/myInfo/myInfo">내 정보 보기</li>';
+						str += '<li><a href="/erp/myinfo/mydocument">나의 결재함</a></li>';
+					}
+					$("#menuList").html(str);
+				}, error : function(err){
+					console.log(err);
+				}
+			});
 			$.ajax({
 				url:"/erp/rest/myinfo/myinfo",
 				dataType:"json",
@@ -163,6 +183,8 @@ tr{
 				contentType: 'application/json',
 				success : function(data){
 					let str="";
+					console.log(flag);
+					if(flag){
 					str+='<tr><td><a href="javascript:InCompanyInfo()"><button class = "infobtn" >사내정보</button></a></td>';
 					if(data){
 						str +='<td><a href="javascript:AcademicInfo()"> <button class = "infobtn">학력</button></a></td>';
@@ -170,6 +192,7 @@ tr{
 						str +='<td><a href="javascript:CertificationInfo()"> <button class = "infobtn">자격증</button> </a></td>';
 					}
 					str+='</tr>';
+					}
 					$("#hrmenu").html(str);
 				}, error : function(err){
 					console.log(err);

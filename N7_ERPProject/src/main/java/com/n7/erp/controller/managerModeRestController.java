@@ -51,4 +51,11 @@ public class managerModeRestController {
 		 mav = mm.companyUpdate(cp);
 		return mav;
 	}
+	
+	//내정보 메뉴출력용!
+	@GetMapping(value="/managermode/myinfomenu", produces = "application/json;charset=utf-8")
+	public boolean myInfoMenu(HttpSession session) {
+		boolean result = mm.myInfoMenu(session);
+		return result;
+	}
 }

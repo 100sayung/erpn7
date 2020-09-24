@@ -535,12 +535,14 @@ public class HrMM {
 		if (hDao.haveHrCode(session.getAttribute("id").toString())) {
 			mav.setViewName(address);
 		} else {
-			mav.setViewName("redirect:/myinfo/myinfo");
+			mav.setViewName("redirect:/myInfo/myInfo");
 		}
 		return mav;
 	}
 
-	// �궡 湲됱뿬 紐낆꽭�꽌 �씠�룞
+	//!!
+	//여기 HrCode없을때 에러뜸. 수정해야함
+	//!!
 	public ModelAndView moveMyPayCheck(HttpSession session) {
 		String hrCode = session.getAttribute("hrCode").toString();
 		HR_Card check = hDao.selectcheckpay(hrCode);

@@ -104,4 +104,13 @@ public class menuMM {
 		mav.setViewName(view);
 		return mav;
 	}
+
+	
+	//내정보 메뉴출력용 (인사없을때 안띄우려고)
+	public boolean myInfoMenu(HttpSession session) {
+		if(mDao.hasHrMenu(session.getAttribute("cCode").toString())) {
+			return true;			
+		}
+		return false;
+	}
 }

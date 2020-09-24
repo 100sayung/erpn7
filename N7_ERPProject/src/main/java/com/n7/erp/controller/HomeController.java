@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.n7.erp.bean.Company;
 import com.n7.erp.bean.ConsultingBoard;
 import com.n7.erp.bean.Member;
+import com.n7.erp.service.CompanyMM;
 import com.n7.erp.service.ConsultingBoardMM;
 import com.n7.erp.service.MemberMM;
 
@@ -29,6 +32,8 @@ public class HomeController {
 	private MemberMM mm;
 	@Autowired
 	private ConsultingBoardMM cbm;
+	@Autowired
+	private CompanyMM cm;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
@@ -105,6 +110,11 @@ public class HomeController {
 	public ModelAndView join(MultipartHttpServletRequest multi) {
 		mav = mm.join(multi);
 		return mav;
+	}
+	@PostMapping(value="/newerp")
+	public String registNewERP(Company com){
+		cm.registNewERP(com);
+		return "/home/home";
 	}
 	@PostMapping(value="/logout")
 	public String logout(HttpSession session) {
