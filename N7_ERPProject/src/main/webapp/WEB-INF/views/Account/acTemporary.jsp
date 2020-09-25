@@ -63,66 +63,89 @@ td {
 			<td>관계회사</td>
 			<td>결재상태</td>
 		</tr>
-		<tbody id="Info">
-		</tbody>
+		<tbody id="Info"></tbody>
 	</table>
+	<br>
+	<div id="paging" style="text-align: center;"></div>
 	<br>
 	<button id="approval">결재안 상세보기</button>
 </body>
 <script>
-	$(document).ready(
-					function() {
+	//페이지 변경 스크립트
+	var currPage = 1;
+	function pageNumber(j) {
+		currPage = j;
+		$.ajax({
+			url : "/erp/rest/Account/documentPagenumber",
+			dataType : "json",
+			method : "get",
+			success : function(page) {
+				console.log(page);
+				var pagecnt = (page / 10) + 1;
+				let str = "";
+				for (let i = 1; i < pagecnt; i++) {
+					if (i == currPage) {
+						str += " &nbsp; [" + i + "] &nbsp; ";
+					} else {
+						str += " &nbsp; <a href=javascript:paging(" + i + ")>["
+								+ i + "]</a> &nbsp; ";
+					}
+				}
+				console.log(str);
+				$("#paging").html(str);
+			},
+			error : function(err) {
+				console.log(err);
+			}
+		});
+	}
 
-						$.ajax({
-									type : 'get',
-									url : '/erp/rest/Account/acTemporaryList',
-									dataType : 'json',
-									success : function(data) {
-										console.log(data);
-										var str = "";
-										for ( var i in data.aList) {
-											str += "<tr>"
-											str += "<td><input type='radio' name='checknum' class='check' value='"+data.aList[i].j_docunum+"'></td>"
-											str += '<td>'
-													+ data.aList[i].j_docunum
-													+ '</td>'
-											str += '<td>'
-													+ data.aList[i].j_title
-													+ '</td>'
-											str += '<td>'
-													+ data.aList[i].j_account
-													+ '</td>'
-											str += '<td>'
-													+ data.aList[i].j_group
-													+ '</td>'
-											str += '<td>'
-													+ data.aList[i].j_debit
-													+ '</td>'
-											str += '<td>'
-													+ data.aList[i].j_credit
-													+ '</td>'
-											str += '<td>'
-													+ data.aList[i].j_section
-													+ '</td>'
-											str += '<td>'
-													+ data.aList[i].j_centre
-													+ '</td>'
-											str += '<td>'
-													+ data.aList[i].j_company
-													+ '</td>'
-											str += '<td>'
-													+ data.aList[i].j_grade
-													+ '</td>'
-											str += '</tr>'
-										}
-										$("#Info").html(str);
-									},
-									error : function(err) {
-										console.log(err);
-									}
-								});
-					});
+	function paging(num) {
+		pageNumber(num);
+		acTemporaryList(num);
+	}
 
+	function acTemporaryList(nowPage) {
+		$
+				.ajax({
+					url : "/erp/rest/Account/acTemporaryList",
+					dataType : "json",
+					data : {
+						nowPage : nowPage,
+						cntPerPage : "10"
+					},
+					method : "get",
+					success : function(data) {
+						let str = "";
+						for (let i = 0; i < data.length; i++) {
+							str += "<table>"
+							str += "<tr>"
+							str += "<td><input type='radio' name='checknum' class='check' value='"+data[i].j_docunum+"'></td>";
+							str += "<td>" + data[i].j_docunum + "</td>";
+							str += "<td>" + data[i].j_title + "</td>";
+							str += "<td>" + data[i].j_account + "</td>";
+							str += "<td>" + data[i].j_group + "</td>";
+							str += "<td>" + data[i].j_debit + "</td>";
+							str += "<td>" + data[i].j_credit + "</td>";
+							str += "<td>" + data[i].j_section + "</td>";
+							str += "<td>" + data[i].j_centre + "</td>";
+							str += "<td>" + data[i].j_company + "</td>";
+							str += "<td>" + data[i].j_grade + "</td>";
+							str += "</tr>"
+						}
+						str += "</table>";
+						$("#Info").html(str);
+					},
+					error : function(err) {
+						console.log(err);
+					}
+				});
+	}
+
+	acTemporaryList(1);
+	pageNumber(1);
+</script>
+<script>
 	$("#approval").click(
 			function() {
 				var check = '';

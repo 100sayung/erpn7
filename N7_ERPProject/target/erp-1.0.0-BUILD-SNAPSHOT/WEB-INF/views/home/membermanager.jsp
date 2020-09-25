@@ -20,6 +20,7 @@ Released   : 20130526
 <title></title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
+<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css" media="all" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
@@ -73,12 +74,14 @@ margin-left: 200px;
 	검색기능 :
 	<input type="text" id="m_id"></input>	<button id="searchbtn">검색</button> </br>
 	<br></br>
-	여기 출력
-	<div id="container">
+	</div><!-- 옵션선택 -->
 	
+	
+	<div id="container" style="text-align:center; align-content: center;">
 	</div>
+	<div id="paging" style="text-align: center"></div>
 	<br><br></br></br><br></br>
-	<div id="management">
+	<div id="management"> 
 	선택 멤버를 
 	<select>
 	<option value="0"> 0(일반회원)</option>
@@ -90,7 +93,73 @@ margin-left: 200px;
 	<input type='button' value='강제탈퇴' onclick="forceWithdrawal()">
 	</div>
 	</div>
+	<script> 
+	//페이지 변경 스크립트
+	
+	var currPage = 1;
+	function pageNumber(j){
+		currPage = j;
+		$.ajax({
+			url:"/erp/rest/admin/memberpagenumber",
+			dataType:"json",
+			method:"get",
+			success : function(page){
+				console.log(page);
+				var pagecnt = (page/10) + 1;
+				let str = "";
+				for(let i = 1 ; i < pagecnt ; i++){
+					if(i == currPage){
+						str += " &nbsp; ["+ i +"] &nbsp; ";
+					}else{
+						str += " &nbsp; <a href=javascript:paging("+i+")>["+ i +"]</a> &nbsp; ";
+					}
+				}
+				console.log(str);
+				$("#paging").html(str);
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+	}
+	function paging(num){
+		pageNumber(num);
+		memberlist(num);
+	}
+	
+	function memberlist(nowPage){
+		$.ajax({
+			url:"/erp/rest/admin/memberlist",
+			dataType:"json",
+			data:{nowPage : nowPage, cntPerPage : "10"},
+			method:"get",
+			success : function(data){
+				console.log(data);
+				let str = "";
+				str = "<table>"
+				str += "<tr class='infomenu'><td> &nbsp; </td><td style='width:200px;'>이름(아이디)</td><td style='width:150px;'>회사코드</td><td style='width:100px;'>등급</td></tr>"
+				for(let i = 0 ; i<data.length ; i++){
+				str += "<tr class = '' id='"+data[i].m_id+"'>";					
+					str += "<td><input type='checkbox' id='chkbx' name='chkbx' value='"+data[i].m_id+"'></td>";
+					str += "<td>" + data[i].m_name + "(" + data[i].m_id +")</td>";
+					str += "<td>" + data[i].c_name + "("+ data[i].m_ccode + ")</td>";
+					str += "<td>" + data[i].m_grade + "</td>";
+					str += "</tr>"
+				}
+				str += "</table>";
+				$("#container").html(str);
+			}, error : function(err){
+				console.log(err);
+			}	
+		});
+	}
+	
+	memberlist(1);
+	pageNumber(1);
+	
+	</script>
 	<script>
+	
+	
 	function confirmcheck(){
 		if(confirm("정말 하시겠습니까?") == true){
 			return true;
@@ -111,7 +180,7 @@ margin-left: 200px;
 			gradeArr = JSON.stringify(gradeArr);
 			
 			$.ajax({
-				url:"/erp/rest/home/changegrade",
+				url:"/erp/rest/admin/changegrade",
 				data:{jsonStr : gradeArr},
 				dataType:"json",
 				method:"post",
@@ -121,7 +190,7 @@ margin-left: 200px;
 					console.log(err);
 				}
 			});
-		//	location.reload();
+			location.reload();
 		}else{
 			
 		}
@@ -139,7 +208,7 @@ margin-left: 200px;
 			forceArr = JSON.stringify(forceArr);
 			
 			$.ajax({
-				url:"/erp/rest/home/forcewithdrawal",
+				url:"/erp/rest/admin/forcewithdrawal",
 				data:{jsonStr : forceArr},
 				dataType:"json",
 				method:"post",
@@ -149,7 +218,7 @@ margin-left: 200px;
 					console.log(err);
 				}
 			});
-//			location.reload();
+			location.reload();
 		}else{
 			
 		}
@@ -159,7 +228,7 @@ margin-left: 200px;
 	function SearchFromId(m_id){
 		console.log(m_id);
 		$.ajax({
-			url:"/erp/rest/home/searchfromid",
+			url:"/erp/rest/admin/searchfromid",
 			dataType:"json",
 			data:{m_id : m_id},
 			method:"get",
@@ -182,7 +251,6 @@ margin-left: 200px;
 			}
 		});
 	}
-	SearchFromId("");
 	
 	$("#searchbtn").click(function() {
 		SearchFromId($("#m_id").val());

@@ -62,12 +62,9 @@ td {
 		</tr>
 		<tbody id="Info"></tbody>
 	</table>
-	<br>
 	<div id="paging" style="text-align: center;"></div>
 	<br>
 	<button id="approval">결재안 상세보기</button>
-	<!-- 	<button id="acBack2">반려요청</button> -->
-	<!-- 	<button id="acDelete">삭제</button> -->
 </body>
 <script>
 	//페이지 변경 스크립트
@@ -101,29 +98,27 @@ td {
 
 	function paging(num) {
 		pageNumber(num);
-		apdownPaymentList(num);
+		apupPaymentList(num);
 	}
 
-	function apdownPaymentList(nowPage) {
+	function apupPaymentList(nowPage) {
 		$.ajax({
-					url : "/erp/rest/Account/apdownPaymentList",
+					url : "/erp/rest/Account/apupPaymentList",
 					dataType : "json",
-					data : {
-						nowPage : nowPage,
-						cntPerPage : "10"
-					},
+					data : {nowPage : nowPage, cntPerPage : "10"},
 					method : "get",
 					success : function(data) {
 						let str = "";
-						for (let i = 0; i < data.length; i++) {
+						for ( let i = 0; i<data.length; i++) {
 							str += "<table>"
 							str += "<tr>"
 							str += "<td><input type='radio' name='checknum' class='check' value='"+data[i].ap_docunum+"'></td>";
 							str += "<td>" + data[i].ap_docunum + "</td>";
 							str += "<td>" + data[i].ap_ccode + "</td>";
 							str += "<td>" + data[i].ap_docuname + "</td>";
-							str += "<td>" + data[i].ap_fromapprover + "</td>";
-							str += "<td>" + data[i].ap_toapprover + "</td>";
+							str += "<td>" + data[i].ap_fromapprover+ "</td>";
+							str += "<td>" + data[i].ap_toapprover
+									+ "</td>";
 							str += "<td>" + data[i].ap_date + "</td>";
 							str += "<td>" + data[i].ap_status + "</td>";
 							str += "</tr>"
@@ -137,36 +132,37 @@ td {
 				});
 	}
 
-	apdownPaymentList(1);
+	apupPaymentList(1);
 	pageNumber(1);
+
+	// 	$.ajax({
+	// 				type : 'get',
+	// 				url : '/erp/rest/Account/apupPaymentList',
+	// 				dataType : 'json',
+	// 	 			contentType : 'application/json; charset=UTF-8',
+	// 				success : function(data) {
+	// 					console.log(data);
+	// 					var str = "";
+	// 					for ( var i in data.pList) {
+	// 						str += "<tr>"
+	// 						str += "<td><input type='radio' name='checknum' class='check' value='"+data.pList[i].ap_docunum+"'></td>"
+	// 						str += '<td>' + data.pList[i].ap_docunum + '</td>'
+	// 						str += '<td>' + data.pList[i].ap_ccode + '</td>'
+	// 						str += '<td>' + data.pList[i].ap_docuname + '</td>'
+	// 						str += '<td>' + data.pList[i].ap_fromapprover + '</td>'
+	// 						str += '<td>' + data.pList[i].ap_toapprover + '</td>'
+	// 						str += '<td>' + data.pList[i].ap_date + '</td>'
+	// 						str += '<td>' + data.pList[i].ap_status + '</td>'
+	// 						str += '</tr>'
+	// 					}
+	// 					$("#Info").html(str);
+	// 				},
+	// 				error : function(err) {
+	// 					console.log(err);
+	// 				}
+	// 			});
 </script>
 <script>
-	//	$.ajax({
-	//	type : 'get',
-	//	url : '/erp/rest/Account/apdownPaymentList',
-	//	dataType : 'json',
-	//	contentType : 'application/json; charset=UTF-8',
-	//	success : function(data) {
-	//		console.log(data);
-	//		var str = "";
-	//		for ( var i in data.pList) {
-	//			str += "<tr class='success'>"
-	//			str += "<td><input type='radio' name='checknum' class='check' value='"+data.pList[i].ap_docunum+"'></td>"
-	//			str += '<td>' + data.pList[i].ap_docunum + '</td>'
-	//			str += '<td>' + data.pList[i].ap_ccode + '</td>'
-	//			str += '<td>' + data.pList[i].ap_docuname + '</td>'
-	//			str += '<td>' + data.pList[i].ap_fromapprover + '</td>'
-	//			str += '<td>' + data.pList[i].ap_toapprover + '</td>'
-	//			str += '<td>' + data.pList[i].ap_date + '</td>'
-	//			str += '<td>' + data.pList[i].ap_status + '</td>'
-	//			str += '</tr>'
-	//		}
-	//		$("#Info").html(str);
-	//	},
-	//	error : function(err) {
-	//		console.log(err);
-	//	}
-	//});
 	$("#approval").click(
 			function() {
 				var check = '';
@@ -175,14 +171,29 @@ td {
 							check = $(this).attr('value');
 
 							window.open(
-									'/erp/rest/Account/apRequest2?j_docunum='
-											+ check,
-									'/erp/rest/Account/apRequest2',
+									'/erp/rest/Account/apRequest?j_docunum='
+											+ check, 'apRequest',
 									'width=1500, height=600');
 						});
 			});
 </script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

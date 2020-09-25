@@ -205,7 +205,7 @@ input {
 					console.log(obj);
 
 					$.ajax({
-						url : '/erp/rest/Account/acCart',
+						url : '/erp/rest/Account/actempoInsert',
 						type : 'post',
 						data : obj,
 						dateType : "json",

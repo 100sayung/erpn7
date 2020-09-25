@@ -15,11 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import com.n7.erp.dao.AccountDao;
+import com.n7.erp.userClass.PagingVO;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.n7.erp.bean.ac.A_company;
 import com.n7.erp.bean.ac.Account;
 import com.n7.erp.bean.ac.ApprovalDocument;
 import com.n7.erp.bean.ApprovalDocu;
+import com.n7.erp.bean.Member;
 import com.n7.erp.bean.ac.SaleInfo;
 import com.n7.erp.bean.ac.myCompany;
 import com.n7.erp.bean.ac.approvalLine;
@@ -476,57 +479,80 @@ public class AccountMM {
 
 	}
 
-	public Map<String, List<Account>> acTemporaryList(HttpSession session) {
-		Map<String, List<Account>> aMap = null;
-		String hrCode = session.getAttribute("hrCode").toString();
-		String cCode = (String) session.getAttribute("cCode");
-		List<Account> aList = aDao.acTemporaryList(hrCode, cCode);
-
-		if (aList != null) {
-			aMap = new HashMap<>();
-			aMap.put("aList", aList);
-			System.out.println("임시저장 리스트 가져왓어");
-		} else {
-			System.out.println("못가져왓져");
-		}
-		return aMap;
-	}
-
-	public Map<String, List<ApprovalDocu>> apupPaymentList(HttpSession session) {
-		Map<String, List<ApprovalDocu>> pMap = null;
+//	public Map<String, List<Account>> acTemporaryList((HttpSession session, PagingVO vo, int start, int end) {
+//		String hrCode = (String) session.getAttribute("hrCode");
+//		String cCode = (String) session.getAttribute("cCode");aDao.acTemporaryList(hrCode, cCode);
+//		
+//		if (aList != null) {
+//			aMap = new HashMap<>();
+//			aMap.put("aList", aList);
+//			System.out.println("임시저장 리스트 가져왓어");
+//		} else {
+//			System.out.println("못가져왓져");
+//		}
+//		return aMap;
+//	}
+	
+	public List<Account> acTemporaryList(HttpSession session, PagingVO vo, int start, int end) {
 		String hrCode = (String) session.getAttribute("hrCode");
 		String cCode = (String) session.getAttribute("cCode");
 		
-		List<ApprovalDocu> pList = aDao.apupPaymentList(hrCode, cCode);
+        return aDao.acTemporaryList(hrCode, cCode, vo, start, end);
 
-		if (pList != null) {
-			pMap = new HashMap<>();
-			pMap.put("pList", pList);
-			System.out.println("내가올린 pList가져왓어");
-		} else {
-			System.out.println("못가져왓져");
-		}
-		return pMap;
 	}
 
-	public Map<String, List<ApprovalDocu>> apdownPaymentList(HttpSession session) {
-		Map<String, List<ApprovalDocu>> pMap = null;
+//	public Map<String, List<ApprovalDocu>> apupPaymentList(HttpSession session) {
+//		Map<String, List<ApprovalDocu>> pMap = null;
+//		String hrCode = (String) session.getAttribute("hrCode");
+//		String cCode = (String) session.getAttribute("cCode");
+//		
+//		List<ApprovalDocu> pList = aDao.apupPaymentList(hrCode, cCode);
+//		
+//		if (pList != null) {
+//			pMap = new HashMap<>();
+//			pMap.put("pList", pList);
+//			System.out.println("내가올린 pList가져왓어");
+//		} else {
+//			System.out.println("못가져왓져");
+//		}
+//		return pMap;
+//	}
+	
+	//내가 올린 결재안 목록 페이징
+	public List<ApprovalDocu> apupPaymentList(HttpSession session, PagingVO vo, int start, int end) {
+		String hrCode = (String) session.getAttribute("hrCode");
+		String cCode = (String) session.getAttribute("cCode");
+		
+		return aDao.apupPaymentList(hrCode, cCode, vo, start, end);
+	}
+
+//	public Map<String, List<ApprovalDocu>> apdownPaymentList(HttpSession session) {
+//		Map<String, List<ApprovalDocu>> pMap = null;
+//		String hrCode = (String) session.getAttribute("hrCode");
+//		String cCode = (String) session.getAttribute("cCode");
+//		System.out.println("사원코드: " + hrCode);
+//		
+//		List<ApprovalDocu> pList = aDao.apdownPaymentList(hrCode, cCode);
+//		
+//		if (pList != null) {
+//			pMap = new HashMap<>();
+//			pMap.put("pList", pList);
+//			System.out.println("내가받은 jList가져왓어");
+//		} else {
+//			System.out.println("못가져왓져");
+//		}
+//		
+//		return pMap;
+//	}
+	
+	//내가 받은 결재안 목록 페이징
+	public List<ApprovalDocu> apdownPaymentList(HttpSession session, PagingVO vo, int start, int end) {
 		String hrCode = (String) session.getAttribute("hrCode");
 		String cCode = (String) session.getAttribute("cCode");
 		System.out.println("사원코드: " + hrCode);
 
-		List<ApprovalDocu> pList = aDao.apdownPaymentList(hrCode, cCode);
-
-		if (pList != null) {
-			pMap = new HashMap<>();
-			pMap.put("pList", pList);
-			System.out.println("내가받은 jList가져왓어");
-		} else {
-			System.out.println("못가져왓져");
-		}
-
-		return pMap;
-	}
+		return aDao.apdownPaymentList(hrCode, cCode, vo, start, end);
+    }
 
 	// 임시저장 결재안 상세보기
 	public ModelAndView acRequest(String j_docunum, HttpSession session) {
@@ -768,4 +794,11 @@ public class AccountMM {
 		}
 		return aMap;
 	}
+	
+	//결재안문서 카운트
+	public int countDocument() {
+		return aDao.countDocument();
+	}
+
+
 }

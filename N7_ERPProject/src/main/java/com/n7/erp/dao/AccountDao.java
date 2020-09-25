@@ -1,6 +1,9 @@
 package com.n7.erp.dao;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -9,10 +12,12 @@ import org.springframework.stereotype.Component;
 import com.n7.erp.bean.ac.A_company;
 import com.n7.erp.bean.ac.Account;
 import com.n7.erp.bean.ac.ApprovalDocument;
+import com.google.gson.JsonElement;
 import com.n7.erp.bean.ApprovalDocu;
 import com.n7.erp.bean.ac.SaleInfo;
 import com.n7.erp.bean.ac.approvalLine;
 import com.n7.erp.bean.ac.myCompany;
+import com.n7.erp.userClass.PagingVO;
 
 @Mapper
 @Component
@@ -88,11 +93,17 @@ public interface AccountDao {
 ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////
 
-	public List<ApprovalDocu> apupPaymentList(@Param("hrCode") String hrCode,@Param("cCode") String cCode); //내가 올린 결재안
+//	public List<ApprovalDocu> apupPaymentList(@Param("hrCode") String hrCode, @Param("cCode") String cCode); //내가 올린 결재안(페이징x)
+	public List<ApprovalDocu> apupPaymentList(@Param("hrCode") String hrCode, @Param("cCode") String cCode, 
+			@Param("vo") PagingVO vo, @Param("start")int start, @Param("end")int end); //내가 올린 결재안
 
-	public List<ApprovalDocu> apdownPaymentList(@Param("hrCode") String hrCode,@Param("cCode") String cCode); //내가 받은 결재안
+//	public List<ApprovalDocu> apdownPaymentList(@Param("hrCode") String hrCode, @Param("cCode") String cCode); //내가 받은 결재안
+	public List<ApprovalDocu> apdownPaymentList(@Param("hrCode") String hrCode, @Param("cCode") String cCode, 
+			@Param("vo") PagingVO vo, @Param("start")int start, @Param("end")int end); //내가 받은 결재안
 	
-	public List<Account> acTemporaryList(@Param("hrCode") String hrCode,@Param("cCode") String cCode); //임시저장 결재함
+//	public List<Account> acTemporaryList(@Param("hrCode") String hrCode,@Param("cCode") String cCode); //임시저장 결재함
+	public List<Account> acTemporaryList(@Param("hrCode") String hrCode, @Param("cCode") String cCode, 
+			@Param("vo") PagingVO vo, @Param("start")int start, @Param("end")int end); //임시저장 결재함
 	
 	public Account apRequest(@Param("j_docunum") String j_docunum,@Param("cCode") String cCode); // 내가올린 결재안상세
 
@@ -119,6 +130,10 @@ public interface AccountDao {
 	public boolean apBack2(@Param("ap_docunum")String ap_docunum,@Param("cCode") String cCode); //공통결재함 반려
 
 	com.n7.erp.bean.ac.approvalLine getApprinfo(String code); //결재안에서 결재자 표시
+
+	public int countDocument();
+
+//	public List<ApprovalDocu> selectUpdocument(PagingVO vo);
 
 
 	

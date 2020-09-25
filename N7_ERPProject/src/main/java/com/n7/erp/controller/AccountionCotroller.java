@@ -19,10 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.n7.erp.bean.ac.A_company;
 import com.n7.erp.bean.ac.Account;
+import com.google.gson.Gson;
 import com.n7.erp.bean.ApprovalDocu;
 import com.n7.erp.bean.ac.SaleInfo;
 import com.n7.erp.bean.ac.approvalLine;
 import com.n7.erp.service.AccountMM;
+import com.n7.erp.userClass.PagingVO;
 
 @RestController
 @RequestMapping(value = "/rest")
@@ -158,11 +160,36 @@ public class AccountionCotroller {
 		return a; // DAO
 	}
 
-	// 내가올린 결재안 목록
+	// 페이징
+	@GetMapping(value = "/Account/documentPagenumber")
+	public String documentPagenumber() {
+		int result = am.countDocument();
+		return Integer.toString(result);
+	}
+
+//	// 내가올린 결재안 목록(페이징x)
+//	@GetMapping(value = "Account/apupPaymentList", produces = "application/json;charset=utf-8")
+//	public Map<String, List<ApprovalDocu>> apupPaymentList(HttpSession session) {
+//		Map<String, List<ApprovalDocu>> pMap = am.apupPaymentList(session);
+//		return pMap;
+//	}
+
+	// 내가올린 결재안 목록(페이징o)
 	@GetMapping(value = "Account/apupPaymentList", produces = "application/json;charset=utf-8")
-	public Map<String, List<ApprovalDocu>> apupPaymentList(HttpSession session) {
-		Map<String, List<ApprovalDocu>> pMap = am.apupPaymentList(session);
-		return pMap;
+	public String apupPaymentList(HttpSession session, String nowPage, String cntPerPage) {
+		int total = am.countDocument();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "10";
+		}
+
+		PagingVO vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		int start = vo.getStart();
+		int end = vo.getEnd();
+		System.out.println(vo);
+		String result = new Gson().toJson(am.apupPaymentList(session, vo, start, end));
+
+		return result;
 	}
 
 	// 내가올린 결재안 상세보기
@@ -173,13 +200,30 @@ public class AccountionCotroller {
 		return mav;
 	}
 
-	// 내가받은 결재안 목록
+//	// 내가받은 결재안 목록(페이징x)
+//	@GetMapping(value = "Account/apdownPaymentList", produces = "application/json;charset=utf-8")
+//	public Map<String, List<ApprovalDocu>> apdownPaymentList(HttpSession session) {
+//		Map<String, List<ApprovalDocu>> pMap = am.apdownPaymentList(session);
+//		return pMap;
+//	}
+
+	// 내가받은 결재안 목록(페이징o)
 	@GetMapping(value = "Account/apdownPaymentList", produces = "application/json;charset=utf-8")
-	public Map<String, List<ApprovalDocu>> apdownPaymentList(HttpSession session) {
-		Map<String, List<ApprovalDocu>> pMap = am.apdownPaymentList(session);
-		return pMap;
+	public String apdownPaymentList(HttpSession session, String nowPage, String cntPerPage) {
+		int total = am.countDocument();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "10";
+		}
+		PagingVO vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		int start = vo.getStart();
+		int end = vo.getEnd();
+		System.out.println(vo);
+		String result = new Gson().toJson(am.apdownPaymentList(session, vo, start, end));
+
+		return result;
 	}
-	
+
 	// 내가받은 결재안 상세보기
 	@GetMapping(value = "Account/apRequest2", produces = "application/json;charset=utf-8")
 	public ModelAndView apRequest2(String j_docunum, HttpSession session) {
@@ -188,12 +232,26 @@ public class AccountionCotroller {
 		return mav;
 	}
 
-
-	// 임시저장 결재안 목록
+//	// 임시저장 결재안 목록
+//	@GetMapping(value = "Account/acTemporaryList", produces = "application/json;charset=utf-8")
+//	public Map<String, List<Account>> acTemporaryList(HttpSession session) {
+//		Map<String, List<Account>> aMap = am.acTemporaryList(session);
+//		return aMap;
+//	}
+	// 임시저장 결재안 목록(페이징o)
 	@GetMapping(value = "Account/acTemporaryList", produces = "application/json;charset=utf-8")
-	public Map<String, List<Account>> acTemporaryList(HttpSession session) {
-		Map<String, List<Account>> aMap = am.acTemporaryList(session);
-		return aMap;
+	public String acTemporaryList(HttpSession session, String nowPage, String cntPerPage) {
+		int total = am.countDocument();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "10";
+		}
+		PagingVO vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		int start = vo.getStart();
+		int end = vo.getEnd();
+		System.out.println(vo);
+		String result = new Gson().toJson(am.acTemporaryList(session, vo, start, end));
+		return result;
 	}
 
 	// 임시저장 결재안 상세보기
@@ -203,7 +261,6 @@ public class AccountionCotroller {
 		System.out.println(j_docunum);
 		return mav;
 	}
-
 
 	// 내문서결재요청(업데이트)
 	@PostMapping(value = "Account/acSign", produces = "application/json;charset=utf-8")
@@ -228,7 +285,7 @@ public class AccountionCotroller {
 	// 결재안 삭제
 	@RequestMapping(value = "Account/acDelete", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public int acDelete(String j_docunum, Account ac, HttpServletRequest req, HttpServletResponse rep, 
+	public int acDelete(String j_docunum, Account ac, HttpServletRequest req, HttpServletResponse rep,
 			HttpSession session) {
 		System.out.println(j_docunum);
 		logger.info("acDelete 결재안 삭제요청");
@@ -252,7 +309,7 @@ public class AccountionCotroller {
 	public Map<String, List<approvalLine>> getApprinfo(String CNT, String ARR, HttpSession session) {
 		int cnt = Integer.parseInt(CNT);
 		String[] strArray = ARR.split(",");
-		Map<String, List<approvalLine>> mMap = am.getApprinfo(cnt,strArray, session);
+		Map<String, List<approvalLine>> mMap = am.getApprinfo(cnt, strArray, session);
 		return mMap;
 	}
 
