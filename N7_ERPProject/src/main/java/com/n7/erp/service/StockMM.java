@@ -76,11 +76,10 @@ public class StockMM {
 
 	//품목코드 출력
 	public ResponseEntity<List<ItemCode>> getItemCode(ItemCode it, HttpSession session) {
-		it.setIt_cpcode(session.getAttribute("cCode").toString());
 		if (it.getIt_ccode() == null) {
 			return ResponseEntity.ok(itDao.getItemCode(session.getAttribute("cCode").toString()));
 		} else {
-			return ResponseEntity.ok(itDao.getItemCodeFromItemCCode(it.getIt_ccode()));
+			return ResponseEntity.ok(itDao.getItemCodeFromItemCCode(it.getIt_ccode(),session.getAttribute("cCode").toString()));
 		}
 	}
 
@@ -293,10 +292,10 @@ public class StockMM {
 				dMap.put("cCode", session.getAttribute("cCode").toString());
 				ip = ieDao.getImportDateList(dMap);
 			} else if (!(ie_status.equals("")) && date1 == null && date2 == null) {
-				ip = ieDao.getImportIeList(Integer.parseInt(ie_status),session.getAttribute("cCode").toString());
+				ip = ieDao.getImportIeList(ie_status,session.getAttribute("cCode").toString());
 			} else { 
 				Map<String, Object> iMap = new HashMap<String, Object>();
-				iMap.put("ie_status", Integer.parseInt(ie_status));
+				iMap.put("ie_status",ie_status);
 				iMap.put("date1", date1);
 				iMap.put("date2", date2);
 				iMap.put("cCode", session.getAttribute("cCode").toString());
@@ -352,16 +351,16 @@ public class StockMM {
 			}
 		}else{
 			for (int i = 0; i < ieList.size();) {
-				if (ieList.size() - 3 > i) {
+				if (ieList.size() - 3 >= i) {
 					if (ieList.get(i).getIe_itcode().equals(ieList.get(i + 1).getIe_itcode())) {
-						if (ieList.get(i + 1).getIe_status() == "1") {
+						if (ieList.get(i + 1).getIe_status().equals("2")) {
 							if (ieList.get(i + 1).getIe_itcode().equals(ieList.get(i + 2).getIe_itcode())) {
-								if (ieList.get(i + 2).getIe_status() == "2") {
-									sb.append("<tr><td>" + ieList.get(i).getIe_itcode() + "</td>");
+								if (ieList.get(i + 2).getIe_status().equals("3")) {
+									sb.append("<td>" + ieList.get(i).getIe_itcode() + "</td>");
 									if(ieList2.size()<a+1||ieList2.size()==0) {
 									sb.append("<td>0</td>");	
 									}else {
-										sb.append("<td>" + ieList2.get(a).getIe_qty() + "</td>");
+									sb.append("<td>" + ieList2.get(a).getIe_qty() + "</td>");
 										
 									}
 									sb.append("<td>" + ieList.get(i).getIe_qty() + "</td>");
@@ -433,7 +432,7 @@ public class StockMM {
 					}
 				} else if (ieList.size() - 2 >= i) {
 					if (ieList.get(i).getIe_itcode().equals(ieList.get(i + 1).getIe_itcode())) {
-						if (ieList.get(i + 1).getIe_status() == "1") {
+						if (ieList.get(i + 1).getIe_status().equals("2")) {
 							sb.append("<tr><td>" + ieList.get(i).getIe_itcode() + "</td>");
 							if(ieList2.size()<a+1||ieList2.size()==0) {
 								sb.append("<td>0</td>");

@@ -185,20 +185,15 @@ input[type='text'], input[type='number'] {
 				}else{
 					$('#selectit_code').attr('readonly',false);
 				}
-				var str = '<h3>품목별 거래현황</h3><table><tr><td>제품 코드</td><td>거래처</td><td>거래 일시</td><td>거래 분류</td><td>발주 번호</td><td>단가</td><td>수량</td><td>거래 사원</td><td>총액</td></tr>';
+				var str = '<table><tr><td>제품 코드</td><td>거래처</td><td>거래 일시</td><td>거래 분류</td><td>단가</td><td>수량</td><td>거래 사원</td><td>총액</td></tr>';
 				for (var i = 0; i < result.length; i++) {
 					str += '<tr><td>' + result[i].ie_itcode + '</td>';
-					str += '<td>' + result[i].ie_account + '</td>';
+					str += '<td>' + result[i].ie_clcode + '</td>';
 					str += '<td>' + result[i].ie_date.substr(0, 10)+ '</td>';
-					if (result[i].ie_status == 0) {
+					if (result[i].ie_status == 1) {
 						str += '<td>입고</td>'
-					} else {
+					} else if(result[i].ie_status==2){
 						str += '<td>출고</td>'
-					}
-					if (result[i].ie_pnum != undefined) {
-						str += '<td>' + result[i].ie_pnum + '</td>'
-					} else {
-						str += '<td></td>'
 					}
 					str += '<td>' +parseInt(result[i].ie_price/result[i].ie_qty) + '</td>'
 					str += '<td>' + result[i].ie_qty + '</td>'

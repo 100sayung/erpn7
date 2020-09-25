@@ -25,7 +25,7 @@ public interface ItemCodeDao {
 	public boolean deleteItemCode(ItemCode it);
 
 	@Select("SELECT * FROM IT WHERE IT_CCODE = #{it_ccode} AND IT_CPCODE =  #{it_cpcode}")
-	public List<ItemCode> getItemCodeFromItemCCode(String it_ccode);
+	public List<ItemCode> getItemCodeFromItemCCode(@Param("it_ccode")String it_ccode,@Param("it_cpcode")String it_cpcode);
 
 	@Select("SELECT * FROM IT WHERE IT_CPCODE = #{cCode} AND IT_CODE = #{bs_itcode}")
 	public ItemCode getPname(@Param("cCode")String cCode,@Param("bs_itcode") String bs_itcode);
