@@ -10,6 +10,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
+<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css"
+	media="all" />
 <style>
 #header {
 	width: 100%;
@@ -58,14 +60,8 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내 정보</a></li>
-				<li class="current_page_item"><a href="/erp/hr/hr" accesskey="2"
-					title="">인사 관리</a></li>
-				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
-				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="#">회계 관리</a></li>
-			</ul>
+				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
+				<ul id="mainmenu">
 		</div>
 	</div>
 	<div id="side_menu">
@@ -97,7 +93,7 @@ ul {
 	<div id="description"> ${msg }<br><br>
 	<div id="noHaveHrCard"></div>
 	<input type="text" id="nameSearch"> <- 이름으로 검색
-	<button onclick="searchFromName()">검색</button>
+	<button onclick="searchFromName()" class='infobtn'>검색</button>
 	
 	<div id="container">
 	${hrCard} 
@@ -106,6 +102,7 @@ ul {
 	
 	
 	</div>
+	<script src=/erp/js/menu.js></script>
 	<script>
 	
 	function searchFromName(){

@@ -58,17 +58,11 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내 정보</a></li>
-				<li class="current_page_item"><a href="/erp/hr/hr" accesskey="2"
-					title="">인사 관리</a></li>
-				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
-				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="#">회계 관리</a></li>
-			</ul>
+				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
+				<ul id="mainmenu">
 		</div>
 	</div>
-	<div id = "side_menu">
+	<div id="side_menu">
 		<ul id="menuList">
 			<li id="showMenu1">인사 관리
 				<ul id="smallMenu1" style="display: none;">
@@ -79,7 +73,7 @@ ul {
 
 			<li id="showMenu2">근태 관리
 				<ul id="smallMenu2" style="display: none;">
-					<li><a href="/erp/hr/receitpholiday">휴가 접수</a></li>
+					<li><a href="/erp/hr/receiptholiday">휴가 접수</a></li>
 					<li><a href="/erp/hr/attendance">사원 출결 관리</a></li>
 					<li><a href="/erp/hr/employeestatus">근무 조회</a></li>
 					<li><a href="/erp/hr/retiremm">휴/퇴직 관리</a></li>
@@ -105,8 +99,8 @@ ul {
 </tr>
 </table> 본 화면 </div>
 </body>
+	<script src=/erp/js/menu.js></script> <!-- 메뉴Ajax로 출력 -->
 <script>
-
 $("#showMenu1").hover(function() {
 	$("#smallMenu1").attr("style", "display:inline-block");
 }, function() {

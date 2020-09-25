@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Document</title>
+	<script src=/erp/js/menu.js></script> <!-- 메뉴Ajax로 출력 -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
@@ -55,6 +56,7 @@ ul {
 <%
     request.setCharacterEncoding("UTF-8");
 %>
+	
 	<div id="header">
 		<div id="logo">
 			<h1>
@@ -63,14 +65,8 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내 정보</a></li>
-				<li class="current_page_item"><a href="/erp/hr/hr" accesskey="2"
-					title="">인사 관리</a></li>
-				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
-				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="#">회계 관리</a></li>
-			</ul>
+				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
+				<ul id="mainmenu">
 		</div>
 	</div>
 	<div id="side_menu">

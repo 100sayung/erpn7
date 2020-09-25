@@ -16,6 +16,8 @@ public interface IMemberDao {
 	String bringCCode(Member mb);
 
 	ArrayList<Member> getHRCard(String m_ccode);
+	
+	
 	@Select("SELECT * FROM MEMBER WHERE M_ID = #{id}")
 	Member getMemberDetail(String id);
 
@@ -37,4 +39,5 @@ public interface IMemberDao {
 	Member findPassword(@Param("userEmail") String userEmail,@Param("userId") String userId);
 	@Select("UPDATE MEMBER SET M_PW = #{userPassword} WHERE M_ID = #{userId}")
 	void modifyPassword(@Param("userPassword")String userPassword, @Param("userId")String userId);
+	
 }

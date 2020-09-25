@@ -67,14 +67,8 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내 정보</a></li>
-				<li class="current_page_item"><a href="/erp/hr/hr" accesskey="2"
-					title="">인사 관리</a></li>
-				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
-				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="Account/acerp">회계 관리</a></li>
-			</ul>
+				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
+				<ul id="mainmenu">
 		</div>
 	</div>
 	<div id="side_menu">
@@ -98,7 +92,7 @@ ul {
 				<ul id="smallMenu3" style="display: none;">
 					<li><a href="/erp/hr/deptpay">부서/직급별 급여</a></li>
 					<li><a href="/erp/hr/deduct">공제사항 관리</a></li>
-					<li><a href="">급여 관리</a></li>
+					<li><a href="/erp/hr/searchpaymm">급여 관리</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -123,6 +117,7 @@ ul {
     <div id="at"></div>
 	</div>
 
+	<script src=/erp/js/menu.js></script> <!-- 메뉴Ajax로 출력 -->
 	<script>
 	function checkMyAt(i){
 		$.ajax({
@@ -133,14 +128,18 @@ ul {
 			success : function(data){
 				console.log(data);
 				let str = "<table>";
-				let type = "";
-				for(let i = 0; i<data.length ; i++){
-					if(data[i].ha_type=="1"){
-						type = "출근"
+    			for(let i = 0 ; i<data.length ; i++){
+					let type = "";
+       				let time = data[i].ha_time.substr(16, 8);
+    				if(data[i].ha_type=="1"){
+    					type += "<font style='color:blue'>"
+						type+= " 출근</font>"
 					}else{
-						type = "퇴근"
+						type += "<font style='color:red'>"
+						type+= " 퇴근</font>"
 					}
-					str += "<tr><td>"+data[i].m_name+"</td><td>" + data[i].ha_time + "</td><td>" + type + "</td></tr>";
+    				console.log(date);
+					str += "<tr><td>"+data[i].m_name+"</td><td>" + time + "</td><td>" + type + "</td></tr>";
 				}
 				str += "</table>";
 				$("#at").html(str);

@@ -108,8 +108,10 @@ margin-left: 200px;
 <br><br><br><br> 
 메인 메뉴 통일해야함 이름이 다름
 <br>
-ERP창 내부에서도 메뉴 클릭 되게 만들어야함
+아이디가 'manager'가 아니여도 권한이 2면 매니저모드가 활성화 되어야함!!!
+ADMIN관리 페이지도 마찬가지 권한이 3일때만!
 <br>
+
 	<div id="description">
 		<center>
 		<div class="icons" id="personManagement">

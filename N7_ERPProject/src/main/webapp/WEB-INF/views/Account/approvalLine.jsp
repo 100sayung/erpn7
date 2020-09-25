@@ -150,9 +150,7 @@ function sendChildValue(){
 		 datatype:'json',
 		 success:function(data){
 			 console.log(data);
-			 
 				 opener.setChildValue(data);
-
 				 window.close();
 		 },
 		 error:function(error){

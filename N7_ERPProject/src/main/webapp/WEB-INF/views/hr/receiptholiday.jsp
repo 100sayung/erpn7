@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -6,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Document</title>
+	<script src=/erp/js/menu.js></script> <!-- 메뉴Ajax로 출력 -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
@@ -41,27 +44,40 @@ a {
 #description {
 	float: left;
 	height: 100%;
-<<<<<<< HEAD
-<<<<<<< HEAD
 }
 
-table{
+table {
 	text-align: center;
 }
-table, th, td{
-	border-bottom : 1px solid balck;
-	border-top : 1px solid black;
+
+table, th, td {
+	border-bottom: 1px solid balck;
+	border-top: 1px solid black;
 	border-collapse: collapse;
 }
-#calendar td{
-	width:30px;
-}
-=======
-=======
->>>>>>> origin/JSJ
-	width: 800px;
+
+#calendar td {
+	width: 30px;
 }
 
+width
+
+
+
+
+:
+
+
+ 
+
+
+800px
+
+
+
+
+;
+}
 table, td, th {
 	border: 1px solid black;
 	border-collapse: collapse;
@@ -71,10 +87,6 @@ td {
 	width: 30px
 }
 
-<<<<<<< HEAD
->>>>>>> origin/yyyyyyyyyyyy
-=======
->>>>>>> origin/JSJ
 ul {
 	list-style: none;
 }
@@ -89,15 +101,8 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내
-						정보</a></li>
-				<li class="current_page_item"><a href="/erp/hr/hr"
-					accesskey="2" title="">인사 관리</a></li>
-				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
-				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="#">회계 관리</a></li>
-			</ul>
+				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
+				<ul id="mainmenu">
 		</div>
 	</div>
 	<div id="side_menu">
@@ -121,51 +126,29 @@ ul {
 				<ul id="smallMenu3" style="display: none;">
 					<li><a href="/erp/hr/deptpay">부서/직급별 급여</a></li>
 					<li><a href="/erp/hr/deduct">공제사항 관리</a></li>
-					<li><a href="">급여 관리</a></li>
+					<li><a href="/erp/hr/searchpaymm">급여 관리</a></li>
 				</ul>
 			</li>
 		</ul>
 	</div>
 	<div id="description">
-		사원들 휴가 등록된거 보는 화면임~!
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-		<table align="center">
+		<table align="center" id="calendar">
 			<tr>
-				<td style="width : 100px;"><font color="#B3B6B3"><label
+				<td style="width: 100px;"><font color="#B3B6B3"><label
 						onclick="beforem()" id="before"></label></font></td>
-				<td style="width : 150px; font-size: 15px;" align="center" id="yearmonth" style="font-size: 15px;"></td>
-				<td style="width : 100px;"><font color="#B3B6B3"><label
+				<td style="width: 150px; font-size: 15px;" align="center"
+					id="yearmonth" style="font-size: 15px;"></td>
+				<td style="width: 100px;"><font color="#B3B6B3"><label
 						onclick="nextm()" id="next"></label></font></td>
 			</tr>
 		</table>
-		<table align="center" id="calendar">
-		</table>
-=======
-=======
->>>>>>> origin/JSJ
-		<table align="center" id="calendar">
-			<tr>
-				<td><font size=1%; color="#B3B6B3"><label
-						onclick="beforem()" id="before"></label></font></td>
-				<td colspan="5" align="center" id="yearmonth"></td>
-				<td><font size=1%; color="#B3B6B3"><label
-						onclick="nextm()" id="next"></label></font></td>
-			</tr>
-		</table>
-<<<<<<< HEAD
->>>>>>> origin/yyyyyyyyyyyy
-=======
->>>>>>> origin/JSJ
-
 		<br>
 		<div id="container"></div>
 
 	</div>
 	<script>
 		var str = "";
-		$(document).ready(function() {
+			$(document).ready(function() {
 		})
 
 		//이 아래로 달력
@@ -209,11 +192,10 @@ ul {
 				next.innerHTML = (today.getMonth() + 2) + "월";
 			}
 
-	        // 남은 테이블 줄 삭제
-	        while (tbcal.rows.length > 1) 
-	        {
-	            tbcal.deleteRow(tbcal.rows.length - 1);
-	        }
+			// 남은 테이블 줄 삭제
+			while (tbcal.rows.length > 1) {
+				tbcal.deleteRow(tbcal.rows.length - 1);
+			}
 
 			var row = null;
 			row = tbcal.insertRow();
@@ -287,9 +269,9 @@ ul {
 							} else if (endday == date) {
 								cell.innerHTML = "->";
 							} else if (startday < date && date < endday) {
-								if(j!=cnt){
+								if (j != cnt) {
 									cell.innerHTML = "--";
-								}else{
+								} else {
 									cell.innerHTML = data[k].m_name;
 								}
 							} else if (j == cnt) {
@@ -298,13 +280,7 @@ ul {
 								cell.innerHTML = "";
 							}
 						}
-<<<<<<< HEAD
-<<<<<<< HEAD
 						designThis(cell);
-=======
->>>>>>> origin/yyyyyyyyyyyy
-=======
->>>>>>> origin/JSJ
 						row = calendar.insertRow();
 					}
 					str = data[0].hap_type;
@@ -313,25 +289,13 @@ ul {
 					console.log(err);
 				}
 			});
-<<<<<<< HEAD
-<<<<<<< HEAD
-			
 		}
 
-		function designThis(cell){
+		function designThis(cell) {
 			console.log(cell);
 			cell.style.width = "100px";
 		}
 
-
-=======
-		}
-
->>>>>>> origin/yyyyyyyyyyyy
-=======
-		}
-
->>>>>>> origin/JSJ
 		$("#showMenu1").hover(function() {
 			$("#smallMenu1").attr("style", "display:inline-block");
 		}, function() {

@@ -35,6 +35,7 @@ import com.n7.erp.bean.entity.MailHandler;
 import com.n7.erp.dao.IHrDao;
 import com.n7.erp.dao.IMemberDao;
 import com.n7.erp.userClass.FileManager;
+import com.n7.erp.userClass.PagingVO;
 
 @Repository
 @Service
@@ -175,4 +176,5 @@ public ModelAndView moveMyInfo(HttpSession session) {
 		mDao.modifyPassword(userPassword,userId);
 		return ResponseEntity.ok(new Gson().toJson("비밀번호 변경에 성공하였습니다."));
 	}
+
 }

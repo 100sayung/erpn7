@@ -2303,7 +2303,7 @@ org.eclipse.jface.text.BadLocationException: null
 2020-09-19 13:25:09,537 [AetherRepositoryConnector-repo.maven.apache.org-1-2] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/javax/activation/activation/1.1/activation-1.1.jar
 2020-09-19 13:25:10,101 [AetherRepositoryConnector-repo.maven.apache.org-1-3] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/javax/mail/mail/1.4/mail-1.4.jar
 2020-09-19 13:25:14,961 [Worker-46: Building] ERROR o.e.m.c.i.i.nexus.NexusIndexManager - Unable to add com/n7/erp/1.0.0-BUILD-SNAPSHOT/erp-1.0.0-BUILD-SNAPSHOT.pom
-java.io.FileNotFoundException: D:\project\erpn7\.metadata\.plugins\org.eclipse.m2e.core\nexus\830bc118332e77292949ed1e6d2fabe0\segments_j (ÁöÁ¤µÈ ÆÄÀÏÀ» Ã£À» ¼ö ¾ø½À´Ï´Ù)
+java.io.FileNotFoundException: D:\project\erpn7\.metadata\.plugins\org.eclipse.m2e.core\nexus\830bc118332e77292949ed1e6d2fabe0\segments_j (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½)
 	at java.io.RandomAccessFile.open0(Native Method)
 	at java.io.RandomAccessFile.open(Unknown Source)
 	at java.io.RandomAccessFile.<init>(Unknown Source)

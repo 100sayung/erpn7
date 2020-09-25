@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import com.n7.erp.bean.Company;
@@ -25,5 +26,10 @@ public interface menuDao {
 	List<Company> getCompanyInfo(String cCode);
 
 	boolean companyUpdate(Company cp);
+
+	
+	//내정보메뉴출력용 
+	@Select("SELECT COUNT(*) FROM ERP_FUNCTION WHERE F_CCODE = #{cCode} AND F_FUNCTIONS = '인사관리'")
+	boolean hasHrMenu(String string);
 
 }
