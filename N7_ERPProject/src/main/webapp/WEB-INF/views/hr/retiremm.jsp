@@ -90,9 +90,9 @@ ul {
 			</li>
 		</ul>
 	</div>
-
 	<div id="description">
-		<input type="text" id="nameSearch"> <button onclick="searchFromName()" class="infobtn">검색</button> <br>
+	<div class="divcss">사원 휴 - 퇴직 관리</div>
+		<input type="text" id="nameSearch"> <button onclick="searchFromName()" class="infobtn" id="nameSearching">검색</button>
 		<a href="javascript:CheckRetired(0)"><button class='infobtn'>재직중0</button></a> 
 		<a href="javascript:CheckRetired(1)"><button class='infobtn'>휴직중1</button></a> 
 		<a href="javascript:CheckRetired(2)"><button class='infobtn'>퇴사2</button></a> <br>
@@ -115,13 +115,13 @@ ul {
 			data : {status : status},
 			success : function(data){
 				let str = "";
-				str += "<table>";
+				str += "<table style='border:1px solid black;'>";
 				console.log(data);
 				for(let i = 0 ; i<data.length ; i++){
 					str += "<tr>"
-					str += "<td><input type='hidden' name='hc_hrcode' value= '"+data[i].hc_hrcode+"'>"+data[i].m_name +"</td>";
-					str += "<td><input type='text' name ='hc_dept' value = '" + data[i].hc_dept + "' readonly></td>";
-					str += "<td><input type='text' name='hc_position' value = '" + data[i].hc_position + "' readonly></td>";
+					str += "<td><input type='hidden' class='border_delete_btn' name='hc_hrcode' value= '"+data[i].hc_hrcode+"'>"+data[i].m_name +"</td>";
+					str += "<td><input type='text' class='border_delete_btn' name ='hc_dept' value = '" + data[i].hc_dept + "' readonly></td>";
+					str += "<td><input type='text' class='border_delete_btn' name='hc_position' value = '" + data[i].hc_position + "' readonly></td>";
 					str+="<td><select name='hc_work'>";
 					if(status == 1){
 						str+="<option value = '1' selected = 'selected'> 휴직 </option>";
@@ -193,8 +193,12 @@ ul {
 	}
 
 
-
-
+	// 09-24 change    append   id=nameSearching
+	$("#nameSearch").keyup(function(event){
+		if(event.keyCode==13){
+			$("#nameSearching").click();
+		}
+	});
 
 
 

@@ -108,6 +108,7 @@ ul {
 				<td><input type="text" name="HDP_dept" id="dept"></td>
 			</tr>
 		</table>
+		${failure}
 	</form>
 <!-- 	<button type="button" id="deptbutton">+부서등록추가</button> -->
 	</div>

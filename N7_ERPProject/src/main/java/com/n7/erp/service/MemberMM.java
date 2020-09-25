@@ -105,7 +105,7 @@ public class MemberMM {
 public String getSearchFromId(String m_id) {
 	ArrayList<Member> mlist = new ArrayList<Member>();
 	if (m_id.equals("")) {
-		System.out.println("ã„´");
+		System.out.println("¤¤");
 		mlist = mDao.getAllMember();
 	} else {
 		m_id = "%" + m_id + "%";
@@ -134,7 +134,7 @@ public void forceWithDrawal(List<String> slist) {
 
 public ModelAndView moveMyInfo(HttpSession session) {
 	if(!hDao.haveHrCode(session.getAttribute("id").toString())) {
-		mav.addObject("msg", "ìš°ì„  ì¸ì‚¬ì¹´ë“œ ë“±ë¡ì„ ìš”ì²­í•´ì£¼ì„¸ìš”.");
+		mav.addObject("msg", "¿ì¼± ÀÎ»çÄ«µå µî·ÏÀ» ¿äÃ»ÇØÁÖ¼¼¿ä.");
 	}
 	mav.setViewName("myInfo/myInfo");
 	return mav;
@@ -151,13 +151,13 @@ public ModelAndView moveMyInfo(HttpSession session) {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
 			messageHelper.setFrom("mykyj2000@gmail.com");
 			messageHelper.setTo(userEmail);
-			messageHelper.setSubject("N7 ERP ì¸ì¦ë²ˆí˜¸ì…ë‹ˆë‹¤.");
-			messageHelper.setText("ì¸ì¦ë²ˆí˜¸ëŠ” " + authentictionNum + " ì…ë‹ˆë‹¤");
+			messageHelper.setSubject("N7 ERP ÀÎÁõ¹øÈ£ÀÔ´Ï´Ù.");
+			messageHelper.setText("ÀÎÁõ¹øÈ£´Â " + authentictionNum + " ÀÔ´Ï´Ù");
 			mailSender.send(mimeMessage);
-			return ResponseEntity.ok(new Gson().toJson("ì¸ì¦ë²ˆí˜¸ì „ì†¡ ì„±ê³µ"));
+			return ResponseEntity.ok(new Gson().toJson("ÀÎÁõ¹øÈ£Àü¼Û ¼º°ø"));
 		} catch (MessagingException e) {
 			e.printStackTrace();
-			return ResponseEntity.ok(new Gson().toJson("ì¸ì¦ë²ˆí˜¸ì „ì†¡ ì‹¤íŒ¨"));
+			return ResponseEntity.ok(new Gson().toJson("ÀÎÁõ¹øÈ£Àü¼Û ½ÇÆĞ"));
 		}
 	}
 
@@ -174,7 +174,7 @@ public ModelAndView moveMyInfo(HttpSession session) {
 
 	public ResponseEntity<String> modifyPassword(String userPassword, String userId) {
 		mDao.modifyPassword(userPassword,userId);
-		return ResponseEntity.ok(new Gson().toJson("ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ì— ì„±ê³µí•˜ì˜€ìŠµë‹ˆë‹¤."));
+		return ResponseEntity.ok(new Gson().toJson("ºñ¹Ğ¹øÈ£ º¯°æ¿¡ ¼º°øÇÏ¿´½À´Ï´Ù."));
 	}
 
 }

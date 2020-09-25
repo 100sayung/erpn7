@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="container"/>
+		<item key="selection" value="change"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="change"/>
+			<item value="home"/>
+			<item value="/home/"/>
+			<item value="5줄보"/>
+			<item value="changeG"/>
+			<item value="변경"/>
+			<item value="javascr"/>
+			<item value="javascrri"/>
 			<item value="container"/>
 			<item value="mm"/>
 			<item value="사내정보"/>
@@ -15,16 +23,10 @@
 			<item value="NAVER"/>
 			<item value="make"/>
 			<item value="媛믪씠 �굹�샂="/>
-			<item value="myInfo/myInfo"/>
-			<item value="myinfo/myinfo"/>
-			<item value="myinfo/"/>
-			<item value="newerp"/>
-			<item value="new"/>
-			<item value="join"/>
-			<item value="menu.js"/>
-			<item value="id=&quot;addr&quot;"/>
 		</list>
 		<list key="replacehistory">
+			<item value="admin"/>
+			<item value="/admin/"/>
 			<item value="myInfo/myInfo"/>
 			<item value="id=&apos;origin_&quot;+i+&quot;"/>
 			<item value="hr"/>

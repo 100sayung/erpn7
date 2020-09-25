@@ -94,11 +94,11 @@ ul {
 			</li>
 		</ul>
 	</div>
-
+<div>
+<div class="divcss">사원 출퇴근 상태 조회</div>
+	<input type="text" id="nameSearch" placeholder="이름으로 검색"> 
+	<button onclick="searchFromName()" class="infobtn" id="nameSearching" style="margin-right: 200px;">검색</button>
 	<button onclick="searchFromStatus(1)" class="infobtn">출근중</button><button onclick="searchFromStatus(0)" class="infobtn">퇴근중</button>
-	<br>
-	<input type="text" id="nameSearch"> <- 이름으로 검색
-	<button onclick="searchFromName()" class="infobtn">검색</button>
 	<div id ="container">
 
 	</div>
@@ -182,7 +182,13 @@ ul {
 		str +="</table>"
 		$("#container").html(str);
 	}
-
+	//09-24 change   append   id=nameSearching
+	$("#nameSearch").keyup(function(event){
+		if(event.keyCode==13){
+			$("#nameSearching").click();
+		}
+	});
+	///////
 		$("#showMenu1").hover(function() {
 			$("#smallMenu1").attr("style", "display:inline-block");
 		}, function() {

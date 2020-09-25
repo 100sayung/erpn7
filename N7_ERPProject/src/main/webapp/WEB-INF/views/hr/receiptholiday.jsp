@@ -13,6 +13,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
+<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css"
+	media="all" />
 <style>
 #header {
 	width: 100%;
@@ -131,9 +133,11 @@ ul {
 			</li>
 		</ul>
 	</div>
-	<div id="description">
-		<table align="center" id="calendar">
-			<tr>
+	<!-- 09-25 change  -->
+	<div id="description" align="center">
+		<div class="divcss">사원 휴가 관리</div><br>
+		<table align="center" >
+			<tr style="border-left: 1px solid black;border-right: 1px solid black;">
 				<td style="width: 100px;"><font color="#B3B6B3"><label
 						onclick="beforem()" id="before"></label></font></td>
 				<td style="width: 150px; font-size: 15px;" align="center"
@@ -142,6 +146,9 @@ ul {
 						onclick="nextm()" id="next"></label></font></td>
 			</tr>
 		</table>
+		<table align="center" id="calendar">
+		</table>
+	<!-- ////////// -->
 		<br>
 		<div id="container"></div>
 
@@ -193,7 +200,7 @@ ul {
 			}
 
 			// 남은 테이블 줄 삭제
-			while (tbcal.rows.length > 1) {
+			while (tbcal.rows.length > 0) {
 				tbcal.deleteRow(tbcal.rows.length - 1);
 			}
 

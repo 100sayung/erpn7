@@ -11,6 +11,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
+<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css"
+	media="all" />
 <style>
 #header {
 	width: 100%;
@@ -97,7 +99,8 @@ table{
 			</li>
 		</ul>
 	</div>
-	<h1>사원 급여명세서 상세정보 페이지</h1>
+	<div id="description">
+	<div class="divcss">사원 급여 상세정보</div>
 	<form action="searchpaymm" method="post" name="payroll">
 	<input type="hidden" value="${card.hc_ccode}" name="HP_CCODE">
 	<table id="payinputmodify" style="align-self: center; width: 800px;height: 100px;" >
@@ -122,7 +125,7 @@ table{
 	<div id="detailpage">
 	</div>
 	<input type="button" onclick="moving()" value="확인">
-	
+	</div>
 	<script>
 		function moving(){
 			location.href="/erp/hr/searchpaymm";
@@ -132,20 +135,18 @@ table{
 		$("#month").change(function(){
 			var month=$(this).val();
 			var hrcode=$("#hrcode").val();
-			console.log("month="+month);
-			console.log("hrcode="+hrcode);
 			$.ajax({
 				url:"/erp/hr/findmonth",
 				method:'POST',
 				data:{month : month ,hrcode : hrcode},
 				dataType:"json",
 				success:function(data){
-					console.log(data);
-					console.log(data.HP_PAY);
 					var provide=Number(data.HDP_PAY)+Number(data.HP_INCEN);
 					var ince=Number(data.HP_INSURANCE)+Number(data.HP_TAX);
 					var receive=provide-ince;
 					var str='';
+					console.log(data);
+					if(data!="1"){
 						str+="<table style='width:800px; height:300px; border:1px solid black;'><tr>"
 							+"<td>지급내역</td>"
 							+"<td>지급액</td>"
@@ -167,6 +168,9 @@ table{
 							+"<td>"+provide+"</td>"
 							+"<td>실지급액</td>"
 							+"<td>"+receive+"</td></tr></table>"
+					}else if(data=="1"){
+						str+="<h1>해당 월에는 받은 급액이 없습니다.</h1>";
+					}
 					$("#detailpage").html(str);
 				},
 				error:function(err){

@@ -2,7 +2,7 @@ package com.n7.erp.userClass;
 
 public class PagingVO {
 	
-	// í˜„ì¬í˜ì´ì§€, ì‹œì‘í˜ì´ì§€, ëí˜ì´ì§€, ê²Œì‹œê¸€ ì´ ê°¯ìˆ˜, í˜ì´ì§€ë‹¹ ê¸€ ê°¯ìˆ˜, ë§ˆì§€ë§‰í˜ì´ì§€, SQLì¿¼ë¦¬ì— ì“¸ start, end
+	// ÇöÀçÆäÀÌÁö, ½ÃÀÛÆäÀÌÁö, ³¡ÆäÀÌÁö, °Ô½Ã±Û ÃÑ °¹¼ö, ÆäÀÌÁö´ç ±Û °¹¼ö, ¸¶Áö¸·ÆäÀÌÁö, SQLÄõ¸®¿¡ ¾µ start, end
 	private int nowPage, startPage, endPage, total, cntPerPage, lastPage, start, end;
 	private int cntPage = 10;
 	
@@ -16,11 +16,11 @@ public class PagingVO {
 		calcStartEndPage(getNowPage(), cntPage);
 		calcStartEnd(getNowPage(), getCntPerPage());
 	}
-	// ì œì¼ ë§ˆì§€ë§‰ í˜ì´ì§€ ê³„ì‚°
+	// Á¦ÀÏ ¸¶Áö¸· ÆäÀÌÁö °è»ê
 	public void calcLastPage(int total, int cntPerPage) {
 		setLastPage((int) Math.ceil((double)total / (double)cntPerPage));
 	}
-	// ì‹œì‘, ë í˜ì´ì§€ ê³„ì‚°
+	// ½ÃÀÛ, ³¡ ÆäÀÌÁö °è»ê
 	public void calcStartEndPage(int nowPage, int cntPage) {
 		setEndPage(((int)Math.ceil((double)nowPage / (double)cntPage)) * cntPage);
 		if (getLastPage() < getEndPage()) {
@@ -31,7 +31,7 @@ public class PagingVO {
 			setStartPage(1);
 		}
 	}
-	// DB ì¿¼ë¦¬ì—ì„œ ì‚¬ìš©í•  start, endê°’ ê³„ì‚°
+	// DB Äõ¸®¿¡¼­ »ç¿ëÇÒ start, end°ª °è»ê
 	public void calcStartEnd(int nowPage, int cntPerPage) {
 		setEnd(nowPage * cntPerPage);
 		setStart(getEnd() - cntPerPage + 1);

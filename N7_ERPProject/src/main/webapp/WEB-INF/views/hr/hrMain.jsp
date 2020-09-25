@@ -10,8 +10,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
-<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css"
-	media="all" />
 <style>
 #header {
 	width: 100%;
@@ -60,8 +58,14 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
-				<ul id="mainmenu">
+				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내 정보</a></li>
+				<li class="current_page_item"><a href="/erp/hr/hr" accesskey="2"
+					title="">인사 관리</a></li>
+				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
+				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
+				<li><a href="/erp/stock/setcategory" accesskey="6" title="">자재 관리</a></li>
+				<li><a href="/erp/Account/acerp">회계 관리</a></li>
+			</ul>
 		</div>
 	</div>
 	<div id="side_menu">
@@ -90,75 +94,13 @@ ul {
 			</li>
 		</ul>
 	</div>
-	<div id="description" align="center"> ${msg }<br><br>
-	<div class="divcss">사원 인사카드 조회 및 미등록 카드 등록</div>
-	<div id="noHaveHrCard"></div>
-	<input type="text" id="nameSearch" placeholder="이름으로 검색">
-	<button onclick="searchFromName()" class='infobtn' id="nameSearching">검색</button>
-	
-	<div id="container">
-	${hrCard} 
-	</div>
-	
-	
-	
-	</div>
-	<script src=/erp/js/menu.js></script>
-	<script>
-	
-	function searchFromName(){
-		$name = $("#nameSearch").val();
-		console.log($name);
-		$.ajax({
-			url:"/erp/rest/hr/searchfromname",
-			data:{name:$name},
-			dataType:"text",
-			method:"get",
-			success : function(data){
-				console.log(data);
-				$("#container").html(data);
-			}, error : function(err){
-				console.log(err);
-			}
-		});
-	}
-	
-  	  $(function(){
-  	      var responseMessage = "<c:out value="${msg}" />";
-  	      if (responseMessage != ""){
-            alert(responseMessage)
-            let str = "";
-            str += "<a href='javascript:NoHaveHrCard()'>미 등록 인원 보기</a>";
-            $("#noHaveHrCard").html(str);
-   	     }
- 	  });
+	<div id="description"> 본 화면
 
-  	  function NoHaveHrCard(){
-  		  $.ajax({
-  			 url:"/erp/rest/hr/nohrcard",
-  			 dataType:"text",
-  			 method:"get",
-  			 success : function(data){
-  				 console.log(data);
-  				 $("#container").html(data);
-  			 }, error : function(err){
-  				 console.log(err.responseText);
-  			 }
-  		  });
-  	  }
-  	//09-25 change append <button> id=nameSearching
-  	$("#nameSearch").keyup(function(event){
-		if(event.keyCode==13){
-			$("#nameSearching").click();
-		}
-	});
-  	  
-  	  
-  	  
-  	  
-  	  
-  	  
-	
+	<br> 임시페이지
+	<a href="/erp/management/deptauth"> dept 권한 설정 </a>
+
+	</div>
+	<script>
 		$("#showMenu1").hover(function() {
 			$("#smallMenu1").attr("style", "display:inline-block");
 		}, function() {
@@ -174,15 +116,6 @@ ul {
 		}, function() {
 			$("#smallMenu3").attr("style", "display:none");
 		})
-
-
-		function modifyDetail(id){
-			window.open('/erp/hr/hrModifyDetail?id='+id, '사원 인사카드 등록', 'width=700, height=800')
-		}
-		window.onbeforeunload = function(){
-			window.reload();
-		}
-		
 
 	</script>
 </body>

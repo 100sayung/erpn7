@@ -17,7 +17,7 @@ public class AdminMM {
 	@Autowired AdminDao aDao;
 	
 
-	//í˜ì´ì§• ì²˜ë¦¬ ë©¤ë²„
+	//ÆäÀÌÂ¡ Ã³¸® ¸â¹ö
 	public int countMember() {
 		return aDao.countMember();
 	}

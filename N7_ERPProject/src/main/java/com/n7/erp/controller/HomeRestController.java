@@ -17,7 +17,7 @@ import com.n7.erp.userClass.PagingVO;
 import java.lang.reflect.Type;
 import java.util.*;
 
-@RestController // @ResponseBody ìƒëµê°€ëŠ¥
+@RestController // @ResponseBody »ı·«°¡´É
 @RequestMapping(value = "/rest")
 public class HomeRestController {
 
@@ -40,7 +40,7 @@ public class HomeRestController {
 	}
 
 	@PostMapping(value = "/home/forcewithdrawal")
-	public String forceWithDrawal(String jsonStr) { // ê°•í‡´ê¸°ëŠ¥
+	public String forceWithDrawal(String jsonStr) { // °­Åğ±â´É
 		System.out.println(jsonStr);
 		List<String> slist = new Gson().fromJson(jsonStr, new TypeToken<List<String>>() {
 		}.getType());

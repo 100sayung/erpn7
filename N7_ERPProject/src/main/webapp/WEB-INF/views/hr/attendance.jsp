@@ -10,6 +10,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
+<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css"
+	media="all" />
 <style>
 table
 {
@@ -47,13 +49,14 @@ a {
 #description {
 	float: left;
 	height: 100%;
-	width: 800px;
+	width: 1060px;
 }
 
 ul {
 	list-style: none;
 }
 .attendance{
+	
 	border: 1px solid black;
 }
 </style>
@@ -83,7 +86,7 @@ ul {
 			<li id="showMenu2">근태 관리
 				<ul id="smallMenu2" style="display: none;">
 					<li><a href="/erp/hr/receiptholiday">휴가 접수</a></li>
-					<li><a href="/erp/hr/attendance">사원 출결 관리</a></li>
+					<li><a href="/erp/hr/attendance">사원 출결 조회</a></li>
 					<li><a href="/erp/hr/employeestatus">근무 조회</a></li>
 					<li><a href="/erp/hr/retiremm">휴/퇴직 관리</a></li>
 				</ul>
@@ -98,7 +101,9 @@ ul {
 		</ul>
 	</div>
 	<div id="description">
-    <table align="center" id="calendar">
+	<div class="divcss">사원 출결 조회</div>
+								<!-- 09-24 style change -->
+    <table align="center" id="calendar" style="width: 500px;height: 400px;float: left; margin: 0px 20px;">
         <tr>
             <td><font size=1%; color="#B3B6B3"><label onclick="beforem()" id="before" ></label></font></td>
             <td colspan="5" align="center" id="yearmonth"></td>
@@ -127,7 +132,8 @@ ul {
 			data:{day : i, yearmonth : $("#yearmonth").html()},
 			success : function(data){
 				console.log(data);
-				let str = "<table>";
+				//09-24 table change
+				let str = "<div style='height:400px;overflow-x:hidden;float:right;position:static;'><table style='width:500px;overflow-y:scroll;'>";
     			for(let i = 0 ; i<data.length ; i++){
 					let type = "";
        				let time = data[i].ha_time.substr(16, 8);
@@ -139,9 +145,9 @@ ul {
 						type+= " 퇴근</font>"
 					}
     				console.log(date);
-					str += "<tr><td>"+data[i].m_name+"</td><td>" + time + "</td><td>" + type + "</td></tr>";
+					str += "<tr style='width:500px; height:50px;'><td>"+data[i].m_name+"</td><td>" + time + "</td><td>" + type + "</td></tr>";
 				}
-				str += "</table>";
+				str += "</table></div>";
 				$("#at").html(str);
 			}, error : function(err){
 				console.log(err);

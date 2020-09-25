@@ -535,14 +535,12 @@ public class HrMM {
 		if (hDao.haveHrCode(session.getAttribute("id").toString())) {
 			mav.setViewName(address);
 		} else {
-			mav.setViewName("redirect:/myInfo/myInfo");
+			mav.setViewName("redirect:/myinfo/myinfo");
 		}
 		return mav;
 	}
 
-	//!!
-	//여기 HrCode없을때 에러뜸. 수정해야함
-	//!!
+	// �궡 湲됱뿬 紐낆꽭�꽌 �씠�룞
 	public ModelAndView moveMyPayCheck(HttpSession session) {
 		String hrCode = session.getAttribute("hrCode").toString();
 		HR_Card check = hDao.selectcheckpay(hrCode);
@@ -578,8 +576,12 @@ public class HrMM {
 		hMap.put("cCode", session.getAttribute("cCode").toString());
 		hMap.put("docunum", docunum);
 		ApplyHoliday apholi = hDao.getDetailHoliday(hMap);
-		apholi.setHap_fromapprover(hDao.getFromApprover(apholi.getHap_fromapprover()));
-		apholi.setHap_toapprover(hDao.getToApprover(apholi.getHap_toapprover()));
+		//09-24 change
+		String fromapprover=hDao.getFromApprover(apholi.getHap_fromapprover());
+		String toapprover=hDao.getToApprover(apholi.getHap_toapprover());
+		mav.addObject("fromapprover", fromapprover);
+		mav.addObject("toapprover", toapprover);
+		//
 		mav.addObject("apholi", apholi);
 		mav.addObject("hrCode", hrCode);
 		mav.setViewName("/hr/holidayDetail");

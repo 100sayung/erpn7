@@ -10,6 +10,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
+<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css" media="all" />
 <style>
 #header {
 	width: 100%;
@@ -89,7 +90,7 @@ ul {
 		</ul>
 	</div>
 	<div id="description">
-<h1>공제사항 관리 페이지</h1>
+<div class="divcss">공제 금액 관리</div>
 <table id="deductiontable">
 <tr align="center">
 	<td width="100px">항목</td>

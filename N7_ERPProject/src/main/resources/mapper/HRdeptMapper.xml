@@ -51,4 +51,10 @@
 		HP_TAX=#{HP_TAX},HP_INCEN=#{HP_INCEN},HP_INSURANCE=#{HP_INSURANCE},HP_REALMONEY=#{HP_REALMONEY}
 		WHERE HP_PAYDATE=#{HP_PAYDATE} AND HP_HRCODE=#{HP_HRCODE}
 	</update>
+	<select id="checkingidname" parameterType="String" resultType="Viewpay">
+		SELECT * FROM HR_CD_D 
+		WHERE HC_ID LIKE '%'||#{checkpayid}||'%' 
+		OR M_NAME LIKE '%'||#{checkpayid}||'%' 
+		OR HC_ID LIKE '%'||#{checkpayid}||'%' AND M_NAME LIKE '%'||#{checkpayid}||'%'
+	</select>
 </mapper>

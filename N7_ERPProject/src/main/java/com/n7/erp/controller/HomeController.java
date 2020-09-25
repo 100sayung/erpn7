@@ -24,7 +24,7 @@ import com.n7.erp.service.ConsultingBoardMM;
 import com.n7.erp.service.MemberMM;
 import com.n7.erp.userClass.PagingVO;
 
-//ì „ë¶€ ì´ë™ê´€ë ¨
+//ÀüºÎ ÀÌµ¿°ü·Ã
 @Controller
 public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -131,7 +131,7 @@ public class HomeController {
 
 	@PostMapping(value = "/newerp")
 	public String registNewERP(Company com) {
-		cm.registNewERP(com); //ê¸°ë¡ì€ tempì—ë‹¤ í• ê±°ì„.
+		cm.registNewERP(com); //±â·ÏÀº temp¿¡´Ù ÇÒ°ÅÀÓ.
 		return "/home/home";
 	}
 
@@ -157,34 +157,34 @@ public class HomeController {
 		return "/hr/hrCard";
 	}
 
-	// ê²Œì‹œê¸€ í˜ì´ì§€ë¡œ ì´ë™
+	// °Ô½Ã±Û ÆäÀÌÁö·Î ÀÌµ¿
 	@RequestMapping(value = "/writeFrm", method = RequestMethod.GET)
 	public String write() {
 		return "writeFrm";
 	}
 
-	// ê²Œì‹œê¸€ ì‘ì„±
+	// °Ô½Ã±Û ÀÛ¼º
 	@RequestMapping(value = "/writeBoard", method = RequestMethod.POST)
 	public ModelAndView writeBoard(ConsultingBoard board) {
 		mav = cbm.writeBoard(board);
 		return mav;
 	}
 
-	// ê²Œì‹œê¸€ ìˆ˜ì •
+	// °Ô½Ã±Û ¼öÁ¤
 	@RequestMapping(value = "/boardmodify", method = RequestMethod.POST)
 	public ModelAndView boardmodify(ConsultingBoard board) {
 		mav = cbm.boardmodify(board);
 		return mav;
 	}
 
-	// ê²Œì‹œê¸€ ìˆ˜ì •í˜ì´ì§€ë¡œ ì´ë™
+	// °Ô½Ã±Û ¼öÁ¤ÆäÀÌÁö·Î ÀÌµ¿
 	@RequestMapping(value = "/boardmodifyajax", method = RequestMethod.POST)
 	public @ResponseBody String boardmodifyajax(Integer num) {
 		String result = cbm.boardmodifyajax(num);
 		return result;
 	}
 
-	// ê²Œì‹œê¸€ ì‚­ì œ
+	// °Ô½Ã±Û »èÁ¦
 	@RequestMapping(value = "/writelistdelete", method = RequestMethod.POST)
 	public ModelAndView writelistdelete(Integer num) {
 		mav = cbm.writelistdelete(num);
