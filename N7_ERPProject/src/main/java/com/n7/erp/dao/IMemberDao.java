@@ -39,4 +39,5 @@ public interface IMemberDao {
 	Member findPassword(@Param("userEmail") String userEmail,@Param("userId") String userId);
 	@Select("UPDATE MEMBER SET M_PW = #{userPassword} WHERE M_ID = #{userId}")
 	void modifyPassword(@Param("userPassword")String userPassword, @Param("userId")String userId);
+	
 }

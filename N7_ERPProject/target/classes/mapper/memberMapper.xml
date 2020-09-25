@@ -15,8 +15,8 @@
 		FROM MEMBER 
 			LEFT OUTER JOIN HR_CARD
 			ON M_ID = HC_ID 
-		WHERE
-			M_CCODE = #{cCode} AND HR_CARD.HC_WORK !='2'
+		WHERE M_CCODE = #{cCode} AND HR_CARD.HC_WORK !='2'
 	</select>
+	
 	
 </mapper>
