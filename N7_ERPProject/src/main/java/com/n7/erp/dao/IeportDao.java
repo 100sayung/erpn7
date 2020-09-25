@@ -53,10 +53,10 @@ public interface IeportDao {
 	@Select("SELECT COUNT(IE_QTY) FROM S_IEPORT WHERE IE_CPCODE = #{cCode}")
 	List<IePort> getStockList(String cCode);
 
-	@Update("UPDATE B_SHIPMENT SET BS_STATUS = '4' WHERE BS_DOCUNUM = {ip_ocode} AND IE_CPCODE = #{ip_cpcode}")
-	boolean updateBshipment(IePort ip);
+	@Update("UPDATE B_SHIPMENT SET BS_STATUS = '4' WHERE BS_DOCUNUM = #{ie_ocode} AND BS_CCODE = #{ie_cpcode}")
+	boolean updateBshipment(IePort ie);
 
-	@Select("INSERT INTO S_IEPORT VALUES(S_IEPORT_SEQ.NEXTVAL,#{ip_cpcode},DEFAULT,#{ie_hrcode},#{ie_etc},'2',{ie_clcode},#{ie_ocode},#{ie_itcode},-#{ie_qty},#{ie_price},0)")
-	boolean insertExport(IePort ip);
+	@Select("INSERT INTO S_IEPORT VALUES(S_IEPORT_SEQ.NEXTVAL,#{ie_cpcode},DEFAULT,#{ie_hrcode},#{ie_etc},'2',#{ie_clcode},#{ie_ocode},#{ie_itcode},-#{ie_qty},#{ie_price},0)")
+	boolean insertExport(IePort ie);
 	
 }

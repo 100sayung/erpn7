@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 @Data
-@Alias("ieport")
 @Accessors(chain=true)
+@Alias("ieport")
 public class IePort {
 
 	private String ie_seqnum;
