@@ -56,6 +56,22 @@
     </div>
     <center>
         <div id="container">
+        <br>
+        C_CODE     NOT NULL NVARCHAR2(20) <br>
+C_NAME     NOT NULL NVARCHAR2(30) <br>
+C_CEO      NOT NULL NVARCHAR2(10) <br>
+C_PHONENUM NOT NULL NVARCHAR2(11) <br>
+C_KIND     NOT NULL NVARCHAR2(20) <br>
+C_KIND2    NOT NULL NVARCHAR2(20) <br>
+C_ADDR     NOT NULL NVARCHAR2(50) <br>
+C_COMNUM            NVARCHAR2(25)<br>
+<br>
+이 정보들 입력하게 해야함.<br>
+<br>
+회사코드같은경우엔 자기가 입력할건지 (중복체크 필수), 우리가 자동으로생성해줄건지 결정<br>
+
+        <br><br>
+        
             <h1>erp 신청</h1>
             <form>
                 <table class="table table-condensed">

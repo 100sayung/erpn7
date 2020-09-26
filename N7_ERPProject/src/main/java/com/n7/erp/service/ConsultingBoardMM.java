@@ -25,17 +25,15 @@ public class ConsultingBoardMM {
 	ModelAndView mav = new ModelAndView();
 	//게시판 이동시 목록 출력
 	public ModelAndView moveBoardList() {
-		System.out.println("여기로 들어왔나?");
 		String view=null;
 		mav=new ModelAndView();
 		ArrayList<ConsultingBoard> bList=new ArrayList<ConsultingBoard>();
-		System.out.println("그르게 뭐가 문제일까");
 		bList=CBdao.moveBoardList();
 		System.out.println("게시판 목록 불러오기="+bList);
 		Integer pageNum=bList.size();
 		System.out.println("전체 글 갯수"+pageNum);
 		pageNum=(pageNum==null)?1:pageNum;
-		
+
 		if(pageNum<=0) {
 			System.out.println("잘못된 페이지 번호");
 		}
@@ -45,20 +43,18 @@ public class ConsultingBoardMM {
 			String json=gson.toJson(bList);
 			mav.addObject("bList", json);
 			mav.addObject("paging", getPaging(pageNum));
-			view="erpboard";
-		}else {
-			view="home";
+			view="/home/erpboard";
 		}
 		mav.setViewName(view);
 		return mav;
 	}
 	//페이징
 	private Object getPaging(Integer pageNum) {
-		int maxNum=CBdao.getBoardList();
+		Integer maxNum=CBdao.getBoardList();
 		System.out.println("maxnum="+maxNum);
 		int listCount=5;
 		int pageCount=2;
-		String boardName="erpboard";
+		String boardName="/erp/home/erpboard";
 		Paging paging=new Paging(pageNum,maxNum, listCount, pageCount, boardName);
 		System.out.println("======"+paging.makeHtmlPaging());
 		return paging.makeHtmlPaging();
@@ -67,9 +63,9 @@ public class ConsultingBoardMM {
 	public ModelAndView writeBoard(ConsultingBoard board) {
 		String view=null;
 		if(CBdao.writeBoard(board)) {
-			view="erpapply";
+			view="/home/erpboard";
 		}else {
-			view="writeFrm";
+			view="/home/erpboard";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -85,14 +81,14 @@ public class ConsultingBoardMM {
 			System.out.println("json타입으로 변경"+json);
 			return json;
 		}
-		
+
 		return null;
 	}
 	//게시글 수정
 	public ModelAndView boardmodify(ConsultingBoard board) {
 		String view=null;
 		if(CBdao.boardmodify(board)) {
-			view="redirect:erpboard";
+			view="redirect:/home/erpboard";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -102,9 +98,9 @@ public class ConsultingBoardMM {
 		String view=null;
 		if(num!=null) {
 			if(CBdao.writelistdelete(num)) {
-				view="erpboard";
+				view="/home/erpboard";
 			}else {
-				view="erpboard";
+				view="/home/erpboard";
 			}
 		}
 		mav.setViewName(view);

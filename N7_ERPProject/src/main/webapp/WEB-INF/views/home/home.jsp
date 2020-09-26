@@ -2,17 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!--
-Design by TEMPLATED
-http://templated.co
-Released for free under the Creative Commons Attribution License
 
-Name       : UpRight 
-Description: A two-column, fixed-width design with dark color scheme.
-Version    : 1.0
-Released   : 20130526
-
--->
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -22,7 +12,9 @@ Released   : 20130526
 <meta name="description" content="" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link href="/erp/css/default.css" rel="stylesheet" type="text/css"
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<!-- <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous" />
 		<link href="img/favicon.png" rel="icon" />
@@ -35,45 +27,121 @@ Released   : 20130526
 	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
 	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
 	crossorigin="anonymous" />
-	<!--[if IE 6]>
+	[if IE 6]>
 <link href="default_ie6.css" rel="stylesheet" type="text/css" />
-<![endif]-->
+<![endif] -->
 	<style>
-.button {
-	color: #ffffff;
-}
 
-#description div {
-	border-radius: 25px;
-	background-color: rgb(85, 82, 82);
-	width: 200px;
-	margin: 5px;
-	height: 150px;
-	float: left;
-	line-height: 150px;
+.carousel-caption{
+font-size: 30px;
 }
-
-#description div:hover {
-	background-color: #eeeeee;
-	border: 1px solid black;
-}
-
-#description {
-	margin-left: 340px;
-	margin-top: 200px;
-}
-
-#desc {
-margin-left: 200px;
-	font-size: 20px;
-	font-weight: bolder;
-}
-
 </style>
 </head>
 
 <body>
-	<div id="header" class="container">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">N7 COMPANY</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">admin관리</a></li>
+        <li class="dropdown">
+          <a href="/erp/introducecompany" class="dropdown-toggle">회사소개</a>
+ 
+        </li>
+            <li><a href="#">상담게시판</a></li>
+        <li><a href="#">ERP신청</a></li>
+
+          <c:choose>
+				<c:when test="${id==null}">
+				<li><a href="/erp/login">LOGIN</a></li>
+			<!-- 	<li><a href="/erp/join" accesskey="6" title="">JOIN</a></li> -->
+				</c:when>
+				<c:when test="${id!=null and id eq 'manager'}">
+				<li class="current_page_item"><a href="#" onClick='window.open("/erp/managermode/managermode", "ERP START", "width=1200, height=900, toolbar=no, menubar=no, resizable=yes"); return false;'>ERP관리하기</a></li>
+				<li><form action="logout" method="post"><button>LOGOUT</button></li>
+				</c:when>
+				<c:when test="${id!=null and id ne 'manager'}">
+				<li class="current_page_item"><a href="#" onClick='window.open("/erp/main", "ERP START", "width=1200, height=900, toolbar=no, menubar=no, resizable=yes"); return false;'>ERP시작</a></li>
+				<li><form action="logout" method="post"><button>LOGOUT</button></form></li>
+				</c:when>
+				</c:choose> 
+         </ul>
+    </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-collapse -->
+  </nav>
+  
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+
+        <div class="item active">
+          <img src="img/mainerp3.jpg" alt="Chania" width="70%" height="50%" style="margin-left: 15%"></img>
+          <!-- <div class="carousel-caption">
+            <h2>기술</h2>
+            <p>혁신적인 기술로 시장을 선도하는 기업</p>
+          </div> -->
+        </div>
+
+        <div class="item">
+          <img src="img/mainerp1.png" alt="Chania" width="70%" height="50%" style="margin-left: 15%"></img>
+          <!-- <div class="carousel-caption">
+            <h2>가동성</h2>
+            <p>ERP로 최고의 효율 창조하는 기업</p>
+          </div> -->
+        </div>
+        <div class="item">
+          <img src="img/mainerp4.jpg" alt="Chania" width="70%" height="50%" style="margin-left: 15%"></img>
+         <!--  <div class="carousel-caption">
+            <h2>커뮤니티</h2>
+            <p>항상 고객을 최우선으로 생각하는 기업</p>
+          </div> -->
+        </div>
+        <div class="item">
+          <img src="img/mainerp2.jpg" alt="Chania" width="60%" height="50%" style="margin-left: 20%"></img>
+          <!-- <div class="carousel-caption">
+            <h2>플랫폼</h2>
+            <p>개인기업부터 대기업까지 사용할 수있는 맞춤형 ERP </p>
+          </div> -->
+        </div>
+
+    
+
+      </div>
+
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+	<%-- <div id="header" class="container">
 		<div id="logo">
 			<h1>
 				<a href="/erp/">N7 ERP SYSTEM</a>
@@ -81,7 +149,8 @@ margin-left: 200px;
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="#" id="introduce" accesskey="2" title="">회사
+				<li><a href="/erp/adminpage"  title="">ADMIN관리</a></li>
+				<li><a href="/erp/introducecompany" accesskey="2" title="">회사
 						소개</a></li>
 				<li><a href="/erp/erpboard" accesskey="3" title="">신청 게시판</a></li>
 				<li><a href="/erp/erpapply" accesskey="4" title="">ERP 신청</a></li>
@@ -103,7 +172,6 @@ margin-left: 200px;
 			</ul>
 		</div>
 	</div>
-
 	<div id="description">
 		<center>
 		<div class="icons" id="personManagement">
@@ -124,23 +192,9 @@ margin-left: 200px;
 		</div>
 		</center>
 	</div>
-	<div id="desc"></div>
+	<div id="desc"></div> --%>
 	<script>
-	$("#introduce").click(function(){
-		$.ajax({
-			url:'introducecompany',
-			type:"get",
-			success:function(data){
-				
-				$("#description").hide();
-				$("#desc").html(data);
-			},
-			error:function(error){
-				console.log(error);
-			}
-		});
-		
-	});
+
 		var msg=location.search.substring(5, 6);
 		console.log(msg)
 		if(!msg){

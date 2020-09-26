@@ -7,7 +7,11 @@ Design by TEMPLATED
 http://templated.co
 Released for free under the Creative Commons Attribution License
 
+<<<<<<< HEAD
+Name       : UpRight
+=======
 Name       : UpRight 
+>>>>>>> origin/JSJ
 Description: A two-column, fixed-width design with dark color scheme.
 Version    : 1.0
 Released   : 20130526
@@ -85,6 +89,7 @@ margin-left: 200px;
 						소개</a></li>
 				<li><a href="/erp/erpboard" accesskey="3" title="">신청 게시판</a></li>
 				<li><a href="/erp/erpapply" accesskey="4" title="">ERP 신청</a></li>
+<<<<<<< HEAD
 				<c:choose>
 				<c:when test="${id==null}">
 				<li><a href="/erp/login" accesskey="5" title="">LOGIN</a></li>
@@ -99,7 +104,17 @@ margin-left: 200px;
 				<li class="current_page_item"><a href="#" onClick='window.open("/erp/main", "ERP START", "width=1200, height=900, toolbar=no, menubar=no, resizable=yes"); return false;'>ERP시작</a></li>
 				</c:when>
 				</c:choose>
-				
+
+=======
+				<c:if test="${id==null}">
+				<li><a href="/erp/login" accesskey="5" title="">LOGIN</a></li>
+				<li><a href="/erp/join" accesskey="6" title="">JOIN</a></li>
+				</c:if>
+				<c:if test="${id!=null}">
+             	<li><form action="logout" method="post"><button>LOGOUT</button></form></li>
+				<li class="current_page_item"><a href="#" onClick='window.open("/erp/main", "ERP START", "width=1200, height=900, toolbar=no, menubar=no, resizable=yes"); return false;'>ERP시작</a></li>
+				</c:if>
+>>>>>>> origin/JSJ
 			</ul>
 		</div>
 	</div>
@@ -124,14 +139,21 @@ margin-left: 200px;
 		</div>
 		</center>
 	</div>
+<<<<<<< HEAD
 	<div id="desc"></div>
+=======
+	<div id="desc" style="float: left;"></div>
+>>>>>>> origin/JSJ
 	<script>
 	$("#introduce").click(function(){
 		$.ajax({
 			url:'introducecompany',
 			type:"get",
 			success:function(data){
-				
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/JSJ
 				$("#description").hide();
 				$("#desc").html(data);
 			},
@@ -139,7 +161,11 @@ margin-left: 200px;
 				console.log(error);
 			}
 		});
+<<<<<<< HEAD
+
+=======
 		
+>>>>>>> origin/JSJ
 	});
 		var msg=location.search.substring(5, 6);
 		console.log(msg)
@@ -194,4 +220,8 @@ margin-left: 200px;
 	</script>
 </body>
 
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> origin/JSJ

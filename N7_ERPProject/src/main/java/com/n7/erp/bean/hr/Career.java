@@ -1,6 +1,5 @@
 package com.n7.erp.bean.hr;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.type.Alias;

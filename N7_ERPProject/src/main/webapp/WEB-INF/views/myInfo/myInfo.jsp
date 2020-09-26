@@ -60,24 +60,24 @@ ul {
 			</h1>
 		</div>
 		<div id="menu">
-			<ul id="mainmenu">
+				<ul id="mainmenu">
 				
-			</ul>
+				</ul>
 		</div>
 	</div>
 	<div id="side_menu">
 		<ul id="menuList">
 			<li><a href="/erp/myinfo/checkattendance">출/퇴근 등록</a></li>
-			<li><a href="/erp/myinfo/myinfo">내 정보 보기</li>
-			<li><a href="#">급여명세서 보기</li>
-			<li><a href="/erp/myinfo/myattendance">내 출결 보기</li>
-			<li><a href="/erp/myinfo/myholiday">내 휴가 보기</li>
+			<li><a href="/erp/myinfo/myinfo">내 정보 보기</a></li>
+			<li><a href="/erp/myinfo/myPaycheck">급여명세서 보기</a></li>
+			<li><a href="/erp/myinfo/myattendance">내 출결 보기</a></li>
+			<li><a href="/erp/myinfo/myholiday">내 휴가 보기</a></li>
 			<li><a href="/erp/myinfo/applyholiday">휴가신청</a></li>
 			<li><a href="/erp/myinfo/mydocument">나의 결재함</a></li>
 		</ul>
 	</div>
 <div id="description">
-
+<h1>CSS 테이블 만들기 정리하기</h1>
 <h1>인사카드 세부정보 / 수정</h1>
 <div id="member"></div>
 
@@ -106,6 +106,12 @@ ul {
 
 </div>
 	<script>
+$(function(){
+		var responseMessage = "<c:out value="${msg}" />";
+		if (responseMessage != ""){
+			alert(responseMessage)
+	 }
+});
 	$(document).ready(function(){
 		$.ajax({
 			url:'/erp/rest/managermode/getaddmenu',
@@ -114,37 +120,36 @@ ul {
 			success:function(data){
 				console.log(data);
 				var str="";
-				
+
 				for(var i in data.mList){
 					str+="<li><a id="+data.mList[i].f_functions+" onclick=menu('"+data.mList[i].f_functions+"')>"+data.mList[i].f_functions+"</a></li>";
 				}
-				
+
 				$("#mainmenu").html(str);
 			},
 			error:function(error){
 				console.log(error);
 			}
-			
+
 		});
-		
+
 	});
-	
+
 	function menu(menu){
 		console.log(menu);
-		
+
 		if(menu=="인사관리"){
-			$("#"+menu).attr("href","/erp/myInfo/myInfo");	
+			$("#"+menu).attr("href","/erp/main");
 			}else if(menu=="영업관리"){
-			$("#"+menu).attr("href","");	
+			$("#"+menu).attr("href","/erp/sales/main");
 			}else if(menu=="구매관리"){
-			$("#"+menu).attr("href","");	
+			$("#"+menu).attr("href","/erp/Purchase/erpmain");
 			}else if(menu=="재고관리"){
-			$("#"+menu).attr("href","");	
+			$("#"+menu).attr("href","/erp/stock/setcategory");
 			}else if(menu=="회계관리"){
-			$("#"+menu).attr("href","/erp/Account/acerp");	
+			$("#"+menu).attr("href","/erp/Account/acerp");
 			}
 	}
-	
 		var num;
 		$(document).ready(function(){
 			$.ajax({
@@ -154,7 +159,7 @@ ul {
 				success : function(data){
 					console.log(data);
 					let info = "";
-					//info += '<span style="height:200px;"><img src="/erp/upload/'+data.photo+'"></span>&nbsp;'
+					info += '<span style="height:200px;"><img src="/erp/upload/'+data.photo+'"></span>&nbsp;'
 					info += '<span style="height:200px;"><table style="width:500px"><tr class="info"><td id="m_name">'+data.name+'</td><td id="m_gender">'+data.m_gender+'</td></tr>';
 					info += '<tr class="info"><td id="m_phonenum">'+data.phonenum+'</td><td id="m_birth">'+data.birth+'</td></tr>';
 					info += '<tr style="height:80px;"><td id="m_address" colspan="2">'+data.address+'</td></tr></table></span>';
@@ -189,7 +194,7 @@ ul {
 		function replaceAll(str, searchStr, replaceStr) {
 		    return str.split(searchStr).join(replaceStr);
 		 }
-		 
+
 		function checkDateValue(val1, val2){
 			let date1 = Number(replaceAll(val1.value, "-", ""));
 			let date2 = Number(replaceAll(val2.value, "-", ""));
@@ -198,7 +203,7 @@ ul {
 				val2.value = "";
 			}
 		}
-		 
+
 		function addRecord(){
 			let str ="";
 			let cntAc = 0;
@@ -282,8 +287,8 @@ ul {
 					str += "<td><input type='date' name='hac_year' class='detailInfo'></td></tr>";
 					str += "</table>";
 					$("#hrDetailInfo").html(str); */
-				} 
-			}); 
+				}
+			});
 		}
 
 		function CertificationInfo(){
@@ -318,8 +323,8 @@ ul {
 					str += "<td><input type='date' name='hct_date' class='detailInfo' required pattern='\d{4}-\d{2}-\d{2}'></td></tr>";
 					str += "</table>";
 					$("#hrDetailInfo").html(str); */
-				} 
-			}); 
+				}
+			});
 		}
 		function CareerInfo(){
 			$("#form").attr("action", formURL + "/newcareer");
@@ -346,8 +351,8 @@ ul {
 					num=data.length;
 				},error : function(err){
 					console.log(err);
-				} 
-			}); 
+				}
+			});
 		}
 		function InCompanyInfo(){
 			$("#form").attr("action", formURL + "/newhrcard");
@@ -404,8 +409,8 @@ ul {
 							str += "<td><input type='text' placeholder='---' readonly></td>"
 							str += "<td><input type='text' placeholder='---' readonly></td></tr></table>";
 							$("#hrDetailInfo").html(str);
-						} 
-					}); 
+						}
+					});
 		}
 	</script>
 </body>

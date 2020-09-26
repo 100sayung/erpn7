@@ -9,7 +9,7 @@
 		UPDATE HR_DEPT SET HDP_PAY=#{pay1} WHERE HDP_NUM=#{dept1}
 	</update> -->
 	<select id="payselect" parameterType="hashMap" resultType="String">
-		SELECT HDP_PAY FROM HR_DEPT WHERE HDP_NUM=#{HDP_num} AND HDP_CCODE = #{cCode}
+		SELECT HDP_PAY FROM HR_DEPT WHERE HDP_NUM=#{dept} AND HDP_CCODE = #{cCode}
 	</select>
 	<select id="findDeduction" resultType="String" parameterType="hashMap">
 		SELECT HDD_AMOUNT FROM HR_DEDUCTION WHERE HDD_NAME=#{deduct} AND HDD_CCODE = #{cCode}
@@ -28,5 +28,33 @@
 			HR_DEPT.HDP_AUTH = #{authority} AND 
 			HR_CARD.HC_DEPT = #{myDept} AND
 			HR_CARD.HC_CCODE = #{cCode}
+	</select>
+	<select id="detailpay" parameterType="String"
+		resultType="HR_Card">
+		SELECT * FROM HR_CARD WHERE HC_ID=#{hc}
+	</select>
+	<select id="paysearch" parameterType="String"
+		resultType="ViewPay">
+		SELECT * FROM HR_CD_D WHERE HC_ID=#{hc}
+	</select>
+	<select id="findincentive" parameterType="String"
+		resultType="payroll">
+		SELECT HP_INCEN,HP_PAYDATE FROM HR_PAYROLL WHERE ROWNUM = 1 AND HP_HRCODE=#{HP_HRCODE}
+	</select>
+	<select id="findpay" parameterType="Payroll" resultType="String">
+		SELECT *
+		FROM HR_PAYROLL WHERE HP_HRCODE=#{HP_HRCODE} AND
+		HP_PAYDATE=#{HP_PAYDATE}
+	</select>
+	<update id="updatepay" parameterType="Payroll">
+		UPDATE HR_PAYROLL SET
+		HP_TAX=#{HP_TAX},HP_INCEN=#{HP_INCEN},HP_INSURANCE=#{HP_INSURANCE},HP_REALMONEY=#{HP_REALMONEY}
+		WHERE HP_PAYDATE=#{HP_PAYDATE} AND HP_HRCODE=#{HP_HRCODE}
+	</update>
+	<select id="checkingidname" parameterType="String" resultType="Viewpay">
+		SELECT * FROM HR_CD_D 
+		WHERE HC_ID LIKE '%'||#{checkpayid}||'%' 
+		OR M_NAME LIKE '%'||#{checkpayid}||'%' 
+		OR HC_ID LIKE '%'||#{checkpayid}||'%' AND M_NAME LIKE '%'||#{checkpayid}||'%'
 	</select>
 </mapper>

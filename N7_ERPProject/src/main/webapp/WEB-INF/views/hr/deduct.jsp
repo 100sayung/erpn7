@@ -58,8 +58,8 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="#" accesskey="4" title="">내 정보</a></li>
-				<li class="current_page_item"><a href="#" accesskey="2"
+				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내 정보</a></li>
+				<li class="current_page_item"><a href="/erp/hr/hr" accesskey="2"
 					title="">인사 관리</a></li>
 				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
 				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
@@ -79,17 +79,17 @@ ul {
 
 			<li id="showMenu2">근태 관리
 				<ul id="smallMenu2" style="display: none;">
-					<li><a href="">휴가 접수</a></li>
-					<li><a href="">사원 출결 관리</a></li>
-					<li><a href="">근무 조회</a></li>
-					<li><a href="">휴/퇴직 관리</a></li>
+					<li><a href="/erp/hr/receitpholiday">휴가 접수</a></li>
+					<li><a href="/erp/hr/attendance">사원 출결 관리</a></li>
+					<li><a href="/erp/hr/employeestatus">근무 조회</a></li>
+					<li><a href="/erp/hr/retiremm">휴/퇴직 관리</a></li>
 				</ul>
 			</li>
 			<li id="showMenu3">급여 관리
 				<ul id="smallMenu3" style="display: none;">
 					<li><a href="/erp/hr/deptpay">부서/직급별 급여</a></li>
 					<li><a href="/erp/hr/deduct">공제사항 관리</a></li>
-					<li><a href="">급여 관리</a></li>
+					<li><a href="/erp/hr/searchpaymm">급여 관리</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -106,6 +106,7 @@ ul {
 </table> 본 화면 </div>
 </body>
 <script>
+
 $("#showMenu1").hover(function() {
 	$("#smallMenu1").attr("style", "display:inline-block");
 }, function() {
@@ -125,7 +126,7 @@ $("#showMenu3").hover(function() {
 	$(function(){
 		var str='<tr align="center"><td width="150px">공제 명</td><td width="150px">현재 공제금액</td><td width="150px">수정 금액</td><td width="150px"></td></tr>';
 		var deduct=${deduct};
-		console.log(${deduct})
+		console.log(deduct);
 		for(var i=0;i<deduct.length;i++){
 			str+="<tr align='center'><td width='100px'>"+deduct[i].HDD_NAME+"</td>"
 				 +"<td id='123"+deduct[i].HDD_NAME+"' width='100px'>"+deduct[i].HDD_AMOUNT+"</td>"
@@ -134,9 +135,9 @@ $("#showMenu3").hover(function() {
 		}
 		$("#deductiontable").html(str);
 	});
-	
-	
-	
+
+
+
 	function modifydeduction(deduct){
 		console.log($("#123"+deduct));
 		var denum = $("#deduct_"+deduct).val();

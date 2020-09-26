@@ -45,14 +45,14 @@
         </div>
         <div id="menu">
             <ul id="mainmenu">
-              
+
             </ul>
         </div>
     </div>
     <div id="side_menu">
         <ul id="menuList">
             <li><a href="#" id="acountting">매츌/매입전표 작성</a></li>
-            <li><a href="">분개전표입력</a></li>
+            <li><a href="#" id="acWriting">분개전표입력</a></li>
         </ul>
     </div>
     <center>
@@ -70,34 +70,34 @@ $(document).ready(function(){
 		success:function(data){
 			console.log(data);
 			var str="";
-			
+
 			for(var i in data.mList){
 				str+="<li><a id="+data.mList[i].f_functions+" onclick=menu('"+data.mList[i].f_functions+"')>"+data.mList[i].f_functions+"</a></li>";
 			}
-			
+
 			$("#mainmenu").html(str);
 		},
 		error:function(error){
 			console.log(error);
 		}
-		
+
 	});
-	
+
 });
 
 function menu(menu){
 	console.log(menu);
-	
+
 	if(menu=="인사관리"){
-		$("#"+menu).attr("href","/erp/myInfo/myInfo");	
+		$("#"+menu).attr("href","/erp/myInfo/myInfo");
 		}else if(menu=="영업관리"){
-		$("#"+menu).attr("href","");	
+		$("#"+menu).attr("href","/erp/sales/main");
 		}else if(menu=="구매관리"){
-		$("#"+menu).attr("href","");	
+		$("#"+menu).attr("href","/erp/Purchase/erpmain");
 		}else if(menu=="재고관리"){
-		$("#"+menu).attr("href","");	
+		$("#"+menu).attr("href","/erp/stock/setcategory");
 		}else if(menu=="회계관리"){
-		$("#"+menu).attr("href","/erp/Account/acerp");	
+		$("#"+menu).attr("href","/erp/Account/acerp");
 		}
 }
 
@@ -105,6 +105,19 @@ function menu(menu){
 $("#acountting").click(function(){
 	$.ajax({
 		url:'/erp/Account/openTable',
+		type:'get',
+		success:function(data){
+			$("#description").html(data);
+		},
+		error:function(){
+
+		}
+	});
+
+});
+$("#acWriting").click(function(){
+	$.ajax({
+		url:'/erp/Account/acWritefrm',
 		type:'get',
 		success:function(data){
 			$("#description").html(data);

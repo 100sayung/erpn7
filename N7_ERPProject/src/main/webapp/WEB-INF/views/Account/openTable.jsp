@@ -7,7 +7,6 @@
 <title>Document</title>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 	<!-- <script src="/js/jquery.serializeObject.js"></script> -->
-	
 <style>
 #cal {
 	font-size: 20px;
@@ -68,7 +67,8 @@ float: left;
 		<span style="padding-left: 5px"><a href="#" onclick="saleinsert()"><button>매출/매입등록</button></a></span>
 		<span style="padding-left: 5px"><a href="#"
 			onclick="window.open('comPany','comlist','width=1350,height=500')"><button>거래처등록</button></a></span>
-		<span style="padding-left: 5px"><button id="getList">매출/매입조회</button></span>
+		<span style="padding-left: 5px"><button id="getshipment">출하조회</button></span>
+		<span style="padding-left: 5px"><button id="getList">매출/매입데이터조회</button></span>
 		<span style="padding-left: 5px"><button id="taxbill">세금계산서인쇄</button></span>
 		<span style="padding-left: 5px"><button id="saledetails">거래명세표인쇄</button></span>
 		<span style="padding-left: 5px"><button id="approval">결재요청하기</button></span>
@@ -87,7 +87,7 @@ float: left;
 		<button id="search2" type="button">검색</button>
 		매출<input onclick="getList('AS')" type='radio' name="sale" value='AS'>
 		매입<input onclick="getList('AP')" type='radio' name="sale" value='AP'>
-	
+
 		<!-- <form action="rest/saleinsert" method="post"> -->
 		<form id="saleInfo">
 		<div id="comInfo"
@@ -100,8 +100,8 @@ float: left;
 						<td>종류</td>
 						<td><select class="data" name="s_num">
 								<option value="">--</option>
-								<option value="S">매출</option>
-								<option value="P">매입</option>
+								<option value="AS">매출</option>
+								<option value="AP">매입</option>
 						</select></td>
 						<td>유형</td>
 						<td><select class="data" name="s_kind">
@@ -123,14 +123,14 @@ float: left;
 		</div>
 		<!-- </form> -->
 			<button id="detaile" type="button">상세정보</button>
-			 <span id='plusorminus'> 
-			<input type="number" id="qty" min="1" style="width: 64px;"> 
+			 <span id='plusorminus'>
+			<input type="number" id="qty" min="1" style="width: 64px;">
 			<button type="button" id="addList"> 행추가</button>
 			<button type="button" id="deleteCheck">삭제</button>
 			</span>
-			
+
 			<!-- <form id="saleInfodetaile"> -->
-			
+
 		<div id="ListTable" style="background-color: #ECEBEA;">
 			<table id="testTable"
 				summary="Code page support in different versions of MS Windows."
@@ -164,18 +164,32 @@ float: left;
 		</div>
 		</form>
  		<button type="button" onclick="saleInsertInfo()">등록</button>
-	
-        
- 		
+
+
+
 	<br>
 	<br>
-	
+
 </body>
 <script type="text/javascript">
+$("#getshipment").click(function(){
+	$.ajax({
+		url:'/erp/rest/Account/getshipment',
+		type:'get',
+		datatype:'json',
+		success:function(data){
+			console.log(data);
+		},
+		error:function(error){
+			console.log(error);
+		}
+	});
+	
+});
+
 $("#search2").click(function(){
 	var select = $("#select").val();
 	var choice = $("#choice").val();
-	
 	$.ajax({
 		url:"/erp/rest/Account/selectSearch",
 		type:"post",
@@ -195,7 +209,6 @@ $("#search2").click(function(){
 				str += "<td><input class='data2' type='text' name='s_employee' value="+data.sList[i].s_employee+"></td></tr>";
 			}
 			$("#testTable").html(str);
-				
 			}else{
 				alert("검색할 데이터가 없습니다");
 			}
@@ -203,9 +216,9 @@ $("#search2").click(function(){
 		error:function(error){
 			console.log(error);
 		}
-		
+
 	});
-	
+
 });
 
 
@@ -216,8 +229,13 @@ $("input[name='checknum']:checked").each(function() {
 				check = $(this).attr('value');
 				console.log(check);
                 if(check!=""){
-					window.open('/erp/Account/SaleDetaile?check=' + check,
-							'SaleDetaile', 'width=1400,height=700');
+                	if(check.indexOf("AS")){
+					window.open('/erp/Account/SaleDetaileAS?check=' + check,
+							'SaleDetaileAS', 'width=1400,height=700');
+                	}else{
+					window.open('/erp/Account/SaleDetaileAP?check=' + check,
+							'SaleDetaileAP', 'width=1400,height=700');
+                	}
 				}else{
                 	alert("체크한 항목이 없습니다");
                 }
@@ -239,9 +257,9 @@ function saleInsertInfo(){
     		  console.log(error);
     		  alert("데이터 입력실패");
     	  }
-    	  
+
        });
-       
+
 };
 
 
@@ -270,7 +288,6 @@ $("#approval").click(function(){
 								}
 							});
 						}
-	
 });
 
 $("#addList").click(function() {
@@ -291,7 +308,7 @@ $("#addList").click(function() {
 
 
  function saleinsert(){
-	//$("#comInfo").attr("display","inline-block");	
+	//$("#comInfo").attr("display","inline-block");
 	//$("#plusorminus").attr("display","inline-block");
 	$("#testTable").html("");
 	var str='';
@@ -304,7 +321,6 @@ $("#addList").click(function() {
 		str += "<td><input class='data' type='text' name='s_tax'/></td>"
 		str += "<td><input class='data' type='text' name='s_total' /></td>"
 		str += "<td><input class='data' name='s_memo' /></td></tr></tbody>"
-	
 	$("#testTable").html(str);
 }
 
@@ -314,20 +330,19 @@ $("#addList").click(function() {
 							check = $(this).attr('value');
 							console.log(check);
                             if(check!=""){
-							if (check.indexOf("S")) {
+							if (check.indexOf("AS")) {
 								window.open('/erp/Account/taxbill?check=' + check,
-										'taxbillS', 'width=1400,height=700');
+										'taxbillAS', 'width=1400,height=700');
 
 							} else {
 								window.open('/erp/Account/taxbill?check=' + check,
-										'taxbillP', 'width=1400,height=700');
+										'taxbillAP', 'width=1400,height=700');
 							}
                             }else{
                             	alert("체크한 항목이 없습니다");
                             }
 						});
 			});
-	
 	$("#saledetails").click(function() {
 				var check = '';
 		$("input[name='checknum']:checked").each(function() {

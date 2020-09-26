@@ -63,8 +63,7 @@ tr, td {
 	}
 
 .but{
-margin-top: 110px;
-margin-bottom: 10px;
+margin-top: 200px;
 }
 .title{
 height:10px;
@@ -111,8 +110,8 @@ height:10px;
 		<div id="main3"><br>
 		<button id="addapproval1" class="but">></button><br>
 		<button id="deleteCheck1"><</button><br><br><br><br><br>
-	<button id="addapproval2" class="but">></button><br>
-	<button id="deleteCheck2"><</button><br><br>
+	<!-- <button id="addapproval2" class="but">></button><br>
+	<button id="deleteCheck2"><</button><br><br> -->
 	
 		</div>
 		<div id="main4">
@@ -125,15 +124,13 @@ height:10px;
 					<tbody id="addAp1"></tbody>
 				</table>
 			</div>
-		
 			
 		</div>
 	</div><br>
-	<a  href="javascript:sendChildValue()"><button>결제라인 등록</button></a>
+	<a  href="javascript:sendChildValue()"><button>결재라인 등록</button></a>
 </body>
 <script>
 var count1=0;
-
 
 function sendChildValue(){
 	
@@ -181,7 +178,6 @@ $("#deleteCheck1").click(function() {
 		}
 	}
 });
-
 	var list = ${aList};
 	console.log(list);
 	var str = "";
@@ -243,6 +239,8 @@ $("#deleteCheck1").click(function() {
 			console.log(cnt);
 	}else if($("#addAp1").html()!="" && arr[0]==$("#addname10").val()){
 	      alert("이미 추가한 이름입니다.");
+	}else if(count1==1 && cnt==2){
+		alert("총 2명만 추가 할 수 있습니다.");
 	}else{
 			   $.ajax({
 					url : '/erp/rest/Account/addApproval',

@@ -44,15 +44,35 @@
             <h1><a href="#">N7 ERP SYSTEM</a></h1>
         </div>
         <div id="menu">
+<<<<<<< HEAD
             <ul id="mainmenu">
               
+=======
+            <ul>
+                <li  ><a href="#" accesskey="4" title="">내 정보</a></li>
+                <li><a href="#" accesskey="2" title="">인사 관리</a></li>
+                <li><a href="#" accesskey="3" title="">영업 관리</a></li>
+                <li><a href="#" accesskey="5" title="">구매 관리</a></li>
+                <li><a href="#" accesskey="6" title="">자재 관리</a></li>
+                <li class="current_page_item"><a href="#" accesskey="4" title="">회계 관리</a></li>
+>>>>>>> origin/JSJ
             </ul>
         </div>
     </div>
     <div id="side_menu">
         <ul id="menuList">
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            <li>내 정보</li>
+>>>>>>> origin/yyyyyyyyyyyy
             <li><a href="#" id="acountting">매츌/매입전표 작성</a></li>
             <li><a href="">분개전표입력</a></li>
+=======
+            <li>내 정보</li>
+            <li><a href="#" id="acountting">매츌/매입전표 작성</a></li>
+            <li><a href="">매출/매입전표 결재확인</a></li>
+>>>>>>> origin/JSJ
         </ul>
     </div>
     <center>
@@ -62,6 +82,7 @@
     </center>
 </body>
 <script>
+<<<<<<< HEAD
 $(document).ready(function(){
 	$.ajax({
 		url:'/erp/rest/managermode/getaddmenu',
@@ -102,6 +123,8 @@ function menu(menu){
 }
 
 
+=======
+>>>>>>> origin/JSJ
 $("#acountting").click(function(){
 	$.ajax({
 		url:'/erp/Account/openTable',

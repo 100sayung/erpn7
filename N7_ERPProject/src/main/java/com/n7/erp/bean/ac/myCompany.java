@@ -5,8 +5,8 @@ import org.apache.ibatis.type.Alias;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-@Alias("myCom")
 @Data
+@Alias("myCom")
 @Accessors(chain=true)
 public class myCompany {
 	private String c_code;

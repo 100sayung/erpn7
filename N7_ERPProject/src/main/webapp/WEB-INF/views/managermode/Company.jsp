@@ -72,22 +72,10 @@ text-align: center;
                        
                     </div>
                     </div>
-                  <!-- /. ROW  --> 
     </div>
-             <!-- /. PAGE INNER  -->
             </div>
-         <!-- /. PAGE WRAPPER  -->
         
-        
-    <div class="footer">
-      
-    
-            <div class="row">
-                <div class="col-lg-12">
-                    ©  2014 yourdomain.com | Design by: <a href="http://binarytheme.com" style="color:#fff;" target="_blank">www.binarytheme.com</a>
-                </div>
-            </div>
-        </div>
+  
 </body>
 <script>
      $("#save").click(function(){
@@ -108,7 +96,8 @@ text-align: center;
     	 
      });
 
-
+ $(document).ready(function(){
+	 
     $.ajax({
     	url:'/erp/rest/managermode/getCompanyInfo',
     	type:'get',
@@ -147,5 +136,6 @@ text-align: center;
     	}
     	
     });
+ });
 </script>
 </html>

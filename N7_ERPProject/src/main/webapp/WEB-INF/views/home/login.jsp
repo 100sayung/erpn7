@@ -21,7 +21,7 @@
 <style>
 #loginContainer {
 	width: 300px;
-	margin-left: 700px;
+	margin-left: 600px;
 	margin-top: 170px;
 }
 
@@ -40,17 +40,22 @@ button {
 .warnMsg {
 	color: red;
 }
+#idserach{
+margin-left: 30px;
+
+}
 </style>
 </head>
 
 <body>
-	<div id="header" class="container">
+
+	<div id="header" class="container" style="text-align: center;">
 		<div id="logo">
 			<h1>
-				<a href="/erp/" style="color: black;">N7 ERP SYSTEM</a>
+				<a href="/erp/" style="color: black;">N7 COMPANY</a>
 			</h1>
 		</div>
-		<div id="menu">
+		<%-- <div id="menu">
 			<ul>
 				<li><a href="/erp/" accesskey="1" title="">MAIN</a></li>
 				<li><a href="/erp/introducecompany" accesskey="2" title="">회사
@@ -65,10 +70,10 @@ button {
 				<li class="current_page_item"><a href="#" accesskey="6">ERP시작</a></li>
 				</c:if>
 			</ul>
-		</div>
+		</div> --%>
 	</div>
 	<form action="access" method="post">
-		<div id="loginContainer">
+		<div id="loginContainer" >
 			<div class="table-responsive">
 				<div class="form-group">
 					<input type="text" class="form-control" name="m_id"
@@ -79,8 +84,9 @@ button {
 						placeholder="password를 입력해주세요" required id="pwd">
 				</div>
 			</div>
-			<span class="warnMsg">${warn }</span>
-			<button>로그인</button>
+			<span class="warnMsg">${warn }</span><br>
+			<button>로그인</button><br>
+			<a href = "/erp/findidfrm" id="idserach">아이디 찾기</a>____<a href = "/erp/findpasswordfrm">비밀번호 찾기</a>
 		</div>
 	</form>
 	<script>
