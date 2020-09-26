@@ -41,7 +41,7 @@ border: 1px solid;
         <button id="searchh">검색</button>   
         <form id="shippingrequestinput">
         <div border="1" style="height:80px; padding-top:25px; background-color:#F8F7F7;">
-        <table style="margin-left:200px;">
+        <table style="margin-left:250px;">
          <thead>
             <tr>
                <th>출하번호</th>
@@ -50,14 +50,14 @@ border: 1px solid;
                <th><input type="text" name="bs_ccode"></th>
                <th>수주번호</th>
                <th><input type="text" name="bs_bonum"></th>
-               <th>품목코드</th>
-               <th><input type="text" name="bs_itcode"></th>
+<!--           <th>품목코드</th>
+               <th><input type="text" name="bs_itcode"></th>  -->  
             </tr>
             <tr>
-               <th>제품명</th>
+<!--           <th>제품명</th>
                <th><input type="text" name="bs_proname"></th>
                <th>거래처회사코드</th>
-               <th><input type="text" name="bs_clcode"></th>
+               <th><input type="text" name="bs_clcode"></th> -->
 <!--           <th>출하의뢰일</th>
                <th><input type="date" name="bs_basedate"></th>       -->   
             </tr>
@@ -66,7 +66,7 @@ border: 1px solid;
       </div> 
             <div style="background-color:#ECEBEA;">
             <table id="item" summary="Code page support in different versions of MS Windows." rules="groups" frame="hsides" border="1"
-              style="margin-left:300px;">
+              style="margin-left:70px;">
                 <colgroup align="center">
                 </colgroup>
                 <colgroup align="left">
@@ -79,6 +79,9 @@ border: 1px solid;
                     <tr>
                         <th><input type="radio" id="allCheck"></th>
                         <th>출하의뢰일</th>
+                        <th>거래처회사코드</th>
+                        <th>품목코드</th>
+                        <th>제품명</th>
                         <th>판매단가</th>
                         <th>수량</th>
                         <th>판매금액</th>                  
@@ -88,8 +91,11 @@ border: 1px solid;
                     <tr>
                         <td><input type="radio" name="each_check" class="each"></td>          
                         <td><input type="date" name="bs_basedate" required></td>
+                        <td><input type="text" name="bs_clcode" required></td>
+                        <td class = "cl"></td>
+                        <td><input type="text" name="bs_proname" required></td>
                         <td><input type="number" name="bs_unit"  required></td>
-                        <td><input type="number" name="bs_quantity" required></td>
+                        <td><input onclick="changeItcode(this)" type="number" name="bs_quantity" required></td>
                         <td><input type="number" name="bs_price" required></td>           
                     </tr>
                 </tbody>
@@ -111,6 +117,21 @@ border: 1px solid;
     </div>
     
     <script type="text/javascript">
+    
+    var select;
+	 $.ajax({
+	    	url:"/erp/stock/getitemcode",
+	    	dataType:"json",
+	    	type:"post",
+	    	success:function(data){
+	    		select = makeSelectBox(data);
+	    		$(".cl").html(select);
+	    	},
+	    	error:function(err){
+	    		console.log(err);
+	    	}
+	    });
+	 	 
     $('#shippingitemfrm').click(function(){
       var str="";
    
@@ -121,12 +142,16 @@ border: 1px solid;
       success:function(data){
          console.log(data);
          
+         //거래처랑 제품명도!
          for(var i in data.sList){
             str+="<tr><td><input type='radio' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
-            str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
+            str+="<td><input type='date' value="+data.sList[i].bs_basedate+"></td>";
+            str+="<td><input type='text' value="+data.sList[i].bs_clcode+"></td>";
+            str+="<td><input type='text' value="+data.sList[i].bs_itcode+"></td>";
+            str+="<td><input type='text' value="+data.sList[i].bs_proname+"></td>";   
             str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
-            str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
-            str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";            
+            str+="<td><input onclick='changeItcode(this)' type='number' value="+data.sList[i].bs_quantity+"></td>";
+            str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";    
          }
             $('#tBody').html(str);
       },
@@ -136,18 +161,19 @@ border: 1px solid;
    });
   });
       
+        //select형식의 추가삭제로 바꿔야함!
         //추가삭제
-        $(document).ready(function(){
+         $(document).ready(function(){
               $('.addList').click(function(){
-                 $('#tBody').append('<tr><td><input type="radio" name="each_check" class="each"></td><td><input type="text" name="bs_basedate" class="input-text" ></td><td><input type="number" name="bs_unit" class="input-text" ></td><td><input type="number" name="bs_quantity" class="input-text"></td><td><input type="number" name="bs_price" class="input-text" ></td><td><input type="button" value="삭제" onclick="javascript:thisRowDel(this);"></td></tr>');
+                 $('#tBody').append('<tr><td><input type="radio" name="each_check" class="each"></td><td><input type="date" name="bs_basedate" class="input-text"></td><td><input type="text" name="bs_clcode" class="input-text" ></td><td><input type="text" name="bs_itcode" class="input-text"></td><td><input type="text" name="bs_proname" class="input-text" ></td><td><input type="number" name="bs_unit" class="input-text" ></td><td><input type="number" name="bs_quantity" class="input-text" ></td><td><input type="number" name="bs_price" class="input-text" ></td><td><input type="button" value="삭제" onclick="javascript:thisRowDel(this);"></td></tr>');
               });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
           }); 
            function thisRowDel(row){
                 console.log(row);
                 let tr = row.parentNode.parentNode;
                 tr.parentNode.removeChild(tr);
-         };    
-        
+         }; 
+  
         
     $('#sub').click(function(){
        console.log("저장클릭");
@@ -201,10 +227,13 @@ border: 1px solid;
                       if(data.sList!=""){
                      for(var i in data.sList){
                         str+="<tr class='tr'><td><input type='radio' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
-                        str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
+                        str+="<td><input type='number' value="+data.sList[i].bs_basedate+"></td>";
+                        str+="<td><input type='text' value="+data.sList[i].bs_clcode+"></td>";
+                        str+="<td>"+select+"</td>";
+                        str+="<td><input type='text' value="+data.sList[i].bs_proname+"></td>";   
                         str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
                         str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
-                        str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
+                        str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";   
                         }
                          $('#tBody').html(str);
                       }else{
@@ -236,10 +265,13 @@ border: 1px solid;
                      
                      for(var i in data.sList){
                         str+="<tr><td><input type='radio' name='each_check' value="+data.sList[i].bs_docunum+"></td>";
-                        str+="<td><input type='text' value="+data.sList[i].bs_basedate+"></td>";
+                        str+="<td><input type='number' value="+data.sList[i].bs_basedate+"></td>";
+                        str+="<td><input type='text' value="+data.sList[i].bs_clcode+"></td>";
+                        str+="<td>"+select+"</td>";
+                        str+="<td><input type='text' value="+data.sList[i].bs_proname+"></td>";   
                         str+="<td><input type='number' value="+data.sList[i].bs_unit+"></td>";
                         str+="<td><input type='number' value="+data.sList[i].bs_quantity+"></td>";
-                        str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";
+                        str+="<td><input type='number' value="+data.sList[i].bs_price+"></td>";   
                       }
                          $('#tBody').html(str);
                   },
@@ -248,7 +280,36 @@ border: 1px solid;
                   }
                });
             });
-   
+         function makeSelectBox(arr){
+      	   var arrStr = "<select class='select' name = 'bs_itcode'><option></option>"
+      	   if(arr.length==0){
+      		   arrStr+="<option>품목코드를 먼저 작성해주세요 </option>";
+      	   }else{
+      		   for(var i = 0; i<arr.length;i++){
+      			   arrStr+="<option value='"+arr[i].it_code+"'>"+arr[i].it_code+"</option>"; 
+      		   }
+      	   }
+      	   arrStr+="</select>";
+      	   return arrStr;
+         }
+        function changeItcode(id){
+        	var it_stock = $(id).val();
+        	var it_code = $(id).parent().siblings(".cl").children().val();
+        	$.ajax({
+        		url:"/erp/stock/getstock",
+        		data : {it_code : it_code, it_stock : it_stock} ,
+        		dataType : "json",
+        		type : "get",
+        		success : function(result){
+        			alert("재고가 부족합니다.");
+        			id.value = result;
+        			
+        		},error: function(err){
+        			console.log(err)
+        		}
+        	})
+        }
+
 </script>
 </body>
 </html>

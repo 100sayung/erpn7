@@ -62,6 +62,18 @@ public class StockMM {
 			return ResponseEntity.status(304).body("분류명 수정에 실패하였습니다. 다시 시도해주세요!");
 		}
 	}
+	// 카테고리 수정
+	public ResponseEntity<String> getStock(ItemCode it, HttpSession session) {
+		it.setIt_cpcode(session.getAttribute("cCode").toString());
+		int num = itDao.getStock(it);
+		System.out.println(num<it.getIt_stock());
+		if(num<it.getIt_stock()) {
+			return ResponseEntity.ok(new Gson().toJson(num));
+		}else {
+			return null;
+		}
+		
+	}
 
 	//카테고리 삭제
 	public ResponseEntity<String> deleteCategory(Category ct, HttpSession session) {
@@ -75,6 +87,7 @@ public class StockMM {
 
 	//품목코드 출력
 	public ResponseEntity<List<ItemCode>> getItemCode(ItemCode it, HttpSession session) {
+		System.out.println(session.getAttribute("cCode").toString());
 		if (it.getIt_ccode() == null) {
 			return ResponseEntity.ok(itDao.getItemCode(session.getAttribute("cCode").toString()));
 		} else {

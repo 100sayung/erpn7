@@ -3,6 +3,7 @@ package com.n7.erp.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,15 +90,15 @@ public class SalesController {
 //   }
    
    @PostMapping(value = "/sales/shippingrequestinput",produces="application/json;charset=utf-8") //출하의뢰등록
-   public ModelAndView shippingrequestinput(Shippingbean ss, HttpSession session) {
-     System.out.println("슈밤22222222222222");
-     mav=sm.shippingrequestinput(ss, session);
+   public ModelAndView shippingrequestinput(Shippingbean ss, HttpSession session) { //HttpServletrequest request
+     //String bs_quantity = request.getParameter("bs_quantity");
+     //Map<String, List<Shippingbean>> sMap=sm.shippingrequestinput(ss, session);
+	  mav=sm.shippingrequestinput(ss, session);
       return mav;
    }
    
    @GetMapping(value = "/sales/shippingitem") //출하 DB데이터 긁어온 거
    public @ResponseBody Map<String, List<Shippingbean>> shippingitem(Shippingbean ss, HttpSession session) {
-     System.out.println("여긴들어와?1");
      Map<String, List<Shippingbean>> sMap=sm.shippingitem(session);
       return sMap;
    }
@@ -137,6 +138,12 @@ public class SalesController {
       return sMap;
    }
    
+   @GetMapping(value = "/sales/getMyInfo",produces="application/json;charset=utf-8" ) 
+   public  Map<String, List<approvalLine>> getMyInfo(HttpSession session) {
+	   Map<String, List<approvalLine>> mMap=sm.getMyInfo(session);
+	   return mMap;
+   }
+   
    @PostMapping(value = "/sales/approvalinput",produces="application/json;charset=utf-8") //출하 결재창 등록
    public ModelAndView approvalinput(approvaldetail app, HttpSession session) {
      System.out.println("슈밤111111");
@@ -162,16 +169,7 @@ public class SalesController {
    public Map<String, List<approvaldetail>> uncollectedmoneysearch(String search, String choice, HttpSession session) {
      Map<String, List<approvaldetail>> sMap=sm.uncollectedmoneysearch(search, choice, session);
       return sMap;
-   }
-
-
-   @PostMapping(value = "/sales/fullpaymentprocess") //완납 처리
-   public Map<String, List<approvaldetail>> fullpaymentprocess(String check, HttpSession session) {
-      System.out.println(check);
-      Map<String, List<approvaldetail>> sMap=sm.fullpaymentprocess(check, session);
-      return sMap;
-   } 
-   
+   }  
      
    @GetMapping(value = "/sales/creditsearch") //외상
    public Map<String, List<approvaldetail>> creditsearch(HttpSession session) {
@@ -184,6 +182,13 @@ public class SalesController {
      Map<String, List<approvaldetail>> sMap=sm.fullpaymentsearch(session);
       return sMap;
    }
+   
+   @PostMapping(value = "/sales/fullpaymentprocess") //완납 처리
+   public Map<String, List<approvaldetail>> fullpaymentprocess(String check, HttpSession session) {
+	   System.out.println(check);
+	   Map<String, List<approvaldetail>> sMap=sm.fullpaymentprocess(check, session);
+	   return sMap;
+   } 
    
    @PostMapping(value = "/sales/businessactivitiesinput",produces="application/json;charset=utf-8") //영업활동 등록
    public ModelAndView businessactivitiesinput(Businessbean b, HttpSession session) {
@@ -211,21 +216,22 @@ public class SalesController {
       return sMap;
    }
    
-   @GetMapping(value = "/sales/getMyInfo",produces="application/json;charset=utf-8" )
-   public  Map<String, List<approvalLine>> getMyInfo(HttpSession session) {
-      Map<String, List<approvalLine>> mMap=sm.getMyInfo(session);
-      return mMap;
+   
+   @PostMapping(value = "/sales/approvaldetailinput",produces="application/json;charset=utf-8") //결재 상세보기 등록
+   public ModelAndView approvaldetailinput(approvaldetail app, HttpSession session) {
+	   mav=sm.approvaldetailinput(app, session);
+	   return mav;
    }
    
-//   @PostMapping(value = "/sales/approvaldelete") //결재완료 삭제
+//   @PostMapping(value = "/sales/approvaldelete") //결재완료 삭제 망함
 //   public Map<String, List<approvaldetail>> approvaldelete(String check) {
 //      Map<String, List<approvaldetail>> sMap=sm.approvaldelete(check);
 //      return sMap;
 //   }
-   
-   @PostMapping(value = "/sales/approvaldetailinput",produces="application/json;charset=utf-8") //결재 상세보기 등록
-   public ModelAndView approvaldetailinput(approvaldetail app, HttpSession session) {
-     mav=sm.approvaldetailinput(app, session);
-      return mav;
-   }
+     
+//   @PostMapping(value = "/sales/shippingquantity") //출하 수량비교
+//   public Map<String, List<approvaldetail>> shippingquantity(String check, HttpSession session) {
+//     Map<String, List<approvaldetail>> sMap=sm.shippingquantity(check, session);
+//      return sMap;
+//   }
 } 

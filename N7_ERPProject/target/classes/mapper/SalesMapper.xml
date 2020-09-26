@@ -23,7 +23,7 @@
           </if>
           <if test="choice.equals('bo_ccode')">
               BO_CCODE = #{search} AND BO_CCODE = #{cCode}
-          </if>
+          </if>   
       </where>
    </select>
    
@@ -58,19 +58,23 @@
       DELETE FROM B_SHIPREGIST WHERE BS_DOCUNUM = #{check} AND BS_CCODE = #{cCode}
    </delete>
    
+   <select id="approvalplan" parameterType="String" resultType="shipping">
+     SELECT * FROM B_SHIPREGIST 
+   </select> 
+   
    <select id="approvalplanchoice" parameterType="string" resultType="shipping">
       SELECT * FROM B_SHIPREGIST WHERE BS_DOCUNUM = #{check} AND BS_CCODE = #{cCode}
    </select>
    
-   <select id="businessitem" parameterType="String" resultType="business">
-       SELECT * FROM B_ACTIVITES WHERE BA_CCODE = #{cCode}
-   </select>
+   <insert id="approvalinput" parameterType="appdetail">
+      INSERT INTO APPROVALDOCU VALUES(#{bs_docunum},#{bs_ccode},#{bs_docuname},#{bs_apcode1},#{bs_apcode2}, DEFAULT, 1) <!-- #{bs_date} -->
+   </insert> 
    
-   <insert id="businessactivitiesinput" parameterType="business">
-      INSERT INTO B_ACTIVITES VALUES(#{ba_ocode}||LPAD(B_ACTIVITES_SEQ.NEXTVAL,4,0),#{ba_ccode},#{ba_clcode},#{ba_hrcode},#{ba_unit},#{ba_startperiod},#{ba_endperiod},#{ba_date},#{ba_content},#{ba_estimatedsalesamount},#{ba_actualsalesamount},#{ba_enddate},#{ba_memo})
-   </insert>
+   <insert id="approvalinput2" parameterType="appdetail">
+      INSERT INTO B_SHIPMENT VALUES(#{bs_docunum},#{bs_ccode},#{bs_bonum},#{bs_itcode},#{bs_clcode},#{bs_docuname},#{bs_approver1},#{bs_approver2},#{bs_approver3},#{bs_basedate},#{bs_unit},#{bs_quantity},#{bs_price},DEFAULT,#{bs_proname},#{bs_credit},#{bs_apcode1},#{bs_apcode2},#{bs_apcode3})<!--#{full_payment} -->
+   </insert> 
    
-   <insert id="insertcomlist" parameterType="A_comp">
+<!--    <insert id="insertcomlist" parameterType="A_comp">
      INSERT INTO AC_COMPANYLIST
    VALUES(#{cl_code},#{cl_ccode},#{cl_name},#{cl_comnum},#{cl_comnum2},#{cl_ceo},#{cl_employee},#{cl_phone},
    #{cl_phone2},#{cl_fax},#{cl_email},#{cl_addr},#{cl_kind},#{cl_kind2},#{cl_kind3},#{cl_bank},
@@ -99,17 +103,14 @@
    
    <delete id="deleteCom" parameterType="String">
      DELETE FROM AC_COMPANYLIST WHERE CL_CODE=#{code}
-   </delete>
+   </delete> -->
    
-   <select id="approvalplan" parameterType="String" resultType="shipping">
-     SELECT * FROM B_SHIPREGIST    
-   </select> 
-   
+   <!-- 결재라인 -->
 <!--    <select id="approvalLine" parameterType="String" resultType="Linee">
    SELECT * FROM MEMBER2 
-   </select>
+   </select> -->
    
-   <select id="searchName" parameterType="String" resultType="Linee">
+<!--    <select id="searchName" parameterType="String" resultType="Linee">
    SELECT * FROM MEMBER2 WHERE M_NAME=#{name}
    </select>
    
@@ -140,14 +141,10 @@
    <select id="approLinecom1" parameterType="String" resultType="Linee">
    SELECT * FROM MLIST  WHERE HC_HRCODE=#{code01}
    </select>
-   
-   <insert id="approvalinput" parameterType="appdetail">
-      INSERT INTO APPROVALDOCU VALUES(#{bs_docunum},#{bs_ccode},#{bs_docuname},#{bs_apcode1},#{bs_apcode2}, DEFAULT, 1) <!-- #{bs_date} -->
-   </insert> 
-   
-   <insert id="approvalinput2" parameterType="appdetail">
-      INSERT INTO B_SHIPMENT VALUES(#{bs_docunum},#{bs_ccode},#{bs_bonum},#{bs_itcode},#{bs_clcode},#{bs_docuname},#{bs_approver1},#{bs_approver2},#{bs_approver3},#{bs_basedate},#{bs_unit},#{bs_quantity},#{bs_price},DEFAULT,#{bs_proname},#{bs_credit},#{bs_apcode1},#{bs_apcode2},#{bs_apcode3})<!--#{full_payment} -->
-   </insert> 
+     
+   <select id="getMyInfo" parameterType="String" resultType="Linee">
+     SELECT * FROM MLIST WHERE HC_HRCODE=#{code}
+   </select>
    
    <select id="creditsearch" parameterType="string" resultType="appdetail">
       SELECT * FROM B_SHIPMENT WHERE BS_CREDIT = '외상' AND BS_CCODE=#{cCode}
@@ -185,31 +182,41 @@
       </where>
    </select>
    
+   <select id="businessitem" parameterType="String" resultType="business">
+       SELECT * FROM B_ACTIVITES WHERE BA_CCODE = #{cCode}
+   </select>
+   
+   <insert id="businessactivitiesinput" parameterType="business">
+      INSERT INTO B_ACTIVITES VALUES(#{ba_ocode}||LPAD(B_ACTIVITES_SEQ.NEXTVAL,4,0),#{ba_ccode},#{ba_clcode},#{ba_hrcode},#{ba_unit},#{ba_startperiod},#{ba_endperiod},#{ba_date},#{ba_content},#{ba_estimatedsalesamount},#{ba_actualsalesamount},#{ba_enddate},#{ba_memo})
+   </insert>
+   
    <select id="businessactivitiessearch" parameterType="String" resultType="business">
       SELECT * FROM B_ACTIVITES WHERE BA_CCODE = #{cCode}
       <where>
           <if test="choice.equals('ba_ocode')">
-              BA_OCODE = #{search} AND BA_CCODE=#{cCode}
+              BA_OCODE = #{search} AND BA_CCODE= #{cCode}
           </if>
           <if test="choice.equals('ba_code')">
-              BA_CODE = #{search} AND BA_CCODE=#{cCode}
+              BA_CODE = #{search} AND BA_CCODE= #{cCode}
           </if>
       </where>
-   </select>
-   
-     <select id="getbonum" parameterType="String" resultType="shipping">
-       SELECT * FROM B_SHIPREGIST WHERE BS_BONUM =#{check} AND BS_CCODE = #{cCode}
    </select>
    
    <delete id="businessactivitiesdelete" parameterType="business">
       DELETE FROM B_ACTIVITES WHERE BA_OCODE = #{check} AND BA_CCODE = #{cCode}
    </delete>
    
-   <select id="getMyInfo" parameterType="String" resultType="Linee">
-   SELECT * FROM MLIST  WHERE HC_HRCODE=#{code}
+   <select id="getbonum" parameterType="String" resultType="shipping">
+       SELECT * FROM B_SHIPREGIST WHERE BS_BONUM =#{check} AND BS_CCODE = #{cCode}
    </select>
    
-  <select id="approvaldetailinput" parameterType="String" resultType="appdetail"> 
-     SELECT * FROM B_SHIPMENT 
-   </select>
+   
+   
+<!--   <select id="approvaldetailinput" parameterType="String" resultType="appdetail"> 
+      SELECT * FROM B_SHIPMENT 
+   </select> -->
+   
+<!--<select id="shippingquantity" parameterType="String" resultType="appdetail">
+       SELECT * FROM B_SHIPMENT WHERE BS_QUANTITY = #{check} AND BS_CCODE=#{cCode} AND BS_STATUS = '4' 
+   </select> -->
 </mapper>
