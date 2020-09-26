@@ -81,7 +81,7 @@ a{
 		   dataType: 'html',
 		   success: function(data){
 			   $('#description').html(data);
-			   console.log(data);
+			   //console.log(data);
 		   },
 		   error: function(err){
 			   console.log(err);

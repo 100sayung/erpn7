@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="add"/>
+		<item key="selection" value="JsonParseObject"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="JsonParseObject"/>
+			<item value="getByItemStockList"/>
+			<item value="bbb"/>
+			<item value="erpboard"/>
 			<item value="add"/>
 			<item value="search"/>
 			<item value="searchcode"/>
@@ -19,10 +23,6 @@
 			<item value="HrCard"/>
 			<item value="fromid"/>
 			<item value="gethr"/>
-			<item value="employeeholi"/>
-			<item value="erpboard"/>
-			<item value="board"/>
-			<item value="saleInfo"/>
 		</list>
 		<list key="replacehistory">
 			<item value="pDao"/>

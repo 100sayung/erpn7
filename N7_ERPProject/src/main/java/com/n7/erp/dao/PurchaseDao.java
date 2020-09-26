@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.n7.erp.bean.ps.approvalLine;
 import com.n7.erp.bean.IePort;
+import com.n7.erp.bean.ItemCode;
 import com.n7.erp.bean.ps.Purchase;
 import com.n7.erp.bean.ps.PurchaseApproval;
 import com.n7.erp.bean.ps.Return;
@@ -64,6 +65,10 @@ public interface PurchaseDao {
 	boolean rDelete(@Param("check_list")String check_list, @Param("cCode") String cCode);
 
 	List<Return> rSearch(@Param("search") String search, @Param("choice") String choice, @Param("cCode") String cCode);
+
+	List<IePort> stocklist(String cCode);
+
+	List<ItemCode> getstocklist(String cCode);
 
 
 }

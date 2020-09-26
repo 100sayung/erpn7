@@ -15,8 +15,7 @@ Released   : 20130526
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
@@ -24,41 +23,64 @@ Released   : 20130526
 <!--[if IE 6]>
 <link href="default_ie6.css" rel="stylesheet" type="text/css" />
 <![endif]-->
-<style>
-#header{
-	margin-bottom: 30px;
+<style type="text/css">
+h2{
+font-size: 36px;
+margin-top: 20px;
+margin-bottom: 10px;
+margin-left: auto;
+font-family: inherit;
+font-weight: 500;
+color: inherit;
+text-transform: uppercase;
+display: block;    
+text-align: center;
 }
-.button {
-	color: #ffffff;
+table#List {
+border-collapse: separate;
+border-spacing: 1px;
+text-align: left;
+line-height: 1.5;
+order-top: 1px solid #ccc;
+margin : auto;
+text-align: center;
+margin-top: 20px;
 }
-
-#container {
-	margin-left: 300px;
+table#List th {
+width: 140px;
+padding: 7px;
+padding-top: 10px;
+font-weight: bold;
+vertical-align: top;
+border-bottom: 1px solid #ccc;
+text-align: center;
 }
-
-#boardList,.writelist {
-	text-align: center; border-collapse : collapse;
-	border: 1px solid black;
-	border-collapse: collapse;
+table#List td {
+width: 250px;
+padding: 8px;
+vertical-align: top;
+border-bottom: 1px solid #ccc;
+text-align: center;
 }
-
-#boardList {
-	margin-top: 30px;
-	font-size: 30px;
+#paging{
+display: block;
+text-align: center;
+margin-top: 15px;
+margin-left: 520px;
+padding-bottom: 12px;
 }
-.writelist {
-	font-size: 15px;
-	width: 225px;
+#bbb{
+/* position: absolute;  */
+float: right;
+margin-right: 450px;
+margin-top: 10px;
 }
-#writing{
-	margin-top:25px;
-	float: right;
-}
-#container{
-	padding: 50px;
-	border:1px solid black;
-	margin:auto;
-	width: 800px;
+#ccc{
+position:relative;
+float: right;
+margin-right: 450px;
+margin-top: 10px;
+padding-bottom: 20px;
 }
 </style>
 </head>
@@ -66,93 +88,57 @@ Released   : 20130526
 	<div id="header" class="container">
 		<div id="logo">
 			<h1>
-				<a href="/erp/">N7 ERP SYSTEM</a>
+				<a href="/erp/" style="color: black;">N7 ERP SYSTEM</a>
 			</h1>
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="/erp/" accesskey="4" title="">MAIN</a></li>
-				<li><a href="/erp/introducecompany" accesskey="2" title="">회사
-						소개</a></li>
-				<li><a href="/erp/erpapply" accesskey="3" title="">erp 신청</a></li>
-				<li><a href="/erp/login" accesskey="5" title="">LOGIN</a></li>
-				<li><a href="/erp/join" accesskey="6" title="">JOIN</a></li>
-				<li class="current_page_item"><a href="/erp/hrCard">ERP시작</a></li>
+				<li><a href="/erp/">MAIN</a></li>
+				<li><a href="/erp/introducecompany">회사 소개</a></li>
+				<li><a href="/erp/erpboard" accesskey="5" title="">상담 게시판</a></li>
+				<li><a href="/erp/erpapply">ERP 신청</a></li>
+				<li><a href="/erp/login">LOGIN</a></li>
+				<li><a href="/erp/join">JOIN</a></li>
+				<li class="current_page_item"><a href="#">ERP시작</a></li>
 			</ul>
 		</div>
 	</div>
-	<div id="container">
-		<h1>상담 게시판</h1>
-		<table id="boardList" align="center">
-			<tr>
-				<td>번호</td>
-				<td>제목</td>
-				<td>작성자</td>
+	<form action="erpboard">
+	<div id="a">
+		<h2>상담 게시판</h2>
+		<table id="List">
+			<tr style="background-color: #F0CDDE; width: 350px;">
+				<th scope="row">번호</th>
+				<th scope="row">제목</th>
+				<th scope="row">작성자</th>
 			</tr>
 		</table>
-		<div align="center">${paging}</div>
-		<div id="writing"><a href="/erp/home/writeFrm">글쓰기</a></div>
 	</div>
-</body>
-
-<script>
-	$(function() {
+	<div id="bbb"><button><a href="/erp/home/writeFrm" style="text-decoration: none;">글쓰기</a></button></div>
+	</form>
+	<div align="cneter" id="paging">${paging}</div>
+	<div id="ccc">
+		<select id="choice" style="height: 24px;">
+			<option value="CB_WRITER">작성자</option>
+			<option value="CB_TITLE">제목</option>
+		</select>
+		<input type="text" id="search" name="search" style="height: 18px;">
+		<button id="searchbtn">검색</button>
+	</div>
+	
+<script type="text/javascript">
+	$(function(){
 		var bList=${bList};
-		var str='';
-		for(var i=0;i<bList.length;i++){
+		var str="";
+		for(var i=0; i<bList.length; i++){
 			var date=bList[i].CB_DATE;
-// 			var cb=date.substring(0,10);
-			str+=("<tr id='"+bList[i].CB_NUM+"' onclick='writemodify("+bList[i].CB_NUM+")'><td class='writelist'>"+bList[i].CB_NUM+"</td>"
-					+"<td class='writelist'>"+bList[i].CB_TITLE+"</td><td class='writelist'>"+bList[i].CB_WRITER+"</td class='writelist'>");
+			str+="<tr><td>"+bList[i].CB_NUM+"</td>";
+			str+="<td><a style='text-decoration: none;' href='boardcontentsajax?b_num="+bList[i].CB_NUM+"'>"+bList[i].CB_TITLE+"</a></td>";
+			str+="<td>"+bList[i].CB_WRITER+"</td></tr>";
 		}
-		$("#boardList").append(str);
+		$("#List").append(str);
 		console.log(bList);
 	});
-// 	<td class='writelist'>"+cb+"</td></tr>"
-	//게시물 수정 목록 출력
-	function writemodify(num){
-		console.log(num);
-		$.ajax({
-			url:'/erp/home/boardmodifyajax',
-			method:'post',
-			data:{num:num},
-			dataType:'json',
-			success:function(data){
-				$("#container").html("<form action='/erp/home/boardmodify' method='post'>"
-						+"<h1>글 수정</h1>"
-							+"<table id='boardList' align='center'>"
-								+"<tr><td><input value='"+data.CB_WRITER+"' readonly='readonly' name='CB_WRITER'>"
-									+"<input value='"+data.CB_PASSWORD+"' readonly='readonly' name='CB_PASSWORD'>"
-									+"<input value='"+data.CB_NUM+"' readonly='readonly' name='CB_NUM'>번글"
-									+"<input type='checkbox' checked='checked' name='CB_TYPE' value='a'>공개글"
-									+"<input type='checkbox' name='CB_TYPE' value='b'>비밀글</td></tr>"
-								+"<tr><td><input value='"+data.CB_TITLE+"' placeholder='변경할 제목을 입력해 주세요.' required='required' name='CB_TITLE' ></td></tr>"
-								+"<tr><td><textarea rows='20' cols='100' required='required' name='CB_CONTENTS'>"+data.CB_CONTENTS+"</textarea></td></tr>"
-								+"<tr><td><button type='submit'>수정</button></td>"
-								+"<tr><td><button onclick='writelistdelete("+data.CB_NUM+")' id='writedetaile' type='button'>삭제</button></td>"
-						+"</tr></form>");
-				console.log(data);
-			},
-			error:function(err){
-				console.log(err);
-			}
-		});
-	}
-	
-	//게시물 삭제
-	function writelistdelete(num){
-		$.ajax({
-			url:'writelistdelete',
-			method:'post',
-			data:{num:num},
-			success:function(data){
-				location.href="erpboard";
-			},
-			error:function(err){
-				console.log(err);
-			}
-		});
-	}
-	
 </script>
+</body>
 </html>

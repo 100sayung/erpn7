@@ -48,11 +48,10 @@ public class HomeController {
 	public String introduceCompany() {
 		return "/home/introducecompany";
 	}
-	@RequestMapping(value = "/home/erpboard", method = RequestMethod.GET)
-	public ModelAndView erpBoard() {
-		logger.info("");
-		mav=cbm.moveBoardList();
-		return mav;
+	@RequestMapping(value = "/erpboard", method = RequestMethod.GET)
+	public ModelAndView erpBoard(Integer pageNum) {
+	mav=cbm.moveBoardList(pageNum);
+	return mav;
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
@@ -127,36 +126,36 @@ public class HomeController {
 	}
 
 	//게시글 페이지로 이동
-	   @RequestMapping(value = "/writeFrm", method = RequestMethod.GET)
+	   @RequestMapping(value = "/home/writeFrm", method = RequestMethod.GET)
 	   public String write() {
-	      return "writeFrm";
+	      return "/home/writeFrm";
 	   }
 
 	   //게시글 작성
 	   @RequestMapping(value = "/writeBoard", method = RequestMethod.POST)
-	   public ModelAndView writeBoard(ConsultingBoard board) {
-	      mav=cbm.writeBoard(board);
+	   public ModelAndView writeBoard(ConsultingBoard board, HttpSession session, MultipartHttpServletRequest multi) {
+	      mav=cbm.writeBoard(board,session, multi);
 	      return mav;
 	   }
-	   //게시글 수정
-	   @RequestMapping(value = "/boardmodify", method = RequestMethod.POST)
-	   public ModelAndView boardmodify(ConsultingBoard board) {
-	      mav=cbm.boardmodify(board);
-	      return mav;
-	   }
-
-	   //게시글 수정페이지로 이동
-	   @RequestMapping(value = "/boardmodifyajax", method = RequestMethod.POST)
-	   public @ResponseBody String boardmodifyajax(Integer num) {
-	      String result=cbm.boardmodifyajax(num);
-	      return result;
-	   }
-	   //게시글 삭제
-	   @RequestMapping(value = "/writelistdelete", method = RequestMethod.POST)
-	   public ModelAndView writelistdelete(Integer num) {
-	      mav=cbm.writelistdelete(num);
-	      return mav;
-	   }
+//	   //게시글 수정
+//	   @RequestMapping(value = "/boardmodify", method = RequestMethod.POST)
+//	   public ModelAndView boardmodify(ConsultingBoard board) {
+//	      mav=cbm.boardmodify(board);
+//	      return mav;
+//	   }
+//
+//	   //게시글 수정페이지로 이동
+//	   @RequestMapping(value = "/boardmodifyajax", method = RequestMethod.POST)
+//	   public @ResponseBody String boardmodifyajax(Integer num) {
+//	      String result=cbm.boardmodifyajax(num);
+//	      return result;
+//	   }
+//	   //게시글 삭제
+//	   @RequestMapping(value = "/writelistdelete", method = RequestMethod.POST)
+//	   public ModelAndView writelistdelete(Integer num) {
+//	      mav=cbm.writelistdelete(num);
+//	      return mav;
+//	   }
 	   @RequestMapping(value = "/home/findid", method = RequestMethod.POST)
 	   public ResponseEntity<String> findID(String userEmail) {
 	      return mm.findId(userEmail);
@@ -180,3 +179,5 @@ public class HomeController {
 		   return mm.modifyPassword(userPassword,userId);
 	   }
 }
+
+

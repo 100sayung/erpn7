@@ -180,7 +180,7 @@ input[type='text'], input[type='number'] {
 				}
 			}
 	}
-	function getByItemStockList(it_code) {
+	function a(it_code) {
 		$.ajax({
 			url:"/erp/stock/getbyitemstocklist",
 			type:"post",

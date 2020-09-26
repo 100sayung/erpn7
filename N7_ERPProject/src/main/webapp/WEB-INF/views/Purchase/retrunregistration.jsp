@@ -230,20 +230,31 @@ border: 1px solid silver;
   	  			  })
 			})	  
 			
+	$("#Wearing").click(function(){
+		  $.ajax({
+			  url:"/erp/rest/purchase/stocklist",
+			  type: "get",
+			  dataType: "json",
+			  success: function(data){
+				  console.log(data);
+				  var str="";
+				  for(var i in data.sList){
+				  	str+="<tr><td>"+data.sList[i].ie_itcode+"</td>";
+				  	str+="<td>"+data.sList[i].ie_date+"</td>";
+				  	str+="<td>"+data.sList[i].ie_hrcode+"</td>";
+				  	str+="<td>"+data.sList[i].ie_status+"</td>";
+				  	str+="<td>"+data.sList[i].ie_price+"</td>";
+				  	str+="<td>"+data.sList[i].ie_cpcode+"</td></tr>";
+				  }
+				  $('#list').html(str);
+			  },
+			  error: function(err){
+				  console.log(err);
+			  }
+		  })
+	})
+			
 	
-	$('#Wearing').click(function(){
-		$.ajax({
-			url: "/erp/stock/getimportlist",
-			type: "post",
-			dataType: "json",
-			success: function(data){
-				console.log(data);
-			},
-			error: function(err){
-				console.log(err);
-			}
-		});
-	});
    </script>
 </body>
 </html>
