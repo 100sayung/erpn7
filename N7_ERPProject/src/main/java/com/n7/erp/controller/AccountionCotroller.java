@@ -67,10 +67,8 @@ public class AccountionCotroller {
 	}
 
 	@PostMapping(value = "/Account/trensCom", produces = "application/json;charset=utf-8")
-	public Map<String, List<A_company>> trensCom(String USE, String CNT, String ARR, HttpSession session) {
-		int cnt = Integer.parseInt(CNT);
-		String[] strArray = ARR.split(",");
-		Map<String, List<A_company>> aMap = am.trensCom(USE, cnt, strArray, session);
+	public Map<String, List<A_company>> trensCom(String USE, String CODE, HttpSession session) {
+		Map<String, List<A_company>> aMap = am.trensCom(USE, CODE, session);
 		return aMap;
 	}
 

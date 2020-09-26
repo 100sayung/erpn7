@@ -24,7 +24,7 @@ public interface AccountDao {
 
 	List<A_company> getComList(String cl_ccode);
 
-	List<A_company> getCompanyList(@Param("cCode")String cCode,@Param("use") String use);
+	List<A_company> getCompanyList(@Param("use")String use,@Param("cCode") String cCode);
 
 	List<A_company> getsearchCode(@Param("use")String use, @Param("code") String code, @Param("cCode") String cCode);
 
