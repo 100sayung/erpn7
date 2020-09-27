@@ -2,7 +2,6 @@ package com.n7.erp.service;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,13 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.n7.erp.bean.ConsultingBoard;
-import com.n7.erp.dao.HRIDeptDao;
+import com.n7.erp.bean.Member;
 import com.n7.erp.dao.IConsultingBoardDao;
 import com.n7.erp.userClass.Paging;
 
-import lombok.extern.log4j.Log4j;
 
-@Log4j
 @Service
 public class ConsultingBoardMM {
 
@@ -52,24 +49,26 @@ public class ConsultingBoardMM {
 	private String getPaging(Integer pageNum) {
 		int maxNum = CBdao.getBoarCount();
 		int listCount=10;
-		int pageCount=2;
+		int pageCount=5;
 		String boardName="/erp/erpboard";
 		Paging paging= new Paging(maxNum, pageNum, listCount, pageCount, boardName);
 		return paging.makeHtmlPaging();
 	}
 
-	public ModelAndView writeBoard(ConsultingBoard board, HttpSession session, MultipartHttpServletRequest multi) {
+	public ModelAndView writeBoard(ConsultingBoard board) {
 		mav= new ModelAndView();
 		String view= null;
-		String title= multi.getParameter("CB_TITLE");
-		String contents= multi.getParameter("CB_CONTENTS");
-		int check= Integer.parseInt(multi.getParameter("filecheck"));
-		String id= multi.getSession().getAttribute("m_id").toString();
-		String pw= multi.getParameter("CB_PASSWORD");
-		System.out.println("check="+check);
-		System.out.println("id="+id);
 		
-		return null;
+		if(CBdao.boardWrite(board)) {
+			System.out.println("들어감?");
+			view="/erp/erpboard";
+			mav.addObject("msg", "등록이 완료되었습니다.");
+		}else {
+			view="/erp/home/writeFrm";
+			mav.addObject("msg", "등록이 실패되었습니다.");
+		}
+		mav.setViewName(view);
+		return mav;
 	}
 
 //	//게시판 글 작성

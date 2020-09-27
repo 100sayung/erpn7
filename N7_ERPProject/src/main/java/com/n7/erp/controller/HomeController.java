@@ -132,9 +132,9 @@ public class HomeController {
 	   }
 
 	   //게시글 작성
-	   @RequestMapping(value = "/writeBoard", method = RequestMethod.POST)
-	   public ModelAndView writeBoard(ConsultingBoard board, HttpSession session, MultipartHttpServletRequest multi) {
-	      mav=cbm.writeBoard(board,session, multi);
+	   @RequestMapping(value = "/home/writeBoard", method = RequestMethod.POST)
+	   public ModelAndView writeBoard(ConsultingBoard board) {
+	      mav=cbm.writeBoard(board);
 	      return mav;
 	   }
 //	   //게시글 수정

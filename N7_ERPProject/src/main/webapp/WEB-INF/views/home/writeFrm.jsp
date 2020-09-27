@@ -87,16 +87,9 @@ resize: none;
 }
 #password{
 display : block;
-padding: 8px;
-}
-#file{
-display : block;
 float: left;
-margin-left: -220px;
-}
-#aaa{
-margin-top: 15px;
-margin-bottom: 10px;
+margin-left: -195px;
+padding: 8px;
 }
 </style>
 </head>
@@ -119,7 +112,7 @@ margin-bottom: 10px;
 			</ul>
 		</div>
 	</div>
-   <form action="writeBoard" id="writeFrm" method="post" enctype="multipart/form-data">
+   <form action="writeBoard" id="writeFrm" method="post">
       <h1>글쓰기</h1>
 	<table>
 		 <tr>
@@ -132,11 +125,7 @@ margin-bottom: 10px;
 			</td>
          </tr>
          <tr>
-            <th><textarea rows="23" cols="100" id="write" class="writeText" name="CB_CONTENTS" required="required" placeholder="내용을 입력해주세요."></textarea></th>
-         </tr>
-         <tr>
-         	 <td><input type="password" name="CB_PASSWORD" id="password" placeholder="비밀번호 입력" ></td>
-         	<th><input type="file" name="bf_name" id="file" multiple></th>
+            <th><textarea rows="25" cols="100" id="write" class="writeText" name="CB_CONTENTS" required="required" placeholder="내용을 입력해주세요."></textarea></th>
          </tr>
          <tr>
             <td id="aaa">
@@ -144,6 +133,7 @@ margin-bottom: 10px;
                <button type="reset">다시쓰기</button>
                <button><a href="/erp/erpboard" style="text-decoration: none;">뒤로</a></button>
             </td>
+         	 <td><input type="password" name="CB_PASSWORD" id="password" placeholder="비밀번호 입력" ></td>
          </tr>
          <tr>
          </tr>

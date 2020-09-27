@@ -13,6 +13,8 @@ public interface IConsultingBoardDao {
 	@Select("SELECT COUNT(*) FROM CONSULTING_BOARD")
 	int getBoarCount();
 
+	boolean boardWrite(ConsultingBoard board);
+
 	//	boolean writeBoard(ConsultingBoard board);
 //	
 //	ConsultingBoard boardmodifyajax(Integer num);

@@ -18,7 +18,12 @@
 			WHERE RN>=#{pageNum}*10-9
 		]]>
 	</select>
-
+	
+	 <insert id="writeBoard" parameterType="board">
+      	INSERT INTO CONSULTING_BOARD
+     	VALUES(BR_NUM_SEQ.NEXTVAL,#{CB_TYPE},#{CB_WRITER},#{CB_PASSWORD},#{CB_TITLE},#{CB_CONTENTS})
+   </insert>
+	
 <!--    <insert id="writeBoard" parameterType="board">
       INSERT INTO CONSULTING_BOARD
       VALUES(BR_NUM_SEQ.NEXTVAL,#{CB_TYPE},#{CB_WRITER},#{CB_PASSWORD},#{CB_TITLE},#{CB_CONTENTS})
