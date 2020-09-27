@@ -160,4 +160,14 @@ public ModelAndView moveMyInfo(HttpSession session) {
 		return ResponseEntity.ok(new Gson().toJson("��й�ȣ ���濡 �����Ͽ����ϴ�."));
 	}
 
+	public String getDupleID(String m_id) {
+		int idcnt = mDao.getDupleID(m_id);
+		return Integer.toString(idcnt);
+	}
+
+	public String getDupleCCode(String cCode) {
+		int ccodecnt = mDao.getDupleCCode(cCode);
+		return Integer.toString(ccodecnt);
+	}
+
 }

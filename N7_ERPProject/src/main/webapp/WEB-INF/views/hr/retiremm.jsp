@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Document</title>
-	<script src=/erp/js/menu.js></script> <!-- 메뉴Ajax로 출력 -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
@@ -100,6 +99,7 @@ ul {
 			<input type="hidden" value="" id="status">
 		</div>
 	</div>
+<script src=/erp/js/menu.js></script><!-- 메뉴Ajax로 출력 -->
 	<script>
 	//검색 조건들 생성
 

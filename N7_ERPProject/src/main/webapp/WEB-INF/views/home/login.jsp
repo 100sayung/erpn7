@@ -72,8 +72,9 @@ margin-left: 30px;
 			</ul>
 		</div> --%>
 	</div>
+	<br>
+	<div id="loginContainer" >
 	<form action="access" method="post">
-		<div id="loginContainer" >
 			<div class="table-responsive">
 				<div class="form-group">
 					<input type="text" class="form-control" name="m_id"
@@ -86,9 +87,10 @@ margin-left: 30px;
 			</div>
 			<span class="warnMsg">${warn }</span><br>
 			<button>로그인</button><br>
-			<a href = "/erp/findidfrm" id="idserach">아이디 찾기</a>____<a href = "/erp/findpasswordfrm">비밀번호 찾기</a>
-		</div>
+			<a href = "/erp/findidfrm" id="idserach">아이디 찾기</a>____<a href = "/erp/findpasswordfrm">비밀번호 찾기</a>			
 	</form>
+		</div>
+<p style="text-align : center;">회원이 아니신가요? <a href="/erp/joinpage">회원가입</a></p><br>
 	<script>
 		if (location.search!= '') {
 			$('.warnMsg').text('아이디 혹은 비밀번호가 잘못되었습니다.');

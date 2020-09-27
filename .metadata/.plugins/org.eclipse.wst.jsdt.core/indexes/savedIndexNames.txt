@@ -1,7 +1,3 @@
 INDEX VERSION 1.4+D:\project\erpn7\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-1993041711.index
-2275690158.index
-1168182889.index
-3182238025.index
-936034625.index
 480913627.index
+1168182889.index

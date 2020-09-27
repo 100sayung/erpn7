@@ -7,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Document</title>
-	<script src=/erp/js/menu.js></script> <!-- 메뉴Ajax로 출력 -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
@@ -113,6 +112,7 @@ ul {
 <!-- 	<button type="button" id="deptbutton">+부서등록추가</button> -->
 	</div>
 </body>
+<script src=/erp/js/menu.js></script><!-- 메뉴Ajax로 출력 -->
 <script>
 $("#showMenu1").hover(function() {
 	$("#smallMenu1").attr("style", "display:inline-block");

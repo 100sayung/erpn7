@@ -153,6 +153,7 @@ ul {
 		<div id="container"></div>
 
 	</div>
+<script src=/erp/js/menu.js></script><!-- 메뉴Ajax로 출력 -->
 	<script>
 		var str = "";
 			$(document).ready(function() {

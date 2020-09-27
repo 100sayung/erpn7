@@ -7,7 +7,6 @@
 <fullyQualifiedTypeName name="org.omg.CosNaming.NameHolder"/>
 <fullyQualifiedTypeName name="com.n7.erp.bean.entity.NameHoliday"/>
 <fullyQualifiedTypeName name="org.hamcrest.core.SubstringMatcher"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="com.google.gson.reflect.TypeToken"/>
 <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Update"/>
@@ -35,9 +34,10 @@
 <fullyQualifiedTypeName name="com.n7.erp.service.MemberMM"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
-<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
 <fullyQualifiedTypeName name="com.google.gson.Gson"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.n7.erp.bean.Company"/>
 <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Select"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
 </qualifiedTypeNameHistroy>

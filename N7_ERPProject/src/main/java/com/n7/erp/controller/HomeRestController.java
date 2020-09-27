@@ -17,7 +17,7 @@ import com.n7.erp.userClass.PagingVO;
 import java.lang.reflect.Type;
 import java.util.*;
 
-@RestController // @ResponseBody »ý·«°¡´É
+@RestController // @ResponseBody ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 @RequestMapping(value = "/rest")
 public class HomeRestController {
 
@@ -40,13 +40,25 @@ public class HomeRestController {
 	}
 
 	@PostMapping(value = "/home/forcewithdrawal")
-	public String forceWithDrawal(String jsonStr) { // °­Åð±â´É
+	public String forceWithDrawal(String jsonStr) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		System.out.println(jsonStr);
 		List<String> slist = new Gson().fromJson(jsonStr, new TypeToken<List<String>>() {
 		}.getType());
 		System.out.println(slist);
 		mm.forceWithDrawal(slist);
 		return null;
+	}
+	
+	@GetMapping(value="/home/dupleid")
+	public String getDupleID(String m_id) {
+		String result = mm.getDupleID(m_id);
+		return result;
+	}
+	
+	@GetMapping(value="/home/dupleccode")
+	public String getDupleCCode(String m_ccode) {
+		String result = mm.getDupleCCode(m_ccode);
+		return result;
 	}
 
 }

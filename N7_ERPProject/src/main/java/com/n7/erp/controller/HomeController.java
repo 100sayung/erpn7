@@ -24,7 +24,7 @@ import com.n7.erp.service.ConsultingBoardMM;
 import com.n7.erp.service.MemberMM;
 import com.n7.erp.userClass.PagingVO;
 
-//ÀüºÎ ÀÌµ¿°ü·Ã
+//ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½
 @Controller
 public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -82,7 +82,7 @@ public class HomeController {
 		return "/home/findpasswordfrm";
 	}
 
-	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	@RequestMapping(value = "/joinpage", method = RequestMethod.GET)
 	public String join() {
 		return "/home/join";
 	}
@@ -131,7 +131,7 @@ public class HomeController {
 
 	@PostMapping(value = "/newerp")
 	public String registNewERP(Company com) {
-		cm.registNewERP(com); //±â·ÏÀº temp¿¡´Ù ÇÒ°ÅÀÓ.
+		cm.registNewERP(com); //ï¿½ï¿½ï¿½ï¿½ï¿½ tempï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½.
 		return "/home/home";
 	}
 
@@ -151,40 +151,34 @@ public class HomeController {
 		mav = mm.moveMyInfo(session);
 		return mav;
 	}
-
-	@GetMapping(value = "/hr/hr")
-	public String hrMain() {
-		return "/hr/hrCard";
-	}
-
-	// °Ô½Ã±Û ÆäÀÌÁö·Î ÀÌµ¿
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	@RequestMapping(value = "/writeFrm", method = RequestMethod.GET)
 	public String write() {
 		return "writeFrm";
 	}
 
-	// °Ô½Ã±Û ÀÛ¼º
+	// ï¿½Ô½Ã±ï¿½ ï¿½Û¼ï¿½
 	@RequestMapping(value = "/writeBoard", method = RequestMethod.POST)
 	public ModelAndView writeBoard(ConsultingBoard board) {
 		mav = cbm.writeBoard(board);
 		return mav;
 	}
 
-	// °Ô½Ã±Û ¼öÁ¤
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/boardmodify", method = RequestMethod.POST)
 	public ModelAndView boardmodify(ConsultingBoard board) {
 		mav = cbm.boardmodify(board);
 		return mav;
 	}
 
-	// °Ô½Ã±Û ¼öÁ¤ÆäÀÌÁö·Î ÀÌµ¿
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	@RequestMapping(value = "/boardmodifyajax", method = RequestMethod.POST)
 	public @ResponseBody String boardmodifyajax(Integer num) {
 		String result = cbm.boardmodifyajax(num);
 		return result;
 	}
 
-	// °Ô½Ã±Û »èÁ¦
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/writelistdelete", method = RequestMethod.POST)
 	public ModelAndView writelistdelete(Integer num) {
 		mav = cbm.writelistdelete(num);
