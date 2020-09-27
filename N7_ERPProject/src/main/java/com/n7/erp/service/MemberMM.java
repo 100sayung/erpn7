@@ -1,41 +1,24 @@
 package com.n7.erp.service;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-import javax.mail.Address;
-import javax.mail.Authenticator;
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.MailException;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMailMessage;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.n7.erp.bean.Member;
-import com.n7.erp.bean.entity.Gmail;
-import com.n7.erp.bean.entity.MailHandler;
 import com.n7.erp.dao.IHrDao;
 import com.n7.erp.dao.IMemberDao;
 import com.n7.erp.userClass.FileManager;
-import com.n7.erp.userClass.PagingVO;
 
 @Repository
 @Service
@@ -105,7 +88,7 @@ public class MemberMM {
 public String getSearchFromId(String m_id) {
 	ArrayList<Member> mlist = new ArrayList<Member>();
 	if (m_id.equals("")) {
-		System.out.println("¤¤");
+		System.out.println("ï¿½ï¿½");
 		mlist = mDao.getAllMember();
 	} else {
 		m_id = "%" + m_id + "%";
@@ -134,7 +117,7 @@ public void forceWithDrawal(List<String> slist) {
 
 public ModelAndView moveMyInfo(HttpSession session) {
 	if(!hDao.haveHrCode(session.getAttribute("id").toString())) {
-		mav.addObject("msg", "¿ì¼± ÀÎ»çÄ«µå µî·ÏÀ» ¿äÃ»ÇØÁÖ¼¼¿ä.");
+		mav.addObject("msg", "ï¿½ì¼± ï¿½Î»ï¿½Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.");
 	}
 	mav.setViewName("myInfo/myInfo");
 	return mav;
@@ -151,13 +134,13 @@ public ModelAndView moveMyInfo(HttpSession session) {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
 			messageHelper.setFrom("mykyj2000@gmail.com");
 			messageHelper.setTo(userEmail);
-			messageHelper.setSubject("N7 ERP ÀÎÁõ¹øÈ£ÀÔ´Ï´Ù.");
-			messageHelper.setText("ÀÎÁõ¹øÈ£´Â " + authentictionNum + " ÀÔ´Ï´Ù");
+			messageHelper.setSubject("N7 ERP ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½Ô´Ï´ï¿½.");
+			messageHelper.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ " + authentictionNum + " ï¿½Ô´Ï´ï¿½");
 			mailSender.send(mimeMessage);
-			return ResponseEntity.ok(new Gson().toJson("ÀÎÁõ¹øÈ£Àü¼Û ¼º°ø"));
+			return ResponseEntity.ok(new Gson().toJson("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½"));
 		} catch (MessagingException e) {
 			e.printStackTrace();
-			return ResponseEntity.ok(new Gson().toJson("ÀÎÁõ¹øÈ£Àü¼Û ½ÇÆÐ"));
+			return ResponseEntity.ok(new Gson().toJson("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½"));
 		}
 	}
 
@@ -174,7 +157,7 @@ public ModelAndView moveMyInfo(HttpSession session) {
 
 	public ResponseEntity<String> modifyPassword(String userPassword, String userId) {
 		mDao.modifyPassword(userPassword,userId);
-		return ResponseEntity.ok(new Gson().toJson("ºñ¹Ð¹øÈ£ º¯°æ¿¡ ¼º°øÇÏ¿´½À´Ï´Ù."));
+		return ResponseEntity.ok(new Gson().toJson("ï¿½ï¿½Ð¹ï¿½È£ ï¿½ï¿½ï¿½æ¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½."));
 	}
 
 }

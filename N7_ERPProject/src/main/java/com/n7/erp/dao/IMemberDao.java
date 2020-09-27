@@ -16,8 +16,6 @@ public interface IMemberDao {
 	String bringCCode(Member mb);
 
 	ArrayList<Member> getHRCard(String m_ccode);
-	
-	
 	@Select("SELECT * FROM MEMBER WHERE M_ID = #{id}")
 	Member getMemberDetail(String id);
 

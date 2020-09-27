@@ -94,3 +94,7 @@
 9월 24, 2020 15:13:33.905 [3684:4048:0924/151333.905:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
 9월 24, 2020 15:14:13.917 [3684:4048:0924/151413.917:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
 9월 24, 2020 15:14:16.924 [3684:4048:0924/151416.924:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+
+9월 27, 2020 10:38:38.182 NEW SESSION
+9월 27, 2020 10:38:38.182 [16608:15712:0927/103838.002:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 27, 2020 10:38:52.173 [16608:5740:0927/103852.172:ERROR:device_event_log_impl.cc(208)] [10:38:52.172] Bluetooth: bluetooth_adapter_winrt.cc:1074 Getting Default Adapter failed.

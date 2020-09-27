@@ -83,14 +83,8 @@ color: red;
 			</h1>
 		</div>
 		<div id="menu">
-			<ul>
-				<li><a href="#" accesskey="4" title="">내 정보</a></li>
-				<li><a href="#" accesskey="2" title="">인사 관리</a></li>
-				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
-				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li class="current_page_item"><a href="#" accesskey="6"
-					title="">자재 관리</a></li>
-				<li><a href="#">회계 관리</a></li>
+			<ul id="mainmenu">
+				
 			</ul>
 		</div>
 	</div>
@@ -134,6 +128,44 @@ color: red;
 	</div>
 
 	<script>
+	$(document).ready(function(){
+		$.ajax({
+			url:'/erp/rest/managermode/getaddmenu',
+			type:'get',
+			datatype:'json',
+			success:function(data){
+				console.log(data);
+				var str="";
+
+				for(var i in data.mList){
+					str+="<li><a id="+data.mList[i].f_functions+" onclick=menu('"+data.mList[i].f_functions+"')>"+data.mList[i].f_functions+"</a></li>";
+				}
+
+				$("#mainmenu").html(str);
+			},
+			error:function(error){
+				console.log(error);
+			}
+
+		});
+
+	});
+
+	function menu(menu){
+		console.log(menu);
+
+		if(menu=="인사관리"){
+			$("#"+menu).attr("href","/erp/main");
+			}else if(menu=="영업관리"){
+			$("#"+menu).attr("href","/erp/sales/main");
+			}else if(menu=="구매관리"){
+			$("#"+menu).attr("href","/erp/Purchase/erpmain");
+			}else if(menu=="재고관리"){
+			$("#"+menu).attr("href","/erp/stock/setcategory");
+			}else if(menu=="회계관리"){
+			$("#"+menu).attr("href","/erp/Account/acerp");
+			}
+	}
 	//카테고리 출력	
 	category('/erp/stock/getcategory');
 	//카테고리 추가	

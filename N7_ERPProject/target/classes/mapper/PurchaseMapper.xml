@@ -3,17 +3,28 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.n7.erp.dao.PurchaseDao">
-	<insert id="pregistration" parameterType="Purchase">
-		INSERT INTO O_PURCHASELIST VALUES(#{p_documentcode}||LPAD(P_SEQ.CURRVAL,4,0), #{p_ccode}, #{p_itcode}, #{p_name}, #{p_unlit}, #{p_amount}, #{p_budget})
+	<insert id="pcommom" parameterType="Purchase">
+		INSERT INTO O_PURCHASECOMMOM VALUES(#{p_documentcode}||LPAD(O_PURCHASEPROGRAM_SEQ.NEXTVAL,4,0), #{p_ccode}, #{p_productnum}, #{p_day}, #{p_clcode}, #{p_writer})
 	</insert>
 	
-	<insert id="pcommom" parameterType="Purchase">
-		INSERT INTO O_PURCHASECOMMOM VALUES(#{p_documentcode}||LPAD(P_SEQ.NEXTVAL,4,0), #{p_ccode}, #{p_productnum}, #{p_day}, #{p_clcode}, #{p_writer})
+	<insert id="pregistration" parameterType="Purchase">
+		INSERT INTO O_PURCHASELIST VALUES(#{p_documentcode}||LPAD(O_PURCHASEPROGRAM_SEQ.CURRVAL,4,0), #{p_ccode}, #{p_itcode}, #{p_name}, #{p_unlit}, #{p_amount}, #{p_budget})
 	</insert>
 	
 	<select id="pFrerence" resultType="Purchase">
 		SELECT * FROM O_PURCHASECOMMOM
-	</select>
+	</select> 
+	
+<!-- 	<select id="pFrerence" parameterType="object" resultType="Purchase">
+	<![CDATA[
+		SELECT * FROM(
+		 SELECT /*+INDEX_DESC(O_PURCHASECOMMOM O_PURCHASECOMMOM_PK)*/ROWNUM RN, O_PURCHASECOMMOM.*
+		 FROM O_PURCHASECOMMOM
+		 WHERER ROWNUM<=#{pageNum}*10
+		)
+		WHERE RN>=#{pageNum}*10-9
+	]]>
+	</select> -->
 	
 	<select id="pfSearch" parameterType="String" resultType="Purchase">
 		SELECT * FROM O_PURCHASECOMMOM 
@@ -54,40 +65,40 @@
 		SELECT * FROM O_PURCHASELIST WHERE P_DOCUMENTCODE= #{check}
 	</select>
 	
-	<select id="approvalLine" parameterType="String" resultType="Line">
-   		SELECT * FROM MEMBER2 
+    <select id="approvalLine" parameterType="String" resultType="pALine">
+  		 SELECT * FROM MLIST 
    </select>
    
-   <select id="searchName" parameterType="String" resultType="Line">
-   		SELECT * FROM MEMBER2 WHERE M_NAME=#{name}
+   <select id="searchName" parameterType="String" resultType="pALine">
+   		SELECT * FROM MLIST  WHERE M_NAME=#{name}
    </select>
    
-   <select id="addApproval" parameterType="String" resultType="Line">
-   		SELECT * FROM MEMBER2 WHERE M_CODE=#{code}
+   <select id="addApproval" parameterType="String" resultType="pALine">
+   		SELECT * FROM MLIST  WHERE HC_HRCODE=#{code}
    </select>
    
-   <select id="approLinecom1" parameterType="String" resultType="Line">
-   		SELECT * FROM MEMBER2 WHERE M_CODE=#{code01}
+   <select id="approLinecom1" parameterType="String" resultType="pALine">
+   		SELECT * FROM MLIST  WHERE HC_HRCODE=#{code01}
    </select>
    
-   <select id="approLinecom2" parameterType="String" resultType="Line">
-  		SELECT * FROM MEMBER2 WHERE M_CODE=#{code02}
+	<select id="getMyInfo" parameterType="String" resultType="pALine">
+   SELECT * FROM MLIST  WHERE HC_HRCODE=#{code}
    </select>
    
-	<insert id="Approval" parameterType="Approval" >
-		INSERT INTO APPROVALDOCU VALUES(#{p_docunum}, #{p_ccode}, #{p_docuname}, #{p_approver0}, #{p_approver1}, DEFAULT, 1)
+	<insert id="Approval" parameterType="pApproval">
+		INSERT INTO APPROVALDOCU VALUES(#{p_documentcode}, #{p_ccode}, #{p_title}, #{p_apcode1}, #{p_apcode2}, DEFAULT, 0)
 	</insert>
 	
-	<insert id="pApproval1" parameterType="Approval">
-		INSERT INTO O_PURCHASEPROGRAMCOMMOM VALUES(#{p_docunum}, #{p_ccode}, #{p_docuname}, #{p_clcode}, DEFAULT, #{p_productnum}, #{p_day}, #{p_ect,jdbcType=VARCHAR}, #{p_approver0}, #{p_approver1}, #{p_approver2})
+	<insert id="pApproval1" parameterType="pApproval">
+		INSERT INTO O_PURCHASEPROGRAMCOMMOM VALUES(#{p_documentcode}, #{p_ccode}, #{p_title}, #{p_day}, #{p_clcode}, DEFAULT, #{p_productnum}, #{p_etc,jdbcType=VARCHAR}, #{p_approver1}, #{p_approver2}, #{p_approver3}, #{p_apcode1}, #{p_apcode2}, #{p_apcode3})
 	</insert>
 	
-	<insert id="pApproval2" parameterType="Approval">
-		INSERT INTO O_PURCHASEPROGRAM VALUES(#{p_docunum}, #{p_ccode}, #{p_name}, #{p_itcode}, #{p_unlit}, #{p_amount}, #{p_budget})
+	<insert id="pApproval2" parameterType="pApproval">
+		INSERT INTO O_PURCHASEPROGRAM VALUES(#{p_documentcode}, #{p_ccode}, #{p_name}, #{p_itcode}, #{p_unlit}, #{p_amount},#{p_budget})
 	</insert>
 	
 	<insert id="rRegistration" parameterType="Return">
-		INSERT INTO O_RETURN VALUES(#{r_documentcode}||LPAD(R_SEQ.NEXTVAL,4,0), #{r_ccode}, #{r_ieseqnum}, #{r_itcode}, #{r_clcode}, DEFAULT, #{r_amount}, #{r_unlit}, #{r_budget}, #{r_name}, #{r_reason}, 3)
+		INSERT INTO O_RETURN VALUES(#{r_documentcode}||LPAD(R_SEQ.NEXTVAL,4,0), #{r_ccode}, #{r_ieseqnum}, #{r_itcode}, #{r_clcode}, #{r_amount}, #{r_unlit}, #{r_budget}, #{r_name}, #{r_reason}, 3, DEFAULT)
 	</insert>
 	
 	<select id="rInfo" resultType="Return">
@@ -115,4 +126,5 @@
 			</if>
 		</where>
 	</select>
+
 </mapper>

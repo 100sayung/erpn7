@@ -52,8 +52,7 @@
     <div id="side_menu">
         <ul id="menuList">
             <li><a href="#" id="acountting">매츌/매입전표 작성</a></li>
-            <li><a href="">분개전표입력</a></li>
-            <li><a href="">매출/매입전표 결재확인</a></li>
+            <li><a href="#" id="acWriting">분개전표입력</a></li>
         </ul>
     </div>
     <center>
@@ -92,11 +91,11 @@ function menu(menu){
 	if(menu=="인사관리"){
 		$("#"+menu).attr("href","/erp/myInfo/myInfo");
 		}else if(menu=="영업관리"){
-		$("#"+menu).attr("href","");
+		$("#"+menu).attr("href","/erp/sales/main");
 		}else if(menu=="구매관리"){
-		$("#"+menu).attr("href","");
+		$("#"+menu).attr("href","/erp/Purchase/erpmain");
 		}else if(menu=="재고관리"){
-		$("#"+menu).attr("href","");
+		$("#"+menu).attr("href","/erp/stock/setcategory");
 		}else if(menu=="회계관리"){
 		$("#"+menu).attr("href","/erp/Account/acerp");
 		}
@@ -115,6 +114,19 @@ $("#acountting").click(function(){
 		}
 	});
 
+});
+$("#acWriting").click(function(){
+	$.ajax({
+		url:'/erp/Account/acWritefrm',
+		type:'get',
+		success:function(data){
+			$("#description").html(data);
+		},
+		error:function(){
+			
+		}
+	});
+	
 });
 </script>
 </html>

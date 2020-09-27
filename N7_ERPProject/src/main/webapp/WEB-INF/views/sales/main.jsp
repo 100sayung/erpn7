@@ -1,40 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <title>Document</title>
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
-	media="all" />
+   media="all" />
+   
 <style>
 #header {
-	width: 100%;
-	height: 200px;
+   width: 100%;
+   height: 200px;
 }
 
 #side_menu {
-	height: 100%;
-	width: 250px;
-	font-size: 20px;
-	font-weight: bolder;
-	float: left;
-	border-right:1px solid #E6E6E6;
+   height: 100%;
+   width: 250px;
+   font-size: 20px;
+   font-weight: bolder;
+   float: left;
+   border-right:1px solid #E6E6E6;
 }
 
 #side_menu #menuList {
-	list-style: none;
-	margin-top: 150px;
+   list-style: none;
+   margin-top: 150px;
 }
 
 #side_menu #menuList li {
-	margin: 20px;
+   margin: 20px;
 }
 
 a {
-	text-decoration: none;
+   text-decoration: none;
 }
 
 #body{
@@ -50,41 +51,75 @@ a {
 }
 
 ul {
-	list-style: none;
+   list-style: none;
 }
 </style>
-</head>
+
 <body>
-	<div id="header">
-		<div id="logo">
-			<h1>
-				<a href="#">N7 ERP SYSTEM</a>
-			</h1>
-		</div>
-		<div id="menu">
-			<ul>
-				<li><a href="#" accesskey="4" title="">내 정보</a></li>
-				<li><a href="#" accesskey="2" title="">인사 관리</a></li>
-				<li class="current_page_item"><a href="#" accesskey="3" title="">영업 관리</a></li>
-				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="#">회계 관리</a></li>
-			</ul>
-		</div>
-	</div>
-	<div id="side_menu">
-		<ul id="menuList">
-			<li id="showMenu1">수주등록</li>
-			<li id="showMenu2">출하의뢰입력  </li>
-			<li id="showMenu3">미수금등록</li>
-			<li id="showMenu4">영업활동 조회</li>
-		</ul>
-	</div>
-	<div id="description">
+   <div id="header">
+      <div id="logo">
+         <h1>
+            <a href="#">N7 ERP SYSTEM</a>
+         </h1>
+      </div>
+      <div id="menu">
+         <ul id="mainmenu">
+         
+         </ul>
+      </div>
+   </div>
+   <div id="side_menu">
+      <ul id="menuList">
+         <li id="showMenu1">수주등록</li>
+         <li id="showMenu2">출하의뢰입력  </li>
+         <li id="showMenu3">미수금등록</li>
+         <li id="showMenu4">영업활동 조회</li>
+         <li id="showMenu5">내 결재함</li>
+      </ul>
+   </div>
+   <div id="description">
     
-	</div>
-	<script>
-	
+   </div>
+   </body>
+   <script>
+   $(document).ready(function(){
+		$.ajax({
+			url:'/erp/rest/managermode/getaddmenu',
+			type:'get',
+			datatype:'json',
+			success:function(data){
+				console.log(data);
+				var str="";
+
+				for(var i in data.mList){
+					str+="<li><a id="+data.mList[i].f_functions+" onclick=menu('"+data.mList[i].f_functions+"')>"+data.mList[i].f_functions+"</a></li>";
+				}
+
+				$("#mainmenu").html(str);
+			},
+			error:function(error){
+				console.log(error);
+			}
+
+		});
+
+	});
+
+	function menu(menu){
+		console.log(menu);
+
+		if(menu=="인사관리"){
+			$("#"+menu).attr("href","/erp/main");
+			}else if(menu=="영업관리"){
+			$("#"+menu).attr("href","/erp/sales/main");
+			}else if(menu=="구매관리"){
+			$("#"+menu).attr("href","/erp/Purchase/erpmain");
+			}else if(menu=="재고관리"){
+			$("#"+menu).attr("href","/erp/stock/setcategory");
+			}else if(menu=="회계관리"){
+			$("#"+menu).attr("href","/erp/Account/acerp");
+			}
+	}
    $('#showMenu1').click(function() {
 
        $.ajax({
@@ -128,9 +163,9 @@ ul {
           console.log(data);
           
           for(var i in data.sList){
-        	  str+="<tr><td><input type='text' name='checknum' value="+data.sList[i].pro_order_num+"></td>";
-        	  str+="<td><input type='text' name='pro_name' value="+data.sList[i].pro_name+"</td>";
-        	  
+             str+="<tr><td><input type='text' name='checknum' value="+data.sList[i].pro_order_num+"></td>";
+             str+="<td><input type='text' name='pro_name' value="+data.sList[i].pro_name+"</td>";
+             
           }
           $('#tBody').html(str);
        },
@@ -174,6 +209,56 @@ ul {
        });
     });
    
-	</script>
-</body>
+   $('#showMenu5').on('click', function(e) {
+       e.preventDefault();
+
+/*        var check='';
+       $("input[name=each_check]:checked").each(function(){
+          check= $(this).attr("value");
+          
+          console.log(check);
+          if(check!=""){ */
+      
+       $.ajax({
+          type : 'get',
+          url :  'salesapprovaldetail',
+          dataType : 'html',
+          success : function(data) {
+             console.log(data);
+             $('#description').html(data);
+          },
+          error: function(error){
+             console.log(error);
+          }
+        });
+    });
+  
+   var select;
+      $.ajax({
+            url:"/erp/stock/getitemcode",
+            dataType:"json",
+            type:"post",
+            success:function(data){
+               select = makeSelectBox(data);
+               console.log(str)
+            },
+            error:function(err){
+               console.log(err);
+            }
+         });
+      
+     function makeSelectBox(arr){
+          var arrStr = "<select name = 'bs_itcode'>"
+          if(arr.length==0){
+             arrStr+="<option>품목코드를 먼저 작성해주세요 </option>";
+          }else{
+             for(var i = 0;i<arr.length;i++){
+                arrStr+="<option value='"+arr[i].it_code+"'>"+arr[i].it_code+"</option>"; 
+             }
+          }
+          arrStr+="</select>";
+          return arrStr;
+       }
+   </script>
+
 </html>

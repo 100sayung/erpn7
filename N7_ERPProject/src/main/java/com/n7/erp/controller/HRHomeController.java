@@ -201,8 +201,8 @@ public class HRHomeController {
 		return result;
 	}
 	@GetMapping(value="/hr/holidayap")
-	public ModelAndView holidayAp() {
-		mav=am.approvalLine();
+	public ModelAndView holidayAp(HttpSession session) {
+		mav=am.approvalLine(session);
 		return mav;
 	}
 
