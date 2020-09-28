@@ -266,6 +266,9 @@ ul {
 		                    	 cell.style.color="black";
 		                    	 cell.style.backgroundColor="#C4C5C4";
 		                     }
+		                     if(data[k].hap_status=="4"){
+		                    	 cell.innerHTML = row.remove();
+		                     }
 		                     ///////
 		                     let date = "" + year + month + day;
 		                     if (startday == date) {

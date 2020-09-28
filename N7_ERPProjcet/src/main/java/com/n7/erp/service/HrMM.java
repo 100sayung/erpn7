@@ -209,14 +209,14 @@ public class HrMM {
 	private String makeHRCardList(ArrayList<Member> hList) {
 		StringBuilder str = new StringBuilder();
 		str.append("<table id='table1' border='1' cellspacing='0'>");
-		str.append("<tr class='infomenu'><td>�궗吏�</td><td>�씠由�</td><td>�깮�뀈�썡�씪</td><td>�씠硫붿씪</td><td>�닔�젙</td></tr>");
+		str.append("<tr class='infomenu'><td>사진</td><td>이름</td><td>전화번호</td><td>이메일</td><td></td></tr>");
 		for (int i = 0; i < hList.size(); i++) {
-			str.append("<tr><td><img style='width:200px; height: 250px;' src='/erp/upload/" + hList.get(i).getM_photo()
+			str.append("<tr><td><img style='width:200px; height: 150px;' src='/erp/upload/" + hList.get(i).getM_photo()
 					+ "'></td>");
 			str.append("<td>" + hList.get(i).getM_name() + "</td>");
 			str.append("<td>" + hList.get(i).getM_birth() + "</td>");
 			str.append("<td>" + hList.get(i).getM_email() + "</td><td>");
-			str.append("<input type='button' value='�닔�젙' class='infobtn' onclick='modifyDetail(\""
+			str.append("<input type='button' value='수정' class='infobtn' onclick='modifyDetail(\""
 					+ hList.get(i).getM_id() + "\")'></td></tr>");
 		}
 		str.append("</table>");

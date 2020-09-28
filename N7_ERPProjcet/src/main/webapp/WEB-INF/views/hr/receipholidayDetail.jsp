@@ -35,16 +35,23 @@
       <tr>
          <td>${apholi.hap_startday }</td>
          <td>${apholi.hap_endday }</td>
-         <td>${apholi.hap_status }</td>
+         <c:if test="${apholi.hap_status eq 1}">
+         	<td>대기중</td>
+         </c:if>
+         <c:if test="${apholi.hap_status eq 3}">
+         	<td>승인됨</td>
+         </c:if>
          <td>${apholi.hap_applydate }</td>
       </tr>
       <tr>
          <td>${apholi.hap_reason }</td>
    </table>
-      <c:if test="${apholi.hap_status eq 1}">
+      <c:if test="${apholi.hap_status eq 1 or apholi.hap_status eq 3}">
       -- 이 아래는 toApprover만 볼수있음-- 
          <input type='hidden' value='${apholi.hap_docunum}' name='docunum' id="docunum">
+         <c:if test="${apholi.hap_status eq 1}">
          <button id="ok" value="">승인</button> &nbsp;
+         </c:if>
          <button id='no'>거부</button>
       </c:if>
    

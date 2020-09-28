@@ -43,7 +43,7 @@ a {
 #description {
 	float: left;
 	height: 100%;
-	width: 800px;
+	width: 1000px;
 }
 
 ul {

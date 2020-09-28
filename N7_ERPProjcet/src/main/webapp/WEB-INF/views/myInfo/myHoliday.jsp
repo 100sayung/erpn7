@@ -43,6 +43,7 @@ a {
 #description {
    float: left;
    height: 100%;
+   
 }
 
 ul {
@@ -262,8 +263,7 @@ table, th, td{
                     	 cell.style.color="black";
                     	 cell.style.fontWeight="bolder";
                     	 cell.style.textShadow="black 0px 1px";
-                     }
-                     if(data[k].hap_status=="1"){
+                     }else if(data[k].hap_status=="1"){
                     	 cell.style.color="black";
                     	 cell.style.backgroundColor="#C4C5C4";
                      }
