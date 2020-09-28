@@ -126,5 +126,13 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="stocklist" parameterType="String" resultType="ieport">
+		SELECT * FROM S_IEPORT WHERE IE_CPCODE=#{cCode}
+	</select>
+	
+	<select id="getstocklist" parameterType="String" resultType="ieport">
+		SELECT * FROM S_IEPORT WHERE IE_CPCODE=#{cCode}
+	</select>
 
 </mapper>

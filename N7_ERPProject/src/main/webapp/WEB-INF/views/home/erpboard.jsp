@@ -26,7 +26,7 @@ Released   : 20130526
 <style type="text/css">
 h2{
 font-size: 36px;
-margin-top: 35px;
+margin-top: 23px;
 margin-bottom: 10px;
 margin-left: auto;
 font-family: inherit;
@@ -131,9 +131,8 @@ padding-bottom: 20px;
 		var bList=${bList};
 		var str="";
 		for(var i=0; i<bList.length; i++){
-			var date=bList[i].CB_DATE;
 			str+="<tr><td>"+bList[i].CB_NUM+"</td>";
-			str+="<td><a style='text-decoration: none;' href='boardContents?CB_NUM="+bList[i].CB_NUM+"'>"+bList[i].CB_TITLE+"</a></td>";
+			str+="<td><a style='text-decoration: none;' href='/erp/home/boardContents?CB_NUM="+bList[i].CB_NUM+"'>"+bList[i].CB_TITLE+"</a></td>";
 			str+="<td>"+bList[i].CB_WRITER+"</td></tr>";
 		}
 		$("#List").append(str);

@@ -73,7 +73,7 @@ ${msg}
 						<tr>
 							<th><input type="checkbox" id="allCheck"></th>
                      		<th>상품명</th>
-                     		<th>상품코드</th>
+                     		<th>품목코드</th>
                      		<th>수량</th>
                      		<th>단가</th>
                      		<th>합계</th>
@@ -83,7 +83,12 @@ ${msg}
 						<tr>
 							<td><input type="checkbox" name="each_check" class="each"></td>
                      		<td><input type="text" name="p_name"></td>
-                     		<td><input type="text" name="p_itcode"></td>
+                     		<!-- <td><input type="text" name="p_itcode"></td> -->
+                     		<td>
+                     			<select>
+                     				<option value=""></option>
+                     			</select>
+                     		</td>
                      		<td><input type="number" min="1" name="p_amount"></td>
                      		<td><input type="text" name="p_unlit"></td>
                      		<td><input type="text" name="p_budget"></td>
@@ -262,18 +267,29 @@ ${msg}
       });
       
       $("#stock").click(function(){
-    	  $.ajax({
-    		  url: "/erp/stock/getbyitemstocklist",
-    		  type: "post",
-    		  dataType: "json",
-    		  success: function(data){
-    			  console.log(data);
-    		  },
-    		  error: function(err){
-    			  console.log(err);
-    		  }
-    	  })
-      })
+		  $.ajax({
+			  url:"/erp/rest/purchase/getstocklist",
+			  type: "get",
+			  dataType: "json",
+			  success: function(data){
+				  console.log(data);
+				  var str="";
+				  str+="<tr><th>품목코드</th><th>날짜</th><th>수량</th><th>가격</th><th>회사</th><tr>";
+				  for(var i in data.sList){
+				  	str+="<tr><td>"+data.sList[i].ie_itcode+"</td>";
+				  	str+="<td>"+data.sList[i].ie_date+"</td>";
+				  	str+="<td>"+data.sList[i].ie_qty+"</td>";
+				  	str+="<td>"+data.sList[i].ie_price+"</td>";
+				  	str+="<td>"+data.sList[i].ie_cpcode+"</td></tr>";
+				  }
+				  $('#list').html(str);
+			  },
+			  error: function(err){
+				  console.log(err);
+			  }
+		  })
+  }) 
+      
      
    </script>
 </body>

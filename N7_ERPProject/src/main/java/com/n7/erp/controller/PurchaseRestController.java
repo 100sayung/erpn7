@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.n7.erp.bean.IePort;
+import com.n7.erp.bean.ItemCode;
 import com.n7.erp.bean.ps.Purchase;
 import com.n7.erp.bean.ps.PurchaseApproval;
 import com.n7.erp.bean.ps.Return;
@@ -119,6 +121,18 @@ public class PurchaseRestController {
 		System.out.println("search="+search);
 		Map<String, List<Return>> rMap= pm.rSearch(search, choice);
 		return rMap;
+	}
+	
+	@GetMapping(value = "/purchase/stocklist", produces= "application/json;charest=utf-8" )
+	public Map<String, List<IePort>> stocklist(HttpSession session) {
+		Map<String, List<IePort>> sMap= pm.stocklist(session);
+		return sMap;
+	}
+	
+	@GetMapping(value = "/purchase/getstocklist", produces= "application/json;charest=utf-8" )
+	public Map<String, List<ItemCode>> getstocklist(HttpSession session) {
+		Map<String, List<ItemCode>> sMap= pm.getstocklist(session);
+		return sMap;
 	}
 
 }

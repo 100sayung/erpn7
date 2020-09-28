@@ -231,19 +231,29 @@ border: 1px solid silver;
 			})	  
 			
 	
-	$('#Wearing').click(function(){
-		$.ajax({
-			url: "/erp/stock/getimportlist",
-			type: "post",
-			dataType: "json",
-			success: function(data){
-				console.log(data);
-			},
-			error: function(err){
-				console.log(err);
-			}
-		});
-	});
+	$("#Wearing").click(function(){
+		  $.ajax({
+			  url:"/erp/rest/purchase/stocklist",
+			  type: "get",
+			  dataType: "json",
+			  success: function(data){
+				  console.log(data);
+				  var str="";
+				  str+="<tr><th>품목코드</th><th>날짜</th><th>수량</th><th>가격</th><th>회사</th></tr>";
+				  for(var i in data.sList){
+				  	str+="<tr style='text-align: center;'><td>"+data.sList[i].ie_itcode+"</td>";
+				  	str+="<td>"+data.sList[i].ie_date+"</td>";
+				  	str+="<td>"+data.sList[i].ie_qty+"</td>";
+				  	str+="<td>"+data.sList[i].ie_price+"</td>";
+				  	str+="<td>"+data.sList[i].ie_cpcode+"</td></tr>";
+				  }
+				  $('#list').html(str);
+			  },
+			  error: function(err){
+				  console.log(err);
+			  }
+		  })
+	})
    </script>
 </body>
 </html>

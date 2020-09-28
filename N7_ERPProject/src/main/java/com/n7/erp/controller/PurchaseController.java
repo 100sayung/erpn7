@@ -1,5 +1,7 @@
 package com.n7.erp.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,9 +56,10 @@ public class PurchaseController {
 		return "Purchase/retrunregistration";
 	}
 	
-	@RequestMapping(value = "Purchase/purchaseApprovalInfo", method = RequestMethod.GET)
-	public String purchaseApprovalInfo() {
-		return "Purchase/purchaseApprovalInfo";
+	@RequestMapping(value = "Purchase/approvalInfo", method = RequestMethod.GET)
+	public ModelAndView purchaseApprovalInfo(HttpSession session) {
+		mav=pm.getApprovalInfo(session);
+		return mav;
 	
 	}
 	

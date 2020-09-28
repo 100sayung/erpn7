@@ -163,12 +163,12 @@ public class HomeController {
 	    return mav;
 	}
 	
-	//게시글 상세보기
-	@RequestMapping(value = "/home/boardContents", method = RequestMethod.POST)
-	public ModelAndView boardContents(int CB_NUM) {
+	@RequestMapping(value = "/home/boardContents", method = RequestMethod.GET)
+	 public ModelAndView boardContents(int CB_NUM) {
+		System.out.println("CB_NUM="+CB_NUM);
 		mav=cbm.boardContents(CB_NUM);
 		return mav;
-	}
+   }
 
 //	// �Խñ� ����
 //	@RequestMapping(value = "/boardmodify", method = RequestMethod.POST)

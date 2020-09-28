@@ -13,6 +13,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.n7.erp.bean.ApprovalDocu;
+import com.n7.erp.bean.IePort;
+import com.n7.erp.bean.ItemCode;
 import com.n7.erp.bean.ps.Purchase;
 import com.n7.erp.bean.ps.PurchaseApproval;
 import com.n7.erp.bean.ps.approvalLine;
@@ -350,4 +353,52 @@ public class PurchaseMM {
 		return rMap;
 	}
 	
+	public Map<String, List<IePort>> stocklist(HttpSession session) {
+		String cCode = session.getAttribute("cCode").toString();
+		Map<String, List<IePort>> sMap= null;
+		List<IePort> sList= pDao.stocklist(cCode);
+		if(sList!=null) {
+			sMap= new HashMap<>();
+			sMap.put("sList", sList);
+			System.out.println("sList="+sList);
+		}else {
+			sMap=null;
+		}
+		return sMap;
+	}
+
+	public Map<String, List<ItemCode>> getstocklist(HttpSession session) {
+		String cCode = session.getAttribute("cCode").toString();
+		Map<String, List<ItemCode>> sMap= null;
+		List<ItemCode> sList= pDao.getstocklist(cCode);
+		if(sList!=null) {
+			sMap= new HashMap<>();
+			sMap.put("sList", sList);
+			System.out.println("sList="+sList);
+		}else {
+			sMap=null;
+		}
+		return sMap;
+	}
+
+	public ModelAndView getApprovalInfo(HttpSession session) {
+		String cCode = session.getAttribute("cCode").toString();
+		ModelAndView mav= new ModelAndView();
+		String view=null;
+		
+		List<ApprovalDocu>aList=null;
+		
+		aList=pDao.getApprovalInfo();
+		if(aList!=null) {
+			System.out.println("aLIST"+aList);
+			mav.addObject("aList", new Gson().toJson(aList));
+			view= "/Purchase/approvalInfo";
+		}else {
+			view= "/Purchase/approvalInfo";
+		}
+		mav.setViewName(view);
+	
+		return mav;
+	}
+
 }

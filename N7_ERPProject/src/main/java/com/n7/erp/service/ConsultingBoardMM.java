@@ -71,16 +71,15 @@ public class ConsultingBoardMM {
 	}
 	
 	public ModelAndView boardContents(int CB_NUM) {
-		mav=new ModelAndView();
+		mav= new ModelAndView();
 		String view= null;
 		
-		ConsultingBoard board= new ConsultingBoard();
+		ConsultingBoard board= CBdao.getContents(CB_NUM);
+		System.out.println("들어감?");
 		
-		board=CBdao.getBoardContents(CB_NUM);
-		
-		view="/erp/home/boardContents";
-		
+		System.out.println("board="+board);
 		mav.addObject("board", board);
+		view="/home/boardContents";
 		mav.setViewName(view);
 		
 		return mav;

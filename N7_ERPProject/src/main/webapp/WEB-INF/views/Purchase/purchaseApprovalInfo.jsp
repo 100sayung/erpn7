@@ -85,31 +85,9 @@ html, body {
                            <tr>
                               <th colspan="2">문서번호</th>
                               <th colspan="6"><input type="text" name="p_documentcode"
-                                 class="txt" value="${pa.p_documentcode}" readonly><input
-                                 type="hidden" name="j_grade" class="draft3"
-                                 value="${ac.j_grade}" readonly></th>
-                              <!--                               <td>결재상태</td> -->
-
+                                 class="txt" value="${pa.p_documentcode}" readonly>
                            </tr>
                            <tr>
-                              <th colspan="2">활동센터</th>
-                              <th colspan="2"><input type="text" name="j_centre"
-                                 class="txt" value="${ac.j_centre}" readonly><input
-                                 type="hidden" name="j_ccode" class="txt"
-                                 value="${ac.j_ccode}" readonly></th>
-                              <th colspan="2">귀속부서</th>
-                              <th colspan="2"><input type="text" name="j_section"
-                                 class="txt" value="${ac.j_section}" readonly></th>
-                           </tr>
-                           <tr>
-                              <th colspan="2">관계회사</th>
-                              <td colspan="6"><input type="text" name="p_clcode"
-                                 class="draft3" value="${pa.p_clcode}" readonly></td>
-<%--                               <th colspan="2">비용구분</th>
-                              <td colspan="2"><input type="text" name="p_budget"
-                                 class="draft3" value="${pa.p_budget}" readonly></td> --%>
-
-                           </tr>
                            <tr>
                               <th colspan="2">제품일련번호</th>
                               <td colspan="6"><input type="text" name="p_productnum"
@@ -134,6 +112,10 @@ html, body {
                                  value="${ac.j_reasion}" id="ect"></th>
                            </tr>
                         </table>
+                        <div>
+                          <button type="button" id="submit">승인하기</button>
+         				  <button type="button" id="">반려하기</button>
+                        </div>
                      </div>
                   </div>
                </td>
@@ -141,5 +123,20 @@ html, body {
          </table>
        </div>
      </form>
+ <script type="text/javascript">
+ 	$(document).ready(function(){
+ 		arr= new Array();
+ 		var cnt= $("input[name='appval']").each(function(){
+ 			arr.push($(this).attr('value'));
+ 		});
+ 		
+ 		$.ajax({
+ 			url: '/erp/rest/Purchase/getApprovalInfo',
+ 			type: 'post',
+ 			traditional: true,
+ 			
+ 		})
+ 	})
+ </script>
 </body>
 </html>

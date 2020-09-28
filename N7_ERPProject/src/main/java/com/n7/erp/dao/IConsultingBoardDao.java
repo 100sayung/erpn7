@@ -15,7 +15,7 @@ public interface IConsultingBoardDao {
 
 	boolean boardWrite(ConsultingBoard board);
 
-	ConsultingBoard getBoardContents(int cB_NUM);
+	ConsultingBoard getContents(int CB_NUM);
 	
 	//상담 게시판 	
 //	@Select("SELECT * FROM CONSULTING_BOARD")
