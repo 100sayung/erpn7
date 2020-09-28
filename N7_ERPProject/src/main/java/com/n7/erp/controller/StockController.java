@@ -51,6 +51,10 @@ public class StockController {
 	public String accountConfirm() {
 		return "stock/accountconfirm";
 	}
+	@RequestMapping(value = "/addimportlist", method = RequestMethod.GET)
+	public String addImportList() {
+		return "stock/addimportlist";
+	}
 	@RequestMapping(value = "/exportstockcheck", method = RequestMethod.GET)
 	public ModelAndView exportStockCheck(HttpSession session) {
 		mav = stmm.exportStockCheck(session);

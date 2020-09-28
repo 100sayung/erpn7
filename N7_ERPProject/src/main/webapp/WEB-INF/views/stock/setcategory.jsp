@@ -98,7 +98,7 @@ color: red;
 			<li><a href="/erp/stock/byitemstocklist">품목별 자재현황</a></li>
 			<li><a href="/erp/stock/monthpayment">월수불실적</a></li>
 			<li><a href="/erp/stock/exportstockcheck">출고 양식</a></li>
-		</ul>
+			<li><a href="/erp/stock/addimportlist">입고 확정</a></li>		</ul>
 	</div>
 
 	<div id="description">

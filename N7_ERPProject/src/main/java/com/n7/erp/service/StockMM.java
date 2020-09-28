@@ -160,13 +160,13 @@ public class StockMM {
 						+ "' readonly></td>");
 				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_size() + "' readonly></td>");
 				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
-				sb.append("<td><input id='p_amount" + ipList.get(i).getP_productnum() + "' onclick='modifySum(\""
-						+ ipList.get(i).getP_productnum() + "\")' name='ie_qty' type='number' value='"
+				sb.append("<td><input id='p_amount" + ipList.get(i).getP_documentcode() + "' onclick='modifySum(\""
+						+ ipList.get(i).getP_documentcode() + "\")' name='ie_qty' type='number' value='"
 						+ ipList.get(i).getP_amount() + "'>");
 				sb.append("<input type='hidden' value='" + ipList.get(i).getP_amount() + "'></td>");
-				sb.append("<td id='p_unlit" + ipList.get(i).getP_productnum() + "'><input type='number' value='"
+				sb.append("<td id='p_unlit" + ipList.get(i).getP_documentcode() + "'><input type='number' value='"
 						+ ipList.get(i).getP_unlit() + "' readonly></td>");
-				sb.append("<td id='p_sum" + ipList.get(i).getP_productnum() + "'><input name='ie_price' type='number' value='"
+				sb.append("<td id='p_sum" + ipList.get(i).getP_documentcode() + "'><input name='ie_price' type='number' value='"
 						+ (ipList.get(i).getP_unlit()*ipList.get(i).getP_amount()) + "' readonly></td>");
 				sb.append("<td><input type='text' name = 'ie_etc'>");
 				sb.append("<input type='hidden' name = 'ie_ocode' value='" + ipList.get(i).getO_code() + "'></td>");
@@ -188,8 +188,8 @@ public class StockMM {
 							+ "' readonly></td>");
 					sb.append("<td><input type='text' value='" + ipList.get(i).getIt_size() + "' readonly></td>");
 					sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
-					sb.append("<td><input id='p_amount" + ipList.get(i).getP_productnum() + "' onclick='modifySum(\""
-							+ ipList.get(i).getP_productnum() + "\")' name='ie_qty' type='number' value='"
+					sb.append("<td><input id='p_amount" + ipList.get(i).getP_documentcode() + "' onclick='modifySum(\""
+							+ ipList.get(i).getP_documentcode() + "\")' name='ie_qty' type='number' value='"
 							+ ipList.get(i).getP_amount() + "'>");
 					sb.append("<input type='hidden' value='" + ipList.get(i).getP_amount() + "'></td>");
 					sb.append("<td id='p_unlit" + ipList.get(i).getP_productnum() + "'><input type='number' value='"
@@ -212,13 +212,13 @@ public class StockMM {
 							+ "' readonly></td>");
 					sb.append("<td><input type='text' value='" + ipList.get(i).getIt_size() + "' readonly></td>");
 					sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
-					sb.append("<td><input id='p_amount" + ipList.get(i).getP_productnum() + "' onclick='modifySum(\""
-							+ ipList.get(i).getP_productnum() + "\")' name='ie_qty' type='number' value='"
+					sb.append("<td><input id='p_amount" + ipList.get(i).getP_documentcode() + "' onclick='modifySum(\""
+							+ ipList.get(i).getP_documentcode() + "\")' name='ie_qty' type='number' value='"
 							+ ipList.get(i).getP_amount() + "'>");
 					sb.append("<input type='hidden' value='" + ipList.get(i).getP_amount() + "'></td>");
-					sb.append("<td id='p_unlit" + ipList.get(i).getP_productnum() + "'><input type='number' value='"
+					sb.append("<td id='p_unlit" + ipList.get(i).getP_documentcode() + "'><input type='number' value='"
 							+ ipList.get(i).getP_unlit() + "' readonly></td>");
-					sb.append("<td id='p_sum" + ipList.get(i).getP_productnum()
+					sb.append("<td id='p_sum" + ipList.get(i).getP_documentcode()
 							+ "'><input name='ie_price' type='number' value='" + (ipList.get(i).getP_unlit()*ipList.get(i).getP_amount())
 							+ "' readonly></td>");
 					sb.append("<td><input type='text' name = 'ie_etc'>");
@@ -239,13 +239,13 @@ public class StockMM {
 						+ "' readonly></td>");
 				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_size() + "' readonly></td>");
 				sb.append("<td><input type='text' value='" + ipList.get(i).getIt_unit() + "' readonly></td>");
-				sb.append("<td><input id='p_amount" + ipList.get(i).getP_productnum() + "' onclick='modifySum(\""
-						+ ipList.get(i).getP_productnum() + "\")' name='ie_qty' type='number' value='"
+				sb.append("<td><input id='p_amount" + ipList.get(i).getP_documentcode() + "' onclick='modifySum(\""
+						+ ipList.get(i).getP_documentcode() + "\")' name='ie_qty' type='number' value='"
 						+ ipList.get(i).getP_amount() + "'>");
 				sb.append("<input type='hidden' value='" + ipList.get(i).getP_amount() + "'></td>");
-				sb.append("<td id='p_unlit" + ipList.get(i).getP_productnum() + "'><input type='number' value='"
+				sb.append("<td id='p_unlit" + ipList.get(i).getP_documentcode() + "'><input type='number' value='"
 						+ ipList.get(i).getP_unlit() + "' readonly></td>");
-				sb.append("<td id='p_sum" + ipList.get(i).getP_productnum() + "'><input name='ie_price' type='number' value='"
+				sb.append("<td id='p_sum" + ipList.get(i).getP_documentcode() + "'><input name='ie_price' type='number' value='"
 						+ (ipList.get(i).getP_unlit()*ipList.get(i).getP_amount()) + "' readonly></td>");
 				sb.append("<td><input type='text' name = 'ie_etc'>");
 				sb.append("<input type='hidden' name = 'ie_ocode' value='" + ipList.get(i).getO_code()+ "'></td>");
@@ -623,5 +623,9 @@ public class StockMM {
 			return ResponseEntity.ok(new Gson().toJson(makeExportCheckHtml(bsList)));
 		}
 		return ResponseEntity.ok(new Gson().toJson("출고 확정에 실패하였습니다."));
+	}
+
+	public ResponseEntity<String> getClcode(HttpSession session) {
+		return ResponseEntity.ok(new Gson().toJson(ieDao.getClcode(session.getAttribute("cCode").toString())));
 	}
 }

@@ -17,7 +17,7 @@ public interface IeportDao {
 	@Select("SELECT *  FROM P JOIN IT ON P.P_ITCODE = IT.IT_CODE WHERE P.O_STATUS = '0' AND IT.IT_CPCODE = #{cCode} ORDER BY P.P_CLCODE")
 	List<Purchase> importCheckList(String cCode);
 
-	@Insert("INSERT INTO IE VALUES(S_IEPORT_SEQ.NEXTVAL,#{ie_cpcode},DEFAULT,#{ie_hrcode},#{ie_etc},'1',#{ie_clcode},#{ie_ocode},#{ie_itcode},#{ie_qty},#{ie_price},NULL)")
+	@Insert("INSERT INTO IE VALUES(S_IEPORT_SEQ.NEXTVAL,#{ie_cpcode},DEFAULT,#{ie_hrcode},#{ie_etc},'1',#{ie_clcode},#{ie_ocode},#{ie_itcode},#{ie_qty},#{ie_price},0)")
 	boolean insertImport(IePort iePort);
 
 	@Select("SELECT * FROM IE WHERE IE_CPCODE = #{cCode}")
@@ -58,5 +58,8 @@ public interface IeportDao {
 
 	@Insert("INSERT INTO S_IEPORT VALUES(S_IEPORT_SEQ.NEXTVAL,#{ie_cpcode},DEFAULT,#{ie_hrcode},#{ie_etc},'2',#{ie_clcode},#{ie_ocode},#{ie_itcode},-#{ie_qty},#{ie_price},0)")
 	boolean insertExport(IePort ie);
+
+	@Select("SELECT CL_CODE FROM AC_COMPANYLIST WHERE CL_CCODE = #{cCode}")
+	List<String> getClcode(String cCode);
 	
 }

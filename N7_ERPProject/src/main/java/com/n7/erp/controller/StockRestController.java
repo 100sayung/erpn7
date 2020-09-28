@@ -45,7 +45,7 @@ public class StockRestController {
 		return stmm.deleteCategory(ct,session);
 	}
 
-	@RequestMapping(value = "/getitemcode", method = RequestMethod.POST)
+	@RequestMapping(value = "/getitemcode", method = RequestMethod.GET)
 	public ResponseEntity<List<ItemCode>> getItemCode(ItemCode it,HttpSession session) {
 		return stmm.getItemCode(it,session);
 	}
@@ -118,5 +118,9 @@ public class StockRestController {
 		}
 
 		return stmm.cofirmExportCheck(ipList, session);
+	}
+	@RequestMapping(value = "/getclcode", method = RequestMethod.GET)
+	public ResponseEntity<String> getClcode(HttpSession session) {
+		return stmm.getClcode(session);
 	}
 }
