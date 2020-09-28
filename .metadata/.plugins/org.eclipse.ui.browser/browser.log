@@ -138,3 +138,11 @@
 9월 26, 2020 15:52:19.120 [19396:12400:0926/155219.120:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
 9월 26, 2020 16:06:25.176 [10856:14152:0926/160625.176:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
 9월 26, 2020 16:55:52.988 [2288:568:0926/165552.987:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+
+9월 28, 2020 09:08:07.990 NEW SESSION
+9월 28, 2020 09:08:07.990 [6252:10636:0928/090807.986:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 28, 2020 10:34:29.263 [6252:6868:0928/103429.261:ERROR:socket_stream.cc(219)] Closing stream with result -2
+9월 28, 2020 10:36:24.526 [6252:6868:0928/103624.525:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+
+9월 28, 2020 10:57:28.217 NEW SESSION
+9월 28, 2020 10:57:28.217 [10012:1892:0928/105728.214:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
