@@ -10,6 +10,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
+<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css"
+	media="all" />
 <style>
 #header {
 	width: 100%;
@@ -66,14 +68,8 @@ table{
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내 정보</a></li>
-				<li class="current_page_item"><a href="/erp/hr/hr" accesskey="2"
-					title="">인사 관리</a></li>
-				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
-				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="#">회계 관리</a></li>
-			</ul>
+				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
+				<ul id="mainmenu">
 		</div>
 	</div>
 	<div id="side_menu">
@@ -87,10 +83,10 @@ table{
 
 			<li id="showMenu2">근태 관리
 				<ul id="smallMenu2" style="display: none;">
-					<li><a href="">휴가 접수</a></li>
-					<li><a href="">사원 출결 관리</a></li>
-					<li><a href="">근무 조회</a></li>
-					<li><a href="">휴/퇴직 관리</a></li>
+					<li><a href="/erp/hr/receiptholiday">휴가 접수</a></li>
+					<li><a href="/erp/hr/attendance">사원 출결 관리</a></li>
+					<li><a href="/erp/hr/employeestatus">근무 조회</a></li>
+					<li><a href="/erp/hr/retiremm">휴/퇴직 관리</a></li>
 				</ul>
 			</li>
 			<li id="showMenu3">급여 관리
@@ -102,7 +98,8 @@ table{
 			</li>
 		</ul>
 	</div>
-	<h1>사원 급여명세서 상세정보 페이지</h1>
+	<div id="description">
+	<div class="divcss">사원 급여 상세정보</div>
 	<form action="searchpaymm" method="post" name="payroll">
 	<input type="hidden" value="${card.hc_ccode}" name="HP_CCODE">
 	<table id="payinputmodify" style="align-self: center; width: 800px;height: 100px;" >
@@ -127,7 +124,8 @@ table{
 	<div id="detailpage">
 	</div>
 	<input type="button" onclick="moving()" value="확인">
-	
+	</div>
+<script src=/erp/js/menu.js></script><!-- 메뉴Ajax로 출력 -->
 	<script>
 		function moving(){
 			location.href="/erp/hr/searchpaymm";
@@ -137,20 +135,18 @@ table{
 		$("#month").change(function(){
 			var month=$(this).val();
 			var hrcode=$("#hrcode").val();
-			console.log("month="+month);
-			console.log("hrcode="+hrcode);
 			$.ajax({
 				url:"/erp/hr/findmonth",
 				method:'POST',
 				data:{month : month ,hrcode : hrcode},
 				dataType:"json",
 				success:function(data){
-					console.log(data);
-					console.log(data.HP_PAY);
 					var provide=Number(data.HDP_PAY)+Number(data.HP_INCEN);
 					var ince=Number(data.HP_INSURANCE)+Number(data.HP_TAX);
 					var receive=provide-ince;
 					var str='';
+					console.log(data);
+					if(data!="1"){
 						str+="<table style='width:800px; height:300px; border:1px solid black;'><tr>"
 							+"<td>지급내역</td>"
 							+"<td>지급액</td>"
@@ -172,6 +168,9 @@ table{
 							+"<td>"+provide+"</td>"
 							+"<td>실지급액</td>"
 							+"<td>"+receive+"</td></tr></table>"
+					}else if(data=="1"){
+						str+="<h1>해당 월에는 받은 급액이 없습니다.</h1>";
+					}
 					$("#detailpage").html(str);
 				},
 				error:function(err){

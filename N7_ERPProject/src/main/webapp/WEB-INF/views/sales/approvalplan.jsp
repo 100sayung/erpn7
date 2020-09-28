@@ -137,28 +137,28 @@ resize: none;
    
    <script>
    $(document).ready(function(){
-	   $.ajax({
-	      url:'/erp/rest/sales/getMyInfo',
-	      type:'get',
-	      datatype:'json',
-	      success:function(data){
-	         console.log(data);
-	         var str = "";
-	         for ( var i in data.sList) {
-	              str +="<input type='text' name='bs_apcode"+(Number(i)+Number(1))+"' value='"+data.sList[i].hc_hrcode+"' hidden='true'>";
-	            str +=data.sList[i].hc_position+"/";
-	            str +="<input style='width:50px;' type='text' name='bs_approver"+(Number(i)+Number(1))+"' value='"+ data.sList[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
-	         }
-	         console.log(str)
-	         $("#line").html(str);
-	      
-	      },
-	      error:function(error){
-	         console.log(error);
-	      }
-	   });
-	    
-	 });
+      $.ajax({
+         url:'/erp/rest/sales/getMyInfo',
+         type:'get',
+         datatype:'json',
+         success:function(data){
+            console.log(data);
+            var str = "";
+            for ( var i in data.sList) {
+                 str +="<input type='text' name='bs_apcode"+(Number(i)+Number(1))+"' value='"+data.sList[i].hc_hrcode+"' hidden='true'>";
+               str +=data.sList[i].hc_position+"/";
+               str +="<input style='width:50px;' type='text' name='bs_approver"+(Number(i)+Number(1))+"' value='"+ data.sList[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
+            }
+            console.log(str)
+            $("#line").html(str);
+         
+         },
+         error:function(error){
+            console.log(error);
+         }
+      });
+       
+    });
    
    
       $(function() {
@@ -225,8 +225,8 @@ resize: none;
          
 /*          var check="";
          $("input[name=each_check]:checked").each(function(){
-        	 check = $(this).attr("value"); */
-        	 
+            check = $(this).attr("value"); */
+            
         $.ajax({
           url:'/erp/rest/sales/approvalinput',
           type: 'post',
@@ -234,7 +234,7 @@ resize: none;
           //dataType: 'json',
           success:function(data){
               alert("기안문 제출이 완료되었습니다.");           
-              console.log(data);           	  
+              console.log(data);                
                 
               window.close();   
           },

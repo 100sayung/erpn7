@@ -81,14 +81,49 @@ margin-left: 200px;
 		</div>
 		<div id="menu">
 			<ul>
+				<li><a href="/erp/adminpage">ERP 등록</a></li>
 				<li><a href="/erp/companymanager" accesskey="3" title="">회사 관리</a></li>
 				<li><a href="/erp/membermanager" accesskey="4" title="">회원 관리</a></li>
 			</ul>
 		</div>
 	</div>
 	
-	들어왔을때 뜨는거
+	<div id="container"></div>
 	
-	
+	<script>
+	$(document).ready(function(){
+		$.ajax({
+			url:"/erp/rest/admin/companytemp",
+			dataType:"json",
+			method:"get",
+			success : function(data){
+				console.log(data);
+				let str = "";
+			 	str = "<table>"
+				str += "<tr class='infomenu' style='height:75px'><td style='width:100px;'>회사이름</td>";
+				str += "<td style='width:150px;'>회사코드</td><td style='width:200px;'>주소</td><td style='width:100px;'>대표자</td>";
+				str += "<td style='width:100px;'>업태</td><td style='width:100px;'>분류</td>";
+				str += "<td style='width:150px;'>전화번호</td><td style='width:160px;'>사업자번호</td><td style='width:75px;'>수정</td><tr>"
+				for(let i = 0 ; i<data.length ; i++){
+					str += "<tr class = '' id='"+data[i].ct_code+"'>";					
+					str += "<td>" + data[i].ct_name +"</td>";
+					str += "<td>" + data[i].ct_code +"</td>";
+					str += "<td>" + data[i].ct_addr + "</td>";
+					str += "<td>" + data[i].ct_ceo + "</td>";
+					str += "<td>" + data[i].ct_kind + "</td>";
+					str += "<td>" + data[i].ct_kind2 + "</td>";
+					str += "<td>" + data[i].ct_phonenum + "</td>";
+					str += "<td>" + data[i].ct_comnum + "</td>";
+					str += "<td><button class='infobtn' onclick='deleteCompany(\""+data[i].ct_code+"\")'>등록</button><br/>";					
+					str += "<button class='infobtn' onclick='updateFunction(\""+data[i].ct_code+"\")'>거부</button></td>";	
+				}
+				str += "</tr>";
+				$("#container").html(str);
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+	});
+	</script>
 </body>
 </html>

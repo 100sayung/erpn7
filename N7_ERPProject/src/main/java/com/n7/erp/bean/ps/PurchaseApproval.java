@@ -7,23 +7,26 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-@Alias("Approval")
+@Alias("pApproval")
 public class PurchaseApproval {
 	private String p_documentcode;
 	private String p_ccode;
 	private String p_title;
-	private String p_productnum;
-	private String p_date;
-	private String p_pday;
+	private String p_day;
 	private String p_clcode;
-	private int p_budget;
-	private String p_ect;
-	private String p_itcode;
-	private int p_amount;
-	private int p_unlit;
+	private String p_date;
+	private String p_productnum;
+	private String p_etc;
+	private String p_apcode1;
+	private String p_apcode2;
+	private String p_apcode3;
+	private String p_approver1;
+	private String p_approver2;
+	private String p_approver3;
 	private String p_name;
-	private String p_approvel0;
-	private String p_approvel1;
-	private String p_approvel2;
+	private String p_itcode;
+	private int p_unlit;
+	private int p_amount;
+	private int p_budget;
 }
 

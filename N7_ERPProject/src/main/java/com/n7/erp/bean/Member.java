@@ -19,4 +19,7 @@ public class Member {
 	String m_ccode;
 	String m_email;
 	String m_grade;
+	
+	//��¿�
+	String c_name;	
 }

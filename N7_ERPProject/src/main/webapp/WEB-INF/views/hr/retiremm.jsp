@@ -10,6 +10,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
+<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css" media="all" />
 <style>
 #header {
 	width: 100%;
@@ -58,15 +59,8 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내
-						정보</a></li>
-				<li class="current_page_item"><a href="/erp/hr/hr"
-					accesskey="2" title="">인사 관리</a></li>
-				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
-				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="#">회계 관리</a></li>
-			</ul>
+				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
+				<ul id="mainmenu">
 		</div>
 	</div>
 	<div id="side_menu">
@@ -90,23 +84,22 @@ ul {
 				<ul id="smallMenu3" style="display: none;">
 					<li><a href="/erp/hr/deptpay">부서/직급별 급여</a></li>
 					<li><a href="/erp/hr/deduct">공제사항 관리</a></li>
-					<li><a href="">급여 관리</a></li>
+					<li><a href="/erp/hr/searchpaymm">급여 관리</a></li>
 				</ul>
 			</li>
 		</ul>
 	</div>
-
 	<div id="description">
-	<br> 재직중일때 검색 기능 추가해야함 !! 정말 그럴거냐고 물어봐야함 !!<br>
-	<br><h1>인사카드 등록이 한개라도 안되어있을땐 인사카드부터 하게해야함. 전부 예외처리해서 인사카드로 이동시켜야함.</h1>
-		<a href="javascript:CheckRetired(0)"> 재직중(0) </a> 
-		<a href="javascript:CheckRetired(1)"> 휴직중(1) </a> 
-		<a href="javascript:CheckRetired(2)"> 퇴사(2) </a> <br>
+	<div class="divcss">사원 휴 - 퇴직 관리</div>
+		<input type="text" id="nameSearch"> <button onclick="searchFromName()" class="infobtn" id="nameSearching">검색</button>
+		<a href="javascript:CheckRetired(0)"><button class='infobtn'>재직중0</button></a> 
+		<a href="javascript:CheckRetired(1)"><button class='infobtn'>휴직중1</button></a> 
+		<a href="javascript:CheckRetired(2)"><button class='infobtn'>퇴사2</button></a> <br>
 		<div id="container">
 			<input type="hidden" value="" id="status">
 		</div>
-
 	</div>
+<script src=/erp/js/menu.js></script><!-- 메뉴Ajax로 출력 -->
 	<script>
 	//검색 조건들 생성
 
@@ -121,13 +114,14 @@ ul {
 			method:"get",
 			data : {status : status},
 			success : function(data){
-				let str = "<table>";
+				let str = "";
+				str += "<table style='border:1px solid black;'>";
 				console.log(data);
 				for(let i = 0 ; i<data.length ; i++){
 					str += "<tr>"
-					str += "<td><input type='hidden' name='hc_hrcode' value= '"+data[i].hc_hrcode+"'>"+data[i].m_name +"</td>";
-					str += "<td><input type='text' name ='hc_dept' value = '" + data[i].hc_dept + "' readonly></td>";
-					str += "<td><input type='text' name='hc_position' value = '" + data[i].hc_position + "' readonly></td>";
+					str += "<td><input type='hidden' class='border_delete_btn' name='hc_hrcode' value= '"+data[i].hc_hrcode+"'>"+data[i].m_name +"</td>";
+					str += "<td><input type='text' class='border_delete_btn' name ='hc_dept' value = '" + data[i].hc_dept + "' readonly></td>";
+					str += "<td><input type='text' class='border_delete_btn' name='hc_position' value = '" + data[i].hc_position + "' readonly></td>";
 					str+="<td><select name='hc_work'>";
 					if(status == 1){
 						str+="<option value = '1' selected = 'selected'> 휴직 </option>";
@@ -155,6 +149,8 @@ ul {
 
 
 		function thisRowDel(row){
+
+			if(confirm("정말 하시겠습니까?") == true){
 			console.log(row);
 			let tr = row.parentNode.parentNode;
 			console.log(tr.firstChild.firstChild.value);
@@ -171,16 +167,38 @@ ul {
 				}
 			});
 			tr.parentNode.removeChild(tr);
+			}else{
+				alert("취소되었습니다.");
+			}
 		}
 	//업데이트시
 
 
 
 
+	function searchFromName(){
+		$name = $("#nameSearch").val();
+		console.log($name);
+		$.ajax({
+			url:"/erp/rest/hr/searchfromname",
+			data:{name:$name},
+			dataType:"text",
+			method:"get",
+			success : function(data){
+				console.log(data);
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+	}
 
 
-
-
+	// 09-24 change    append   id=nameSearching
+	$("#nameSearch").keyup(function(event){
+		if(event.keyCode==13){
+			$("#nameSearching").click();
+		}
+	});
 
 
 

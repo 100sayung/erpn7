@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src=/erp/js/menu.js></script>
 <script
 src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <meta charset="UTF-8">
@@ -47,23 +48,18 @@ a{
     <div id="header">
         <div id="logo">
             <h1><a href="#">N7 ERP SYSTEM</a></h1>
-        </div>
-        <div id="menu">
-            <ul>
-                <li  ><a href="#" accesskey="4" title="">내 정보</a></li>
-                <li><a href="#" accesskey="2" title="">인사 관리</a></li>
-                <li><a href="#" accesskey="3" title="">영업 관리</a></li>
-                <li  class="current_page_item"><a href="#" accesskey="5" title="">구매 관리</a></li>
-                <li><a href="#" accesskey="6" title="">자재 관리</a></li>
-                <li><a href="#" accesskey="4" title="">회계 관리</a></li>
-            </ul>
-        </div>
+    </div>
+		<div id="menu">
+			<ul>
+				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
+				<ul id="mainmenu">
+		</div>
     </div>
     <div id="side_menu">
         <ul id="menuList">
             <li><a href="#" id="pregistration">구매관리</a></li>
-            <li><a href="" id="rregistration">반품 관리</a></li>
-            <li><a href="" id="papproval">내결재함</a></li>
+            <li><a href="#" id="rregistration">반품 관리</a></li>
+            <li><a href="#" id="puchaseAppvalInfo">결재 상세보기</a></li>
         </ul>
     </div>
     <center>
@@ -72,6 +68,8 @@ a{
     </div>
     </center>
 </body>
+
+<script src=/erp/js/menu.js></script><!-- 메뉴Ajax로 출력 -->
 <script>
 		
     $("#pregistration").click(function(){
@@ -92,7 +90,21 @@ a{
    $("#rregistration").click(function(){
 	   $.ajax({
 		   type:'get',
-		   url:' /erp/Purchase/returnregistration',
+		   url:' /erp/Purchase/retrunregistration',
+		   dataType: 'html',
+		   success: function(data){
+			   $("#description").html(data);
+		   },
+		   error: function(err){
+			   console.log(err);
+		   }
+	   });
+   });
+   
+   $("#puchaseAppvalInfo").click(function(){
+	   $.ajax({
+		   type:'get',
+		   url:' /erp/Purchase/purchaseApprovalInfo',
 		   dataType: 'html',
 		   success: function(data){
 			   $("#description").html(data);

@@ -37,4 +37,8 @@ public interface IMemberDao {
 	Member findPassword(@Param("userEmail") String userEmail,@Param("userId") String userId);
 	@Select("UPDATE MEMBER SET M_PW = #{userPassword} WHERE M_ID = #{userId}")
 	void modifyPassword(@Param("userPassword")String userPassword, @Param("userId")String userId);
+	@Select("SELECT COUNT(*) FROM MEMBER WHERE M_ID = #{m_id}")
+	int getDupleID(String m_id);
+	@Select("SELECT COUNT(*) FROM COMPANY WHERE C_CODE = #{cCode}")
+	int getDupleCCode(String m_ccode);
 }

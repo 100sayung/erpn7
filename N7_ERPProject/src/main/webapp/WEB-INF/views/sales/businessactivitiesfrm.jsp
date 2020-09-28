@@ -66,11 +66,11 @@ text-align:center;
                         <th><input type="radio" id="allCheck"></th>
                         <th>날짜</th>
                         <th>내용</th>
-						<th>예상매출금액</th>
-						<th>실제매출금액</th>
-						<th>종료일자</th>
-						<th>메모</th>
-						</tr>
+                  <th>예상매출금액</th>
+                  <th>실제매출금액</th>
+                  <th>종료일자</th>
+                  <th>메모</th>
+                  </tr>
                 </thead>
                 <tbody id="tBody">
                     <tr>

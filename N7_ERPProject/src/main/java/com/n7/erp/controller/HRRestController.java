@@ -48,6 +48,12 @@ public class HRRestController {
 		List<Career> crList = hm.getCareerInfo(m_id, request.getServletPath().substring(9), request.getSession().getAttribute("cCode").toString());
 		return crList;
 	}
+	//열 삭제하면서 데이터지우기
+	@PostMapping(value="/hr/removeinfo")
+	public String removeInfo(HttpSession session, String num, String type) {
+		String result = hm.removeInfo(session, num, type);
+		return result;
+	}
 
 	//id로부터 hrCard가 존재하는지 안하는지 체크함!!!
 	@GetMapping(value="/hr/hrcodefromid")
@@ -62,7 +68,13 @@ public class HRRestController {
 		Member mb = hm.getMemberInfo(m_id);
 		return mb;
 	}
-
+	
+	//부서로 직책가져오기
+	@GetMapping(value="/hr/positionfromdept")
+	public String getPositionFromDept(HttpSession session, String dept) {
+		String result = hm.getPositionFromDept(session, dept);
+		return result;
+	}
 	//인사카드 없는 사람들 정보 출력
 	@GetMapping(value="/hr/nohrcard",  produces = "application/text; charset=utf8")
 	public String getNoHrCard(HttpSession session) {
@@ -71,9 +83,19 @@ public class HRRestController {
 	}
 
 	//인사카드 이름 검색 출력
-	@GetMapping(value="/hr/searchfromname")
-	public String getSearchFromName(HttpSession session) {
-		String result = hm.getSearchFromName(session);
+	@GetMapping(value="/hr/searchfromname",  produces = "application/text; charset=utf8")
+	public String getSearchFromName(HttpSession session, String name) {
+		String result = hm.getSearchFromName(session, name);
+		return result;
+	}
+	@GetMapping(value="/hr/searchstatusfromname",  produces = "application/text; charset=utf8")
+	public String getSearchStatusFromName(HttpSession session, String name) {
+		String result = hm.getSearchStatusFromName(session, name);
+		return result;
+	}
+	@GetMapping(value="/hr/searchfromstatus",  produces = "application/text; charset=utf8")
+	public String getSearchFromStatus(HttpSession session, String status) {
+		String result = hm.getSearchFromStatus(session, status);
 		return result;
 	}
 
@@ -140,6 +162,13 @@ public class HRRestController {
 		String result = hm.getEmployeeHoliday(cCode, yearmonth, hrCode);
 		return result;
 	}
+	//휴가 승인/반려
+	@PostMapping(value="/hr/holidaystatus")
+	public String registHoliday(HttpSession session, String yesno, String docunum) {
+		hm.registHolidayStatus(session, docunum, yesno);
+		return "ok";
+	}
+
 
 
 	//사원 휴/퇴직 상태 조회

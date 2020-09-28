@@ -32,7 +32,7 @@ text-align:center;
     <div style="width:auto; background-color:white; color:white; padding:1%;">
            <button type="button" id="orderitemfrm">수주품목 현황</button>
            <span style="padding-left: 5px"><a href="#"
-			onclick="window.open('/erp/Account/comPany','comlist','width=1350,height=500')"><button>거래처등록</button></a></span>
+         onclick="window.open('/erp/Account/comPany','comlist','width=1350,height=500')"><button>거래처등록</button></a></span>
            <!-- <span style="padding-left: 5px"><a href="#"
          onclick="window.open('clientfrm','clientfrm','width=1200,height=700')"><button>거래처등록</button></a></span> -->
         </div> 
@@ -227,9 +227,9 @@ text-align:center;
                     console.log(data);
                     var str="";
                     if(data.sList[0].bo_num==check){
-                    	alert("출하 등록된 자료입니다.");
+                       alert("출하 등록된 자료입니다.");
                     }else{
-                    	
+                       
                     for(var i in data.sList){
                         str+="<tr><td><input type='radio' name='each_check' value="+data.sList[i].bo_num+"></td>";
                         str+="<td><input type='text' value="+data.sList[i].bo_pronum+"></td>";

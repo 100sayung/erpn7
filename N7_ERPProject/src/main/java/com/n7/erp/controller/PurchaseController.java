@@ -43,11 +43,21 @@ public class PurchaseController {
 		return mav;
 	}
 	
-	
-	@RequestMapping(value = "Purchase/returnregistration", method = RequestMethod.GET)
-	public String returnregistration() {
-		return "Purchase/returnregistration";
+	@RequestMapping(value = "Purchase/approvalLine", method = RequestMethod.GET)
+	public ModelAndView approvalLine() {
+		mav=pm.approvalLine();
+		return mav;
 	}
 	
-
+	@RequestMapping(value = "Purchase/retrunregistration", method = RequestMethod.GET)
+	public String returnregistration() {
+		return "Purchase/retrunregistration";
+	}
+	
+	@RequestMapping(value = "Purchase/purchaseApprovalInfo", method = RequestMethod.GET)
+	public String purchaseApprovalInfo() {
+		return "Purchase/purchaseApprovalInfo";
+	
+	}
+	
 }

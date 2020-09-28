@@ -7,17 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.n7.erp.bean.ItemCode;
 import com.n7.erp.bean.sales.A_company;
 import com.n7.erp.bean.sales.Businessbean;
 import com.n7.erp.bean.sales.Salesbean;
@@ -96,7 +93,7 @@ public class SalesController {
    public ModelAndView shippingrequestinput(Shippingbean ss, HttpSession session) { //HttpServletrequest request
      //String bs_quantity = request.getParameter("bs_quantity");
      //Map<String, List<Shippingbean>> sMap=sm.shippingrequestinput(ss, session);
-	  mav=sm.shippingrequestinput(ss, session);
+     mav=sm.shippingrequestinput(ss, session);
       return mav;
    }
    
@@ -143,8 +140,8 @@ public class SalesController {
    
    @GetMapping(value = "/sales/getMyInfo",produces="application/json;charset=utf-8" ) 
    public  Map<String, List<approvalLine>> getMyInfo(HttpSession session) {
-	   Map<String, List<approvalLine>> mMap=sm.getMyInfo(session);
-	   return mMap;
+      Map<String, List<approvalLine>> mMap=sm.getMyInfo(session);
+      return mMap;
    }
    
    @PostMapping(value = "/sales/approvalinput",produces="application/json;charset=utf-8") //출하 결재창 등록
@@ -188,9 +185,9 @@ public class SalesController {
    
    @PostMapping(value = "/sales/fullpaymentprocess") //완납 처리
    public Map<String, List<approvaldetail>> fullpaymentprocess(String check, HttpSession session) {
-	   System.out.println(check);
-	   Map<String, List<approvaldetail>> sMap=sm.fullpaymentprocess(check, session);
-	   return sMap;
+      System.out.println(check);
+      Map<String, List<approvaldetail>> sMap=sm.fullpaymentprocess(check, session);
+      return sMap;
    } 
    
    @PostMapping(value = "/sales/businessactivitiesinput",produces="application/json;charset=utf-8") //영업활동 등록
@@ -222,17 +219,10 @@ public class SalesController {
    
    @PostMapping(value = "/sales/approvaldetailinput",produces="application/json;charset=utf-8") //결재 상세보기 등록
    public ModelAndView approvaldetailinput(approvaldetail app, HttpSession session) {
-	   mav=sm.approvaldetailinput(app, session);
-	   return mav;
+      mav=sm.approvaldetailinput(app, session);
+      return mav;
    }
    
-	@PostMapping(value = "/getbonumm") //수주번호 select
-	public Map<String, List<Salesbean>> getbonumm(Salesbean s ,HttpSession session) {
-		//return sm.getbonumm(s,session);
-		Map<String, List<Salesbean>> sMap=sm.getbonumm(s, session);
-		return sMap;
-	}
-	
 //   @PostMapping(value = "/sales/approvaldelete") //결재완료 삭제 망함
 //   public Map<String, List<approvaldetail>> approvaldelete(String check) {
 //      Map<String, List<approvaldetail>> sMap=sm.approvaldelete(check);

@@ -3,12 +3,9 @@ package com.n7.erp.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -63,7 +60,7 @@ public class MyInfoController {
 	public String registAcademic(HttpServletRequest request){
 		String id = request.getSession().getAttribute("id").toString();
 		hm.registAcademic(request, id);
-		return "myInfo/myInfo";
+		return "redirect:/myinfo/myinfo";
 	}
 	//새로운 이력 정보 등록
 	@PostMapping(value="/myinfo/newcareer")

@@ -20,12 +20,12 @@ import com.n7.erp.bean.hr.ViewPay;
 
 public interface HRIDeptDao {
 
-	@Insert("INSERT INTO HR_DEPT VALUES(#{HDP_position},#{HDP_dept},#{hdp_ccode}, 0, HR_DEPT_SEQ.nextval, DEFAULT)")
+	@Insert("INSERT INTO HR_DEPT VALUES(#{HDP_dept},#{HDP_position},#{hdp_ccode}, 0, HR_DEPT_SEQ.nextval, DEFAULT)")
 	boolean deptregistinsert(Department dept);
 
 	@Select("SELECT * FROM HR_DEPT WHERE HDP_CCODE = #{cCode}")
 	ArrayList<Department> deptpayselect(String cCode);
-
+	
 	@Update("UPDATE HR_DEPT SET HDP_PAY=#{pay} WHERE HDP_NUM=#{dept} AND HDP_CCODE = #{cCode}")
 	boolean deptpayupdate(HashMap<String, String> hMap);
 
@@ -89,12 +89,17 @@ public interface HRIDeptDao {
 
 	String findpay(ViewPay pay);
 
-	@Insert("INSERT INTO HR_PAYROLL VALUES(#{HP_PAYDATE},#{HP_CCODE},#{HP_HRCODE},#{HP_TAX},#{HP_INCEN},#{HP_INSURANCE},#{HP_REALMONEY})")
+	@Insert("INSERT INTO HR_PAYROLL VALUES(#{HP_PAYDATE},#{HP_CCODE},#{HC_HRCODE},#{HP_TAX},#{HP_INCEN},#{HP_INSURANCE},#{HP_REALMONEY})")
 	boolean insertpay(ViewPay pay);
 
 	boolean updatepay(ViewPay pay);
 
-	@Select("SELECT * FROM HR_CDD_PAY WHERE HP_PAYDATE=#{month} AND HP_HRCODE=#{hrcode}")
+	@Select("SELECT * FROM HR_CDD_PAY WHERE HP_PAYDATE=#{month} AND HC_HRCODE=#{hrcode}")
 	Payroll findmonth(HashMap<String, String> hMap);
 
+	ArrayList<ViewPay> checkingidname(String checkpayid);
+	
+	//09-25 append
+	@Select("SELECT HDP_POSITION FROM HR_DEPT WHERE HDP_DEPT=#{dept} AND HDP_CCODE=#{cCode}")
+	ArrayList<Department> deptsearchposition(HashMap<String, String> hMap);
 }
