@@ -26,9 +26,9 @@
 		console.log(menu);
 
 		if(menu=="인사관리"){
-			$("#"+menu).attr("href","/erp/hr/hr");
+			$("#"+menu).attr("href","/erp/hr/movehrcardpage");
 			}else if(menu=="영업관리"){
-			$("#"+menu).attr("href","/erp/sales/orderitem");
+			$("#"+menu).attr("href","/erp/sales/main");
 			}else if(menu=="구매관리"){
 			$("#"+menu).attr("href","/erp/Purchase/erpmain");
 			}else if(menu=="재고관리"){

@@ -82,7 +82,7 @@ float: right;
                         <a href="#" id="company"><i class="fa fa-table "></i>회사정보</a>
                     </li>
                     <li>
-                        <a href="blank.html"><i class="fa fa-edit "></i>환경설정</a>
+                        <a href="#" id="erpmanage"><i class="fa fa-edit "></i>ERP관리</a>
                     </li>
 
 
@@ -183,6 +183,24 @@ float: right;
 </body>
 
 <script>
+   $("#erpmanage").click(function(){
+	   $.ajax({
+			url:'/erp/managermode/erpmanage',
+			type:'get',
+			success:function(data){
+				console.log(data);
+				$("#page-wrapper").html(data);
+				$(".active-link").attr("class","none");
+			},
+			error:function(error){
+				console.log(error);
+			}
+			
+			  
+		  });
+	   
+   });
+
    $("#company").click(function(){
 	  $.ajax({
 		url:'/erp/managermode/Company',

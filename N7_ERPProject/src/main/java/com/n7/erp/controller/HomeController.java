@@ -24,7 +24,7 @@ import com.n7.erp.service.ConsultingBoardMM;
 import com.n7.erp.service.MemberMM;
 import com.n7.erp.userClass.PagingVO;
 
-//전부 이동관련
+//���� �̵�����
 @Controller
 public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -82,7 +82,7 @@ public class HomeController {
 		return "/home/findpasswordfrm";
 	}
 
-	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	@RequestMapping(value = "/joinpage", method = RequestMethod.GET)
 	public String join() {
 		return "/home/join";
 	}
@@ -131,7 +131,7 @@ public class HomeController {
 
 	@PostMapping(value = "/newerp")
 	public String registNewERP(Company com) {
-		cm.registNewERP(com); //기록은 temp에다 할거임.
+		cm.registNewERP(com); //����� temp���� �Ұ���.
 		return "/home/home";
 	}
 
@@ -151,40 +151,34 @@ public class HomeController {
 		mav = mm.moveMyInfo(session);
 		return mav;
 	}
-
-	@GetMapping(value = "/hr/hr")
-	public String hrMain() {
-		return "/hr/hrCard";
-	}
-
-	// 게시글 페이지로 이동
+	// �Խñ� �������� �̵�
 	@RequestMapping(value = "/writeFrm", method = RequestMethod.GET)
 	public String write() {
 		return "writeFrm";
 	}
 
-	// 게시글 작성
+	// �Խñ� �ۼ�
 	@RequestMapping(value = "/writeBoard", method = RequestMethod.POST)
 	public ModelAndView writeBoard(ConsultingBoard board) {
 		mav = cbm.writeBoard(board);
 		return mav;
 	}
 
-	// 게시글 수정
+	// �Խñ� ����
 	@RequestMapping(value = "/boardmodify", method = RequestMethod.POST)
 	public ModelAndView boardmodify(ConsultingBoard board) {
 		mav = cbm.boardmodify(board);
 		return mav;
 	}
 
-	// 게시글 수정페이지로 이동
+	// �Խñ� ������������ �̵�
 	@RequestMapping(value = "/boardmodifyajax", method = RequestMethod.POST)
 	public @ResponseBody String boardmodifyajax(Integer num) {
 		String result = cbm.boardmodifyajax(num);
 		return result;
 	}
 
-	// 게시글 삭제
+	// �Խñ� ����
 	@RequestMapping(value = "/writelistdelete", method = RequestMethod.POST)
 	public ModelAndView writelistdelete(Integer num) {
 		mav = cbm.writelistdelete(num);

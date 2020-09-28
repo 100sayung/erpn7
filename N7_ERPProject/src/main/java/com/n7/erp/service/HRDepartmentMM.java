@@ -34,12 +34,13 @@ public class HRDepartmentMM {
 		String view = null;
 		System.out.println(dept.getHDP_dept());
 		dept.setHdp_ccode(cCode);
-		if (Ddao.deptregistinsert(dept)) {
-			view = "hr/deptregistpage";
-
-		} else {
-			mav.addObject("deptfalse", "부서 및 직책이 입력되지 않았습니다 입력해주세요.");
-			view = "hr/deptregistpage";
+		if(dept.getHDP_dept()!="" && dept.getHDP_position()!="") {
+			if (Ddao.deptregistinsert(dept)) {
+				view = "hr/deptregistpage";
+			}
+		}else {
+			mav.addObject("failure", "부서 및 직책이 입력되지 않았습니다 입력해주세요.");
+			view="hr/deptregistpage";
 		}
 		mav.setViewName(view);
 		return mav;
@@ -335,4 +336,17 @@ public class HRDepartmentMM {
 		}
 		return null;
 	}
+
+	public String deptsearchposition(String dept, String cCode) {
+		HashMap<String, String> hMap=new HashMap<String, String>();
+		hMap.put("dept", dept);
+		hMap.put("cCode", cCode);
+		ArrayList<Department> dList=Ddao.deptsearchposition(hMap);
+		Gson gson=new Gson();
+		String json=gson.toJson(dList);
+		System.out.println(dept+","+cCode);
+		System.out.println("[[[="+dList);
+		return json;
+	}
 }
+

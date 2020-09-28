@@ -10,15 +10,15 @@ import com.n7.erp.dao.companyDao;
 @Service
 public class CompanyMM {
 
-	@Autowired
-	private companyDao cDao;
+   @Autowired
+   private companyDao cDao;
 
-	ModelAndView mav;
+   ModelAndView mav;
 
-	public boolean registNewERP(Company com){
-		if (cDao.registNewERP(com)) {
-			return true;
-		}
-		return false;
-	}
+   public boolean registNewERP(Company com){
+      if (cDao.registNewERP(com)) {
+         return true;
+      }
+      return false;
+   }
 }

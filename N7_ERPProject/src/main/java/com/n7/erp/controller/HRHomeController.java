@@ -126,7 +126,6 @@ public class HRHomeController {
 	public @ResponseBody String modifyDeptPay(@Param(value = "dept") String dept, @Param(value = "pay") Integer pay, HttpSession session) {
 		System.out.println(dept + "," + pay);
 		String update = dm.deptpayupdate(dept, pay, session.getAttribute("cCode").toString());
-		System.out.println("금액1=" + update);
 		return update;
 	}
 
@@ -202,8 +201,8 @@ public class HRHomeController {
 		return result;
 	}
 	@GetMapping(value="/hr/holidayap")
-	public ModelAndView holidayAp() {
-		mav=am.approvalLine();
+	public ModelAndView holidayAp(HttpSession session) {
+		mav=am.approvalLine(session);
 		return mav;
 	}
 
@@ -215,6 +214,12 @@ public class HRHomeController {
 	@RequestMapping(value = "/hr/findcheckpayid", method = RequestMethod.POST)
 	public @ResponseBody String findcheckpayid(String checkpayid) {
 		String result=dm.findcheckpayid(checkpayid);
+		return result;
+	}
+	@RequestMapping(value = "/hr/deptsearchposition", method = RequestMethod.GET)
+	public @ResponseBody String deptsearchposition(String dept,HttpSession session) {
+		
+		String result=dm.deptsearchposition(dept,session.getAttribute("cCode").toString());
 		return result;
 	}
 }

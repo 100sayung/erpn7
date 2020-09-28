@@ -19,10 +19,12 @@
          <td>${apholi.hap_docuname }</td>
       </tr>
       <tr>
+<!-- 09-24 change -->
          <td>신청인</td>
-         <td>${apholi.hap_fromapprover }</td>
+         <td>${fromapprover }</td>
          <td>결재자</td>
-         <td>${apholi.hap_toapprover }</td>
+         <td>${toapprover }</td>
+<!--  -->
       </tr>
       <tr>
          <td>휴가시작일</td>

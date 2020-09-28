@@ -90,10 +90,11 @@ ul {
 			</li>
 		</ul>
 	</div>
-	<div id="description"> ${msg }<br><br>
+	<div id="description" align="center"> ${msg }<br><br>
+	<div class="divcss">사원 인사카드 조회 및 미등록 카드 등록</div>
 	<div id="noHaveHrCard"></div>
-	<input type="text" id="nameSearch"> <- 이름으로 검색
-	<button onclick="searchFromName()" class='infobtn'>검색</button>
+	<input type="text" id="nameSearch" placeholder="이름으로 검색">
+	<button onclick="searchFromName()" class='infobtn' id="nameSearching">검색</button>
 	
 	<div id="container">
 	${hrCard} 
@@ -145,8 +146,12 @@ ul {
   			 }
   		  });
   	  }
-  	  
-  	  
+  	//09-25 change append <button> id=nameSearching
+  	$("#nameSearch").keyup(function(event){
+		if(event.keyCode==13){
+			$("#nameSearching").click();
+		}
+	});
   	  
   	  
   	  

@@ -57,7 +57,7 @@ tr{
 <meta charset="UTF-8">
 </head>
 <body>
-<h1>인사카드 세부정보 / 수정</h1>
+<h1>인사카드 세부정보 / 수정 / 사용한 월차 null로 뜸. 매달 0으로 초기화되는 기능 알아야함.</h1>
 <div id="member"></div>
 
 <br><br><br>
@@ -407,16 +407,13 @@ function CareerInfo(){
 					str += "<table border='1px solid black'><tr>";
 					str += "<td>사원코드</td><td>부서</td><td>직책</td></tr>";
 					str += "<tr><td><input type='text' name='hc_code' placeholder='---' readonly></td>"
-					str += "<td><select name='hc_dept' class='detailInfo'>"
-					for(let i = 0 ; i<deptList.deptList.length ; i++){
-						str += "<option value='"+deptList.deptList[i]+"'>"+deptList.deptList[i]+"</option>";
-					}
-					str += "</select></td><td><select name='hc_position' class='detailInfo'>";
-					for(let i = 0 ; i<deptList.positionList.length ; i++){
-						str += "<option value='"+deptList.positionList[i]+"'>"+deptList.positionList[i]+"</option>";
-					}
-					str += "</select></td></tr><td colspan='3'>입사일</td></tr>";
-					str += "<td colspan='3'><input type='date' name='hc_joindate' class='detailInfo'></td></tr>"
+					str += "<td><select name='hc_dept' class='detailInfo' onchange='changeDept(this)'>"
+						for(let i = 0 ; i<deptList.deptList.length ; i++){
+							str += "<option>"+deptList.deptList[i]+"</option>";
+						}
+					str += "</select></td><td><span id='position'></td></tr>";
+					str += "<tr><td colspan='3'>입사일</td></tr>";
+					str += "<td colspan='3'><input type='date' name='hc_joindate' class='detailInfo' required></td></tr>"
 					str += "<tr><td>현재 상태</td><td>재/휴직 상태</td><td>사용한 월차</td></tr>";
 					str += "<td><input type='text' placeholder='---' readonly></td>"
 					str += "<td><input type='text' placeholder='---' readonly></td>"

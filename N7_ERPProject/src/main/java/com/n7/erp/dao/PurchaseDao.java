@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
 import com.n7.erp.bean.IePort;
+import com.n7.erp.bean.ps.approvalLine;
+import com.n7.erp.bean.ps.A_company;
 import com.n7.erp.bean.ps.Purchase;
 import com.n7.erp.bean.ps.PurchaseApproval;
 import com.n7.erp.bean.ps.Return;
@@ -39,17 +42,17 @@ public interface PurchaseDao {
 
 	List<Purchase> pProgram(String check);
 
-//	com.n7.erp.bean.approvalLine approLinecom1(String code01);
-//
-//	com.n7.erp.bean.approvalLine approLinecom2(String code02);
-//	
-//	List<approvalLine> approvalLine();
-//
-//	List<approvalLine> searchName(String name);
-//
-//	List<approvalLine> addApproval(String name);
+	List<approvalLine> approvalLine();
 
-	boolean Approval(PurchaseApproval pa);
+	List<approvalLine> searchName(String name);
+
+    List<com.n7.erp.bean.ps.approvalLine> addApproval(String code01); //name
+
+    com.n7.erp.bean.ps.approvalLine approLinecom1(String code01);
+
+    List<com.n7.erp.bean.ps.approvalLine> getMyInfo(String code);
+
+    boolean Approval(PurchaseApproval pa);
 
 	boolean pApproval1(PurchaseApproval pa);
 
@@ -62,5 +65,8 @@ public interface PurchaseDao {
 	boolean rDelete(String check_list);
 
 	List<Return> rSearch(@Param("search") String search, @Param("choice") String choice);
+
+	@Select("SELECT COUNT(*) FROM O_PURCHASECOMMOM")
+	int getListCount();
 
 }

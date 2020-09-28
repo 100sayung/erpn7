@@ -20,6 +20,6 @@ public class Member {
 	String m_email;
 	String m_grade;
 	
-	//출력용
+	//��¿�
 	String c_name;	
 }

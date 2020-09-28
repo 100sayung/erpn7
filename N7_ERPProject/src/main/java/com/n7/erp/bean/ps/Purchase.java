@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 @Data
-@Alias("purchase")
+@Alias("Purchase")
 @Accessors(chain = true)
 public class Purchase {
 	
@@ -18,8 +18,6 @@ public class Purchase {
 	private String p_writer; 
 	private String p_itcode; 
 	private String p_name; 
-	private int p_unlit; 
-	private int p_amount; 
 	private int p_budget; 
 	private String o_status;
 	private String it_pname;
@@ -27,5 +25,8 @@ public class Purchase {
 	private String it_unit;
 	private String it_size;
 	private String o_code;
+	private int p_amount;
+	private int p_sum;
+	private int p_unlit;
 	
 }

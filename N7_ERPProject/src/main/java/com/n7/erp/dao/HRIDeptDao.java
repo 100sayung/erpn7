@@ -98,4 +98,8 @@ public interface HRIDeptDao {
 	Payroll findmonth(HashMap<String, String> hMap);
 
 	ArrayList<ViewPay> checkingidname(String checkpayid);
+	
+	//09-25 append
+	@Select("SELECT HDP_POSITION FROM HR_DEPT WHERE HDP_DEPT=#{dept} AND HDP_CCODE=#{cCode}")
+	ArrayList<Department> deptsearchposition(HashMap<String, String> hMap);
 }

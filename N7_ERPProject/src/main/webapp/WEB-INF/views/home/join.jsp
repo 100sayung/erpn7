@@ -88,6 +88,8 @@ button {
 				<div class="form-group">
 					<input type="text" class="form-control" placeholder="ID를 입력해주세요"
 						id="id" name="m_id" required />
+					<input type="button" value="중복체크" onclick="dupleID()">
+					<br/><span id="dupleID"></span>
 				</div>
 				<div class="form-group">
 					<input type="password" class="form-control"
@@ -99,7 +101,9 @@ button {
 				</div>
 				<div class="form-group">
 					<input type="text" class="form-control" placeholder="회사 코드를 입력해주세요 / 없으면 공백 "
-						name="m_ccode" />
+						id="cCode" name="m_ccode" />
+					<input type="button" value="코드확인" onclick="dupleCCode()">
+					<br/><span id="dupleCCode"></span>
 				</div>
 				<div class="form-group">
 					<input type="text" class="form-control"
@@ -131,11 +135,68 @@ button {
 		</div> 
 	</form>
 	<script> 
+	var checkid;
+	var checkccode
+	
+	function dupleID(){
+		var $id = $("#id").val()
+		console.log($id)
+		$.ajax({
+			url:"/erp/rest/home/dupleid",
+			data : {m_id: $id},
+			dataType:"text",
+			method:"get",
+			async:false,
+			success : function(data){
+				console.log(data)
+				if(data==1){
+					checkid=false;
+					$("#dupleID").html("<font style='color:red;'>아이디가 중복됩니다.</font>");
+				}else{
+					checkid=true;
+					$("#dupleID").html("");
+				}
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+	}
+	
+	function dupleCCode(){
+		var $cCode = $("#cCode").val();
+		console.log($cCode);
+		$.ajax({
+			url:"/erp/rest/home/dupleccode",
+			data : {m_ccode: $cCode},
+			dataType:"text",
+			method:"get",
+			async:false,
+			success : function(data){
+				console.log(data)
+				if(data==1){
+					checkccode=true;
+					$("#dupleCCode").html("");
+				}else{
+					checkccode=false;
+					$("#dupleCCode").html("<font style='color:red;'>해당 회사코드가 존재하지 않습니다.</font>");
+				}
+			}, error : function(err){
+				console.log(err);
+			}
+		})
+	}
+	
 	$(function() { $("#postcodify_search_button").postcodifyPopUp(); }); 
 	
 	function sum(){
-		$("#addr").val($('#addr1').val()+$('#addr2').val()+$('#addr3').val());
-		return true;
+		console.log(checkid, checkccode);
+		if(checkid&&checkccode){
+			$("#addr").val($('#addr1').val()+$('#addr2').val()+$('#addr3').val());
+			return true;
+		}else{
+			alert("회사코드 혹은 아이디 중복을 확인해주세요.");
+			return false;
+		}
 	}
 	
 	</script> 

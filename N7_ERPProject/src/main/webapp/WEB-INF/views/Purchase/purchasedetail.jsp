@@ -19,10 +19,6 @@ table, tr, th,td{
 </head>
 <body>
 	<form action="purchasedetail">
-	<div style="width: auto; background-color: white; padding: 1%;"></div>
-		<div style="width: auto; background-color: #FFB2D9; color: white; padding: 1%;">구매 상세보기</div>
-		<div style="height: 15px; padding-top: 10px; background-color: #F8F7F7;"></div>
-		<div style="background-color: #ECEBEA; height: 400px; padding-top: 80px;">
 		<table>
 			<tr>
 				<th>구매번호</th>
@@ -47,7 +43,6 @@ table, tr, th,td{
 			</tr>
 			<tbody id="tbody"></tbody>
 		</table>
-		</div>
 	</form>
 
 <script type="text/javascript">

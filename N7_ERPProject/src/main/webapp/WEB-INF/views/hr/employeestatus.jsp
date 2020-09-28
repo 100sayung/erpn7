@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Document</title>
-	<script src=/erp/js/menu.js></script> <!-- 메뉴Ajax로 출력 -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
@@ -94,16 +93,17 @@ ul {
 			</li>
 		</ul>
 	</div>
-
+<div>
+<div class="divcss">사원 출퇴근 상태 조회</div>
+	<input type="text" id="nameSearch" placeholder="이름으로 검색"> 
+	<button onclick="searchFromName()" class="infobtn" id="nameSearching" style="margin-right: 200px;">검색</button>
 	<button onclick="searchFromStatus(1)" class="infobtn">출근중</button><button onclick="searchFromStatus(0)" class="infobtn">퇴근중</button>
-	<br>
-	<input type="text" id="nameSearch"> <- 이름으로 검색
-	<button onclick="searchFromName()" class="infobtn">검색</button>
 	<div id ="container">
 
 	</div>
 
 	 </div>
+<script src=/erp/js/menu.js></script><!-- 메뉴Ajax로 출력 -->
 	<script>
 
 	$(document).ready(function() {
@@ -182,7 +182,13 @@ ul {
 		str +="</table>"
 		$("#container").html(str);
 	}
-
+	//09-24 change   append   id=nameSearching
+	$("#nameSearch").keyup(function(event){
+		if(event.keyCode==13){
+			$("#nameSearching").click();
+		}
+	});
+	///////
 		$("#showMenu1").hover(function() {
 			$("#smallMenu1").attr("style", "display:inline-block");
 		}, function() {
