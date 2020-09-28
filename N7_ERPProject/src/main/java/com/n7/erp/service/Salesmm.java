@@ -138,7 +138,6 @@ public class Salesmm {
 //      재고테이블 다녀와야함
 //      품목코드로 재고수량 가져외기
 //      if(내것이 더 많다) {
-//       상태코드 : 4
 //       return mav 그럴수없습니다.
 
    public ModelAndView shippingrequestinput(Shippingbean ss, HttpSession session) { //출하등록     
@@ -592,6 +591,41 @@ public class Salesmm {
          mav.setViewName(view);
          return mav;
    }
+
+   public Map<String, List<Salesbean>> getbonumm(Salesbean s, HttpSession session) {
+      //System.out.println(session.getAttribute("cCode").toString());
+      String cCode=session.getAttribute("cCode").toString();
+      Map<String, List<Salesbean>> sMap = null;
+        List<Salesbean> sList= sDao.getbonumm(cCode);
+         if(sList!=null) {
+            sMap=new HashMap<>();
+            sMap.put("sList", sList);
+         }
+         return sMap;
+   }
+
+	public ModelAndView appRequest(String check, HttpSession session) {
+        mav=new ModelAndView();
+        String view = null;
+        String cCode=session.getAttribute("cCode").toString();
+        
+        //List<approvaldetail> sList=new ArrayList<>();
+        approvaldetail app =sDao.appRequest(check, cCode);
+        
+        if(app!=null) {
+           mav.addObject("app", app);
+           view = "sales/salesapprovaldetail";
+        }else {
+           view = "sales/salesapprovaldetail";
+        }
+		mav.setViewName(view);
+		return mav;
+	}
+
+	public ModelAndView approvalup(String check, HttpSession session) {
+		
+		return null;
+	}
     
 //   public Map<String, List<Shippingbean>> shippingquantity(String check, HttpSession session) {
 //      String cCode=session.getAttribute("cCode").toString();

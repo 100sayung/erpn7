@@ -158,7 +158,7 @@ resize: none;
          }
       });
        
-    });
+    }); 
    
    
       $(function() {

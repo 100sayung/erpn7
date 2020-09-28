@@ -83,6 +83,7 @@ text-align:center;
                 <thead valign="top">
                 <tr>
                   <th><input type="radio" id="allCheck"></th>
+                  <th>수주번호</th>
                   <th>프로젝트명</th>
                   <th>프로젝트기간 시작</th>
                   <th>프로젝트기간 끝</th>
@@ -94,6 +95,7 @@ text-align:center;
                 <tbody id="tBody">
                     <tr>
                         <td><input type="radio" name="each_check" class="each"></td> 
+                        <td><input type="text" name="bo_num" placeholder="자동생성" readonly></td>
                         <td><input type="text" name="bo_pronum" id="add"  required></td>
                         <td><input type="date" name="bo_orderdate" min="2000-01-01" max="2030-12-31" style="width:180px;"></td>
                         <td><input type="date" name="bo_duedate" min="2000-01-01" max="2030-12-31" style="width:180px;"></td>
@@ -127,6 +129,7 @@ text-align:center;
                  
                  for(var i in data.sList){
                     str+="<tr><td><input type='radio' name='each_check' value="+data.sList[i].bo_num+"></td>";
+                    str+="<td><input type='text' value="+data.sList[i].bo_num+"></td>";
                     str+="<td><input type='text' value="+data.sList[i].bo_pronum+"></td>";
                     str+="<td><input type='text' value="+data.sList[i].bo_orderdate+"></td>";
                     str+="<td><input type='text' value="+data.sList[i].bo_duedate+"></td>";
@@ -147,7 +150,7 @@ text-align:center;
         
       $(document).ready(function(){
             $('.addList').click(function(){
-               $('#tBody').append('<tr><td><input type="radio" name="each_check" class="each"></td><td><input type="text" name="bo_pronum" class="input-text"></td><td><input type="text" name="bo_orderdate" class="input-text" ></td><td><input type="text" name="bo_duedate" class="input-text" ></td><td><input type="number" name="bo_proquantity" class="input-text"></td><td><input type="number" name="bo_prosalesamount" class="input-text" ></td><td><input type="number" name="bo_orderbudget" class="input-text" ></td><td><input type="button" value="삭제" id="deleteCheck" onclick="javascript:thisRowDel(this);"></td></tr>');
+               $('#tBody').append('<tr><td><input type="radio" name="each_check" class="each"></td><td><input type="text" name="bo_num" class="input-text"></td><td><input type="text" name="bo_pronum" class="input-text"></td><td><input type="text" name="bo_orderdate" class="input-text" ></td><td><input type="text" name="bo_duedate" class="input-text" ></td><td><input type="number" name="bo_proquantity" class="input-text"></td><td><input type="number" name="bo_prosalesamount" class="input-text" ></td><td><input type="number" name="bo_orderbudget" class="input-text" ></td><td><input type="button" value="삭제" id="deleteCheck" onclick="javascript:thisRowDel(this);"></td></tr>');
             });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
         }); 
          function thisRowDel(row){
@@ -192,6 +195,7 @@ text-align:center;
                      if(data.sList!=""){
                     for(var i in data.sList){
                         str+="<tr class='tr'><td><input type='radio' name='each_check' value="+data.sList[i].bo_num+"></td>";
+                        str+="<td><input type='text' value="+data.sList[i].bo_num+"></td>";
                         str+="<td><input type='text' value="+data.sList[i].bo_pronum+"></td>";
                         str+="<td><input type='text' value="+data.sList[i].bo_orderdate+"></td>";
                         str+="<td><input type='text' value="+data.sList[i].bo_duedate+"></td>";
@@ -232,6 +236,7 @@ text-align:center;
                        
                     for(var i in data.sList){
                         str+="<tr><td><input type='radio' name='each_check' value="+data.sList[i].bo_num+"></td>";
+                        str+="<td><input type='text' value="+data.sList[i].bo_num+"></td>";
                         str+="<td><input type='text' value="+data.sList[i].bo_pronum+"></td>";
                         str+="<td><input type='text' value="+data.sList[i].bo_orderdate+"></td>";
                         str+="<td><input type='text' value="+data.sList[i].bo_duedate+"></td>";

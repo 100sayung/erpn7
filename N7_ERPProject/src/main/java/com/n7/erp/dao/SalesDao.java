@@ -2,6 +2,8 @@ package com.n7.erp.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -93,6 +95,10 @@ public interface SalesDao {
    Shippingbean getbonum(@Param("check") String check, @Param("cCode") String cCode); //삭제
 
    boolean approvaldetailinput(approvaldetail app); //결재 상세 등록
+
+   List<Salesbean> getbonumm(String cCode); //수주번호
+
+   approvaldetail appRequest(@Param("bs_docunum") String bs_docunum, @Param("cCode") String cCode);
 
 //   List<Shippingbean> shippingquantity(String check, String cCode); //출하수량비교
 

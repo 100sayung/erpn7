@@ -1,3 +1,5 @@
+//페이지 이동 컨트롤러
+
 package com.n7.erp.controller;
 
 
@@ -60,6 +62,11 @@ public class SalesHomeController {
         mav=sm.approvalplan(check, session);
          return mav;
    }
+   
+   @RequestMapping(value = "/sales/approvalup", method = RequestMethod.GET)
+   public String approvalup(String check, HttpSession session) {
+	   return "/sales/approvalup";
+}
    
    @RequestMapping(value = "/sales/clientfrm", method = RequestMethod.GET)
       public String clientfrm() {

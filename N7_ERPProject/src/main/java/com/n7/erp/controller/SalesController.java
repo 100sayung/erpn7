@@ -223,6 +223,12 @@ public class SalesController {
       return mav;
    }
    
+	@GetMapping(value = "/sales/appRequest", produces = "application/json;charset=utf-8")
+	public ModelAndView appRequest(String check, HttpSession session) {
+		mav = sm.appRequest(check, session);
+		//System.out.println(bs_docunum);
+		return mav;
+	}
 //   @PostMapping(value = "/sales/approvaldelete") //결재완료 삭제 망함
 //   public Map<String, List<approvaldetail>> approvaldelete(String check) {
 //      Map<String, List<approvaldetail>> sMap=sm.approvaldelete(check);
