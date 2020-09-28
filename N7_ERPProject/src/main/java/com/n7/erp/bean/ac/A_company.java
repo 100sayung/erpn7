@@ -29,4 +29,5 @@ public class A_company {
     private String cl_comnum2;
     private String cl_kind3;
     private String cl_memo;
+    private String cl_status;
 }

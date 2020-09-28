@@ -54,7 +54,7 @@ border: 1px solid silver;
          </div>
          <div style="background-color: #ECEBEA;">
             <table summary="Code page support in different versions of MS Windows."
-               rules="groups" frame="hsides" border="1"  id="list">
+               rules="groups" frame="hsides" border="1"  id="list" style="width: 100%;">
                <colgroup align="center">
                </colgroup>
                <colgroup align="left">
@@ -110,7 +110,7 @@ border: 1px solid silver;
 	  $('#save').click(function(){
 	         var obj = $('#rRegistration').serialize();
 	         $.ajax({
-	            url: 'rest/rRegistration',
+	            url: '/erp/rest/Purchase/rRegistration',
 	            type: 'post',
 	            data: obj,
 	            success: function(data){
@@ -125,15 +125,15 @@ border: 1px solid silver;
 	  
 	  $('#rInfo').click(function(){
 		  $.ajax({
-			  url: 'rest/rInfo',
+			  url: '/erp/rest/Purchase/rInfo',
 			  type: 'get',
 			  dataType: 'json',
 			  success: function(data){
 				  console.log(data);
 				  var str="";
-				  str+="<tr><th><input type='checkbox' id='allCheck'></th><th>반품번호</th><th>입고번호</th><th>상품명</th><th>상품코드</th><th>담당자</th><th>거래처</th><th>반품일</th><th>수량</th><th>단가</th><th>합계</th><th>적요</th></tr>";
+				  str+="<tr><th><span>선택</span></th><th>반품번호</th><th>입고번호</th><th>상품명</th><th>상품코드</th><th>담당자</th><th>거래처</th><th>반품일</th><th>수량</th><th>단가</th><th>합계</th><th>적요</th></tr>";
 			 	  for(var i in data.rList){
-			 		 str+="<tr class='tr'><td><input type='checkbox' value='"+data.rList[i].r_documentcode+"' name='each_check' class='each_check'></td>";
+			 		 str+="<tr class='tr'><td><input type='radio' value='"+data.rList[i].r_documentcode+"' name='each_check' class='each_check'></td>";
 	  				 str+="<td>"+data.rList[i].r_documentcode+"</td>"
 		  				 str+="<td>"+data.rList[i].r_ieseqnum+"</td>";
 		  				 str+="<td>"+data.rList[i].r_name+"</td>";
@@ -161,16 +161,16 @@ border: 1px solid silver;
   	  			  console.log(check_list);
   	  			  
   	  			  $.ajax({
-  	  				  url: 'rest/rdelete',
+  	  				  url: '/erp/rest/Purchase/rdelete',
   	  				  type: 'post',
   	  				  data: {check_list:cid},
   	  				  dataType: 'json',
   	  				  success: function(data){
   	  				  console.log(data);
   					  var str="";
-  					  str+="<tr><th><input type='checkbox' id='allCheck'></th><th>반품번호</th><th>입고번호</th><th>상품명</th><th>상품코드</th><th>담당자</th><th>거래처</th><th>반품일</th><th>수량</th><th>단가</th><th>합계</th><th>적요</th></tr>";
+  					  str+="<tr><th><span>선택</span></th><th>반품번호</th><th>입고번호</th><th>상품명</th><th>상품코드</th><th>담당자</th><th>거래처</th><th>반품일</th><th>수량</th><th>단가</th><th>합계</th><th>적요</th></tr>";
   				 	  for(var i in data.rList){
-  				 		 str+="<tr class='tr'><td><input type='checkbox' value='"+data.rList[i].r_documentcode+"' name='each_check' class='each_check'></td>";
+  				 		 str+="<tr class='tr'><td><input type='radio' value='"+data.rList[i].r_documentcode+"' name='each_check' class='each_check'></td>";
 		  				 str+="<td>"+data.rList[i].r_documentcode+"</td>"
   		  				 str+="<td>"+data.rList[i].r_ieseqnum+"</td>";
   		  				 str+="<td>"+data.rList[i].r_name+"</td>";
@@ -199,16 +199,16 @@ border: 1px solid silver;
 			console.log(choice);
 			console.log(search);
 			$.ajax({
-				url: 'rest/retrunsearch',
+				url: '/erp/rest/Purchase/retrunsearch',
 				type: 'post',
 				data: "choice="+choice+"&search="+search,
 				dataType: 'json',
 				  success: function(data){
   	  				  console.log(data);
   					  var str="";
-  					  str+="<tr><th><input type='checkbox' id='allCheck'></th><th>반품번호</th><th>입고번호</th><th>상품명</th><th>상품코드</th><th>담당자</th><th>거래처</th><th>반품일</th><th>수량</th><th>단가</th><th>합계</th><th>적요</th></tr>";
+  					  str+="<tr><th><span>선택</span></th><th>반품번호</th><th>입고번호</th><th>상품명</th><th>상품코드</th><th>담당자</th><th>거래처</th><th>반품일</th><th>수량</th><th>단가</th><th>합계</th><th>적요</th></tr>";
   				 	  for(var i in data.rList){
-  				 		 str+="<tr class='tr'><td><input type='checkbox' value='"+data.rList[i].r_documentcode+"' name='each_check' class='each_check'></td>";
+  				 		 str+="<tr class='tr'><td><input type='radio' value='"+data.rList[i].r_documentcode+"' name='each_check' class='each_check'></td>";
   		  				 str+="<td>"+data.rList[i].r_documentcode+"</td>"
   		  				 str+="<td>"+data.rList[i].r_ieseqnum+"</td>";
   		  				 str+="<td>"+data.rList[i].r_name+"</td>";
@@ -230,8 +230,20 @@ border: 1px solid silver;
   	  			  })
 			})	  
 			
-  	  
+	
+	$('#Wearing').click(function(){
+		$.ajax({
+			url: "/erp/stock/getimportlist",
+			type: "post",
+			dataType: "json",
+			success: function(data){
+				console.log(data);
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});
+	});
    </script>
-
 </body>
 </html>

@@ -5,187 +5,168 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1 user-scalable=no">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-<link
-	href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
-	rel='stylesheet' type='text/css'>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+ <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+<link href="/erp/assets2/img/favicon.png" rel="icon">
+  <link href="/erp/assets2/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-<script src="/erp/lib/jquery/jquery.min.js"></script>
-<script src="/erp/lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="/erp/lib/php-mail-form/validate.js"></script>
-<script src="/erp/lib/easing/easing.min.js"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-<!-- Template Main Javascript File -->
-<script src="resources/js/main.js"></script>
+  <!-- Vendor CSS Files -->
+  <link href="/erp/assets2/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/erp/assets2/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="/erp/assets2/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/erp/assets2/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="/erp/assets2/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="/erp/assets2/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/erp/assets2/css/style.css" rel="stylesheet">
+  
+ 
 
 <title>회사소개</title>
 
 <style>
-#container {
-	border-bottom: gray 1px solid;
-	border-top: gray 1px solid;
-	line-height: 50px;
+#table,td{
+border: 3px double #e1e1e1;
+margin-left: 30%;
 }
-
-.list {
-	float: left;
-	padding: 30px;
-}
-
-.subNavBtn {
-	width: 27%;
-}
-
-table, tr, td {
-	border: 1px black solid;
-}
-
-#info {
-	padding: 0 0 0 26%;
-}
-.wrap{
-height:1000px;
-}
-.erpimg{
-float: left;
-width:300px;
-height:450px;
-margin-left: 6%;
-}
-.img{
-width:300px;
-height: 400px;
-
-}
-header{
-padding-left: 300px;
-}
-
-#logo2{
-width:50%;
-position: absolute; 
-left:25%;
-top: 47%
-}
-.clearfix{
-height: 700px;
+#map{
+border: 3px double #e1e1e1;
+border-radius: 8px;
 }
 </style>
 </head>
-<body data-spy="scroll" data-offset="58" data-target="#navbar-main">
+<body>
+ <!-- ======= Mobile nav toggle button ======= -->
+  <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
 
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex flex-column justify-content-center">
 
-  <div id="navbar-main">
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon icon-shield" style="font-size:30px; color:#3498db;"></span>
-          </button>
-          <a class="navbar-brand hidden-xs hidden-sm smoothscroll" href="#home"></a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="#home" class="smoothscroll">인사말</a></li>
-            <li> <a href="#about" class="smoothscroll"> 회사소개</a></li>
-            <li> <a href="#services" class="smoothscroll">회사기술</a></li>
-            <li> <a href="#team" class="smoothscroll"> 오시는길</a></li>
-            </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+    <nav class="nav-menu">
+      <ul>
+      
+        <li><a href="/erp/"><i class="bx bx-home"></i> <span>홈</span></a></li>
+        <li class="active"><a href="#hero"><i class="bx bx-user"></i> <span>인사말</span></a></li>
+        <li><a href="#about"><i class="bx bx-envelope"></i> <span>회사소개</span></a></li>
+        <li><a href="#resume"><i class="bx bx-file-blank"></i> <span>회사기술</span></a></li>
+        <li><a href="#map"><i class="bx bx-book-content"></i> <span>오시는길</span></a></li>
+      </ul>
+    </nav><!-- .nav-menu -->
 
-  <!-- ==== HEADERWRAP ==== -->
-  <div id="home"></div>
-  <div id="headerwrap" name="home">
-    <header class="clearfix">
-      <h1>인사말
-				</h1>
-				<span> <br>최첨단 기술과 최고의 전문 인력으로 고객에게 최상의 결과물을 제공하는 IT기업,
-					<span style="color: #FFB2D9">N7 ERP</span>입니다!</span>
+  </header><!-- End Header -->
+ <section id="hero" class="d-flex flex-column justify-content-center">
+    <div class="container" data-aos="zoom-in" data-aos-delay="100">
+      <h1>인사말</h1>
+      <p>N7 COMPANY는  &amp;<span class="typed" data-typed-items="혁신적인, 기발한, 능동적인, 알기쉬운"></span></p>
+      <span> <br>최첨단 기술과 최고의 전문 인력으로 고객에게 최상의 결과물을 제공하는 IT기업,
+					<span style="color: #FFB2D9">N7 COMPANY</span>입니다!</span>
 				<p>ERP의 최신 기술을 경험해 보세요!</p>
 				<span>눈앞에 물질보다 정보의 가치가 더 커진 요즘 고객들의 소중한 정보를 지키기 위해 보안 메일 솔루션을<br>
 				구축하여 고객에게 안전한 업무 환경을 제공하고 있으며, 기업 관리 시스템 구축으로 보다 효율적으로 사업을 <br>
 				진행할 수 있도록 도와드리고 있습니다.<br>
-                              그 외에도 홈페이지 구축, 그룹웨어 등 기업에서 필요로 하는 많은 기술을 제공할 수 있는 기업이 되었습니다.</span>
-                              <br><img src="/erp/img/logo.png" id="logo2">
-    </header>
-  </div>
-
-  <!-- ==== ABOUT ==== -->
-  <div class="container" id="about" name="about">
-    <div class="row white">
-      <br>
-      <h1 class="centered">회사소개</h1>
-      <hr>
-
-      <div class="col-lg-6">
-        <p><img src="img/companyimg.png" style="width:190%; height: 500px;"></p>
-      </div>
+                              그 외에도 홈페이지 구축, 그룹웨어 등 기업에서 필요로 하는 많은 기술을 제공할 수 있는 기업이 되겠습니다.</span>
     </div>
-  </div>
-<hr>
-  <!-- ==== SERVICES ==== -->
-  <div class="container" id="services" name="services">
-    <br>
-    <br>
-    <div class="row">
-      <h2 class="centered">회사기술</h2>
-      <hr>
-      <br>
-                <div class="erpimg">
-                <table>
-                <tr><td><img class="img" src="img/erp1.png" alt="최고의 기술로 가치를 창조하고"></td></tr>
-                <tr><td><span> 좋은 ERP로 최고의 기술의 가치를 창조하고</span></td></tr>
-                </table>
-                </div>
-
-                <div class="erpimg">
-                <table>
-                <tr><td><img class="img" src="img/erp2.jpg" alt="혁신적인 기술로 시장을 선도하며"></td></tr>
-                <tr><td><span>혁신적인 기술로 시장을 선도하며</span></td></tr>
-                </table>
-                </div>
-
-                <div>
-                <table class="erpimg">
-                <tr><td><img class="img" src="img/erp3.jpg" alt="항상 고객을 최우선으로 생각하는 기업"></td></tr>
-                <tr><td><span>항상 고객을 최우선으로 생각하는 기업</span></td></tr>
-                </table>
-                </div>
-    </div>
-
-  </div>
-<hr>
-
-  <!-- ==== SECTION DIVIDER2 -->
-  <section class="section-divider textdivider divider2">
-    <div class="container">
-
-    </div>
-    <!-- container -->
   </section>
-  <!-- section -->
+  <section id="about" class="facts">
+      <div class="container" data-aos="fade-up">
 
-  <!-- ==== TEAM MEMBERS ==== -->
-  <div class="container" id="team" name="team">
-    <br>
-    <div class="row white centered">
-      <h1>오시는길</h1>
-				<div id="info">
-					<table>
+        <div class="section-title">
+          <h2>회사소개</h2>
+          <p>N7 COMPANY는 2020년 8월 4일에 창설하여 젊은 인력으로 새로운 기술을 가지고 있고 더높은 곳으로 비상할 준비가 되있는 신생 기업입니다.<br>
+             플랫폼 ERP라는 기술을 앞세워 남녀노소 누구나 쉽게 ERP를 경험 할수 있게 제작하였습니다. </p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="count-box">
+              <i class="icofont-simple-smile"></i>
+              <span data-toggle="counter-up">232</span>
+              <p>고객사</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
+            <div class="count-box">
+              <i class="icofont-document-folder"></i>
+              <span data-toggle="counter-up">521</span>
+              <p>등록된 프로젝트</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+            <div class="count-box">
+              <i class="icofont-live-support"></i>
+              <span data-toggle="counter-up">1,463</span>
+              <p>일평균 상담 업무</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+            <div class="count-box">
+              <i class="icofont-users-alt-5"></i>
+              <span data-toggle="counter-up">15</span>
+              <p>실시간 대기중 엔지니어</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+ <section id="resume" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>ERP소개</h2>
+          <p> Web 기반 맞춤형 ERP를 앞세워 저렴한 가격으로 누구나 사용 할 수 있는 ERP입니다. </p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4">
+            <img src="img/erp1.png" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-8 pt-4 pt-lg-0 content">
+            <h3>N7ERP의 장점</h3>
+            <p class="font-italic">저렴한가격 &amp; Web 기반</p>
+            <div class="row">
+              <div class="col-lg-6">
+              <h4>특장점</h4>
+               <ul>
+               <li>기능이나 사용자 수에 따른 추가비용 없이 월 5만원으로 ERP 모든 기능을 사용할 수 있습니다.</li>
+               <li>기본적인 ERP 기능은 물론 모바일 앱(App), 사내 메신저, 온라인수발주시스템, 온라인급여조회시스템 등을 무료로 사용할 수 있으며,
+시스템 관리 및 고객상담서비스, 각종 교육서비스, 업그레이드 등을 모두 무료로 지원합니다.</li>
+               <li>인터넷만 연결되면 사무실 밖에서도 언제든지 업무를 조회하고 처리할 수 있습니다.</li>
+               <li>입력한 자료는 실시간으로 모든 장부에 반영되기 때문에 여러 매장이나 공장, 해외 지사에서도 최신 자료를 확인할 수 있습니다.</li>
+               </ul>
+              </div>
+              <div class="col-lg-6">
+               <ul>
+               <li>PC, 노트북, 태블릿, 모바일 등 모든 기기에서 사용할 수 있습니다.</li>
+               <li>별도의 설치 과정이 필요하지 않기 때문에 도입을 결정하는 즉시 사용할 수 있습니다.</li>
+               <li>개인 PC가 아닌 이카운트 서버에 실시간으로 안전하게 보관되므로 보안이나 백업에 대해 우려를 할 필요가 없습니다.</li>
+               </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  <section id="map" class="facts">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>오시는길</h2>
+          <table id="table">
 						<tr>
 							<td>회사이름</td>
-							<td>달콤살벌한 SELECT</td>
+							<td>N7 COMAPNY</td>
 						</tr>
 						<tr>
 							<td>회사전화번호</td>
@@ -196,15 +177,31 @@ height: 700px;
 							<td>인천 미추홀구 매소홀로488번길 6-32 태승빌딩 4층</td>
 						</tr>
 					</table>
-				</div>
-				<div id="map"
+        </div>
+
+        <div class="row">
+          <div id="map"
 					style="width: 600px; border: 1px solid black; height: 400px; margin: 20px auto; display: block;"></div>
+        </div>
 
-			</div>
       </div>
-
+    </section>
 
 </body>
+ <script src="/erp/assets2/vendor/jquery/jquery.min.js"></script>
+  <script src="/erp/assets2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/erp/assets2/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="/erp/assets2/vendor/php-email-form/validate.js"></script>
+  <script src="/erp/assets2/vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="/erp/assets2/vendor/counterup/counterup.min.js"></script>
+  <script src="/erp/assets2/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/erp/assets2/vendor/venobox/venobox.min.js"></script>
+  <script src="/erp/assets2/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="/erp/assets2/vendor/typed.js/typed.min.js"></script>
+  <script src="/erp/assets2/vendor/aos/aos.js"></script>
+
+  <script src="/erp/assets2/js/main.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
 	var map = null;

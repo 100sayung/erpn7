@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.n7.erp.service.AdminMM;
-import com.n7.erp.service.MemberMM;
 import com.n7.erp.userClass.PagingVO;
 
 @RestController
@@ -17,14 +15,18 @@ public class AdminRestController {
 	@Autowired AdminMM am;
 
 	@GetMapping(value = "/admin/memberlist")
-	public String memberList(String nowPage, String cntPerPage) {
+	public String memberList(PagingVO vo, String nowPage, String cntPerPage) {
 		//	@RequestParam(value = "cntPerPage", required = false) 
 		int total = am.countMember();
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "10";
-		} 
-		PagingVO vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) {
+			cntPerPage = "10";
+		}
+		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		System.out.println(vo);
 		String result = new Gson().toJson(am.selectMember(vo));
 		return result;
@@ -55,6 +57,12 @@ public class AdminRestController {
 		PagingVO vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
 		String result = new Gson().toJson(am.selectCompany(vo));
+		return result;
+	}
+	
+	@GetMapping(value="admin/companytemp")
+	public String companyTemp() {
+		String result = am.companyTemp();
 		return result;
 	}
 }

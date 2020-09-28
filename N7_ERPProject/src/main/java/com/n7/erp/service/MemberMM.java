@@ -1,37 +1,21 @@
 package com.n7.erp.service;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-import javax.mail.Address;
-import javax.mail.Authenticator;
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.MailException;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMailMessage;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.n7.erp.bean.Member;
-import com.n7.erp.bean.entity.Gmail;
-import com.n7.erp.bean.entity.MailHandler;
 import com.n7.erp.dao.IHrDao;
 import com.n7.erp.dao.IMemberDao;
 import com.n7.erp.userClass.FileManager;
@@ -104,7 +88,7 @@ public class MemberMM {
 public String getSearchFromId(String m_id) {
 	ArrayList<Member> mlist = new ArrayList<Member>();
 	if (m_id.equals("")) {
-		System.out.println("ㄴ");
+		System.out.println("��");
 		mlist = mDao.getAllMember();
 	} else {
 		m_id = "%" + m_id + "%";
@@ -133,7 +117,7 @@ public void forceWithDrawal(List<String> slist) {
 
 public ModelAndView moveMyInfo(HttpSession session) {
 	if(!hDao.haveHrCode(session.getAttribute("id").toString())) {
-		mav.addObject("msg", "우선 인사카드 등록을 요청해주세요.");
+		mav.addObject("msg", "�켱 �λ�ī�� ����� ��û���ּ���.");
 	}
 	mav.setViewName("myInfo/myInfo");
 	return mav;
@@ -150,13 +134,13 @@ public ModelAndView moveMyInfo(HttpSession session) {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
 			messageHelper.setFrom("mykyj2000@gmail.com");
 			messageHelper.setTo(userEmail);
-			messageHelper.setSubject("N7 ERP 인증번호입니다.");
-			messageHelper.setText("인증번호는 " + authentictionNum + " 입니다");
+			messageHelper.setSubject("N7 ERP ������ȣ�Դϴ�.");
+			messageHelper.setText("������ȣ�� " + authentictionNum + " �Դϴ�");
 			mailSender.send(mimeMessage);
-			return ResponseEntity.ok(new Gson().toJson("인증번호전송 성공"));
+			return ResponseEntity.ok(new Gson().toJson("������ȣ���� ����"));
 		} catch (MessagingException e) {
 			e.printStackTrace();
-			return ResponseEntity.ok(new Gson().toJson("인증번호전송 실패"));
+			return ResponseEntity.ok(new Gson().toJson("������ȣ���� ����"));
 		}
 	}
 
@@ -173,6 +157,17 @@ public ModelAndView moveMyInfo(HttpSession session) {
 
 	public ResponseEntity<String> modifyPassword(String userPassword, String userId) {
 		mDao.modifyPassword(userPassword,userId);
-		return ResponseEntity.ok(new Gson().toJson("비밀번호 변경에 성공하였습니다."));
+		return ResponseEntity.ok(new Gson().toJson("��й�ȣ ���濡 �����Ͽ����ϴ�."));
 	}
+
+	public String getDupleID(String m_id) {
+		int idcnt = mDao.getDupleID(m_id);
+		return Integer.toString(idcnt);
+	}
+
+	public String getDupleCCode(String cCode) {
+		int ccodecnt = mDao.getDupleCCode(cCode);
+		return Integer.toString(ccodecnt);
+	}
+
 }

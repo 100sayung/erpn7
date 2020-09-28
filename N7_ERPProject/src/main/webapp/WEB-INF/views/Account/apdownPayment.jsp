@@ -45,6 +45,11 @@ td {
 #m {
 	background-color: gray;
 }
+
+#center{
+
+text-align: center;
+}
 </style>
 </head>
 <body>
@@ -65,7 +70,9 @@ td {
 	<br>
 	<div id="paging" style="text-align: center;"></div>
 	<br>
+	<div id="center">
 	<button id="approval">결재안 상세보기</button>
+	</div>
 	<!-- 	<button id="acBack2">반려요청</button> -->
 	<!-- 	<button id="acDelete">삭제</button> -->
 </body>

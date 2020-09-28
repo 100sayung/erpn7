@@ -83,13 +83,13 @@ resize: none;
                               <th><input type="text" name="bs_docunum" value="${sb.bs_docunum}" placeholder="출하번호" class="txt"></th>
                            </tr>
                            <tr>
-                          <th colspan="3">상신자</th>
-                              <th colspan="1"><input type="text" placeholder="자동생성" class="txt" readonly></th>
-                              <th colspan="2">거래처 회사코드</th>
-                              <th colspan="2"><input type="text" name="bs_clcode" value="${sb.bs_clcode}" class="txt"></th>
+<!--                       <th colspan="3">상신자</th>
+                              <th colspan="1"><input type="text"> --></th> <!-- name="bs_approver1" --> <!--bo_num-->
+                              <th colspan="4">거래처 회사코드</th>
+                              <th colspan="4"><input type="text" name="bs_clcode" value="${sb.bs_clcode}" class="txt"></th>
                            </tr>
                            <tr>
-                              <th rowspan="8" colspan="2">조회</th>
+                              <th rowspan="15" colspan="2">조회</th>   
                            </tr>
                            <tr>
                               <td>회사코드</td>
@@ -128,13 +128,37 @@ resize: none;
                               <th colspan="8"><textarea rows="13" cols="125" name="bs_ect" id="ect"></textarea></th>
                            </tr>
                         </table>
-               		</td>
-            	</tr>
-         	</table>
-      	</div>
+                     </td>
+               </tr>
+            </table>
+         </div>
    </form>
+   
+   
    <script>
-  
+   $(document).ready(function(){
+      $.ajax({
+         url:'/erp/rest/sales/getMyInfo',
+         type:'get',
+         datatype:'json',
+         success:function(data){
+            console.log(data);
+            var str = "";
+            for ( var i in data.sList) {
+                 str +="<input type='text' name='bs_apcode"+(Number(i)+Number(1))+"' value='"+data.sList[i].hc_hrcode+"' hidden='true'>";
+               str +=data.sList[i].hc_position+"/";
+               str +="<input style='width:50px;' type='text' name='bs_approver"+(Number(i)+Number(1))+"' value='"+ data.sList[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
+            }
+            console.log(str)
+            $("#line").html(str);
+         
+         },
+         error:function(error){
+            console.log(error);
+         }
+      });
+       
+    });
    
    
       $(function() {
@@ -165,67 +189,61 @@ resize: none;
          return new Date(year, month, 0).getDate();
       }
       
-/*       $('#submit').click(function(){
-         $.ajax({
-            url: 'rest/pprogramwrite',
-            type: 'get',
-            dataType: 'json',
-            success: function(data){
-               console.log(data);
-            },
-            error: function(error){
-               console.log(error);
-            }
-         });
-      }); */
+
       
       $("#approvalLine").click(function() {
-          window.open('approvalLine', 'approvalLine', 'width=1400,height=700');
+          window.open('/erp/sales/approvalLine', 'approvalLine', 'width=1400,height=700');
        });
-      
+            
       function setChildValue(data) {
-	      console.log(data);
-	      if (data.tList1 != "") {
-	      var str = "";
-	         for ( var i in data.tList1) {
-	            str +="<input type='text' name='bs_approver"+i+"' value='"+data.tList1[i].m_code+"' hidden='true'>";
-	            str +=data.tList1[i].m_grade+"/";
-	            str +="<input style='width:50px;' type='text' name='bs_approver"+i+"' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;"; /* ad_apname */
-	         }
-	         console.log(str)
-	         $("#line").html(str);
-	      };
-	      
-	      /* if (data.tList2 != "") {
-	         for ( var i in data.tList2) {
-	      var str2 = "";
-	            str2 +="<input type='text' name='ad_recode"+i+"' value='"+data.tList2[i].m_code+"' hidden='true'>";
-	            str2 += data.tList2[i].m_grade + "<br>";
-	            str2 += data.tList2[i].m_name;
-	         $("#refer"+i).html(str2);
-	         }
-	      }; */
-	   
-	   };
-	   
-	   $("#submit").click(function(){
-		   var obj=$("#approvalinput").serialize();
-		   
-		  $.ajax({
-			 url:'rest/approvalinput',
-			 type: 'post',
-			 data: obj,
-			 dataType: 'json',
-			 success:function(data){
-				  console.log(data)				 
-			 },
-			 error:function(error){
-				 console.log(error)
-			 }
-			 
-		  });  
-	   });
-	   
+          console.log(data);
+          if (data.tList1 != "") {
+          var str = "";
+             for ( var i in data.tList1) {
+                  str +="<input type='text' name='bs_apcode"+(Number(i)+Number(2))+"' value='"+data.tList1[i].hc_hrcode+"' hidden='true'>";
+                str +=data.tList1[i].hc_position+"/";
+                str +="<input style='width:50px;' type='text' name='bs_approver"+(Number(i)+Number(2))+"' value='"+ data.tList1[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
+             }
+             console.log(str)
+             $("#line").append(str);
+          };
+       };
+         
+/*          if (data.tList2 != "") {
+            for ( var i in data.tList2) {
+         var str2 = "";
+               str2 +="<input type='text' name='ad_recode"+i+"' value='"+data.tList2[i].m_code+"' hidden='true'>";
+               str2 += data.tList2[i].m_grade + "<br>";
+               str2 += data.tList2[i].m_name;
+            $("#refer"+i).html(str2);
+            } */
+         /* };  */
+      
+      //결재 제출하기
+      $("#submit").click(function(){
+         var obj=$("#approvalinput").serialize();
+         
+/*          var check="";
+         $("input[name=each_check]:checked").each(function(){
+            check = $(this).attr("value"); */
+            
+        $.ajax({
+          url:'/erp/rest/sales/approvalinput',
+          type: 'post',
+          data: obj,
+          //dataType: 'json',
+          success:function(data){
+              alert("기안문 제출이 완료되었습니다.");           
+              console.log(data);                
+                
+              window.close();   
+          },
+          error:function(error){
+             console.log(error);
+          }         
+        });  
+      });
+      
    </script>
 </body>
 </html>

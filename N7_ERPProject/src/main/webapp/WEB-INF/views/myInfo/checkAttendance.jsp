@@ -49,6 +49,27 @@ ul {
 }
 .attendance{
 	border: 1px solid black;
+	margin : 15px;
+	width:300px;
+	height: 70px;
+}
+
+.emphasis{
+	background:#FFB2D9;
+	font-size: 30px;
+	font-weight: bold;
+	color:white;
+}
+.noemphasis{
+	background:gray;
+	font-size:20px;
+}
+
+#check{
+	width:800px;
+	height:150px;
+	text-align: center;
+	align-content: center;
 }
 </style>
 </head>
@@ -62,19 +83,13 @@ ul {
 		<div id="menu">
 			<ul>
 				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
-				<li><a href="/erp/hr/hr" accesskey="2"
-					title="">인사 관리</a></li>
-				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
-				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="#">회계 관리</a></li>
-			</ul>
+				<ul id="mainmenu">
 		</div>
 	</div>
 	<div id="side_menu">
 		<ul id="menuList">
 			<li><a href="/erp/myinfo/checkattendance">출/퇴근 등록</a></li>
-			<li><a href="/erp/myinfo/myinfo">내 정보 보기</li>
+			<li><a href="/erp/myInfo/myInfo">내 정보 보기</li>
 			<li><a href="/erp/myinfo/myPaycheck">급여명세서 보기</li>
 			<li><a href="/erp/myinfo/myattendance">내 출결 보기</li>
 			<li><a href="/erp/myinfo/myholiday">내 휴가 보기</li>
@@ -84,12 +99,16 @@ ul {
 	</div>
 	<div id="description">
 	
-	<h1 align="center">오늘 날짜 현재 시각 출력해야함. 현재 등록버튼누르면 오늘날짜가 입력되는데 현재시각이 들어가도록 바꿔야함</h1>
-	<h1 id="clock"></h1>
-	<div id="currentStatus"></div>
+	<h1 align="center">현재시각</h1>
+	<h1 align="center" id="clock"></h1><br><br>
+	
+	<div style="align:center;" id="currentStatus"></div>
 	<br>
-	<span id="in" class="attendance"> 출근 등록 </span>
-	<span id="out" class="attendance"> 퇴근 등록 </span>
+	<br>
+	<div id='check'>
+	<span id="in" class="attendance">출근 등록</span>
+	<span id="out" class="attendance">퇴근 등록</span>
+	</div>
 	</div>
 	
 	
@@ -112,6 +131,7 @@ ul {
 	
 
 
+	<script src=/erp/js/menu.js></script> <!-- 메뉴Ajax로 출력 -->
 <script>
 	var status = "";
 	var load = function(){
@@ -122,9 +142,13 @@ ul {
 			success : function(status){
 				console.log(status);
 				if(status == 1){
-					status = "근무중";
+					status = "<h1 align='center'>근무중</h1>";
+					$("#out").addClass('emphasis');
+					$("#in").addClass('noemphasis');
 				}else{
-					status = "퇴근중";
+					status = "<h1 align='center'>퇴근중</h1>";
+					$("#in").addClass('emphasis');
+					$("#out").addClass('noemphasis');
 				}
 				$("#currentStatus").html(status);
 			}, error : function(err){
@@ -148,18 +172,15 @@ ul {
 				console.log(data);
 				if(data == 1){
 					alert("출근 등록 되었습니다.");
-					status = "근무중";
 				}else{
 					alert("퇴근 등록 되었습니다.");
-					status = "퇴근중";
 				}
-				$("#currentStatus").html(status);
+				location.reload();
 			}, error : function(err){
 				console.log(err);
 			}
 		}); 
 	});
-	
 
 	var clockTarget = document.getElementById("clock");
 

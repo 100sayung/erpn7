@@ -35,7 +35,7 @@
 	<!-- 페이징 처리 후 회원조회 -->
 	
 	<!-- 탈퇴회원 포함X -->
-	<select id="selectCompany" resultType="member">
+	<select id="selectCompany" resultType="company">
 		SELECT *
 			FROM (
 				 SELECT ROWNUM RN, A.*

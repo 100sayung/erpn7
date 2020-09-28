@@ -2,6 +2,8 @@ package com.n7.erp.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Select;
+
 import com.n7.erp.bean.Company;
 import com.n7.erp.bean.Member;
 import com.n7.erp.userClass.PagingVO;
@@ -15,5 +17,7 @@ public interface AdminDao {
 	
 	public int countCompany();
 	public List<Company> selectCompany(PagingVO vo);
-} 
+	@Select("SELECT * FROM COMPANY_TEMP")
+	public List<Company> companyTemp();
+}
 

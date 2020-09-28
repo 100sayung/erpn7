@@ -10,6 +10,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
+<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css" media="all" />
 <style>
 #header {
 	width: 100%;
@@ -58,14 +59,8 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내 정보</a></li>
-				<li class="current_page_item"><a href="/erp/hr/hr" accesskey="2"
-					title="">인사 관리</a></li>
-				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
-				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="#">회계 관리</a></li>
-			</ul>
+				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
+				<ul id="mainmenu">
 		</div>
 	</div>
 	<div id="side_menu">
@@ -80,7 +75,7 @@ ul {
 			<li id="showMenu2">근태 관리
 				<ul id="smallMenu2" style="display: none;">
 					<li><a href="/erp/hr/receiptholiday">휴가 접수</a></li>
-					<li><a href="/erp/hr/attendance">사원 출결 관리</a></li>
+					<li><a href="/erp/hr/attendance">사원 출결 조회</a></li>
 					<li><a href="/erp/hr/employeestatus">근무 조회</a></li>
 					<li><a href="/erp/hr/retiremm">휴/퇴직 관리</a></li>
 				</ul>
@@ -95,13 +90,14 @@ ul {
 		</ul>
 	</div>
 	<div id="description">
+	<div class="divcss">부서 or 직책 적용</div>
 	<table>
 		<tr id="seldplist">
-			<td><select id="disposition" name="disposition"><option selected="selected"
-						 value="d">부서 선택</option>
+			<td><select id="disdept" name="disdept" onchange="changeDept()"><option selected="selected"
+						 value="">부서 선택</option>
 			</select></td>
-			<td><select id="disdept" name="disdept"><option selected="selected"
-						 value="p">직급 선택</option>
+			<td><select id="disposition" name="disposition"><option selected="selected"
+						 value="">직급 선택</option>
 			</select></td>
 			<td><button type="button" onclick="distinct()">검색</button></td>
 			<!-- 검색 버튼 클릭시  -->
@@ -116,8 +112,9 @@ ul {
 			<td></td>
 		</tr>
 	</table>
-	 본 화면 </div>
+ </div>
 </body>
+	<script src=/erp/js/menu.js></script> <!-- 메뉴Ajax로 출력 -->
 <script>
 $("#showMenu1").hover(function() {
 	$("#smallMenu1").attr("style", "display:inline-block");
@@ -142,15 +139,31 @@ $("#showMenu3").hover(function() {
 		console.log(${dept});
 		console.log(dept.length);
 		for(var i=0;i<dept.length;i++){
-			$("#id").append("<tr align='center'><td width='100px'>"+dept[i].HDP_position+"</td>"
-			+"<td width='100px'>"+dept[i].HDP_dept+"</td>"
+			console.log(dept[i].HDP_num+dept[i].HDP_pay);
+			$("#id").append("<tr align='center'><td width='100px'>"+dept[i].HDP_dept+"</td>"
+			+"<td width='100px'>"+dept[i].HDP_position+"</td>"
 			+"<td id='"+dept[i].HDP_num+"' width='100px'>"+dept[i].HDP_pay+"</td>"
 			+"<td><input id='modifypay_"+dept[i].HDP_num+"'></td>"
-			+"<td><button type='button' onclick='dify("+dept[i].HDP_num+")'>수정</button></td>"
+			+"<td><button type='button' id='"+dept[i].HDP_num+dept[i].HDP_pay+"'  onclick='dify("+dept[i].HDP_num+")'>수정</button></td>"
 			+"<td><button type='button' onclick='erase("+dept[i].HDP_num+")'>삭제</button></td></tr>");
-			console.log(dept[i].HDP_num);
 		}
 	});
+	
+// 	$(function(){
+// 		var division = ${dept};
+// 		for(var i=0;i<division.length;i++){
+// 			var num=division[i].HDP_num;
+// 			var p=division[i].HDP_pay;
+// 			$("#modifypay_"+division[i].HDP_num).keyup(function(event){
+// 			console.log(num+","+p);
+// 				if(event.keyCode==13){
+// 					$("#"+num+p).click();
+// 				}
+// 			});
+// 		}
+// 	});
+
+
 
 	//부서 직급 페이지 에서 급여 수정
 	function dify(dept) {
@@ -165,7 +178,6 @@ $("#showMenu3").hover(function() {
 			success : function(data) {
 				$("#"+dept).html(data);
 				$("#modifypay_"+dept).val('');
-				console.log(data);
 			},
 			error : function(err) {
 				console.log(err);
@@ -183,16 +195,14 @@ $("#showMenu3").hover(function() {
 			data : {deptnum : deptnum},
 			dataType: 'JSON',
 			success : function(data) {
-				console.log(data.length);
 				var str='<tr align="center"><td width="100px">부서</td><td width="100px">직급</td><td width="100px">금액</td><td width="100px">수정 금액</td></tr>';
 				for(var i=0;i<data.length;i++){
 					str+="<tr align='center'><td width='100px'>"+data[i].HDP_position+"</td>"
 					+"<td width='100px'>"+data[i].HDP_dept+"</td>"
 					+"<td id='"+data[i].HDP_num+"' width='100px'>"+data[i].HDP_pay+"</td>"
 					+"<td><input id='modifypay_"+data[i].HDP_num+"'></td>"
-					+"<td><button type='button' onclick='dify("+data[i].HDP_num+")'>수정</button></td>"
+					+"<td><button type='button id='"+dept[i].HDP_num+dept[i].HDP_pay+"'' onclick='dify("+data[i].HDP_num+")'>수정</button></td>"
 					+"<td><button type='button' onclick='erase("+data[i].HDP_num+")'>삭제</button></td></tr>";
-					console.log(data[i].HDP_num);
 				}
 				console.log(str);
 				$("#id").html(str);
@@ -209,18 +219,34 @@ $("#showMenu3").hover(function() {
 		var str='';
 		var distinctposition=${distinctposition};
 		var distinctdept=${distinctdept};
- 		console.log(${distinctposition});
-		console.log(${distinctdept});
-		console.log(${distinctposition}.length);
-		for(var i=0;i<distinctposition.length;i++){
-			console.log(distinctposition[i].HDP_position);
-			$("#disposition").append("<option>"+distinctposition[i].HDP_position+"</option>");
-		}
+// 		for(var i=0;i<distinctposition.length;i++){
+// 			$("#disposition").append("<option>"+distinctposition[i].HDP_position+"</option>");
+// 		}
 		for(var i=0;i<distinctdept.length;i++){
-			$("#disdept").append("<option name=''>"+distinctdept[i].HDP_dept+"</option>");
+			$("#disdept").append("<option>"+distinctdept[i].HDP_dept+"</option>");
 		}
 	});
-
+	function changeDept(){
+		var id=$("#disdept");
+		console.log(id.val());
+		$.ajax({
+			url:"deptsearchposition",
+			method : "get",
+			dataType : "json",
+			data : {"dept" : id.val()},
+			success : function(data){
+				let str = "";
+				str += "<select name='dispostion' class='detailInfo' id='disposition'>";
+				for(let i = 0 ; i<data.length ; i++){
+					str += "<option value='"+data[i].HDP_position+"'>"+data[i].HDP_position+"</option>";
+				}
+				str += "</select>"
+				$("#disposition").html(str);
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+	}
 	//부서 직책 검색기능
 	function distinct(){
 
@@ -236,15 +262,14 @@ $("#showMenu3").hover(function() {
 			success:function(data){
 				var str='<tr align="center"><td width="100px">부서</td><td width="100px">직급</td><td width="100px">금액</td><td width="100px">수정 금액</td></tr>';
 				for(var i=0;i<data.length;i++){
-					str+="<tr align='center'><td width='100px'>"+data[i].HDP_position+"</td>"
-					+"<td width='100px'>"+data[i].HDP_dept+"</td>"
+					str+="<tr align='center'><td width='100px'>"+data[i].HDP_dept+"</td>"
+					+"<td width='100px'>"+data[i].HDP_position+"</td>"
 					+"<td id='"+data[i].HDP_num+"' width='100px'>"+data[i].HDP_pay+"</td>"
 					+"<td><input id	='modifypay_"+data[i].HDP_num+"'></td>"
-					+"<td><button type='button' onclick='dify("+data[i].HDP_num+")' class='mopay'>수정</button></td>"
+					+"<td><button type='button' id='"+dept[i].HDP_num+dept[i].HDP_pay+"' onclick='dify("+data[i].HDP_num+")' class='mopay'>수정</button></td>"
 					+"<td><button type='button' onclick='erase("+data[i].HDP_num+")' class='mopay'>삭제</button></td></tr>";
 					console.log(data[i].HDP_num);
 				}
-				console.log(str);
 				$("#id").html(str);
 			},
 			error:function(err){
@@ -253,5 +278,7 @@ $("#showMenu3").hover(function() {
 
 		});
 	}
+
+	
 </script>
 </html>

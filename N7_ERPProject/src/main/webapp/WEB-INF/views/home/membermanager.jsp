@@ -62,6 +62,7 @@ margin-left: 200px;
 		</div>
 		<div id="menu">
 			<ul>
+				<li><a href="/erp/adminpage">ERP 등록</a></li>
 				<li><a href="/erp/companymanager" accesskey="3" title="">회사 관리</a></li>
 				<li><a href="/erp/membermanager" accesskey="4" title="">회원 관리</a></li>
 			</ul>
@@ -84,19 +85,78 @@ margin-left: 200px;
 	<div id="management"> 
 	선택 멤버를 
 	<select>
-	<option value="0"> 0(일반회원)</option>
-	<option value="1"> 1(ERP매니저)</option>
-	<option value="2"> 2(ADMIN계정)</option>
+	<option value="0"> 일반회원</option>
+	<option value="1"> ERP매니저</option>
+	<option value="2"> ADMIN계정</option>
 	</select>
 	으로 
 	<input type='button' value='변경' onclick="changeGrade()">
 	<input type='button' value='강제탈퇴' onclick="forceWithdrawal()">
 	</div>
 	</div>
+	
+	<script>
+	//테스트중
+	/* 
+	var currPage = 1;
+	var contents;
+	function pageNumber(num, addr){
+		var pageNum;
+		currPage = num;
+		$.ajax({
+			url:"/erp/rest"+addr,
+			dataType:"json",
+			async:false, //비동기통신을 동기통신으로 만들어줘야함
+			method:"get",
+			success : function(page){
+				console.log(page);
+				pageNum = page;
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+		console.log(pageNum);
+		return pageNum;
+	}
+	
+	function list(nowPage, addr, cntPerPage){
+		$.ajax({
+			url:"/erp/rest"+addr,
+			dataType:"json",
+			data:{nowPage : nowPage, cntPerPage : cntPerPage},
+			method:"get",
+			success : function(data){
+				console.log(data);
+				contents = data;
+			}, error : function(err){
+				console.log(err);
+			}	
+		});
+		console.log(contents);
+		return contents;
+	}
+	
+	
+	
+	var Paging = function(num, pageAddr, contentsAddr, nowPage, cntPerPage){
+		console.log(pageNumber(num, pageAddr));
+		console.log(list(nowPage, contentsAddr, cntPerPage));
+	}
+	
+	Paging(1, "/admin/memberpagenumber", "/admin/memberlist", 1, 10);
+	
+	 */
+	</script>
+	
 	<script> 
 	//페이지 변경 스크립트
-	
+
 	var currPage = 1;
+	function selChange(){
+		var sel = document.getElementById('cntPerPage').value;
+		location.href ="memberlist?nowPage=${paging.nowPage}&cntPerPage="+sel;
+	}
+	
 	function pageNumber(j){
 		currPage = j;
 		$.ajax({
@@ -154,7 +214,7 @@ margin-left: 200px;
 	}
 	
 	memberlist(1);
-	pageNumber(1);
+	pageNumber(1); 
 	
 	</script>
 	<script>
@@ -241,7 +301,13 @@ margin-left: 200px;
 					str += "<td><input type='checkbox' id='chkbx' name='chkbx' value='"+data[i].m_id+"'></td>";
 					str += "<td>" + data[i].m_name + "(" + data[i].m_id +")</td>";
 					str += "<td>" + data[i].m_ccode + "</td>";
-					str += "<td>" + data[i].m_grade + "</td>";
+					if(data[i].m_grade == 0){
+						str += "<td>일반회원</td>";						
+					}else if(data[i].m_grade == 1){
+						str += "<td>ERP매니저</td>";
+					}else if(data[i].m_grade == 2){
+						str += "<td>홈페이지ADMIN</td>";
+					}
 					str += "</tr>"
 				}
 				str += "</table>";

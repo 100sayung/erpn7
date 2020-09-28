@@ -8,7 +8,10 @@
 <title>Document</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css"
 	media="all" />
 <style>
 #header {
@@ -47,6 +50,25 @@ a {
 ul {
 	list-style: none;
 }
+td, th, table {
+	border: 1px solid white;
+}
+
+td, th {
+	width: 100px;
+	height: 30px;
+}
+
+tr {
+	text-align: center;
+}
+
+
+span {
+	text-align: center;
+	color: red;
+}
+
 </style>
 </head>
 <body>
@@ -58,14 +80,8 @@ ul {
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="/erp/myinfo/myinfo" accesskey="4" title="">내 정보</a></li>
-				<li class="current_page_item"><a href="/erp/hr/hr" accesskey="2"
-					title="">인사 관리</a></li>
-				<li><a href="#" accesskey="3" title="">영업 관리</a></li>
-				<li><a href="#" accesskey="5" title="">구매 관리</a></li>
-				<li><a href="#" accesskey="6" title="">자재 관리</a></li>
-				<li><a href="#">회계 관리</a></li>
-			</ul>
+				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
+				<ul id="mainmenu">
 		</div>
 	</div>
 	<div id="side_menu">
@@ -94,21 +110,34 @@ ul {
 			</li>
 		</ul>
 	</div>
-	<h1>급여 관리 페이지</h1>
-	<table id="wages" style="text-align: center; width: 800px;">
-		<tr>
+	<div id="description">
+	<div class="divcss">사원 검색</div>
+	<input type="text" id="findcheckpayid" placeholder="아이디 이름 검색">
+	<input type="button" id="checkpayid" class="cssbutton" onclick="checkpayid()" value="검색">
+	<br><br>
+	<div class="divcss">사원 급여 관리</div>
+	<table id="wages" style="text-align: center; width: 900px;">
+		<tr class="tr_chart_color"  style="">
 			<td>아이디</td>
 			<td>이름</td>
 			<td>부서</td>
-			<td>직책</td>
+			<td>직급</td>
 			<td>급여</td>
 			<td>기본공제액</td>
 			<td>기본수령액</td>
 		</tr>
 	</table>
+	</div>
+<script src=/erp/js/menu.js></script><!-- 메뉴Ajax로 출력 -->
 	<script>
-	//사원들 급여 조회
+	//검색창에 포커스 들어가서 Enter치면 검색 클릭
+	$("#findcheckpayid").keyup(function(event){
+		if(event.keyCode==13){
+			$("#checkpayid").click();
+		}
+	});
 	
+	//사원들 급여 조회
 	$(function(){
 	$.ajax({
 		url:"/erp/hr/searchwages",
@@ -116,7 +145,7 @@ ul {
 		dataType:'JSON',
 		success:function(data){
 			console.log(data);
-			console.log(data.hc_id);
+			console.log(data[0].HC_ID);
 			console.log(data.length);
 			var str='';
 			var da=data.toString();
@@ -124,8 +153,8 @@ ul {
 				var result=data[i].HDP_PAY-data[i].HDD_AMOUNT;
 				str+="<tr id='\""+data[i].HC_ID+"\"'><td>"+data[i].HC_ID+"</td>"
 					+"<td>"+data[i].M_NAME+"</td>"
-					+"<td>"+data[i].HC_POSITION+"</td>"
 					+"<td>"+data[i].HC_DEPT+"</td>"
+					+"<td>"+data[i].HC_POSITION+"</td>"
 					+"<td>"+data[i].HDP_PAY+"</td>"
 					+"<td>"+data[i].HDD_AMOUNT+"</td>"
 					+"<td>"+result+"</td>"
@@ -169,8 +198,24 @@ ul {
 		});
 	}
 	
-	
-	
+	//사원 이름 or 아이디 검색
+	function checkpayid(){
+		var checkpayid=$("#findcheckpayid").val();
+		console.log(checkpayid);
+		$.ajax({
+			url:"findcheckpayid",
+			method:'post',
+			data:{checkpayid : checkpayid},
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				$("#wages").html(data);
+			},
+			error:function(err){
+				console.log(err);
+			}
+		});
+	}
 	
 	
 	
@@ -189,6 +234,7 @@ ul {
 		}, function() {
 			$("#smallMenu3").attr("style", "display:none");
 		})
+		
 		
 	</script>
 </body>

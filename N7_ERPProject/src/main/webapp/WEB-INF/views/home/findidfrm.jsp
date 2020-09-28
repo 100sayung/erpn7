@@ -65,6 +65,7 @@ input[type="text"]{
 			</ul>
 		</div>
 	</div>
+	LOGOUT계속 떠있는데 이거처리해야함
 		<div id="loginContainer">
 			<div class="table-responsive">
                 <table><tr><td>	<input type="text" class="form-control" id="userEmail"
