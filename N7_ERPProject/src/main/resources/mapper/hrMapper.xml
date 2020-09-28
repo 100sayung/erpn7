@@ -5,6 +5,52 @@
 
 <mapper namespace="com.n7.erp.dao.IHrDao">
 
+<select id="selectHrCard" resultType="member">
+	SELECT *
+		FROM (
+			 SELECT ROWNUM RN, A.*
+				FROM (
+					  SELECT *
+					  FROM MEMBER
+					  WHERE M_CCODE = #{cCode}
+					  ) A
+			 ) 
+		WHERE 
+			RN BETWEEN #{start} AND #{end}
+</select>
+
+<select id="countHrCard" resultType="int">
+	SELECT COUNT(*) FROM MEMBER WHERE M_CCODE = #{cCode}
+</select>
+
+<select id="selectNoHrCard" resultType="member">
+	SELECT *
+		FROM (
+			 SELECT ROWNUM RN, A.*
+				FROM (
+					  SELECT
+					  		MEMBER.M_ID, MEMBER.M_NAME, MEMBER.M_BIRTH, MEMBER.M_EMAIL, MEMBER.M_PHOTO
+					  FROM MEMBER
+					  		LEFT OUTER JOIN HR_CARD ON M_ID = HC_ID
+					  WHERE
+					  		M_CCODE = #{cCode} AND HR_CARD.HC_HRCODE IS NULL
+                      ORDER BY HC_DEPT DESC
+					  ) A
+			 ) 
+		WHERE 
+			RN BETWEEN #{start} AND #{end}
+</select>
+
+<select id="countNoHrCard" resultType="int">		
+	SELECT COUNT(*)
+	FROM MEMBER 
+		LEFT OUTER JOIN HR_CARD ON M_ID = HC_ID 
+	WHERE 
+		M_CCODE = #{cCode} AND HR_CARD.HC_HRCODE IS NULL
+</select>
+
+
+
 <update parameterType="HR_Card" id="updateHRCard">
 	UPDATE HR_CARD
 	SET
@@ -110,15 +156,6 @@
 		HR_APPLYHOLIDAY.HAP_CCODE = #{cCode} AND HR_APPLYHOLIDAY.HAP_HRCODe = #{hrCode} AND
 		(HR_APPLYHOLIDAY.HAP_STARTDAY LIKE #{date} OR HR_APPLYHOLIDAY.HAP_ENDDAY LIKE #{date}) AND HR_APPLYHOLIDAY.HAP_STATUS=3 
 	ORDER BY HAP_STARTDAY
-</select>
-<select id="getNoHrCard" parameterType="String" resultType="member">
-	SELECT
-		MEMBER.M_ID, MEMBER.M_NAME, MEMBER.M_BIRTH, MEMBER.M_EMAIL, MEMBER.M_PHOTO
-	FROM MEMBER
-		LEFT OUTER JOIN HR_CARD ON
-			M_ID = HC_ID
-	WHERE
-		M_CCODE = #{cCode} AND HR_CARD.HC_HRCODE IS NULL
 </select>
 
 <select id="checkMemberHrCardCnt" parameterType="String" resultType="boolean">

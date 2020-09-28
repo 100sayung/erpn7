@@ -10,10 +10,8 @@
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="com.google.gson.reflect.TypeToken"/>
 <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Update"/>
-<fullyQualifiedTypeName name="com.n7.erp.bean.Member"/>
 <fullyQualifiedTypeName name="com.n7.erp.bean.ac.A_company"/>
 <fullyQualifiedTypeName name="com.n7.erp.bean.hr.ApplyHoliday"/>
-<fullyQualifiedTypeName name="com.n7.erp.bean.hr.HR_Card"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.n7.erp.service.HrMM"/>
@@ -22,7 +20,6 @@
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
 <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Insert"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
-<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 <fullyQualifiedTypeName name="java.lang.Override"/>
 <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
@@ -39,5 +36,9 @@
 <fullyQualifiedTypeName name="com.n7.erp.bean.Company"/>
 <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Select"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+<fullyQualifiedTypeName name="com.n7.erp.bean.hr.HR_Card"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+<fullyQualifiedTypeName name="com.n7.erp.bean.Member"/>
 </qualifiedTypeNameHistroy>

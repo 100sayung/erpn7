@@ -19,6 +19,7 @@ import com.n7.erp.bean.hr.Career;
 import com.n7.erp.bean.hr.Certification;
 import com.n7.erp.bean.hr.HR_Card;
 import com.n7.erp.bean.hr.Payroll;
+import com.n7.erp.userClass.PagingVO;
 
 public interface IHrDao {
 	@Select("SELECT * FROM HR_CARD WHERE HC_ID = #{m_id}")
@@ -123,7 +124,6 @@ public interface IHrDao {
 
 	boolean checkMemberHrCardCnt(String cCode);
 
-	ArrayList<Member> getNoHrCard(String cCode);
 
 	@Select("SELECT * FROM MEMBER WHERE M_CCODE = #{cCode} AND M_NAME LIKE #{name}")
 	ArrayList<Member> getSearchFromName(HashMap<String, String> hMap);
@@ -154,4 +154,9 @@ public interface IHrDao {
 	@Delete("DELETE FROM HR_CERTIFICATION WHERE hct_ccode = #{cCode} AND HCT_NUM = #{num}")
 	void removeCertificationInfo(HashMap<String, String> hMap);
 
+	
+	int countHrCard(String cCode);
+	List<Member> selectHrCard(PagingVO vo);
+	List<Member> selectNoHrCard(PagingVO vo);
+	int countNoHrCard(String cCode);
 }

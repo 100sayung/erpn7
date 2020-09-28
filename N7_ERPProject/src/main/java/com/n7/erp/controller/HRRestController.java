@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.google.gson.Gson;
 import com.n7.erp.bean.Member;
 import com.n7.erp.bean.hr.Academic;
 import com.n7.erp.bean.hr.Career;
@@ -16,6 +18,7 @@ import com.n7.erp.bean.hr.Department;
 import com.n7.erp.bean.hr.HR_Card;
 import com.n7.erp.service.HRDepartmentMM;
 import com.n7.erp.service.HrMM;
+import com.n7.erp.userClass.PagingVO;
 
 @RestController // @ResponseBody 생략가능
 @RequestMapping(value = "/rest")
@@ -69,24 +72,59 @@ public class HRRestController {
 		return mb;
 	}
 	
+	//HRCARD !!!~\
+	@GetMapping(value="/hr/hrcardpagenumber")
+	public String hrCardPageNumber(HttpSession session) {
+		int result = hm.countHrCard(session);
+		return Integer.toString(result);
+	}
+	
+	@GetMapping(value="/hr/hrcardlist")
+	public String hrCardList(String nowPage, String cntPerPage, HttpSession session) {
+		int total = hm.countHrCard(session);
+		if(nowPage == null) {
+			nowPage = "1";
+		}
+		
+		PagingVO vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), session.getAttribute("cCode").toString());
+		
+		String result = new Gson().toJson(hm.selectHrCard(vo));
+		return result;
+	}
+	@GetMapping(value="/hr/nohrcardpagenumber")
+	public String noHrCardPageNumber(HttpSession session) {
+		int result = hm.countNoHrCard(session);
+		return Integer.toString(result);
+	}
+	
+	@GetMapping(value="/hr/nohrcardlist")
+	public String noHrCardList(String nowPage, String cntPerPage, HttpSession session) {
+		int total = hm.countNoHrCard(session);
+		if(nowPage == null) {
+			nowPage = "1";
+		}
+		
+		PagingVO vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), session.getAttribute("cCode").toString());
+		
+		String result = new Gson().toJson(hm.selectNoHrCard(vo));
+		return result;
+	}
+	
+	//HRCARD !!!~\
+	
 	//부서로 직책가져오기
 	@GetMapping(value="/hr/positionfromdept")
 	public String getPositionFromDept(HttpSession session, String dept) {
 		String result = hm.getPositionFromDept(session, dept);
 		return result;
 	}
-	//인사카드 없는 사람들 정보 출력
-	@GetMapping(value="/hr/nohrcard",  produces = "application/text; charset=utf8")
-	public String getNoHrCard(HttpSession session) {
-		String result = hm.getNoHrCard(session);
-		return result;
-	}
-
+	
 	//인사카드 이름 검색 출력
 	@GetMapping(value="/hr/searchfromname",  produces = "application/text; charset=utf8")
 	public String getSearchFromName(HttpSession session, String name) {
-		String result = hm.getSearchFromName(session, name);
-		return result;
+//		String result = hm.getSearchFromName(session, name);
+//		return result;
+		return "test..";
 	}
 	@GetMapping(value="/hr/searchstatusfromname",  produces = "application/text; charset=utf8")
 	public String getSearchStatusFromName(HttpSession session, String name) {

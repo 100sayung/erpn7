@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.n7.erp.bean.ApprovalDocu;
+import com.n7.erp.bean.Company;
 import com.n7.erp.bean.Member;
 import com.n7.erp.bean.entity.NameHoliday;
 import com.n7.erp.bean.entity.NameHrCode;
@@ -29,6 +30,7 @@ import com.n7.erp.dao.HRIDeptDao;
 import com.n7.erp.dao.IBaiscDao;
 import com.n7.erp.dao.IHrDao;
 import com.n7.erp.dao.IMemberDao;
+import com.n7.erp.userClass.PagingVO;
 
 @Service
 public class HrMM {
@@ -187,17 +189,7 @@ public class HrMM {
 
 	public ModelAndView hrCard(HttpSession session) {
 		String m_ccode = session.getAttribute("cCode").toString();
-
-		System.out.println(m_ccode);
-
-		ArrayList<Member> hrCardList = new ArrayList<>();
-		hrCardList = mDao.getHRCard(m_ccode);
-
-		System.out.println(hrCardList);
-
-		mav.addObject("hrCard", makeHRCardList(hrCardList));
 		mav.setViewName("/hr/hrCard");
-
 		if (!checkMemberHrCardCnt(m_ccode)) {
 			mav.addObject("msg", "입력하세요");
 
@@ -206,22 +198,6 @@ public class HrMM {
 		return mav;
 	}
 
-	private String makeHRCardList(ArrayList<Member> hList) {
-		StringBuilder str = new StringBuilder();
-		str.append("<table id='table1' border='1' cellspacing='0'>");
-		str.append("<tr class='infomenu'><td>사진</td><td>이름</td><td>생년월일</td><td>이메일</td><td>수정</td></tr>");
-		for (int i = 0; i < hList.size(); i++) {
-			str.append("<tr><td><img style='width:200px; height: 250px;' src='/erp/upload/" + hList.get(i).getM_photo()
-					+ "'></td>");
-			str.append("<td>" + hList.get(i).getM_name() + "</td>");
-			str.append("<td>" + hList.get(i).getM_birth() + "</td>");
-			str.append("<td>" + hList.get(i).getM_email() + "</td><td>");
-			str.append("<input type='button' value='수정' class='infobtn' onclick='modifyDetail(\""
-					+ hList.get(i).getM_id() + "\")'></td></tr>");
-		}
-		str.append("</table>");
-		return str.toString();
-	}
 
 	public String logAttendance(String cCode, String id, String status, String time) {
 		String hrCode = hDao.getHrCodeFromID(id);
@@ -506,30 +482,18 @@ public class HrMM {
 			return true;
 		}
 	}
-
-	public String getNoHrCard(HttpSession session) {
-		String cCode = session.getAttribute("cCode").toString();
-
-		ArrayList<Member> hrCardList = new ArrayList<>();
-		hrCardList = hDao.getNoHrCard(cCode);
-
-		String list = makeHRCardList(hrCardList);
-		return list;
-	}
-
-	public String getSearchFromName(HttpSession session, String name) {
-		String cCode = session.getAttribute("cCode").toString();
-
-		name = "%" + name + "%";
-		HashMap<String, String> hMap = new HashMap<String, String>();
-		ArrayList<Member> hrCardList = new ArrayList<>();
-		hMap.put("cCode", cCode);
-		hMap.put("name", name);
-		hrCardList = hDao.getSearchFromName(hMap);
-
-		String list = makeHRCardList(hrCardList);
-		return list;
-	}
+//
+//	public String getSearchFromName(HttpSession session, String name) {
+//		String cCode = session.getAttribute("cCode").toString();
+//
+//		name = "%" + name + "%";
+//		HashMap<String, String> hMap = new HashMap<String, String>();
+//		ArrayList<Member> hrCardList = new ArrayList<>();
+//		hMap.put("cCode", cCode);
+//		hMap.put("name", name);
+//		hrCardList = hDao.getSearchFromName(hMap);
+//		return list;
+//	}
 
 	public ModelAndView checkMyHrCard(HttpSession session, String address) {
 		if (hDao.haveHrCode(session.getAttribute("id").toString())) {
@@ -665,4 +629,22 @@ public class HrMM {
 		}
 		return "good";
 	}
+
+
+	public int countHrCard(HttpSession session) {
+		String cCode = session.getAttribute("cCode").toString();
+		return hDao.countHrCard(cCode);			
+	}
+	public List<Member> selectHrCard(PagingVO vo){
+		return hDao.selectHrCard(vo);			
+	}
+	public int countNoHrCard(HttpSession session) {
+		String cCode = session.getAttribute("cCode").toString();
+		return hDao.countNoHrCard(cCode);
+	}
+	public List<Member> selectNoHrCard(PagingVO vo){
+		return hDao.selectNoHrCard(vo);
+	}
+	
+	
 }
