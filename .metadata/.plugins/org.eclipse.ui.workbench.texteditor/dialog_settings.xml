@@ -1,40 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="JsonParseObject"/>
+		<item key="selection" value="main"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="JsonParseObject"/>
-			<item value="getByItemStockList"/>
-			<item value="bbb"/>
-			<item value="erpboard"/>
-			<item value="add"/>
-			<item value="search"/>
-			<item value="searchcode"/>
-			<item value="pinfo"/>
-			<item value="&lt;!-- AND P_CCODE=#{p_ccode} --&gt;"/>
-			<item value="aDao"/>
-			<item value="get"/>
-			<item value="HR_CARD"/>
-			<item value="HrCard"/>
-			<item value="fromid"/>
-			<item value="gethr"/>
+			<item value="main"/>
+			<item value="hrCard"/>
+			<item value="hr"/>
+			<item value="order"/>
+			<item value="menu"/>
+			<item value="incompa"/>
+			<item value="date"/>
+			<item value="menu.js"/>
+			<item value=""/>
+			<item value="$(document).ready(function(){"/>
+			<item value="utf"/>
+			<item value="join"/>
+			<item value="login"/>
+			<item value="apply"/>
+			<item value="admin"/>
 		</list>
 		<list key="replacehistory">
-			<item value="pDao"/>
+			<item value="admin"/>
+			<item value="/admin/"/>
+			<item value="myInfo/myInfo"/>
+			<item value="id=&apos;origin_&quot;+i+&quot;"/>
+			<item value="hr"/>
+			<item value="type"/>
+			<item value="300"/>
 			<item value="end"/>
 			<item value="receipt"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1478"/>
-		<item key="DIALOG_Y_ORIGIN" value="172"/>
-		<item key="DIALOG_WIDTH" value="340"/>
-		<item key="DIALOG_HEIGHT" value="454"/>
-		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+		<item key="DIALOG_X_ORIGIN" value="1078"/>
+		<item key="DIALOG_Y_ORIGIN" value="417"/>
+		<item key="DIALOG_WIDTH" value="288"/>
+		<item key="DIALOG_HEIGHT" value="390"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
 	</section>
 </section>

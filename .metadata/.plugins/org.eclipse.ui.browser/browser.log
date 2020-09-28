@@ -36,113 +36,70 @@
 9월 15, 2020 16:19:54.126 [3304:5104:0915/161954.126:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
 9월 15, 2020 16:27:02.25 [7052:5440:0915/162702.024:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
 
-9월 22, 2020 16:19:37.758 NEW SESSION
-9월 22, 2020 16:19:37.759 [5472:9632:0922/161937.755:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 22, 2020 16:57:09.848 [2264:9320:0922/165709.847:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 22, 2020 17:09:31.396 [2588:1276:0922/170931.395:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 22, 2020 17:32:00.796 [7336:3972:0922/173200.796:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 22, 2020 15:04:55.641 NEW SESSION
+9월 22, 2020 15:04:55.641 [1492:9284:0922/150455.435:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 22, 2020 15:05:10.274 [1492:18396:0922/150510.274:ERROR:device_event_log_impl.cc(208)] [15:05:10.274] Bluetooth: bluetooth_adapter_winrt.cc:1074 Getting Default Adapter failed.
+9월 22, 2020 19:09:16.244 [1492:18396:0922/190916.244:ERROR:CONSOLE(0)] "TypeError: Cannot read property 'isAnonymousInlineStyleSheet' of null", source:  (0)
+9월 22, 2020 19:09:18.08 [1492:18396:0922/190918.007:ERROR:CONSOLE(0)] "TypeError: Cannot read property 'isAnonymousInlineStyleSheet' of null", source:  (0)
 
-9월 22, 2020 21:18:00.182 NEW SESSION
-9월 22, 2020 21:18:00.182 [8896:9520:0922/211800.177:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 22, 2020 21:25:38.733 [11776:14596:0922/212538.733:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 24, 2020 09:13:16.650 NEW SESSION
+9월 24, 2020 09:13:16.650 [3684:4284:0924/091316.649:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 24, 2020 09:30:32.800 [3684:4048:0924/093032.799:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 09:31:12.861 [3684:4048:0924/093112.860:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 09:31:15.750 [3684:4048:0924/093115.750:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 09:31:18.185 [3684:4048:0924/093118.184:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 09:42:08.224 [3684:4048:0924/094208.224:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 09:43:54.959 [3684:4048:0924/094354.959:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 09:45:06.154 [3684:4048:0924/094506.153:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 09:48:57.998 [3684:4048:0924/094857.998:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 09:51:40.549 [3684:4048:0924/095140.549:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 10:05:26.333 [3684:4048:0924/100526.333:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:21:44.50 [3684:4048:0924/112144.050:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:37:17.553 [3684:4048:0924/113717.552:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:37:18.171 [3684:4048:0924/113718.171:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:37:19.189 [3684:4048:0924/113719.188:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:37:20.404 [3684:4048:0924/113720.404:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:39:45.936 [3684:4048:0924/113945.935:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:39:47.102 [3684:4048:0924/113947.102:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:39:53.33 [3684:4048:0924/113953.033:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:40:00.863 [3684:4048:0924/114000.863:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:40:09.53 [3684:4048:0924/114009.053:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:42:58.990 [3684:4048:0924/114258.990:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:43:02.490 [3684:4048:0924/114302.490:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:43:03.490 [3684:4048:0924/114303.490:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:43:05.406 [3684:4048:0924/114305.406:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:43:22.858 [3684:4048:0924/114322.858:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:43:25.63 [3684:4048:0924/114325.063:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:43:26.951 [3684:4048:0924/114326.951:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 11:45:01.654 [3684:4048:0924/114501.654:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 12:54:17.405 [3684:4824:0924/125417.405:ERROR:socket_stream.cc(219)] Closing stream with result -2
+9월 24, 2020 14:02:25.89 [3684:4048:0924/140225.088:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:12:27.534 [3684:4048:0924/141227.533:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:12:35.177 [3684:4048:0924/141235.177:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:12:41.101 [3684:4048:0924/141241.101:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:13:21.973 [3684:4048:0924/141321.973:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:13:28.705 [3684:4048:0924/141328.705:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:17:14.749 [3684:4048:0924/141714.748:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:17:15.428 [3684:4048:0924/141715.428:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:17:18.414 [3684:4048:0924/141718.414:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:20:50.218 [3684:4048:0924/142050.218:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:20:56.56 [3684:4048:0924/142056.056:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:20:58.961 [3684:4048:0924/142058.961:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:21:13.970 [3684:4048:0924/142113.970:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:45:18.876 [3684:4048:0924/144518.875:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:45:19.879 [3684:4048:0924/144519.878:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:45:19.879 [3684:4048:0924/144519.879:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:45:19.881 [3684:4048:0924/144519.881:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 14:45:22.876 [3684:4048:0924/144522.876:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 15:13:33.905 [3684:4048:0924/151333.905:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 15:14:13.917 [3684:4048:0924/151413.917:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
+9월 24, 2020 15:14:16.924 [3684:4048:0924/151416.924:ERROR:CONSOLE(1555)] "No document", source: devtools://devtools/bundled/sdk/sdk.js (1555)
 
-9월 23, 2020 14:32:32.296 NEW SESSION
-9월 23, 2020 14:32:32.297 [14304:13592:0923/143232.271:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 23, 2020 15:46:51.67 [17228:15488:0923/154651.066:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 23, 2020 16:12:03.775 [17904:17756:0923/161203.774:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 27, 2020 10:38:38.182 NEW SESSION
+9월 27, 2020 10:38:38.182 [16608:15712:0927/103838.002:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 27, 2020 10:38:52.173 [16608:5740:0927/103852.172:ERROR:device_event_log_impl.cc(208)] [10:38:52.172] Bluetooth: bluetooth_adapter_winrt.cc:1074 Getting Default Adapter failed.
 
-9월 23, 2020 17:36:21.942 NEW SESSION
-9월 23, 2020 17:36:21.942 [12440:18312:0923/173621.939:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-
-9월 23, 2020 17:42:05.877 NEW SESSION
-9월 23, 2020 17:42:05.877 [14920:19092:0923/174205.860:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 23, 2020 17:42:14.962 [14920:14436:0923/174214.962:ERROR:socket_stream.cc(219)] Closing stream with result -2
-9월 23, 2020 17:42:21.572 [14920:14436:0923/174221.571:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
-
-9월 24, 2020 16:05:20.491 NEW SESSION
-9월 24, 2020 16:05:20.491 [18744:12400:0924/160520.468:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 24, 2020 16:06:44.429 [15092:9272:0924/160644.429:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 24, 2020 16:07:33.455 [6208:10904:0924/160733.455:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 24, 2020 16:10:04.719 [9188:3260:0924/161004.719:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 24, 2020 17:11:18.178 [20328:9248:0924/171118.177:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-
-9월 25, 2020 24:21:10.92 NEW SESSION
-9월 25, 2020 24:21:10.93 [9852:18184:0925/002110.088:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 24:22:59.815 [9852:14660:0925/002259.815:ERROR:socket_stream.cc(219)] Closing stream with result -2
-9월 25, 2020 24:40:02.75 [14624:17288:0925/004002.075:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 24:50:53.556 [11252:15408:0925/005053.556:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 01:08:13.970 [5252:15136:0925/010813.970:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-
-9월 25, 2020 08:52:56.877 NEW SESSION
-9월 25, 2020 08:52:56.877 [11636:13120:0925/085256.844:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 08:56:11.358 [12712:12236:0925/085611.357:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 08:58:55.250 [500:19776:0925/085855.249:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 08:59:36.329 [500:10016:0925/085936.328:ERROR:socket_stream.cc(219)] Closing stream with result -2
-9월 25, 2020 09:02:25.724 [500:10016:0925/090225.724:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
-9월 25, 2020 09:27:51.678 [12384:13660:0925/092751.678:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 09:37:24.00 [1516:19896:0925/093724.000:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-
-9월 25, 2020 09:41:31.820 NEW SESSION
-9월 25, 2020 09:41:31.821 [1528:7096:0925/094131.818:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 10:13:42.104 [12852:1040:0925/101342.103:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-
-9월 25, 2020 10:57:45.244 NEW SESSION
-9월 25, 2020 10:57:45.244 [13444:18276:0925/105745.241:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 11:56:10.395 [16624:10068:0925/115610.394:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 11:57:59.784 [16624:11136:0925/115759.783:ERROR:socket_stream.cc(219)] Closing stream with result -2
-9월 25, 2020 12:47:55.802 [16624:11136:0925/124755.801:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
-
-9월 25, 2020 15:48:04.445 NEW SESSION
-9월 25, 2020 15:48:04.445 [10028:2956:0925/154804.410:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 15:59:11.61 [3888:10992:0925/155911.061:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 16:00:22.422 [2080:19624:0925/160022.421:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 16:08:38.142 [3032:8864:0925/160838.142:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 16:23:43.10 [3032:11352:0925/162343.010:ERROR:socket_stream.cc(219)] Closing stream with result -2
-9월 25, 2020 16:38:12.61 [18708:11660:0925/163812.061:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 16:38:57.555 [5988:2092:0925/163857.555:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 16:39:39.601 [12764:15424:0925/163939.600:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 16:40:07.740 [12764:1700:0925/164007.739:ERROR:socket_stream.cc(219)] Closing stream with result -2
-9월 25, 2020 17:09:27.686 [14004:7680:0925/170927.685:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 17:14:19.640 [15208:18900:0925/171419.640:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 17:21:26.290 [13604:18872:0925/172126.290:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 17:31:11.457 [7692:8416:0925/173111.457:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 17:31:53.59 [3676:20040:0925/173153.059:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 17:59:06.259 [8552:13276:0925/175906.258:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 18:42:22.525 [8552:1880:0925/184222.524:ERROR:socket_stream.cc(219)] Closing stream with result -2
-9월 25, 2020 18:45:48.355 [14532:5920:0925/184548.355:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 19:03:59.335 [14532:12316:0925/190359.335:ERROR:socket_stream.cc(219)] Closing stream with result -2
-9월 25, 2020 19:23:57.651 [14532:12316:0925/192357.650:ERROR:socket_stream.cc(219)] Closing stream with result -2
-9월 25, 2020 19:59:43.221 [17688:11652:0925/195943.221:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 20:01:12.837 [17368:8304:0925/200112.836:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 20:02:51.453 [13164:17232:0925/200251.453:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 20:07:47.290 [7012:13416:0925/200747.289:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 20:08:38.17 [2584:8460:0925/200838.017:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 20:09:47.187 [10020:10436:0925/200947.186:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 20:50:57.768 [13372:9844:0925/205057.768:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 20:53:38.877 [17420:15076:0925/205338.876:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 25, 2020 22:01:19.683 [11512:19528:0925/220119.683:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-
-9월 25, 2020 23:36:25.123 NEW SESSION
-9월 25, 2020 23:36:25.123 [8572:19440:0925/233625.120:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 26, 2020 24:58:04.33 [8296:13840:0926/005804.032:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 26, 2020 02:38:29.100 [8296:9832:0926/023829.099:ERROR:socket_stream.cc(219)] Closing stream with result -2
-9월 26, 2020 04:35:41.551 [8296:9832:0926/043541.551:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
-
-9월 26, 2020 14:33:01.977 NEW SESSION
-9월 26, 2020 14:33:01.977 [12488:19464:0926/143301.974:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 26, 2020 14:55:46.419 [18336:9248:0926/145546.418:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 26, 2020 15:00:15.949 [18336:1632:0926/150015.948:ERROR:CONSOLE(0)] "TypeError: Cannot read property 'isAnonymousInlineStyleSheet' of null", source:  (0)
-9월 26, 2020 15:02:38.809 [9872:18800:0926/150238.809:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 26, 2020 15:23:03.987 [14604:4664:0926/152303.987:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 26, 2020 15:25:51.711 [5192:14920:0926/152551.710:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 26, 2020 15:52:19.120 [19396:12400:0926/155219.120:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 26, 2020 16:06:25.176 [10856:14152:0926/160625.176:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 26, 2020 16:55:52.988 [2288:568:0926/165552.987:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-
-9월 28, 2020 09:08:07.990 NEW SESSION
-9월 28, 2020 09:08:07.990 [6252:10636:0928/090807.986:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
-9월 28, 2020 10:34:29.263 [6252:6868:0928/103429.261:ERROR:socket_stream.cc(219)] Closing stream with result -2
-9월 28, 2020 10:36:24.526 [6252:6868:0928/103624.525:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
-
-9월 28, 2020 10:57:28.217 NEW SESSION
-9월 28, 2020 10:57:28.217 [10012:1892:0928/105728.214:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 28, 2020 11:19:02.941 NEW SESSION
+9월 28, 2020 11:19:02.941 [3160:15628:0928/111902.939:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 28, 2020 11:51:37.681 [3160:15704:0928/115137.680:ERROR:socket_stream.cc(219)] Closing stream with result -2
+9월 28, 2020 12:54:39.779 [3160:15704:0928/125439.778:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
