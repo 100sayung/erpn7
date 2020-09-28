@@ -34,4 +34,5 @@
 <fullyQualifiedTypeName name="com.n7.erp.bean.ItemCode"/>
 <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Select"/>
 <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
 </qualifiedTypeNameHistroy>

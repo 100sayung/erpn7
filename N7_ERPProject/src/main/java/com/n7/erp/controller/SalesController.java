@@ -7,14 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.n7.erp.bean.ItemCode;
 import com.n7.erp.bean.sales.A_company;
 import com.n7.erp.bean.sales.Businessbean;
 import com.n7.erp.bean.sales.Salesbean;
@@ -223,6 +226,13 @@ public class SalesController {
 	   return mav;
    }
    
+	@PostMapping(value = "/getbonumm") //수주번호 select
+	public Map<String, List<Salesbean>> getbonumm(Salesbean s ,HttpSession session) {
+		//return sm.getbonumm(s,session);
+		Map<String, List<Salesbean>> sMap=sm.getbonumm(s, session);
+		return sMap;
+	}
+	
 //   @PostMapping(value = "/sales/approvaldelete") //결재완료 삭제 망함
 //   public Map<String, List<approvaldetail>> approvaldelete(String check) {
 //      Map<String, List<approvaldetail>> sMap=sm.approvaldelete(check);

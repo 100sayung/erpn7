@@ -49,7 +49,8 @@ border: 1px solid;
                <th>회사코드</th>
                <th><input type="text" name="bs_ccode"></th>
                <th>수주번호</th>
-               <th><input type="text" name="bs_bonum"></th>
+               <td class = "cl2"></td>
+               <!-- <th><input type="text" name="bs_bonum"></th> -->              
 <!--           <th>품목코드</th>
                <th><input type="text" name="bs_itcode"></th>  -->  
             </tr>
@@ -132,6 +133,21 @@ border: 1px solid;
 	    	}
 	    });
 	 	 
+	 
+ 	    var select2;
+		 $.ajax({
+		    	url:"/erp/rest/sales/getbonum",
+		    	dataType:"json",
+		    	type:"post",
+		    	success:function(data){
+		    		select2 = makeSelectBox2(data);
+		    		$(".cl2").html(select2);
+		    	},
+		    	error:function(err){
+		    		console.log(err);
+		    	}
+		    }); 
+		 
     $('#shippingitemfrm').click(function(){
       var str="";
    
@@ -292,6 +308,20 @@ border: 1px solid;
       	   arrStr+="</select>";
       	   return arrStr;
          }
+         
+          function makeSelectBox2(arr){
+      	   var arrStr = "<select name = 'bs_bonum'>"
+      	   if(arr.length==0){
+      		   arrStr+="<option>수주번호를 작성해주세요 </option>";
+      	   }else{
+      		   for(var i = 0;i<arr.length;i++){
+      			   arrStr+="<option value='"+arr[i].bo_num+"'>"+arr[i].bo_num+"</option>"; 
+      		   }
+      	   }
+      	   arrStr+="</select>";
+      	   return arrStr;
+         }  
+         
         function changeItcode(id){
         	var it_stock = $(id).val();
         	var it_code = $(id).parent().siblings(".cl").children().val();

@@ -94,6 +94,8 @@ public interface SalesDao {
 
 	boolean approvaldetailinput(approvaldetail app); //결재 상세 등록
 
+	List<Salesbean> getbonumm(String cCode); //수주번호
+
 //	List<Shippingbean> shippingquantity(String check, String cCode); //출하수량비교
 
 //	boolean approvaldelete(String check); //결재완료 삭제

@@ -591,6 +591,18 @@ public class Salesmm {
 	      mav.setViewName(view);
 	      return mav;
 	}
+
+	public Map<String, List<Salesbean>> getbonumm(Salesbean s, HttpSession session) {
+		//System.out.println(session.getAttribute("cCode").toString());
+		String cCode=session.getAttribute("cCode").toString();
+		Map<String, List<Salesbean>> sMap = null;
+	     List<Salesbean> sList= sDao.getbonumm(cCode);
+	      if(sList!=null) {
+	         sMap=new HashMap<>();
+	         sMap.put("sList", sList);
+	      }
+	      return sMap;
+	}
     
 //	public Map<String, List<Shippingbean>> shippingquantity(String check, HttpSession session) {
 //		String cCode=session.getAttribute("cCode").toString();

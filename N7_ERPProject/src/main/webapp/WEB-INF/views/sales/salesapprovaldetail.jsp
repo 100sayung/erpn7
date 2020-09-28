@@ -71,9 +71,9 @@ table, tr, th, td {
             <tr>
                <th>결재자</th>
                <th id="line">
-                  <input type="hidden" value="bs_approver1" name="bs_approver1">결재자1: ${ap.bs_approver1} || 
-                  <input type="hidden" value="bs_approver2" name="">결재자2: ${ap.bs_approver2} || 
-                  <input type="hidden" value="bs_approver3" name="">결재자3: ${ap.bs_approver3} ||
+                  <input type="hidden" value="bs_approver1" name="bs_approver1">결재자1: ${sb.bs_approver1} || 
+                  <input type="hidden" value="bs_approver2" name="">결재자2: ${sb.bs_approver2} || 
+                  <input type="hidden" value="bs_approver3" name="">결재자3: ${sb.bs_approver3} ||
                </th>
 
             </tr>
@@ -84,39 +84,39 @@ table, tr, th, td {
                         <table>
                            <tr>
                               <th colspan="2">출하번호</th>
-                              <th colspan="2"><input type="text" name="bs_docunum" class="txt" value="${sb.bs_docunum}" readonly></th>
+                              <th colspan="2"><input type="text" name="bs_docunum" class="txt" value="${approvaldetail.bs_docunum}" readonly></th>
                               <th colspan="2">거래처 회사코드</th>
-                              <th colspan="2"><input type="text" name="bs_clcode" class="txt" value="${sb.bs_clcode}" readonly>
+                              <th colspan="2"><input type="text" name="bs_clcode" class="txt" value="${approvaldetail.bs_clcode}" readonly>
 <%--                          <input type="hidden" name="j_grade" class="draft3" value="${ac.j_grade}" readonly></th>
                               <td>결재상태</td> --%>
 
                            </tr>
                            <tr>
                             <th colspan="2">회사코드</th>
-                              <th colspan="2"><input type="text" name="bs_ccode" class="txt" value="${sb.bs_ccode}" readonly>
+                              <th colspan="2"><input type="text" name="bs_ccode" class="txt" value="${approvaldetail.bs_ccode}" readonly>
                               <%-- <input type="hidden" name="j_ccode" class="txt" value="${ac.j_ccode}" readonly></th> --%>
                               <th colspan="2">품목코드</th>
-                              <th colspan="2"><input type="text" name="bs_itcode" class="txt" value="${sb.bs_itcode}" readonly></th> 
+                              <th colspan="2"><input type="text" name="bs_itcode" class="txt" value="${approvaldetail.bs_itcode}" readonly></th> 
                            </tr>
                            <tr>
                               <th colspan="2">제품명</th>
-                              <td colspan="2"><input type="text" name="bs_proname" class="draft3" value="${sb.bs_proname}" readonly></td>
+                              <td colspan="2"><input type="text" name="bs_proname" class="draft3" value="${approvaldetail.bs_proname}" readonly></td>
                               <th colspan="2">예상납기일</th>
-                              <td colspan="2"><input type="text" name="bs_basedate" class="draft3" value="${sb.bs_basedate}" readonly></td>
+                              <td colspan="2"><input type="text" name="bs_basedate" class="draft3" value="${approvaldetail.bs_basedate}" readonly></td>
 
                            </tr>
                           <tr>
                               <th colspan="2">판매단가</th>
-                              <td colspan="5"><input type="text" name="bs_unit" class="draft" value="${sb.bs_unit}" readonly></td>
+                              <td colspan="5"><input type="text" name="bs_unit" class="draft" value="${approvaldetail.bs_unit}" readonly></td>
                            </tr>
                            <tr>
                               <th colspan="2">수량</th>
-                              <td colspan="5"><input type="text" name="bs_quantity" class="draft" value="${sb.bs_quantity}" readonly></td>
+                              <td colspan="5"><input type="text" name="bs_quantity" class="draft" value="${approvaldetail.bs_quantity}" readonly></td>
                            </tr>
 
                            <tr>
                               <th>판매금액</th>
-                              <td colspan="7"><input type="text" name="bs_price" class="draft" value="${sb.bs_price}" readonly></td>
+                              <td colspan="7"><input type="text" name="bs_price" class="draft" value="${approvaldetail.bs_price}" readonly></td>
                            </tr>
                             <tr>
                               <th>반려사유</th>
@@ -128,14 +128,86 @@ table, tr, th, td {
                </td>
             </tr>
          </table>  
+         <br>
+         <button type="button" id="submit">제출하기</button>
+         <button type="button" id="">반려하기</button>
    <script>
-/*    $(document).ready(function(){
-	 $.ajax({
-		 
-	 });
-   }); */
-  
-   
-   </script>
+	$(document).ready(
+			function() {
+
+				$.ajax({
+							url : '/erp/rest/sales/getMyInfo',
+							type : 'get',
+							success : function(data) {
+								console.log(data);
+								var str = "";
+								for ( var i in data.sList) {
+									str += "<input type='text' name='bs_apcode"+(Number(i)+Number(1))+"' value='"+data.sList[i].hc_hrcode+"' hidden='true'>";
+									str += data.sList[i].hc_position+ "/";
+									str += "<input style='width:50px;' type='text' name='bs_approver"+(Number(i)+Number(1))+"' value='"+ data.sList[i].m_name+"'>&nbsp;&nbsp;||&nbsp;&nbsp;";
+								}
+								console.log(str)
+								$("#line").html(str);
+
+							},
+							error : function(error) {
+								console.log(error);
+							}
+						});
+			});
+
+				function setChildValue(data) {
+					console.log(data);
+					if (data.tList1 != "") {
+						var str = "";
+						for ( var i in data.tList1) {
+							str += "<input type='text' name='bs_apcode"
+									+ (Number(i) + Number(2)) + "' value='"
+									+ data.tList1[i].hc_hrcode
+									+ "' hidden='true'>";
+							str += data.tList1[i].hc_position + "/";
+							str += "<input style='width:50px;' type='text' name='bs_approver"
+									+ (Number(i) + Number(2))
+									+ "' value='"
+									+ data.tList1[i].m_name
+									+ "'>&nbsp;&nbsp;||&nbsp;&nbsp;";
+
+						}
+						console.log(str)
+						$("#line").append(str);
+					};
+				};
+
+				$("#approvalLine").click(function() {
+
+							window.open('/erp/sales/approvalLine', 'approvalLine', 'width=1400,height=700');
+				});
+				
+			      //결재 제출하기
+			      $("#submit").click(function(){
+			         var obj=$("#approvaldetailinput").serialize();
+			         
+			/*          var check="";
+			         $("input[name=each_check]:checked").each(function(){
+			        	 check = $(this).attr("value"); */
+			        	 
+			        $.ajax({
+			          url:'/erp/rest/sales/approvaldetailinput',
+			          type: 'post',
+			          data: obj,
+			          //dataType: 'json',
+			          success:function(data){
+			              alert("기안문 제출이 완료되었습니다.");           
+			              console.log(data);           	  
+			                
+			              window.close();   
+			          },
+			          error:function(error){
+			             console.log(error);
+			          }         
+			        });  
+			      });		
+				
+</script>
 </body>
 </html>
