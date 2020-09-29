@@ -110,7 +110,7 @@ input[type='text'], input[type='number'] {
 	</div>
 
 	<div id="description">
-	<form id="form" action="/erp/stock/confirmimport" method="post"> 
+	<form id="form" action="/erp/stock/confirmexport" method="post"> 
 		<button type="button" id="account">거래처 등록</button>
 		<button type="button" id="addTable">거래처 추가</button>
 		<div id="contain">

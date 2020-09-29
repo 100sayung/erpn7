@@ -176,7 +176,7 @@ margin-left: 200px;
 			console.log(cCode);
 			alert("전부삭제 해야함");
 			$.ajax({
-				url:"/erp/rest/deletecompany",
+				url:"/erp/rest/home/deletecompany",
 				data:{cCode:cCode},
 				dataType:"json",
 				type:"post",
