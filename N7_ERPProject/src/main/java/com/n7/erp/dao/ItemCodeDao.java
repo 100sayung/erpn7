@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.n7.erp.bean.B_shipment;
+import com.n7.erp.bean.IePort;
 import com.n7.erp.bean.ItemCode;
 
 public interface ItemCodeDao {
@@ -32,5 +33,11 @@ public interface ItemCodeDao {
 
 	@Select("SELECT *FROM IT WHERE IT_CODE = #{bs_itcode} AND IT_CPCODE = #{bs_ccode}")
 	public ItemCode getPnnnname(B_shipment bs);
+
+	@Select("SELECT IT_STOCK FROM S_ITEMCODE WHERE IT_CODE = #{ie_itcode} AND IT_CPCODE = #{ie_cpcode}")
+	public int getItqty(IePort ie);
+
+	@Update("UPDATE S_ITEMCODE SET IT_STOCK =#{i} WHERE IT_CODE = #{ie_itcode} AND IT_CPCODE = #{cCode}")
+	public void updateItqty(@Param("i")int i,@Param("cCode") String string,@Param("ie_itcode") String ie_itcode);
 
 }

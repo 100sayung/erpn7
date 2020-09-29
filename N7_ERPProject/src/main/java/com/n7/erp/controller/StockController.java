@@ -1,5 +1,6 @@
 package com.n7.erp.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +58,14 @@ public class StockController {
 	}
 	@RequestMapping(value = "/exportstockcheck", method = RequestMethod.GET)
 	public ModelAndView exportStockCheck(HttpSession session) {
-		mav = stmm.exportStockCheck(session);
-		return mav;
+		return stmm.exportStockCheck(session);
 	}
-	
+	@RequestMapping(value = "/confirmimport", method = RequestMethod.POST)
+	public ModelAndView confirmImport(HttpServletRequest request) {
+		return stmm.cofirmImport(request);
+	}
+	@RequestMapping(value = "/confirmexport", method = RequestMethod.POST)
+	public ModelAndView confirmExport(HttpServletRequest request) {
+		return stmm.cofirmExport(request);
+	}
 }

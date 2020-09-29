@@ -61,5 +61,5 @@ public interface IeportDao {
 
 	@Select("SELECT CL_CODE FROM AC_COMPANYLIST WHERE CL_CCODE = #{cCode}")
 	List<String> getClcode(String cCode);
-	
+
 }

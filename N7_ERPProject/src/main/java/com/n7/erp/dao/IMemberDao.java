@@ -2,6 +2,7 @@ package com.n7.erp.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -41,4 +42,8 @@ public interface IMemberDao {
 	int getDupleID(String m_id);
 	@Select("SELECT COUNT(*) FROM COMPANY WHERE C_CODE = #{cCode}")
 	int getDupleCCode(String m_ccode);
+	@Delete("DELETE FROM O_RETURN WHERE R_CCODE = #{m_ccode}")
+	void deleteO_return(String m_ccode);
+	@Delete("DELETE FROM S_IEPORT WHERE IE_CPCODE = #{m_ccode}")
+	void deleteS_ieport(String m_ccode);
 }
