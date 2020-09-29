@@ -187,4 +187,11 @@ public class HRRestController {
 		String result = hm.getDetailHoliday(session.getAttribute("cCode").toString(), docunum);
 		return result;
 	}
+	
+	@GetMapping(value="/hr/attendanceDelete")
+	public String getAttendanceDelete(HttpSession session, String hrcode, String time) {
+		String result=hm.DeleteAttendance(session.getAttribute("cCode").toString(), hrcode, time);
+		return result;
+	}	
+	
 }

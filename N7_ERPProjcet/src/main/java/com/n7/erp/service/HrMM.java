@@ -1,5 +1,6 @@
 package com.n7.erp.service;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -681,5 +682,18 @@ public class HrMM {
 			break;
 		}
 		return "good";
+	}
+
+	public String DeleteAttendance(String cCode, String hrcode, String time) {
+		HashMap<String, String> hMap=new HashMap<String, String>();
+		hMap.put("cCode", cCode);
+		hMap.put("hrcode", hrcode);
+		hMap.put("time", time);
+		if(hDao.DeleteAttendance(hMap)) {
+			String day=time.substring(0,15);
+			ArrayList<Attendance> aList=hDao.getEmployeeAttendanceTwo(day);
+		}
+		
+		return null;
 	}
 }

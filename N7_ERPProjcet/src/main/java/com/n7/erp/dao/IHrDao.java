@@ -153,5 +153,11 @@ public interface IHrDao {
 
 	@Delete("DELETE FROM HR_CERTIFICATION WHERE hct_ccode = #{cCode} AND HCT_NUM = #{num}")
 	void removeCertificationInfo(HashMap<String, String> hMap);
+	
+	@Delete("DELETE FROM HR_ATTENDANCE WHERE HA_CCODE=#{cCode} AND HA_HRCODE=#{hrcode} AND HA_TIME=#{time}")
+	boolean DeleteAttendance(HashMap<String, String> hMap);
+	
+	@Select("SELECT * FROM HR_ATTENDANCE WHERE HA_TIME LIKE '%'||#{day}||'%'")
+	ArrayList<Attendance> getEmployeeAttendanceTwo(String day);
 
 }

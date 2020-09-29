@@ -279,7 +279,7 @@ ul {
 		                        if(j!=cnt){
 		                           cell.innerHTML = "---";
 		                        }else{					/*09-28 append p태그 style 추가 */
-		                           cell.innerHTML ="<p style='width:150px;'>"+data[k].m_name+"</p>";
+		                           cell.innerHTML ="<p style='width:100px;'>"+data[k].m_name+"</p>";
 		                           cell.style.width="90px;";
 		                           cell.className="last"
 		                              cell = row.insertCell();
@@ -288,7 +288,7 @@ ul {
 		                           
 		                        }
 		                     } else if (j == cnt) {
-		                        cell.innerHTML = data[k].m_name;
+		                    	 cell.innerHTML ="<p style='width:100px;'>"+data[k].m_name+"</p>";
 		                        cell.style.width="90px;";
 		                        cell.clssName="last"
 		                        cell = row.insertCell();
