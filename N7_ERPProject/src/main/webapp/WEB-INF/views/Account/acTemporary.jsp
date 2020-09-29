@@ -33,12 +33,20 @@ table, tr, td {
 td {
 	padding: 5px;
 	font-size: large;
+<<<<<<< HEAD
 /* 	width: 58px; */
+=======
+	width: 58px;
+>>>>>>> origin/JSJ
 	height: 10px;
 }
 
 #table {
+<<<<<<< HEAD
 	width: 1200px;
+=======
+	width: 1400px;
+>>>>>>> origin/JSJ
 	height: auto;
 }
 
@@ -46,13 +54,19 @@ td {
 	background-color: gray;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/JSJ
 
 #center{
 
 text-align: center;
 }
+<<<<<<< HEAD
 >>>>>>> origin/dduddu
+=======
+>>>>>>> origin/JSJ
 </style>
 </head>
 <body>
@@ -77,6 +91,7 @@ text-align: center;
 	<div id="paging" style="text-align: center;"></div>
 	<br>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<button id="approval">결재안 상세보기</button>
 =======
 	<div id="center">
@@ -84,6 +99,11 @@ text-align: center;
 	<button id="acDelete2">삭제요청</button>
 	</div>
 >>>>>>> origin/dduddu
+=======
+	<div id="center">
+	<button id="approval">결재안 상세보기</button>
+	</div>
+>>>>>>> origin/JSJ
 </body>
 <script>
 	//페이지 변경 스크립트
@@ -174,6 +194,7 @@ text-align: center;
 									'width=1500, height=600');
 						});
 			});
+<<<<<<< HEAD
 	
 	$("#acDelete2").click(function() {
 
@@ -203,6 +224,8 @@ text-align: center;
 		});
 
 	});
+=======
+>>>>>>> origin/JSJ
 </script>
 </html>
 

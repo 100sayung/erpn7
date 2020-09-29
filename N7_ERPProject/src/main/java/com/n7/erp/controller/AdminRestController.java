@@ -65,6 +65,7 @@ public class AdminRestController {
 		String result = am.companyTemp();
 		return result;
 	}
+<<<<<<< HEAD
 	
 	
 
@@ -87,4 +88,6 @@ public class AdminRestController {
 		String result = new Gson().toJson(am.selectCCodeMember(vo));
 		return result;
 	}
+=======
+>>>>>>> origin/JSJ
 }

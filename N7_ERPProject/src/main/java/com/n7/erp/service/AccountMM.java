@@ -54,58 +54,58 @@ public class AccountMM {
 	}
 
 	public Map<String, List<A_company>> serchcomlist(String use, HttpSession session) {
-		Map<String, List<A_company>> aMap = null;
-		String cCode = session.getAttribute("cCode").toString();
-		List<A_company> aList = aDao.getCompanyList(use,cCode);
-		aMap = new HashMap<>();
-		aMap.put("aList", aList);
-		return aMap;
-	}
+	      Map<String, List<A_company>> aMap = null;
+	      String cCode = session.getAttribute("cCode").toString();
+	      List<A_company> aList = aDao.getCompanyList(use,cCode);
+	      aMap = new HashMap<>();
+	      aMap.put("aList", aList);
+	      return aMap;
+	   }
 
-	public Map<String, List<A_company>> searchcode(String use, String code, HttpSession session) {
-		Map<String, List<A_company>> aMap = null;
-		String cCode = session.getAttribute("cCode").toString();
-		System.out.println(use);
-		System.out.println(code);
-		List<A_company> aList = aDao.getsearchCode(use, code, cCode);
-		if (aList != null) {
-			aMap = new HashMap<>();
-			aMap.put("aList", aList);
-		}
-		return aMap;
-	}
+	   public Map<String, List<A_company>> searchcode(String use, String code, HttpSession session) {
+	      Map<String, List<A_company>> aMap = null;
+	      String cCode = session.getAttribute("cCode").toString();
+	      System.out.println(use);
+	      System.out.println(code);
+	      List<A_company> aList = aDao.getsearchCode(use, code, cCode);
+	      if (aList != null) {
+	         aMap = new HashMap<>();
+	         aMap.put("aList", aList);
+	      }
+	      return aMap;
+	   }
 
-	public Map<String, List<A_company>> trensCom(String USE, String CODE, HttpSession session) {
-		Map<String, List<A_company>> aMap = null;
-		List<A_company> aList=null;
-		boolean result = false;
-		String cCode = session.getAttribute("cCode").toString();
-		
-			result = aDao.trensCom(USE, CODE, cCode);
-			
-		System.out.println(result);
-		if (result) {
-			if(Integer.parseInt(USE)==0) {
-				System.out.println("여기로와?1");
-				USE="1";
-				aList = aDao.getCompanyList(USE, cCode);
-			}else if(Integer.parseInt(USE)==1) {
-				System.out.println("여기로와?2");
-				USE="0";
-				aList = aDao.getCompanyList(USE, cCode);
-			}
-			aMap = new HashMap<>();
-			aMap.put("aList", aList);
-		} else {
-			System.out.println("여기로와?3");
-			aMap = null;
+	   public Map<String, List<A_company>> trensCom(String USE, String CODE, HttpSession session) {
+	      Map<String, List<A_company>> aMap = null;
+	      List<A_company> aList=null;
+	      boolean result = false;
+	      String cCode = session.getAttribute("cCode").toString();
+	      
+	         result = aDao.trensCom(USE, CODE, cCode);
+	         
+	      System.out.println(result);
+	      if (result) {
+	         if(Integer.parseInt(USE)==0) {
+	            System.out.println("여기로와?1");
+	            USE="1";
+	            aList = aDao.getCompanyList(USE, cCode);
+	         }else if(Integer.parseInt(USE)==1) {
+	            System.out.println("여기로와?2");
+	            USE="0";
+	            aList = aDao.getCompanyList(USE, cCode);
+	         }
+	         aMap = new HashMap<>();
+	         aMap.put("aList", aList);
+	      } else {
+	         System.out.println("여기로와?3");
+	         aMap = null;
 
-		}
-//		}else {
-//			aMap=null;
-//		}
-		return aMap;
-	}
+	      }
+//	      }else {
+//	         aMap=null;
+//	      }
+	      return aMap;
+	   }
 
 	public ModelAndView saleinsert(HttpServletRequest request, SaleInfo si, HttpSession session) {
 		String view = null;

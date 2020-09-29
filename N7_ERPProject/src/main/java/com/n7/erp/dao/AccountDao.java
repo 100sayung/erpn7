@@ -28,6 +28,8 @@ public interface AccountDao {
 
 	List<A_company> getsearchCode(@Param("use")String use, @Param("code") String code, @Param("cCode") String cCode);
 
+	boolean trensCom(@Param("use")String use,@Param("code") String code,@Param("cCode")String cCode);
+	
 	boolean saleinsert(SaleInfo si);
 	
 	boolean saleinsert2(SaleInfo si);
@@ -86,7 +88,6 @@ public interface AccountDao {
 
 	List<shipment> getshipment(String cCode);
 
-	boolean trensCom(@Param("use")String use,@Param("code") String code,@Param("cCode")String cCode);
 
 //	public List<ApprovalDocu> apupPaymentList(@Param("hrCode") String hrCode, @Param("cCode") String cCode); //내가 올린 결재안(페이징x)
 	public List<ApprovalDocu> apupPaymentList(@Param("hrCode") String hrCode, @Param("cCode") String cCode, 
@@ -127,6 +128,7 @@ public interface AccountDao {
 	com.n7.erp.bean.ac.approvalLine getApprinfo(String code); //결재안에서 결재자 표시
 
 	public int countDocument();
+
 
 //	public List<ApprovalDocu> selectUpdocument(PagingVO vo);
 

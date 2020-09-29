@@ -4,7 +4,11 @@
 <mapper namespace="com.n7.erp.dao.AdminDao">
 	<!-- 페이징 관련 테스트중 홈페이지회원보기 -->
 	<select id="countMember" resultType="int">
+<<<<<<< HEAD
 		SELECT COUNT(*) FROM MEMBER WHERE M_GRADE != 'X'
+=======
+		SELECT COUNT(*) FROM MEMBER
+>>>>>>> origin/JSJ
 	</select>
 	
 	<!-- 페이징 처리 후 회원조회 -->
@@ -48,6 +52,7 @@
 				RN BETWEEN #{start} AND #{end}
 	</select>
 	
+<<<<<<< HEAD
 
 	
 	<select id="countCCodeMember" resultType="int">
@@ -74,4 +79,6 @@
 				RN BETWEEN #{start} AND #{end}
 	</select>
 	
+=======
+>>>>>>> origin/JSJ
 </mapper>

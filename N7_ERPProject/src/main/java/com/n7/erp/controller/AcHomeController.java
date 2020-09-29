@@ -2,8 +2,6 @@ package com.n7.erp.controller;
 
 import java.util.Locale;
 
-import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
