@@ -52,7 +52,8 @@
 			<exclude-mapping path="/erpboard" />
 			<exclude-mapping path="/findidfrm" />
 			<exclude-mapping path="/findpasswordfrm" />
-			<beans:bean class="com.n7.erp.userClass.SessionInterceptor" />
+			<beans:bean
+				class="com.n7.erp.userClass.SessionInterceptor" />
 		</interceptor>
 	</interceptors>
 </beans:beans>

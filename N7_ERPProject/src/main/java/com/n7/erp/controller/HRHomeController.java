@@ -98,9 +98,6 @@ public class HRHomeController {
 
 	@RequestMapping(value = "/hr/searchpaymm", method = {RequestMethod.GET , RequestMethod.POST})
 	public ModelAndView moveSearchPay(ViewPay pay,HttpSession session) {
-		System.out.println("findhrcode="+pay.getHC_HRCODE());
-		System.out.println("findccode="+pay.getHC_CCODE());
-		System.out.println("findpaydate="+pay.getHP_PAYDATE());
 		if(pay.getHP_PAYDATE()==""||pay.getHP_PAYDATE()==null) {
 			if(pay.getHC_HRCODE()==null) {
 				mav = dm.searchpay(session.getAttribute("cCode").toString());
@@ -218,8 +215,12 @@ public class HRHomeController {
 	}
 	@RequestMapping(value = "/hr/deptsearchposition", method = RequestMethod.GET)
 	public @ResponseBody String deptsearchposition(String dept,HttpSession session) {
-		
 		String result=dm.deptsearchposition(dept,session.getAttribute("cCode").toString());
 		return result;
+	}
+	@GetMapping(value = "/hr/receipholidaydetail")
+	public ModelAndView getreceiphoilday(String docunum,HttpSession session) {
+		mav = hm.getReceipHoliDay(docunum, session);
+		return mav;
 	}
 }

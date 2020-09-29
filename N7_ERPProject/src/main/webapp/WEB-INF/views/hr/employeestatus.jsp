@@ -78,7 +78,7 @@ ul {
 
 			<li id="showMenu2">근태 관리
 				<ul id="smallMenu2" style="display: none;">
-					<li><a href="/erp/hr/receiptholiday">휴가 접수</a></li>
+					<li><a href="/erp/hr/receiptholiday">휴가 조회</a></li>
 					<li><a href="/erp/hr/attendance">사원 출결 관리</a></li>
 					<li><a href="/erp/hr/employeestatus">근무 조회</a></li>
 					<li><a href="/erp/hr/retiremm">휴/퇴직 관리</a></li>
@@ -93,11 +93,13 @@ ul {
 			</li>
 		</ul>
 	</div>
-<div>
-<div class="divcss">사원 출퇴근 상태 조회</div>
-	<input type="text" id="nameSearch" placeholder="이름으로 검색"> 
-	<button onclick="searchFromName()" class="infobtn" id="nameSearching" style="margin-right: 200px;">검색</button>
-	<button onclick="searchFromStatus(1)" class="infobtn">출근중</button><button onclick="searchFromStatus(0)" class="infobtn">퇴근중</button>
+<div id="description">
+	<div class="divcss">사원 출퇴근 상태 조회</div>
+	<input type="text" id="nameSearch" placeholder="이름으로 검색" style="margin-left: 500px;"> 
+	<button onclick="searchFromName()" class="infobtn" id="nameSearching">검색</button>
+	<div id="commuting" style="float: left;">
+		<br><br><br><br><br><br><button onclick="searchFromStatus(1)" class="infobtn">출근중</button><br><br><br><br><button onclick="searchFromStatus(0)" class="infobtn">퇴근중</button>
+	</div>
 	<div id ="container">
 
 	</div>

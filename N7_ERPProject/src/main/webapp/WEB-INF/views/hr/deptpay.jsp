@@ -74,7 +74,7 @@ ul {
 
 			<li id="showMenu2">근태 관리
 				<ul id="smallMenu2" style="display: none;">
-					<li><a href="/erp/hr/receiptholiday">휴가 접수</a></li>
+					<li><a href="/erp/hr/receiptholiday">휴가 조회</a></li>
 					<li><a href="/erp/hr/attendance">사원 출결 조회</a></li>
 					<li><a href="/erp/hr/employeestatus">근무 조회</a></li>
 					<li><a href="/erp/hr/retiremm">휴/퇴직 관리</a></li>
@@ -260,13 +260,15 @@ $("#showMenu3").hover(function() {
 			data:{disdept:disdept,disposition:disposition},
 			dataType:'json',
 			success:function(data){
+				console.log("1="+data[0].HDP_dept);
+				
 				var str='<tr align="center"><td width="100px">부서</td><td width="100px">직급</td><td width="100px">금액</td><td width="100px">수정 금액</td></tr>';
 				for(var i=0;i<data.length;i++){
 					str+="<tr align='center'><td width='100px'>"+data[i].HDP_dept+"</td>"
 					+"<td width='100px'>"+data[i].HDP_position+"</td>"
 					+"<td id='"+data[i].HDP_num+"' width='100px'>"+data[i].HDP_pay+"</td>"
 					+"<td><input id	='modifypay_"+data[i].HDP_num+"'></td>"
-					+"<td><button type='button' id='"+dept[i].HDP_num+dept[i].HDP_pay+"' onclick='dify("+data[i].HDP_num+")' class='mopay'>수정</button></td>"
+					+"<td><button type='button' id='"+(data[i].HDP_num+data[i].HDP_pay)+"' onclick='dify("+data[i].HDP_num+")' class='mopay'>수정</button></td>"
 					+"<td><button type='button' onclick='erase("+data[i].HDP_num+")' class='mopay'>삭제</button></td></tr>";
 					console.log(data[i].HDP_num);
 				}
