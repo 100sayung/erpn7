@@ -3,6 +3,8 @@
 package com.n7.erp.controller;
 
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,11 +65,6 @@ public class SalesHomeController {
          return mav;
    }
    
-   @RequestMapping(value = "/sales/approvalup", method = RequestMethod.GET)
-   public String approvalup(String check, HttpSession session) {
-	   return "/sales/approvalup";
-}
-   
    @RequestMapping(value = "/sales/clientfrm", method = RequestMethod.GET)
       public String clientfrm() {
          return "/sales/clientfrm";
@@ -80,7 +77,7 @@ public class SalesHomeController {
    }
    
    @RequestMapping(value = "/sales/salesapprovaldetail", method = RequestMethod.GET)
-      public String salesapprovaldetail(HttpSession session) {
+      public String salesapprovaldetail() {
       return "/sales/salesapprovaldetail"; 
    }
    

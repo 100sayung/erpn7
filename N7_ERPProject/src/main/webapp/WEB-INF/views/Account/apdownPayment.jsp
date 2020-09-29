@@ -45,6 +45,11 @@ td {
 #m {
 	background-color: gray;
 }
+
+#center{
+
+text-align: center;
+}
 </style>
 </head>
 <body>
@@ -65,7 +70,9 @@ td {
 	<br>
 	<div id="paging" style="text-align: center;"></div>
 	<br>
+	<div id="center">
 	<button id="approval">결재안 상세보기</button>
+	</div>
 	<!-- 	<button id="acBack2">반려요청</button> -->
 	<!-- 	<button id="acDelete">삭제</button> -->
 </body>
@@ -170,17 +177,49 @@ td {
 	$("#approval").click(
 			function() {
 				var check = '';
-				$("input[name='checknum']:checked").each(
-						function() {
-							check = $(this).attr('value');
 
-							window.open(
-									'/erp/rest/Account/apRequest2?j_docunum='
-											+ check,
-									'/erp/rest/Account/apRequest2',
-									'width=1500, height=600');
-						});
-			});
+				 $("input[name='checknum']:checked").each(
+			               function() {
+			                  check = $(this).attr('value');
+			                  
+
+			                  if(check.indexOf("AC") != -1){
+			                     window.open(
+			                        '/erp/rest/Account/apRequest?j_docunum='
+			                              + check, 'apRequest',
+			                        'width=1500, height=600');
+
+			                  }else if(check.indexOf("AS") != -1){ //영민
+			                     window.open(
+			                        '/erp/rest/Account/asRequest?as_document='+ check, 'asRequest',
+			                        'width=1500, height=600');
+			   
+			                  }else if(check.indexOf("AP") != -1){ //영민  //G??????
+			                     window.open(
+			                        '/erp/rest/Account/apRequest?ap_document='+ check, 'apRequest',
+			                        'width=1500, height=600');         
+
+			                  }else if(check.indexOf("P") != -1){ //예은
+			                     window.open(
+			                        '/erp/rest/Purchase/pRequest2?p_documentcode='+ check, 'pRequest',
+			                        'width=1500, height=600');
+
+			                  }else if(check.indexOf("G") != -1){ //수진
+			                     window.open(
+			                        '/erp/rest/sales/apRequest?bs_docunum='+ check, 'apRequest',
+			                        'width=1500, height=600');
+
+			                  }else if(check.indexOf("G") != -1){ //동훈
+			                     window.open(
+			                        '/erp/rest/동훈/gRequest?g_document='+ check, 'hRequest',
+			                        'width=1500, height=600');
+			                  }else{
+			                     window.open(
+			                        '/erp/rest/myinfo/mydocument', 'mydocument', 'width=1500, height=600');
+			                  }
+
+			               });
+			      });
 </script>
 </html>
 

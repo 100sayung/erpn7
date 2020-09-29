@@ -176,7 +176,7 @@ ul {
     });
    
    $('#showMenu5').on('click', function(e) {
-       e.preventDefault(); 
+       e.preventDefault();
 
 /*        var check='';
        $("input[name=each_check]:checked").each(function(){
@@ -185,10 +185,10 @@ ul {
           console.log(check);
           if(check!=""){ */
       
-      $.ajax({
+       $.ajax({
           type : 'get',
-          url :  'approvalup',
-          dataType : "html",
+          url :  'salesapprovaldetail',
+          dataType : 'html',
           success : function(data) {
              console.log(data);
              $('#description').html(data);
@@ -197,9 +197,9 @@ ul {
              console.log(error);
           }
         });
-    }); 
+    });
   
-/*     var select;
+    var select;
       $.ajax({
             url:"/erp/stock/getitemcode",
             dataType:"json",
@@ -249,21 +249,7 @@ ul {
           }
           arrStr+="</select>";
           return arrStr;
-       }  */
-     
-     
-/*      $("#showMenu5").click(function(){
-         var check='';
-         $("input[name=each_check]:checked").each(function(){
-           check= $(this).attr("value");
-           
-           console.log(check);
-           if(check!=""){
-              window.open("/erp/sales/salesapprovaldetail?check="+check,'salesapprovaldetail','width=1200,height=700')
-           }
-         }); 
-      }); */
-     
+       } 
    </script>
 </body>
 </html>

@@ -52,6 +52,11 @@ public class MyInfoController {
 		return mav;
 	}
 	
+	@GetMapping(value="/myinfo/mydocument")
+	public String mydocument() {
+		return "myInfo/mydocument";
+	}
+	
 	//여기까지 이동관련
 	
 	

@@ -59,7 +59,10 @@ public class HomeController {
 	public String introduceCompany() {
 		return "/home/introducecompany";
 	}
-
+	@RequestMapping(value = "/home/comInfo", method = RequestMethod.GET)
+	   public String comInfo() {
+	      return "/home/comInfo";
+	   }
 	@RequestMapping(value = "/home/erpboard", method = RequestMethod.GET)
 	public ModelAndView erpBoard() {
 		logger.info("");

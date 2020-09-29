@@ -31,7 +31,7 @@ border: 1px solid;
         <button type="button" id="approvalplan">결재 요청하기</button>
         <br>
         <br>
-        <div style="width:auto; background-color:#FFB2D9;  color:white; padding:1%;">출하의뢰입력</div>
+        <div style="width:auto; background-color:#211289;  color:white; padding:1%;">출하의뢰입력</div>
           <select id="choice" style="width:180px;">
                       <option value="bs_docunum">출하번호</option>                    
                       <option value="bs_bonum">수주번호</option>
@@ -49,7 +49,7 @@ border: 1px solid;
                <th>회사코드</th>
                <th><input type="text" name="bs_ccode"></th>
                <th>수주번호</th>
-               <th><input type="text" name="bs_bonum"></th>        
+               <th><input type="text" name="bs_bonum">           
 <!--           <th>품목코드</th>
                <th><input type="text" name="bs_itcode"></th>  -->  
             </tr>
@@ -295,7 +295,6 @@ border: 1px solid;
                   }
                });
             });
-         
          function makeSelectBox(arr){
             var arrStr = "<select class='select' name = 'bs_itcode'><option></option>"
             if(arr.length==0){

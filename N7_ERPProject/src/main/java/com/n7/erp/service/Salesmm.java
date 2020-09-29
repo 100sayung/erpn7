@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.n7.erp.bean.IePort;
+import com.n7.erp.bean.ac.Account;
 import com.n7.erp.bean.sales.A_company;
 import com.n7.erp.bean.sales.Businessbean;
 import com.n7.erp.bean.sales.Salesbean;
@@ -573,21 +574,23 @@ public class Salesmm {
    }
 
    //결재 상세보기
-   public ModelAndView approvaldetailinput(approvaldetail app, HttpSession session){ 
-         app.setBs_ccode(session.getAttribute("cCode").toString());
+   public ModelAndView approvaldetailinput(String bs_docunum, HttpSession session){ 
+         String cCode= (String)session.getAttribute("cCode");
          mav=new ModelAndView();
          String view=null;
                
-         boolean result=sDao.approvaldetailinput(app);
-         if(app.getBs_ccode()!="") {
-           if(result) {
+         approvaldetail app=sDao.approvaldetailinput(bs_docunum, cCode);
+         
+         //if(app.getBs_ccode()!="") {
+           if(app!=null) {
+        	mav.addObject("app",app); 
             mav.addObject("msg", "데이터 입력이 완료되었습니다");
              view="sales/salesapprovaldetail";
          }else {
             mav.addObject("msg", "데이터 입력이 실패하였습니다");
              view="sales/salesapprovaldetail";
            }
-         }
+         //}
          mav.setViewName(view);
          return mav;
    }
@@ -604,27 +607,82 @@ public class Salesmm {
          return sMap;
    }
 
-	public ModelAndView appRequest(String check, HttpSession session) {
-        mav=new ModelAndView();
-        String view = null;
-        String cCode=session.getAttribute("cCode").toString();
-        
-        //List<approvaldetail> sList=new ArrayList<>();
-        approvaldetail app =sDao.appRequest(check, cCode);
-        
-        if(app!=null) {
-           mav.addObject("app", app);
-           view = "sales/salesapprovaldetail";
-        }else {
-           view = "sales/salesapprovaldetail";
-        }
+	public ModelAndView apRequest(String bs_docunum, HttpSession session) {
+		mav = new ModelAndView();
+		String view = null;
+		String cCode = (String) session.getAttribute("cCode");
+
+		approvaldetail app = sDao.apRequest(bs_docunum, cCode);
+
+		if (app!= null) {
+			mav.addObject("app", app);
+			System.out.println("가져옴???????");
+			view = "sales/salesapprovaldetail";
+		} else {
+			view = "sales/salesapprovaldetail";
+		}
 		mav.setViewName(view);
 		return mav;
 	}
 
-	public ModelAndView approvalup(String check, HttpSession session) {
-		
-		return null;
+	public Map<String, List<com.n7.erp.bean.sales.approvalLine>> getApprinfo(int cnt, String[] strArray, HttpSession session) {
+		Map<String, List<approvalLine>> sMap = null;
+		List<approvalLine> sList = new ArrayList<>();
+
+		System.out.println("숫자=" + cnt);
+		System.out.println("이름값=" + strArray.length);
+		String code = "";
+
+		approvalLine al = new approvalLine();
+		for (int i = 0; i < cnt; i++) {
+			code = strArray[i];
+			al = sDao.getApprinfo(code);
+			sList.add(al);
+		}
+		if (sList != null) {
+			sMap = new HashMap<>();
+			sMap.put("sList", sList);
+		} else {
+			sMap = null;
+		}
+		return sMap;
+	}
+
+	public ModelAndView apRequest2(String bs_docunum, HttpSession session) {
+		mav = new ModelAndView();
+		String view = null;
+		String cCode = (String) session.getAttribute("cCode");
+
+		approvaldetail app = sDao.apRequest2(bs_docunum, cCode);
+
+		if (app!= null) {
+			mav.addObject("app", app);
+			view = "sales/salesdownapprovaldetail";
+		} else {
+			view = "sales/salesdownapprovaldetail";
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+
+	public ModelAndView downapprovaldetailinput(String bs_docunum, HttpSession session) {
+        String cCode= (String)session.getAttribute("cCode");
+        mav=new ModelAndView();
+        String view=null;
+              
+        approvaldetail app=sDao.downapprovaldetailinput(bs_docunum, cCode);
+        
+        //if(app.getBs_ccode()!="") {
+          if(app!=null) {
+           mav.addObject("msg", "데이터 입력이 완료되었습니다");
+            view="sales/salesdownapprovaldetail";
+        }else {
+           mav.addObject("msg", "데이터 입력이 실패하였습니다");
+            view="sales/salesdownapprovaldetail";
+          }
+        //}
+        mav.setViewName(view);
+        return mav;
 	}
     
 //   public Map<String, List<Shippingbean>> shippingquantity(String check, HttpSession session) {
