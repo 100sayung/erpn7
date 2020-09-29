@@ -54,58 +54,58 @@ public class AccountMM {
 	}
 
 	public Map<String, List<A_company>> serchcomlist(String use, HttpSession session) {
-		Map<String, List<A_company>> aMap = null;
-		String cCode = session.getAttribute("cCode").toString();
-		List<A_company> aList = aDao.getCompanyList(use,cCode);
-		aMap = new HashMap<>();
-		aMap.put("aList", aList);
-		return aMap;
-	}
+	      Map<String, List<A_company>> aMap = null;
+	      String cCode = session.getAttribute("cCode").toString();
+	      List<A_company> aList = aDao.getCompanyList(use,cCode);
+	      aMap = new HashMap<>();
+	      aMap.put("aList", aList);
+	      return aMap;
+	   }
 
-	public Map<String, List<A_company>> searchcode(String use, String code, HttpSession session) {
-		Map<String, List<A_company>> aMap = null;
-		String cCode = session.getAttribute("cCode").toString();
-		System.out.println(use);
-		System.out.println(code);
-		List<A_company> aList = aDao.getsearchCode(use, code, cCode);
-		if (aList != null) {
-			aMap = new HashMap<>();
-			aMap.put("aList", aList);
-		}
-		return aMap;
-	}
+	   public Map<String, List<A_company>> searchcode(String use, String code, HttpSession session) {
+	      Map<String, List<A_company>> aMap = null;
+	      String cCode = session.getAttribute("cCode").toString();
+	      System.out.println(use);
+	      System.out.println(code);
+	      List<A_company> aList = aDao.getsearchCode(use, code, cCode);
+	      if (aList != null) {
+	         aMap = new HashMap<>();
+	         aMap.put("aList", aList);
+	      }
+	      return aMap;
+	   }
 
-	public Map<String, List<A_company>> trensCom(String USE, String CODE, HttpSession session) {
-		Map<String, List<A_company>> aMap = null;
-		List<A_company> aList=null;
-		boolean result = false;
-		String cCode = session.getAttribute("cCode").toString();
-		
-			result = aDao.trensCom(USE, CODE, cCode);
-			
-		System.out.println(result);
-		if (result) {
-			if(Integer.parseInt(USE)==0) {
-				System.out.println("여기로와?1");
-				USE="1";
-				aList = aDao.getCompanyList(USE, cCode);
-			}else if(Integer.parseInt(USE)==1) {
-				System.out.println("여기로와?2");
-				USE="0";
-				aList = aDao.getCompanyList(USE, cCode);
-			}
-			aMap = new HashMap<>();
-			aMap.put("aList", aList);
-		} else {
-			System.out.println("여기로와?3");
-			aMap = null;
+	   public Map<String, List<A_company>> trensCom(String USE, String CODE, HttpSession session) {
+	      Map<String, List<A_company>> aMap = null;
+	      List<A_company> aList=null;
+	      boolean result = false;
+	      String cCode = session.getAttribute("cCode").toString();
+	      
+	         result = aDao.trensCom(USE, CODE, cCode);
+	         
+	      System.out.println(result);
+	      if (result) {
+	         if(Integer.parseInt(USE)==0) {
+	            System.out.println("여기로와?1");
+	            USE="1";
+	            aList = aDao.getCompanyList(USE, cCode);
+	         }else if(Integer.parseInt(USE)==1) {
+	            System.out.println("여기로와?2");
+	            USE="0";
+	            aList = aDao.getCompanyList(USE, cCode);
+	         }
+	         aMap = new HashMap<>();
+	         aMap.put("aList", aList);
+	      } else {
+	         System.out.println("여기로와?3");
+	         aMap = null;
 
-		}
-//		}else {
-//			aMap=null;
-//		}
-		return aMap;
-	}
+	      }
+//	      }else {
+//	         aMap=null;
+//	      }
+	      return aMap;
+	   }
 
 	public ModelAndView saleinsert(HttpServletRequest request, SaleInfo si, HttpSession session) {
 		String view = null;
@@ -684,11 +684,11 @@ public class AccountMM {
 			HttpSession session) {
 		mav = new ModelAndView();
 		String view = null;
-		String cCode = (String) session.getAttribute("cCode");
 
 		ac.setJ_none(req.getParameter("rs_apcode0"));
 		ac.setJ_ntwo(req.getParameter("rs_apcode1"));
 		ac.setJ_nthr(req.getParameter("rs_apcode2"));
+		ac.setJ_ccode((String) session.getAttribute("cCode"));
 //if (ac.getJ_grade().equals("0")) {
 		ac.setJ_grade("1");
 //} 
@@ -711,8 +711,8 @@ public class AccountMM {
 		ap.setAp_toapprover(ac.getJ_ntwo()); // 결재받을사람
 		ap.setAp_status((ac.getJ_grade())); // 결재상태
 
-		boolean sa = aDao.acSign(ac, cCode); // 결재사람1,2,3 넣는거 업데이트
-		boolean sp = aDao.apCart2(ap, cCode); // 결재문서 테이블에 인서트
+		boolean sa = aDao.acSign(ac); // 결재사람1,2,3 넣는거 업데이트
+		boolean sp = aDao.apCart2(ap); // 결재문서 테이블에 인서트
 
 		if (sa && sp) {
 			try {
@@ -724,13 +724,13 @@ public class AccountMM {
 				out.println("<script>window.opener.location.reload();</script>");
 				out.flush();
 				out.close();
-				mav.setViewName("Account/acPend");
+				mav.setViewName("Account/acTemporary");
 				System.out.println("결재요청했음");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		} else {
-			mav.setViewName("Account/acPend");
+			mav.setViewName("Account/acTemporary");
 			System.out.println("야 결재요청못했다 미안하다..");
 		}
 //mav.setViewName(view);
@@ -744,7 +744,8 @@ public class AccountMM {
 		String view = null;
 		String hrCode = (String) session.getAttribute("hrCode");
 		String cCode = (String) session.getAttribute("cCode");
-
+		
+		ac.setJ_ccode(cCode);
 		ac.setJ_none(req.getParameter("rs_apcode0"));
 		ac.setJ_ntwo(req.getParameter("rs_apcode1"));
 		ac.setJ_nthr(req.getParameter("rs_apcode2"));
@@ -768,16 +769,17 @@ public class AccountMM {
 			ap.setAp_status("3");
 		}
 
+		ap.setAp_ccode(cCode);
 		ap.setAp_docunum(ac.getJ_docunum());
 
-		boolean sa = aDao.acSign2(ac, cCode);
-		boolean sp = aDao.apSign2(ap, cCode);
+		boolean sa = aDao.acSign2(ac);
+		boolean sp = aDao.apSign2(ap);
 
 		if (sa && sp) {
-			view = "Account/acDownlist";
+			view = "Account/apdownPayment";
 			System.out.println("결재요청했음");
 		} else {
-			view = "Account/acDownlist";
+			view = "Account/apdownPayment";
 			System.out.println("야 결재요청못했다 미안하다..");
 		}
 		mav.setViewName(view);
@@ -818,17 +820,20 @@ public class AccountMM {
 		if (ac.getJ_reasion() == null || ac.getJ_reasion() == "" || ac.getJ_reasion().equals("사유")) {
 			ac.setJ_reasion("사유없음");
 		}
-
+		
+		ac.setJ_ccode(cCode);
+		
+		ap.setAp_ccode(cCode);
 		ap.setAp_docunum(ac.getJ_docunum());
 
-		boolean ba = aDao.acBack(ac, cCode);
-		boolean bp = aDao.apBack2(ap.getAp_docunum(), cCode);
+		boolean ba = aDao.acBack(ac);
+		boolean bp = aDao.apBack2(ap);
 
 		if (ba && bp) {
-			view = "Account/acDownlist";
+			view = "Account/apdownPayment";
 			System.out.println("반려요청했음");
 		} else {
-			view = "Account/acDownlist";
+			view = "Account/apdownPayment";
 			System.out.println("야 반려요청못했다 미안하다..");
 		}
 		mav.setViewName(view);

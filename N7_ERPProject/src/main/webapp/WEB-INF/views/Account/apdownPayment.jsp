@@ -45,6 +45,11 @@ td {
 #m {
 	background-color: gray;
 }
+
+#center{
+
+text-align: center;
+}
 </style>
 </head>
 <body>
@@ -65,7 +70,9 @@ td {
 	<br>
 	<div id="paging" style="text-align: center;"></div>
 	<br>
+	<div id="center">
 	<button id="approval">결재안 상세보기</button>
+	</div>
 	<!-- 	<button id="acBack2">반려요청</button> -->
 	<!-- 	<button id="acDelete">삭제</button> -->
 </body>
@@ -174,13 +181,22 @@ td {
 						function() {
 							check = $(this).attr('value');
 
-							window.open(
-									'/erp/rest/Account/apRequest2?j_docunum='
-											+ check,
-									'/erp/rest/Account/apRequest2',
-									'width=1500, height=600');
-						});
-			});
+			                  if(check.indexOf("AC") != -1){
+			                      window.open(
+			                              '/erp/rest/Account/apRequest2?j_docunum='+ check,
+			                              '/erp/rest/Account/apRequest2',
+			                              'width=1500, height=600');
+				                  }else if(check.indexOf("P") != -1){ //예은
+				                     window.open(
+				                        '/erp/rest/Purchase/pRequest2?p_documentcode='+ check, '/erp/rest/Purchase/pRequest2',
+				                        'width=1500, height=600');
+				                  }else{
+				                     window.open(
+				                        '/erp/rest/myinfo/mydocument', 'mydocument', 'width=1500, height=600');
+				                  }
+
+				               });
+				      });
 </script>
 </html>
 

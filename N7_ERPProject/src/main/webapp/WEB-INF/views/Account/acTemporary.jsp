@@ -45,6 +45,11 @@ td {
 #m {
 	background-color: gray;
 }
+
+#center{
+
+text-align: center;
+}
 </style>
 </head>
 <body>
@@ -68,7 +73,9 @@ td {
 	<br>
 	<div id="paging" style="text-align: center;"></div>
 	<br>
+	<div id="center">
 	<button id="approval">결재안 상세보기</button>
+	</div>
 </body>
 <script>
 	//페이지 변경 스크립트

@@ -216,6 +216,10 @@ public class HomeController {
 	public ResponseEntity<String> modifyPassword(String userPassword, String userId) {
 		return mm.modifyPassword(userPassword, userId);
 	}
+	@RequestMapping(value = "/home/comInfo", method = RequestMethod.GET)
+	   public String comInfo() {
+	      return "/home/comInfo";
+	   }
 	
 	
 	

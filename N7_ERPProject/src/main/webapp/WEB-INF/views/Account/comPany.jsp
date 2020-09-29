@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- <script src="js/jquery.serializeObject.js"></script> -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- BOOTSTRAP STYLES-->
+   <!-- BOOTSTRAP STYLES-->
     <link href="/erp/assets/css/bootstrap.css" rel="stylesheet">
      <!-- FONTAWESOME STYLES-->
     <link href="/erp/assets/css/font-awesome.css" rel="stylesheet">
@@ -27,25 +27,25 @@
 <style>
 
 body, td, th, select, textarea {
-	font-family: Nanum Gothic, Gulim, Arial, ms sans serif;
-	font-size: 11px;
-	color: #000;
+   font-family: Nanum Gothic, Gulim, Arial, ms sans serif;
+   font-size: 11px;
+   color: #000;
 }
 
 .main {
-	width: 50%;
-	height: 50%;
-	display: inline;
-	float: left;
-	overflow: auto:
+   width: 50%;
+   height: 50%;
+   display: inline;
+   float: left;
+   overflow: auto:
 }
 
 #search {
-	width: 50px;
+   width: 50px;
 }
 
 #Info {
-	text-align: center;
+   text-align: center;
 }
 #maincontents{
 border: 3px double #e1e1e1;
@@ -67,331 +67,331 @@ font-size: 20px;
 </style>
 </head>
 <body>
-	<div id="mainhead" class="main">
-		<br>
-		<!-- <form id="code"> -->
-					<input type="text" id="code">
-					<button type="button" id="codesearch">코드검색</button>
-	                    <!-- </form> -->
-	                    <button type="button" id="Alllist">리스트출력</button>
-				        사용<input type="radio" name="use" value="1"> 
-				        미사용<input type="radio" name="use" value="0"> 
-	                    <!-- <button type="button" id="trens">사용안함</button> -->
-		
-			<table id="Info" class="table">
-				<tbody id="Tbody">
-					
-				</tbody>
-			</table>
-	</div>
-	<div id="maincontents" class="main">
-		<form id="comInfo">
-			<br>
-			<table>
-				<tbody>
-				<tr><th><div class='input-group'><span class='input-group-addon'>거래처코드</span>
+   <div id="mainhead" class="main">
+      <br>
+      <!-- <form id="code"> -->
+               <input type="text" id="code">
+               <button type="button" id="codesearch">코드검색</button>
+                       <!-- </form> -->
+                       <button type="button" id="Alllist">리스트출력</button>
+                    활성<input type="radio" name="use" value="1"> 
+                    비활성<input type="radio" name="use" value="0"> 
+                       <!-- <button type="button" id="trens">사용안함</button> -->
+      
+         <table id="Info" class="table">
+            <tbody id="Tbody">
+               
+            </tbody>
+         </table>
+   </div>
+   <div id="maincontents" class="main">
+      <form id="comInfo">
+         <br>
+         <table>
+            <tbody>
+            <tr><th><div class='input-group'><span class='input-group-addon'>거래처코드</span>
                 <input type='text' name='cl_code' class='form-control'></div></th>
-				<th><div class='input-group'><span class='input-group-addon'>거래처명</span>
+            <th><div class='input-group'><span class='input-group-addon'>거래처명</span>
                 <input type='text' name='cl_name' class='form-control'></div></th>
-					
-					</tr>
-					<tr>
-				<th><div class='input-group'><span class='input-group-addon'>사업자번호</span>
+               
+               </tr>
+               <tr>
+            <th><div class='input-group'><span class='input-group-addon'>사업자번호</span>
                 <input type='text' name='cl_comnum' class='form-control'></div></th>
-				<th><div class='input-group'><span class='input-group-addon'>대표자명</span>
+            <th><div class='input-group'><span class='input-group-addon'>대표자명</span>
                 <input type='text' name='cl_ceo' class='form-control'></div></th>
 
-					</tr>
-					<tr>
-				<th><div class='input-group'><span class='input-group-addon'>&nbsp;담당자명&nbsp;</span>
+               </tr>
+               <tr>
+            <th><div class='input-group'><span class='input-group-addon'>&nbsp;담당자명&nbsp;</span>
                 <input type='text' name='cl_employee' class='form-control'></div></th>
-				<th><div class='input-group'><span class='input-group-addon'>전화번호</span>
+            <th><div class='input-group'><span class='input-group-addon'>전화번호</span>
                 <input type='text' name='cl_phone' class='form-control'></div></th>
-		
-					</tr>
-					<tr>
-				<th><div class='input-group'><span class='input-group-addon'>핸드폰번호</span>
+      
+               </tr>
+               <tr>
+            <th><div class='input-group'><span class='input-group-addon'>핸드폰번호</span>
                 <input type='text' name='cl_phone2' class='form-control'></div></th>
-				<th><div class='input-group'><span class='input-group-addon'>팩스번호</span>
+            <th><div class='input-group'><span class='input-group-addon'>팩스번호</span>
                 <input type='text' name='cl_fax' class='form-control'></div></th>
-			
-					</tr>
-					<tr>
-				<th><div class='input-group'><span class='input-group-addon'>&nbsp;&nbsp;이메일&nbsp;&nbsp;</span>
+         
+               </tr>
+               <tr>
+            <th><div class='input-group'><span class='input-group-addon'>&nbsp;&nbsp;이메일&nbsp;&nbsp;</span>
                 <input type='text' name='cl_email' class='form-control'></div></th>
                 <th><div class='input-group'><span class='input-group-addon'>&nbsp;&nbsp;유형&nbsp;&nbsp;</span>
                 <select name='cl_kind3' class='form-control'>
                 <option value="">--</option>
-				<option value="매출">매출</option>
-				<option value="매입">매입</option>
+            <option value="매출">매출</option>
+            <option value="매입">매입</option>
                 </select></div></th>
 
-		
-					</tr>
-					<tr>
-				<th><div class='input-group'><span class='input-group-addon'>&nbsp;우편번호&nbsp;</span>
+      
+               </tr>
+               <tr>
+            <th><div class='input-group'><span class='input-group-addon'>&nbsp;우편번호&nbsp;</span>
                 <input type='text' name='cl_addrnum' class='form-control'></div></th>
-				
+            
 
-					</tr>
+               </tr>
 
 
-					<tr>
-				<th colspan="2"><div class='input-group'><span class='input-group-addon'>&nbsp;&nbsp;&nbsp;주소&nbsp;&nbsp;&nbsp;</span>
+               <tr>
+            <th colspan="2"><div class='input-group'><span class='input-group-addon'>&nbsp;&nbsp;&nbsp;주소&nbsp;&nbsp;&nbsp;</span>
                 <input type='text' name='cl_addr' class='form-control' style="width:540px;"></div></th>
-						
-					</tr>
-					<tr>
-				<th><div class='input-group'><span class='input-group-addon'>&nbsp;&nbsp;&nbsp;업태&nbsp;&nbsp;&nbsp;</span>
+                  
+               </tr>
+               <tr>
+            <th><div class='input-group'><span class='input-group-addon'>&nbsp;&nbsp;&nbsp;업태&nbsp;&nbsp;&nbsp;</span>
                 <input type='text' name='cl_kind' class='form-control' style="width:230px;"></div></th>
-				<th><div class='input-group'><span class='input-group-addon'>&nbsp;&nbsp;종목&nbsp;&nbsp;</span>
+            <th><div class='input-group'><span class='input-group-addon'>&nbsp;&nbsp;종목&nbsp;&nbsp;</span>
                 <input type='text' name='cl_kind2' class='form-control'></div></th>
-					
-					</tr>
-					<tr>
-				<th><div class='input-group'><span class='input-group-addon'>&nbsp;거래은행&nbsp;</span>
+               
+               </tr>
+               <tr>
+            <th><div class='input-group'><span class='input-group-addon'>&nbsp;거래은행&nbsp;</span>
                 <input type='text' name='cl_bank' class='form-control'></div></th>
-				<th><div class='input-group'><span class='input-group-addon'>&nbsp;예금주&nbsp;</span>
+            <th><div class='input-group'><span class='input-group-addon'>&nbsp;예금주&nbsp;</span>
                 <input type='text' name='cl_bankholder' class='form-control'></div></th>
-						
-					</tr>
-					<tr>
-				<th><div class='input-group'><span class='input-group-addon'>&nbsp;계좌번호&nbsp;</span>
+                  
+               </tr>
+               <tr>
+            <th><div class='input-group'><span class='input-group-addon'>&nbsp;계좌번호&nbsp;</span>
                 <input type='text' name='cl_banknum' class='form-control'></div></th>
-				<th><div class='input-group'><span class='input-group-addon'>종사업장번호</span>
+            <th><div class='input-group'><span class='input-group-addon'>종사업장번호</span>
                 <input type='text' name='cl_comnum2' class='form-control' style="width:200px;"></div></th>
-					</tr>
+               </tr>
 
-					<tr>
-				<th colspan="2"><div class='input-group'><span class='input-group-addon'>&nbsp;&nbsp;&nbsp;메모&nbsp;&nbsp;&nbsp;</span>
+               <tr>
+            <th colspan="2"><div class='input-group'><span class='input-group-addon'>&nbsp;&nbsp;&nbsp;메모&nbsp;&nbsp;&nbsp;</span>
                 <textarea name='cl_memo' rows="3" cols="" class='form-control' style="width:539px;"></textarea></div></th>
                 
-						<!-- <th class="th1">메모</th>
-						<td><textarea name="cl_memo"
-								style="width: 380px; height: 75px; background: #FFFFFF; -ms-ime-mode: active;"></textarea></td> -->
-					
-					</tr>
-				</tbody>
+                  <!-- <th class="th1">메모</th>
+                  <td><textarea name="cl_memo"
+                        style="width: 380px; height: 75px; background: #FFFFFF; -ms-ime-mode: active;"></textarea></td> -->
+               
+               </tr>
+            </tbody>
 
-			</table>
-			<button type="button" id="insertcomlist">저장</button>
-		</form>
-	</div>
+         </table>
+         <button type="button" id="insertcomlist">저장</button>
+      </form>
+   </div>
 </body>
 <script type="text/javascript">
-	 $("#Alllist").click(function(){
+    $("#Alllist").click(function(){
    var use = "";
 $("input[name='use']:checked").each(function() {
     use=($(this).attr('value'));
     
-	});
-		 
-		 console.log(use);
-		 if(use==null){
-			 alert("사용여부를 체크해주세요");
-		 }else{
-			 
-		$.ajax({
-			url : '/erp/rest/Account/serchcomlist',
-			type : 'post',
-			data : {use:use},
-			dataType : 'json',
-			success : function(data) {
-				console.log(data);
-				var List="";
-				if(use==1){
-					List+="<tr><th class='allinfo'>코드</th><th class='allinfo'>거래처명</th><th class='allinfo'>사업자(주민)번호</th><th class='allinfo'>대표자명</th><th class='allinfo'>업태</th><th class='allinfo'>유형</th><th class='allinfo'>사용여부</th></tr>";
-    				for ( var i in data.aList) {
-    					List+="<tr class='success'>";
-    					List+="<td class='allinfo'>" + data.aList[i].cl_code + "</td>";
-    					List+="<td class='allinfo'>" + data.aList[i].cl_name + "</td>";
-    					List+="<td class='allinfo'>" + data.aList[i].cl_comnum + "</td>";
-    				    List+="<td class='allinfo'>" + data.aList[i].cl_ceo + "</td>";
-    					List+="<td class='allinfo'>" + data.aList[i].cl_kind + "</td>";
-    					List+="<td class='allinfo'>" + data.aList[i].cl_kind3 + "</td>";
-    					List+="<td class='allinfo'><button onclick='trensCom("+0+","+data.aList[i].cl_code+")'>사용안함</button></td>"; 
-    					List+="</tr>";
-    				}
-					
-				}else{
-					
-					List+="<tr><th class='allinfo'>코드</th><th class='allinfo'>거래처명</th><th class='allinfo'>사업자(주민)번호</th><th class='allinfo'>대표자명</th><th class='allinfo'>업태</th><th class='allinfo'>유형</th><th class='allinfo'>사용여부</th></tr>";
-    				for ( var i in data.aList) {
-    					List+="<tr class='success'>";
-    					List+="<input id="+data.aList[i].cl_code+" type='text' name='reportChkBxRow' value="+data.aList[i].cl_code+" hidden='true'>";
-    					List+="<td class='allinfo'>" + data.aList[i].cl_code + "</td>";
-    					List+="<td class='allinfo'>" + data.aList[i].cl_name + "</td>";
-    					List+="<td class='allinfo'>" + data.aList[i].cl_comnum + "</td>";
-    				    List+="<td class='allinfo'>" + data.aList[i].cl_ceo + "</td>";
-    					List+="<td class='allinfo'>" + data.aList[i].cl_kind + "</td>";
-    					List+="<td class='allinfo'>" + data.aList[i].cl_kind3 + "</td>";
-    					List+="<td class='allinfo'><button onclick='trensCom("+1+","+data.aList[i].cl_code+")'>사용</button></td>";
-    					List+="</tr>";
-    				}
-				}
+   });
+       
+       console.log(use);
+       if(use==null){
+          alert("사용여부를 체크해주세요");
+       }else{
+          
+      $.ajax({
+         url : '/erp/rest/Account/serchcomlist',
+         type : 'post',
+         data : {use:use},
+         dataType : 'json',
+         success : function(data) {
+            console.log(data);
+            var List="";
+            if(use==1){
+               List+="<tr><th class='allinfo'>코드</th><th class='allinfo'>거래처명</th><th class='allinfo'>사업자(주민)번호</th><th class='allinfo'>대표자명</th><th class='allinfo'>업태</th><th class='allinfo'>유형</th><th class='allinfo'>사용여부</th></tr>";
+                for ( var i in data.aList) {
+                   List+="<tr class='success'>";
+                   List+="<td class='allinfo'>" + data.aList[i].cl_code + "</td>";
+                   List+="<td class='allinfo'>" + data.aList[i].cl_name + "</td>";
+                   List+="<td class='allinfo'>" + data.aList[i].cl_comnum + "</td>";
+                    List+="<td class='allinfo'>" + data.aList[i].cl_ceo + "</td>";
+                   List+="<td class='allinfo'>" + data.aList[i].cl_kind + "</td>";
+                   List+="<td class='allinfo'>" + data.aList[i].cl_kind3 + "</td>";
+                   List+="<td class='allinfo'><button onclick='trensCom("+0+","+data.aList[i].cl_code+")'>비활성화</button></td>"; 
+                   List+="</tr>";
+                }
+               
+            }else{
+               
+               List+="<tr><th class='allinfo'>코드</th><th class='allinfo'>거래처명</th><th class='allinfo'>사업자(주민)번호</th><th class='allinfo'>대표자명</th><th class='allinfo'>업태</th><th class='allinfo'>유형</th><th class='allinfo'>사용여부</th></tr>";
+                for ( var i in data.aList) {
+                   List+="<tr class='success'>";
+                   List+="<input id="+data.aList[i].cl_code+" type='text' name='reportChkBxRow' value="+data.aList[i].cl_code+" hidden='true'>";
+                   List+="<td class='allinfo'>" + data.aList[i].cl_code + "</td>";
+                   List+="<td class='allinfo'>" + data.aList[i].cl_name + "</td>";
+                   List+="<td class='allinfo'>" + data.aList[i].cl_comnum + "</td>";
+                    List+="<td class='allinfo'>" + data.aList[i].cl_ceo + "</td>";
+                   List+="<td class='allinfo'>" + data.aList[i].cl_kind + "</td>";
+                   List+="<td class='allinfo'>" + data.aList[i].cl_kind3 + "</td>";
+                   List+="<td class='allinfo'><button onclick='trensCom("+1+","+data.aList[i].cl_code+")'>활성화</button></td>";
+                   List+="</tr>";
+                }
+            }
                  $("#Tbody").html(List);
                  $("input").html("");
-			},
-			error : function(error) {
-				console.log(error);
-			}
-		});
-		 }
+         },
+         error : function(error) {
+            console.log(error);
+         }
+      });
+       }
 
-	});
+   });
 
-	$("#codesearch").click(function() {
-		 var use = "";
-		 $("input[name='use']:checked").each(function() {
-		     use=($(this).attr('value'));
-		     
-		 	});
-		 		 
-		 		 console.log(use);
-		 		 
-		var code = $("#code").val();
-		console.log(code);
-		 if(use==null){
-			 alert("사용여부를 체크해주세요");
-		 }else{
-						$.ajax({
-									url : '/erp/rest/Account/searchcode',
-									type : 'post',
-									data : {code:code,use:use},
-									dataType : 'json',
-									success : function(data) {
-									
-										console.log(data);
-										var List="";
-										if(use==1){
-											List+="<tr><th class='allinfo'>코드</th><th class='allinfo'>거래처명</th><th class='allinfo'>사업자(주민)번호</th><th class='allinfo'>대표자명</th><th class='allinfo'>업태</th><th class='allinfo'>유형</th><th class='allinfo'>사용여부</th></tr>";
-						    				for ( var i in data.aList) {
-						    					List+="<tr class='success'>";
-						    					List+="<input id="+data.aList[i].cl_code+" type='text' name='reportChkBxRow' value="+data.aList[i].cl_code+" hidden='true'>";
-						    					List+="<td class='allinfo'>" + data.aList[i].cl_code + "</td>";
-						    					List+="<td class='allinfo'>" + data.aList[i].cl_name + "</td>";
-						    					List+="<td class='allinfo'>" + data.aList[i].cl_comnum + "</td>";
-						    				    List+="<td class='allinfo'>" + data.aList[i].cl_ceo + "</td>";
-						    					List+="<td class='allinfo'>" + data.aList[i].cl_kind + "</td>";
-						    					List+="<td class='allinfo'>" + data.aList[i].cl_kind3 + "</td>";
-						    					List+="<td class='allinfo'><button onclick='trensCom("+0+","+data.aList[i].cl_code+")'>사용안함</button></td>";
-						    					List+="</tr>";
-						    				}
-											
-										}else{
-											
-											List+="<tr><th class='allinfo'>코드</th><th class='allinfo'>거래처명</th><th class='allinfo'>사업자(주민)번호</th><th class='allinfo'>대표자명</th><th class='allinfo'>업태</th><th class='allinfo'>유형</th><th class='allinfo'>사용여부</th></tr>";
-						    				for ( var i in data.aList) {
-						    					List+="<tr class='success'>";
-						    					List+="<input id="+data.aList[i].cl_code+" type='text' name='reportChkBxRow' value="+data.aList[i].cl_code+" hidden='true'>";
-						    					List+="<td class='allinfo'>" + data.aList[i].cl_code + "</td>";
-						    					List+="<td class='allinfo'>" + data.aList[i].cl_name + "</td>";
-						    					List+="<td class='allinfo'>" + data.aList[i].cl_comnum + "</td>";
-						    				    List+="<td class='allinfo'>" + data.aList[i].cl_ceo + "</td>";
-						    					List+="<td class='allinfo'>" + data.aList[i].cl_kind + "</td>";
-						    					List+="<td class='allinfo'>" + data.aList[i].cl_kind3 + "</td>";
-						    					List+="<td class='allinfo'><button onclick='trensCom("+1+","+data.aList[i].cl_code+")'>사용</button></td>";
-						    					List+="</tr>";
-						    				}
-										}
-						                 $("#Tbody").html(List);
-									 },
-									error : function(error) {
-										console.log(error);
-									}
-								});
-		 }
-					});  
-	
-	$("#insertcomlist").click(function() {
-						var obj = $("#comInfo").serialize();
-						$.ajax({
-									url : '/erp/rest/Account/insertcomlist',
-									type : 'post',
-									data : obj,
-									dataType : 'json',
-									success : function(data) {
-										console.log(data);
-										var List="";
-										List+="<tr><th class='allinfo'>코드</th><th class='allinfo'>거래처명</th><th class='allinfo'>사업자(주민)번호</th><th class='allinfo'>대표자명</th><th class='allinfo'>업태</th><th class='allinfo'>유형</th><th class='allinfo'>사용여부</th></tr>";
-					    				for ( var i in data.aList) {
-					    					List+="<tr class='success'>";
-					    					List+="<input id="+data.aList[i].cl_code+" type='text' name='reportChkBxRow' value="+data.aList[i].cl_code+" hidden='true'>";
-					    					List+="<td class='allinfo'>" + data.aList[i].cl_code + "</td>";
-					    					List+="<td class='allinfo'>" + data.aList[i].cl_name + "</td>";
-					    					List+="<td class='allinfo'>" + data.aList[i].cl_comnum + "</td>";
-					    				    List+="<td class='allinfo'>" + data.aList[i].cl_ceo + "</td>";
-					    					List+="<td class='allinfo'>" + data.aList[i].cl_kind + "</td>";
-					    					List+="<td class='allinfo'>" + data.aList[i].cl_kind3 + "</td>";
-					    					List+="<td class='allinfo'><button onclick='trensCom("+0+","+data.aList[i].cl_code+")'>사용안함</button></td>";
-					    					List+="</tr>";
-					    				}
-						                 $("#Tbody").html(List);
-						                 $("input").val("");
-						                 $("textarea").val("");
-									},
-									error : function(error) {
-										console.log(error);
-									}
-								});
-					});
-	
-	function trensCom(use,code){
-		
-		console.log(code);
-		
-	     		$.ajax({
-	     			url:'/erp/rest/Account/trensCom',
-	     			type:'post',
-	     			traditional : true,
-	     			data:'CODE='+code+'&USE='+use,
-	     			datatype:'json',
-	     			success:function(data){
-	     				console.log(data);
-	     				var size=data.aList.length;
-	     				console.log(size);
-	     				var List="";
-	     				if(size>=1 && data.aList[0].cl_status=='0'){
-	     					
-	    				List+="<tr><th class='allinfo'>코드</th><th class='allinfo'>거래처명</th><th class='allinfo'>사업자(주민)번호</th><th class='allinfo'>대표자명</th><th class='allinfo'>업태</th><th class='allinfo'>유형</th><th class='allinfo'>사용여부</th></tr>";
-	    				for ( var i in data.aList) {
-	    					List+="<tr class='success'>";
-	    					List+="<input id="+data.aList[i].cl_code+" type='text' name='reportChkBxRow' value="+data.aList[i].cl_code+" hidden='true'>";
-	    					List+="<td class='allinfo'>" + data.aList[i].cl_code + "</td>";
-	    					List+="<td class='allinfo'>" + data.aList[i].cl_name + "</td>";
-	    					List+="<td class='allinfo'>" + data.aList[i].cl_comnum + "</td>";
-	    				    List+="<td class='allinfo'>" + data.aList[i].cl_ceo + "</td>";
-	    					List+="<td class='allinfo'>" + data.aList[i].cl_kind + "</td>";
-	    					List+="<td class='allinfo'>" + data.aList[i].cl_kind3 + "</td>";
-	    					List+="<td class='allinfo'><button onclick='trensCom("+1+","+data.aList[i].cl_code+")'>사용</button></td>";
-	    					List+="</tr>";
-	    				}
-	     				}else{
-	     					
-	    				List+="<tr><th class='allinfo'>코드</th><th class='allinfo'>거래처명</th><th class='allinfo'>사업자(주민)번호</th><th class='allinfo'>대표자명</th><th class='allinfo'>업태</th><th class='allinfo'>유형</th><th class='allinfo'>사용여부</th></tr>";
-	    				for ( var i in data.aList) {
-	    					List+="<tr class='success'>";
-	    					List+="<input id="+data.aList[i].cl_code+" type='text' name='reportChkBxRow' value="+data.aList[i].cl_code+" hidden='true'>";
-	    					List+="<td class='allinfo'>" + data.aList[i].cl_code + "</td>";
-	    					List+="<td class='allinfo'>" + data.aList[i].cl_name + "</td>";
-	    					List+="<td class='allinfo'>" + data.aList[i].cl_comnum + "</td>";
-	    				    List+="<td class='allinfo'>" + data.aList[i].cl_ceo + "</td>";
-	    					List+="<td class='allinfo'>" + data.aList[i].cl_kind + "</td>";
-	    					List+="<td class='allinfo'>" + data.aList[i].cl_kind3 + "</td>";
-	    					List+="<td class='allinfo'><button onclick='trensCom("+0+","+data.aList[i].cl_code+")'>사용안함</button></td>";
-	    					List+="</tr>";
-	    				}
-	     				}
-	                     $("#Tbody").html(List);
-		                 
-	     			},
-	     			error:function(error){
-	     				console.log(error);
-	     			}
-	     			
-	     		});
-	     	
-	};
-	
+   $("#codesearch").click(function() {
+       var use = "";
+       $("input[name='use']:checked").each(function() {
+           use=($(this).attr('value'));
+           
+          });
+              
+              console.log(use);
+              
+      var code = $("#code").val();
+      console.log(code);
+       if(use==null){
+          alert("사용여부를 체크해주세요");
+       }else{
+                  $.ajax({
+                           url : '/erp/rest/Account/searchcode',
+                           type : 'post',
+                           data : {code:code,use:use},
+                           dataType : 'json',
+                           success : function(data) {
+                           
+                              console.log(data);
+                              var List="";
+                              if(use==1){
+                                 List+="<tr><th class='allinfo'>코드</th><th class='allinfo'>거래처명</th><th class='allinfo'>사업자(주민)번호</th><th class='allinfo'>대표자명</th><th class='allinfo'>업태</th><th class='allinfo'>유형</th><th class='allinfo'>사용여부</th></tr>";
+                                  for ( var i in data.aList) {
+                                     List+="<tr class='success'>";
+                                     List+="<input id="+data.aList[i].cl_code+" type='text' name='reportChkBxRow' value="+data.aList[i].cl_code+" hidden='true'>";
+                                     List+="<td class='allinfo'>" + data.aList[i].cl_code + "</td>";
+                                     List+="<td class='allinfo'>" + data.aList[i].cl_name + "</td>";
+                                     List+="<td class='allinfo'>" + data.aList[i].cl_comnum + "</td>";
+                                      List+="<td class='allinfo'>" + data.aList[i].cl_ceo + "</td>";
+                                     List+="<td class='allinfo'>" + data.aList[i].cl_kind + "</td>";
+                                     List+="<td class='allinfo'>" + data.aList[i].cl_kind3 + "</td>";
+                                     List+="<td class='allinfo'><button onclick='trensCom("+0+","+data.aList[i].cl_code+")'>비활성화</button></td>";
+                                     List+="</tr>";
+                                  }
+                                 
+                              }else{
+                                 
+                                 List+="<tr><th class='allinfo'>코드</th><th class='allinfo'>거래처명</th><th class='allinfo'>사업자(주민)번호</th><th class='allinfo'>대표자명</th><th class='allinfo'>업태</th><th class='allinfo'>유형</th><th class='allinfo'>사용여부</th></tr>";
+                                  for ( var i in data.aList) {
+                                     List+="<tr class='success'>";
+                                     List+="<input id="+data.aList[i].cl_code+" type='text' name='reportChkBxRow' value="+data.aList[i].cl_code+" hidden='true'>";
+                                     List+="<td class='allinfo'>" + data.aList[i].cl_code + "</td>";
+                                     List+="<td class='allinfo'>" + data.aList[i].cl_name + "</td>";
+                                     List+="<td class='allinfo'>" + data.aList[i].cl_comnum + "</td>";
+                                      List+="<td class='allinfo'>" + data.aList[i].cl_ceo + "</td>";
+                                     List+="<td class='allinfo'>" + data.aList[i].cl_kind + "</td>";
+                                     List+="<td class='allinfo'>" + data.aList[i].cl_kind3 + "</td>";
+                                     List+="<td class='allinfo'><button onclick='trensCom("+1+","+data.aList[i].cl_code+")'>활성화</button></td>";
+                                     List+="</tr>";
+                                  }
+                              }
+                                   $("#Tbody").html(List);
+                            },
+                           error : function(error) {
+                              console.log(error);
+                           }
+                        });
+       }
+               });  
+   
+   $("#insertcomlist").click(function() {
+                  var obj = $("#comInfo").serialize();
+                  $.ajax({
+                           url : '/erp/rest/Account/insertcomlist',
+                           type : 'post',
+                           data : obj,
+                           dataType : 'json',
+                           success : function(data) {
+                              console.log(data);
+                              var List="";
+                              List+="<tr><th class='allinfo'>코드</th><th class='allinfo'>거래처명</th><th class='allinfo'>사업자(주민)번호</th><th class='allinfo'>대표자명</th><th class='allinfo'>업태</th><th class='allinfo'>유형</th><th class='allinfo'>사용여부</th></tr>";
+                               for ( var i in data.aList) {
+                                  List+="<tr class='success'>";
+                                  List+="<input id="+data.aList[i].cl_code+" type='text' name='reportChkBxRow' value="+data.aList[i].cl_code+" hidden='true'>";
+                                  List+="<td class='allinfo'>" + data.aList[i].cl_code + "</td>";
+                                  List+="<td class='allinfo'>" + data.aList[i].cl_name + "</td>";
+                                  List+="<td class='allinfo'>" + data.aList[i].cl_comnum + "</td>";
+                                   List+="<td class='allinfo'>" + data.aList[i].cl_ceo + "</td>";
+                                  List+="<td class='allinfo'>" + data.aList[i].cl_kind + "</td>";
+                                  List+="<td class='allinfo'>" + data.aList[i].cl_kind3 + "</td>";
+                                  List+="<td class='allinfo'><button onclick='trensCom("+0+","+data.aList[i].cl_code+")'>비활성화</button></td>";
+                                  List+="</tr>";
+                               }
+                                   $("#Tbody").html(List);
+                                   $("input").val("");
+                                   $("textarea").val("");
+                           },
+                           error : function(error) {
+                              console.log(error);
+                           }
+                        });
+               });
+   
+   function trensCom(use,code){
+      
+      console.log(code);
+      
+              $.ajax({
+                 url:'/erp/rest/Account/trensCom',
+                 type:'post',
+                 traditional : true,
+                 data:'CODE='+code+'&USE='+use,
+                 datatype:'json',
+                 success:function(data){
+                    console.log(data);
+                    var size=data.aList.length;
+                    console.log(size);
+                    var List="";
+                    if(size>=1 && data.aList[0].cl_status=='0'){
+                       
+                   List+="<tr><th class='allinfo'>코드</th><th class='allinfo'>거래처명</th><th class='allinfo'>사업자(주민)번호</th><th class='allinfo'>대표자명</th><th class='allinfo'>업태</th><th class='allinfo'>유형</th><th class='allinfo'>사용여부</th></tr>";
+                   for ( var i in data.aList) {
+                      List+="<tr class='success'>";
+                      List+="<input id="+data.aList[i].cl_code+" type='text' name='reportChkBxRow' value="+data.aList[i].cl_code+" hidden='true'>";
+                      List+="<td class='allinfo'>" + data.aList[i].cl_code + "</td>";
+                      List+="<td class='allinfo'>" + data.aList[i].cl_name + "</td>";
+                      List+="<td class='allinfo'>" + data.aList[i].cl_comnum + "</td>";
+                       List+="<td class='allinfo'>" + data.aList[i].cl_ceo + "</td>";
+                      List+="<td class='allinfo'>" + data.aList[i].cl_kind + "</td>";
+                      List+="<td class='allinfo'>" + data.aList[i].cl_kind3 + "</td>";
+                      List+="<td class='allinfo'><button onclick='trensCom("+1+","+data.aList[i].cl_code+")'>활성화</button></td>";
+                      List+="</tr>";
+                   }
+                    }else{
+                       
+                   List+="<tr><th class='allinfo'>코드</th><th class='allinfo'>거래처명</th><th class='allinfo'>사업자(주민)번호</th><th class='allinfo'>대표자명</th><th class='allinfo'>업태</th><th class='allinfo'>유형</th><th class='allinfo'>사용여부</th></tr>";
+                   for ( var i in data.aList) {
+                      List+="<tr class='success'>";
+                      List+="<input id="+data.aList[i].cl_code+" type='text' name='reportChkBxRow' value="+data.aList[i].cl_code+" hidden='true'>";
+                      List+="<td class='allinfo'>" + data.aList[i].cl_code + "</td>";
+                      List+="<td class='allinfo'>" + data.aList[i].cl_name + "</td>";
+                      List+="<td class='allinfo'>" + data.aList[i].cl_comnum + "</td>";
+                       List+="<td class='allinfo'>" + data.aList[i].cl_ceo + "</td>";
+                      List+="<td class='allinfo'>" + data.aList[i].cl_kind + "</td>";
+                      List+="<td class='allinfo'>" + data.aList[i].cl_kind3 + "</td>";
+                      List+="<td class='allinfo'><button onclick='trensCom("+0+","+data.aList[i].cl_code+")'>비활성화</button></td>";
+                      List+="</tr>";
+                   }
+                    }
+                        $("#Tbody").html(List);
+                       
+                 },
+                 error:function(error){
+                    console.log(error);
+                 }
+                 
+              });
+           
+   };
+   
 </script>
 </html>

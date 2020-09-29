@@ -50,7 +50,7 @@ ${msg}
                      	<th>담당자</th>
                     	<th><input type="text" name="p_writer"></th>
                     	<th>거래처</th>
-                     	<th><input type="text" name="p_clcode"></th>
+                     	<th><input id="clcode" type="text" name="p_clcode"><button type="button" onclick="window.open('/erp/home/comInfo','comInfo','width=550,height=700')">검색</button></th>
                      	<th>구매일</th>
                      	<th><input type="date" name="p_day" min="2000-01-01" max="2030-12-31" style="width: 161px;"></th>
                   	</tr>
@@ -73,7 +73,7 @@ ${msg}
 						<tr>
 							<th><input type="checkbox" id="allCheck"></th>
                      		<th>상품명</th>
-                     		<th>품목코드</th>
+                     		<th>상품코드</th>
                      		<th>수량</th>
                      		<th>단가</th>
                      		<th>합계</th>
@@ -83,12 +83,7 @@ ${msg}
 						<tr>
 							<td><input type="checkbox" name="each_check" class="each"></td>
                      		<td><input type="text" name="p_name"></td>
-                     		<!-- <td><input type="text" name="p_itcode"></td> -->
-                     		<td>
-                     			<select>
-                     				<option value=""></option>
-                     			</select>
-                     		</td>
+                     		<td><input type="text" name="p_itcode"></td>
                      		<td><input type="number" min="1" name="p_amount"></td>
                      		<td><input type="text" name="p_unlit"></td>
                      		<td><input type="text" name="p_budget"></td>
@@ -110,7 +105,15 @@ ${msg}
 	</div>
 	
 	  <script type="text/javascript">
-	  
+	  function setChildValue(data) {
+		   console.log(data)
+		   for(var i in data.aList){ 
+		   var clcode=data.aList[i].cl_code;
+		   }
+		   
+		   $("#clcode").val(clcode);
+		};
+		
 	 $(document).ready(function(){
 		 $('.addList').click(function(){
 			 $('#tbody').append('<tr><td><input type="checkbox" name="each_check" class="each"></td><td><input type="text" name="p_name"></td><td><input type="text" name="p_itcode"></td><td><input type="number" min="1" name="p_amount"></td><td><input type="text" name="p_unlit"></td><td><input type="text" name="p_budget"></td><td><input type="button" value="삭제" onclick="javascript:thisRowDel(this);"></td></tr>');
@@ -267,29 +270,18 @@ ${msg}
       });
       
       $("#stock").click(function(){
-		  $.ajax({
-			  url:"/erp/rest/purchase/getstocklist",
-			  type: "get",
-			  dataType: "json",
-			  success: function(data){
-				  console.log(data);
-				  var str="";
-				  str+="<tr><th>품목코드</th><th>날짜</th><th>수량</th><th>가격</th><th>회사</th><tr>";
-				  for(var i in data.sList){
-				  	str+="<tr><td>"+data.sList[i].ie_itcode+"</td>";
-				  	str+="<td>"+data.sList[i].ie_date+"</td>";
-				  	str+="<td>"+data.sList[i].ie_qty+"</td>";
-				  	str+="<td>"+data.sList[i].ie_price+"</td>";
-				  	str+="<td>"+data.sList[i].ie_cpcode+"</td></tr>";
-				  }
-				  $('#list').html(str);
-			  },
-			  error: function(err){
-				  console.log(err);
-			  }
-		  })
-  }) 
-      
+    	  $.ajax({
+    		  url: "/erp/stock/getbyitemstocklist",
+    		  type: "post",
+    		  dataType: "json",
+    		  success: function(data){
+    			  console.log(data);
+    		  },
+    		  error: function(err){
+    			  console.log(err);
+    		  }
+    	  })
+      })
      
    </script>
 </body>

@@ -104,7 +104,7 @@ a{
    $("#puchaseAppvalInfo").click(function(){
 	   $.ajax({
 		   type:'get',
-		   url:' /erp/Purchase/approvalInfo',
+		   url:' /erp/Purchase/purchaseApprovalInfo',
 		   dataType: 'html',
 		   success: function(data){
 			   $("#description").html(data);

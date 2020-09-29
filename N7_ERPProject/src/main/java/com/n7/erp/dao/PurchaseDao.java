@@ -8,9 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
-import com.n7.erp.bean.ApprovalDocu;
 import com.n7.erp.bean.IePort;
-import com.n7.erp.bean.ItemCode;
 import com.n7.erp.bean.ps.approvalLine;
 import com.n7.erp.bean.ps.A_company;
 import com.n7.erp.bean.ps.Purchase;
@@ -68,10 +66,18 @@ public interface PurchaseDao {
 
 	List<Return> rSearch(@Param("search") String search, @Param("choice") String choice);
 
-	List<IePort> stocklist(String cCode);
+	@Select("SELECT COUNT(*) FROM O_PURCHASECOMMOM")
+	int getListCount();
 
-	List<ItemCode> getstocklist(String cCode);
+	PurchaseApproval pRequest(@Param("p_documentcode") String p_documentcode, @Param("cCode") String cCode);
 
-	@Select("SELECT * FROM APPROVALDOCU")
-	List<ApprovalDocu> getApprovalInfo();
+	List<PurchaseApproval> pListRequest(@Param("p_documentcode") String p_documentcode, @Param("cCode") String cCode);
+
+	com.n7.erp.bean.ps.approvalLine getApprovalInfo(String code);
+
+	PurchaseApproval pRequest2(@Param("p_documentcode") String p_documentcode, @Param("cCode") String cCode);
+
+	List<PurchaseApproval> pListRequest2(@Param("p_documentcode") String p_documentcode, @Param("cCode") String cCode);
+
+
 }

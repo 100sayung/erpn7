@@ -117,3 +117,39 @@
 9월 28, 2020 14:50:38.788 [3052:14184:0928/145038.788:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
 9월 28, 2020 15:05:04.475 [12488:2724:0928/150504.474:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
 9월 28, 2020 15:46:03.971 [12508:7280:0928/154603.970:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 28, 2020 17:45:20.914 [3164:11400:0928/174520.913:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 28, 2020 17:59:20.823 [12088:7576:0928/175920.822:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 28, 2020 18:06:42.219 [12016:12440:0928/180642.219:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 28, 2020 18:10:37.409 [12432:11236:0928/181037.408:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+
+9월 28, 2020 18:14:07.513 NEW SESSION
+9월 28, 2020 18:14:07.513 [10100:10332:0928/181407.511:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 28, 2020 18:16:21.406 [4972:3352:0928/181621.406:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 28, 2020 18:23:59.684 [4472:32:0928/182359.684:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 28, 2020 18:27:44.909 [1204:1136:0928/182744.908:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+
+9월 28, 2020 18:34:16.719 NEW SESSION
+9월 28, 2020 18:34:16.719 [15688:16048:0928/183416.717:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+
+9월 28, 2020 21:49:54.158 NEW SESSION
+9월 28, 2020 21:49:54.158 [6612:9404:0928/214954.155:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+
+9월 29, 2020 10:48:59.525 NEW SESSION
+9월 29, 2020 10:48:59.525 [13792:15024:0929/104859.497:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 29, 2020 11:01:19.349 [7492:13456:0929/110119.348:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 29, 2020 11:03:51.297 [12892:3708:0929/110351.297:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
+9월 29, 2020 11:57:25.556 [12892:1932:0929/115725.555:ERROR:socket_stream.cc(219)] Closing stream with result -2
+9월 29, 2020 12:00:21.821 [12892:1932:0929/120021.821:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+9월 29, 2020 14:05:07.729 [12892:1932:0929/140507.728:ERROR:socket_stream.cc(219)] Closing stream with result -2
+9월 29, 2020 14:16:14.553 [12892:1932:0929/141614.553:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+9월 29, 2020 14:19:06.838 [12892:1932:0929/141906.838:ERROR:socket_stream.cc(219)] Closing stream with result -2
+9월 29, 2020 14:19:43.523 [12892:1932:0929/141943.522:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+9월 29, 2020 14:26:24.513 [12892:1932:0929/142624.513:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+9월 29, 2020 14:26:47.77 [12892:1932:0929/142647.076:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+9월 29, 2020 14:27:28.675 [12892:1932:0929/142728.675:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+9월 29, 2020 14:29:18.695 [12892:1932:0929/142918.695:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+9월 29, 2020 14:32:49.817 [12892:1932:0929/143249.817:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+9월 29, 2020 14:37:12.50 [12892:1932:0929/143712.050:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -105
+
+9월 29, 2020 15:59:07.461 NEW SESSION
+9월 29, 2020 15:59:07.461 [14228:16760:0929/155907.457:ERROR:media_history_store.cc(363)] Failed to create or update the media history store.
