@@ -684,18 +684,11 @@ public class AccountMM {
 			HttpSession session) {
 		mav = new ModelAndView();
 		String view = null;
-<<<<<<< HEAD
-		String cCode = (String) session.getAttribute("cCode");
-=======
->>>>>>> origin/dduddu
 
 		ac.setJ_none(req.getParameter("rs_apcode0"));
 		ac.setJ_ntwo(req.getParameter("rs_apcode1"));
 		ac.setJ_nthr(req.getParameter("rs_apcode2"));
-<<<<<<< HEAD
-=======
 		ac.setJ_ccode((String) session.getAttribute("cCode"));
->>>>>>> origin/dduddu
 //if (ac.getJ_grade().equals("0")) {
 		ac.setJ_grade("1");
 //} 
@@ -718,13 +711,8 @@ public class AccountMM {
 		ap.setAp_toapprover(ac.getJ_ntwo()); // 결재받을사람
 		ap.setAp_status((ac.getJ_grade())); // 결재상태
 
-<<<<<<< HEAD
-		boolean sa = aDao.acSign(ac, cCode); // 결재사람1,2,3 넣는거 업데이트
-		boolean sp = aDao.apCart2(ap, cCode); // 결재문서 테이블에 인서트
-=======
 		boolean sa = aDao.acSign(ac); // 결재사람1,2,3 넣는거 업데이트
 		boolean sp = aDao.apCart2(ap); // 결재문서 테이블에 인서트
->>>>>>> origin/dduddu
 
 		if (sa && sp) {
 			try {
@@ -736,21 +724,13 @@ public class AccountMM {
 				out.println("<script>window.opener.location.reload();</script>");
 				out.flush();
 				out.close();
-<<<<<<< HEAD
-				mav.setViewName("Account/acPend");
-=======
 				mav.setViewName("Account/acTemporary");
->>>>>>> origin/dduddu
 				System.out.println("결재요청했음");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		} else {
-<<<<<<< HEAD
-			mav.setViewName("Account/acPend");
-=======
 			mav.setViewName("Account/acTemporary");
->>>>>>> origin/dduddu
 			System.out.println("야 결재요청못했다 미안하다..");
 		}
 //mav.setViewName(view);
@@ -764,12 +744,8 @@ public class AccountMM {
 		String view = null;
 		String hrCode = (String) session.getAttribute("hrCode");
 		String cCode = (String) session.getAttribute("cCode");
-<<<<<<< HEAD
-
-=======
 		
 		ac.setJ_ccode(cCode);
->>>>>>> origin/dduddu
 		ac.setJ_none(req.getParameter("rs_apcode0"));
 		ac.setJ_ntwo(req.getParameter("rs_apcode1"));
 		ac.setJ_nthr(req.getParameter("rs_apcode2"));
@@ -793,18 +769,6 @@ public class AccountMM {
 			ap.setAp_status("3");
 		}
 
-<<<<<<< HEAD
-		ap.setAp_docunum(ac.getJ_docunum());
-
-		boolean sa = aDao.acSign2(ac, cCode);
-		boolean sp = aDao.apSign2(ap, cCode);
-
-		if (sa && sp) {
-			view = "Account/acDownlist";
-			System.out.println("결재요청했음");
-		} else {
-			view = "Account/acDownlist";
-=======
 		ap.setAp_ccode(cCode);
 		ap.setAp_docunum(ac.getJ_docunum());
 
@@ -816,7 +780,6 @@ public class AccountMM {
 			System.out.println("결재요청했음");
 		} else {
 			view = "Account/apdownPayment";
->>>>>>> origin/dduddu
 			System.out.println("야 결재요청못했다 미안하다..");
 		}
 		mav.setViewName(view);
@@ -857,19 +820,6 @@ public class AccountMM {
 		if (ac.getJ_reasion() == null || ac.getJ_reasion() == "" || ac.getJ_reasion().equals("사유")) {
 			ac.setJ_reasion("사유없음");
 		}
-<<<<<<< HEAD
-
-		ap.setAp_docunum(ac.getJ_docunum());
-
-		boolean ba = aDao.acBack(ac, cCode);
-		boolean bp = aDao.apBack2(ap.getAp_docunum(), cCode);
-
-		if (ba && bp) {
-			view = "Account/acDownlist";
-			System.out.println("반려요청했음");
-		} else {
-			view = "Account/acDownlist";
-=======
 		
 		ac.setJ_ccode(cCode);
 		
@@ -884,7 +834,6 @@ public class AccountMM {
 			System.out.println("반려요청했음");
 		} else {
 			view = "Account/apdownPayment";
->>>>>>> origin/dduddu
 			System.out.println("야 반려요청못했다 미안하다..");
 		}
 		mav.setViewName(view);
