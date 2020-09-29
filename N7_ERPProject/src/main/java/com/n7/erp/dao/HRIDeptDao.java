@@ -23,7 +23,7 @@ public interface HRIDeptDao {
 	@Insert("INSERT INTO HR_DEPT VALUES(#{HDP_dept},#{HDP_position},#{hdp_ccode}, 0, HR_DEPT_SEQ.nextval, DEFAULT)")
 	boolean deptregistinsert(Department dept);
 
-	@Select("SELECT * FROM HR_DEPT WHERE HDP_CCODE = #{cCode} ORDER BY HDP_DEPT ASC")
+	@Select("SELECT * FROM HR_DEPT WHERE HDP_CCODE = #{cCode}")
 	ArrayList<Department> deptpayselect(String cCode);
 	
 	@Update("UPDATE HR_DEPT SET HDP_PAY=#{pay} WHERE HDP_NUM=#{dept} AND HDP_CCODE = #{cCode}")
@@ -37,7 +37,7 @@ public interface HRIDeptDao {
 	@Select("SELECT * FROM HR_DEPT WHERE HDP_CCODE = #{cCode}")
 	ArrayList<Department> deptafterselect(String cCode);
 
-	@Select("SELECT * FROM MHR WHERE HC_CCODE=#{cCode} ORDER BY M_NAME ASC")
+	@Select("SELECT * FROM MHR WHERE HC_CCODE=#{cCode}")
 	ArrayList<HR_Card> searchpay(String cCode);
 
 	@Select("SELECT * FROM HR_DEDUCTION WHERE HDD_CCODE = #{cCode}")
@@ -72,7 +72,7 @@ public interface HRIDeptDao {
 
 
 
-	@Select("SELECT HC_ID,M_NAME,HC_DEPT,HC_POSITION,HDP_PAY,HDD_AMOUNT,HC_HRCODE FROM HR_CD_D ORDER BY HC_DEPT ASC")
+	@Select("SELECT HC_ID,M_NAME,HC_DEPT,HC_POSITION,HDP_PAY,HDD_AMOUNT,HC_HRCODE FROM HR_CD_D")
 	ArrayList<ViewPay> searchwages();
 
 	HR_Card detailpay(String hc);
@@ -89,7 +89,7 @@ public interface HRIDeptDao {
 
 	String findpay(ViewPay pay);
 
-	@Insert("INSERT INTO HR_PAYROLL VALUES(#{HP_PAYDATE},#{HC_CCODE},#{HC_HRCODE},#{HP_TAX},#{HP_INCEN},#{HP_INSURANCE},#{HP_REALMONEY})")
+	@Insert("INSERT INTO HR_PAYROLL VALUES(#{HP_PAYDATE},#{HP_CCODE},#{HC_HRCODE},#{HP_TAX},#{HP_INCEN},#{HP_INSURANCE},#{HP_REALMONEY})")
 	boolean insertpay(ViewPay pay);
 
 	boolean updatepay(ViewPay pay);

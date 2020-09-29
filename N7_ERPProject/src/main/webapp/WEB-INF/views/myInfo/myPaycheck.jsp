@@ -10,8 +10,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
-<link href="/erp/css/hrCss.css" rel="stylesheet" type="text/css"
-	media="all" />	
 <style>
 #header {
 	width: 100%;
@@ -49,12 +47,9 @@ a {
 ul {
 	list-style: none;
 }
-.leftmoney{
-	text-align: right;
-}
 </style>
 </head>
-<body onload="build();">
+<body>
 	<div id="header">
 		<div id="logo">
 			<h1>
@@ -78,9 +73,8 @@ ul {
 			<li><a href="/erp/myinfo/mydocument">나의 결재함</a></li>
 		</ul>
 	</div>
-
 	<h1> 급여 명세서 보기 </h1>
-	<table style="border: 1px solid black; width: 800px; height: 100px; text-align: center;">
+	<table style="border: 1px solid black; width: 800px; height: 100px;">
 		<tr>
 			<td>사원코드 : </td>
 			<td>${paycheck.hc_hrcode}</td>
@@ -91,18 +85,22 @@ ul {
 		</tr>
 		<tr>
 			<td>부서 : </td>
-			<td>${paycheck.hc_dept}</td>
-			<td>직급 : </td>
 			<td>${paycheck.hc_position}</td>
+			<td>직급</td>
+			<td>${paycheck.hc_dept}</td>
 			<td>급여일</td>
 			<td><input type="month" id="month" name="month"></td>
 		</tr>
 	</table>	
 	<div id="paycheckpage">
 		
+
 	</div>
+
 	<script src=/erp/js/menu.js></script> <!-- 메뉴Ajax로 출력 -->
 	<script>
+
+	
 		$("#month").change(function(){
 			var month=$("#month").val();
 			console.log(month);
@@ -113,37 +111,33 @@ ul {
 				data:{month : month},
 				dataType:'JSON',
 				success:function(data){
-					if(data!="1"){
 					console.log(data);
 					var provide=Number(data.HDP_PAY)+Number(data.HP_INCEN);
 					var ince=Number(data.HP_INSURANCE)+Number(data.HP_TAX);
 					var receive=provide-ince;
 					var str='';
-						str+="<table style='border:1px solid black;width:800px;height:300px; text-align: center;'><tr>"
+						str+="<table style='border:1px solid black;width:800px;height:300px;'><tr>"
 							+"<td>지급내역<td>"
 							+"<td>지급액<td>"
 							+"<td>공제내역<td>"
 							+"<td>공제액<td></tr>"
 							+"<tr><td>기본급<td>"
-							+"<td class='leftmoney'>"+data.HDP_PAY+"<td>"
+							+"<td>"+data.HDP_PAY+"<td>"
 							+"<td>보험<td>"
-							+"<td class='leftmoney'>"+data.HP_INSURANCE+"<td></tr>"
+							+"<td>"+data.HP_INSURANCE+"<td></tr>"
 							+"<tr><td>인센티브<td>"
-							+"<td class='leftmoney'>"+data.HP_INCEN+"<td>"
+							+"<td>"+data.HP_INCEN+"<td>"
 							+"<td>소득세<td>"
-							+"<td class='leftmoney'>"+data.HP_TAX+"<td></tr>"
+							+"<td>"+data.HP_TAX+"<td></tr>"
 							+"<tr><td><td>"
 							+"<td><td>"
 							+"<td>공제액계<td>"
-							+"<td class='leftmoney'>"+ince+"<td></tr>"
+							+"<td>"+ince+"<td></tr>"
 							+"<tr><td>급여 계<td>"
-							+"<td class='leftmoney'>"+provide+"<td>"
+							+"<td>"+provide+"<td>"
 							+"<td>실지급액<td>"
-							+"<td class='leftmoney'>"+receive+"<td></tr>"
+							+"<td>"+receive+"<td></tr>"
 					$("#paycheckpage").html(str);
-					}else if(data=="1"){
-						$("#paycheckpage").html("<h1>선택한 날짜에는 받은 급여가 없습니다.</h1>");
-					}
 				},
 				errorr:function(err){
 					console.log(err);
@@ -152,5 +146,6 @@ ul {
 			});
 		});	
 	</script>
+	
 </body>
 </html>

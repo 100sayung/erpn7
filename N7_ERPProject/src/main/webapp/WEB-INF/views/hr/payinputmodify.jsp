@@ -66,7 +66,7 @@ tr {
 
 </style>
 </head>
-<body onload="build();">
+<body>
 	<div id="header">
 		<div id="logo">
 			<h1>
@@ -90,10 +90,10 @@ tr {
 
 			<li id="showMenu2">근태 관리
 				<ul id="smallMenu2" style="display: none;">
-					<li><a href="/erp/hr/receiptholiday">휴가 조회</a></li>
-					<li><a href="/erp/hr/attendance">사원 출결 조회</a></li>
-					<li><a href="/erp/hr/employeestatus">근무 조회</a></li>
-					<li><a href="/erp/hr/retiremm">휴/퇴직 관리</a></li>
+					<li><a href="">휴가 접수</a></li>
+					<li><a href="">사원 출결 관리</a></li>
+					<li><a href="">근무 조회</a></li>
+					<li><a href="">휴/퇴직 관리</a></li>
 				</ul>
 			</li>
 			<li id="showMenu3">급여 관리

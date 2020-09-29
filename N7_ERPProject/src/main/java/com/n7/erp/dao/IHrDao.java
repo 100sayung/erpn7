@@ -19,6 +19,7 @@ import com.n7.erp.bean.hr.Career;
 import com.n7.erp.bean.hr.Certification;
 import com.n7.erp.bean.hr.HR_Card;
 import com.n7.erp.bean.hr.Payroll;
+import com.n7.erp.userClass.PagingVO;
 
 public interface IHrDao {
 	@Select("SELECT * FROM HR_CARD WHERE HC_ID = #{m_id}")
@@ -42,7 +43,7 @@ public interface IHrDao {
 	@Select("SELECT M_NAME FROM MHR WHERE HC_HRCODE=#{hap_toapprover}")
 	String getToApprover(String hap_toapprover);
 
-	// HC_CODE 占쏙옙占쎈뻿占쎈퓠 占쎈퉸癰귣��뮉餓ο옙
+	// HC_CODE ���떊�뿉 �빐蹂대뒗以�
 
 	@Select("SELECT C_NAME FROM COMPANY WHERE C_CODE = #{cCode}")
 	String getCName(String cCode);
@@ -114,7 +115,7 @@ public interface IHrDao {
 	void updateRetired(HR_Card hrCard);
 
 	@Select("SELECT HR_CARD.HC_DEPT, HR_CARD.HC_POSITION, HR_CARD.HC_STATUS, MEMBER.M_NAME "
-			+ "FROM HR_CARD INNER JOIN MEMBER ON HR_CARD.HC_ID = MEMBER.M_ID WHERE HC_CCODE = #{cCode} ORDER BY HC_DEPT DESC")
+			+ "FROM HR_CARD INNER JOIN MEMBER ON HR_CARD.HC_ID = MEMBER.M_ID WHERE HC_CCODE = #{cCode} ORDER BY HC_WORK")
 	ArrayList<HR_Card> getEmployeeStatus(String cCode);
 
 	ArrayList<NameHoliday> getEmployeeHoliday(HashMap<String, String> hMap);
@@ -123,7 +124,6 @@ public interface IHrDao {
 
 	boolean checkMemberHrCardCnt(String cCode);
 
-	ArrayList<Member> getNoHrCard(String cCode);
 
 	@Select("SELECT * FROM MEMBER WHERE M_CCODE = #{cCode} AND M_NAME LIKE #{name}")
 	ArrayList<Member> getSearchFromName(HashMap<String, String> hMap);
@@ -153,11 +153,10 @@ public interface IHrDao {
 
 	@Delete("DELETE FROM HR_CERTIFICATION WHERE hct_ccode = #{cCode} AND HCT_NUM = #{num}")
 	void removeCertificationInfo(HashMap<String, String> hMap);
-	
-	@Delete("DELETE FROM HR_ATTENDANCE WHERE HA_CCODE=#{cCode} AND HA_HRCODE=#{hrcode} AND HA_TIME=#{time}")
-	boolean DeleteAttendance(HashMap<String, String> hMap);
-	
-	@Select("SELECT * FROM HR_ATTENDANCE WHERE HA_TIME LIKE '%'||#{day}||'%'")
-	ArrayList<Attendance> getEmployeeAttendanceTwo(String day);
 
+	
+	int countHrCard(String cCode);
+	List<Member> selectHrCard(PagingVO vo);
+	List<Member> selectNoHrCard(PagingVO vo);
+	int countNoHrCard(String cCode);
 }

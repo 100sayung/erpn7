@@ -43,7 +43,7 @@ a {
 #description {
 	float: left;
 	height: 100%;
-	width: 1000px;
+	width: 800px;
 }
 
 ul {
@@ -75,7 +75,7 @@ ul {
 
 			<li id="showMenu2">근태 관리
 				<ul id="smallMenu2" style="display: none;">
-					<li><a href="/erp/hr/receiptholiday">휴가 조회</a></li>
+					<li><a href="/erp/hr/receiptholiday">휴가 접수</a></li>
 					<li><a href="/erp/hr/attendance">사원 출결 관리</a></li>
 					<li><a href="/erp/hr/employeestatus">근무 조회</a></li>
 					<li><a href="/erp/hr/retiremm">휴/퇴직 관리</a></li>
@@ -96,15 +96,135 @@ ul {
 	<input type="text" id="nameSearch" placeholder="이름으로 검색">
 	<button onclick="searchFromName()" class='infobtn' id="nameSearching">검색</button>
 	
-	<div id="container">
-	${hrCard} 
+	<div id="container"></div>
+	<div id="paging">
+	
+	
+	
+	
+	</div>
 	</div>
 	
 	
-	
-	</div>
 	<script src=/erp/js/menu.js></script>
-	<script>
+	<script> 
+	//페이지 변경 스크립트
+ 	hrCardList(1);
+ 	pageNumber(1);
+
+	var currPage = 1;
+	function pageNumber(j){
+		currPage = j;
+		$.ajax({
+			url:"/erp/rest/hr/hrcardpagenumber",
+			dataType:"json",
+			method:"get",
+			success : function(page){
+				console.log(page);
+				var pagecnt = (page/10) + 1;
+				let str = "";
+				for(let i = 1 ; i < pagecnt ; i++){
+					if(i == currPage){
+						str += " &nbsp; ["+ i +"] &nbsp; ";
+					}else{
+						str += " &nbsp; <a href=javascript:paging("+i+")>["+ i +"]</a> &nbsp; ";
+					}
+				}
+				console.log(str);
+				$("#paging").html(str);
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+	}
+
+	function hrCardList(nowPage){
+		console.log("?????????");
+		$.ajax({
+			url:"/erp/rest/hr/hrcardlist",
+			dataType:"json",
+			data:{nowPage : nowPage, cntPerPage : "10"},
+			method:"get",
+			success : function(data){
+				console.log(data);
+				let str = "";
+			 	str = "<table id='table1' border='1' cellspacing='0'>";
+			 	str += "<tr class='infomenu'><td>사진</td><td>이름</td><td>생년월일</td><td>이메일</td><td>수정</td></tr>";
+				for(let i = 0 ; i<data.length ; i++){
+					str += "<td><img style='width:120px; height:90px;' src = '/erp/upload/"+data[i].m_photo+"'></td>";
+					str += "<td>"+data[i].m_name+"</td>";
+					str += "<td>"+data[i].m_birth+"</td>";
+					str += "<td>"+data[i].m_email+"</td>";
+					str += "<td><input type='button' value='수정' class='infobtn' onclick='modifyDetail(\""+data[i].m_id+"\")'></td></tr>";
+				}
+				str += "</table>";
+				$("#container").html(str);
+			}, error : function(err){
+				console.log(err);
+			}	
+		});
+	}
+	function paging(num){
+		pageNumber(num);
+		HrCardList(num);
+	}
+
+	function noHrCardPageNumber(j){
+		currPage = j;
+		$.ajax({
+			url:"/erp/rest/hr/nohrcardpagenumber",
+			dataType:"json",
+			method:"get",
+			success : function(page){
+				console.log(page);
+				var pagecnt = (page/10) + 1;
+				let str = "";
+				for(let i = 1 ; i < pagecnt ; i++){
+					if(i == currPage){
+						str += " &nbsp; ["+ i +"] &nbsp; ";
+					}else{
+						str += " &nbsp; <a href=javascript:noHrCardPaging("+i+")>["+ i +"]</a> &nbsp; ";
+					}
+				}
+				console.log(str);
+				$("#paging").html(str);
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+	}
+
+	function noHrCardHrCardList(nowPage){
+		$.ajax({
+			url:"/erp/rest/hr/nohrcardlist",
+			dataType:"json",
+			data:{nowPage : nowPage, cntPerPage : "10"},
+			method:"get",
+			success : function(data){
+				console.log(data);
+				let str = "";
+			 	str = "<table id='table1' border='1' cellspacing='0'>";
+			 	str += "<tr class='infomenu'><td>사진</td><td>이름</td><td>생년월일</td><td>이메일</td><td>수정</td></tr>";
+				for(let i = 0 ; i<data.length ; i++){
+					str += "<td><img style='width:120px; height:90px;' src = '/erp/upload/"+data[i].m_photo+"'></td>";
+					str += "<td>"+data[i].m_name+"</td>";
+					str += "<td>"+data[i].m_birth+"</td>";
+					str += "<td>"+data[i].m_email+"</td>";
+					str += "<td><input type='button' value='수정' class='infobtn' onclick='modifyDetail(\""+data[i].m_id+"\")'></td></tr>";
+				}
+				str += "</table>";
+				$("#container").html(str);
+			}, error : function(err){
+				console.log(err);
+			}	
+		});
+	}
+	
+	function noHrCardPaging(num){
+		noHrCardPageNumber(num);
+		noHrCardHrCardList(num);
+	}
+	
 	
 	function searchFromName(){
 		$name = $("#nameSearch").val();
@@ -134,17 +254,7 @@ ul {
  	  });
 
   	  function NoHaveHrCard(){
-  		  $.ajax({
-  			 url:"/erp/rest/hr/nohrcard",
-  			 dataType:"text",
-  			 method:"get",
-  			 success : function(data){
-  				 console.log(data);
-  				 $("#container").html(data);
-  			 }, error : function(err){
-  				 console.log(err.responseText);
-  			 }
-  		  });
+  		  noHrCardPaging();
   	  }
   	//09-25 change append <button> id=nameSearching
   	$("#nameSearch").keyup(function(event){

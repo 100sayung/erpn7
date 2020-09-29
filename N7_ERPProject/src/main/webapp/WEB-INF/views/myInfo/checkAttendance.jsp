@@ -42,7 +42,6 @@ a {
 	float: left;
 	height: 100%;
 	width: 800px;
-	margin: 50px 250px;
 }
 
 ul {
@@ -99,8 +98,21 @@ ul {
 		</ul>
 	</div>
 	<div id="description">
-	<div style="float: left;">
-	<table align="center" id="calendar" style="border:1px solid black;width: 400px; height: 300px;">
+	
+	<h1 align="center">현재시각</h1>
+	<h1 align="center" id="clock"></h1><br><br>
+	
+	<div style="align:center;" id="currentStatus"></div>
+	<br>
+	<br>
+	<div id='check'>
+	<span id="in" class="attendance">출근 등록</span>
+	<span id="out" class="attendance">퇴근 등록</span>
+	</div>
+	</div>
+	
+	
+    <table align="center" id="calendar">
         <tr>
             <td><font size=1%; color="#B3B6B3"><label onclick="beforem()" id="before" ></label></font></td>
             <td colspan="5" align="center" id="yearmonth"></td>
@@ -116,24 +128,7 @@ ul {
             <td align="center"><font color=#7ED5E4>토</font></td>
         </tr>
     </table>
-    </div>
-	<div>
-	<h1 align="center">현재시각</h1>
-	<h1 align="center" id="clock"></h1>
-	</div>
-	<br><br><br>
 	
-	<div style="align:center;" id="currentStatus"></div>
-	<br>
-	<br>
-	<div id='check'>
-	<span id="in" class="attendance">출근 등록</span>
-	<span id="out" class="attendance">퇴근 등록</span>
-	</div>
-	
-	
-	
-	</div>
 
 
 	<script src=/erp/js/menu.js></script> <!-- 메뉴Ajax로 출력 -->
