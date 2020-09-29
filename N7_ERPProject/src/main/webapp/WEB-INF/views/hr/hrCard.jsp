@@ -166,7 +166,7 @@ ul {
 	}
 	function paging(num){
 		pageNumber(num);
-		HrCardList(num);
+		hrCardList(num);
 	}
 
 	function noHrCardPageNumber(j){
@@ -202,17 +202,6 @@ ul {
 			method:"get",
 			success : function(data){
 				console.log(data);
-				let str = "";
-			 	str = "<table id='table1' border='1' cellspacing='0'>";
-			 	str += "<tr class='infomenu'><td>사진</td><td>이름</td><td>생년월일</td><td>이메일</td><td>수정</td></tr>";
-				for(let i = 0 ; i<data.length ; i++){
-					str += "<td><img style='width:120px; height:90px;' src = '/erp/upload/"+data[i].m_photo+"'></td>";
-					str += "<td>"+data[i].m_name+"</td>";
-					str += "<td>"+data[i].m_birth+"</td>";
-					str += "<td>"+data[i].m_email+"</td>";
-					str += "<td><input type='button' value='수정' class='infobtn' onclick='modifyDetail(\""+data[i].m_id+"\")'></td></tr>";
-				}
-				str += "</table>";
 				$("#container").html(str);
 			}, error : function(err){
 				console.log(err);
@@ -236,6 +225,17 @@ ul {
 			method:"get",
 			success : function(data){
 				console.log(data);
+				let str = "";
+			 	str = "<table id='table1' border='1' cellspacing='0'>";
+			 	str += "<tr class='infomenu'><td>사진</td><td>이름</td><td>생년월일</td><td>이메일</td><td>수정</td></tr>";
+				for(let i = 0 ; i<data.length ; i++){
+					str += "<td><img style='width:120px; height:90px;' src = '/erp/upload/"+data[i].m_photo+"'></td>";
+					str += "<td>"+data[i].m_name+"</td>";
+					str += "<td>"+data[i].m_birth+"</td>";
+					str += "<td>"+data[i].m_email+"</td>";
+					str += "<td><input type='button' value='수정' class='infobtn' onclick='modifyDetail(\""+data[i].m_id+"\")'></td></tr>";
+				}
+				str += "</table>";
 				$("#container").html(data);
 			}, error : function(err){
 				console.log(err);

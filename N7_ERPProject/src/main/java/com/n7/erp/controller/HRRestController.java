@@ -122,9 +122,8 @@ public class HRRestController {
 	//인사카드 이름 검색 출력
 	@GetMapping(value="/hr/searchfromname",  produces = "application/text; charset=utf8")
 	public String getSearchFromName(HttpSession session, String name) {
-//		String result = hm.getSearchFromName(session, name);
-//		return result;
-		return "test..";
+		String result = hm.getSearchFromName(session, name);
+		return result;
 	}
 	@GetMapping(value="/hr/searchstatusfromname",  produces = "application/text; charset=utf8")
 	public String getSearchStatusFromName(HttpSession session, String name) {

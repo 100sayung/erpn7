@@ -645,6 +645,14 @@ public class HrMM {
 	public List<Member> selectNoHrCard(PagingVO vo){
 		return hDao.selectNoHrCard(vo);
 	}
+
+	public String getSearchFromName(HttpSession session, String name) {
+		HashMap<String, String> hMap= new HashMap<String, String>();
+		hMap.put("cCode", session.getAttribute("cCode").toString());
+		hMap.put("name", name);
+		String result = new Gson().toJson(hDao.getSearchFromName(hMap));
+		return result;
+	}
 	
 	
 }

@@ -6,9 +6,8 @@ public class PagingVO {
    private int nowPage, startPage, endPage, total, cntPerPage, lastPage, start, end;
    private int cntPage = 10;
    private String cCode;
-   
-  
-   
+   public PagingVO() {
+   }
    public PagingVO(int total, int nowPage, int cntPerPage, String cCode) {
 	   setNowPage(nowPage);
 	   setCntPerPage(cntPerPage);

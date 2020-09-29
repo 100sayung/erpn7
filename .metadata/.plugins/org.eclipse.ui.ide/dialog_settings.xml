@@ -113,8 +113,8 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
-			<item value="D:\project\erpn7"/>
 			<item value="J:\erpn7"/>
+			<item value="D:\project\erpn7"/>
 			<item value="J:\erpn7\N7_ERPProject"/>
 			<item value="D:\erpn7\N7_ERPProject"/>
 		</list>
