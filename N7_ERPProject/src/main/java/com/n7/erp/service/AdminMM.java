@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
-<<<<<<< HEAD
 import com.google.gson.JsonElement;
-=======
->>>>>>> origin/JSJ
 import com.n7.erp.bean.Company;
 import com.n7.erp.bean.Member;
 import com.n7.erp.dao.AdminDao;
@@ -21,11 +18,7 @@ public class AdminMM {
 	@Autowired AdminDao aDao;
 	
 
-<<<<<<< HEAD
 	//ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½
-=======
-	//ÆäÀÌÂ¡ Ã³¸® ¸â¹ö
->>>>>>> origin/JSJ
 	public int countMember() {
 		return aDao.countMember();
 	}
@@ -48,7 +41,6 @@ public class AdminMM {
 		return result;
 	}
 
-<<<<<<< HEAD
 	public List<Member> selectCCodeMember(PagingVO vo) {
 		return aDao.selectCCodeMember(vo);
 	}
@@ -57,7 +49,5 @@ public class AdminMM {
 	}
 
 
-=======
->>>>>>> origin/JSJ
 
 }

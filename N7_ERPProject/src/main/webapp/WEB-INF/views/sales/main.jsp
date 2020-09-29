@@ -9,10 +9,7 @@
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link href="/erp/css/default.css" rel="stylesheet" type="text/css"
    media="all" />
-<<<<<<< HEAD
    
-=======
->>>>>>> origin/JSJ
 <style>
 #header {
    width: 100%;
@@ -65,24 +62,11 @@ ul {
             <a href="#">N7 ERP SYSTEM</a>
          </h1>
       </div>
-<<<<<<< HEAD
 		<div id="menu">
 			<ul>
 				<li class="current_page_item"><a href="/erp/myInfo/myInfo" accesskey="4" title="">내 정보</a></li>
 				<ul id="mainmenu">
 		</div>
-=======
-      <div id="menu">
-         <ul>
-            <li><a href="#" accesskey="4" title="">내 정보</a></li>
-            <li><a href="#" accesskey="2" title="">인사 관리</a></li>
-            <li class="current_page_item"><a href="#" accesskey="3" title="">영업 관리</a></li>
-            <li><a href="#" accesskey="5" title="">구매 관리</a></li>
-            <li><a href="#" accesskey="6" title="">자재 관리</a></li>
-            <li><a href="#">회계 관리</a></li>
-         </ul>
-      </div>
->>>>>>> origin/JSJ
    </div>
    <div id="side_menu">
       <ul id="menuList">
@@ -96,14 +80,9 @@ ul {
    <div id="description">
     
    </div>
-<<<<<<< HEAD
    </body>
 <script src=/erp/js/menu.js></script><!-- 메뉴Ajax로 출력 -->
    <script>
-=======
-   <script>
-   
->>>>>>> origin/JSJ
    $('#showMenu1').click(function() {
 
        $.ajax({
@@ -217,21 +196,14 @@ ul {
         });
     });
   
-<<<<<<< HEAD
    var select;
-=======
-    var select;
->>>>>>> origin/JSJ
       $.ajax({
             url:"/erp/stock/getitemcode",
             dataType:"json",
             type:"post",
             success:function(data){
                select = makeSelectBox(data);
-<<<<<<< HEAD
                console.log(str)
-=======
->>>>>>> origin/JSJ
             },
             error:function(err){
                console.log(err);
@@ -249,39 +221,7 @@ ul {
           }
           arrStr+="</select>";
           return arrStr;
-<<<<<<< HEAD
        }
    </script>
 
-=======
-       } 
-     
-      var select2;
-      $.ajax({
-            url:"/erp/rest/sales/getbonum",
-            dataType:"json",
-            type:"post",
-            success:function(data){
-               select2 = makeSelectBox(data);
-            },
-            error:function(err){
-               console.log(err);
-            }
-         });
-      
-     function makeSelectBox(arr){
-          var arrStr = "<select name = 'bs_bonum'>"
-          if(arr.length==0){
-             arrStr+="<option>수주번호를 작성해주세요 </option>";
-          }else{
-             for(var i = 0;i<arr.length;i++){
-                arrStr+="<option value='"+arr[i].bo_num+"'>"+arr[i].bo_num+"</option>"; 
-             }
-          }
-          arrStr+="</select>";
-          return arrStr;
-       } 
-   </script>
-</body>
->>>>>>> origin/JSJ
 </html>

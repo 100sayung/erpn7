@@ -1,9 +1,5 @@
-//페이지 이동 컨트롤러
-
 package com.n7.erp.controller;
 
-
-import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
@@ -77,7 +73,7 @@ public class SalesHomeController {
    }
    
    @RequestMapping(value = "/sales/salesapprovaldetail", method = RequestMethod.GET)
-      public String salesapprovaldetail() {
+      public String salesapprovaldetail(HttpSession session) {
       return "/sales/salesapprovaldetail"; 
    }
    

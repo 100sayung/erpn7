@@ -42,10 +42,11 @@ public class AccountionCotroller {
 	}
 
 	@PostMapping(value = "/Account/searchcode", produces = "application/json;charset=utf-8")
-	   public Map<String, List<A_company>> searchcode(String use, String code, HttpSession session) {
-	      Map<String, List<A_company>> aMap = am.searchcode(use, code, session);
-	      return aMap;
-	   }
+	public Map<String, List<A_company>> searchcode(String use, String code, HttpSession session) {
+		Map<String, List<A_company>> aMap = am.searchcode(use, code, session);
+		return aMap;
+	}
+
 	@PostMapping(value = "/Account/getList", produces = "application/json;charset=utf-8")
 	public Map<String, List<SaleInfo>> getList(String code) {
 		System.out.println(code);
@@ -66,10 +67,11 @@ public class AccountionCotroller {
 	}
 
 	@PostMapping(value = "/Account/trensCom", produces = "application/json;charset=utf-8")
-	   public Map<String, List<A_company>> trensCom(String USE, String CODE, HttpSession session) {
-	      Map<String, List<A_company>> aMap = am.trensCom(USE, CODE, session);
-	      return aMap;
-	   }
+	public Map<String, List<A_company>> trensCom(String USE, String CODE, HttpSession session) {
+		Map<String, List<A_company>> aMap = am.trensCom(USE, CODE, session);
+		return aMap;
+	}
+
 	@PostMapping(value = "/Account/deleteSale", produces = "application/json;charset=utf-8")
 	public Map<String, List<SaleInfo>> deleteSale(String CNT, String ARR, HttpSession session) {
 		int cnt = Integer.parseInt(CNT);
@@ -102,10 +104,10 @@ public class AccountionCotroller {
 	}
 
 	@PostMapping(value = "/Account/serchcomlist", produces = "application/json;charset=utf-8")
-	   public Map<String, List<A_company>> serchcomlist(String use, HttpSession session) {
-	      Map<String, List<A_company>> aMap = am.serchcomlist(use, session);
-	      return aMap;
-	   }
+	public Map<String, List<A_company>> serchcomlist(String use, HttpSession session) {
+		Map<String, List<A_company>> aMap = am.serchcomlist(use, session);
+		return aMap;
+	}
 
 	@GetMapping(value = "/Account/getsaleList", produces = "application/json;charset=utf-8")
 	public Map<String, List<SaleInfo>> getsaleList(HttpSession session) {

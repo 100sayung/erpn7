@@ -56,6 +56,7 @@ resize: none;
       <button type="button" id="approvalLine">결재라인 불러오기</button>
       <input type="button" id="submit" value="제출하기"> 
    </div>
+   
    <div style="width: auto; background-color: #FFB2D9; color: white; padding: 1%;">기안문 작성</div>
    <div style="height: auto; padding-top: 5px; background-color: #F8F7F7;">
          <table id="table">

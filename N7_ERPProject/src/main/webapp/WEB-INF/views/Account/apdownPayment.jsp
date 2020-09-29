@@ -33,20 +33,12 @@ table, tr, td {
 td {
 	padding: 5px;
 	font-size: large;
-<<<<<<< HEAD
 /* 	width: 58px; */
-=======
-	width: 58px;
->>>>>>> origin/JSJ
 	height: 10px;
 }
 
 #table {
-<<<<<<< HEAD
 	width: 1200px;
-=======
-	width: 1400px;
->>>>>>> origin/JSJ
 	height: auto;
 }
 
@@ -54,19 +46,13 @@ td {
 	background-color: gray;
 }
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
-=======
->>>>>>> origin/JSJ
 
 #center{
 
 text-align: center;
 }
-<<<<<<< HEAD
 >>>>>>> origin/dduddu
-=======
->>>>>>> origin/JSJ
 </style>
 </head>
 <body>
@@ -88,18 +74,12 @@ text-align: center;
 	<div id="paging" style="text-align: center;"></div>
 	<br>
 <<<<<<< HEAD
-<<<<<<< HEAD
 	<button id="approval">결재안 상세보기</button>
 =======
 	<div id="center">
 	<button id="approval">결재안 상세보기</button>
 	</div>
 >>>>>>> origin/dduddu
-=======
-	<div id="center">
-	<button id="approval">결재안 상세보기</button>
-	</div>
->>>>>>> origin/JSJ
 	<!-- 	<button id="acBack2">반려요청</button> -->
 	<!-- 	<button id="acDelete">삭제</button> -->
 </body>
@@ -204,7 +184,6 @@ text-align: center;
 	$("#approval").click(
 			function() {
 				var check = '';
-<<<<<<< HEAD
 				$("input[name='checknum']:checked").each(
 						function() {
 							check = $(this).attr('value');
@@ -216,51 +195,6 @@ text-align: center;
 									'width=1500, height=600');
 						});
 			});
-=======
-
-				 $("input[name='checknum']:checked").each(
-			               function() {
-			                  check = $(this).attr('value');
-			                  
-
-			                  if(check.indexOf("AC") != -1){
-			                     window.open(
-			                        '/erp/rest/Account/apRequest?j_docunum='
-			                              + check, 'apRequest',
-			                        'width=1500, height=600');
-
-			                  }else if(check.indexOf("AS") != -1){ //영민
-			                     window.open(
-			                        '/erp/rest/Account/asRequest?as_document='+ check, 'asRequest',
-			                        'width=1500, height=600');
-			   
-			                  }else if(check.indexOf("AP") != -1){ //영민  //G??????
-			                     window.open(
-			                        '/erp/rest/Account/apRequest?ap_document='+ check, 'apRequest',
-			                        'width=1500, height=600');         
-
-			                  }else if(check.indexOf("P") != -1){ //예은
-			                     window.open(
-			                        '/erp/rest/Purchase/pRequest2?p_documentcode='+ check, 'pRequest',
-			                        'width=1500, height=600');
-
-			                  }else if(check.indexOf("G") != -1){ //수진
-			                     window.open(
-			                        '/erp/rest/sales/apRequest?bs_docunum='+ check, 'apRequest',
-			                        'width=1500, height=600');
-
-			                  }else if(check.indexOf("G") != -1){ //동훈
-			                     window.open(
-			                        '/erp/rest/동훈/gRequest?g_document='+ check, 'hRequest',
-			                        'width=1500, height=600');
-			                  }else{
-			                     window.open(
-			                        '/erp/rest/myinfo/mydocument', 'mydocument', 'width=1500, height=600');
-			                  }
-
-			               });
-			      });
->>>>>>> origin/JSJ
 </script>
 </html>
 

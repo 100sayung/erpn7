@@ -109,19 +109,11 @@ input {
 
 									</tr>
 									<tr>
-<<<<<<< HEAD
 										<th colspan="2">수주이름</th> <!-- 활동센터 -->
 										<th colspan="2">
 										<input type="text" id="j_centre" name="j_centre" class="txt" style="width: 400px;">
 										</th>
 										<th colspan="2">부서명</th><!-- 귀속부서 -->
-=======
-										<th colspan="2">활동센터</th>
-										<th colspan="2">
-										<input type="text" id="j_centre" name="j_centre" class="txt" style="width: 400px;">
-										</th>
-										<th colspan="2">귀속부서</th>
->>>>>>> origin/JSJ
 										<th colspan="2">
 										<input type="text" id="j_section" name="j_section" class="txt" style="width: 400px;">
 										</th>
@@ -131,11 +123,7 @@ input {
 										<td colspan="2">
 										<input type="text" id="j_group" name="j_group" class="draft3"style="width: 400px;">
 										</td>
-<<<<<<< HEAD
 										<th colspan="2">거래처명</th> <!-- 관계회사 -->
-=======
-										<th colspan="2">관계회사</th>
->>>>>>> origin/JSJ
 										<td colspan="2">
 										<input type="text" id="j_company" name="j_company" class="draft3" style="width: 400px;">
 										</td>

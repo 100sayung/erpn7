@@ -5,11 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<<<<<<< HEAD
 <title>acTemroinfo - 임시저장 결재안 상세보기</title>
-=======
-<title>Insert title here</title>
->>>>>>> origin/JSJ
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
@@ -113,20 +109,12 @@ table, tr, th, td {
 
 									</tr>
 									<tr>
-<<<<<<< HEAD
 										<th colspan="2">수주이름</th>
-=======
-										<th colspan="2">활동센터</th>
->>>>>>> origin/JSJ
 										<th colspan="2"><input type="text" name="j_centre"
 											class="txt" value="${ac.j_centre}" readonly><input
 											type="hidden" name="j_ccode" class="txt"
 											value="${ac.j_ccode}" readonly></th>
-<<<<<<< HEAD
 										<th colspan="2">부서명</th>
-=======
-										<th colspan="2">귀속부서</th>
->>>>>>> origin/JSJ
 										<th colspan="2"><input type="text" name="j_section"
 											class="txt" value="${ac.j_section}" readonly></th>
 									</tr>
@@ -134,11 +122,7 @@ table, tr, th, td {
 										<th colspan="2">비용구분</th>
 										<td colspan="2"><input type="text" name="j_group"
 											class="draft3" value="${ac.j_group}" readonly></td>
-<<<<<<< HEAD
 										<th colspan="2">거래처명</th>
-=======
-										<th colspan="2">관계회사</th>
->>>>>>> origin/JSJ
 										<td colspan="2"><input type="text" name="j_company"
 											class="draft3" value="${ac.j_company}" readonly></td>
 

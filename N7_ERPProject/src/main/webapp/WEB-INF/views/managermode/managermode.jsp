@@ -41,9 +41,9 @@ float: right;
 </head>
 <body>
 
-
-
-
+     
+           
+          
     <div id="wrapper">
          <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #FFB2D9">
             <div class="adjust-nav">
@@ -57,11 +57,11 @@ float: right;
                         <img src="/erp/img/logo.png" style="width:200px; height: 60px;">
 
                     </a>
-
+                    
                 </div>
-
+              
                 <span class="logout-spn">
-                  <a href="#" onclick="window.close()" style="color:#fff;">나가기</a>
+                  <a href="#" onclick="window.close()" style="color:#fff;">나가기</a>  
 
                 </span>
             </div>
@@ -70,13 +70,13 @@ float: right;
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-
+                 
 
 
                     <li class="active-link">
                         <a href="/erp/managermode/managermode"><i class="fa fa-desktop "></i>메뉴관리 </a>
                     </li>
-
+                   
 
                     <li>
                         <a href="#" id="company"><i class="fa fa-table "></i>회사정보</a>
@@ -100,7 +100,7 @@ float: right;
                      <li>
                         <a href="#"><i class="fa fa-edit "></i> </a>
                     </li>
-
+                    
                 </ul>
                             </div>
 
@@ -110,9 +110,9 @@ float: right;
             <div id="page-inner">
                 <div class="row">
                     <div class="col-lg-12">
-                     <h2>메뉴관리</h2>
+                     <h2>메뉴관리</h2>   
                     </div>
-                </div>
+                </div>              
                  <!-- /. ROW  -->
                   <hr>
                 <div class="row">
@@ -120,42 +120,42 @@ float: right;
                         <div class="alert alert-info">
                              <strong>원하시는 메뉴를 선택해 주세요. </strong><button class="btn btn-success" id="save">저장</button>
                         </div>
-
+                       
                     </div>
                     </div>
-
-
-                  <!-- /. ROW  -->
+               
+                    
+                  <!-- /. ROW  --> 
                   <div>
                             <div class="row text-center pad-top">
-
+                            
                             <div class="div-square" >
                             <span class="badge">선택할 메뉴</span>
                               <ul class="nav" id="menu">
-
+                      
                               </ul>
                             </div >
-
-
+                            
+                            
                             <div class="div-square" >
                             <span class="badge">선택한 메뉴</span>
                              <ul class="nav" id="addmenu">
-
+                      
                               </ul>
                             </div >
                             </div>
-
-                 <!-- /. ROW  -->
+                
+                 <!-- /. ROW  -->   
 				  <div class="row">
                     <div class="col-lg-12 ">
 					<br>
                         <div class="alert alert-danger">
                              <strong>문제가 있으신가요?</strong> 오류 및 문제점 문의는 <a target="_blank" href="http://localhost/erp/access">여기를 클릭하세요</a>.
                         </div>
-
+                       
                     </div>
                     </div>
-                  <!-- /. ROW  -->
+                  <!-- /. ROW  --> 
     </div>
              <!-- /. PAGE INNER  -->
             </div>
@@ -184,10 +184,10 @@ float: right;
 			error:function(error){
 				console.log(error);
 			}
-
-
+			
+			  
 		  });
-
+	   
    });
 
    $("#company").click(function(){
@@ -202,11 +202,11 @@ float: right;
 		error:function(error){
 			console.log(error);
 		}
-
-
+		
+		  
 	  });
-
-
+	  
+	   
    });
 
 
@@ -214,7 +214,7 @@ var clientMenu= new Array();
 var newMenu= new Array();
 
 	$(document).ready(function(){
-
+		
 $.ajax({
 	 url:'/erp/rest/managermode/getaddmenu',
 	 type:'get',
@@ -224,9 +224,9 @@ $.ajax({
 		 var str="";
 		 if(data.mList==null){
 		 $("#addmenu").html(str);
-
+			 
 		 }else{
-
+			 
 		 for(var i in data.mList){
 			 clientMenu.push(data.mList[i].f_functions);
 		        str+="<li id='"+data.mList[i].f_functions+"'><a href='#' onclick=addmenu('"+data.mList[i].f_functions+"') return false>"+data.mList[i].f_functions+"</a></li>";
@@ -234,7 +234,7 @@ $.ajax({
 		 console.log(clientMenu);
 		 $("#addmenu").html(str);
 		 }
-
+		 
 		 $.ajax({
 			 url:'/erp/rest/managermode/getmenu',
 			 type:'get',
@@ -242,7 +242,7 @@ $.ajax({
 			 success:function(data){
 				 //console.log(data);
 				 var str="";
-
+				 
 				 for(var i in data.mList){
 					 newMenu.push(data.mList[i].m_menu);
 				 }
@@ -255,32 +255,32 @@ $.ajax({
 				 }
 				 console.log(newMenu);
 				for(var i=0; i<newMenu.length; i++){
-				 str+="<li id='"+newMenu[i]+"'><a href='#' onclick=addmenu('"+newMenu[i]+"') return false>"+newMenu[i]+"</a></li>";
-
+				 str+="<li id='"+newMenu[i]+"'><a href='#' onclick=addmenu('"+newMenu[i]+"') return false>"+newMenu[i]+"</a></li>"; 
+					
 				}
 				 $("#menu").html(str);
 		 	 },
 			 error:function(error){
-
+				
 				 console.log(error);
-
+				 
 			 }
-
+			  
 		  });
 	 },
 	 error:function(error){
-
+		
 		 console.log(error);
-
+		 
 	 }
-
+	  
  });
 
 
-
+  
 	});
 
-
+  
   var menuName= new Array();
   var count =0;
 function addmenu(menu){
@@ -289,13 +289,13 @@ function addmenu(menu){
     	clientMenu.push(menu);
 	 $("#"+menu).remove();
 	 $("#addmenu").append("<li id='"+menu+"'>"+addmenu+"</li>");
-
+	
     }else{
 	 $("#"+menu).remove();
 	 $("#menu").append("<li id='"+menu+"'>"+addmenu+"</li>");
 	 clientMenu.splice(menuName.indexOf(menu),1);
     }
-
+	
   console.log(clientMenu);
 };
 
@@ -303,7 +303,7 @@ function addmenu(menu){
 	   if($("#addmenu").html()==""){
 		   alert("선택한 메뉴가 없습니다.");
 	   }else{
-
+		   
 	   $.ajax({
 		  url:'/erp/rest/managermode/addmenu',
 		  type:'post',
@@ -316,15 +316,15 @@ function addmenu(menu){
 		  error:function(error){
 			  console.log(error);
 		  }
-
+		  
 	   });
-
+		   
 	   }
-
-
-
+	  
+	   
+	   
    });
 
-
+   
 </script>
 </html>

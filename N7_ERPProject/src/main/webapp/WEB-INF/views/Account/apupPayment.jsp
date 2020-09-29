@@ -36,11 +36,7 @@ table, tr, td {
 td {
 	padding: 5px;
 	font-size: large;
-<<<<<<< HEAD
 /* 	width: 58px; */
-=======
-	width: 58px;
->>>>>>> origin/JSJ
 	height: 10px;
 }
 
@@ -58,12 +54,9 @@ td {
 #center {
 	text-align: center;
 }
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> origin/JSJ
 </style>
 </head>
 <body>
@@ -191,11 +184,7 @@ td {
 	$("#approval").click(
 			function() {
 				var check = '';
-<<<<<<< HEAD
 				$("input[name='checknum']:checked").each(
-=======
-				/*$("input[name='checknum']:checked").each(
->>>>>>> origin/JSJ
 						function() {
 							check = $(this).attr('value');
 
@@ -204,76 +193,6 @@ td {
 											+ check, 'apRequest',
 									'width=1500, height=600');
 						});
-<<<<<<< HEAD
 			});
 </script>
 </html>
-=======
-			}); */
-			
-			 $("input[name='checknum']:checked").each(
-		               function() {
-		                  check = $(this).attr('value');
-		                  
-
-		                  if(check.indexOf("AC") != -1){
-		                     window.open(
-		                        '/erp/rest/Account/apRequest?j_docunum='
-		                              + check, 'apRequest',
-		                        'width=1500, height=600');
-
-		                  }else if(check.indexOf("AS") != -1){ //영민
-		                     window.open(
-		                        '/erp/rest/Account/asRequest?as_document='+ check, 'asRequest',
-		                        'width=1500, height=600');
-		   
-		                  }else if(check.indexOf("AP") != -1){ //영민  //G??????
-		                     window.open(
-		                        '/erp/rest/Account/apRequest?ap_document='+ check, 'apRequest',
-		                        'width=1500, height=600');         
-
-		                  }else if(check.indexOf("P") != -1){ //예은
-		                     window.open(
-		                        '/erp/rest/예은/pRequest?p_documentcode='+ check, 'pRequest',
-		                        'width=1500, height=600');
-
-		                  }else if(check.indexOf("G") != -1){ //수진
-		                     window.open(
-		                        '/erp/rest/sales/apRequest?bs_docunum='+ check, 'apRequest',
-		                        'width=1500, height=600');
-
-		                  }else if(check.indexOf("G") != -1){ //동훈
-		                     window.open(
-		                        '/erp/rest/동훈/gRequest?g_document='+ check, 'hRequest',
-		                        'width=1500, height=600');
-		                  }else{
-		                     window.open(
-		                        '/erp/rest/myinfo/mydocument', 'mydocument', 'width=1500, height=600');
-		                  }
-
-		               });
-		      });
-</script>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> origin/JSJ
