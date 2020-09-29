@@ -26,4 +26,22 @@ UPDATE COMPANY SET C_NAME=#{c_name}, C_CEO=#{c_ceo}, C_PHONENUM=#{c_phonenum}, C
 <delete id="deletemenu" parameterType="String">
 DELETE FROM ERP_FUNCTION WHERE F_CCODE=#{cCode}
 </delete>
+
+
+<insert id="authInsert" parameterType="authority">
+INSERT INTO AUTHORITY VALUES(#{au_comname}, #{au_name}, #{au_authority})
+</insert>
+
+<select id="authoritList" parameterType="authority" resultType="authority">
+SELECT * 
+FROM AUTHORITY
+WHERE AU_COMNAME = #{cCode}
+</select>
+
+<delete id="depratmentDelete" parameterType="String">
+DELETE 
+FROM AUTHORITY 
+WHERE AU_COMNAME = #{cCode} AND AU_NAME = #{au_name}
+</delete>
+
 </mapper>

@@ -82,10 +82,8 @@ float: right;
                         <a href="#" id="company"><i class="fa fa-table "></i>회사정보</a>
                     </li>
                     <li>
-                        <a href="#" id="erpmanage"><i class="fa fa-edit "></i>ERP관리</a>
+                        <a href="#" id="erpmanage"><i class="fa fa-edit "></i>부서관리</a>
                     </li>
-
-
                     <li>
                         <a href="#"><i class="fa fa-qrcode "></i></a>
                     </li>
@@ -165,21 +163,12 @@ float: right;
         </div>
         </div>
     <div class="footer">
-      
-    
             <div class="row">
                 <div class="col-lg-12">
                     ©  2014 yourdomain.com | Design by: <a href="http://binarytheme.com" style="color:#fff;" target="_blank">www.binarytheme.com</a>
                 </div>
             </div>
         </div>
-          
-
-   
-    
-   
-
-
 </body>
 
 <script>

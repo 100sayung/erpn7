@@ -36,7 +36,7 @@ table, tr, td {
 td {
 	padding: 5px;
 	font-size: large;
-	width: 58px;
+/* 	width: 58px; */
 	height: 10px;
 }
 
@@ -54,6 +54,9 @@ td {
 #center {
 	text-align: center;
 }
+
+
+
 </style>
 </head>
 <body>
