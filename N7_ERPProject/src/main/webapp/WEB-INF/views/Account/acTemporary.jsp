@@ -33,12 +33,12 @@ table, tr, td {
 td {
 	padding: 5px;
 	font-size: large;
-	width: 58px;
+/* 	width: 58px; */
 	height: 10px;
 }
 
 #table {
-	width: 1400px;
+	width: 1200px;
 	height: auto;
 }
 
@@ -81,6 +81,7 @@ text-align: center;
 =======
 	<div id="center">
 	<button id="approval">결재안 상세보기</button>
+	<button id="acDelete2">삭제요청</button>
 	</div>
 >>>>>>> origin/dduddu
 </body>
@@ -173,6 +174,35 @@ text-align: center;
 									'width=1500, height=600');
 						});
 			});
+	
+	$("#acDelete2").click(function() {
+
+		var check = '';
+		$("input[name='checknum']:checked").each(function() {
+			check = $(this).attr('value');
+
+			$.ajax({
+				url : '/erp/rest/Account/acDelete?j_docunum=' + check,
+				type : 'post',
+				success : function(data) {
+					if(data == 1){
+					alert("결재안 삭제가 완료되었습니다.");
+					window.location.reload();
+					console.log(data);
+					}else{
+						alert("결재안 삭제를 실패했습니다.");
+// 						window.location.reload();
+						console.log(data);
+					}
+				},
+				error : function(error) {
+					alert("결재안 삭제를 실패했습니다.")
+					console.log(error);
+				}
+			});
+		});
+
+	});
 </script>
 </html>
 

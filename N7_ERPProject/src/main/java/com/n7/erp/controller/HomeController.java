@@ -42,7 +42,14 @@ public class HomeController {
 	public String home() {
 		return "/home/home";
 	}
-
+	
+	//부서관리 페이지
+	@RequestMapping(value = "/managermode/erpmanage", method = RequestMethod.GET)
+	public String erpmanage() {
+		
+		return "/managermode/erpmanage";
+	}
+	
 	@RequestMapping(value = "/managermode/managermode", method = RequestMethod.GET)
 	public String managermode() {
 

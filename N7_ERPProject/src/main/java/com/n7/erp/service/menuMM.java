@@ -5,12 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.n7.erp.bean.Authority;
 import com.n7.erp.bean.Company;
 import com.n7.erp.bean.Menu;
 import com.n7.erp.bean.clientMenu;
@@ -104,4 +107,52 @@ public class menuMM {
 		mav.setViewName(view);
 		return mav;
 	}
+
+	public int authInsert(Authority au) {
+		System.out.println("회사명: "+au.getAu_comname());
+		System.out.println("부서명: "+au.getAu_name());
+		System.out.println("권한: "+au.getAu_authority());
+		
+		int a = mDao.authInsert(au);
+		
+		if(a != 0) {
+			return 1;
+		}
+		return 0;
+	}
+
+	public Map<String, List<Authority>> authoritList(HttpSession session) {
+		Map<String, List<Authority>> pMap = null;
+		String cCode = (String) session.getAttribute("cCode");
+		System.out.println("회사코드: " + cCode);
+		
+		
+		List<Authority> pList = mDao.authoritList(cCode);
+		
+		if (pList != null) {
+		pMap = new HashMap<>();
+		pMap.put("pList", pList);
+		System.out.println("내가받은 pList가져왓어");
+		} else {
+		System.out.println("못가져왓져");
+		}
+		
+		return pMap;
+		}
+
+	public int depratmentDelete(String au_name, HttpSession session) {
+		String cCode = (String) session.getAttribute("cCode");
+		
+		System.out.println("부서명"+au_name);
+		
+		int a = mDao.depratmentDelete(au_name, cCode);
+		
+		if(a != 0) {
+			System.out.println("부서 삭제햇져");
+			return 1;
+		}
+		
+		return 0;
+	}
+		
 }
