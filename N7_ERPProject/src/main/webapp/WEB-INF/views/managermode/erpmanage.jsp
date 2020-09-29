@@ -284,7 +284,7 @@ ul {
 																console
 																		.log(data);
 															} else {
-																alert("삭제를 실패하였습니다.");
+																alert("삭제를 실패하였습니다. 현재 사용하고 있는 부서인지 확인해주세요.");
 																console
 																		.log(data);
 															}

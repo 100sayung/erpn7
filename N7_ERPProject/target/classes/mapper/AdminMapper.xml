@@ -4,7 +4,7 @@
 <mapper namespace="com.n7.erp.dao.AdminDao">
 	<!-- 페이징 관련 테스트중 홈페이지회원보기 -->
 	<select id="countMember" resultType="int">
-		SELECT COUNT(*) FROM MEMBER
+		SELECT COUNT(*) FROM MEMBER WHERE M_GRADE != 'X'
 	</select>
 	
 	<!-- 페이징 처리 후 회원조회 -->
@@ -44,6 +44,32 @@
 						  FROM COMPANY
 						  ) A
 				 )
+			WHERE 
+				RN BETWEEN #{start} AND #{end}
+	</select>
+	
+
+	
+	<select id="countCCodeMember" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE M_CCODE = #{m_ccode} AND M_GRADE != 'X'
+	</select>
+	
+	<!-- 페이징 처리 후 회원조회 -->
+	
+	<!-- 탈퇴회원 포함X -->
+	<select id="selectCCodeMember" resultType="member">
+		SELECT B.*, COMPANY.C_NAME
+			FROM (
+				 SELECT ROWNUM RN, A.*
+					FROM (
+						  SELECT *
+						  FROM MEMBER
+						  WHERE M_CCODE = #{cCode} AND M_GRADE != 'X'
+						  ORDER BY M_GRADE DESC
+						  ) A
+				 )B
+			INNER JOIN COMPANY
+				ON M_CCODE = COMPANY.C_CODE
 			WHERE 
 				RN BETWEEN #{start} AND #{end}
 	</select>

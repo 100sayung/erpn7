@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.n7.erp.bean.Company;
 import com.n7.erp.bean.Member;
 import com.n7.erp.dao.AdminDao;
@@ -17,7 +18,7 @@ public class AdminMM {
 	@Autowired AdminDao aDao;
 	
 
-	//ÆäÀÌÂ¡ Ã³¸® ¸â¹ö
+	//ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public int countMember() {
 		return aDao.countMember();
 	}
@@ -39,6 +40,14 @@ public class AdminMM {
 		String result = new Gson().toJson(cList);
 		return result;
 	}
+
+	public List<Member> selectCCodeMember(PagingVO vo) {
+		return aDao.selectCCodeMember(vo);
+	}
+	public int countCCodeMember(String m_ccode) {
+		return aDao.countCCodeMember(m_ccode);
+	}
+
 
 
 }

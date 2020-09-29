@@ -157,7 +157,6 @@ margin-left: 200px;
 					str += "<td>" + data[i].c_phonenum + "</td>";
 					str += "<td>" + data[i].c_comnum + "</td>";
 					str += "<td><button class='infobtn' onclick='deleteCompany(\""+data[i].c_code+"\")'>제거</button><br/>";					
-					str += "<button class='infobtn' onclick='updateFunction(\""+data[i].c_code+"\")'>기능수정</button></td>";										
 					str += "</tr>"
 				}
 				$("#container").html(str);

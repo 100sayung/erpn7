@@ -50,6 +50,15 @@ margin-left: 200px;
 	font-weight: bolder;
 }
 
+#description{
+	position:relative;
+}
+.center{
+	position : absolute;
+	top : 50%;
+	left : 50%;
+	transform:translate(-50%, -50%);
+}
 </style>
 </head>
 
@@ -68,94 +77,30 @@ margin-left: 200px;
 			</ul>
 		</div>
 	</div>
-	<div id="description">
-	
-	회원관리페이지 <h1> 탈퇴누르면 delete 시키는게 아니라 상태코드를 'X' 로 바꿔둠!!!!</h1>
-	<br>
-	검색기능 :
-	<input type="text" id="m_id"></input>	<button id="searchbtn">검색</button> </br>
+	<div id="description" style="height: 700px;">
+	<div style='width:100%; height:50px; text-align:center; background-color: #3D6B9B;'><h1 style='color:white'>회원관리</h1></div>
+	<div class="center">
+	<input type="text" id="m_ccode" placeholder='회사코드검색'><button id="searchbtn" onclick="searchStart();">검색</button>
 	<br></br>
-	</div><!-- 옵션선택 -->
+		<div id="container" ></div>
+		<div id="paging" style="text-align: center"></div>
+	<br><br>
 	
-	
-	<div id="container" style="text-align:center; align-content: center;">
-	</div>
-	<div id="paging" style="text-align: center"></div>
-	<br><br></br></br><br></br>
 	<div id="management"> 
-	선택 멤버를 
-	<select>
-	<option value="0"> 일반회원</option>
-	<option value="1"> ERP매니저</option>
-	<option value="2"> ADMIN계정</option>
-	</select>
-	으로 
+	선택 멤버를 <select>
+		<option value="0"> 일반회원</option>
+		<option value="1"> ERP매니저</option>
+		<option value="2"> ADMIN계정</option>
+	</select>으로 
 	<input type='button' value='변경' onclick="changeGrade()">
 	<input type='button' value='강제탈퇴' onclick="forceWithdrawal()">
 	</div>
 	</div>
-	
-	<script>
-	//테스트중
-	/* 
-	var currPage = 1;
-	var contents;
-	function pageNumber(num, addr){
-		var pageNum;
-		currPage = num;
-		$.ajax({
-			url:"/erp/rest"+addr,
-			dataType:"json",
-			async:false, //비동기통신을 동기통신으로 만들어줘야함
-			method:"get",
-			success : function(page){
-				console.log(page);
-				pageNum = page;
-			}, error : function(err){
-				console.log(err);
-			}
-		});
-		console.log(pageNum);
-		return pageNum;
-	}
-	
-	function list(nowPage, addr, cntPerPage){
-		$.ajax({
-			url:"/erp/rest"+addr,
-			dataType:"json",
-			data:{nowPage : nowPage, cntPerPage : cntPerPage},
-			method:"get",
-			success : function(data){
-				console.log(data);
-				contents = data;
-			}, error : function(err){
-				console.log(err);
-			}	
-		});
-		console.log(contents);
-		return contents;
-	}
-	
-	
-	
-	var Paging = function(num, pageAddr, contentsAddr, nowPage, cntPerPage){
-		console.log(pageNumber(num, pageAddr));
-		console.log(list(nowPage, contentsAddr, cntPerPage));
-	}
-	
-	Paging(1, "/admin/memberpagenumber", "/admin/memberlist", 1, 10);
-	
-	 */
-	</script>
-	
+	</div>
 	<script> 
 	//페이지 변경 스크립트
 
 	var currPage = 1;
-	function selChange(){
-		var sel = document.getElementById('cntPerPage').value;
-		location.href ="memberlist?nowPage=${paging.nowPage}&cntPerPage="+sel;
-	}
 	
 	function pageNumber(j){
 		currPage = j;
@@ -215,9 +160,6 @@ margin-left: 200px;
 	
 	memberlist(1);
 	pageNumber(1); 
-	
-	</script>
-	<script>
 	
 	
 	function confirmcheck(){
@@ -284,43 +226,69 @@ margin-left: 200px;
 		}
 	}
 	
+	function ccodePaging(m_ccode, num){
+		console.log(m_ccode, num);
+		ccodePageNumber(m_ccode, num);
+		ccodeMemberList(m_ccode, num);
+	}
+
+	function searchStart(){
+		console.log("??");
+		ccodePaging($("#m_ccode").val(), 1);
+	}
 	
-	function SearchFromId(m_id){
-		console.log(m_id);
+	function ccodePageNumber(m_ccode, j){
+		currPage = j;
 		$.ajax({
-			url:"/erp/rest/admin/searchfromid",
+			url:"/erp/rest/admin/ccodepagenumber",
 			dataType:"json",
-			data:{m_id : m_id},
+			data:{m_ccode : m_ccode},
+			method:"get",
+			success : function(page){
+				console.log(page);
+				var pagecnt = (page/10) + 1;
+				let str = "";
+				for(let i = 1 ; i < pagecnt ; i++){
+					if(i == currPage){
+						str += " &nbsp; ["+ i +"] &nbsp; ";
+					}else{
+						str += " &nbsp; <a href='javascript:ccodePaging(\""+m_ccode+"\", "+i+")'>["+ i +"]</a> &nbsp; ";
+					}
+				}
+				console.log(str);
+				$("#paging").html(str);
+			}, error : function(err){
+				console.log(err);
+			}
+		});
+	}
+
+	function ccodeMemberList(m_ccode, nowPage){
+		$.ajax({
+			url:"/erp/rest/admin/ccodememberlist",
+			dataType:"json",
+			data:{nowPage : nowPage, cntPerPage : "10", m_ccode : m_ccode},
 			method:"get",
 			success : function(data){
 				console.log(data);
 				let str = "";
 				str = "<table>"
+				str += "<tr class='infomenu'><td> &nbsp; </td><td style='width:200px;'>이름(아이디)</td><td style='width:150px;'>회사코드</td><td style='width:100px;'>등급</td></tr>"
 				for(let i = 0 ; i<data.length ; i++){
-					str += "<tr class = '' id='"+data[i].m_id+"'>";					
+				str += "<tr class = '' id='"+data[i].m_id+"'>";					
 					str += "<td><input type='checkbox' id='chkbx' name='chkbx' value='"+data[i].m_id+"'></td>";
 					str += "<td>" + data[i].m_name + "(" + data[i].m_id +")</td>";
-					str += "<td>" + data[i].m_ccode + "</td>";
-					if(data[i].m_grade == 0){
-						str += "<td>일반회원</td>";						
-					}else if(data[i].m_grade == 1){
-						str += "<td>ERP매니저</td>";
-					}else if(data[i].m_grade == 2){
-						str += "<td>홈페이지ADMIN</td>";
-					}
+					str += "<td>" + data[i].c_name + "("+ data[i].m_ccode + ")</td>";
+					str += "<td>" + data[i].m_grade + "</td>";
 					str += "</tr>"
 				}
 				str += "</table>";
 				$("#container").html(str);
 			}, error : function(err){
 				console.log(err);
-			}
+			}	
 		});
 	}
-	
-	$("#searchbtn").click(function() {
-		SearchFromId($("#m_id").val());
-	});
 	
 	</script>
 	

@@ -499,7 +499,8 @@ public class HrMM {
 		if (hDao.haveHrCode(session.getAttribute("id").toString())) {
 			mav.setViewName(address);
 		} else {
-			mav.setViewName("redirect:/myinfo/myinfo");
+			System.out.println("내정보로 보내기");
+			mav.setViewName("redirect:/myInfo/myInfo");
 		}
 		return mav;
 	}
@@ -519,7 +520,6 @@ public class HrMM {
 		return mav;
 	}
 
-	// �궡 湲됱뿬紐낆꽭�꽌 紐⑸줉
 	public String getMyPaySelect(String hrCode, String month) {
 		HashMap<String, String> hMap = new HashMap<String, String>();
 		hMap.put("hrCode", hrCode);

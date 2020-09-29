@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -102,4 +103,7 @@ public interface HRIDeptDao {
 	//09-25 append
 	@Select("SELECT HDP_POSITION FROM HR_DEPT WHERE HDP_DEPT=#{dept} AND HDP_CCODE=#{cCode}")
 	ArrayList<Department> deptsearchposition(HashMap<String, String> hMap);
+	
+	@Select("SELECT COUNT(*) FROM HR_DEPT WHERE HDP_DEPT=#{au_name} AND HDP_CCODE = #{cCode}")
+	int checkDept(@Param("au_name")String au_name, @Param("cCode") String cCode);
 }

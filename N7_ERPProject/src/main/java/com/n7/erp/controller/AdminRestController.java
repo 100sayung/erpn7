@@ -65,4 +65,26 @@ public class AdminRestController {
 		String result = am.companyTemp();
 		return result;
 	}
+	
+	
+
+	//회원관리 검색페이징
+	@GetMapping(value="/admin/ccodepagenumber")
+	public String ccodePageNumber(String m_ccode) {
+		int result = am.countCCodeMember(m_ccode);
+		return Integer.toString(result);
+	}
+	
+	@GetMapping(value="/admin/ccodememberlist")
+	public String ccodeMemberList(String nowPage, String cntPerPage, String m_ccode) {
+		int total = am.countCCodeMember(m_ccode);
+		if(nowPage == null) {
+			nowPage = "1";
+		}
+		
+		PagingVO vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), m_ccode);
+		
+		String result = new Gson().toJson(am.selectCCodeMember(vo));
+		return result;
+	}
 }
