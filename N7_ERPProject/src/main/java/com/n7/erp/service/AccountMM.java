@@ -863,8 +863,37 @@ public class AccountMM {
 		return aMap;
 	}
 
-//결재안문서 카운트
-	public int countDocument() {
-		return aDao.countDocument();
+//내가올린 결재안문서 카운트
+	public int countDocument(ApprovalDocu ap, HttpSession session) {
+		String hrCode = (String) session.getAttribute("hrCode");
+		String cCode = (String) session.getAttribute("cCode");
+		
+		ap.setAp_ccode(cCode);
+		ap.setAp_fromapprover(hrCode);
+		
+		return aDao.countDocument(ap);
+	}
+	
+//내가받은 결재안문서 카운트
+	public int countDocument1(ApprovalDocu ap, HttpSession session) {
+		String hrCode = (String) session.getAttribute("hrCode");
+		String cCode = (String) session.getAttribute("cCode");
+		
+		ap.setAp_ccode(cCode);
+		ap.setAp_toapprover(hrCode);
+		
+		return aDao.countDocument1(ap);
+	}
+	
+//임시저장 결재안문서 카운트
+	public int countDocument2(Account ac, HttpSession session) {
+		String hrCode = (String) session.getAttribute("hrCode");
+		String cCode = (String) session.getAttribute("cCode");
+		
+		ac.setJ_none(hrCode);
+		ac.setJ_ccode(cCode);
+		
+		
+		return aDao.countDocument2(ac);
 	}
 }

@@ -84,7 +84,7 @@ text-align: center;
 	function pageNumber(j) {
 		currPage = j;
 		$.ajax({
-			url : "/erp/rest/Account/documentPagenumber",
+			url : "/erp/rest/Account/documentPagenumber2",
 			dataType : "json",
 			method : "get",
 			success : function(page) {

@@ -126,7 +126,11 @@ public interface AccountDao {
 
 	com.n7.erp.bean.ac.approvalLine getApprinfo(String code); //결재안에서 결재자 표시
 
-	public int countDocument();
+	public int countDocument(ApprovalDocu ap);
+	
+	public int countDocument1(ApprovalDocu ap);
+	
+	public int countDocument2(Account ac);
 
 
 //	public List<ApprovalDocu> selectUpdocument(PagingVO vo);
