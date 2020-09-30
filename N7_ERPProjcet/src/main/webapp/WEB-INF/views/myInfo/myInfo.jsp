@@ -419,7 +419,6 @@ tr{
 							str += "<td><input type='text' value='"+data.hc_holynum+"' readonly></td></tr></table>";
 							$("#hrDetailInfo").html(str);
 						},error : function(err){
-							console.log(deptList);
 							console.log(err);
 							let str ="";
 							str += "<table border='1px solid black' class='myinfo_table_css'><tr class='infomenu'>";

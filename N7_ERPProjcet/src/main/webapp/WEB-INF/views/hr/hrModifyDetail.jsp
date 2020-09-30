@@ -162,20 +162,20 @@ function addRecord(){
 	var $current = $("#current").val();
 	console.log(num);
 	if($current == 'Academic'){
-		str += "<tr id='test'><td><input type='text' name='hac_school' class='detailInfo'></td>";
-		str += "<td><input type='text' name='hac_major' class='detailInfo'></td>";
-		str += "<td><input type='date' name='hac_year' class='detailInfo'></td>";
+		str += "<tr id='test'><td><input type='text' name='hac_school' class='detailInfo' required='required'></td>";
+		str += "<td><input type='text' name='hac_major' class='detailInfo' required='required'></td>";
+		str += "<td><input type='date' name='hac_year' class='detailInfo' required='required'></td>";
 		str += "<td><input type='button' value='삭제' onclick='javascript:thisRowDel(this);'></td></tr>";
 	}else if($current =='Certification'){
-		str += "<tr><td><input type='text' name='hct_name' class='detailInfo'></td>";
-		str += "<td><input type='text' name='hct_agency' class='detailInfo'></td>";
-		str += "<td><input type='date' name='hct_date' class='detailInfo'></td>"
+		str += "<tr><td><input type='text' name='hct_name' class='detailInfo' required='required'></td>";
+		str += "<td><input type='text' name='hct_agency' class='detailInfo' required='required'></td>";
+		str += "<td><input type='date' name='hct_date' class='detailInfo' required='required'></td>"
 			str += "<td><input type='button' value='삭제' onclick='javascript:thisRowDel(this);'></td></tr>";
 	}else if($current =='Career'){
-		str += "<tr><td><input type='text' name='hcr_cname' class='detailInfo'></td>";
-		str += "<td><input type='date' name='hcr_startperiod' id='chk"+(num*2)+"' class='detailInfo checkDate'><br>";
+		str += "<tr><td><input type='text' name='hcr_cname' class='detailInfo' required='required'></td>";
+		str += "<td><input type='date' name='hcr_startperiod' id='chk"+(num*2)+"' class='detailInfo checkDate' required='required'><br>";
 		str += "<input type='date' name='hcr_endperiod' id='chk"+((num*2)+1)+"' class='detailInfo checkDate' onchange='checkDateValue(chk"+(num*2)+", chk"+((num*2)+1)+")'></td>"
-		str += "<td><input type='text' name='hcr_position' class='detailInfo'></td>";
+		str += "<td><input type='text' name='hcr_position' class='detailInfo' required='required'></td>";
 		str += "<td><textarea rows='3' cols='20' name='hcr_content' class='detailInfo'></textarea></td>"
 		str += "<td><input type='button' value='삭제' onclick='javascript:thisRowDel(this);'></td></tr>";
 		num++;

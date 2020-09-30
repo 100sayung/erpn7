@@ -689,11 +689,26 @@ public class HrMM {
 		hMap.put("cCode", cCode);
 		hMap.put("hrcode", hrcode);
 		hMap.put("time", time);
-		if(hDao.DeleteAttendance(hMap)) {
-			String day=time.substring(0,15);
-			ArrayList<Attendance> aList=hDao.getEmployeeAttendanceTwo(day);
-		}
+		hDao.DeleteAttendance(hMap);
+		String day=time.substring(0,15);
+		ArrayList<Attendance> aList=hDao.getEmployeeAttendanceTwo(day);
+		String result=new Gson().toJson(aList);	
+		return result;
+	}
+
+	public String Updateattendance(Object cCode, String hrcode, String time, String textTime) {
+		String front=time.substring(0, 8);
+		String back=time.substring(16,0);
 		
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("cCode", cCode);
+		hMap.put("hrcode", hrcode);
+		hMap.put("time", time);
+		hMap.put("textTime", textTime);
+		boolean attendace=hDao.selectAttendance(hMap);
+		if(attendace) {
+			hDao.updateAttendance(hMap);
+		}
 		return null;
 	}
 }

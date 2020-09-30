@@ -159,5 +159,11 @@ public interface IHrDao {
 	
 	@Select("SELECT * FROM HR_ATTENDANCE WHERE HA_TIME LIKE '%'||#{day}||'%'")
 	ArrayList<Attendance> getEmployeeAttendanceTwo(String day);
+	
+	@Select("SELECT * FROM HR_ATTNEDANCE WHERE HA_CCODE=#{cCode} AND HA_TIME=#{time}")
+	boolean selectAttendance(HashMap<String, Object> hMap);
+
+	@Update("UPDATE HR_ATTENDANCE SET HA_TIME=#{time}")
+	void updateAttendance(HashMap<String, Object> hMap);
 
 }

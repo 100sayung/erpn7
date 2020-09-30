@@ -102,9 +102,9 @@ ul {
 		<table id="depttable">
 			<tr>
 				<td>부서 :</td>
-				<td><input type="text" name="HDP_position" id="position"></td>
-				<td>직책 :</td>
 				<td><input type="text" name="HDP_dept" id="dept"></td>
+				<td>직책 :</td>
+				<td><input type="text" name="HDP_position" id="position"></td>
 			</tr>
 		</table>
 		${failure}

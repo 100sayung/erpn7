@@ -59,6 +59,9 @@ ul {
 	
 	border: 1px solid black;
 }
+input{
+	outline-style: none;
+}
 </style>
 </head>
 <body onload="build();">
@@ -146,9 +149,10 @@ ul {
 						type += "<font style='color:red'>"
 						type+= " 퇴근</font>"
 					}
-    				console.log(date);															/* "onclick='javascript:attendanceDelete(this,"+data[i].ha_hrcode+",\""+data[i].ha_time+"\");'" */
-					str += "<tr style='width:500px; height:50px;'><td>"+data[i].m_name+"</td><td>" + time + "</td><td>" + type + "</td>";
-					str +="<td><button type='button'>수정</button><button type='button' onclick='javascript:attendanceDelete(this,"+data[i].ha_hrcode+",\""+data[i].ha_time+"\");'>삭제</button></td></tr>";
+    				console.log(date);
+					str += "<tr style='width:500px; height:50px;'><td>"+data[i].m_name+"</td><td><input type='input' value='" + time + "' style='border:0px solid; text-align:center;' readonly></td><td>" + type + "</td>";
+					str +="<td><button type='button' onclick='javascript:attendanceUpdate(this,"+data[i].ha_hrcode+",\""+data[i].ha_time+"\");'>수정</button>";
+					str +="<button type='button' onclick='javascript:attendanceDelete(this,"+data[i].ha_hrcode+",\""+data[i].ha_time+"\");'>삭제</button></td></tr>";
 					
 				}
 				str += "</table></div>";
@@ -159,21 +163,55 @@ ul {
 		});
 	}
 	
+	function attendanceUpdate(row, hrcode, time){
+// 		if(confirm("정말 수정하겠습니까?")){
+			let tr=row.parentNode.parentNode;
+			var input=tr.children[1].children[0];
+			console.log(tr);
+			console.log(input.value);
+			console.log(time.substr(0,8));
+			console.log(time.substr(16,20));
+// 			$.ajax({
+// 				url:'/erp/rest/hr/attendanceUpdate',
+// 				type:'get',
+// 				data:{hrcode : hrcode, time : time, textTime : input.value},
+// 				dataType:'json',
+// 				success:function(data){
+// 					console.log(data);
+// 				},
+// 				error:function(err){
+// 					console.log(err);
+// 				}
+// 			});
+			
+			
+// 		}else{
+// 			alert("취소가 완료되었습니다.");
+// 		}
+
+	}
+	
+	
+	//사원  출퇴근 삭제
 	function attendanceDelete(row,hrcode,time){
-		let tr = row.parentNode.parentNode;
-	 	$.ajax({
-			url:"/erp/rest/hr/attendanceDelete",
-			type:'get',
-			data:{hrcode : hrcode, time : time},
-			dataType:'json',
-			success:function(data){
-				console.log(data);
-				tr.parentNode.removeChild(tr);		
-			},
-			error:function(err){
-				console.log(err);
-			}
-		}); 
+		if(confirm("정말 삭제하겠습니까?")){
+			let tr = row.parentNode.parentNode;
+			tr.parentNode.removeChild(tr);		
+	 		$.ajax({
+				url:"/erp/rest/hr/attendanceDelete",
+				type:'get',
+				data:{hrcode : hrcode, time : time},
+				dataType:'json',
+				success:function(data){
+					console.log(data);
+				},
+				error:function(err){
+					console.log(err);
+				}
+			});
+		}else{
+			alert("에러 404");
+		}
 	}
 	
 	$("#showMenu1").hover(function() {
