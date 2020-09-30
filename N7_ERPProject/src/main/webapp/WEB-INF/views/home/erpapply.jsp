@@ -52,6 +52,37 @@ button {
 	font-weight: bolder;
 	border-radius: 8%;
 }
+
+///////////////////////////////////////
+.department-div {
+	border: 3px double #e1e1e1;
+	border-radius: 8px;
+	height: 350px;
+	width: 80%;
+	margin-left: 100px;
+	text-align: center;
+}
+
+table {
+	margin-top: 100px;
+	margin-left: 30px;
+	width: 700px;
+	border: 3px double #e1e1e1;
+	border-collapse: collapse;
+	border-radius: 8px;
+	text-align: center;
+}
+
+th, td {
+	border: 3px double #e1e1e1;
+	padding: 10px;
+	border-radius: 8px;
+}
+
+ul {
+	list-style: none;
+}
+
 </style>
 </head>
 

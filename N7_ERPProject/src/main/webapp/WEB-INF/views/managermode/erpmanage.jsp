@@ -102,8 +102,6 @@ ul {
 	list-style: none;
 }
 
-
-
 /* #departmentinfo{ */
 /* width: 80%; */
 /* height: 80px; */
@@ -119,8 +117,10 @@ ul {
 			</div>
 		</div>
 		<hr>
-		<div style="background-color: gray;"><label><input type="radio" class="active" id="insert" value="option"
-			name="option">부서권한등록</label></div>
+		<div style="background-color: gray;">
+			<label><input type="radio" class="active" id="insert"
+				value="option" name="option">부서권한등록</label>
+		</div>
 		<!-- 			<li><a href="deDelete">부서권한 조회-삭제</a></li> -->
 		<div>
 			<div id="insertBox">
@@ -133,7 +133,7 @@ ul {
 					</div>
 				</div>
 				<div class="row text-center pad-top">
-					<form id="departmentinfo" >
+					<form id="departmentinfo">
 						<div class="department-div">
 							<table style='border-radius: 8px;'>
 								<tbody style='border-radius: 8px;'>
@@ -147,17 +147,24 @@ ul {
 									</tr>
 									<tr style='border-radius: 8px;'>
 										<th colspan='4'><div class='input-group'>
-												<span class='input-group-addon'>&nbsp;부서명&nbsp;&nbsp;</span> <input
-													type='text' id="au_name" name="au_name"
+												<span class='input-group-addon'>&nbsp;부서명&nbsp;&nbsp;</span>
+												<input type='text' id="au_name" name="au_name"
 													class='form-control' style='width: 120%;'>
-											</div></th>
+											</div><span id="ncheck" style="text-align: center;"></span></th>
+										<th style="border-color: white; ">
+											<button onclick="namecheck()" type="button">중복확인</button> 
+										</th>
+										
 									</tr>
 									<tr style='border-radius: 8px;'>
 										<th colspan='4'><div class='input-group'>
-												<span class='input-group-addon'>&nbsp;&nbsp;&nbsp;권한&nbsp;&nbsp;&nbsp;</span><div
-													type='text' class='form-control' style='width: 120%; text-align: center;'>
-												 &nbsp;<label><input type="radio" id="au_authority" name="au_authority" value="1">승인</label> &nbsp; 
-												<label><input type="radio" id="au_authority" name="au_authority" value="0">거부</label> &nbsp;
+												<span class='input-group-addon'>&nbsp;&nbsp;&nbsp;권한&nbsp;&nbsp;&nbsp;</span>
+												<div type='text' class='form-control'
+													style='width: 120%; text-align: center;'>
+													&nbsp;<label><input type="radio" id="au_authority"
+														name="au_authority" value="1">승인</label> &nbsp; <label><input
+														type="radio" id="au_authority" name="au_authority"
+														value="0">거부</label> &nbsp;
 												</div>
 											</div></th>
 									</tr>
@@ -168,10 +175,10 @@ ul {
 				</div>
 			</div>
 		</div>
-		<br><br>
+		<br> <br>
 		<div>
-			<label><input type="radio" class="active" id="delete" value="option"
-				name="option">부서권한삭제</label>
+			<label><input type="radio" class="active" id="delete"
+				value="option" name="option">부서권한삭제</label>
 			<div id="deleteBox">
 				<div class="row">
 					<div class="col-lg-12 ">
@@ -272,7 +279,8 @@ ul {
 										function() {
 											check = $(this).attr('value');
 
-											$.ajax({
+											$
+													.ajax({
 														url : '/erp/rest/managermode/depratmentDelete?au_name='
 																+ check,
 														type : 'post',
@@ -328,6 +336,37 @@ ul {
 								});
 
 					});
+
+	function namecheck() {
+		var au_name = $("#au_name").val();
+		console.log(au_name);
+		$
+				.ajax({
+					url : "/erp/rest/managermode/namecheck",
+					data : {
+						au_name : au_name
+					},
+					dataType : "text",
+					method : "get",
+					async : false,
+					success : function(data) {
+						console.log(data)
+						if (data == 1) {
+							checkccode = false;
+							$("#ncheck")
+									.html(
+											"<font style='color:red;'>해당 부서가 이미 존재합니다.</font>");
+						} else {
+							checkccode = true;
+							$("#ncheck").html(
+									"<font style='color:green;'>확인</font>");
+						}
+					},
+					error : function(err) {
+						console.log(err);
+					}
+				})
+	}
 
 	// 	$(document).ready(
 	// 					function() {

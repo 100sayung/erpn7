@@ -80,5 +80,9 @@ public class managerModeRestController {
 		return a;
 	}
 	
-	
+	@GetMapping(value="/managermode/namecheck")
+	public String namecheck(String au_name) {
+		String result = mm.namecheck(au_name);
+		return result;
+	}
 }
